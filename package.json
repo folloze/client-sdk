@@ -10,11 +10,11 @@
   "scripts": {
     "lint": "node_modules/.bin/eslint 'src/**/*.ts'",
     "lint:fix": "node_modules/.bin/eslint --fix 'src/**/*.ts'",
-    "dev": "npm run build:ts:watch &&",
+    "dev": "npm-run-all --parallel build:ts:watch test:watch",
     "build:ts": "tsc --build",
     "build:ts:watch": "tsc --build --watch",
     "test": "jest --verbose",
-    "test:watch": "jest --watch --verbose"
+    "test:watch": "jest --watch --onlyChanged"
   },
   "author": "Rotem Grimberg <rotem@folloze.com>",
   "license": "",
@@ -30,37 +30,47 @@
     "axios-mock-adapter": "^1.20.0",
     "core-js": "^3.8.1",
     "eslint": "^7.25.0",
-    "eslint-webpack-plugin": "^2.5.4",
     "jest": "^27.4.3",
     "json-loader": "^0.5.7",
-    "string-replace-loader": "^3.0.1",
+    "npm-run-all": "^4.1.5",
     "ts-jest": "^27.1.0",
-    "ts-lit-plugin": "^1.2.1",
     "ts-loader": "^5.4.5",
     "ts-node": "^9.1.1",
     "typescript": "^4.3.5",
-    "web-types-lit": "^0.1.0",
-    "webpack": "^4.36.1",
-    "webpack-cli": "^4.2.0",
-    "webpack-dev-server": "^3.11.0",
-    "webpack-node-externals": "^2.5.2"
+    "web-types-lit": "^0.1.0"
   },
+  "homepage": "https://github.com/folloze/client-sdk",
+  "repository": "https://github.com/folloze/client-sdk",
   "files": [
     "/analytics.{d.ts.map,d.ts,js.map,js}",
     "/analytics/",
+    "/liveboard.{d.ts.map,d.ts,js.map,js}",
+    "/liveboard/",
+    "/common.{d.ts.map,d.ts,js.map,js}",
+    "/common/",
+    "/designer.{d.ts.map,d.ts,js.map,js}",
+    "/designer/",
     "sdk.{d.ts.map,d.ts,js.map,js}",
-    "index.{d.ts.map,d.ts,js.map,js}",
-    "common.{d.ts.map,d.ts,js.map,js}"
+    "index.{d.ts.map,d.ts,js.map,js}"
   ],
   "exports": {
     ".": {
       "default": "./dist/index.js"
     },
-    "./analytics.js": {
-      "default": "./dist/analytics.js"
-    },
     "./sdk.js": {
       "default": "./dist/sdk.js"
+    },
+    "./analytics.js": {
+      "default": "./dist/analytics/analytics.js"
+    },
+    "./liveboard.js": {
+      "default": "./dist/liveboard/liveboard.js"
+    },
+    "./common.js": {
+      "default": "./dist/common/common.js"
+    },
+    "./designer.js": {
+      "default": "./dist/designer/designer.js"
     }
   },
   "web-types": "./node_modules/web-types-lit/web-types.json"

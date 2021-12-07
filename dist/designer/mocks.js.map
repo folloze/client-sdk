@@ -1,1 +1,1 @@
-{"version":3,"file":"mocks.js","sourceRoot":"","sources":["../../src/designer/mocks.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,KAAK,GAAG,CAAC,IAAiB,EAAE,EAAE;IACvC,IAAI,CAAC,MAAM,CAAC,UAAU,CAAC;SAClB,KAAK,CAAC,GAAG,CAAC,CAAC;AACpB,CAAC,CAAC"}
+{"version":3,"file":"mocks.js","sourceRoot":"","sources":["../../src/designer/mocks.ts"],"names":[],"mappings":"AAEA,MAAM,CAAC,MAAM,KAAK,GAAG,CAAC,IAAiB,EAAE,EAAE;IACvC,IAAI,CAAC,MAAM,CAAC,4BAA4B,CAAC;SACpC,KAAK,CAAC,GAAG,CAAC,CAAC;AACpB,CAAC,CAAC"}

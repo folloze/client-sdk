@@ -4,7 +4,7 @@ export class Liveboard {
     }
     getItems(payload) {
         return new Promise((resolve, reject) => {
-            this.fetcher.post("url-getting-items", payload)
+            this.fetcher.get("/url-getting-items", payload)
                 .then(result => {
                 resolve(result);
             })

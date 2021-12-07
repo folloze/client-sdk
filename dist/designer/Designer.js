@@ -4,7 +4,7 @@ export class Designer {
     }
     saveLiveBoard(payload) {
         return new Promise((resolve, reject) => {
-            this.fetcher.post("url-for-saving-live-board", payload)
+            this.fetcher.post("/url-for-saving-live-board", payload)
                 .then(result => {
                 resolve(result);
             })

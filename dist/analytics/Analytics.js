@@ -4,7 +4,7 @@ export class Analytics {
     }
     sendCustomAnalyticEvent(payload) {
         return new Promise((resolve, reject) => {
-            this.fetcher.post("url-for-custom-analytic-event", payload)
+            this.fetcher.post("/url-for-custom-analytic-event", payload)
                 .then(result => {
                 resolve(result);
             })

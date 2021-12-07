@@ -1,19 +1,5 @@
 
-/decorators/
-/development/
-/directives/
 /node_modules/
-/test/
-
-/decorators.*
-/directive-helpers.*
-/directive.*
-/async-directive.*
-/html.*
-/experimental-hydrate-support.*
-/experimental-hydrate.*
-/index.*
-/static-html.*
 
 
 node_modules

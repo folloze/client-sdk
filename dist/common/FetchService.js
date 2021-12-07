@@ -11,7 +11,6 @@ export class FetchService {
     constructor(options) {
         this.useMock = false;
         options = Object.assign(defaultFetcherOptions, options);
-        console.log({ options });
         this.useMock = options.useMock;
         if (this.useMock) {
             this.createMockFetcher(options);
