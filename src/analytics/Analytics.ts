@@ -1,6 +1,16 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 
+
+type PingPayload = {
+    time: string;
+    guid: string;
+    leadId: number;
+    boardId: number;
+    itemId?: number;
+}
+
+
 export class Analytics {
     private fetcher: AxiosInstance;
 
@@ -9,15 +19,10 @@ export class Analytics {
     }
 
     sendCustomAnalyticEvent(payload: {type: string, data: any}): Promise<AxiosResponse> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post("/url-for-custom-analytic-event", payload)
-                .then(result => {
-                    resolve(result);
-                })
-                .catch(e => {
-                    console.error("could not send custom analytic event", e);
-                    reject(e);
-                });
-        });
+        return this.fetcher.post("/url-for-custom-analytic-event", payload);
+    }
+
+    sendPing(payload: PingPayload) {
+        return this.fetcher.post("/url-for-ping", payload);
     }
 }
