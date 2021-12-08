@@ -24,8 +24,9 @@
       }
     ]
   },
-  "exclude": ["node_modules"],
+  "exclude": [],
   "include": [
-    "src"
+    "src",
+    "node_modules/axios-mock-adapter/dist/axios-mock-adapter.js",
   ]
 }
