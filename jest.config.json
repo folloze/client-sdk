@@ -1,0 +1,10 @@
+{
+  "preset": "ts-jest/presets/default-esm",
+  "setupFilesAfterEnv": ["<rootDir>/tests/setup.js"],
+  "globals": {
+    "ts-jest": {
+      "useEsm": "true",
+      "compiler": "typescript"
+    }
+  }
+}

@@ -6,7 +6,9 @@ beforeAll(() => {
     sdk = new ClientSDK({useMock: true});
 });
 
-test('saveLiveBoard mock working as expected', async () => {
-    await sdk.designer.saveLiveBoard({type: "test", data: {}})
-        .then(result => expect(result.status == 200));
+describe("testing sdk liveboard module", () => {
+    it('checks that saveLiveBoard mock working as expected', async () => {
+        await sdk.designer.saveLiveBoard({type: "test", data: {}})
+            .then(result => expect(result.status == 200));
+    });
 });
