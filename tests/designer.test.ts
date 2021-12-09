@@ -1,3 +1,5 @@
+import {describe, expect, beforeAll} from "@jest/globals";
+
 import {ClientSDK} from "../src";
 
 let sdk: ClientSDK;

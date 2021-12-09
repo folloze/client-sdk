@@ -13,7 +13,8 @@
     "@typescript-eslint"
   ],
   "ignorePatterns": ["**/*.js"],
-  "rules": {
+   "root": true,
+   "rules": {
     "no-unexpected-multiline": "off",
     "semi": "error",
     "prefer-const": "warn",
