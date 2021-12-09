@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.MRSYPSGR.js";
+} from "./chunk.VVGXRC7R.js";
 import {
   __commonJS
 } from "./chunk.CDYLR4M5.js";
