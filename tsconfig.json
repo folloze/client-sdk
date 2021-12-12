@@ -5,7 +5,10 @@
     "declaration": true,
     "sourceMap": true,
     "outDir": "dist",
-    "rootDir": "./src",
+    "rootDirs": [
+        "./src",
+        "./node_modules/axios-mock-adapter/dist/axios-mock-adapter.js"
+    ],
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
