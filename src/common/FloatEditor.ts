@@ -1,8 +1,7 @@
 import { css, CSSResultGroup, html, LitElement } from "lit";
-import { customElement, property, query } from "lit/decorators.js";
+import { property, query } from "lit/decorators.js";
 import { LiveWidgetEdit, LiveWidgetComponentEdit, makeDragElement } from "../index";
 
-@customElement("float-editor")
 export class FloatEditor extends LitElement {
     static styles = [
         css`
