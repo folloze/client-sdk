@@ -3,7 +3,6 @@ import { customElement, property, query, state } from "lit/decorators.js";
 import { LiveDraggable } from "./LiveDraggable";
 import { LiveWidget } from "./LiveWidget";
 
-@customElement("live-widget-edit")
 export abstract class LiveWidgetEdit extends LitElement {
     protected _widget: LiveWidget;
     protected _data: any;

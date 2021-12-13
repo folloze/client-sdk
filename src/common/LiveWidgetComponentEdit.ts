@@ -2,7 +2,6 @@ import {customElement} from "lit/decorators.js";
 import {LiveWidgetEdit} from "./LiveWidgetEdit";
 import _ from "lodash";
 
-@customElement("live-widget-comp-edit")
 export abstract class LiveWidgetComponentEdit extends LiveWidgetEdit {
 
     protected _propPath: string;

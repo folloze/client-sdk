@@ -94,7 +94,7 @@ export class FloatEditor extends LitElement {
             }
 
             #body {
-                padding: 1em;
+                padding: var(--fz-spacing-small);
             }
 
             .btn {
@@ -128,7 +128,7 @@ export class FloatEditor extends LitElement {
     ] as CSSResultGroup;
 
     @query("#body")
-    public content: HTMLElement;
+    public body: HTMLElement;
 
     @property()
     private isLoading: boolean = true;
@@ -141,7 +141,7 @@ export class FloatEditor extends LitElement {
 
     protected firstUpdated() {
         this.isLoading = false;
-        this.content.appendChild(this.childEl);
+        this.body.appendChild(this.childEl);
         makeDragElement(this.shadowRoot, this, "#handle");
     }
 
@@ -159,7 +159,7 @@ export class FloatEditor extends LitElement {
                 </span>
                 <flz-v-icon name="x-lg" class="close" @click=${this.close}></flz-v-icon>
             </div>
-            <div id="content"></div>
+            <div id="body"></div>
         `;
     }
 }

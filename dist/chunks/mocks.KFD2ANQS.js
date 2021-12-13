@@ -1,4 +1,4 @@
-import "./chunk.CDYLR4M5.js";
+import "./chunk.5KE7N75L.js";
 
 // src/designer/mocks.ts
 var rules = (mock) => {

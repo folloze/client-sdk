@@ -8,7 +8,7 @@ esbuild.build({
     // sourcemap: true,
 
     format: "esm",
-    target: "esnext",
+    target: "es2017",
     entryPoints: [
         "./src/index.ts",
     ],
