@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunks/chunk.36K6N7BL.js";
+} from "./chunks/chunk.VDOWMMET.js";
 import {
   __commonJS,
   __decorateClass,
@@ -5470,7 +5470,7 @@ var FetchService = class {
   }
   createMockFetcher(options) {
     this.createAxiosFetcher(options);
-    import("./chunks/src.D6RVSZNK.js").then((module) => {
+    import("./chunks/src.QVKUCV53.js").then((module) => {
       this.mock = new module.default(this.fetcher);
       MockConnector.bindLiveBoard(this.mock);
       MockConnector.bindDesigner(this.mock);
