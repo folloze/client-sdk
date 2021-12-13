@@ -18,6 +18,7 @@ esbuild.build({
     define: {
         "process.env.NODE_ENV": '"production"'
     },
+    //watch: true,
     bundle: true,
     external: [],
     splitting: true,
