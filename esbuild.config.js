@@ -8,7 +8,7 @@ esbuild.build({
     // sourcemap: true,
 
     format: "esm",
-    target: "esnext",
+    target: "es2017",
     entryPoints: [
         "./src/index.ts",
     ],
@@ -18,6 +18,7 @@ esbuild.build({
     define: {
         "process.env.NODE_ENV": '"production"'
     },
+    //watch: true,
     bundle: true,
     external: [],
     splitting: true,
