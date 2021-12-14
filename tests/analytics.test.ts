@@ -10,8 +10,8 @@ beforeAll(() => {
 describe("testing analytics module", () => {
     it('checks that sendLeadBoardView mock works as expected', async () => {
         await sdk.analytics.sendLeadBoardView({boardId: 1})
-            .then(result => expect(result.status).toEqual(200))
-    })
+            .then(result => expect(result.status).toEqual(200));
+    });
 
     it('checks that sendCustomAnalyticEvent mock works as expected', async () => {
         await sdk.analytics.sendCustomAnalyticEvent({type: "test", data: {}})

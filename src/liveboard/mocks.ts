@@ -1,8 +1,9 @@
 import MockAdapter from "axios-mock-adapter";
+import { BoardResponseV1 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
     mock.onGet("/live_board/v1/boards/board_slug/")
-        .reply(200, {
+        .reply<BoardResponseV1>(200, {
             id: 1,
             slug: 'board_slug',
             online_items_count: 0,

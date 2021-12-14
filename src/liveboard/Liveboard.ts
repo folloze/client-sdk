@@ -1,22 +1,26 @@
-import {AxiosInstance, AxiosResponse} from "axios";
-import {FetchService} from "../common/FetchService";
-import mapKeys from 'lodash'
-import snakeCase from 'lodash'
+import { AxiosInstance, AxiosResponse } from "axios";
+import { default as mapKeys, default as snakeCase } from 'lodash';
+import { FetchService } from "../common/FetchService";
+import { BoardResponseV1 } from './ILiveboardTypes';
 
 export class Liveboard {
     private fetcher: AxiosInstance;
-
-
 
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
     }
 
-    getBoard(payload: {boardSlug: string}): Promise<AxiosResponse> {
+    /**
+    * given the board slug (i.e. /best-board) it will retrieve the corresponding board
+    *
+    * @param {string} boardSlug the board's slug
+    * @return {BoardResponseV1} BoardResponse
+    */
+    getBoard(boardSlug: string): Promise<BoardResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v1/boards/${payload.boardSlug}/`)
+            this.fetcher.get<BoardResponseV1>(`/live_board/v1/boards/${boardSlug}/`)
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not get board");
@@ -24,7 +28,7 @@ export class Liveboard {
                 });
         });
     }
-
+    
     getPresenter(payload: {boardId: number, token: string}): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
             this.fetcher.get(
@@ -142,6 +146,26 @@ export class Liveboard {
         });
     }
 
+    setCookiesConsent(payload: {
+        boardId: number,
+        leadId: number,
+        constentOrigin: string,
+        isoCode: string
+    }): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(
+                `/live_board/v1/boards/${payload.boardId}/cookies_consents`,
+                {params: this.keysToSnakeCase(payload)}
+            )
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get file url", e);
+                    reject(e);
+                });
+        })
+    }
 
     getItems(payload?: any): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
