@@ -1,5 +1,4 @@
-import { css, html, LitElement } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
+import { html } from "lit";
 import { LiveDraggable } from "./LiveDraggable";
 // import { v4 as uuid_v4 } from "uuid";
 

@@ -1,4 +1,3 @@
-import {customElement} from "lit/decorators.js";
 import {LiveWidgetEdit} from "./LiveWidgetEdit";
 import _ from "lodash";
 

@@ -8,16 +8,16 @@
   "type": "module",
   "description": "",
   "scripts": {
-    "lint": "node_modules/.bin/eslint 'src/**/*.ts'",
-    "lint:fix": "node_modules/.bin/eslint --fix 'src/**/*.ts'",
+    "lint": "node_modules/.bin/eslint **/*.ts",
+    "lint:fix": "node_modules/.bin/eslint --fix **/*.ts",
     "dev": "npm-run-all --parallel build:es test:watch",
     "ts-types": " tsc --emitDeclarationOnly --outDir dist",
     "build": "npm run build:es",
-    "build:es": "rimraf dist && node ./esbuild.config.js && npm run ts-types",
+    "build:es": "npm run lint:fix && rimraf dist && node ./esbuild.config.js && npm run ts-types",
     "dont:use:build:ts": "tsc --build",
     "dont:use:build:ts:watch": "tsc --build --watch",
-    "test": "jest --verbose",
-    "test:watch": "jest --watch --onlyChanged"
+    "test": "npm run lint:fix && jest --verbose",
+    "test:watch": "npm run lint:fix && jest --watch --onlyChanged"
   },
   "author": "Rotem Grimberg <rotem@folloze.com>",
   "license": "",

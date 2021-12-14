@@ -12,9 +12,11 @@
   "plugins": [
     "@typescript-eslint"
   ],
-  "ignorePatterns": ["**/*.js"],
-   "root": true,
-   "rules": {
+  "ignorePatterns": [
+    "**/*.js"
+  ],
+  "root": true,
+  "rules": {
     "no-unexpected-multiline": "off",
     "semi": "error",
     "prefer-const": "warn",

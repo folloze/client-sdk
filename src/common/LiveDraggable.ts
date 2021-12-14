@@ -51,11 +51,13 @@ export class LiveDraggable extends LitElement implements IDraggable {
         console.log(e);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onDragEnd(e?: PointerEvent): void {
         this._pos = { x: Math.round(this.currentX), y: Math.round(this.currentY) };
         console.log("new pos", this._pos);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     onDrag(e: PointerEvent) {
         this.setAttribute("style", `transform: translate(${this.currentX}px, ${this.currentY}px);`);
     }

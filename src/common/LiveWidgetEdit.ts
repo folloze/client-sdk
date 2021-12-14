@@ -1,6 +1,4 @@
-import { html, LitElement } from "lit";
-import { customElement, property, query, state } from "lit/decorators.js";
-import { LiveDraggable } from "./LiveDraggable";
+import { LitElement } from "lit";
 import { LiveWidget } from "./LiveWidget";
 
 export abstract class LiveWidgetEdit extends LitElement {
