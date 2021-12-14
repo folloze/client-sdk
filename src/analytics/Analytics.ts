@@ -18,6 +18,19 @@ export class Analytics {
         this.fetcher = fetch.fetcher;
     }
 
+    sendLeadBoardView(payload: {boardId: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post(`/live_board/v2/boards/${payload.boardId}/lead_views`)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not track lead board view", e);
+                    reject(e);
+                });
+        });
+    }
+
     sendCustomAnalyticEvent(payload: {type: string, data: any}): Promise<AxiosResponse> {
         return this.fetcher.post("/url-for-custom-analytic-event", payload);
     }

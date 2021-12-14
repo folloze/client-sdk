@@ -1,12 +1,147 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
+import mapKeys from 'lodash'
+import snakeCase from 'lodash'
 
 export class Liveboard {
     private fetcher: AxiosInstance;
 
+
+
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
     }
+
+    getBoard(payload: {boardSlug: string}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(`/live_board/v1/boards/${payload.boardSlug}/`)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get board");
+                    reject(e);
+                });
+        });
+    }
+
+    getPresenter(payload: {boardId: number, token: string}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(
+                `/live_board/v1/boards/${payload.boardId}/presenter`,
+                {params: this.keysToSnakeCase(payload)}
+            )
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get presenter");
+                    reject(e);
+                });
+        });
+    }
+
+    // this will probably be one of the first things to go
+    getCampaign(payload: {boardId: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/campaign`)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get campaign");
+                    reject(e);
+                });
+        });
+    }
+
+    getCategory(payload: {categoryId: number, boardId: number, bySlug: boolean}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(
+                `/live_board/v2/categories/${payload.categoryId}`,
+                {params: this.keysToSnakeCase(payload)}
+            )
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get category", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getCategories(payload: {boardId: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/categories`)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get categories", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getUserChat(payload: {boardId: number, leadId: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post(
+                "/live_board/v1/chat/user_chat", 
+                {params: this.keysToSnakeCase(payload)}
+            )
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get user chat", e);
+                    reject(e);
+                });
+        });
+    }
+
+    createSnapshotUrl(payload: {contentItemId: number, guid?: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post(
+                `/live_board/v1/content_items/${payload.contentItemId}/snapshots`,
+                {params: this.keysToSnakeCase(payload)}
+            )
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not create snapshot", e);
+                    reject(e);
+                });
+        });
+    }
+
+    createItemAnalysis(payload: {contentItemId: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/analyses`)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not create analysis", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getFileUrl(payload: {contentItemId: number}): Promise<AxiosResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(`/live_board/v1/content_items/${payload.contentItemId}/files`)
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not get file url", e);
+                    reject(e);
+                });
+        });
+    }
+
 
     getItems(payload?: any): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
@@ -19,5 +154,11 @@ export class Liveboard {
                     reject(e);
                 });
         });
+    }
+
+    private keysToSnakeCase(params: object): object {
+        return mapKeys(params, (value, key) => {
+            return snakeCase(key)
+        })
     }
 }
