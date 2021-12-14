@@ -7,3 +7,14 @@ export type BoardResponseV1 = {
     is_ssl: boolean
 }
 
+export type BoardSellerV1 = {
+    name: string,
+    last_name: string,
+    email: string,
+    phone: string,
+    headline: string,
+    company: string,
+    photo: string,
+    twitter: string,
+    linkedin: string
+}

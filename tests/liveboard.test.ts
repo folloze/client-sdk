@@ -1,6 +1,5 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
-import { BoardResponseV1 } from '../src/liveboard/ILiveboardTypes';
 
 let sdk: ClientSDK;
 
@@ -14,9 +13,9 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.id).toEqual(1));
     });
 
-    it('checks that getPresenter mock works as expected', async() => {
-        await sdk.liveboard.getPresenter({boardId: 1, token: 'abcd'})
-            .then(result => expect(result.status == 200));
+    it('checks that getSellerInformation mock works as expected', async() => {
+        await sdk.liveboard.getSellerInformation(1, 'abcd')
+            .then(result => expect(result.email).toContain('@'));
     });
 
     it('checks that getCampaign mock works as expected', async() => {

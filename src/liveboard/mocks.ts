@@ -1,5 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
-import { BoardResponseV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerV1 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
     mock.onGet("/live_board/v1/boards/board_slug/")
@@ -13,7 +13,7 @@ export const rules = (mock: MockAdapter) => {
         });
 
     mock.onGet("/live_board/v1/boards/1/presenter")
-        .reply(200, {
+        .reply<BoardSellerV1>(200, {
             name: 'Jane',
             last_name: 'Doe',
             email: 'mock@email.com',

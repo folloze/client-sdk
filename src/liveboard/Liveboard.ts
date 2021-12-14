@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from "axios";
 import { default as mapKeys, default as snakeCase } from 'lodash';
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerV1 } from './ILiveboardTypes';
 
 export class Liveboard {
     private fetcher: AxiosInstance;
@@ -14,7 +14,7 @@ export class Liveboard {
     * given the board slug (i.e. /best-board) it will retrieve the corresponding board
     *
     * @param {string} boardSlug the board's slug
-    * @return {BoardResponseV1} BoardResponse
+    * @returns {BoardResponseV1} BoardResponse
     */
     getBoard(boardSlug: string): Promise<BoardResponseV1> {
         return new Promise((resolve, reject) => {
@@ -29,17 +29,24 @@ export class Liveboard {
         });
     }
     
-    getPresenter(payload: {boardId: number, token: string}): Promise<AxiosResponse> {
+    /**
+     * gets the seller to be displayed for the board
+     * 
+     * @param {number} boardId the board's id
+     * @param {string=} token 
+     * @returns {BoardContactV1} BoardContact
+     */
+    getSellerInformation(boardId: number, token?: string): Promise<BoardSellerV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(
-                `/live_board/v1/boards/${payload.boardId}/presenter`,
-                {params: this.keysToSnakeCase(payload)}
+            this.fetcher.get<BoardSellerV1>(
+                `/live_board/v1/boards/${boardId}/presenter`,
+                {params: {token}}
             )
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
-                    console.error("could not get presenter");
+                    console.error("could not get seller");
                     reject(e);
                 });
         });
