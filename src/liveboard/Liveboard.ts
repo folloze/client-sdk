@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from "axios";
 import { default as mapKeys, default as snakeCase } from 'lodash';
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerV1, CategoryV2, CategoriesV2 } from './ILiveboardTypes';
 
 export class Liveboard {
     private fetcher: AxiosInstance;
@@ -52,28 +52,27 @@ export class Liveboard {
         });
     }
 
-    // this will probably be one of the first things to go
-    getCampaign(payload: {boardId: number}): Promise<AxiosResponse> {
+    /**
+     * gets category by id, board id, and slug
+     * 
+     * @param {number | string} categoryIdOrSlug 
+     * @param {number} boardId 
+     * @param {boolean} bySlug 
+     * @returns {CategoryV2} Category
+     */
+    getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/campaign`)
-                .then(result => {
-                    resolve(result);
-                })
-                .catch(e => {
-                    console.error("could not get campaign");
-                    reject(e);
-                });
-        });
-    }
-
-    getCategory(payload: {categoryId: number, boardId: number, bySlug: boolean}): Promise<AxiosResponse> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.get(
-                `/live_board/v2/categories/${payload.categoryId}`,
-                {params: this.keysToSnakeCase(payload)}
+            this.fetcher.get<CategoryV2>(
+                `/live_board/v2/categories/${categoryIdOrSlug}`,
+                {
+                    params: {
+                        board_id: boardId,
+                        by_slug: bySlug
+                    }
+                }
             )
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not get category", e);
@@ -82,11 +81,17 @@ export class Liveboard {
         });
     }
 
-    getCategories(payload: {boardId: number}): Promise<AxiosResponse> {
+    /**
+     * gets all categories of a board
+     * 
+     * @param {string} boardId 
+     * @returns 
+     */
+    getCategories(boardId: number): Promise<CategoriesV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/categories`)
+            this.fetcher.get(`/live_board/v2/boards/${boardId}/categories`)
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not get categories", e);
