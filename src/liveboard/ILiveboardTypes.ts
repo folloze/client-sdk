@@ -18,3 +18,22 @@ export type BoardSellerV1 = {
     twitter: string,
     linkedin: string
 }
+
+export type CategoryV2 = {
+    id: number,
+    slug: string,
+    name: string,
+    category_type: number,
+    parent_category_id: number,
+    board_id: number,
+    url: string,
+    items_count: number,
+    subcategories_ids: number[],
+    description: string,
+    images: object[] //TODO: what is the structure of images
+}
+
+export type CategoriesV2 = {
+    category_ids: number[],
+    data: Record<string, CategoryV2>
+}

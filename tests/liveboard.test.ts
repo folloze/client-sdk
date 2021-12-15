@@ -18,19 +18,14 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.email).toContain('@'));
     });
 
-    it('checks that getCampaign mock works as expected', async() => {
-        await sdk.liveboard.getCampaign({boardId: 1})
-            .then(result => expect(result.status == 200));
-    });
-
     it('checks that getCategory mock works as expected', async() => {
-        await sdk.liveboard.getCategory({boardId: 1, categoryId: 1, bySlug: false})
-            .then(result => expect(result.status == 200));
+        await sdk.liveboard.getCategory(1, 1, false)
+            .then(result => expect(result.id).toEqual(1));
     });
 
     it('checks that getCategories mock works as expected', async() => {
-        await sdk.liveboard.getCategories({boardId: 1})
-            .then(result => expect(result.status == 200));
+        await sdk.liveboard.getCategories(1)
+            .then(result => expect(result.category_ids).toHaveLength);
     });
 
     it('checks that getUserChat mock works as expected', async() => {
