@@ -155,7 +155,7 @@ export class FloatEditor extends LitElement {
                 <span class="conf-name">
                     ${this.childEl.widget.tagName.toLowerCase()} ${this.childEl.id ? `#${this.childEl.id}` : ""}
                 </span>
-                <flz-v-icon name="x-lg" class="close" @click=${this.close}></flz-v-icon>
+                <div class="close" @click=${this.close}>X</div>
             </div>
             <div id="body"></div>
         `;
