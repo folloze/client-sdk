@@ -1,6 +1,6 @@
 import { LiveDraggable } from "./LiveDraggable";
 export declare abstract class LiveWidget extends LiveDraggable {
-    static editScripts: string[];
+    abstract readonly editScripts: string[];
     protected _data: any;
     private _widgetId;
     private _config;

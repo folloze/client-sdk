@@ -5,7 +5,7 @@ import {WidgetConfig} from "./interfaces/IWidget";
 
 export abstract class LiveWidget extends LiveDraggable {
 
-    public static editScripts: string[];
+    public abstract readonly editScripts: string[];
     protected _data: any;
     private _widgetId: string;
     private _config: WidgetConfig;
