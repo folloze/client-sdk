@@ -1,13 +1,14 @@
 import { LiveDraggable } from "./LiveDraggable";
 export declare abstract class LiveWidget extends LiveDraggable {
+    static editScripts: string[];
     protected _data: any;
     private _widgetId;
     private _config;
-    constructor();
+    protected constructor();
     set config(data: any);
     get config(): any;
     set data(x: any);
     get data(): any;
     get widgetId(): string;
-    render(): import("lit-html").TemplateResult<1>;
+    abstract render(): any;
 }

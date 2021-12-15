@@ -13,7 +13,8 @@
     "@typescript-eslint"
   ],
   "ignorePatterns": [
-    "**/*.js"
+    "**/*.js",
+    "dist/**"
   ],
   "root": true,
   "rules": {

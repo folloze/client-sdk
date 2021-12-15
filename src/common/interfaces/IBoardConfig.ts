@@ -1,6 +1,6 @@
 import {IOldGeneral} from "./oldBoardTypes/IOldGeneral";
-import {ISection} from "./ISection";
-import {IWidget} from "./IWidget";
+import {SectionConfig} from "./ISection";
+import {WidgetConfig} from "./IWidget";
 
 export type IBoardConfig = {
     boardId: string;
@@ -17,6 +17,6 @@ export type IBoardConfig = {
             rowHeight: string; // this should always be immutable "40px"
         }
     };
-    sections: ISection[];
-    widgets: IWidget[];
+    sections: SectionConfig[];
+    widgets: WidgetConfig[];
 };

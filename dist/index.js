@@ -4293,7 +4293,7 @@ var require_lodash = __commonJS({
         function keysIn(object) {
           return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
         }
-        function mapKeys(object, iteratee2) {
+        function mapKeys2(object, iteratee2) {
           var result2 = {};
           iteratee2 = getIteratee(iteratee2, 3);
           baseForOwn(object, function(value, key, object2) {
@@ -4553,7 +4553,7 @@ var require_lodash = __commonJS({
           var args = arguments, string = toString(args[0]);
           return args.length < 3 ? string : string.replace(args[1], args[2]);
         }
-        var snakeCase = createCompounder(function(result2, word, index) {
+        var snakeCase2 = createCompounder(function(result2, word, index) {
           return result2 + (index ? "_" : "") + word.toLowerCase();
         });
         function split(string, separator, limit) {
@@ -4991,7 +4991,7 @@ var require_lodash = __commonJS({
         lodash.keys = keys;
         lodash.keysIn = keysIn;
         lodash.map = map;
-        lodash.mapKeys = mapKeys;
+        lodash.mapKeys = mapKeys2;
         lodash.mapValues = mapValues;
         lodash.matches = matches;
         lodash.matchesProperty = matchesProperty;
@@ -5201,7 +5201,7 @@ var require_lodash = __commonJS({
         lodash.runInContext = runInContext2;
         lodash.sample = sample;
         lodash.size = size;
-        lodash.snakeCase = snakeCase;
+        lodash.snakeCase = snakeCase2;
         lodash.some = some;
         lodash.sortedIndex = sortedIndex;
         lodash.sortedIndexBy = sortedIndexBy;
@@ -5425,6 +5425,16 @@ var Analytics = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
+  sendLeadBoardView(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v2/boards/${payload.boardId}/lead_views`).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not track lead board view", e5);
+        reject(e5);
+      });
+    });
+  }
   sendCustomAnalyticEvent(payload) {
     return this.fetcher.post("/url-for-custom-analytic-event", payload);
   }
@@ -5439,13 +5449,13 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static bindLiveBoard(mock) {
-    import("./chunks/mocks.265CBAGD.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+    import("./chunks/mocks.GBNCVVSW.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static bindDesigner(mock) {
     import("./chunks/mocks.KFD2ANQS.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static bindAnalytics(mock) {
-    import("./chunks/mocks.6GCUP3IS.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
+    import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
   }
 };
 
@@ -5503,9 +5513,110 @@ var Designer = class {
 };
 
 // src/liveboard/Liveboard.ts
+var import_lodash = __toModule(require_lodash());
 var Liveboard = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
+  }
+  getBoard(boardSlug) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v1/boards/${boardSlug}/`).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get board");
+        reject(e5);
+      });
+    });
+  }
+  getSellerInformation(boardId, token) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v1/boards/${boardId}/presenter`, { params: { token } }).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get seller");
+        reject(e5);
+      });
+    });
+  }
+  getCampaign(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/campaign`).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not get campaign");
+        reject(e5);
+      });
+    });
+  }
+  getCategory(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/categories/${payload.categoryId}`, { params: this.keysToSnakeCase(payload) }).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not get category", e5);
+        reject(e5);
+      });
+    });
+  }
+  getCategories(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/categories`).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not get categories", e5);
+        reject(e5);
+      });
+    });
+  }
+  getUserChat(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/live_board/v1/chat/user_chat", { params: this.keysToSnakeCase(payload) }).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not get user chat", e5);
+        reject(e5);
+      });
+    });
+  }
+  createSnapshotUrl(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/snapshots`, { params: this.keysToSnakeCase(payload) }).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not create snapshot", e5);
+        reject(e5);
+      });
+    });
+  }
+  createItemAnalysis(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/analyses`).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not create analysis", e5);
+        reject(e5);
+      });
+    });
+  }
+  getFileUrl(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v1/content_items/${payload.contentItemId}/files`).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not get file url", e5);
+        reject(e5);
+      });
+    });
+  }
+  setCookiesConsent(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v1/boards/${payload.boardId}/cookies_consents`, { params: this.keysToSnakeCase(payload) }).then((result) => {
+        resolve(result);
+      }).catch((e5) => {
+        console.error("could not get file url", e5);
+        reject(e5);
+      });
+    });
   }
   getItems(payload) {
     return new Promise((resolve, reject) => {
@@ -5515,6 +5626,11 @@ var Liveboard = class {
         console.error("could not get items", e5);
         reject(e5);
       });
+    });
+  }
+  keysToSnakeCase(params) {
+    return (0, import_lodash.default)(params, (value, key) => {
+      return (0, import_lodash.default)(key);
     });
   }
 };
@@ -6190,13 +6306,6 @@ var LiveWidget = class extends LiveDraggable {
   get widgetId() {
     return this._widgetId;
   }
-  render() {
-    return p`
-            <div class="live-widget">
-                <slot></slot>
-            </div>
-        `;
-  }
 };
 
 // src/common/LiveWidgetEdit.ts
@@ -6229,7 +6338,7 @@ var LiveWidgetEdit = class extends s4 {
 };
 
 // src/common/LiveWidgetComponentEdit.ts
-var import_lodash = __toModule(require_lodash());
+var import_lodash2 = __toModule(require_lodash());
 var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   set propertyPath(path) {
     this._propPath = path;
@@ -6238,7 +6347,7 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
     return this._propPath;
   }
   firstUpdated() {
-    this.data = import_lodash.default.get(this.widget.data, this.propertyPath);
+    this.data = import_lodash2.default.get(this.widget.data, this.propertyPath);
   }
 };
 

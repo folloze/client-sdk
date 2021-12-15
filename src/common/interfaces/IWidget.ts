@@ -1,7 +1,7 @@
 import {FloatPos, GridPos} from "./IPositions";
 
 
-export type IWidget = {
+export type WidgetConfig = {
     id: string;
     position: GridPos | FloatPos;
     widgetTag: string; // 'folloze-header-hor' | 'header' | 'gallery' | 'banner' ...

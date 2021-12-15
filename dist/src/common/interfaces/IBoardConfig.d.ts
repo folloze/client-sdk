@@ -1,6 +1,6 @@
 import { IOldGeneral } from "./oldBoardTypes/IOldGeneral";
-import { ISection } from "./ISection";
-import { IWidget } from "./IWidget";
+import { SectionConfig } from "./ISection";
+import { WidgetConfig } from "./IWidget";
 export declare type IBoardConfig = {
     boardId: string;
     meta: IOldGeneral;
@@ -19,6 +19,6 @@ export declare type IBoardConfig = {
             rowHeight: string;
         };
     };
-    sections: ISection[];
-    widgets: IWidget[];
+    sections: SectionConfig[];
+    widgets: WidgetConfig[];
 };

@@ -1,5 +1,5 @@
 import { GridPos } from "./IPositions";
-export declare type ISection = {
+export declare type SectionConfig = {
     position: GridPos;
     background: string;
 };

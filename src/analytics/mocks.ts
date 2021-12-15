@@ -3,7 +3,7 @@ import MockAdapter from "axios-mock-adapter";
 export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v2/boards/1/lead_views")
-        .reply(200)
+        .reply(200);
 
     mock.onPost("/url-for-custom-analytic-event")
         .reply(config => {

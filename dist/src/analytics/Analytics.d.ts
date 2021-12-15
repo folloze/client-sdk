@@ -10,6 +10,9 @@ declare type PingPayload = {
 export declare class Analytics {
     private fetcher;
     constructor(fetch: FetchService);
+    sendLeadBoardView(payload: {
+        boardId: number;
+    }): Promise<AxiosResponse>;
     sendCustomAnalyticEvent(payload: {
         type: string;
         data: any;
