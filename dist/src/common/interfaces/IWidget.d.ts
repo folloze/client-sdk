@@ -3,6 +3,6 @@ export declare type WidgetConfig = {
     id: string;
     position: GridPos | FloatPos;
     widgetTag: string;
-    widgetScripts: string[];
+    widgetScripts: string;
     data: any;
 };
