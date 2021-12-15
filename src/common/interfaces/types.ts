@@ -1,6 +1,6 @@
 
 
-export * from "./IBoardConfig";
+export * from "./IBoard";
 export * from "./IDraggable";
 export * from "./IGrid";
 export * from "./IPositions";

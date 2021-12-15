@@ -5449,7 +5449,7 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static bindLiveBoard(mock) {
-    import("./chunks/mocks.GBNCVVSW.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+    import("./chunks/mocks.TKHE3YIX.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static bindDesigner(mock) {
     import("./chunks/mocks.KFD2ANQS.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
@@ -5538,30 +5538,25 @@ var Liveboard = class {
       });
     });
   }
-  getCampaign(payload) {
+  getCategory(categoryIdOrSlug, boardId, bySlug) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/campaign`).then((result) => {
-        resolve(result);
-      }).catch((e5) => {
-        console.error("could not get campaign");
-        reject(e5);
-      });
-    });
-  }
-  getCategory(payload) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/categories/${payload.categoryId}`, { params: this.keysToSnakeCase(payload) }).then((result) => {
-        resolve(result);
+      this.fetcher.get(`/live_board/v2/categories/${categoryIdOrSlug}`, {
+        params: {
+          board_id: boardId,
+          by_slug: bySlug
+        }
+      }).then((result) => {
+        resolve(result.data);
       }).catch((e5) => {
         console.error("could not get category", e5);
         reject(e5);
       });
     });
   }
-  getCategories(payload) {
+  getCategories(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${payload.boardId}/categories`).then((result) => {
-        resolve(result);
+      this.fetcher.get(`/live_board/v2/boards/${boardId}/categories`).then((result) => {
+        resolve(result.data);
       }).catch((e5) => {
         console.error("could not get categories", e5);
         reject(e5);

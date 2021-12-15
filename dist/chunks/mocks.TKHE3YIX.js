@@ -21,24 +21,6 @@ var rules = (mock) => {
     twitter: "twitter",
     linkedin: "linkedin"
   });
-  mock.onGet("/live_board/v2/boards/1/campaign").reply(200, {
-    id: 1,
-    board_id: 1,
-    organization_id: 1,
-    campaign_type: 0,
-    general: {},
-    header: {},
-    banner: {},
-    contact_card: {},
-    live_event: {},
-    items: {},
-    promotion: {},
-    side_by_side: {},
-    footer: {},
-    widget: {},
-    created_at: new Date(),
-    updated_at: new Date()
-  });
   mock.onGet("/live_board/v2/categories/1").reply(200, {
     id: 1,
     slug: "home",
@@ -54,7 +36,7 @@ var rules = (mock) => {
   });
   mock.onGet("/live_board/v2/boards/1/categories").reply(200, {
     data: {
-      1: {
+      "1": {
         id: 1,
         slug: "home",
         name: "home",
@@ -67,7 +49,7 @@ var rules = (mock) => {
         description: "home category",
         images: []
       },
-      2: {
+      "2": {
         id: 2,
         slug: "first",
         name: "first",

@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerV1, CategoryV2, CategoriesV2 } from './ILiveboardTypes';
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -19,17 +19,22 @@ export declare class Liveboard {
      * @returns {BoardContactV1} BoardContact
      */
     getSellerInformation(boardId: number, token?: string): Promise<BoardSellerV1>;
-    getCampaign(payload: {
-        boardId: number;
-    }): Promise<AxiosResponse>;
-    getCategory(payload: {
-        categoryId: number;
-        boardId: number;
-        bySlug: boolean;
-    }): Promise<AxiosResponse>;
-    getCategories(payload: {
-        boardId: number;
-    }): Promise<AxiosResponse>;
+    /**
+     * gets category by id, board id, and slug
+     *
+     * @param {number | string} categoryIdOrSlug
+     * @param {number} boardId
+     * @param {boolean} bySlug
+     * @returns {CategoryV2} Category
+     */
+    getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryV2>;
+    /**
+     * gets all categories of a board
+     *
+     * @param {string} boardId
+     * @returns
+     */
+    getCategories(boardId: number): Promise<CategoriesV2>;
     getUserChat(payload: {
         boardId: number;
         leadId: number;
