@@ -20,14 +20,14 @@ export abstract class LiveWidget extends LiveDraggable {
         this.initialY = 0;
     }
 
-    set config(data: any) {
+    set config(data: WidgetConfig) {
         this._widgetId = data.id;
         this._config = data;
         this._data = data?.data;
         this.requestUpdate();
     }
 
-    public get config() {
+    public get config(): WidgetConfig {
         return this._config;
     }
 
