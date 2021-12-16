@@ -1,5 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
-import { BoardResponseV1, BoardSellerV1, CategoryV2 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
     mock.onGet("/live_board/v1/boards/board_slug/")
@@ -13,7 +13,7 @@ export const rules = (mock: MockAdapter) => {
         });
 
     mock.onGet("/live_board/v1/boards/1/presenter")
-        .reply<BoardSellerV1>(200, {
+        .reply<BoardSellerResponseV1>(200, {
             name: 'Jane',
             last_name: 'Doe',
             email: 'mock@email.com',
@@ -26,7 +26,7 @@ export const rules = (mock: MockAdapter) => {
         })
 
     mock.onGet("/live_board/v2/categories/1")
-        .reply<CategoryV2>(200, {
+        .reply<CategoryResponseV2>(200, {
             id: 1,
             slug: 'home',
             name: 'home',
@@ -41,7 +41,7 @@ export const rules = (mock: MockAdapter) => {
         });
 
     mock.onGet("/live_board/v2/boards/1/categories")
-        .reply(200, {
+        .reply<CategoriesResponseV2>(200, {
             data: {
                 '1': {
                     id: 1,
@@ -74,7 +74,7 @@ export const rules = (mock: MockAdapter) => {
         });
 
     mock.onPost("/live_board/v1/chat/user_chat")
-        .reply(200, {token: 'abcd', chat_id: 123});
+        .reply<UserChatResponseV1>(200, {token: 'abcd', chat_id: 123});
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"})

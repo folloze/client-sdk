@@ -25,17 +25,17 @@ describe("test liveboard mocks module", () => {
 
     it('checks that getCategories mock works as expected', async() => {
         await sdk.liveboard.getCategories(1)
-            .then(result => expect(result.category_ids).toHaveLength);
+            .then(result => expect(result.categories_ids).toHaveLength(2));
     });
 
     it('checks that getUserChat mock works as expected', async() => {
-        await sdk.liveboard.getUserChat({boardId: 1, leadId: 1})
-            .then(result => expect(result.status == 200));
+        await sdk.liveboard.getUserChat(1, 1)
+            .then(result => expect(result.chat_id).toBeDefined());
     });
 
     it('checks that createSnapshotUrl mock works as expected', async() => {
-        await sdk.liveboard.createSnapshotUrl({contentItemId: 1})
-            .then(result => expect(result.status == 200));
+        await sdk.liveboard.createSnapshotUrl(1)
+            .then(result => expect(result.link_url == '200'));
     });
 
     it('checks that createItemAnalysis mock works as expected', async() => {
