@@ -5563,20 +5563,25 @@ var Liveboard = class {
       });
     });
   }
-  getUserChat(payload) {
+  getUserChat(boardId, leadId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/live_board/v1/chat/user_chat", { params: this.keysToSnakeCase(payload) }).then((result) => {
-        resolve(result);
+      this.fetcher.post("/live_board/v1/chat/user_chat", {
+        params: {
+          board_id: boardId,
+          leadId
+        }
+      }).then((result) => {
+        resolve(result.data);
       }).catch((e5) => {
         console.error("could not get user chat", e5);
         reject(e5);
       });
     });
   }
-  createSnapshotUrl(payload) {
+  createSnapshotUrl(contentItemId, guid) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/snapshots`, { params: this.keysToSnakeCase(payload) }).then((result) => {
-        resolve(result);
+      this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/snapshots`, { params: { guid } }).then((result) => {
+        resolve(result.data);
       }).catch((e5) => {
         console.error("could not create snapshot", e5);
         reject(e5);

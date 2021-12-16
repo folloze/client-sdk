@@ -6,7 +6,7 @@ export declare type BoardResponseV1 = {
     name: string;
     is_ssl: boolean;
 };
-export declare type BoardSellerV1 = {
+export declare type BoardSellerResponseV1 = {
     name: string;
     last_name: string;
     email: string;
@@ -17,7 +17,7 @@ export declare type BoardSellerV1 = {
     twitter: string;
     linkedin: string;
 };
-export declare type CategoryV2 = {
+export declare type CategoryResponseV2 = {
     id: number;
     slug: string;
     name: string;
@@ -30,7 +30,15 @@ export declare type CategoryV2 = {
     description: string;
     images: object[];
 };
-export declare type CategoriesV2 = {
-    category_ids: number[];
-    data: Record<string, CategoryV2>;
+export declare type CategoriesResponseV2 = {
+    categories_ids: number[];
+    data: Record<string, CategoryResponseV2>;
+};
+export declare type UserChatResponseV1 = {
+    token: string;
+    chat_id: number;
+};
+export declare type SnapshotUrlResponseV1 = {
+    link_url: string;
+    snapshot_url: string;
 };
