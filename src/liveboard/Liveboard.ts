@@ -200,7 +200,7 @@ export class Liveboard {
                     console.error("could not get file url", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     getItems(payload?: any): Promise<AxiosResponse> {
@@ -218,7 +218,7 @@ export class Liveboard {
 
     private keysToSnakeCase(params: object): object {
         return mapKeys(params, (value, key) => {
-            return snakeCase(key)
-        })
+            return snakeCase(key);
+        });
     }
 }

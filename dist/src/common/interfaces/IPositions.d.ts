@@ -3,6 +3,7 @@ export declare type GridPos = {
     colStart: number;
     rowEnd: number;
     colEnd: number;
+    layer?: number;
     span?: number;
     spanMin?: number;
     spanMax?: number;

@@ -4,6 +4,7 @@ export type GridPos = {
     rowEnd: number;
     colEnd: number;
 
+    layer?: number;
     span?: number;
     spanMin?: number;
     spanMax?: number;

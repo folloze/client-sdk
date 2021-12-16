@@ -23,7 +23,7 @@ export const rules = (mock: MockAdapter) => {
             photo: 'image_url',
             twitter: 'twitter',
             linkedin: 'linkedin'
-        })
+        });
 
     mock.onGet("/live_board/v2/categories/1")
         .reply<CategoryResponseV2>(200, {
@@ -77,10 +77,10 @@ export const rules = (mock: MockAdapter) => {
         .reply<UserChatResponseV1>(200, {token: 'abcd', chat_id: 123});
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
-        .reply(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"})
+        .reply(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
 
     mock.onPost("/live_board/v1/content_items/1/analyses")
-        .reply(200, {secured: true})
+        .reply(200, {secured: true});
 
     mock.onGet("/live_board/v1/content_items/1/files")
         .reply(200, {url: 'preview.url.com'});

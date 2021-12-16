@@ -1,27 +1,16 @@
-import { html } from "lit";
 import { LiveDraggable } from "./LiveDraggable";
+import {WidgetConfig} from "./interfaces/IWidget";
 // import { v4 as uuid_v4 } from "uuid";
 
-export abstract class LiveWidget extends LiveDraggable {
-    // static styles = [css`
-    //   :host {
-    //
-    //   }
-    //   .live-widget {
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-    //     height: 100%;
-    //     position: relative;
-    //   }
-    // `
-    // ];
 
+export abstract class LiveWidget extends LiveDraggable {
+
+    public abstract readonly editScripts: string[];
     protected _data: any;
     private _widgetId: string;
-    private _config: any;
+    private _config: WidgetConfig;
 
-    constructor() {
+    protected constructor() {
         super();
         this.xOffset = 0;
         this.yOffset = 0;
@@ -31,14 +20,14 @@ export abstract class LiveWidget extends LiveDraggable {
         this.initialY = 0;
     }
 
-    set config(data: any) {
+    set config(data: WidgetConfig) {
         this._widgetId = data.id;
         this._config = data;
         this._data = data?.data;
         this.requestUpdate();
     }
 
-    public get config() {
+    public get config(): WidgetConfig {
         return this._config;
     }
 
@@ -51,15 +40,9 @@ export abstract class LiveWidget extends LiveDraggable {
         return this._data;
     }
 
-    get widgetId() {
+    public get widgetId() {
         return this._widgetId;
     }
 
-    render() {
-        return html`
-            <div class="live-widget">
-                <slot></slot>
-            </div>
-        `;
-    }
+    abstract render();
 }

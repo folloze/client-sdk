@@ -2,6 +2,7 @@ import "./chunk.5KE7N75L.js";
 
 // src/analytics/mocks.ts
 var rules = (mock) => {
+  mock.onPost("/live_board/v2/boards/1/lead_views").reply(200);
   mock.onPost("/url-for-custom-analytic-event").reply((config) => {
     const data = JSON.parse(config.data);
     console.debug("sending analytic data to server", data);
