@@ -23,7 +23,6 @@ export declare type BoardConfig = {
         };
     };
     sections: SectionConfig[];
-    widgets: WidgetConfig[];
 };
 export interface ILiveBoard extends LitElement {
     exampleConfig: BoardConfig;
