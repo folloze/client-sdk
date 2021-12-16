@@ -1,7 +1,10 @@
 import { AxiosInstance, AxiosResponse } from "axios";
 import { default as mapKeys, default as snakeCase } from 'lodash';
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerV1, CategoryV2, CategoriesV2 } from './ILiveboardTypes';
+import {
+    BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
+    UserChatResponseV1, SnapshotUrlResponseV1
+} from './ILiveboardTypes';
 
 export class Liveboard {
     private fetcher: AxiosInstance;
@@ -34,11 +37,11 @@ export class Liveboard {
      * 
      * @param {number} boardId the board's id
      * @param {string=} token 
-     * @returns {BoardContactV1} BoardContact
+     * @returns {BoardSellerResponseV1} BoardSellerResponse
      */
-    getSellerInformation(boardId: number, token?: string): Promise<BoardSellerV1> {
+    getSellerInformation(boardId: number, token?: string): Promise<BoardSellerResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<BoardSellerV1>(
+            this.fetcher.get<BoardSellerResponseV1>(
                 `/live_board/v1/boards/${boardId}/presenter`,
                 {params: {token}}
             )
@@ -58,11 +61,11 @@ export class Liveboard {
      * @param {number | string} categoryIdOrSlug 
      * @param {number} boardId 
      * @param {boolean} bySlug 
-     * @returns {CategoryV2} Category
+     * @returns {CategoryResponseV2} CategoryResponse
      */
-    getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryV2> {
+    getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<CategoryV2>(
+            this.fetcher.get<CategoryResponseV2>(
                 `/live_board/v2/categories/${categoryIdOrSlug}`,
                 {
                     params: {
@@ -85,9 +88,9 @@ export class Liveboard {
      * gets all categories of a board
      * 
      * @param {string} boardId 
-     * @returns 
+     * @returns {CategoriesResponseV2} CategoriesResponse
      */
-    getCategories(boardId: number): Promise<CategoriesV2> {
+    getCategories(boardId: number): Promise<CategoriesResponseV2> {
         return new Promise((resolve, reject) => {
             this.fetcher.get(`/live_board/v2/boards/${boardId}/categories`)
                 .then(result => {
@@ -100,14 +103,27 @@ export class Liveboard {
         });
     }
 
-    getUserChat(payload: {boardId: number, leadId: number}): Promise<AxiosResponse> {
+    /**
+     * 
+     * Used for livestreams, get the chat id and token for given lead and board
+     * 
+     * @param {number} boardId 
+     * @param {number} leadId 
+     * @returns {UserChatResponseV1} UserChatResponse
+     */
+    getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post(
                 "/live_board/v1/chat/user_chat", 
-                {params: this.keysToSnakeCase(payload)}
+                {
+                    params: {
+                        board_id: boardId,
+                        leadId: leadId
+                    }
+                }
             )
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not get user chat", e);
@@ -116,14 +132,22 @@ export class Liveboard {
         });
     }
 
-    createSnapshotUrl(payload: {contentItemId: number, guid?: number}): Promise<AxiosResponse> {
+    /**
+     * 
+     * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
+     * 
+     * @param {number} contentItemId 
+     * @param {number=} guid 
+     * @returns {SnapshotUrlResponseV1} SnapshotUrlResponse
+     */
+    createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post(
-                `/live_board/v1/content_items/${payload.contentItemId}/snapshots`,
-                {params: this.keysToSnakeCase(payload)}
+                `/live_board/v1/content_items/${contentItemId}/snapshots`,
+                {params: {guid}}
             )
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not create snapshot", e);

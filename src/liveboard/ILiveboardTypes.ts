@@ -7,7 +7,7 @@ export type BoardResponseV1 = {
     is_ssl: boolean
 }
 
-export type BoardSellerV1 = {
+export type BoardSellerResponseV1 = {
     name: string,
     last_name: string,
     email: string,
@@ -19,7 +19,7 @@ export type BoardSellerV1 = {
     linkedin: string
 }
 
-export type CategoryV2 = {
+export type CategoryResponseV2 = {
     id: number,
     slug: string,
     name: string,
@@ -33,7 +33,17 @@ export type CategoryV2 = {
     images: object[] //TODO: what is the structure of images
 }
 
-export type CategoriesV2 = {
-    category_ids: number[],
-    data: Record<string, CategoryV2>
+export type CategoriesResponseV2 = {
+    categories_ids: number[],
+    data: Record<string, CategoryResponseV2>
+}
+
+export type UserChatResponseV1 = {
+    token: string,
+    chat_id: number
+}
+
+export type SnapshotUrlResponseV1 = {
+    link_url: string,
+    snapshot_url: string
 }
