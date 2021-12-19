@@ -1181,7 +1181,7 @@ var require_lodash = __commonJS({
           if (typeof func != "function") {
             throw new TypeError(FUNC_ERROR_TEXT);
           }
-          return setTimeout(function() {
+          return setTimeout2(function() {
             func.apply(undefined, args);
           }, wait);
         }
@@ -2990,7 +2990,7 @@ var require_lodash = __commonJS({
           return object[key];
         }
         var setData = shortOut(baseSetData);
-        var setTimeout = ctxSetTimeout || function(func, wait) {
+        var setTimeout2 = ctxSetTimeout || function(func, wait) {
           return root.setTimeout(func, wait);
         };
         var setToString = shortOut(baseSetToString);
@@ -3782,7 +3782,7 @@ var require_lodash = __commonJS({
           }
           function leadingEdge(time) {
             lastInvokeTime = time;
-            timerId = setTimeout(timerExpired, wait);
+            timerId = setTimeout2(timerExpired, wait);
             return leading ? invokeFunc(time) : result2;
           }
           function remainingWait(time) {
@@ -3798,7 +3798,7 @@ var require_lodash = __commonJS({
             if (shouldInvoke(time)) {
               return trailingEdge(time);
             }
-            timerId = setTimeout(timerExpired, remainingWait(time));
+            timerId = setTimeout2(timerExpired, remainingWait(time));
           }
           function trailingEdge(time) {
             timerId = undefined;
@@ -3829,12 +3829,12 @@ var require_lodash = __commonJS({
               }
               if (maxing) {
                 clearTimeout(timerId);
-                timerId = setTimeout(timerExpired, wait);
+                timerId = setTimeout2(timerExpired, wait);
                 return invokeFunc(lastCallTime);
               }
             }
             if (timerId === undefined) {
-              timerId = setTimeout(timerExpired, wait);
+              timerId = setTimeout2(timerExpired, wait);
             }
             return result2;
           }
@@ -5452,7 +5452,7 @@ var MockConnector = class {
     import("./chunks/mocks.TKHE3YIX.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static bindDesigner(mock) {
-    import("./chunks/mocks.KFD2ANQS.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    import("./chunks/mocks.CHGDOG3P.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static bindAnalytics(mock) {
     import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5500,6 +5500,31 @@ var Designer = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
+  getImageBankSettings(organizationId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/api/v1/organizations/${organizationId}/settings/image_bank`).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get image bank settings", e5);
+        reject(e5);
+      });
+    });
+  }
+  saveImageBankSettings(organizationId, categoryName, source) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.put(`/api/v1/organizations/${organizationId}/settings/image_bank`, {
+        params: {
+          category_name: categoryName,
+          value: source
+        }
+      }).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not set image bank settings", e5);
+        reject(e5);
+      });
+    });
+  }
   saveLiveBoard(payload) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/url-for-saving-live-board", payload).then((result) => {
@@ -5531,7 +5556,13 @@ var Liveboard = class {
   getSellerInformation(boardId, token) {
     return new Promise((resolve, reject) => {
       this.fetcher.get(`/live_board/v1/boards/${boardId}/presenter`, { params: { token } }).then((result) => {
-        resolve(result.data);
+        if (result.status == 206) {
+          setTimeout(() => {
+            this.getSellerInformation(boardId, token).then(resolve).catch(reject);
+          }, 2e3);
+        } else {
+          resolve(result.data);
+        }
       }).catch((e5) => {
         console.error("could not get seller");
         reject(e5);

@@ -1,6 +1,6 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import {ImageBankResponseV1} from "./IDesignerTypes"
+import {ImageBankResponseV1} from "./IDesignerTypes";
 
 export class Designer {
     private fetcher: AxiosInstance;

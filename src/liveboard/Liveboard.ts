@@ -50,11 +50,11 @@ export class Liveboard {
                         setTimeout(() => {
                             this.getSellerInformation(boardId, token)
                             .then(resolve)
-                          . catch(reject)
-                        }, 2000)
+                          . catch(reject);
+                        }, 2000);
                     }
                     else {
-                        resolve(result.data)
+                        resolve(result.data);
                     }
                 })
                 .catch(e => {
