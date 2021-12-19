@@ -1,12 +1,35 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import {ImageBankResponseV1} from "./IDesignerTypes"
+import { default as mapKeys, default as snakeCase } from 'lodash';
+import {ImageBankResponseV1, ImageGalleryParams, GalleryImage} from "./IDesignerTypes"
 
 export class Designer {
     private fetcher: AxiosInstance;
 
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
+    }
+
+    /**
+     * Gets the image gallery for given types
+     * 
+     * @param {ImageGalleryParams} payload 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<GalleryImage[]>(
+                "/api/imagegallery",
+                {params: this.keysToSnakeCase(payload)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get image gallery", e);
+                    reject(e);
+                });
+        });
     }
 
     /**
@@ -70,6 +93,13 @@ export class Designer {
                     console.error("could not save liveboard", e);
                     reject(e);
                 });
+        });
+    }
+
+    //TODO: DRY
+    private keysToSnakeCase(params: object): object {
+        return mapKeys(params, (value, key) => {
+            return snakeCase(key);
         });
     }
 }
