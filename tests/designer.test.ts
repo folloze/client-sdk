@@ -8,6 +8,16 @@ beforeAll(() => {
 });
 
 describe("testing sdk liveboard module", () => {
+    it('checks that getImageBankSettings mock works as expected', async () => {
+        await sdk.designer.getImageBankSettings(1)
+            .then(result => expect(result.icons).toEqual("folloze"));
+    });
+
+    it('checks that getImageBankSettings mock works as expected', async () => {
+        await sdk.designer.saveImageBankSettings(1, "banners", "folloze")
+            .then(result => expect(result.icons).toEqual("folloze"));
+    });
+
     it('checks that saveLiveBoard mock working as expected', async () => {
         await sdk.designer.saveLiveBoard({type: "test", data: {}})
             .then(result => expect(result.status == 200));
