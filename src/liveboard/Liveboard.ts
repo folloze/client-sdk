@@ -46,7 +46,16 @@ export class Liveboard {
                 {params: {token}}
             )
                 .then(result => {
-                    resolve(result.data);
+                    if(result.status == 206) {
+                        setTimeout(() => {
+                            this.getSellerInformation(boardId, token)
+                            .then(resolve)
+                          . catch(reject)
+                        }, 2000)
+                    }
+                    else {
+                        resolve(result.data)
+                    }
                 })
                 .catch(e => {
                     console.error("could not get seller");
