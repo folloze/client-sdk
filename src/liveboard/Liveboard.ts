@@ -346,6 +346,13 @@ export class Liveboard {
         });
     }
 
+    /**
+     * Submit a share by email cta
+     * 
+     * @param {number} boardId 
+     * @param {string} email 
+     * @param {number} invitationId 
+     */
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>{
         return new Promise((resolve, reject) => {
             this.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
