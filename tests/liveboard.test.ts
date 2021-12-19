@@ -8,6 +8,14 @@ beforeAll(() => {
 });
 
 describe("test liveboard mocks module", () => {
+    const ctaParams = {
+        cta: {area: "banner", label: null},
+        email: "email@company.com",
+        formId: 1,
+        message: "hey",
+        type: "message",
+    };
+
     it('checks that getBoard mock works as expected', async () => {
         await sdk.liveboard.getBoard('board_slug')
             .then(result => expect(result.id).toEqual(1));
@@ -48,13 +56,45 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.status == 200));
     });
 
+    //TODO
     it('checks that getItems (all) mock works as expected', async () => {
         await sdk.liveboard.getItems()
             .then(result => expect(result.status == 201));
     });
 
+    //TODO
     it('checks that getItems mock works as expected', async () => {
         await sdk.liveboard.getItems({itemId: 1})
             .then(result => expect(result.status == 201));
+    });
+
+    it('checks that saveMessageCta mock works as expected', async () => {
+        await sdk.liveboard.saveMessageCta(1, ctaParams)
+            .then(result => expect(result.id).toEqual(1));
+    });
+
+    it('checks that saveContactCta mock works as expected', async () => {
+        await sdk.liveboard.saveContactCta(1, ctaParams)
+            .then(result => expect(result.id).toEqual(1));
+    });
+
+    it('checks that saveFormCta mock works as expected', async () => {
+        await sdk.liveboard.saveFormCta(1, ctaParams)
+            .then(result => expect(result.id).toEqual(1));
+    });
+
+    it('checks that saveLinkCta mock works as expected', async () => {
+        await sdk.liveboard.saveLinkCta(1, ctaParams)
+            .then(result => expect(result.id).toEqual(1));
+    });
+
+    it('checks that saveShareCta mock works as expected', async () => {
+        await sdk.liveboard.saveShareCta(1, ctaParams)
+            .then(result => expect(result.id).toEqual(1));
+    });
+
+    it('checks that saveShareByEmailCta mock works as expected', async () => {
+        await sdk.liveboard.saveShareByEmailCta(1, 'email@company.com', 1234)
+            .then(result => expect(result).toBeNull);
     });
 });

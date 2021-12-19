@@ -1,5 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
+    UserChatResponseV1, SnapshotUrlResponseV1, CtaResponseV1
+} from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
     mock.onGet("/live_board/v1/boards/board_slug/")
@@ -77,7 +79,7 @@ export const rules = (mock: MockAdapter) => {
         .reply<UserChatResponseV1>(200, {token: 'abcd', chat_id: 123});
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
-        .reply(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
+        .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
 
     mock.onPost("/live_board/v1/content_items/1/analyses")
         .reply(200, {secured: true});
@@ -96,4 +98,62 @@ export const rules = (mock: MockAdapter) => {
                 {itemId:1, title: "some title 2"}
             ]
         });
+
+    mock.onPost("/live_board/v1/boards/1/campaign/message")
+        .reply<CtaResponseV1>(200, {
+            id: 1,
+            name: "name",
+            last_name: "lastname",
+            email: "email@company.com",
+            company: null,
+            anon_guest: false,
+            group_user: false
+        })
+
+    mock.onPost("/live_board/v1/boards/1/campaign/contact")
+        .reply<CtaResponseV1>(200, {
+            id: 1,
+            name: "name",
+            last_name: "lastname",
+            email: "email@company.com",
+            company: null,
+            anon_guest: false,
+            group_user: false
+        })
+
+    mock.onPost("/live_board/v1/boards/1/campaign/form")
+        .reply<CtaResponseV1>(200, {
+            id: 1,
+            name: "name",
+            last_name: "lastname",
+            email: "email@company.com",
+            company: null,
+            anon_guest: false,
+            group_user: false
+        })
+
+    mock.onPost("/live_board/v1/boards/1/campaign/link")
+        .reply<CtaResponseV1>(200, {
+            id: 1,
+            name: "name",
+            last_name: "lastname",
+            email: "email@company.com",
+            company: null,
+            anon_guest: false,
+            group_user: false
+        })
+
+    mock.onPost("/live_board/v1/boards/1/campaign/share")
+        .reply<CtaResponseV1>(200, {
+            id: 1,
+            name: "name",
+            last_name: "lastname",
+            email: "email@company.com",
+            company: null,
+            anon_guest: false,
+            group_user: false
+        })
+
+    mock.onPost("/live_board/v1/boards/1/shares")
+        .reply<void>(200)
 };

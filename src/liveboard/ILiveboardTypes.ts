@@ -47,3 +47,29 @@ export type SnapshotUrlResponseV1 = {
     link_url: string,
     snapshot_url: string
 }
+
+export type CtaParams = {
+    cta: {
+        area: string,
+        label?: string
+    },
+    email: string,
+    formId: number,
+    type: string,
+    message?: string, //message cta
+    formFields?: string[], //form/share cta
+    name?: string, //form/share cta
+    lastName?: string, //form/share cta
+    link?: string, //link cta
+    invitee?: string //share cta
+}
+
+export type CtaResponseV1 = {
+    id: number,
+    email: string,
+    name: string,
+    last_name: string,
+    anon_guest: boolean,
+    company?: string,
+    group_user: boolean,
+}

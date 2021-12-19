@@ -3,7 +3,8 @@ import { default as mapKeys, default as snakeCase } from 'lodash';
 import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, SnapshotUrlResponseV1
+    UserChatResponseV1, SnapshotUrlResponseV1, CtaResponseV1,
+    CtaParams
 } from './ILiveboardTypes';
 
 export class Liveboard {
@@ -32,6 +33,7 @@ export class Liveboard {
         });
     }
     
+    //TODO: extract partial response logic
     /**
      * gets the seller to be displayed for the board
      * 
@@ -101,7 +103,7 @@ export class Liveboard {
      */
     getCategories(boardId: number): Promise<CategoriesResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v2/boards/${boardId}/categories`)
+            this.fetcher.get<CategoriesResponseV2>(`/live_board/v2/boards/${boardId}/categories`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -122,13 +124,11 @@ export class Liveboard {
      */
     getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(
+            this.fetcher.post<UserChatResponseV1>(
                 "/live_board/v1/chat/user_chat", 
-                {
-                    params: {
-                        board_id: boardId,
-                        leadId: leadId
-                    }
+                { 
+                    board_id: boardId,
+                    lead_id: leadId
                 }
             )
                 .then(result => {
@@ -151,9 +151,9 @@ export class Liveboard {
      */
     createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(
+            this.fetcher.post<SnapshotUrlResponseV1>(
                 `/live_board/v1/content_items/${contentItemId}/snapshots`,
-                {params: {guid}}
+                {guid}
             )
                 .then(result => {
                     resolve(result.data);
@@ -165,6 +165,7 @@ export class Liveboard {
         });
     }
 
+    //TODO
     createItemAnalysis(payload: {contentItemId: number}): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
             this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/analyses`)
@@ -178,6 +179,7 @@ export class Liveboard {
         });
     }
 
+    //TODO
     getFileUrl(payload: {contentItemId: number}): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
             this.fetcher.get(`/live_board/v1/content_items/${payload.contentItemId}/files`)
@@ -191,6 +193,7 @@ export class Liveboard {
         });
     }
 
+    //TODO
     setCookiesConsent(payload: {
         boardId: number,
         leadId: number,
@@ -200,7 +203,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.get(
                 `/live_board/v1/boards/${payload.boardId}/cookies_consents`,
-                {params: this.keysToSnakeCase(payload)}
+                {...this.keysToSnakeCase(payload)}
             )
                 .then(result => {
                     resolve(result);
@@ -212,6 +215,7 @@ export class Liveboard {
         });
     }
 
+    //TODO: replace
     getItems(payload?: any): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
             this.fetcher.get("/url-getting-items", payload)
@@ -223,6 +227,137 @@ export class Liveboard {
                     reject(e);
                 });
         });
+    }
+
+    // CTA
+
+    /**
+     * submit a message CTA
+     * 
+     * @param {number} boardId 
+     * @param {CtaParams} values 
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveMessageCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<CtaResponseV1>(
+                `/live_board/v1/boards/${boardId}/campaign/message`,
+                {...this.keysToSnakeCase(values)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * submit a contact CTA
+     * 
+     * @param {number} boardId 
+     * @param {CtaParams} values 
+     * @returns {CtaResponseV1} CtaResponse
+     */
+     saveContactCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<CtaResponseV1>(
+                `/live_board/v1/boards/${boardId}/campaign/contact`,
+                {...this.keysToSnakeCase(values)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * submit a form CTA
+     * 
+     * @param {number} boardId 
+     * @param {CtaParams} values 
+     * @returns {CtaResponseV1} CtaResponse
+     */
+     saveFormCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<CtaResponseV1>(
+                `/live_board/v1/boards/${boardId}/campaign/form`,
+                {...this.keysToSnakeCase(values)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * submit a link CTA
+     * 
+     * @param {number} boardId 
+     * @param {CtaParams} values 
+     * @returns {CtaResponseV1} CtaResponse
+     */
+     saveLinkCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<CtaResponseV1>(
+                `/live_board/v1/boards/${boardId}/campaign/link`,
+                {...this.keysToSnakeCase(values)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * submit a share CTA
+     * 
+     * @param {number} boardId 
+     * @param {CtaParams} values 
+     * @returns {CtaResponseV1} CtaResponse
+     */
+     saveShareCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<CtaResponseV1>(
+                `/live_board/v1/boards/${boardId}/campaign/share`,
+                {...this.keysToSnakeCase(values)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        });
+    }
+
+    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>{
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
+                email,
+                invitation_id: invitationId
+            })
+                .then(() => { resolve() })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        })
     }
 
     private keysToSnakeCase(params: object): object {
