@@ -1,9 +1,16 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1 } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
+    /**
+     * Gets the image gallery for given types
+     *
+     * @param {ImageGalleryParams} payload
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]>;
     /**
      * Get the settings for the organization's image bank
      *
@@ -21,4 +28,5 @@ export declare class Designer {
      */
     saveImageBankSettings(organizationId: number, categoryName: string, source: string): Promise<ImageBankResponseV1>;
     saveLiveBoard(payload: any): Promise<AxiosResponse>;
+    private keysToSnakeCase;
 }

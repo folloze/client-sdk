@@ -76,6 +76,52 @@ var rules = (mock) => {
       { itemId: 1, title: "some title 2" }
     ]
   });
+  mock.onPost("/live_board/v1/boards/1/campaign/message").reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost("/live_board/v1/boards/1/campaign/contact").reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost("/live_board/v1/boards/1/campaign/form").reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost("/live_board/v1/boards/1/campaign/link").reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost("/live_board/v1/boards/1/campaign/share").reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost("/live_board/v1/boards/1/shares").reply(200);
 };
 export {
   rules

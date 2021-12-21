@@ -4293,7 +4293,7 @@ var require_lodash = __commonJS({
         function keysIn(object) {
           return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
         }
-        function mapKeys2(object, iteratee2) {
+        function mapKeys3(object, iteratee2) {
           var result2 = {};
           iteratee2 = getIteratee(iteratee2, 3);
           baseForOwn(object, function(value, key, object2) {
@@ -4553,7 +4553,7 @@ var require_lodash = __commonJS({
           var args = arguments, string = toString(args[0]);
           return args.length < 3 ? string : string.replace(args[1], args[2]);
         }
-        var snakeCase2 = createCompounder(function(result2, word, index) {
+        var snakeCase3 = createCompounder(function(result2, word, index) {
           return result2 + (index ? "_" : "") + word.toLowerCase();
         });
         function split(string, separator, limit) {
@@ -4991,7 +4991,7 @@ var require_lodash = __commonJS({
         lodash.keys = keys;
         lodash.keysIn = keysIn;
         lodash.map = map;
-        lodash.mapKeys = mapKeys2;
+        lodash.mapKeys = mapKeys3;
         lodash.mapValues = mapValues;
         lodash.matches = matches;
         lodash.matchesProperty = matchesProperty;
@@ -5201,7 +5201,7 @@ var require_lodash = __commonJS({
         lodash.runInContext = runInContext2;
         lodash.sample = sample;
         lodash.size = size;
-        lodash.snakeCase = snakeCase2;
+        lodash.snakeCase = snakeCase3;
         lodash.some = some;
         lodash.sortedIndex = sortedIndex;
         lodash.sortedIndexBy = sortedIndexBy;
@@ -5449,10 +5449,10 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static bindLiveBoard(mock) {
-    import("./chunks/mocks.TKHE3YIX.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+    import("./chunks/mocks.ZPRK64PQ.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static bindDesigner(mock) {
-    import("./chunks/mocks.CHGDOG3P.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    import("./chunks/mocks.4YMGORIH.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static bindAnalytics(mock) {
     import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5496,9 +5496,20 @@ var FetchService = class {
 };
 
 // src/designer/Designer.ts
+var import_lodash = __toModule(require_lodash());
 var Designer = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
+  }
+  getImageGallery(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/api/imagegallery", { params: this.keysToSnakeCase(payload) }).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get image gallery", e5);
+        reject(e5);
+      });
+    });
   }
   getImageBankSettings(organizationId) {
     return new Promise((resolve, reject) => {
@@ -5535,10 +5546,15 @@ var Designer = class {
       });
     });
   }
+  keysToSnakeCase(params) {
+    return (0, import_lodash.default)(params, (value, key) => {
+      return (0, import_lodash.default)(key);
+    });
+  }
 };
 
 // src/liveboard/Liveboard.ts
-var import_lodash = __toModule(require_lodash());
+var import_lodash2 = __toModule(require_lodash());
 var Liveboard = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
@@ -5597,10 +5613,8 @@ var Liveboard = class {
   getUserChat(boardId, leadId) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/live_board/v1/chat/user_chat", {
-        params: {
-          board_id: boardId,
-          leadId
-        }
+        board_id: boardId,
+        lead_id: leadId
       }).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
@@ -5611,7 +5625,7 @@ var Liveboard = class {
   }
   createSnapshotUrl(contentItemId, guid) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/snapshots`, { params: { guid } }).then((result) => {
+      this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/snapshots`, { guid }).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not create snapshot", e5);
@@ -5641,7 +5655,7 @@ var Liveboard = class {
   }
   setCookiesConsent(payload) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/boards/${payload.boardId}/cookies_consents`, { params: this.keysToSnakeCase(payload) }).then((result) => {
+      this.fetcher.get(`/live_board/v1/boards/${payload.boardId}/cookies_consents`, __spreadValues({}, this.keysToSnakeCase(payload))).then((result) => {
         resolve(result);
       }).catch((e5) => {
         console.error("could not get file url", e5);
@@ -5659,9 +5673,72 @@ var Liveboard = class {
       });
     });
   }
+  saveMessageCta(boardId, values) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
+  saveContactCta(boardId, values) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
+  saveFormCta(boardId, values) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
+  saveLinkCta(boardId, values) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
+  saveShareCta(boardId, values) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
+  saveShareByEmailCta(boardId, email, invitationId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/shares`, {
+        email,
+        invitation_id: invitationId
+      }).then(() => {
+        resolve();
+      }).catch((e5) => {
+        console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
   keysToSnakeCase(params) {
-    return (0, import_lodash.default)(params, (value, key) => {
-      return (0, import_lodash.default)(key);
+    return (0, import_lodash2.default)(params, (value, key) => {
+      return (0, import_lodash2.default)(key);
     });
   }
 };
@@ -6369,7 +6446,7 @@ var LiveWidgetEdit = class extends s4 {
 };
 
 // src/common/LiveWidgetComponentEdit.ts
-var import_lodash2 = __toModule(require_lodash());
+var import_lodash3 = __toModule(require_lodash());
 var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   set propertyPath(path) {
     this._propPath = path;
@@ -6378,7 +6455,7 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
     return this._propPath;
   }
   firstUpdated() {
-    this.data = import_lodash2.default.get(this.widget.data, this.propertyPath);
+    this.data = import_lodash3.default.get(this.widget.data, this.propertyPath);
   }
 };
 
@@ -6500,123 +6577,119 @@ var FloatEditor = class extends s4 {
 };
 FloatEditor.styles = [
   r`
-            .loading {
-                width: 100%;
-                height: calc(100% - 2em);
-                background: var(--loading-bg-color, rgba(0, 0, 0, 0.4));
-                /* min-height: 100px; */
-                position: absolute;
-                z-index: 0;
-                display: flex;
-                align-items: center;
-                justify-content: center;
+          :host {
+            --floatBoxShadow: 0.1px 1.1px 1.9px -13px rgba(0, 0, 0, 0.045), 0.3px 2.5px 4.7px -13px rgba(0, 0, 0, 0.065),
+            0.5px 4.8px 8.8px -13px rgba(0, 0, 0, 0.08), 0.9px 8.5px 15.6px -13px rgba(0, 0, 0, 0.095),
+            1.7px 15.9px 29.2px -13px rgba(0, 0, 0, 0.115), 4px 38px 70px -13px rgba(0, 0, 0, 0.16);
+
+            --floatBoxBorder: thin solid rgb(103 103 103 / 78%);
+            --outlineShadow: 1px 1px 3px #ccc;
+
+            resize: both;
+            pointer-events: all;
+
+            position: fixed;
+            top: 100px;
+            left: 150px;
+            z-index: 110;
+            box-shadow: var(--floatBoxShadow);
+            background-color: rgb(var(--fz-color-neutral-0));
+            //overflow: hidden;
+            min-width: 235px;
+            min-height: 150px;
+
+            overflow: visible;
+            max-width: 300px;
+          }
+
+          .close {
+            font-size: 14px;
+            cursor: pointer;
+            color: rgb(var(--fz-color-neutral-500));
+            border: none;
+            background: none;
+
+            &:hover {
+              color: black;
             }
-            .loading::after {
-                content: "autorenew";
-                font-family: "Material Icons", sans-serif;
-                font-size: 40px;
-                text-shadow: 0 0 14px #fff, 0 0 14px #fff, 0 0 20px #fff;
-                animation: rotating 2s ease-in-out infinite;
+          }
+
+          .save {
+            position: absolute;
+            right: 60px;
+            font-size: 14px;
+            cursor: pointer;
+            color: rgb(var(--fz-color-neutral-500));
+            border: none;
+            background: none;
+          }
+
+          .save[disabled] {
+            cursor: default;
+            color: gray;
+          }
+
+          #handle {
+            background-color: rgb(var(--fz-color-primary-100));
+            height: 2em;
+            display: flex;
+            align-items: center;
+            padding-left: 10px;
+            padding-right: 10px;
+            justify-content: space-between;
+          }
+
+          #body {
+            padding: var(--fz-spacing-small);
+          }
+          .loading {
+            width: 100%;
+            height: calc(100% - 2em);
+            background: var(--loading-bg-color, rgba(0, 0, 0, 0.4));
+            /* min-height: 100px; */
+            position: absolute;
+            z-index: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+          .loading::after {
+            content: "autorenew";
+            font-family: "Material Icons", sans-serif;
+            font-size: 40px;
+            text-shadow: 0 0 14px #fff, 0 0 14px #fff, 0 0 20px #fff;
+            animation: rotating 2s ease-in-out infinite;
+          }
+          @keyframes rotating {
+            from {
+              transform: rotate(0deg);
             }
-            @keyframes rotating {
-                from {
-                    transform: rotate(0deg);
-                }
-                to {
-                    transform: rotate(360deg);
-                }
+            to {
+              transform: rotate(360deg);
             }
+          }
+          .btn {
+            margin: 0 1em;
+            width: 10%;
+            text-align: center;
+          }
 
-            :host {
-                --floatBoxShadow: 0.1px 1.1px 1.9px -13px rgba(0, 0, 0, 0.045), 0.3px 2.5px 4.7px -13px rgba(0, 0, 0, 0.065),
-                0.5px 4.8px 8.8px -13px rgba(0, 0, 0, 0.08), 0.9px 8.5px 15.6px -13px rgba(0, 0, 0, 0.095),
-                1.7px 15.9px 29.2px -13px rgba(0, 0, 0, 0.115), 4px 38px 70px -13px rgba(0, 0, 0, 0.16);
+          input,
+          select {
+            background: transparent;
+            border: none;
+            color: rgb(var(--fz-color-neutral-500));
+            outline: none;
+            padding: 0.6em;
+            margin: 0.4em;
+            width: 40%;
+          }
 
-                --floatBoxBorder: thin solid rgb(103 103 103 / 78%);
-                --outlineShadow: 1px 1px 3px #ccc;
-
-                resize: both;
-                pointer-events: all;
-
-                position: fixed;
-                top: 100px;
-                left: 150px;
-                z-index: 100;
-                box-shadow: var(--floatBoxShadow);
-                background-color: rgb(var(--fz-color-neutral-0));
-                overflow: hidden;
-                min-width: 235px;
-                min-height: 150px;
-            }
-
-            .close {
-                font-size: 14px;
-                cursor: pointer;
-                color: rgb(var(--fz-color-neutral-500));
-                border: none;
-                background: none;
-
-                &:hover {
-                    color: black;
-                }
-            }
-
-            .save {
-                position: absolute;
-                right: 60px;
-                font-size: 14px;
-                cursor: pointer;
-                color: rgb(var(--fz-color-neutral-500));
-                border: none;
-                background: none;
-            }
-
-            .save[disabled] {
-                cursor: default;
-                color: gray;
-            }
-
-            #handle {
-                background-color: rgb(var(--fz-color-primary-100));
-                height: 2em;
-                display: flex;
-                align-items: center;
-                padding-left: 10px;
-                padding-right: 10px;
-                justify-content: space-between;
-            }
-
-            #body {
-                padding: var(--fz-spacing-small);
-            }
-
-            .btn {
-                margin: 0 1em;
-                width: 10%;
-                text-align: center;
-            }
-
-            input,
-            select {
-                background: transparent;
-                border: none;
-                color: rgb(var(--fz-color-neutral-500));
-                outline: none;
-                padding: 0.6em;
-                margin: 0.4em;
-                width: 40%;
-            }
-
-            input:focus {
-                outline: none;
-                border: 1px thin var(--subCardSelectedColor);
-                background: var(--subCardBgColor);
-            }
-
-            :host {
-                overflow: visible;
-                max-width: 300px;
-            }
+          input:focus {
+            outline: none;
+            border: 1px thin var(--subCardSelectedColor);
+            background: var(--subCardBgColor);
+          }
         `
 ];
 __decorateClass([

@@ -42,3 +42,27 @@ export declare type SnapshotUrlResponseV1 = {
     link_url: string;
     snapshot_url: string;
 };
+export declare type CtaParams = {
+    cta: {
+        area: string;
+        label?: string;
+    };
+    email: string;
+    formId: number;
+    type: string;
+    message?: string;
+    formFields?: string[];
+    name?: string;
+    lastName?: string;
+    link?: string;
+    invitee?: string;
+};
+export declare type CtaResponseV1 = {
+    id: number;
+    email: string;
+    name: string;
+    last_name: string;
+    anon_guest: boolean;
+    company?: string;
+    group_user: boolean;
+};

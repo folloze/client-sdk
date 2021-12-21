@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import { default as mapKeys, default as snakeCase } from 'lodash';
-import {ImageBankResponseV1, ImageGalleryParams, GalleryImage} from "./IDesignerTypes"
+import {ImageBankResponseV1, ImageGalleryParams, GalleryImage} from "./IDesignerTypes";
 
 export class Designer {
     private fetcher: AxiosInstance;

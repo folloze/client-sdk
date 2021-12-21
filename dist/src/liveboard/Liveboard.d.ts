@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, SnapshotUrlResponseV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, SnapshotUrlResponseV1, CtaResponseV1, CtaParams } from './ILiveboardTypes';
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -66,5 +66,53 @@ export declare class Liveboard {
         isoCode: string;
     }): Promise<AxiosResponse>;
     getItems(payload?: any): Promise<AxiosResponse>;
+    /**
+     * submit a message CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} values
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveMessageCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    /**
+     * submit a contact CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} values
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveContactCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    /**
+     * submit a form CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} values
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveFormCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    /**
+     * submit a link CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} values
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveLinkCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    /**
+     * submit a share CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} values
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveShareCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    /**
+     * Submit a share by email cta
+     *
+     * @param {number} boardId
+     * @param {string} email
+     * @param {number} invitationId
+     */
+    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>;
     private keysToSnakeCase;
 }

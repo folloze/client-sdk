@@ -359,12 +359,12 @@ export class Liveboard {
                 email,
                 invitation_id: invitationId
             })
-                .then(() => { resolve() })
+                .then(() => { resolve(); })
                 .catch(e => {
                     console.error("could not submit cta", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     private keysToSnakeCase(params: object): object {

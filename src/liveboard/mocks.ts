@@ -108,7 +108,7 @@ export const rules = (mock: MockAdapter) => {
             company: null,
             anon_guest: false,
             group_user: false
-        })
+        });
 
     mock.onPost("/live_board/v1/boards/1/campaign/contact")
         .reply<CtaResponseV1>(200, {
@@ -119,7 +119,7 @@ export const rules = (mock: MockAdapter) => {
             company: null,
             anon_guest: false,
             group_user: false
-        })
+        });
 
     mock.onPost("/live_board/v1/boards/1/campaign/form")
         .reply<CtaResponseV1>(200, {
@@ -130,7 +130,7 @@ export const rules = (mock: MockAdapter) => {
             company: null,
             anon_guest: false,
             group_user: false
-        })
+        });
 
     mock.onPost("/live_board/v1/boards/1/campaign/link")
         .reply<CtaResponseV1>(200, {
@@ -141,7 +141,7 @@ export const rules = (mock: MockAdapter) => {
             company: null,
             anon_guest: false,
             group_user: false
-        })
+        });
 
     mock.onPost("/live_board/v1/boards/1/campaign/share")
         .reply<CtaResponseV1>(200, {
@@ -152,8 +152,8 @@ export const rules = (mock: MockAdapter) => {
             company: null,
             anon_guest: false,
             group_user: false
-        })
+        });
 
     mock.onPost("/live_board/v1/boards/1/shares")
-        .reply<void>(200)
+        .reply<void>(200);
 };
