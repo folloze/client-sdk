@@ -1,5 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
-import {ImageBankResponseV1, ImageBankCategory, GalleryImage} from "./IDesignerTypes";
+import {ImageBankResponseV1, ImageBankType, GalleryImage} from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
 
@@ -8,20 +8,20 @@ export const rules = (mock: MockAdapter) => {
     
     mock.onGet("/api/v1/organizations/1/settings/image_bank")
         .reply<ImageBankResponseV1>(200, {
-            icons: ImageBankCategory.folloze,
-            logos: ImageBankCategory.folloze,
-            banners: ImageBankCategory.folloze,
-            thumbnails: ImageBankCategory.folloze,
-            mobile_banners: ImageBankCategory.folloze
+            icons: ImageBankType.folloze,
+            logos: ImageBankType.folloze,
+            banners: ImageBankType.folloze,
+            thumbnails: ImageBankType.folloze,
+            mobile_banners: ImageBankType.folloze
         });
 
     mock.onPut("/api/v1/organizations/1/settings/image_bank")
         .reply<ImageBankResponseV1>(200, {
-            icons: ImageBankCategory.folloze,
-            logos: ImageBankCategory.folloze,
-            banners: ImageBankCategory.folloze,
-            thumbnails: ImageBankCategory.folloze,
-            mobile_banners: ImageBankCategory.folloze
+            icons: ImageBankType.folloze,
+            logos: ImageBankType.folloze,
+            banners: ImageBankType.folloze,
+            thumbnails: ImageBankType.folloze,
+            mobile_banners: ImageBankType.folloze
         });
 
     mock.onPost("/url-for-saving-live-board")
