@@ -3,8 +3,9 @@ import { default as mapKeys, default as snakeCase } from 'lodash';
 import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, SnapshotUrlResponseV1, CtaResponseV1,
-    CtaParams
+    UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1,
+    CtaResponseV1,
+    CookieConsentParams, CtaParams
 } from './ILiveboardTypes';
 
 export class Liveboard {
@@ -141,6 +142,8 @@ export class Liveboard {
         });
     }
 
+    // Items
+
     /**
      * 
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
@@ -165,12 +168,17 @@ export class Liveboard {
         });
     }
 
-    //TODO
-    createItemAnalysis(payload: {contentItemId: number}): Promise<AxiosResponse> {
+    /**
+     * Analyses whether the item is secure or not
+     * 
+     * @param {number} contentItemId 
+     * @returns {ItemAnalysisResponseV1} ItemAnalysisResponse
+     */
+    createItemAnalysis(contentItemId: number): Promise<ItemAnalysisResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/analyses`)
+            this.fetcher.post<ItemAnalysisResponseV1>(`/live_board/v1/content_items/${contentItemId}/analyses`)
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not create analysis", e);
@@ -179,12 +187,25 @@ export class Liveboard {
         });
     }
 
-    //TODO
-    getFileUrl(payload: {contentItemId: number}): Promise<AxiosResponse> {
+    /**
+     * 
+     * @param {number} contentItemId 
+     * @returns {ItemFileMetadataResponseV1} ItemFileMetadataResponse
+     */
+    getFileMetadata(contentItemId: number): Promise<ItemFileMetadataResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v1/content_items/${payload.contentItemId}/files`)
+            this.fetcher.get<ItemFileMetadataResponseV1>(`/live_board/v1/content_items/${contentItemId}/files`)
                 .then(result => {
-                    resolve(result);
+                    if(result.status == 206) {
+                        setTimeout(() => {
+                            this.getFileMetadata(contentItemId)
+                            .then(resolve)
+                        . catch(reject);
+                        }, 2000);
+                    }
+                    else {
+                        resolve(result.data);
+                    }
                 })
                 .catch(e => {
                     console.error("could not get file url", e);
@@ -193,20 +214,22 @@ export class Liveboard {
         });
     }
 
-    //TODO
-    setCookiesConsent(payload: {
-        boardId: number,
-        leadId: number,
-        constentOrigin: string,
-        isoCode: string
-    }): Promise<AxiosResponse> {
+    // end items
+
+    /**
+     * Sets cookies consent for the lead
+     * 
+     * @param {number} boardId
+     * @param {CookieConsentParams} options
+     */
+    setCookiesConsent(boardId: number, options: CookieConsentParams): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(
-                `/live_board/v1/boards/${payload.boardId}/cookies_consents`,
-                {...this.keysToSnakeCase(payload)}
+            this.fetcher.post(
+                `/live_board/v1/boards/${boardId}/cookies_consents`,
+                {...this.keysToSnakeCase(options)}
             )
                 .then(result => {
-                    resolve(result);
+                    resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not get file url", e);
@@ -235,14 +258,14 @@ export class Liveboard {
      * submit a message CTA
      * 
      * @param {number} boardId 
-     * @param {CtaParams} values 
+     * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveMessageCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+    saveMessageCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/message`,
-                {...this.keysToSnakeCase(values)}
+                {...this.keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -258,14 +281,14 @@ export class Liveboard {
      * submit a contact CTA
      * 
      * @param {number} boardId 
-     * @param {CtaParams} values 
+     * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveContactCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+     saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/contact`,
-                {...this.keysToSnakeCase(values)}
+                {...this.keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -281,14 +304,14 @@ export class Liveboard {
      * submit a form CTA
      * 
      * @param {number} boardId 
-     * @param {CtaParams} values 
+     * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveFormCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+     saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/form`,
-                {...this.keysToSnakeCase(values)}
+                {...this.keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -304,14 +327,14 @@ export class Liveboard {
      * submit a link CTA
      * 
      * @param {number} boardId 
-     * @param {CtaParams} values 
+     * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveLinkCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+     saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/link`,
-                {...this.keysToSnakeCase(values)}
+                {...this.keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -327,14 +350,14 @@ export class Liveboard {
      * submit a share CTA
      * 
      * @param {number} boardId 
-     * @param {CtaParams} values 
+     * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveShareCta(boardId: number, values: CtaParams): Promise<CtaResponseV1> {
+     saveShareCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/share`,
-                {...this.keysToSnakeCase(values)}
+                {...this.keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -366,6 +389,8 @@ export class Liveboard {
                 });
         });
     }
+
+    // end CTA
 
     private keysToSnakeCase(params: object): object {
         return mapKeys(params, (value, key) => {

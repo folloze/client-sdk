@@ -48,6 +48,24 @@ export type SnapshotUrlResponseV1 = {
     snapshot_url: string
 }
 
+export type ItemAnalysisResponseV1 = {
+    secured: boolean
+}
+
+export type ItemFileMetadataResponseV1 = {
+    preview_metadata: {
+        url?: string, //every provider but box
+        file_id?: number, //box
+        access_token?: number //box
+    }
+}
+
+export type CookieConsentParams = {
+    leadId: number,
+    constentOrigin: string,
+    isoCode: string
+}
+
 export type CtaParams = {
     cta: {
         area: string,

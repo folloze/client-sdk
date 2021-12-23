@@ -47,13 +47,18 @@ describe("test liveboard mocks module", () => {
     });
 
     it('checks that createItemAnalysis mock works as expected', async() => {
-        await sdk.liveboard.createItemAnalysis({contentItemId: 1})
-            .then(result => expect(result.status == 200));
+        await sdk.liveboard.createItemAnalysis(1)
+            .then(result => expect(result.secured).toBeTruthy);
     });
 
     it('checks that getFileUrl mock works as expected', async() => {
-        await sdk.liveboard.getFileUrl({contentItemId: 1})
-            .then(result => expect(result.status == 200));
+        await sdk.liveboard.getFileMetadata(1)
+            .then(result => expect(result.preview_metadata).toHaveProperty('url'));
+    });
+
+    it('checks that setCookiesConsent mock works as expected', async () => {
+        await sdk.liveboard.setCookiesConsent(1, {leadId: 1, constentOrigin: 'CallToAction', isoCode: 'IL'})
+            .then(result => expect(result).toBeNull);
     });
 
     //TODO

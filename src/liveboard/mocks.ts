@@ -1,6 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, SnapshotUrlResponseV1, CtaResponseV1
+    UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1,
+    CtaResponseV1
 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
@@ -82,22 +83,16 @@ export const rules = (mock: MockAdapter) => {
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
 
     mock.onPost("/live_board/v1/content_items/1/analyses")
-        .reply(200, {secured: true});
+        .reply<ItemAnalysisResponseV1>(200, {secured: true});
 
     mock.onGet("/live_board/v1/content_items/1/files")
-        .reply(200, {url: 'preview.url.com'});
+        .reply<ItemFileMetadataResponseV1>(200, {preview_metadata: {url: 'preview.url.com'}});
 
     mock.onGet("/url-getting-items", {itemId: 1})
         .reply(200, {items: [{itemId:1, title: "some title"}]});
-
-    // getting all items
-    mock.onGet("/url-getting-items")
-        .reply(200, {
-            items: [
-                {itemId:1, title: "some title"},
-                {itemId:1, title: "some title 2"}
-            ]
-        });
+    
+    mock.onPost("/live_board/v1/boards/1/cookies_consents")
+        .reply(200)
 
     mock.onPost("/live_board/v1/boards/1/campaign/message")
         .reply<CtaResponseV1>(200, {
