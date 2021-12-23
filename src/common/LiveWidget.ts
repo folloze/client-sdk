@@ -1,23 +1,19 @@
 import { LiveDraggable } from "./LiveDraggable";
 import {WidgetConfig} from "./interfaces/IWidget";
-// import { v4 as uuid_v4 } from "uuid";
+import { v4 as uuid_v4 } from "uuid";
 
 
 export abstract class LiveWidget extends LiveDraggable {
 
-    public abstract readonly editScripts: string[];
+    public abstract readonly customEditWidgets: string[];
+    public abstract readonly editComponents: string[];
     protected _data: any;
     private _widgetId: string;
     private _config: WidgetConfig;
 
     protected constructor() {
         super();
-        this.xOffset = 0;
-        this.yOffset = 0;
-        this.currentX = 0;
-        this.currentY = 0;
-        this.initialX = 0;
-        this.initialY = 0;
+        this._widgetId = uuid_v4();
     }
 
     set config(data: WidgetConfig) {
