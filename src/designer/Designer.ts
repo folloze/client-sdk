@@ -10,6 +10,16 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
+    // todo
+    // getListOfImagesBySearch(query: string): Promise<any>;
+
+    // todo
+    // getListOfAllAvailableImages(???): Promise<any>
+
+    // todo
+    // getListOfImagesByType(type: ImageBankCategory): Promise<>
+
+
     /**
      * Gets the image gallery for given types
      * 
