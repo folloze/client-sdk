@@ -8,9 +8,17 @@ export enum ImageGalleryTypes {
     webpageImageBank = "webpage_image_bank"
 }
 
-export enum ImageBankCategory {
+export enum ImageBankType {
     folloze = "folloze",
     organization = "organization"
+}
+
+export enum ImageBankCategory {
+    banners = 1,
+    mobile_banners,
+    thumbnails,
+    icons,
+    logos
 }
 
 export type GalleryImage = {
@@ -24,18 +32,17 @@ export type GalleryImage = {
 
 export type ImageGalleryParams = {
     type: ImageGalleryTypes,
-    organizationId?: number,
-    url?: string
-    edit?: boolean,
-    bankCategory?: ImageBankCategory,
-    fileName?: string,
-    images?: GalleryImage[]
+    url?: string // webpage/webpageImageBank - for link type items, the url of the item
+    organizationId?: number, // imageBank This is for cross org users in image bank (agencies, super admins, etc)
+    bankCategory?: ImageBankCategory, // imageBank
+    fileName?: string, // document - gets the file name to search the web for images that might be related
+    images?: GalleryImage[] // document/webpage -  keeps the current thumbnail of the item
 }
 
 export type ImageBankResponseV1 = {
-    icons: ImageBankCategory,
-    logos: ImageBankCategory,
-    banners: ImageBankCategory,
-    thumbnails: ImageBankCategory,
-    mobile_banners: ImageBankCategory
+    icons: ImageBankType,
+    logos: ImageBankType,
+    banners: ImageBankType,
+    thumbnails: ImageBankType,
+    mobile_banners: ImageBankType
 }
