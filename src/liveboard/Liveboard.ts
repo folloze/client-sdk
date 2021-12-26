@@ -405,11 +405,4 @@ export class Liveboard {
                 });
         });
     }
-
-
-    private keysToSnakeCase(params: object): object {
-        return mapKeys(params, (value, key) => {
-            return snakeCase(key);
-        });
-    }
 }
