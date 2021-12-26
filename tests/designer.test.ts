@@ -8,9 +8,9 @@ beforeAll(async () => {
 });
 
 describe("testing sdk designer module", () => {
-    it('checks that getImageGallery mock works as expectes', async () => {
+    it('checks that getCampaignImageGallery mock works as expectes', async () => {
         await sdk.designer.getCampaignImageGallery()
-            .then(result => expect(result).toHaveLength(1));
+            .then(result => expect(result.length).toBeGreaterThan(10));
     });
 
     it('checks that getImageBankSettings mock works as expected', async () => {
