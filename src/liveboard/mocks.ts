@@ -92,7 +92,7 @@ export const rules = (mock: MockAdapter) => {
         .reply(200, {items: [{itemId:1, title: "some title"}]});
     
     mock.onPost("/live_board/v1/boards/1/cookies_consents")
-        .reply(200)
+        .reply(200);
 
     mock.onPost("/live_board/v1/boards/1/campaign/message")
         .reply<CtaResponseV1>(200, {

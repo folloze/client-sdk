@@ -1,4 +1,7 @@
 import {
+  ImageGalleryTypes
+} from "./chunks/chunk.XA2JH32H.js";
+import {
   require_axios
 } from "./chunks/chunk.VDOWMMET.js";
 import {
@@ -5449,10 +5452,10 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static bindLiveBoard(mock) {
-    import("./chunks/mocks.ZPRK64PQ.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+    import("./chunks/mocks.OONCKPLP.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static bindDesigner(mock) {
-    import("./chunks/mocks.4YMGORIH.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    import("./chunks/mocks.OO6AVHWW.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static bindAnalytics(mock) {
     import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5510,6 +5513,19 @@ var Designer = class {
         reject(e5);
       });
     });
+  }
+  getQueryImageGallery(query) {
+    return this.getImageGallery({ type: ImageGalleryTypes.search, query });
+  }
+  getImageBankGallery(organizationId, bankCategory) {
+    return this.getImageGallery({
+      type: ImageGalleryTypes.imageBank,
+      organizationId,
+      bankCategory
+    });
+  }
+  getCampaignImageGallery() {
+    return this.getImageGallery({ type: ImageGalleryTypes.campaign });
   }
   getImageBankSettings(organizationId) {
     return new Promise((resolve, reject) => {
@@ -5633,30 +5649,36 @@ var Liveboard = class {
       });
     });
   }
-  createItemAnalysis(payload) {
+  createItemAnalysis(contentItemId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/content_items/${payload.contentItemId}/analyses`).then((result) => {
-        resolve(result);
+      this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/analyses`).then((result) => {
+        resolve(result.data);
       }).catch((e5) => {
         console.error("could not create analysis", e5);
         reject(e5);
       });
     });
   }
-  getFileUrl(payload) {
+  getFileMetadata(contentItemId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/content_items/${payload.contentItemId}/files`).then((result) => {
-        resolve(result);
+      this.fetcher.get(`/live_board/v1/content_items/${contentItemId}/files`).then((result) => {
+        if (result.status == 206) {
+          setTimeout(() => {
+            this.getFileMetadata(contentItemId).then(resolve).catch(reject);
+          }, 2e3);
+        } else {
+          resolve(result.data);
+        }
       }).catch((e5) => {
         console.error("could not get file url", e5);
         reject(e5);
       });
     });
   }
-  setCookiesConsent(payload) {
+  setCookiesConsent(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/boards/${payload.boardId}/cookies_consents`, __spreadValues({}, this.keysToSnakeCase(payload))).then((result) => {
-        resolve(result);
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/cookies_consents`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+        resolve(result.data);
       }).catch((e5) => {
         console.error("could not get file url", e5);
         reject(e5);
@@ -5673,9 +5695,9 @@ var Liveboard = class {
       });
     });
   }
-  saveMessageCta(boardId, values) {
+  saveMessageCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5683,9 +5705,9 @@ var Liveboard = class {
       });
     });
   }
-  saveContactCta(boardId, values) {
+  saveContactCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5693,9 +5715,9 @@ var Liveboard = class {
       });
     });
   }
-  saveFormCta(boardId, values) {
+  saveFormCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5703,9 +5725,9 @@ var Liveboard = class {
       });
     });
   }
-  saveLinkCta(boardId, values) {
+  saveLinkCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5713,9 +5735,9 @@ var Liveboard = class {
       });
     });
   }
-  saveShareCta(boardId, values) {
+  saveShareCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, this.keysToSnakeCase(values))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);

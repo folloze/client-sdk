@@ -68,14 +68,9 @@ var rules = (mock) => {
   mock.onPost("/live_board/v1/chat/user_chat").reply(200, { token: "abcd", chat_id: 123 });
   mock.onPost("/live_board/v1/content_items/1/snapshots").reply(200, { link_url: "abc.website.com", snapshot_url: "snapshot.website.com" });
   mock.onPost("/live_board/v1/content_items/1/analyses").reply(200, { secured: true });
-  mock.onGet("/live_board/v1/content_items/1/files").reply(200, { url: "preview.url.com" });
+  mock.onGet("/live_board/v1/content_items/1/files").reply(200, { preview_metadata: { url: "preview.url.com" } });
   mock.onGet("/url-getting-items", { itemId: 1 }).reply(200, { items: [{ itemId: 1, title: "some title" }] });
-  mock.onGet("/url-getting-items").reply(200, {
-    items: [
-      { itemId: 1, title: "some title" },
-      { itemId: 1, title: "some title 2" }
-    ]
-  });
+  mock.onPost("/live_board/v1/boards/1/cookies_consents").reply(200);
   mock.onPost("/live_board/v1/boards/1/campaign/message").reply(200, {
     id: 1,
     name: "name",

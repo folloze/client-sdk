@@ -39,7 +39,7 @@ export class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getQueryImageGallery(query: string): Promise<GalleryImage[]> {
-        return this.getImageGallery({type: ImageGalleryTypes.search, query})
+        return this.getImageGallery({type: ImageGalleryTypes.search, query});
     }
     
     /**
@@ -54,7 +54,7 @@ export class Designer {
             type: ImageGalleryTypes.imageBank,
             organizationId,
             bankCategory
-        })
+        });
     }
 
     /**
@@ -64,7 +64,7 @@ export class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getCampaignImageGallery(): Promise<GalleryImage[]> {
-        return this.getImageGallery({type: ImageGalleryTypes.campaign})
+        return this.getImageGallery({type: ImageGalleryTypes.campaign});
     }
     
     /**

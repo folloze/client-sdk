@@ -42,6 +42,21 @@ export declare type SnapshotUrlResponseV1 = {
     link_url: string;
     snapshot_url: string;
 };
+export declare type ItemAnalysisResponseV1 = {
+    secured: boolean;
+};
+export declare type ItemFileMetadataResponseV1 = {
+    preview_metadata: {
+        url?: string;
+        file_id?: number;
+        access_token?: number;
+    };
+};
+export declare type CookieConsentParams = {
+    leadId: number;
+    constentOrigin: string;
+    isoCode: string;
+};
 export declare type CtaParams = {
     cta: {
         area: string;
