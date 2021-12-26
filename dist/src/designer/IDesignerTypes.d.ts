@@ -1,15 +1,18 @@
 export declare enum ImageGalleryTypes {
-    webpage = "webpage",
-    document = "document",
-    board = "board",
     campaign = "campaign",
-    promotion = "promotion",
     imageBank = "image_bank",
-    webpageImageBank = "webpage_image_bank"
+    search = "search"
 }
-export declare enum ImageBankCategory {
+export declare enum ImageBankType {
     folloze = "folloze",
     organization = "organization"
+}
+export declare enum ImageBankCategory {
+    banners = 1,
+    mobile_banners = 2,
+    thumbnails = 3,
+    icons = 4,
+    logos = 5
 }
 export declare type GalleryImage = {
     url: string;
@@ -21,17 +24,14 @@ export declare type GalleryImage = {
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
+    query?: string;
     organizationId?: number;
-    url?: string;
-    edit?: boolean;
     bankCategory?: ImageBankCategory;
-    fileName?: string;
-    images?: GalleryImage[];
 };
 export declare type ImageBankResponseV1 = {
-    icons: ImageBankCategory;
-    logos: ImageBankCategory;
-    banners: ImageBankCategory;
-    thumbnails: ImageBankCategory;
-    mobile_banners: ImageBankCategory;
+    icons: ImageBankType;
+    logos: ImageBankType;
+    banners: ImageBankType;
+    thumbnails: ImageBankType;
+    mobile_banners: ImageBankType;
 };

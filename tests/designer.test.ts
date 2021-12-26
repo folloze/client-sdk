@@ -3,14 +3,14 @@ import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
 
-beforeAll(() => {
-    sdk = new ClientSDK({useMock: true});
+beforeAll(async () => {
+    sdk = await ClientSDK.create({useMock: true});
 });
 
-describe("testing sdk liveboard module", () => {
-    it('checks that getImageGallery mock works as expectes', async () => {
+describe("testing sdk designer module", () => {
+    it('checks that getCampaignImageGallery mock works as expectes', async () => {
         await sdk.designer.getCampaignImageGallery()
-            .then(result => expect(result).toHaveLength(1));
+            .then(result => expect(result.length).toBeGreaterThan(10));
     });
 
     it('checks that uploadImage works as expected', async () => {

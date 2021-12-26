@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, SnapshotUrlResponseV1, CtaResponseV1, CtaParams } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, CookieConsentParams, CtaParams } from './ILiveboardTypes';
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -53,59 +53,67 @@ export declare class Liveboard {
      * @returns {SnapshotUrlResponseV1} SnapshotUrlResponse
      */
     createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1>;
-    createItemAnalysis(payload: {
-        contentItemId: number;
-    }): Promise<AxiosResponse>;
-    getFileUrl(payload: {
-        contentItemId: number;
-    }): Promise<AxiosResponse>;
-    setCookiesConsent(payload: {
-        boardId: number;
-        leadId: number;
-        constentOrigin: string;
-        isoCode: string;
-    }): Promise<AxiosResponse>;
+    /**
+     * Analyses whether the item is secure or not
+     *
+     * @param {number} contentItemId
+     * @returns {ItemAnalysisResponseV1} ItemAnalysisResponse
+     */
+    createItemAnalysis(contentItemId: number): Promise<ItemAnalysisResponseV1>;
+    /**
+     *
+     * @param {number} contentItemId
+     * @returns {ItemFileMetadataResponseV1} ItemFileMetadataResponse
+     */
+    getFileMetadata(contentItemId: number): Promise<ItemFileMetadataResponseV1>;
+    /**
+     * Sets cookies consent for the lead
+     *
+     * @param {number} boardId
+     * @param {CookieConsentParams} options
+     */
+    setCookiesConsent(boardId: number, options: CookieConsentParams): Promise<void>;
     getItems(payload?: any): Promise<AxiosResponse>;
     /**
      * submit a message CTA
      *
      * @param {number} boardId
-     * @param {CtaParams} values
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveMessageCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    saveMessageCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
     /**
      * submit a contact CTA
      *
      * @param {number} boardId
-     * @param {CtaParams} values
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveContactCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
     /**
      * submit a form CTA
      *
      * @param {number} boardId
-     * @param {CtaParams} values
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveFormCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
     /**
      * submit a link CTA
      *
      * @param {number} boardId
-     * @param {CtaParams} values
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveLinkCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
     /**
      * submit a share CTA
      *
      * @param {number} boardId
-     * @param {CtaParams} values
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveShareCta(boardId: number, values: CtaParams): Promise<CtaResponseV1>;
+    saveShareCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
     /**
      * Submit a share by email cta
      *
