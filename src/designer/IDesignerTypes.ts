@@ -1,11 +1,7 @@
 export enum ImageGalleryTypes {
-    webpage = "webpage",
-    document = "document",
-    board = "board",
     campaign = "campaign",
-    promotion = "promotion",
     imageBank = "image_bank",
-    webpageImageBank = "webpage_image_bank"
+    search = "search"
 }
 
 export enum ImageBankType {
@@ -32,11 +28,9 @@ export type GalleryImage = {
 
 export type ImageGalleryParams = {
     type: ImageGalleryTypes,
-    url?: string // webpage/webpageImageBank - for link type items, the url of the item
+    query?: string, // search
     organizationId?: number, // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategory, // imageBank
-    fileName?: string, // document - gets the file name to search the web for images that might be related
-    images?: GalleryImage[] // document/webpage -  keeps the current thumbnail of the item
 }
 
 export type ImageBankResponseV1 = {

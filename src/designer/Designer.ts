@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import { default as mapKeys, default as snakeCase } from 'lodash';
-import {ImageBankResponseV1, ImageGalleryParams, GalleryImage} from "./IDesignerTypes";
+import {ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory} from "./IDesignerTypes";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -9,24 +9,14 @@ export class Designer {
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
     }
-
-    // todo
-    // getListOfImagesBySearch(query: string): Promise<any>;
-
-    // todo
-    // getListOfAllAvailableImages(???): Promise<any>
-
-    // todo
-    // getListOfImagesByType(type: ImageBankCategory): Promise<>
-
-
+    
     /**
      * Gets the image gallery for given types
      * 
      * @param {ImageGalleryParams} payload 
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+     private getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<GalleryImage[]>(
                 "/api/imagegallery",
@@ -42,6 +32,41 @@ export class Designer {
         });
     }
 
+    /**
+     * Whenn searching the web for an image
+     * 
+     * @param {string} query 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getQueryImageGallery(query: string): Promise<GalleryImage[]> {
+        return this.getImageGallery({type: ImageGalleryTypes.search, query})
+    }
+    
+    /**
+     * When a section has image bank set to 'organization'
+     * 
+     * @param {number} organizationId 
+     * @param {ImageBankCategory} bankCategory 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getImageBankGallery(organizationId: number, bankCategory: ImageBankCategory): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            type: ImageGalleryTypes.imageBank,
+            organizationId,
+            bankCategory
+        })
+    }
+
+    /**
+     * When a section of the designer has image bank set to 'folloze', get generic images
+     * or organization doesn't have image bank set
+     * 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getCampaignImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({type: ImageGalleryTypes.campaign})
+    }
+    
     /**
      * Get the settings for the organization's image bank
      * 

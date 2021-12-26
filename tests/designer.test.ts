@@ -1,6 +1,5 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
-import {ImageGalleryTypes} from "../src/designer/IDesignerTypes";
 
 let sdk: ClientSDK;
 
@@ -10,7 +9,7 @@ beforeAll(() => {
 
 describe("testing sdk liveboard module", () => {
     it('checks that getImageGallery mock works as expectes', async () => {
-        await sdk.designer.getImageGallery({type: ImageGalleryTypes.board})
+        await sdk.designer.getCampaignImageGallery()
             .then(result => expect(result).toHaveLength(1));
     });
 
