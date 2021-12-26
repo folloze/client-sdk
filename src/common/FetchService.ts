@@ -21,21 +21,28 @@ export class FetchService {
     private readonly useMock: boolean = false;
     public fetcher: AxiosInstance;
     private mock: MockAdapter;
+    private options: FetcherOptions;
 
-    constructor(options: FetcherOptions) {
-        options = Object.assign(defaultFetcherOptions, options);
+    private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
-        if (this.useMock) {
-            this.createMockFetcher(options);
-        } else {
-            this.createAxiosFetcher(options);
-        }
+        this.options = options;
     }
 
-    private createMockFetcher(options: FetcherOptions) {
+    public static async create(options: FetcherOptions): Promise<FetchService> {
+        options = Object.assign(defaultFetcherOptions, options);
+        const instance = new FetchService(options);
+        if (options.useMock) {
+            await instance.createMockFetcher(options);
+        } else {
+            instance.createAxiosFetcher(options);
+        }
+        return instance;
+    }
+
+    private async createMockFetcher(options: FetcherOptions) {
         this.createAxiosFetcher(options);
-        import("axios-mock-adapter")
-            .then(module => {
+        return await import("axios-mock-adapter")
+            .then(async module => {
                 this.mock = new module.default(this.fetcher);
                 MockConnector.bindLiveBoard(this.mock);
                 MockConnector.bindDesigner(this.mock);

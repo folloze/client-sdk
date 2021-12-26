@@ -5473,17 +5473,22 @@ var defaultFetcherOptions = {
 var FetchService = class {
   constructor(options) {
     this.useMock = false;
-    options = Object.assign(defaultFetcherOptions, options);
     this.useMock = options.useMock;
-    if (this.useMock) {
-      this.createMockFetcher(options);
-    } else {
-      this.createAxiosFetcher(options);
-    }
+    this.options = options;
   }
-  createMockFetcher(options) {
+  static async create(options) {
+    options = Object.assign(defaultFetcherOptions, options);
+    const instance = new FetchService(options);
+    if (options.useMock) {
+      await instance.createMockFetcher(options);
+    } else {
+      instance.createAxiosFetcher(options);
+    }
+    return instance;
+  }
+  async createMockFetcher(options) {
     this.createAxiosFetcher(options);
-    import("./chunks/src.QVKUCV53.js").then((module) => {
+    return await import("./chunks/src.QVKUCV53.js").then(async (module) => {
       this.mock = new module.default(this.fetcher);
       MockConnector.bindLiveBoard(this.mock);
       MockConnector.bindDesigner(this.mock);
@@ -5767,11 +5772,16 @@ var Liveboard = class {
 
 // src/sdk.ts
 var ClientSDK = class {
-  constructor(options) {
-    this.fetcher = new FetchService(options);
-    this.analytics = new Analytics(this.fetcher);
-    this.designer = new Designer(this.fetcher);
-    this.liveboard = new Liveboard(this.fetcher);
+  constructor() {
+  }
+  static async create(options) {
+    const instance = new ClientSDK();
+    const fetcher = await FetchService.create(options);
+    instance.fetcher = fetcher;
+    instance.analytics = new Analytics(fetcher);
+    instance.designer = new Designer(fetcher);
+    instance.liveboard = new Liveboard(fetcher);
+    return instance;
   }
 };
 

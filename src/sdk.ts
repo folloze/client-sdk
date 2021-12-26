@@ -5,16 +5,22 @@ import {Liveboard} from "./liveboard/Liveboard";
 
 export class ClientSDK {
 
-    private readonly fetcher: FetchService;
+    public fetcher: FetchService;
     public analytics: Analytics;
     public designer: Designer;
     public liveboard: Liveboard;
 
-    constructor(options: FetcherOptions) {
-        this.fetcher = new FetchService(options);
-        this.analytics = new Analytics(this.fetcher);
-        this.designer = new Designer(this.fetcher);
-        this.liveboard = new Liveboard(this.fetcher);
+    private constructor() {
+        // do not allow to call it from outside of this class
     }
 
+    public static async create(options: FetcherOptions): Promise<ClientSDK> {
+        const instance = new ClientSDK();
+        const fetcher = await FetchService.create(options);
+        instance.fetcher = fetcher;
+        instance.analytics = new Analytics(fetcher);
+        instance.designer = new Designer(fetcher);
+        instance.liveboard = new Liveboard(fetcher);
+        return instance;
+    }
 }
