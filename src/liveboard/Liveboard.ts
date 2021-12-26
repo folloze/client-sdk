@@ -392,6 +392,21 @@ export class Liveboard {
 
     // end CTA
 
+    updateEnrichment(type: string, enrichmentData: object): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<void>("/live_board/v2/enrichments", {
+                type,
+                enrichment_data: enrichmentData
+            })
+                .then(() => { resolve(); })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
+        });
+    }
+
+
     private keysToSnakeCase(params: object): object {
         return mapKeys(params, (value, key) => {
             return snakeCase(key);

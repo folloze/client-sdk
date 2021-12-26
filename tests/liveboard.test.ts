@@ -102,4 +102,9 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.saveShareByEmailCta(1, 'email@company.com', 1234)
             .then(result => expect(result).toBeNull);
     });
+
+    it('checks that updateEnrichment mock works as expected', async () => {
+        await sdk.liveboard.updateEnrichment("dnb", {"name": "company"})
+            .then(result => expect(result).toBeNull);
+    });
 });

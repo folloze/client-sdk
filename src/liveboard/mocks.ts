@@ -151,4 +151,7 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v1/boards/1/shares")
         .reply<void>(200);
+
+    mock.onPost("/live_board/v2/enrichments")
+        .reply<void>(200)
 };
