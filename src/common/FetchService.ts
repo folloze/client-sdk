@@ -18,7 +18,7 @@ const defaultFetcherOptions: FetcherOptions = {
 
 export class FetchService {
 
-    private readonly useMock: boolean = false;
+    private readonly useMock: boolean;
     public fetcher: AxiosInstance;
     private mock: MockAdapter;
     private options: FetcherOptions;
@@ -40,13 +40,15 @@ export class FetchService {
     }
 
     private async createMockFetcher(options: FetcherOptions) {
-        this.createAxiosFetcher(options);
         return await import("axios-mock-adapter")
             .then(async module => {
+                this.createAxiosFetcher(options);
                 this.mock = new module.default(this.fetcher);
-                MockConnector.bindLiveBoard(this.mock);
-                MockConnector.bindDesigner(this.mock);
-                MockConnector.bindAnalytics(this.mock);
+                await Promise.all([
+                    MockConnector.bindLiveBoard(this.mock),
+                    MockConnector.bindDesigner(this.mock),
+                    MockConnector.bindAnalytics(this.mock),
+                ]);
             })
             .catch(e => console.error(e));
     }

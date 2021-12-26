@@ -5451,14 +5451,14 @@ var import_axios = __toModule(require_axios());
 
 // src/common/MockConnector.ts
 var MockConnector = class {
-  static bindLiveBoard(mock) {
-    import("./chunks/mocks.OONCKPLP.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+  static async bindLiveBoard(mock) {
+    await import("./chunks/mocks.OONCKPLP.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
-  static bindDesigner(mock) {
-    import("./chunks/mocks.OO6AVHWW.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+  static async bindDesigner(mock) {
+    await import("./chunks/mocks.OO6AVHWW.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
-  static bindAnalytics(mock) {
-    import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
+  static async bindAnalytics(mock) {
+    await import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
   }
 };
 
@@ -5472,7 +5472,6 @@ var defaultFetcherOptions = {
 };
 var FetchService = class {
   constructor(options) {
-    this.useMock = false;
     this.useMock = options.useMock;
     this.options = options;
   }
@@ -5487,12 +5486,14 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    this.createAxiosFetcher(options);
     return await import("./chunks/src.QVKUCV53.js").then(async (module) => {
+      this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
-      MockConnector.bindLiveBoard(this.mock);
-      MockConnector.bindDesigner(this.mock);
-      MockConnector.bindAnalytics(this.mock);
+      await Promise.all([
+        MockConnector.bindLiveBoard(this.mock),
+        MockConnector.bindDesigner(this.mock),
+        MockConnector.bindAnalytics(this.mock)
+      ]);
     }).catch((e5) => console.error(e5));
   }
   createAxiosFetcher(options) {
