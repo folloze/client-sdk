@@ -1,6 +1,6 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import { default as mapKeys, default as snakeCase } from 'lodash';
+import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
     UploadUrlResponseV1
@@ -23,7 +23,7 @@ export class Designer {
         return new Promise((resolve, reject) => {
             this.fetcher.post<GalleryImage[]>(
                 "/api/imagegallery",
-                {params: this.keysToSnakeCase(payload)}
+                {params: keysToSnakeCase(payload)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -71,10 +71,10 @@ export class Designer {
     }
 
     uploadImage(image: File, fileType?: string): Promise<string> {
-        fileType = fileType || image.type.split("/")[0]
+        fileType = fileType || image.type.split("/")[0];
 
         return this.getImageUploadUrl(fileType)
-            .then((data) => this.uploadImageToProvider(data, image, fileType))
+            .then((data) => this.uploadImageToProvider(data, image, fileType));
     }
 
     // TODO: possibly extract to a file service
@@ -94,7 +94,7 @@ export class Designer {
                     console.error("could not get upload url", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     // TODO: possibly extract to a file service
@@ -124,7 +124,7 @@ export class Designer {
                     console.error("could not upload image to provider", e);
                     reject(e);
                 });
-        })
+        });
     }
     
     /**
@@ -188,13 +188,6 @@ export class Designer {
                     console.error("could not save liveboard", e);
                     reject(e);
                 });
-        });
-    }
-
-    //TODO: DRY
-    private keysToSnakeCase(params: object): object {
-        return mapKeys(params, (value, key) => {
-            return snakeCase(key);
         });
     }
 }

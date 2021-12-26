@@ -12,7 +12,7 @@ export declare class Designer {
      */
     private getImageGallery;
     /**
-     * Whenn searching the web for an image
+     * When searching the web for an image
      *
      * @param {string} query
      * @returns {GalleryImage[]} an array of GalleryImage
@@ -33,6 +33,22 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getCampaignImageGallery(): Promise<GalleryImage[]>;
+    uploadImage(image: File, fileType?: string): Promise<string>;
+    /**
+     * Fetches all the parameters required to upload a file
+     *
+     * @param {string} uploadType the type of file to be uploaded
+     * @returns {UploadUrlResponseV1} UploadUrlResponse
+     */
+    private getImageUploadUrl;
+    /**
+     *
+     * @param {UploadUrlResponseV1} data
+     * @param {File} image
+     * @param {string} fileType
+     * @returns {string} the url of the image in the provider
+     */
+    private uploadImageToProvider;
     /**
      * Get the settings for the organization's image bank
      *
@@ -50,5 +66,4 @@ export declare class Designer {
      */
     saveImageBankSettings(organizationId: number, categoryName: string, source: string): Promise<ImageBankResponseV1>;
     saveLiveBoard(payload: any): Promise<AxiosResponse>;
-    private keysToSnakeCase;
 }

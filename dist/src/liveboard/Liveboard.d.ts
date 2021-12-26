@@ -122,5 +122,4 @@ export declare class Liveboard {
      * @param {number} invitationId
      */
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>;
-    private keysToSnakeCase;
 }
