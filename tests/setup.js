@@ -7,3 +7,11 @@ global.console = {
     info: console.info,
     debug: jest.fn(), // console.debug are ignored in tests
 };
+
+global.File = class MockFile {
+    fileName;
+    constructor(fileBits, fileName, properties) {
+      this.fileName = fileName;
+      this.type = properties.type || ""
+    }
+  }

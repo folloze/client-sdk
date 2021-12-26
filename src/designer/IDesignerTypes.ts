@@ -40,3 +40,15 @@ export type ImageBankResponseV1 = {
     thumbnails: ImageBankType,
     mobile_banners: ImageBankType
 }
+
+export type UploadUrlResponseV1 = {
+    file_name: string,
+    method: string,
+    params: {
+        api_key: string,
+        signature: string,
+        timestamp: number
+    },
+    get_url: string,
+    put_url: string
+}

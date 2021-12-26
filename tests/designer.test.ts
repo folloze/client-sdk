@@ -13,12 +13,18 @@ describe("testing sdk liveboard module", () => {
             .then(result => expect(result).toHaveLength(1));
     });
 
+    it('checks that uploadImage works as expected', async () => {
+        const image = new global.File([""], "fileName", {type: "image"});
+        await sdk.designer.uploadImage(image)
+            .then(result => expect(result).toEqual('https://uploaded_url.com'));
+    });
+
     it('checks that getImageBankSettings mock works as expected', async () => {
         await sdk.designer.getImageBankSettings(1)
             .then(result => expect(result.icons).toEqual("folloze"));
     });
-
-    it('checks that getImageBankSettings mock works as expected', async () => {
+    
+    it('checks that saveImageBankSettings mock works as expected', async () => {
         await sdk.designer.saveImageBankSettings(1, "banners", "folloze")
             .then(result => expect(result.icons).toEqual("folloze"));
     });
@@ -27,4 +33,5 @@ describe("testing sdk liveboard module", () => {
         await sdk.designer.saveLiveBoard({type: "test", data: {}})
             .then(result => expect(result.status == 200));
     });
+
 });

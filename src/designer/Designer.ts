@@ -1,7 +1,10 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import { default as mapKeys, default as snakeCase } from 'lodash';
-import {ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory} from "./IDesignerTypes";
+import {
+    ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
+    UploadUrlResponseV1
+} from "./IDesignerTypes";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -33,7 +36,7 @@ export class Designer {
     }
 
     /**
-     * Whenn searching the web for an image
+     * When searching the web for an image
      * 
      * @param {string} query 
      * @returns {GalleryImage[]} an array of GalleryImage
@@ -65,6 +68,63 @@ export class Designer {
      */
     getCampaignImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({type: ImageGalleryTypes.campaign})
+    }
+
+    uploadImage(image: File, fileType?: string): Promise<string> {
+        fileType = fileType || image.type.split("/")[0]
+
+        return this.getImageUploadUrl(fileType)
+            .then((data) => this.uploadImageToProvider(data, image, fileType))
+    }
+
+    // TODO: possibly extract to a file service
+    /**
+     * Fetches all the parameters required to upload a file
+     * 
+     * @param {string} uploadType the type of file to be uploaded
+     * @returns {UploadUrlResponseV1} UploadUrlResponse
+     */
+    private getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post("/api/v1/upload_urls", {type: uploadType})
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get upload url", e);
+                    reject(e);
+                });
+        })
+    }
+
+    // TODO: possibly extract to a file service
+    /**
+     * 
+     * @param {UploadUrlResponseV1} data 
+     * @param {File} image 
+     * @param {string} fileType 
+     * @returns {string} the url of the image in the provider
+     */
+    private uploadImageToProvider(data: UploadUrlResponseV1, image: File, fileType: string): Promise<string> {
+        return new Promise<string>((resolve, reject) => {
+            this.fetcher.post(
+                data.put_url,
+                {
+                    file: image,
+                    ...data.params
+                },
+                {
+                    headers: {"Content-type": fileType}
+                }
+            )
+                .then(result => {
+                    resolve(result.data.secure_url);
+                })
+                .catch(e => {
+                    console.error("could not upload image to provider", e);
+                    reject(e);
+                });
+        })
     }
     
     /**
