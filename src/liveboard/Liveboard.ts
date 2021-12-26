@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import { default as mapKeys, default as snakeCase } from 'lodash';
+import {keysToSnakeCase} from "../common/helpers/helpers";
 import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
@@ -226,7 +226,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.post(
                 `/live_board/v1/boards/${boardId}/cookies_consents`,
-                {...this.keysToSnakeCase(options)}
+                {...keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -265,7 +265,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/message`,
-                {...this.keysToSnakeCase(options)}
+                {...keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -288,7 +288,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/contact`,
-                {...this.keysToSnakeCase(options)}
+                {...keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -311,7 +311,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/form`,
-                {...this.keysToSnakeCase(options)}
+                {...keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -334,7 +334,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/link`,
-                {...this.keysToSnakeCase(options)}
+                {...keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -357,7 +357,7 @@ export class Liveboard {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/share`,
-                {...this.keysToSnakeCase(options)}
+                {...keysToSnakeCase(options)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -387,14 +387,6 @@ export class Liveboard {
                     console.error("could not submit cta", e);
                     reject(e);
                 });
-        });
-    }
-
-    // end CTA
-
-    private keysToSnakeCase(params: object): object {
-        return mapKeys(params, (value, key) => {
-            return snakeCase(key);
         });
     }
 }

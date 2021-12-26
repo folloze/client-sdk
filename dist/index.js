@@ -4296,7 +4296,7 @@ var require_lodash = __commonJS({
         function keysIn(object) {
           return isArrayLike(object) ? arrayLikeKeys(object, true) : baseKeysIn(object);
         }
-        function mapKeys3(object, iteratee2) {
+        function mapKeys2(object, iteratee2) {
           var result2 = {};
           iteratee2 = getIteratee(iteratee2, 3);
           baseForOwn(object, function(value, key, object2) {
@@ -4556,7 +4556,7 @@ var require_lodash = __commonJS({
           var args = arguments, string = toString(args[0]);
           return args.length < 3 ? string : string.replace(args[1], args[2]);
         }
-        var snakeCase3 = createCompounder(function(result2, word, index) {
+        var snakeCase2 = createCompounder(function(result2, word, index) {
           return result2 + (index ? "_" : "") + word.toLowerCase();
         });
         function split(string, separator, limit) {
@@ -4994,7 +4994,7 @@ var require_lodash = __commonJS({
         lodash.keys = keys;
         lodash.keysIn = keysIn;
         lodash.map = map;
-        lodash.mapKeys = mapKeys3;
+        lodash.mapKeys = mapKeys2;
         lodash.mapValues = mapValues;
         lodash.matches = matches;
         lodash.matchesProperty = matchesProperty;
@@ -5204,7 +5204,7 @@ var require_lodash = __commonJS({
         lodash.runInContext = runInContext2;
         lodash.sample = sample;
         lodash.size = size;
-        lodash.snakeCase = snakeCase3;
+        lodash.snakeCase = snakeCase2;
         lodash.some = some;
         lodash.sortedIndex = sortedIndex;
         lodash.sortedIndexBy = sortedIndexBy;
@@ -5455,7 +5455,7 @@ var MockConnector = class {
     await import("./chunks/mocks.OONCKPLP.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
-    await import("./chunks/mocks.OO6AVHWW.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    await import("./chunks/mocks.IG4ZEC6M.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static async bindAnalytics(mock) {
     await import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5504,15 +5504,22 @@ var FetchService = class {
   }
 };
 
-// src/designer/Designer.ts
+// src/common/helpers/helpers.ts
 var import_lodash = __toModule(require_lodash());
+var keysToSnakeCase = (params) => {
+  return (0, import_lodash.mapKeys)(params, (value, key) => {
+    return (0, import_lodash.snakeCase)(key);
+  });
+};
+
+// src/designer/Designer.ts
 var Designer = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/api/imagegallery", { params: this.keysToSnakeCase(payload) }).then((result) => {
+      this.fetcher.post("/api/imagegallery", { params: keysToSnakeCase(payload) }).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not get image gallery", e5);
@@ -5532,6 +5539,34 @@ var Designer = class {
   }
   getCampaignImageGallery() {
     return this.getImageGallery({ type: ImageGalleryTypes.campaign });
+  }
+  uploadImage(image, fileType) {
+    fileType = fileType || image.type.split("/")[0];
+    return this.getImageUploadUrl(fileType).then((data) => this.uploadImageToProvider(data, image, fileType));
+  }
+  getImageUploadUrl(uploadType) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/api/v1/upload_urls", { type: uploadType }).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get upload url", e5);
+        reject(e5);
+      });
+    });
+  }
+  uploadImageToProvider(data, image, fileType) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(data.put_url, __spreadValues({
+        file: image
+      }, data.params), {
+        headers: { "Content-type": fileType }
+      }).then((result) => {
+        resolve(result.data.secure_url);
+      }).catch((e5) => {
+        console.error("could not upload image to provider", e5);
+        reject(e5);
+      });
+    });
   }
   getImageBankSettings(organizationId) {
     return new Promise((resolve, reject) => {
@@ -5568,15 +5603,9 @@ var Designer = class {
       });
     });
   }
-  keysToSnakeCase(params) {
-    return (0, import_lodash.default)(params, (value, key) => {
-      return (0, import_lodash.default)(key);
-    });
-  }
 };
 
 // src/liveboard/Liveboard.ts
-var import_lodash2 = __toModule(require_lodash());
 var Liveboard = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
@@ -5683,7 +5712,7 @@ var Liveboard = class {
   }
   setCookiesConsent(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/cookies_consents`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/cookies_consents`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not get file url", e5);
@@ -5703,7 +5732,7 @@ var Liveboard = class {
   }
   saveMessageCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5713,7 +5742,7 @@ var Liveboard = class {
   }
   saveContactCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5723,7 +5752,7 @@ var Liveboard = class {
   }
   saveFormCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5733,7 +5762,7 @@ var Liveboard = class {
   }
   saveLinkCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5743,7 +5772,7 @@ var Liveboard = class {
   }
   saveShareCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, this.keysToSnakeCase(options))).then((result) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not submit cta", e5);
@@ -5762,11 +5791,6 @@ var Liveboard = class {
         console.error("could not submit cta", e5);
         reject(e5);
       });
-    });
-  }
-  keysToSnakeCase(params) {
-    return (0, import_lodash2.default)(params, (value, key) => {
-      return (0, import_lodash2.default)(key);
     });
   }
 };
@@ -6529,7 +6553,7 @@ var LiveWidgetEdit = class extends s4 {
 };
 
 // src/common/LiveWidgetComponentEdit.ts
-var import_lodash3 = __toModule(require_lodash());
+var import_lodash2 = __toModule(require_lodash());
 var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   set propertyPath(path) {
     this._propPath = path;
@@ -6538,7 +6562,7 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
     return this._propPath;
   }
   firstUpdated() {
-    this.data = import_lodash3.default.get(this.widget.data, this.propertyPath);
+    this.data = import_lodash2.default.get(this.widget.data, this.propertyPath);
   }
 };
 

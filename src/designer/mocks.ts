@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import {ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1} from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
-    const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload"
+    const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
 
     mock.onPost("/api/imagegallery", {params: {type: "campaign"}})
         .reply<GalleryImage[]>(200, [
@@ -113,10 +113,10 @@ export const rules = (mock: MockAdapter) => {
             },
             get_url: "//images.folloze.com/image/upload/",
             put_url: providerUrl
-        })
+        });
     
     mock.onPost(providerUrl)
-        .reply(200, {secure_url: 'https://uploaded_url.com'})
+        .reply(200, {secure_url: 'https://uploaded_url.com'});
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);
