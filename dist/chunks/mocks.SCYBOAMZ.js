@@ -1,6 +1,6 @@
 import {
   ImageBankType
-} from "./chunk.XA2JH32H.js";
+} from "./chunk.6KNLIVF4.js";
 import "./chunk.5KE7N75L.js";
 
 // src/designer/mocks.ts

@@ -1,6 +1,8 @@
 import {
+  ImageBankCategory,
+  ImageBankType,
   ImageGalleryTypes
-} from "./chunks/chunk.XA2JH32H.js";
+} from "./chunks/chunk.6KNLIVF4.js";
 import {
   require_axios
 } from "./chunks/chunk.VDOWMMET.js";
@@ -5455,7 +5457,7 @@ var MockConnector = class {
     await import("./chunks/mocks.KXA5EJ6D.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
-    await import("./chunks/mocks.IG4ZEC6M.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    await import("./chunks/mocks.SCYBOAMZ.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static async bindAnalytics(mock) {
     await import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -6862,6 +6864,9 @@ export {
   Designer,
   FetchService,
   FloatEditor,
+  ImageBankCategory,
+  ImageBankType,
+  ImageGalleryTypes,
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,

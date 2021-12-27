@@ -10,6 +10,7 @@ export enum ImageBankType {
 }
 
 export enum ImageBankCategory {
+    all = 0,
     banners = 1,
     mobile_banners,
     thumbnails,

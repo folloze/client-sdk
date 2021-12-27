@@ -1,3 +1,4 @@
+export * from "./IDesignerTypes";
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";

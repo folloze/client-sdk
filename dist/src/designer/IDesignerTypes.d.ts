@@ -8,6 +8,7 @@ export declare enum ImageBankType {
     organization = "organization"
 }
 export declare enum ImageBankCategory {
+    all = 0,
     banners = 1,
     mobile_banners = 2,
     thumbnails = 3,

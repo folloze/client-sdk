@@ -1,3 +1,4 @@
+export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
 import { ImageBankResponseV1, GalleryImage, ImageBankCategory } from "./IDesignerTypes";
