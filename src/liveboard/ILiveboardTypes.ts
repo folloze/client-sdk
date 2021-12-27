@@ -43,6 +43,53 @@ export type UserChatResponseV1 = {
     chat_id: number
 }
 
+export type Image = {
+    id: number,
+    url: string,
+    fit: string,
+    transformation: object, // TODO
+    displayable_section?: string
+}
+
+export type ItemsParams = {
+    boardId: number,
+    categoryId: number,
+    search: string,
+    page?: number,
+    perPage?: number
+}
+
+export type ItemResponseV2 = {
+    id: number,
+    name: string,
+    description: string,
+    views_count: number,
+    image: Image,
+    item_type: string,
+    item_source: number,
+    likes_count: number,
+    category_ids: number[],
+    category_item_data: {
+        id: number,
+        position: number
+    }[],
+    link_url: string,
+    status: number, //TODO: enum?
+    slug: string,
+    is_gated?: boolean,
+    open_in_new_tab?: boolean
+}
+
+export type ItemsResponseV2 = {
+    item_ids: number[],
+    data: Record<string, ItemResponseV2>,
+    most_viewed_item_id: number,
+    items_count?: number,
+    total_pages?: number,
+    current_page?: number,
+    per_page?: number
+}
+
 export type SnapshotUrlResponseV1 = {
     link_url: string,
     snapshot_url: string

@@ -3,9 +3,9 @@ import {keysToSnakeCase} from "../common/helpers/helpers";
 import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1,
-    CtaResponseV1, GeoLocationResponseV1,
-    CookieConsentParams, CtaParams
+    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, SnapshotUrlResponseV1,
+    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
+    ItemsParams, CookieConsentParams, CtaParams
 } from './ILiveboardTypes';
 
 export class Liveboard {
@@ -145,6 +145,60 @@ export class Liveboard {
     // Items
 
     /**
+     * Fetches an item
+     * 
+     * @param {number|string} itemId the item id or slug
+     * @param {number} boardId 
+     * @param {boolean} bySlug 
+     * @returns {ItemResponseV2} ItemResponse
+     */
+    getItem(itemId: number|string, boardId: number, bySlug: boolean): Promise<ItemResponseV2> {
+        return new Promise(((resolve, reject) => {
+            this.fetcher.get(`/live_board/v2/items/${itemId}`, {
+                params: { by_slug: bySlug, board_id: boardId }
+            })
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get item", e);
+                    reject(e);
+                });
+        }));
+    }
+
+    /**
+     * Gets all items by params
+     * 
+     * @param {ItemsParams} params 
+     * @returns {ItemsResponseV2} ItemsResponse
+     */
+    getItems(params: ItemsParams): Promise<ItemsResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(
+                `/live_board/v2/boards/${params.boardId}/items`,
+                {params: {...keysToSnakeCase(params)}}
+            )
+                .then(result => {
+                    if(result.status == 206) {
+                        setTimeout(() => {
+                            this.getItems(params)
+                            .then(resolve)
+                        . catch(reject);
+                        }, 2000);
+                    }
+                    else {
+                        resolve(result.data);
+                    }
+                })
+                .catch(e => {
+                    console.error("could not get items");
+                    reject(e);
+                });
+        })
+    }
+
+    /**
      * 
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
      * 
@@ -188,6 +242,7 @@ export class Liveboard {
     }
 
     /**
+     * Fetches file metadata for given item
      * 
      * @param {number} contentItemId 
      * @returns {ItemFileMetadataResponseV1} ItemFileMetadataResponse
@@ -233,20 +288,6 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get file url", e);
-                    reject(e);
-                });
-        });
-    }
-
-    //TODO: replace
-    getItems(payload?: any): Promise<AxiosResponse> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.get("/url-getting-items", payload)
-                .then(result => {
-                    resolve(result);
-                })
-                .catch(e => {
-                    console.error("could not get items", e);
                     reject(e);
                 });
         });
@@ -392,6 +433,12 @@ export class Liveboard {
 
     // end CTA
 
+    /**
+     * Update the current lead's account's enrichment data
+     * 
+     * @param {string} type 
+     * @param {object} enrichmentData 
+     */
     updateEnrichment(type: string, enrichmentData: object): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<void>("/live_board/v2/enrichments", {
@@ -413,7 +460,7 @@ export class Liveboard {
      */
     getGeoLocation(): Promise<GeoLocationResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get("/live_board/v1/geo_location")
+            this.fetcher.get<GeoLocationResponseV1>("/live_board/v1/geo_location")
                 .then(result => {
                     resolve(result.data);
                 })

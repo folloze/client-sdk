@@ -41,9 +41,19 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.chat_id).toBeDefined());
     });
 
+    it('checks that getItem mock works as expected', async() => {
+        await sdk.liveboard.getItem(1, 1, false)
+            .then(result => expect(result.id).toEqual(1));
+    });
+
+    it('checks that getItems mock works as expected', async() => {
+        await sdk.liveboard.getItems({boardId: 1, categoryId: 1, search: ""})
+            .then(result => expect(result.item_ids).toHaveLength(1));
+    });
+
     it('checks that createSnapshotUrl mock works as expected', async() => {
         await sdk.liveboard.createSnapshotUrl(1)
-            .then(result => expect(result.link_url == '200'));
+            .then(result => expect(result.link_url).toEqual("abc.website.com"));
     });
 
     it('checks that createItemAnalysis mock works as expected', async() => {
@@ -59,18 +69,6 @@ describe("test liveboard mocks module", () => {
     it('checks that setCookiesConsent mock works as expected', async () => {
         await sdk.liveboard.setCookiesConsent(1, {leadId: 1, constentOrigin: 'CallToAction', isoCode: 'IL'})
             .then(result => expect(result).toBeNull);
-    });
-
-    //TODO
-    it('checks that getItems (all) mock works as expected', async () => {
-        await sdk.liveboard.getItems()
-            .then(result => expect(result.status == 201));
-    });
-
-    //TODO
-    it('checks that getItems mock works as expected', async () => {
-        await sdk.liveboard.getItems({itemId: 1})
-            .then(result => expect(result.status == 201));
     });
 
     it('checks that saveMessageCta mock works as expected', async () => {

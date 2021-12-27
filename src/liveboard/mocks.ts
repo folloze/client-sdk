@@ -1,10 +1,34 @@
 import MockAdapter from "axios-mock-adapter";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1,
-    CtaResponseV1, GeoLocationResponseV1
+    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, SnapshotUrlResponseV1,
+    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1
 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
+    const item = {
+        id: 1,
+        category_ids: [1],
+        category_item_data: [{id: 1, position: 65536}],
+        description: "item description",
+        image: {
+            id: 21,
+            displayable_section: null,
+            fit: "cover",
+            transformation: {},
+            url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png"
+        },
+        is_gated: null,
+        item_source: 1,
+        item_type: "snapshot",
+        likes_count: 0,
+        link_url: "https://www.amazon.com/",
+        name: "Amazon.com. Spend less. Smile more.",
+        open_in_new_tab: null,
+        slug: "amazoncom-spend-less-smile-more",
+        status: 1,
+        views_count: 17
+    }
+
     mock.onGet("/live_board/v1/boards/board_slug/")
         .reply<BoardResponseV1>(200, {
             id: 1,
@@ -78,6 +102,16 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v1/chat/user_chat")
         .reply<UserChatResponseV1>(200, {token: 'abcd', chat_id: 123});
+
+    mock.onGet("/live_board/v2/items/1")
+        .reply<ItemResponseV2>(200, item)
+
+    mock.onGet("/live_board/v2/boards/1/items")
+        .reply<ItemsResponseV2>(200, {
+            item_ids: [1],
+            data: {"1": {...item}},
+            most_viewed_item_id: 1,
+        })
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
