@@ -107,4 +107,9 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.updateEnrichment("dnb", {"name": "company"})
             .then(result => expect(result).toBeNull);
     });
+
+    it('checks that getGeoLocation mock works as expected', async () => {
+        await sdk.liveboard.getGeoLocation()
+            .then(result => expect(result.country).toEqual("israel"));
+    });
 });

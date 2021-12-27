@@ -1,7 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
     UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1,
-    CtaResponseV1
+    CtaResponseV1, GeoLocationResponseV1
 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
@@ -154,4 +154,13 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v2/enrichments")
         .reply<void>(200)
+
+    mock.onGet("/live_board/v1/geo_location")
+        .reply<GeoLocationResponseV1>(200, {
+            city: "tel aviv",
+            continent: "asia",
+            country: "israel",
+            country_code: "il",
+            state: "ta"  
+        })
 };

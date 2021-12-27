@@ -4,7 +4,7 @@ import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
     UserChatResponseV1, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1,
-    CtaResponseV1,
+    CtaResponseV1, GeoLocationResponseV1,
     CookieConsentParams, CtaParams
 } from './ILiveboardTypes';
 
@@ -400,9 +400,22 @@ export class Liveboard {
             })
                 .then(() => { resolve(); })
                 .catch(e => {
-                    console.error("could not submit cta", e);
+                    console.error("could not update enrichment", e);
                     reject(e);
                 });
         });
+    }
+
+    getGeoLocation(): Promise<GeoLocationResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get("/live_board/v1/geo_location")
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get geolocation", e);
+                    reject(e);
+                });
+        })
     }
 }

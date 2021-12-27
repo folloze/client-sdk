@@ -91,3 +91,11 @@ export type CtaResponseV1 = {
     company?: string,
     group_user: boolean,
 }
+
+export type GeoLocationResponseV1 = {
+    city: string,
+    continent: string,
+    country: string,
+    country_code: string,
+    state: string
+}
