@@ -406,6 +406,11 @@ export class Liveboard {
         });
     }
 
+    /**
+     * Gets the geo location of the current lead
+     * 
+     * @returns {GeoLocationResponseV1} GeoLocationResponse
+     */
     getGeoLocation(): Promise<GeoLocationResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.get("/live_board/v1/geo_location")
@@ -417,5 +422,21 @@ export class Liveboard {
                     reject(e);
                 });
         })
+    }
+
+    /**
+     * Set invitation wrapper to used
+     * 
+     * @param {string} token
+     */
+    updateInvitationUsed(token: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<void>(`/live_board/v2/invitation_wrappers/${token}`)
+                .then(() => { resolve(); })
+                .catch(e => {
+                    console.error("could not update invitation wrapper", e);
+                    reject(e);
+                });
+        });
     }
 }

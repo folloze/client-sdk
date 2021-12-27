@@ -163,4 +163,7 @@ export const rules = (mock: MockAdapter) => {
             country_code: "il",
             state: "ta"  
         })
+
+    mock.onPost("/live_board/v2/invitation_wrappers/1")
+        .reply<void>(200)
 };

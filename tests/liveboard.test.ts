@@ -112,4 +112,9 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.getGeoLocation()
             .then(result => expect(result.country).toEqual("israel"));
     });
+
+    it('checks that updateInvitationUsed mock works as expected', async () => {
+        await sdk.liveboard.updateInvitationUsed("1")
+            .then(result => expect(result).toBeNull);
+    });
 });
