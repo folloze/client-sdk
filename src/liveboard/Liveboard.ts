@@ -1,4 +1,4 @@
-import { AxiosInstance, AxiosResponse } from "axios";
+import { AxiosInstance } from "axios";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import { FetchService } from "../common/FetchService";
 import {
@@ -195,7 +195,7 @@ export class Liveboard {
                     console.error("could not get items");
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -468,7 +468,7 @@ export class Liveboard {
                     console.error("could not get geolocation", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**

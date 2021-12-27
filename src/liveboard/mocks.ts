@@ -27,7 +27,7 @@ export const rules = (mock: MockAdapter) => {
         slug: "amazoncom-spend-less-smile-more",
         status: 1,
         views_count: 17
-    }
+    };
 
     mock.onGet("/live_board/v1/boards/board_slug/")
         .reply<BoardResponseV1>(200, {
@@ -104,14 +104,14 @@ export const rules = (mock: MockAdapter) => {
         .reply<UserChatResponseV1>(200, {token: 'abcd', chat_id: 123});
 
     mock.onGet("/live_board/v2/items/1")
-        .reply<ItemResponseV2>(200, item)
+        .reply<ItemResponseV2>(200, item);
 
     mock.onGet("/live_board/v2/boards/1/items")
         .reply<ItemsResponseV2>(200, {
             item_ids: [1],
             data: {"1": {...item}},
             most_viewed_item_id: 1,
-        })
+        });
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
@@ -187,7 +187,7 @@ export const rules = (mock: MockAdapter) => {
         .reply<void>(200);
 
     mock.onPost("/live_board/v2/enrichments")
-        .reply<void>(200)
+        .reply<void>(200);
 
     mock.onGet("/live_board/v1/geo_location")
         .reply<GeoLocationResponseV1>(200, {
@@ -196,8 +196,8 @@ export const rules = (mock: MockAdapter) => {
             country: "israel",
             country_code: "il",
             state: "ta"  
-        })
+        });
 
     mock.onPost("/live_board/v2/invitation_wrappers/1")
-        .reply<void>(200)
+        .reply<void>(200);
 };

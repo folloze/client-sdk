@@ -5452,7 +5452,7 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./chunks/mocks.OONCKPLP.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+    await import("./chunks/mocks.KXA5EJ6D.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
     await import("./chunks/mocks.IG4ZEC6M.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
@@ -5674,6 +5674,34 @@ var Liveboard = class {
       });
     });
   }
+  getItem(itemId, boardId, bySlug) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/items/${itemId}`, {
+        params: { by_slug: bySlug, board_id: boardId }
+      }).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get item", e5);
+        reject(e5);
+      });
+    });
+  }
+  getItems(params) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/boards/${params.boardId}/items`, { params: __spreadValues({}, keysToSnakeCase(params)) }).then((result) => {
+        if (result.status == 206) {
+          setTimeout(() => {
+            this.getItems(params).then(resolve).catch(reject);
+          }, 2e3);
+        } else {
+          resolve(result.data);
+        }
+      }).catch((e5) => {
+        console.error("could not get items");
+        reject(e5);
+      });
+    });
+  }
   createSnapshotUrl(contentItemId, guid) {
     return new Promise((resolve, reject) => {
       this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/snapshots`, { guid }).then((result) => {
@@ -5716,16 +5744,6 @@ var Liveboard = class {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not get file url", e5);
-        reject(e5);
-      });
-    });
-  }
-  getItems(payload) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.get("/url-getting-items", payload).then((result) => {
-        resolve(result);
-      }).catch((e5) => {
-        console.error("could not get items", e5);
         reject(e5);
       });
     });
@@ -5789,6 +5807,39 @@ var Liveboard = class {
         resolve();
       }).catch((e5) => {
         console.error("could not submit cta", e5);
+        reject(e5);
+      });
+    });
+  }
+  updateEnrichment(type, enrichmentData) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/live_board/v2/enrichments", {
+        type,
+        enrichment_data: enrichmentData
+      }).then(() => {
+        resolve();
+      }).catch((e5) => {
+        console.error("could not update enrichment", e5);
+        reject(e5);
+      });
+    });
+  }
+  getGeoLocation() {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get("/live_board/v1/geo_location").then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get geolocation", e5);
+        reject(e5);
+      });
+    });
+  }
+  updateInvitationUsed(token) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v2/invitation_wrappers/${token}`).then(() => {
+        resolve();
+      }).catch((e5) => {
+        console.error("could not update invitation wrapper", e5);
         reject(e5);
       });
     });
