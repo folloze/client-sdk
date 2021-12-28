@@ -5,7 +5,7 @@ import {
 } from "./chunks/chunk.6KNLIVF4.js";
 import {
   require_axios
-} from "./chunks/chunk.RK2WZI3L.js";
+} from "./chunks/chunk.VDOWMMET.js";
 import {
   __commonJS,
   __decorateClass,
@@ -5488,7 +5488,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./chunks/src.HWTOBMSU.js").then(async (module) => {
+    return await import("./chunks/src.QVKUCV53.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([
@@ -5536,8 +5536,8 @@ var Designer = class {
       bankCategory
     });
   }
-  getCampaignImageGallery(organizationId) {
-    return this.getImageGallery({ organizationId, type: ImageGalleryTypes.campaign });
+  getCampaignImageGallery() {
+    return this.getImageGallery({ type: ImageGalleryTypes.campaign });
   }
   uploadImage(image, fileType) {
     fileType = fileType || image.type.split("/")[0];

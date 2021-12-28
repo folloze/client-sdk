@@ -33,7 +33,7 @@ export declare class Designer {
      *
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getCampaignImageGallery(organizationId: number): Promise<GalleryImage[]>;
+    getCampaignImageGallery(): Promise<GalleryImage[]>;
     uploadImage(image: File, fileType?: string): Promise<string>;
     /**
      * Fetches all the parameters required to upload a file

@@ -95,7 +95,7 @@ export const rules = (mock: MockAdapter) => {
                 fit: "cover",
                 url: "https://images.folloze.com/image/upload/v1640684303/iog6rsbluzw2y07koz26.jpg"
             }
-        ])
+        ]);
     
     //icons
     mock.onPost("/api/imagegallery", {type: "image_bank", bank_category: 4, organization_id: 1})
@@ -116,7 +116,7 @@ export const rules = (mock: MockAdapter) => {
                 url: "https://images.folloze.com/image/upload/v1640686376/cjlc8wmtndwp8rfcweq3.png",
                 fit: "cover"
             }
-        ])
+        ]);
 
     mock.onPost("/api/imagegallery", {type: "search", query: "bug"})
         .reply<GalleryImage[]>(200, [
@@ -176,7 +176,7 @@ export const rules = (mock: MockAdapter) => {
                 url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
                 fit: "contained"
             }
-        ])
+        ]);
     
     mock.onGet("/api/v1/organizations/1/settings/image_bank")
         .reply<ImageBankResponseV1>(200, {
