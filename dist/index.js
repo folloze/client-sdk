@@ -5499,9 +5499,6 @@ var FetchService = class {
     }).catch((e5) => console.error(e5));
   }
   createAxiosFetcher(options) {
-    options.config.headers["folloze-session-guid"] = "get guid from cookie?";
-    options.config.headers["Authorization"] = "get token from?";
-    options.config.xsrfHeaderName = "X-CSRF-TOKEN";
     this.fetcher = import_axios.default.create(options.config);
   }
 };
