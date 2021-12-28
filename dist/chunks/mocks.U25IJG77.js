@@ -6,7 +6,7 @@ import "./chunk.5KE7N75L.js";
 // src/designer/mocks.ts
 var rules = (mock) => {
   const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
-  mock.onPost("/api/imagegallery", { params: { type: "campaign" } }).reply(200, [
+  mock.onPost("/api/imagegallery", { params: { organization_id: 1, type: "campaign" } }).reply(200, [
     {
       "fit": "cover",
       "url": "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"

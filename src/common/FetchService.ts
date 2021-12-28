@@ -54,9 +54,9 @@ export class FetchService {
     }
 
     private createAxiosFetcher(options: FetcherOptions) {
-        options.config.headers["folloze-session-guid"] = "get guid from cookie?";
-        options.config.headers["Authorization"] = "get token from?";
-        options.config.xsrfHeaderName = 'X-CSRF-TOKEN';
+        // options.config.headers["folloze-session-guid"] = "get guid from cookie?";
+        // options.config.headers["Authorization"] = "get token from?";
+        // options.config.xsrfHeaderName = 'X-CSRF-TOKEN';
         this.fetcher = axios.create(options.config);
     }
 }

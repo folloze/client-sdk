@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, GalleryImage, ImageBankCategory } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -11,7 +11,7 @@ export declare class Designer {
      * @param {ImageGalleryParams} payload
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    private getImageGallery;
+    getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]>;
     /**
      * When searching the web for an image
      *
@@ -33,7 +33,7 @@ export declare class Designer {
      *
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getCampaignImageGallery(): Promise<GalleryImage[]>;
+    getCampaignImageGallery(organizationId: number): Promise<GalleryImage[]>;
     uploadImage(image: File, fileType?: string): Promise<string>;
     /**
      * Fetches all the parameters required to upload a file

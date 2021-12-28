@@ -20,7 +20,7 @@ export class Designer {
      * @param {ImageGalleryParams} payload 
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-     private getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+     public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<GalleryImage[]>(
                 "/api/imagegallery",
@@ -67,8 +67,8 @@ export class Designer {
      * 
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getCampaignImageGallery(): Promise<GalleryImage[]> {
-        return this.getImageGallery({type: ImageGalleryTypes.campaign});
+    getCampaignImageGallery(organizationId: number): Promise<GalleryImage[]> {
+        return this.getImageGallery({organizationId: organizationId, type: ImageGalleryTypes.campaign});
     }
 
     uploadImage(image: File, fileType?: string): Promise<string> {
