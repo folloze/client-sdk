@@ -67,8 +67,8 @@ export class Designer {
      * 
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getCampaignImageGallery(organizationId: number): Promise<GalleryImage[]> {
-        return this.getImageGallery({organizationId: organizationId, type: ImageGalleryTypes.campaign});
+    getCampaignImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({type: ImageGalleryTypes.campaign});
     }
 
     uploadImage(image: File, fileType?: string): Promise<string> {

@@ -5,7 +5,7 @@ import {
 } from "./chunks/chunk.6KNLIVF4.js";
 import {
   require_axios
-} from "./chunks/chunk.VDOWMMET.js";
+} from "./chunks/chunk.RK2WZI3L.js";
 import {
   __commonJS,
   __decorateClass,
@@ -5457,7 +5457,7 @@ var MockConnector = class {
     await import("./chunks/mocks.KXA5EJ6D.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
-    await import("./chunks/mocks.U25IJG77.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    await import("./chunks/mocks.LCRXW45S.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static async bindAnalytics(mock) {
     await import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5488,7 +5488,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./chunks/src.QVKUCV53.js").then(async (module) => {
+    return await import("./chunks/src.HWTOBMSU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([
@@ -5518,7 +5518,7 @@ var Designer = class {
   }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/api/imagegallery", { params: keysToSnakeCase(payload) }).then((result) => {
+      this.fetcher.post("/api/imagegallery", __spreadValues({}, keysToSnakeCase(payload))).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not get image gallery", e5);
