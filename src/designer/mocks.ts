@@ -4,7 +4,7 @@ import {ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1} f
 export const rules = (mock: MockAdapter) => {
     const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
 
-    mock.onPost("/api/imagegallery", {params: {type: "campaign"}})
+    mock.onPost("/api/imagegallery", {type: "campaign"})
         .reply<GalleryImage[]>(200, [
             {
                 "fit": "cover",
@@ -83,6 +83,100 @@ export const rules = (mock: MockAdapter) => {
                 "fit": "cover"
             }
         ]);
+
+    //banners
+    mock.onPost("/api/imagegallery", {type: "image_bank", bank_category: 1, organization_id: 1})
+        .reply<GalleryImage[]>(200, [
+            {
+                fit: "cover",
+                url: "https://images.folloze.com/image/upload/v1640510372/cjo48nkp0gtsk8pjrkjb.jpg"
+            },
+            {
+                fit: "cover",
+                url: "https://images.folloze.com/image/upload/v1640684303/iog6rsbluzw2y07koz26.jpg"
+            }
+        ])
+    
+    //icons
+    mock.onPost("/api/imagegallery", {type: "image_bank", bank_category: 4, organization_id: 1})
+        .reply<GalleryImage[]>(200, [
+            {
+                url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/upload/v1640686376/cjlc8wmtndwp8rfcweq3.png",
+                fit: "cover"
+            }
+        ])
+
+    mock.onPost("/api/imagegallery", {type: "search", query: "bug"})
+        .reply<GalleryImage[]>(200, [
+            {
+                url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+                fit: "contained"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+                fit: "contained"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
+                fit: "contained"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+                fit: "contained"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+                fit: "contained"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+                fit: "cover"
+            },
+            {
+                "url":"https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+                fit: "contained"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+                fit: "cover"
+            },
+            {
+                url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+                fit: "contained"
+            }
+        ])
     
     mock.onGet("/api/v1/organizations/1/settings/image_bank")
         .reply<ImageBankResponseV1>(200, {

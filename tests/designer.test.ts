@@ -13,6 +13,21 @@ describe("testing sdk designer module", () => {
             .then(result => expect(result.length).toBeGreaterThan(10));
     });
 
+    it('checks that getImageBankGallery for banners mock works as expectes', async () => {
+        await sdk.designer.getImageBankGallery(1, 1)
+            .then(result => expect(result.length).toBeGreaterThan(1));
+    });
+
+    it('checks that getImageBankGallery for icons mock works as expectes', async () => {
+        await sdk.designer.getImageBankGallery(1, 4)
+            .then(result => expect(result.length).toBeGreaterThan(3));
+    });
+
+    it('checks that getQueryImageGallery mock works as expectes', async () => {
+        await sdk.designer.getQueryImageGallery("bug")
+            .then(result => expect(result.length).toEqual(14));
+    });
+
     it('checks that uploadImage works as expected', async () => {
         const image = new global.File([""], "fileName", {type: "image"});
         await sdk.designer.uploadImage(image)

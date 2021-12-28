@@ -24,7 +24,7 @@ export class Designer {
         return new Promise((resolve, reject) => {
             this.fetcher.post<GalleryImage[]>(
                 "/api/imagegallery",
-                {params: keysToSnakeCase(payload)}
+                {...keysToSnakeCase(payload)}
             )
                 .then(result => {
                     resolve(result.data);
