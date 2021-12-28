@@ -85,7 +85,7 @@ export class Designer {
      * @param {string} uploadType the type of file to be uploaded
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
-    private getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
+    public getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post("/api/v1/upload_urls", {type: uploadType})
                 .then(result => {

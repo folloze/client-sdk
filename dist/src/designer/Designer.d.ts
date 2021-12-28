@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -41,7 +41,7 @@ export declare class Designer {
      * @param {string} uploadType the type of file to be uploaded
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
-    private getImageUploadUrl;
+    getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1>;
     /**
      *
      * @param {UploadUrlResponseV1} data
