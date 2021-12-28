@@ -5457,7 +5457,7 @@ var MockConnector = class {
     await import("./chunks/mocks.KXA5EJ6D.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
-    await import("./chunks/mocks.SCYBOAMZ.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    await import("./chunks/mocks.U25IJG77.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static async bindAnalytics(mock) {
     await import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5536,8 +5536,8 @@ var Designer = class {
       bankCategory
     });
   }
-  getCampaignImageGallery() {
-    return this.getImageGallery({ type: ImageGalleryTypes.campaign });
+  getCampaignImageGallery(organizationId) {
+    return this.getImageGallery({ organizationId, type: ImageGalleryTypes.campaign });
   }
   uploadImage(image, fileType) {
     fileType = fileType || image.type.split("/")[0];

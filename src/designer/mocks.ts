@@ -4,7 +4,7 @@ import {ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1} f
 export const rules = (mock: MockAdapter) => {
     const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
 
-    mock.onPost("/api/imagegallery", {params: {type: "campaign"}})
+    mock.onPost("/api/imagegallery", {params: {organization_id: 1, type: "campaign"}})
         .reply<GalleryImage[]>(200, [
             {
                 "fit": "cover",

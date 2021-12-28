@@ -9,7 +9,7 @@ beforeAll(async () => {
 
 describe("testing sdk designer module", () => {
     it('checks that getCampaignImageGallery mock works as expectes', async () => {
-        await sdk.designer.getCampaignImageGallery()
+        await sdk.designer.getCampaignImageGallery(1)
             .then(result => expect(result.length).toBeGreaterThan(10));
     });
 
