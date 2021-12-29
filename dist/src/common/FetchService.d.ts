@@ -7,7 +7,9 @@ export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
     private mock;
-    constructor(options: FetcherOptions);
+    private options;
+    private constructor();
+    static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
     private createAxiosFetcher;
 }

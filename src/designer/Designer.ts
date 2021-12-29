@@ -1,7 +1,11 @@
+export * from "./IDesignerTypes";
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import { default as mapKeys, default as snakeCase } from 'lodash';
-import {ImageBankResponseV1, ImageGalleryParams, GalleryImage} from "./IDesignerTypes";
+import {keysToSnakeCase} from "../common/helpers/helpers";
+import {
+    ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
+    UploadUrlResponseV1
+} from "./IDesignerTypes";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -9,18 +13,18 @@ export class Designer {
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
     }
-
+    
     /**
      * Gets the image gallery for given types
      * 
      * @param {ImageGalleryParams} payload 
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+     public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<GalleryImage[]>(
                 "/api/imagegallery",
-                {params: this.keysToSnakeCase(payload)}
+                {...keysToSnakeCase(payload)}
             )
                 .then(result => {
                     resolve(result.data);
@@ -32,6 +36,60 @@ export class Designer {
         });
     }
 
+    /**
+     * When searching the web for an image
+     * 
+     * @param {string} query 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getQueryImageGallery(query: string): Promise<GalleryImage[]> {
+        return this.getImageGallery({type: ImageGalleryTypes.search, query});
+    }
+    
+    /**
+     * When a section has image bank set to 'organization'
+     * 
+     * @param {number} organizationId 
+     * @param {ImageBankCategory} bankCategory 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getImageBankGallery(organizationId: number, bankCategory: ImageBankCategory): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            type: ImageGalleryTypes.imageBank,
+            organizationId,
+            bankCategory
+        });
+    }
+
+    /**
+     * When a section of the designer has image bank set to 'folloze', get generic images
+     * or organization doesn't have image bank set
+     * 
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getCampaignImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({type: ImageGalleryTypes.campaign});
+    }
+
+    /**
+     * Fetches all the parameters required to upload a file
+     * 
+     * @param {string} uploadType the type of file to be uploaded
+     * @returns {UploadUrlResponseV1} UploadUrlResponse
+     */
+    public getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post("/api/v1/upload_urls", {type: uploadType})
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get upload url", e);
+                    reject(e);
+                });
+        });
+    }
+    
     /**
      * Get the settings for the organization's image bank
      * 
@@ -93,13 +151,6 @@ export class Designer {
                     console.error("could not save liveboard", e);
                     reject(e);
                 });
-        });
-    }
-
-    //TODO: DRY
-    private keysToSnakeCase(params: object): object {
-        return mapKeys(params, (value, key) => {
-            return snakeCase(key);
         });
     }
 }
