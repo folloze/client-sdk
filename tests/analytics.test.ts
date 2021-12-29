@@ -3,8 +3,8 @@ import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
 
-beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true});
+beforeAll(() => {
+    sdk = new ClientSDK({useMock: true});
 });
 
 describe("testing analytics module", () => {
