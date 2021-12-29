@@ -5510,6 +5510,52 @@ var keysToSnakeCase = (params) => {
     return (0, import_lodash.snakeCase)(key);
   });
 };
+var fileUpload = (file, params, progressCallback) => {
+  return new Promise((resolve, reject) => {
+    const url = params.url;
+    const headers = params.headers;
+    const data = params.data;
+    const method = params.method || "POST";
+    let payload = file;
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    if (headers) {
+      for (const key in headers) {
+        xhr.setRequestHeader(key, headers[key]);
+      }
+    }
+    if (data) {
+      const formData = new FormData();
+      formData.append("file", file);
+      for (const key in data) {
+        formData.append(key, data[key]);
+      }
+      payload = formData;
+    }
+    xhr.onloadstart = function() {
+      progressCallback(file, 0);
+    };
+    xhr.onload = function() {
+      if (xhr.status == 200 || xhr.status == 201) {
+        const response = xhr.responseText && JSON.parse(xhr.responseText);
+        progressCallback(file, 100);
+        resolve(response);
+      } else {
+        reject("did not receive server conformation for upload i.e: status 200 or 201");
+      }
+    };
+    xhr.onerror = function(e5) {
+      reject(e5);
+    };
+    xhr.upload.onprogress = function(evt) {
+      if (evt.lengthComputable) {
+        const percent = Math.floor(100 * evt.loaded / evt.total);
+        progressCallback(file, percent);
+      }
+    };
+    xhr.send(payload);
+  });
+};
 
 // src/designer/Designer.ts
 var Designer = class {
@@ -6851,6 +6897,8 @@ export {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   Liveboard,
+  fileUpload,
+  keysToSnakeCase,
   makeDragElement
 };
 /**
