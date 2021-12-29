@@ -5539,30 +5539,12 @@ var Designer = class {
   getCampaignImageGallery() {
     return this.getImageGallery({ type: ImageGalleryTypes.campaign });
   }
-  uploadImage(image, fileType) {
-    fileType = fileType || image.type.split("/")[0];
-    return this.getImageUploadUrl(fileType).then((data) => this.uploadImageToProvider(data, image, fileType));
-  }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/api/v1/upload_urls", { type: uploadType }).then((result) => {
         resolve(result.data);
       }).catch((e5) => {
         console.error("could not get upload url", e5);
-        reject(e5);
-      });
-    });
-  }
-  uploadImageToProvider(data, image, fileType) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(data.put_url, __spreadValues({
-        file: image
-      }, data.params), {
-        headers: { "Content-type": fileType }
-      }).then((result) => {
-        resolve(result.data.secure_url);
-      }).catch((e5) => {
-        console.error("could not upload image to provider", e5);
         reject(e5);
       });
     });

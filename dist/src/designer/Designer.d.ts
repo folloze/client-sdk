@@ -34,7 +34,6 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getCampaignImageGallery(): Promise<GalleryImage[]>;
-    uploadImage(image: File, fileType?: string): Promise<string>;
     /**
      * Fetches all the parameters required to upload a file
      *
@@ -42,14 +41,6 @@ export declare class Designer {
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
     getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1>;
-    /**
-     *
-     * @param {UploadUrlResponseV1} data
-     * @param {File} image
-     * @param {string} fileType
-     * @returns {string} the url of the image in the provider
-     */
-    private uploadImageToProvider;
     /**
      * Get the settings for the organization's image bank
      *

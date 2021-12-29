@@ -71,14 +71,6 @@ export class Designer {
         return this.getImageGallery({type: ImageGalleryTypes.campaign});
     }
 
-    uploadImage(image: File, fileType?: string): Promise<string> {
-        fileType = fileType || image.type.split("/")[0];
-
-        return this.getImageUploadUrl(fileType)
-            .then((data) => this.uploadImageToProvider(data, image, fileType));
-    }
-
-    // TODO: possibly extract to a file service
     /**
      * Fetches all the parameters required to upload a file
      * 
@@ -93,36 +85,6 @@ export class Designer {
                 })
                 .catch(e => {
                     console.error("could not get upload url", e);
-                    reject(e);
-                });
-        });
-    }
-
-    // TODO: possibly extract to a file service
-    /**
-     * 
-     * @param {UploadUrlResponseV1} data 
-     * @param {File} image 
-     * @param {string} fileType 
-     * @returns {string} the url of the image in the provider
-     */
-    private uploadImageToProvider(data: UploadUrlResponseV1, image: File, fileType: string): Promise<string> {
-        return new Promise<string>((resolve, reject) => {
-            this.fetcher.post(
-                data.put_url,
-                {
-                    file: image,
-                    ...data.params
-                },
-                {
-                    headers: {"Content-type": fileType}
-                }
-            )
-                .then(result => {
-                    resolve(result.data.secure_url);
-                })
-                .catch(e => {
-                    console.error("could not upload image to provider", e);
                     reject(e);
                 });
         });
