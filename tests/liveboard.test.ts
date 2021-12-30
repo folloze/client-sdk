@@ -51,6 +51,11 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.item_ids).toHaveLength(1));
     });
 
+    it('checks that getHasItems mock works as expected', async() => {
+        await sdk.liveboard.getHasItems(1)
+            .then(result => expect(result.has_items).toBeTruthy);
+    });
+
     it('checks that createSnapshotUrl mock works as expected', async() => {
         await sdk.liveboard.createSnapshotUrl(1)
             .then(result => expect(result.link_url).toEqual("abc.website.com"));
@@ -114,5 +119,20 @@ describe("test liveboard mocks module", () => {
     it('checks that updateInvitationUsed mock works as expected', async () => {
         await sdk.liveboard.updateInvitationUsed("1")
             .then(result => expect(result).toBeNull);
+    });
+
+    it('checks that getCurrentLead mock works as expected', async () => {
+        await sdk.liveboard.getCurrentLead()
+            .then(result => expect(result.anon_guest).toBeFalsy);
+    });
+
+    it('checks that validateLead mock works as expected', async () => {
+        await sdk.liveboard.validateLead(1)
+            .then(result => expect(result).toBeNull);
+    });
+
+    it('checks that stopTrackingForSession mock works as expected', async () => {
+        await sdk.liveboard.stopTrackingForSession()
+            .then(result => expect(result.anon_guest).toBeTruthy);
     });
 });

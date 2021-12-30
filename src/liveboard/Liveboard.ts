@@ -3,8 +3,9 @@ import {keysToSnakeCase} from "../common/helpers/helpers";
 import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, SnapshotUrlResponseV1,
+    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
+    LeadResponseV1,
     ItemsParams, CookieConsentParams, CtaParams
 } from './ILiveboardTypes';
 
@@ -193,6 +194,28 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get items");
+                    reject(e);
+                });
+        });
+    }
+
+    getHasItems(boardId: number): Promise<HasItemResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(`/live_board/v2/boards/${boardId}/items_presence`)
+                .then(result => {
+                    if(result.status == 206) {
+                        setTimeout(() => {
+                            this.getHasItems(boardId)
+                            .then(resolve)
+                        . catch(reject);
+                        }, 2000);
+                    }
+                    else {
+                        resolve(result.data);
+                    }
+                })
+                .catch(e => {
+                    console.error("could not get has items");
                     reject(e);
                 });
         });
@@ -482,6 +505,60 @@ export class Liveboard {
                 .then(() => { resolve(); })
                 .catch(e => {
                     console.error("could not update invitation wrapper", e);
+                    reject(e);
+                });
+        });
+    }
+
+    //identity
+
+    /**
+     * Fetches the current lead
+     * 
+     * @returns {LeadResponseV1} LeadResponse
+     */
+    getCurrentLead(): Promise<LeadResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<LeadResponseV1>("/live_board/v1/leads/me")
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get current lead", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Validates that the lead is a human
+     * 
+     * @param {number} boardId 
+     */
+    validateLead(boardId: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<void>("/live_board/v2/lead_validations", {board_id: boardId})
+                .then(() => { resolve(); })
+                .catch(e => {
+                    console.error("could not validate lead", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Stop tracking and anonimyze lead
+     * 
+     * @returns {LeadResponseV1} LeadResponse new anonymous lead
+     */
+    stopTrackingForSession(): Promise<LeadResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.delete<LeadResponseV1>("/live_board/v2/track_leads")
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get stop tracking lead", e);
                     reject(e);
                 });
         });

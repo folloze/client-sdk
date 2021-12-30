@@ -90,6 +90,10 @@ export type ItemsResponseV2 = {
     per_page?: number
 }
 
+export type HasItemResponseV2 = {
+    has_items: boolean
+}
+
 export type SnapshotUrlResponseV1 = {
     link_url: string,
     snapshot_url: string
@@ -145,4 +149,13 @@ export type GeoLocationResponseV1 = {
     country: string,
     country_code: string,
     state: string
+}
+
+export type LeadResponseV1 = {
+    id: number,
+    name: string,
+    email: string,
+    last_name: string,
+    company: string,
+    anon_guest: boolean
 }

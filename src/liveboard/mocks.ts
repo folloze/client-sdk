@@ -1,7 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, SnapshotUrlResponseV1,
-    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1
+    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
+    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1
 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
@@ -113,6 +113,9 @@ export const rules = (mock: MockAdapter) => {
             most_viewed_item_id: 1,
         });
 
+    mock.onGet("/live_board/v2/boards/1/items_presence")
+        .reply<HasItemResponseV2>(200, {has_items: true})
+
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
 
@@ -200,4 +203,28 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v2/invitation_wrappers/1")
         .reply<void>(200);
+
+    mock.onGet("/live_board/v1/leads/me")
+        .reply<LeadResponseV1>(200, {
+            id: 1,
+            name: "John",
+            last_name: "Doe",
+            company: "folloze",
+            email: "john.doe@folloze.com",
+            anon_guest: false
+        })
+
+    mock.onPost("/live_board/v2/lead_validations", {board_id: 1})
+        .reply<void>(200)
+
+    mock.onDelete("/live_board/v2/track_leads")
+        .reply<LeadResponseV1>(200, {
+            id: 1,
+            name: "Guest1",
+            last_name: null,
+            company: null,
+            email: null,
+            anon_guest: true
+        })
+
 };
