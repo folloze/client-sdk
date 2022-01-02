@@ -222,6 +222,22 @@ export class Liveboard {
     }
 
     /**
+     * Like an item
+     * 
+     * @param {number} itemId 
+     */
+    likeItem(itemId: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<void>(`/live_board/v2/items/${itemId}/likes`)
+                .then(() => { resolve(); })
+                .catch(e => {
+                    console.error("could not validate lead", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
      * 
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
      * 

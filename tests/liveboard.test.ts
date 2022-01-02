@@ -56,6 +56,11 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.has_items).toBeTruthy);
     });
 
+    it('checks that likeItem mock works as expected', async () => {
+        await sdk.liveboard.likeItem(1)
+            .then(result => expect(result).toBeNull);
+    });
+
     it('checks that createSnapshotUrl mock works as expected', async() => {
         await sdk.liveboard.createSnapshotUrl(1)
             .then(result => expect(result.link_url).toEqual("abc.website.com"));

@@ -116,6 +116,9 @@ export const rules = (mock: MockAdapter) => {
     mock.onGet("/live_board/v2/boards/1/items_presence")
         .reply<HasItemResponseV2>(200, {has_items: true})
 
+    mock.onPost("/live_board/v2/items/1/likes")
+        .reply<void>(200)
+
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
 
