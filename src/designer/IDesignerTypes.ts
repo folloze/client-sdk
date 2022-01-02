@@ -77,3 +77,36 @@ export declare type CloudinaryUploadResult = {
     original_extension: string;
     api_key: string;
 }
+
+type FormField = {
+    label: string,
+    order: number,
+    placeholder: string,
+    state: string,
+    type: string
+}
+
+export type FormV1 = {
+    id: number,
+    name: string,
+    board_id: number,
+    organization_id: number,
+    state: number,
+    form_type: number,
+    data: {
+        // both classic and external
+        form_title?: string,
+        submit_label?: string,
+        success_message?: string
+        // for type classic (1)
+        fields?: Record<string, FormField>, // the field's name and properties. There will always be an 'email' field
+        // for type external (2)
+        script?: string,
+        auto_fill?: string,
+        // for type marketo (3)
+        munchkin_id?: string,
+        form_id?: string,
+        base_url?: string,
+        custom_script?: string
+    }
+}

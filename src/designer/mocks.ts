@@ -1,5 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
-import {ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1} from "./IDesignerTypes";
+import {ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1, FormV1} from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
     const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
@@ -211,6 +211,102 @@ export const rules = (mock: MockAdapter) => {
     
     mock.onPost(providerUrl)
         .reply(200, {secure_url: 'https://uploaded_url.com'});
+
+    mock.onGet("api/v1/boards/1/forms")
+        .reply<Record<string, FormV1>>(200, {
+            "1": {
+                board_id: 1,
+                form_type: 1,
+                id: 1,
+                name: "Classic Form",
+                organization_id: 1,
+                state: null,
+                data: {
+                    form_title: "Sign up!",
+                    submit_label: "email me",
+                    success_message: "thanks!",
+                    fields: {
+                        name: {
+                            label: "Name",
+                            order: 1,
+                            placeholder: "First Name",
+                            state: "optional",
+                            type: "text",
+                        },
+                        email: {
+                            label: "Email",
+                            order: 2,
+                            placeholder: "your@email.here",
+                            state: "required",
+                            type: "email"
+                        }
+                    }
+                }
+            },
+            "2": {
+                board_id: 1,
+                form_type: 2,
+                id: 2,
+                name: "External Form",
+                organization_id: 1,
+                state: null,
+                data: {
+                    script: "<script type='text/javascript'>alert('hey!')</script>",
+                    auto_fill: "true",
+                    form_title: "Enter details here",
+                    submit_label: "email me",
+                    success_message: "thanks!",
+                }
+            },
+            "3": {
+                board_id: 1,
+                form_type: 3,
+                id: 3,
+                name: "Marketo Form",
+                organization_id: 1,
+                state: null,
+                data: {
+                    custom_script: "alert('HEY!')",
+                    munchkin_id: "abc-def-ghi",
+                    base_url: "//app-sj25.marketo.com",
+                    form_id: "1"
+                }
+            }
+        })
+
+    mock.onPost("api/v1/boards/1/forms")
+        .reply<FormV1>(200, {
+            board_id: 1,
+            form_type: 2,
+            id: 2,
+            name: "External Form",
+            organization_id: 1,
+            state: null,
+            data: {
+                script: "<script type='text/javascript'>alert('hey!')</script>",
+                auto_fill: "true",
+                form_title: "Enter details here",
+                submit_label: "email me",
+                success_message: "thanks!",
+            }
+        })
+
+    mock.onPut("api/v1/boards/1/forms")
+        .reply<FormV1>(200, {
+            board_id: 1,
+            form_type: 2,
+            id: 2,
+            name: "External Form",
+            organization_id: 1,
+            state: null,
+            data: {
+                script: "<script type='text/javascript'>alert('hey!')</script>",
+                auto_fill: "true",
+                form_title: "Enter details here",
+                submit_label: "email me",
+                success_message: "thanks!",
+            }
+        })
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);

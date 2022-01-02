@@ -4,7 +4,7 @@ import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
-    UploadUrlResponseV1
+    UploadUrlResponseV1, FormV1
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -139,6 +139,62 @@ export class Designer {
                     reject(e);
                 });
         });
+    }
+
+    // Forms
+
+    /**
+     * Gets all forms of a board
+     * 
+     * @param {number} boardId
+     * @returns {Record<string, FormV1>} an object of id and FormResponse
+     */
+    getForms(boardId: number): Promise<Record<string, FormV1>> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get forms", e);
+                    reject(e);
+                });
+        })
+        
+    }
+
+    /**
+     * Create a new form
+     * 
+     * @param {number} boardId 
+     * @param {FormV1} form 
+     * @returns {FormV1} the form after it's been saved (include id)
+     */
+    createForm(boardId: number, form: FormV1): Promise<FormV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save form", e);
+                    reject(e);
+                });
+        })
+    }
+
+    /**
+     * Update new form
+     * 
+     * @param {number} boardId 
+     * @param {FormV1} form 
+     * @returns {FormV1} the form after it's been saved (include id)
+     */
+     updateForm(boardId: number, form: FormV1): Promise<FormV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.put<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save form", e);
+                    reject(e);
+                });
+        })
     }
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {
