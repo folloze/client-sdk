@@ -69,6 +69,21 @@ describe("testing sdk designer module", () => {
             .then(result => expect(result.board_id).toEqual(1));
     });
 
+    it('checks that getFooters works as expexted', async () => {
+        await sdk.designer.getFooters(1)
+            .then(result => expect(result.default_id).not.toBeNull());
+    });
+
+    it('checks that getPrivacyMessages works as expexted', async () => {
+        await sdk.designer.getPrivacyMessages(1)
+            .then(result => expect(result.default_id).not.toBeNull());
+    });
+
+    it('checks that getFooters works as expexted', async () => {
+        await sdk.designer.getFooters(1)
+            .then(result => expect(result.default_id).not.toBeNull());
+    });
+
     it('checks that saveLiveBoard mock working as expected', async () => {
         await sdk.designer.saveLiveBoard({type: "test", data: {}})
             .then(result => expect(result.status == 200));

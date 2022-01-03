@@ -1,5 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
-import {ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1, FormV1} from "./IDesignerTypes";
+import {
+    ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1, FormV1,
+    CampaignElementResponseV1, CampaignElementsTypes
+} from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
     const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
@@ -305,6 +308,82 @@ export const rules = (mock: MockAdapter) => {
                 form_title: "Enter details here",
                 submit_label: "email me",
                 success_message: "thanks!",
+            }
+        })
+
+    mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.footer}})
+        .reply<CampaignElementResponseV1>(200, {
+            default_id: 0,
+            data: {
+                "0": {
+                    background_color: "#eeeeee",
+                    description: "The default footer style, you may choose others from the list. ",
+                    element_id: 0,
+                    id: 3,
+                    is_standard: true,
+                    labels: null,
+                    logo: {show: false},
+                    name: "Standard Footer",
+                    show_in_item_view: false,
+                    state: 1,
+                    text: null,
+                    text_color: {type: 0, color: "#eeeeee"},
+                    tracking_consent: {show: false}
+                }
+            }
+        })
+
+    mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.privacy_message}})
+        .reply<CampaignElementResponseV1>(200, {
+            default_id: 0,
+            data: {
+                "0": {
+                    can_close: true,
+                    description: "The Folloze standard privacy message.",
+                    element_id: 0,
+                    id: 2,
+                    is_standard: true,
+                    is_top: true,
+                    link: "https://sites.google.com/a/folloze.com/terms-of-service/privacy-policy",
+                    message: "We use cookies to give you the best experience. if you do nothing, we'll assume that's ok",
+                    name: "Standard Privacy Message",
+                    state: 1
+                }
+            }
+        })
+
+    mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.form_privacy_message}})
+        .reply<CampaignElementResponseV1>(200, {
+            default_id: 0,
+            data: {
+                "0": {
+                    checkbox_area: {threshold: 2, label: null, checkboxes: []},
+                    element_id: 0,
+                    id: 4,
+                    is_standard: true,
+                    message: null,
+                    name: "None",
+                    state: 1,
+                    text_area: null,
+                },
+                "5": {
+                    checkbox_area: {
+                        checkboxes: [{
+                            label: "fdsfsd",
+                            name: "form_privacy_checkbox_1",
+                            is_required: false
+                        }],
+                        label: "fsdfds",
+                        threshold: 2
+                    },
+                    element_id: 5,
+                    id: 5,
+                    is_standard: null,
+                    message: {html: "<p>fdsfsdfsdf</p><p>fdsfsdf</p>"},
+                    name: "New Form fdsfs Message",
+                    state: null,
+                    text_area: null
+                }
             }
         })
 

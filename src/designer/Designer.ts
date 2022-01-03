@@ -4,7 +4,7 @@ import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
-    UploadUrlResponseV1, FormV1
+    UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -195,6 +195,51 @@ export class Designer {
                     reject(e);
                 });
         })
+    }
+
+    //Campaign elements
+    private getCampaignElements(boardId: number, elementType: CampaignElementsTypes): Promise<CampaignElementResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<CampaignElementResponseV1>(
+                `prism/${boardId}/campaign_elements`,
+                {params: {element_type: elementType}}
+            )
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get campaign elements", e);
+                    reject(e);
+                });
+        })
+    }
+
+    /**
+     * Gets all of the organization's footers
+     * 
+     * @param {number} boardId 
+     * @returns {CampaignElementResponseV1} on object of all of the footers and the default
+     */
+    getFooters(boardId): Promise<CampaignElementResponseV1> {
+        return this.getCampaignElements(boardId, CampaignElementsTypes.footer)
+    }
+
+    /**
+     *  Gets all of the organization's privacy messages (cookie consent)
+     * 
+     * @param {number} boardId 
+     * @returns {CampaignElementResponseV1} on object of all of the privacy messages and the default
+     */
+    getPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
+        return this.getCampaignElements(boardId, CampaignElementsTypes.privacy_message)
+    }
+
+    /**
+     * Gets all of the organization's form privacy messages
+     * 
+     * @param {number} boardId 
+     * @returns {CampaignElementResponseV1} on object of all of the form privacy messages and the default
+     */
+    getFormPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
+        return this.getCampaignElements(boardId, CampaignElementsTypes.form_privacy_message)
     }
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {

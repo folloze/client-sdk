@@ -18,6 +18,12 @@ export enum ImageBankCategory {
     logos
 }
 
+export enum CampaignElementsTypes {
+    footer = 1,
+    privacy_message,
+    form_privacy_message
+}
+
 export type GalleryImage = {
     url: string,
     fit: string,
@@ -109,4 +115,80 @@ export type FormV1 = {
         base_url?: string,
         custom_script?: string
     }
+}
+
+type Label = {
+    text: string,
+    url: string
+}
+
+type Checkbox = {
+    label: string,
+    name: string,
+    is_required: boolean
+}
+
+export type FootersResponseV1 = {
+    id: number,
+    element_id: number,
+    name: string,
+    description: string,
+    state: number,
+    is_standard: boolean,
+    logo: {
+        show: boolean,
+        url?: string
+    },
+    text: string,
+    labels: Label[],
+    background_color: string,
+    show_in_item_view: boolean,
+    text_color: {
+        type: number,
+        color: string
+    },
+    tracking_consent: {
+        show: boolean,
+        button_label?: string,
+        dialog_button_label?: string,
+        dialog_text?: string
+    }
+  } 
+
+
+export type PrivacyMessageResponseV1 = {
+    id: number,
+    element_id: number,
+    name: string,
+    description: string,
+    state: number,
+    is_standard: boolean,
+    is_top: boolean,
+    message: string,
+    link: string,
+    can_close: boolean
+}
+
+export type FormPrivacyMessageResponseV1 = {
+    id: number,
+    element_id: number,
+    name: string,
+    state: number,
+    is_standard: boolean,
+    message: {
+        html: string
+    },
+    text_area: {
+        html: string
+    },
+    checkbox_area: {
+        threshold: number,
+        label: string,
+        checkboxes: Checkbox[]
+    }
+}
+
+export type CampaignElementResponseV1 = {
+    data: Record<string, FootersResponseV1|PrivacyMessageResponseV1|FormPrivacyMessageResponseV1>,
+    default_id: number
 }
