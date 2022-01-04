@@ -1,6 +1,7 @@
 import {
+  CampaignElementsTypes,
   ImageBankType
-} from "./chunk.6KNLIVF4.js";
+} from "./chunk.FPDLHEHA.js";
 import "./chunk.5KE7N75L.js";
 
 // src/designer/mocks.ts
@@ -196,6 +197,166 @@ var rules = (mock) => {
     put_url: providerUrl
   });
   mock.onPost(providerUrl).reply(200, { secure_url: "https://uploaded_url.com" });
+  mock.onGet("api/v1/boards/1/forms").reply(200, {
+    "1": {
+      board_id: 1,
+      form_type: 1,
+      id: 1,
+      name: "Classic Form",
+      organization_id: 1,
+      state: null,
+      data: {
+        form_title: "Sign up!",
+        submit_label: "email me",
+        success_message: "thanks!",
+        fields: {
+          name: {
+            label: "Name",
+            order: 1,
+            placeholder: "First Name",
+            state: "optional",
+            type: "text"
+          },
+          email: {
+            label: "Email",
+            order: 2,
+            placeholder: "your@email.here",
+            state: "required",
+            type: "email"
+          }
+        }
+      }
+    },
+    "2": {
+      board_id: 1,
+      form_type: 2,
+      id: 2,
+      name: "External Form",
+      organization_id: 1,
+      state: null,
+      data: {
+        script: "<script type='text/javascript'>alert('hey!')<\/script>",
+        auto_fill: "true",
+        form_title: "Enter details here",
+        submit_label: "email me",
+        success_message: "thanks!"
+      }
+    },
+    "3": {
+      board_id: 1,
+      form_type: 3,
+      id: 3,
+      name: "Marketo Form",
+      organization_id: 1,
+      state: null,
+      data: {
+        custom_script: "alert('HEY!')",
+        munchkin_id: "abc-def-ghi",
+        base_url: "//app-sj25.marketo.com",
+        form_id: "1"
+      }
+    }
+  });
+  mock.onPost("api/v1/boards/1/forms").reply(200, {
+    board_id: 1,
+    form_type: 2,
+    id: 2,
+    name: "External Form",
+    organization_id: 1,
+    state: null,
+    data: {
+      script: "<script type='text/javascript'>alert('hey!')<\/script>",
+      auto_fill: "true",
+      form_title: "Enter details here",
+      submit_label: "email me",
+      success_message: "thanks!"
+    }
+  });
+  mock.onPut("api/v1/boards/1/forms").reply(200, {
+    board_id: 1,
+    form_type: 2,
+    id: 2,
+    name: "External Form",
+    organization_id: 1,
+    state: null,
+    data: {
+      script: "<script type='text/javascript'>alert('hey!')<\/script>",
+      auto_fill: "true",
+      form_title: "Enter details here",
+      submit_label: "email me",
+      success_message: "thanks!"
+    }
+  });
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {
+    default_id: 0,
+    data: {
+      "0": {
+        background_color: "#eeeeee",
+        description: "The default footer style, you may choose others from the list. ",
+        element_id: 0,
+        id: 3,
+        is_standard: true,
+        labels: null,
+        logo: { show: false },
+        name: "Standard Footer",
+        show_in_item_view: false,
+        state: 1,
+        text: null,
+        text_color: { type: 0, color: "#eeeeee" },
+        tracking_consent: { show: false }
+      }
+    }
+  });
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.privacy_message } }).reply(200, {
+    default_id: 0,
+    data: {
+      "0": {
+        can_close: true,
+        description: "The Folloze standard privacy message.",
+        element_id: 0,
+        id: 2,
+        is_standard: true,
+        is_top: true,
+        link: "https://sites.google.com/a/folloze.com/terms-of-service/privacy-policy",
+        message: "We use cookies to give you the best experience. if you do nothing, we'll assume that's ok",
+        name: "Standard Privacy Message",
+        state: 1
+      }
+    }
+  });
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.form_privacy_message } }).reply(200, {
+    default_id: 0,
+    data: {
+      "0": {
+        checkbox_area: { threshold: 2, label: null, checkboxes: [] },
+        element_id: 0,
+        id: 4,
+        is_standard: true,
+        message: null,
+        name: "None",
+        state: 1,
+        text_area: null
+      },
+      "5": {
+        checkbox_area: {
+          checkboxes: [{
+            label: "fdsfsd",
+            name: "form_privacy_checkbox_1",
+            is_required: false
+          }],
+          label: "fsdfds",
+          threshold: 2
+        },
+        element_id: 5,
+        id: 5,
+        is_standard: null,
+        message: { html: "<p>fdsfsdfsdf</p><p>fdsfsdf</p>" },
+        name: "New Form fdsfs Message",
+        state: null,
+        text_area: null
+      }
+    }
+  });
   mock.onPost("/url-for-saving-live-board").reply(200);
 };
 export {

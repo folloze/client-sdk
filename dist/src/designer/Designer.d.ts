@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1 } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -57,5 +57,50 @@ export declare class Designer {
      * @returns {ImageBankResponseV1} ImageBankResponse
      */
     saveImageBankSettings(organizationId: number, categoryName: string, source: string): Promise<ImageBankResponseV1>;
+    /**
+     * Gets all forms of a board
+     *
+     * @param {number} boardId
+     * @returns {Record<string, FormV1>} an object of id and FormResponse
+     */
+    getForms(boardId: number): Promise<Record<string, FormV1>>;
+    /**
+     * Create a new form
+     *
+     * @param {number} boardId
+     * @param {FormV1} form
+     * @returns {FormV1} the form after it's been saved (include id)
+     */
+    createForm(boardId: number, form: FormV1): Promise<FormV1>;
+    /**
+     * Update new form
+     *
+     * @param {number} boardId
+     * @param {FormV1} form
+     * @returns {FormV1} the form after it's been saved (include id)
+     */
+    updateForm(boardId: number, form: FormV1): Promise<FormV1>;
+    private getCampaignElements;
+    /**
+     * Gets all of the organization's footers
+     *
+     * @param {number} boardId
+     * @returns {CampaignElementResponseV1} on object of all of the footers and the default
+     */
+    getFooters(boardId: any): Promise<CampaignElementResponseV1>;
+    /**
+     *  Gets all of the organization's privacy messages (cookie consent)
+     *
+     * @param {number} boardId
+     * @returns {CampaignElementResponseV1} on object of all of the privacy messages and the default
+     */
+    getPrivacyMessages(boardId: any): Promise<CampaignElementResponseV1>;
+    /**
+     * Gets all of the organization's form privacy messages
+     *
+     * @param {number} boardId
+     * @returns {CampaignElementResponseV1} on object of all of the form privacy messages and the default
+     */
+    getFormPrivacyMessages(boardId: any): Promise<CampaignElementResponseV1>;
     saveLiveBoard(payload: any): Promise<AxiosResponse>;
 }

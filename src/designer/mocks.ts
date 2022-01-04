@@ -275,7 +275,7 @@ export const rules = (mock: MockAdapter) => {
                     form_id: "1"
                 }
             }
-        })
+        });
 
     mock.onPost("api/v1/boards/1/forms")
         .reply<FormV1>(200, {
@@ -292,7 +292,7 @@ export const rules = (mock: MockAdapter) => {
                 submit_label: "email me",
                 success_message: "thanks!",
             }
-        })
+        });
 
     mock.onPut("api/v1/boards/1/forms")
         .reply<FormV1>(200, {
@@ -309,7 +309,7 @@ export const rules = (mock: MockAdapter) => {
                 submit_label: "email me",
                 success_message: "thanks!",
             }
-        })
+        });
 
     mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.footer}})
         .reply<CampaignElementResponseV1>(200, {
@@ -331,7 +331,7 @@ export const rules = (mock: MockAdapter) => {
                     tracking_consent: {show: false}
                 }
             }
-        })
+        });
 
     mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.privacy_message}})
         .reply<CampaignElementResponseV1>(200, {
@@ -350,7 +350,7 @@ export const rules = (mock: MockAdapter) => {
                     state: 1
                 }
             }
-        })
+        });
 
     mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.form_privacy_message}})
         .reply<CampaignElementResponseV1>(200, {
@@ -385,7 +385,7 @@ export const rules = (mock: MockAdapter) => {
                     text_area: null
                 }
             }
-        })
+        });
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);

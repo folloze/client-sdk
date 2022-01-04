@@ -117,10 +117,10 @@ export const rules = (mock: MockAdapter) => {
         });
 
     mock.onGet("/live_board/v2/boards/1/items_presence")
-        .reply<HasItemResponseV2>(200, {has_items: true})
+        .reply<HasItemResponseV2>(200, {has_items: true});
 
     mock.onPost("/live_board/v2/items/1/likes")
-        .reply<void>(200)
+        .reply<void>(200);
 
     mock.onGet("/live_board/v2/journeys/1")
         .reply<JourneyItemsResponseV2>(200, {
@@ -199,17 +199,17 @@ export const rules = (mock: MockAdapter) => {
             journey_index: 2,
             next_item_index: 3,
             prev_item_index: 1,
-        })
+        });
 
     mock.onGet("/live_board/v2/items/1/downloads")
         .reply<ItemDownloadUrlSuccessResponseV2>(200, {
             download_url: "https://url-for-download.com"
-        })
+        });
 
     mock.onGet("/live_board/v2/items/0/downloads")
         .reply<ItemDownloadUrlFailedResponseV2>(400, {
             text: "This file is currently not available for download. Please try again later."
-        })
+        });
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
@@ -304,10 +304,10 @@ export const rules = (mock: MockAdapter) => {
             company: "folloze",
             email: "john.doe@folloze.com",
             anon_guest: false
-        })
+        });
 
     mock.onPost("/live_board/v2/lead_validations", {board_id: 1})
-        .reply<void>(200)
+        .reply<void>(200);
 
     mock.onDelete("/live_board/v2/track_leads")
         .reply<LeadResponseV1>(200, {
@@ -317,12 +317,12 @@ export const rules = (mock: MockAdapter) => {
             company: null,
             email: null,
             anon_guest: true
-        })
+        });
 
     mock.onGet("/live_board/v2/boards/1/live_event")
         .reply<LiveEventUrlsResponseV2>(200, {
             meeting_url: "https://vimeo.com/624909436"
-        })
+        });
     
     mock.onGet("/live_board/v1/boards/1/organization_settings")
         .reply<OrganizationSettingsResponseV1>(200, {
@@ -341,18 +341,18 @@ export const rules = (mock: MockAdapter) => {
                 block_mail_blast_auto_approval: false,
                 block_mail_blast_quick_approval: false
             }
-        })
+        });
 
     mock.onPost("/live_board/v1/sessions")
         .reply<SessionResonseV1>(200, {
             guid: 'abc'
-        })
+        });
 
     mock.onPost("/live_board/v1/session_validations")
         .reply<SessionResonseV1>(200, {
             guid: 'abc'
-        })
+        });
 
     mock.onPost("/live_board/v1/boards/1/session_cookies")
-        .reply<number>(200, 1)
+        .reply<number>(200, 1);
 };

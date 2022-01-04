@@ -52,6 +52,11 @@ export declare type ItemsParams = {
     page?: number;
     perPage?: number;
 };
+export declare type JourneyItemParams = {
+    query?: string;
+    categoryId?: number;
+    boardId?: number;
+};
 export declare type ItemResponseV2 = {
     id: number;
     name: string;
@@ -81,6 +86,84 @@ export declare type ItemsResponseV2 = {
     current_page?: number;
     per_page?: number;
 };
+export declare type HasItemResponseV2 = {
+    has_items: boolean;
+};
+declare type User = {
+    user_id: number;
+    name: string;
+    email: string;
+    bio_settings: {
+        email: boolean;
+        content: string;
+        twitter: boolean;
+        linkedin: boolean;
+    };
+    linkedin: string;
+    twitter: string;
+    image: string;
+};
+declare type ArticleItem = {
+    article_id: number;
+    status: number;
+    has_unpublished_changes: boolean;
+    content_item_id: number;
+    images: Image[];
+    header_settings: {
+        position: number;
+    };
+    title: string;
+    author: {
+        value: number;
+        should_display: boolean;
+    };
+    author_user: User;
+    bio_settings: {
+        should_display: boolean;
+    };
+    published_at: {
+        value: string;
+        should_display: boolean;
+    };
+    read_time: {
+        value: 1;
+        should_display: boolean;
+    };
+    body: string;
+    published_data?: object;
+};
+export declare type JourneyItem = {
+    journey_index: number;
+    category_id: number;
+    category_slug: string;
+    category_name: string;
+    slug: string;
+    liked_by_user: boolean;
+    is_gated: boolean;
+    content_item_id: number;
+    description: string;
+    id: number;
+    name: string;
+    image: {
+        url: string;
+        fit: string;
+    };
+    item_type: string;
+    item_source: number;
+    file_viewer_type?: string;
+    link_url?: string;
+    snapshot_url?: string;
+    secured?: boolean;
+    open_in_new_tab?: boolean;
+    article?: ArticleItem;
+};
+export declare type JourneyItemsResponseV2 = {
+    items: Record<string, JourneyItem>;
+    items_count: number;
+    journey_index: number;
+    next_item_index: number;
+    prev_item_index: number;
+};
 export declare type SnapshotUrlResponseV1 = {
     link_url: string;
     snapshot_url: string;
@@ -94,6 +177,12 @@ export declare type ItemFileMetadataResponseV1 = {
         file_id?: number;
         access_token?: number;
     };
+};
+export declare type ItemDownloadUrlSuccessResponseV2 = {
+    download_url: string;
+};
+export declare type ItemDownloadUrlFailedResponseV2 = {
+    text: string;
 };
 export declare type CookieConsentParams = {
     leadId: number;
@@ -131,3 +220,49 @@ export declare type GeoLocationResponseV1 = {
     country_code: string;
     state: string;
 };
+export declare type LeadResponseV1 = {
+    id: number;
+    name: string;
+    email: string;
+    last_name: string;
+    company: string;
+    anon_guest: boolean;
+};
+export declare type LiveEventUrlsResponseV2 = {
+    meeting_url?: string;
+    api_params?: {
+        name: string;
+        mn: string;
+        email: string;
+        pwd: string;
+        role: string;
+        lang: string;
+        signature: string;
+        china: string;
+        apiKey: string;
+    };
+    rich_client_desktop_url?: string;
+    rich_client_mobile_url?: string;
+};
+declare type PrivacySettings = {
+    restrict_export_data: boolean;
+    privacy_warning_provider: string;
+    emails_privacy_disclaimer: {
+        html: string;
+        is_enabled: boolean;
+    };
+    mail_blast_privacy_message: {
+        html: string;
+        is_enabled: boolean;
+    };
+    disable_share_button_on_board: boolean;
+    block_mail_blast_auto_approval: boolean;
+    block_mail_blast_quick_approval: boolean;
+};
+export declare type OrganizationSettingsResponseV1 = {
+    privacy: PrivacySettings;
+};
+export declare type SessionResonseV1 = {
+    guid: string;
+};
+export {};

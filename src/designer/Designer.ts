@@ -157,7 +157,7 @@ export class Designer {
                     console.error("could not get forms", e);
                     reject(e);
                 });
-        })
+        });
         
     }
 
@@ -176,7 +176,7 @@ export class Designer {
                     console.error("could not save form", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -194,7 +194,7 @@ export class Designer {
                     console.error("could not save form", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     //Campaign elements
@@ -209,7 +209,7 @@ export class Designer {
                     console.error("could not get campaign elements", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -219,7 +219,7 @@ export class Designer {
      * @returns {CampaignElementResponseV1} on object of all of the footers and the default
      */
     getFooters(boardId): Promise<CampaignElementResponseV1> {
-        return this.getCampaignElements(boardId, CampaignElementsTypes.footer)
+        return this.getCampaignElements(boardId, CampaignElementsTypes.footer);
     }
 
     /**
@@ -229,7 +229,7 @@ export class Designer {
      * @returns {CampaignElementResponseV1} on object of all of the privacy messages and the default
      */
     getPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
-        return this.getCampaignElements(boardId, CampaignElementsTypes.privacy_message)
+        return this.getCampaignElements(boardId, CampaignElementsTypes.privacy_message);
     }
 
     /**
@@ -239,7 +239,7 @@ export class Designer {
      * @returns {CampaignElementResponseV1} on object of all of the form privacy messages and the default
      */
     getFormPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
-        return this.getCampaignElements(boardId, CampaignElementsTypes.form_privacy_message)
+        return this.getCampaignElements(boardId, CampaignElementsTypes.form_privacy_message);
     }
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {

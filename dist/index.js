@@ -1,8 +1,9 @@
 import {
+  CampaignElementsTypes,
   ImageBankCategory,
   ImageBankType,
   ImageGalleryTypes
-} from "./chunks/chunk.6KNLIVF4.js";
+} from "./chunks/chunk.FPDLHEHA.js";
 import {
   require_axios
 } from "./chunks/chunk.VDOWMMET.js";
@@ -5430,12 +5431,22 @@ var Analytics = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
-  sendLeadBoardView(payload) {
+  sendLeadBoardView(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/boards/${payload.boardId}/lead_views`).then((result) => {
-        resolve(result);
+      this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`).then(() => {
+        resolve();
       }).catch((e5) => {
         console.error("could not track lead board view", e5);
+        reject(e5);
+      });
+    });
+  }
+  sendLeadItemView(itemId, guid) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, { guid }).then(() => {
+        resolve();
+      }).catch((e5) => {
+        console.error("could not track lead item view", e5);
         reject(e5);
       });
     });
@@ -5454,13 +5465,13 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./chunks/mocks.KXA5EJ6D.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
+    await import("./chunks/mocks.FL5CPGTC.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
-    await import("./chunks/mocks.LCRXW45S.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    await import("./chunks/mocks.IPSGPWGN.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static async bindAnalytics(mock) {
-    await import("./chunks/mocks.UY6AUO3W.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
+    await import("./chunks/mocks.YUWEHGGH.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
   }
 };
 
@@ -5620,6 +5631,47 @@ var Designer = class {
       });
     });
   }
+  getForms(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`api/v1/boards/${boardId}/forms`).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not get forms", e5);
+        reject(e5);
+      });
+    });
+  }
+  createForm(boardId, form) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form)).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not save form", e5);
+        reject(e5);
+      });
+    });
+  }
+  updateForm(boardId, form) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.put(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form)).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not save form", e5);
+        reject(e5);
+      });
+    });
+  }
+  getCampaignElements(boardId, elementType) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`prism/${boardId}/campaign_elements`, { params: { element_type: elementType } }).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not get campaign elements", e5);
+        reject(e5);
+      });
+    });
+  }
+  getFooters(boardId) {
+    return this.getCampaignElements(boardId, CampaignElementsTypes.footer);
+  }
+  getPrivacyMessages(boardId) {
+    return this.getCampaignElements(boardId, CampaignElementsTypes.privacy_message);
+  }
+  getFormPrivacyMessages(boardId) {
+    return this.getCampaignElements(boardId, CampaignElementsTypes.form_privacy_message);
+  }
   saveLiveBoard(payload) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/url-for-saving-live-board", payload).then((result) => {
@@ -5725,6 +5777,52 @@ var Liveboard = class {
         }
       }).catch((e5) => {
         console.error("could not get items");
+        reject(e5);
+      });
+    });
+  }
+  getHasItems(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/boards/${boardId}/items_presence`).then((result) => {
+        if (result.status == 206) {
+          setTimeout(() => {
+            this.getHasItems(boardId).then(resolve).catch(reject);
+          }, 2e3);
+        } else {
+          resolve(result.data);
+        }
+      }).catch((e5) => {
+        console.error("could not get has items");
+        reject(e5);
+      });
+    });
+  }
+  likeItem(itemId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v2/items/${itemId}/likes`).then(() => {
+        resolve();
+      }).catch((e5) => {
+        console.error("could not like item", e5);
+        reject(e5);
+      });
+    });
+  }
+  getJourneyItems(itemId, options) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/journeys/${itemId}`, { params: keysToSnakeCase(options) }).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get journey items", e5);
+        reject(e5);
+      });
+    });
+  }
+  getItemDownloadUrl(itemId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/items/${itemId}/downloads`).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get download url", e5);
         reject(e5);
       });
     });
@@ -5867,6 +5965,86 @@ var Liveboard = class {
         resolve();
       }).catch((e5) => {
         console.error("could not update invitation wrapper", e5);
+        reject(e5);
+      });
+    });
+  }
+  getCurrentLead() {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get("/live_board/v1/leads/me").then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get current lead", e5);
+        reject(e5);
+      });
+    });
+  }
+  validateLead(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/live_board/v2/lead_validations", { board_id: boardId }).then(() => {
+        resolve();
+      }).catch((e5) => {
+        console.error("could not validate lead", e5);
+        reject(e5);
+      });
+    });
+  }
+  stopTrackingForSession() {
+    return new Promise((resolve, reject) => {
+      this.fetcher.delete("/live_board/v2/track_leads").then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get stop tracking lead", e5);
+        reject(e5);
+      });
+    });
+  }
+  getLiveEventUrls(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/boards/${boardId}/live_event`).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get current lead", e5);
+        reject(e5);
+      });
+    });
+  }
+  getOrganizationSettings(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v1/boards/${boardId}/organization_settings`).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not get organization settings", e5);
+        reject(e5);
+      });
+    });
+  }
+  createSession() {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/live_board/v1/sessions").then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not create session", e5);
+        reject(e5);
+      });
+    });
+  }
+  validateSession() {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/live_board/v1/session_validations").then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not validate session", e5);
+        reject(e5);
+      });
+    });
+  }
+  setSessionCookie(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/session_cookies`).then((result) => {
+        resolve(result.data);
+      }).catch((e5) => {
+        console.error("could not create session cookie", e5);
         reject(e5);
       });
     });
@@ -6885,6 +7063,7 @@ __decorateClass([
 ], FloatEditor.prototype, "isLoading", 2);
 export {
   Analytics,
+  CampaignElementsTypes,
   ClientSDK,
   Designer,
   FetchService,
