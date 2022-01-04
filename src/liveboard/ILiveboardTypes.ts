@@ -198,6 +198,15 @@ export type ItemFileMetadataResponseV1 = {
     }
 }
 
+export type ItemDownloadUrlSuccessResponseV2 = {
+    download_url: string,
+}
+
+export type ItemDownloadUrlFailedResponseV2 = {
+    text: string
+}
+
+
 export type CookieConsentParams = {
     leadId: number,
     constentOrigin: string,

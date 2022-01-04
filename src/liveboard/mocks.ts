@@ -1,6 +1,7 @@
 import MockAdapter from "axios-mock-adapter";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, JourneyItemsResponseV2,
+    ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
     SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1,
     GeoLocationResponseV1, LeadResponseV1
 } from './ILiveboardTypes';
@@ -199,6 +200,16 @@ export const rules = (mock: MockAdapter) => {
             prev_item_index: 1,
         })
 
+    mock.onGet("/live_board/v2/items/1/downloads")
+        .reply<ItemDownloadUrlSuccessResponseV2>(200, {
+            download_url: "https://url-for-download.com"
+        })
+
+    mock.onGet("/live_board/v2/items/0/downloads")
+        .reply<ItemDownloadUrlFailedResponseV2>(400, {
+            text: "This file is currently not available for download. Please try again later."
+        })
+
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
 
@@ -207,9 +218,6 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onGet("/live_board/v1/content_items/1/files")
         .reply<ItemFileMetadataResponseV1>(200, {preview_metadata: {url: 'preview.url.com'}});
-
-    mock.onGet("/url-getting-items", {itemId: 1})
-        .reply(200, {items: [{itemId:1, title: "some title"}]});
     
     mock.onPost("/live_board/v1/boards/1/cookies_consents")
         .reply(200);

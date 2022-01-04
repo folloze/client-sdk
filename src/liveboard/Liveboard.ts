@@ -5,7 +5,7 @@ import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
-    LeadResponseV1, JourneyItemsResponseV2,
+    LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
     ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams
 } from './ILiveboardTypes';
 
@@ -261,6 +261,25 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get journey items", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Gets the url to download the item
+     * 
+     * @param {number} itemId 
+     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
+     */
+    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get(`/live_board/v2/items/${itemId}/downloads`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get download url", e);
                     reject(e);
                 });
         });
