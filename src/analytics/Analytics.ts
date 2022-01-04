@@ -18,14 +18,34 @@ export class Analytics {
         this.fetcher = fetch.fetcher;
     }
 
-    sendLeadBoardView(payload: {boardId: number}): Promise<AxiosResponse> {
+    /**
+     * Lead viewed board
+     * 
+     * @param {number} boardId 
+     */
+    sendLeadBoardView(boardId: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(`/live_board/v2/boards/${payload.boardId}/lead_views`)
-                .then(result => {
-                    resolve(result);
-                })
+            this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`)
+                .then(() => { resolve(); })
                 .catch(e => {
                     console.error("could not track lead board view", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Lead viewed item
+     * 
+     * @param {number} itemId 
+     * @param {string} guid 
+     */
+    sendLeadItemView(itemId: number, guid: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, {guid})
+                .then(() => { resolve(); })
+                .catch(e => {
+                    console.error("could not track lead item view", e);
                     reject(e);
                 });
         });
