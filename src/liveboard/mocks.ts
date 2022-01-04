@@ -3,7 +3,8 @@ import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesR
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, JourneyItemsResponseV2,
     ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
     SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1,
-    GeoLocationResponseV1, LeadResponseV1
+    GeoLocationResponseV1, LeadResponseV1, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1,
+    SessionResonseV1
 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
@@ -318,4 +319,40 @@ export const rules = (mock: MockAdapter) => {
             anon_guest: true
         })
 
+    mock.onGet("/live_board/v2/boards/1/live_event")
+        .reply<LiveEventUrlsResponseV2>(200, {
+            meeting_url: "https://vimeo.com/624909436"
+        })
+    
+    mock.onGet("/live_board/v1/boards/1/organization_settings")
+        .reply<OrganizationSettingsResponseV1>(200, {
+            privacy: {
+                restrict_export_data: false,
+                privacy_warning_provider: "app",
+                emails_privacy_disclaimer: {
+                    html: "<p><br></p><p></p>",
+                    is_enabled: false
+                },
+                mail_blast_privacy_message: {
+                    html: "<p>Please add contacts that you have previous business relationship with</p>",
+                    is_enabled: false
+                },
+                disable_share_button_on_board: false,
+                block_mail_blast_auto_approval: false,
+                block_mail_blast_quick_approval: false
+            }
+        })
+
+    mock.onPost("/live_board/v1/sessions")
+        .reply<SessionResonseV1>(200, {
+            guid: 'abc'
+        })
+
+    mock.onPost("/live_board/v1/session_validations")
+        .reply<SessionResonseV1>(200, {
+            guid: 'abc'
+        })
+
+    mock.onPost("/live_board/v1/boards/1/session_cookies")
+        .reply<number>(200, 1)
 };

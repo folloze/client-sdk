@@ -6,7 +6,8 @@ import {
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
     LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
-    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams
+    LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResonseV1,
+    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams,
 } from './ILiveboardTypes';
 
 export class Liveboard {
@@ -627,4 +628,99 @@ export class Liveboard {
                 });
         });
     }
+
+    /**
+     * Gets the urls to use for the live event
+     * 
+     * @param {number} boardId 
+     * @returns {LiveEventUrlsResponseV2} LiveEventUrlsResponse
+     */
+    getLiveEventUrls(boardId: number): Promise<LiveEventUrlsResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<LiveEventUrlsResponseV2>(`/live_board/v2/boards/${boardId}/live_event`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get current lead", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Gets the organization's settings
+     * 
+     * @param {number} boardId 
+     * @returns {OrganizationSettingsResponseV1} OrganizationSettingsResponse
+     */
+    getOrganizationSettings(boardId: number): Promise<OrganizationSettingsResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<OrganizationSettingsResponseV1>(`/live_board/v1/boards/${boardId}/organization_settings`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get organization settings", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Create a new session
+     * 
+     * @returns {SessionResonseV1} SessionResonse
+     */
+    createSession(): Promise<SessionResonseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<SessionResonseV1>("/live_board/v1/sessions")
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not create session", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Validates the session
+     * 
+     * @returns {SessionResonseV1|void} new SessionResonse if session is invalid, otherwise nothing
+     */
+    validateSession(): Promise<SessionResonseV1|void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post("/live_board/v1/session_validations")
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not validate session", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Set the lead's session cookie
+     * 
+     * @param {number} boardId 
+     * @returns {number} the lead's id
+     */
+    setSessionCookie(boardId: number): Promise<number> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post(`/live_board/v1/boards/${boardId}/session_cookies`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not create session cookie", e);
+                    reject(e);
+                });
+        });
+    } 
+
+    //TODO: pings
 }

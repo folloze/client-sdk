@@ -155,4 +155,29 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.stopTrackingForSession()
             .then(result => expect(result.anon_guest).toBeTruthy);
     });
+
+    it('checks that getLiveEventUrls mock works as expected', async () => {
+        await sdk.liveboard.getLiveEventUrls(1)
+            .then(result => expect(result.meeting_url).toMatch('https://'));
+    });
+
+    it('checks that getOrganizationSettings mock works as expected', async () => {
+        await sdk.liveboard.getOrganizationSettings(1)
+            .then(result => expect(result.privacy.privacy_warning_provider).toEqual("app"));
+    });
+
+    it('checks that createSession mock works as expected', async () => {
+        await sdk.liveboard.createSession()
+            .then(result => expect(result.guid).toBeTruthy);
+    });
+
+    it('checks that validateSession mock works as expected', async () => {
+        await sdk.liveboard.validateSession()
+            .then(result => expect(result).toHaveProperty('guid'));
+    });
+
+    it('checks that setSessionCookie mock works as expected', async () => {
+        await sdk.liveboard.setSessionCookie(1)
+            .then(result => expect(result).toEqual(1));
+    });
 });

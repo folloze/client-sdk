@@ -255,3 +255,45 @@ export type LeadResponseV1 = {
     company: string,
     anon_guest: boolean
 }
+
+export type LiveEventUrlsResponseV2 = {
+    meeting_url?: string, //stream
+    //zoom
+    api_params?: {
+        name: string,
+        mn: string,
+        email: string,
+        pwd: string,
+        role: string,
+        lang: string,
+        signature: string,
+        china: string,
+        apiKey: string
+    },
+    rich_client_desktop_url?: string,
+    rich_client_mobile_url?: string
+}
+
+type PrivacySettings = {
+    restrict_export_data: boolean,
+    privacy_warning_provider: string,
+    emails_privacy_disclaimer: {
+        html: string,
+        is_enabled: boolean
+    },
+    mail_blast_privacy_message: {
+        html: string,
+        is_enabled: boolean
+    },
+    disable_share_button_on_board: boolean,
+    block_mail_blast_auto_approval: boolean,
+    block_mail_blast_quick_approval: boolean
+}
+
+export type OrganizationSettingsResponseV1 = {
+    privacy: PrivacySettings
+}
+
+export type SessionResonseV1 = {
+    guid: string
+}
