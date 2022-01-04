@@ -61,6 +61,11 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result).toBeNull);
     });
 
+    it('checks that getJourneyItems mock works as expected', async () => {
+        await sdk.liveboard.getJourneyItems(1, {categoryId: null, boardId: null, query: null})
+            .then(result => expect(result.items_count).toBeGreaterThan(3));
+    });
+
     it('checks that createSnapshotUrl mock works as expected', async() => {
         await sdk.liveboard.createSnapshotUrl(1)
             .then(result => expect(result.link_url).toEqual("abc.website.com"));

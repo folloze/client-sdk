@@ -59,6 +59,12 @@ export type ItemsParams = {
     perPage?: number
 }
 
+export type JourneyItemParams = {
+    query?: string,
+    categoryId?: number,
+    boardId?: number
+}
+
 export type ItemResponseV2 = {
     id: number,
     name: string,
@@ -92,6 +98,87 @@ export type ItemsResponseV2 = {
 
 export type HasItemResponseV2 = {
     has_items: boolean
+}
+
+type User = {
+    user_id: number,
+    name: string,
+    email: string,
+    bio_settings: {
+        email: boolean,
+        content: string,
+        twitter: boolean,
+        linkedin: boolean
+    },
+    linkedin: string,
+    twitter: string,
+    image: string
+}
+
+type ArticleItem = {
+    article_id: number,
+    status: number,
+    has_unpublished_changes: boolean,
+    content_item_id: number,
+    images: Image[],
+    header_settings: {
+        position: number
+    },
+    title: string,
+    author: {
+        value: number,
+        should_display: boolean
+    },
+    author_user: User,
+    bio_settings: {
+        should_display: boolean
+    },
+    published_at: {
+        value: string,
+        should_display: boolean
+    },
+    read_time: {
+        value: 1,
+        should_display: boolean
+    },
+    body: string,
+    published_data?: object// todo
+}
+
+export type JourneyItem = {
+    journey_index: number,
+    category_id: number,
+    category_slug: string,
+    category_name: string,
+    slug: string,
+    liked_by_user: boolean,
+    is_gated: boolean,
+    content_item_id: number,
+    description: string,
+    id: number,
+    name: string,
+    image: {
+        url: string,
+        fit: string
+    },
+    item_type: string,
+    item_source: number
+    file_viewer_type?: string, //for file or box
+    //link item
+    link_url?: string,
+    snapshot_url?: string,
+    secured?: boolean
+    open_in_new_tab?: boolean,
+    //article
+    article?: ArticleItem
+}
+
+export type JourneyItemsResponseV2 = {
+    items: Record<string, JourneyItem>, // current, previous and next items
+    items_count: number,
+    journey_index: number,
+    next_item_index: number,
+    prev_item_index: number
 }
 
 export type SnapshotUrlResponseV1 = {

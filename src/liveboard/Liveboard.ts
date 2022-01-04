@@ -5,8 +5,8 @@ import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
-    LeadResponseV1,
-    ItemsParams, CookieConsentParams, CtaParams
+    LeadResponseV1, JourneyItemsResponseV2,
+    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams
 } from './ILiveboardTypes';
 
 export class Liveboard {
@@ -199,6 +199,12 @@ export class Liveboard {
         });
     }
 
+    /**
+     * Get whether a board has items or not
+     * 
+     * @param boardId 
+     * @returns {HasItemResponseV2} HasItemResponse
+     */
     getHasItems(boardId: number): Promise<HasItemResponseV2> {
         return new Promise((resolve, reject) => {
             this.fetcher.get(`/live_board/v2/boards/${boardId}/items_presence`)
@@ -231,7 +237,30 @@ export class Liveboard {
             this.fetcher.post<void>(`/live_board/v2/items/${itemId}/likes`)
                 .then(() => { resolve(); })
                 .catch(e => {
-                    console.error("could not validate lead", e);
+                    console.error("could not like item", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Gets the item journey
+     * 
+     * @param {number} itemId 
+     * @param {JourneyItemParams} options JourneyItemParams
+     * @returns {JourneyItemsResponseV2} JourneyItemsResponse
+     */
+    getJourneyItems(itemId: number, options: JourneyItemParams): Promise<JourneyItemsResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<JourneyItemsResponseV2>(
+                `/live_board/v2/journeys/${itemId}`,
+                { params: keysToSnakeCase(options)}
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get journey items", e);
                     reject(e);
                 });
         });
@@ -364,7 +393,7 @@ export class Liveboard {
      * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
+    saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/contact`,
@@ -387,7 +416,7 @@ export class Liveboard {
      * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
+    saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/form`,
@@ -410,7 +439,7 @@ export class Liveboard {
      * @param {CtaParams} options 
      * @returns {CtaResponseV1} CtaResponse
      */
-     saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
+    saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<CtaResponseV1>(
                 `/live_board/v1/boards/${boardId}/campaign/link`,

@@ -1,7 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
-    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1
+    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, JourneyItemsResponseV2,
+    SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1,
+    GeoLocationResponseV1, LeadResponseV1
 } from './ILiveboardTypes';
 
 export const rules = (mock: MockAdapter) => {
@@ -118,6 +119,85 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v2/items/1/likes")
         .reply<void>(200)
+
+    mock.onGet("/live_board/v2/journeys/1")
+        .reply<JourneyItemsResponseV2>(200, {
+            items: {
+                "1": {
+                    category_id: null,
+                    category_name: null,
+                    category_slug: null,
+                    content_item_id: 3,
+                    description: "previos item description",
+                    id: 3,
+                    image: {
+                        fit: "cover",
+                        url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png"
+                    },
+                    is_gated: null,
+                    item_source: 1,
+                    item_type: "snapshot",
+                    journey_index: 1,
+                    liked_by_user: false,
+                    link_url: "https://www.amazon.com/",
+                    name: "Amazon.com. Spend less. Smile more.",
+                    open_in_new_tab: null,
+                    secured: true,
+                    slug: "amazoncom-spend-less-smile-more",
+                    snapshot_url: "https://folloze-optimized.s3.amazonaws.com/development/item/3/snapshot_content/png.png"
+                },
+                "2": {
+                    category_id: null,
+                    category_name: null,
+                    category_slug: null,
+                    content_item_id: 1720,
+                    description: "current item description",
+                    id: 1720,
+                    image: {
+                        fit: "cover",
+                        url: "https://images.folloze.com/image/fetch/https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png"
+                    },
+                    is_gated: null,
+                    item_source: 1,
+                    item_type: "link",
+                    journey_index: 2,
+                    liked_by_user: false,
+                    link_url: "https://www.wikipedia.org/",
+                    name: "Wikipedia The Free Encyclopedia",
+                    open_in_new_tab: null,
+                    secured: true,
+                    slug: "wikipedia-the-free-encyclopedia",
+                    snapshot_url: null
+                },
+                "3": {
+                    category_id: 1,
+                    category_name: "home1",
+                    category_slug: "home1",
+                    content_item_id: 3,
+                    description: "next item description",
+                    id: 3,
+                    image: {
+                        fit: "cover",
+                        url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png"
+                    },
+                    is_gated: null,
+                    item_source: 1,
+                    item_type: "snapshot",
+                    journey_index: 3,
+                    liked_by_user: false,
+                    link_url: "https://www.amazon.com/",
+                    name: "Amazon.com. Spend less. Smile more.",
+                    open_in_new_tab: null,
+                    secured: true,
+                    slug: "amazoncom-spend-less-smile-more",
+                    snapshot_url: "https://folloze-optimized.s3.amazonaws.com/development/item/3/snapshot_content/png.png"
+                }
+            },
+            items_count: 4,
+            journey_index: 2,
+            next_item_index: 3,
+            prev_item_index: 1,
+        })
 
     mock.onPost("/live_board/v1/content_items/1/snapshots")
         .reply<SnapshotUrlResponseV1>(200, {link_url: "abc.website.com", snapshot_url: "snapshot.website.com"});
