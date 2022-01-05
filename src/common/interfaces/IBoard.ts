@@ -20,8 +20,8 @@ export type BoardConfig = {
             rowHeight: string; // this should always be immutable "40px"
         }
     };
-    sections: SectionConfig[];
-    widgets: WidgetConfig[];
+    sections: Record<string, SectionConfig>;
+    widgets: Record<string, WidgetConfig>;
 };
 
 export interface ILiveBoard extends LitElement {

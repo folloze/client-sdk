@@ -22,8 +22,8 @@ export declare type BoardConfig = {
             rowHeight: string;
         };
     };
-    sections: SectionConfig[];
-    widgets: WidgetConfig[];
+    sections: Record<string, SectionConfig>;
+    widgets: Record<string, WidgetConfig>;
 };
 export interface ILiveBoard extends LitElement {
     exampleConfig: BoardConfig;
