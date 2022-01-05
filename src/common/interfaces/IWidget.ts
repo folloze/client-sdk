@@ -1,4 +1,5 @@
 import {FloatPos, GridPos} from "./IPositions";
+import {LiveWidget} from "../LiveWidget";
 
 
 export type WidgetConfig = {
@@ -8,4 +9,5 @@ export type WidgetConfig = {
     widgetTag: string; // 'folloze-header-hor' | 'header' | 'gallery' | 'banner' ...
     widgetScripts: string; // url to the widget CDN | lib
     data: any;
+    element?: LiveWidget;
 }
