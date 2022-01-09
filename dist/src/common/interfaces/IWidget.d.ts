@@ -1,4 +1,4 @@
-import { GridPos } from "./IPositions";
+import { FloatPos, GridPos } from "./IPositions";
 import { LiveWidget } from "../LiveWidget";
 export declare type WidgetConfig = {
     id: string;
@@ -8,4 +8,5 @@ export declare type WidgetConfig = {
     widgetScripts: string;
     data: any;
     element?: LiveWidget;
+    floatPos?: FloatPos;
 };

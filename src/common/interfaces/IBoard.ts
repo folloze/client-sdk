@@ -36,5 +36,7 @@ export interface ILiveBoard extends LitElement {
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig>;
 
     get widgets(): WidgetConfig[];
+    get sections(): SectionConfig[];
     getWidget(id: string): WidgetConfig;
+    getSection(id: string): SectionConfig;
 }
