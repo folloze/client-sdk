@@ -34,4 +34,7 @@ export interface ILiveBoard extends LitElement {
     setRows(n: number): void;
     preRender(): void;
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig>;
+
+    get widgets(): WidgetConfig[];
+    getWidget(id: string): WidgetConfig;
 }
