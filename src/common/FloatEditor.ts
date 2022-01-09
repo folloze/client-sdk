@@ -16,7 +16,9 @@ export class FloatEditor extends LitElement {
             resize: both;
             pointer-events: all;
 
-            position: fixed;
+            opacity: 0;
+            transition: opacity 500ms ease-in;
+            position: absolute;
             top: 100px;
             left: 150px;
             z-index: 110;
@@ -127,6 +129,8 @@ export class FloatEditor extends LitElement {
     @property()
     private isLoading: boolean = true;
     private readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
+    private x: number;
+    private y: number;
 
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit) {
         super();
@@ -137,6 +141,10 @@ export class FloatEditor extends LitElement {
         this.isLoading = false;
         this.body.appendChild(this.childEl);
         makeDragElement(this.shadowRoot, this, "#handle");
+        setTimeout(() => {
+            this.moveToPos();
+            this.style.opacity = "1";
+        });
     }
 
     close(e: Event) {
@@ -144,9 +152,30 @@ export class FloatEditor extends LitElement {
         this.remove();
     }
 
-    setPos(x: number, y: number) {
-        this.style.top = (y + 30) + "px";
-        this.style.left = `calc(${x}px - 150px)`;
+    setStartPos(x: number, y: number) {
+        this.x = x;
+        this.y = y;
+    }
+
+    moveToPos() {
+        if (!this.x || !this.y) {
+            return;
+        }
+
+        const rect = this.getBoundingClientRect();
+        const width = rect.width;
+        const viewPortWidth = document.body.getBoundingClientRect().width;
+
+        // calculate new X position
+        let newX = this.x - (width / 2);
+        if (newX < 5) {
+            newX = 5;
+        } else if (newX + width > viewPortWidth - 5) {
+            newX = viewPortWidth - width - 5;
+        }
+
+        this.style.top = `${this.y + 30 + window.scrollY}px`;
+        this.style.left = `${newX}px`;
     }
 
     render() {

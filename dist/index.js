@@ -6920,14 +6920,34 @@ var FloatEditor = class extends s4 {
     this.isLoading = false;
     this.body.appendChild(this.childEl);
     makeDragElement(this.shadowRoot, this, "#handle");
+    setTimeout(() => {
+      this.moveToPos();
+      this.style.opacity = "1";
+    });
   }
   close(e5) {
     e5.stopPropagation();
     this.remove();
   }
-  setPos(x2, y2) {
-    this.style.top = y2 + 30 + "px";
-    this.style.left = `calc(${x2}px - 150px)`;
+  setStartPos(x2, y2) {
+    this.x = x2;
+    this.y = y2;
+  }
+  moveToPos() {
+    if (!this.x || !this.y) {
+      return;
+    }
+    const rect = this.getBoundingClientRect();
+    const width = rect.width;
+    const viewPortWidth = document.body.getBoundingClientRect().width;
+    let newX = this.x - width / 2;
+    if (newX < 5) {
+      newX = 5;
+    } else if (newX + width > viewPortWidth - 5) {
+      newX = viewPortWidth - width - 5;
+    }
+    this.style.top = `${this.y + 30 + window.scrollY}px`;
+    this.style.left = `${newX}px`;
   }
   render() {
     return p`
@@ -6955,7 +6975,9 @@ FloatEditor.styles = [
             resize: both;
             pointer-events: all;
 
-            position: fixed;
+            opacity: 0;
+            transition: opacity 500ms ease-in;
+            position: absolute;
             top: 100px;
             left: 150px;
             z-index: 110;
