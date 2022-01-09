@@ -8,5 +8,6 @@ export declare class FloatEditor extends LitElement {
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit);
     protected firstUpdated(): void;
     close(e: Event): void;
+    setPos(x: number, y: number): void;
     render(): import("lit-html").TemplateResult<1>;
 }

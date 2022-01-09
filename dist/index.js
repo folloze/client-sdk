@@ -6925,6 +6925,10 @@ var FloatEditor = class extends s4 {
     e5.stopPropagation();
     this.remove();
   }
+  setPos(x2, y2) {
+    this.style.top = y2 + 30 + "px";
+    this.style.left = `calc(${x2}px - 150px)`;
+  }
   render() {
     return p`
             ${this.isLoading ? p`<div class="loading"></div>` : ""}

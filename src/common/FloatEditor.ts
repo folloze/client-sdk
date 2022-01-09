@@ -144,6 +144,11 @@ export class FloatEditor extends LitElement {
         this.remove();
     }
 
+    setPos(x: number, y: number) {
+        this.style.top = (y + 30) + "px";
+        this.style.left = `calc(${x}px - 150px)`;
+    }
+
     render() {
         return html`
             ${this.isLoading ? html`<div class="loading"></div>` : ""}
