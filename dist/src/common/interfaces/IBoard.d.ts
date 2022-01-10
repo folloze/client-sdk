@@ -24,6 +24,7 @@ export declare type BoardConfig = {
     };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
+    ribbons: Record<string, any>;
 };
 export interface ILiveBoard extends LitElement {
     exampleConfig: BoardConfig;
