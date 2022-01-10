@@ -1,5 +1,5 @@
 import {IOldGeneral} from "./oldBoardTypes/IOldGeneral";
-import {SectionConfig} from "./ISection";
+import {RibbonConfig, SectionConfig} from "./ISection";
 import {WidgetConfig} from "./IWidget";
 import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
@@ -22,7 +22,7 @@ export type BoardConfig = {
     };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
-    ribbons: Record<string, any>;
+    ribbons: Record<string, RibbonConfig>;
 };
 
 export interface ILiveBoard extends LitElement {
@@ -38,6 +38,9 @@ export interface ILiveBoard extends LitElement {
 
     get widgets(): WidgetConfig[];
     get sections(): SectionConfig[];
+    get ribbons(): RibbonConfig[];
     getWidget(id: string): WidgetConfig;
     getSection(id: string): SectionConfig;
+    getRibbon(id: string): RibbonConfig;
+    getRibbonBySection(sectionId: string): RibbonConfig;
 }
