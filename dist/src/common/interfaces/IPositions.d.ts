@@ -1,3 +1,7 @@
+declare type Pos = {
+    x: number;
+    y: number;
+};
 export declare type GridPos = {
     rowStart: number;
     colStart: number;
@@ -7,12 +11,11 @@ export declare type GridPos = {
     span?: number;
     spanMin?: number;
     spanMax?: number;
+    padding?: Pos;
 };
 export declare type FloatPos = {
     vertical: "top" | "middle" | "bottom";
     horizontal: "start" | "middle" | "end";
-    pos?: {
-        x: number;
-        y: number;
-    };
+    pos?: Pos;
 };
+export {};

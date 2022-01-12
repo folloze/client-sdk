@@ -1,3 +1,8 @@
+type Pos = {
+    x: number,
+    y: number,
+}
+
 export type GridPos = {
     rowStart: number;
     colStart: number;
@@ -8,6 +13,7 @@ export type GridPos = {
     span?: number;
     spanMin?: number;
     spanMax?: number;
+    padding?: Pos
 }
 
 export type FloatPos = {
@@ -15,8 +21,5 @@ export type FloatPos = {
     horizontal: "start" | "middle" | "end";
 
     // pos (if exists) will take precedence over the common vertical / horizontal
-    pos?: {
-        x: number,
-        y: number,
-    }
+    pos?: Pos
 }
