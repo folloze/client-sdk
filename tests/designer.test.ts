@@ -84,6 +84,16 @@ describe("testing sdk designer module", () => {
             .then(result => expect(result.default_id).not.toBeNull());
     });
 
+    it('checks that getPrivacySettings works as expexted', async () => {
+        await sdk.designer.getPrivacySettings(1)
+            .then(result => expect(result.disable_share_button_on_board).not.toBeNull());
+    });
+
+    it('checks that getBoardHasPersonalization works as expexted', async () => {
+        await sdk.designer.getBoardHasPersonalization(1, 1)
+            .then(result => expect(result.personalization).not.toBeNull());
+    });
+
     it('checks that saveLiveBoard mock working as expected', async () => {
         await sdk.designer.saveLiveBoard({type: "test", data: {}})
             .then(result => expect(result.status == 200));

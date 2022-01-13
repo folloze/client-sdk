@@ -1,7 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
 import {
     ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1, FormV1,
-    CampaignElementResponseV1, CampaignElementsTypes
+    CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
+    BoardHasPersonalizationResponseV1
 } from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -386,6 +387,28 @@ export const rules = (mock: MockAdapter) => {
                 }
             }
         });
+
+    mock.onGet("api/v1/organizations/1/settings/privacy")
+        .reply<PrivacySettingsResponseV1>(200, {
+            block_mail_blast_auto_approval: false,
+            block_mail_blast_quick_approval: false,
+            disable_share_button_on_board: false,
+            emails_privacy_disclaimer: {
+                html: "<p><br></p><p></p>",
+                is_enabled: false
+            },
+            mail_blast_privacy_message: {
+                html: "<p>Please add contacts that you have previous business relationship with</p>",
+                is_enabled: false
+            },
+            privacy_warning_provider: "app",
+            restrict_export_data: false
+        })
+
+    mock.onGet("api/v1/organizations/1/settings/personalizations")
+        .reply<BoardHasPersonalizationResponseV1>(200, {
+            personalization: true
+        })
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);

@@ -4,7 +4,8 @@ import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
-    UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes
+    UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
+    BoardHasPersonalizationResponseV1
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -240,6 +241,43 @@ export class Designer {
      */
     getFormPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
         return this.getCampaignElements(boardId, CampaignElementsTypes.form_privacy_message);
+    }
+
+    /**
+     * Gets the privacy setting og the organization
+     * @param {number} organizationId 
+     * @returns {PrivacySettingsResponseV1} PrivacySettingsResponse
+     */
+    getPrivacySettings(organizationId: number): Promise<PrivacySettingsResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<PrivacySettingsResponseV1>(`/api/v1/organizations/${organizationId}/settings/privacy`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get privacy settings", e);
+                    reject(e);
+                });
+        })
+    }
+
+    /**
+     * Return if a board has personalization
+     * 
+     * @param {number} organizationId 
+     * @param {number} boardId 
+     * @returns {BoardHasPersonalizationResponseV1} BoardHasPersonalizationResponse
+     */
+    getBoardHasPersonalization(organizationId: number, boardId: number): Promise<BoardHasPersonalizationResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<BoardHasPersonalizationResponseV1>(
+                    `api/v1/organizations/${organizationId}/settings/personalizations`,
+                    {params: {board_id: boardId}}
+                )
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get personalization setting", e);
+                    reject(e);
+                });
+        })
     }
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {
