@@ -256,7 +256,7 @@ export class Designer {
                     console.error("could not get privacy settings", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -277,7 +277,7 @@ export class Designer {
                     console.error("could not get personalization setting", e);
                     reject(e);
                 });
-        })
+        });
     }
     
     /**

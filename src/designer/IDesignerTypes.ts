@@ -1,4 +1,4 @@
-import {PrivacySettings} from '../common/ISharedTypes'
+import {PrivacySettings} from '../common/ISharedTypes';
 
 export enum ImageGalleryTypes {
     campaign = "campaign",

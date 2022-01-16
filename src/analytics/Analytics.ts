@@ -17,7 +17,7 @@ export enum EventSources {
 const eventPlatformBySource = {
     [EventSources.desginer]: "App",
     [EventSources.liveboard]: "Campaign"
-}
+};
 
 export enum LiveBoardEventTypes {
     viewed_board = 1,
@@ -123,7 +123,7 @@ export class Analytics {
                     console.error("could not track action", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     sendPing(payload: PingPayload) {
