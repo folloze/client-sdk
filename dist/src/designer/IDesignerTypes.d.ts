@@ -1,3 +1,4 @@
+import { PrivacySettings } from '../common/ISharedTypes';
 export declare enum ImageGalleryTypes {
     campaign = "campaign",
     imageBank = "image_bank",
@@ -170,5 +171,9 @@ export declare type FormPrivacyMessageResponseV1 = {
 export declare type CampaignElementResponseV1 = {
     data: Record<string, FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1>;
     default_id: number;
+};
+export declare type PrivacySettingsResponseV1 = PrivacySettings;
+export declare type BoardHasPersonalizationResponseV1 = {
+    personalization: boolean;
 };
 export {};

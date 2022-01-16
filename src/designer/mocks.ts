@@ -403,12 +403,12 @@ export const rules = (mock: MockAdapter) => {
             },
             privacy_warning_provider: "app",
             restrict_export_data: false
-        })
+        });
 
     mock.onGet("api/v1/organizations/1/settings/personalizations")
         .reply<BoardHasPersonalizationResponseV1>(200, {
             personalization: true
-        })
+        });
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);

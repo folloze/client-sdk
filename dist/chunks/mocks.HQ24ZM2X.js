@@ -357,6 +357,24 @@ var rules = (mock) => {
       }
     }
   });
+  mock.onGet("api/v1/organizations/1/settings/privacy").reply(200, {
+    block_mail_blast_auto_approval: false,
+    block_mail_blast_quick_approval: false,
+    disable_share_button_on_board: false,
+    emails_privacy_disclaimer: {
+      html: "<p><br></p><p></p>",
+      is_enabled: false
+    },
+    mail_blast_privacy_message: {
+      html: "<p>Please add contacts that you have previous business relationship with</p>",
+      is_enabled: false
+    },
+    privacy_warning_provider: "app",
+    restrict_export_data: false
+  });
+  mock.onGet("api/v1/organizations/1/settings/personalizations").reply(200, {
+    personalization: true
+  });
   mock.onPost("/url-for-saving-live-board").reply(200);
 };
 export {

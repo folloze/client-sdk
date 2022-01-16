@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1 } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -102,5 +102,19 @@ export declare class Designer {
      * @returns {CampaignElementResponseV1} on object of all of the form privacy messages and the default
      */
     getFormPrivacyMessages(boardId: any): Promise<CampaignElementResponseV1>;
+    /**
+     * Gets the privacy setting og the organization
+     * @param {number} organizationId
+     * @returns {PrivacySettingsResponseV1} PrivacySettingsResponse
+     */
+    getPrivacySettings(organizationId: number): Promise<PrivacySettingsResponseV1>;
+    /**
+     * Return if a board has personalization
+     *
+     * @param {number} organizationId
+     * @param {number} boardId
+     * @returns {BoardHasPersonalizationResponseV1} BoardHasPersonalizationResponse
+     */
+    getBoardHasPersonalization(organizationId: number, boardId: number): Promise<BoardHasPersonalizationResponseV1>;
     saveLiveBoard(payload: any): Promise<AxiosResponse>;
 }

@@ -9,10 +9,10 @@ export const rules = (mock: MockAdapter) => {
         .reply<void>(200);
 
     mock.onPost("/api/v1/tracking")
-        .reply<void>(200)
+        .reply<void>(200);
 
     mock.onPost("/live_board/v1/tracking")
-        .reply<void>(200)
+        .reply<void>(200);
 
     mock.onPost("/url-for-ping")
         .reply(config => {

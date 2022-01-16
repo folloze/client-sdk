@@ -1,7 +1,8 @@
-declare type Pos = {
+export declare type Pos2d = {
     x: number;
     y: number;
 };
+export declare type cssPos = [number, number, number, number];
 export declare type GridPos = {
     rowStart: number;
     colStart: number;
@@ -11,11 +12,11 @@ export declare type GridPos = {
     span?: number;
     spanMin?: number;
     spanMax?: number;
-    padding?: Pos;
+    padding?: cssPos;
+    minHeight?: string;
 };
 export declare type FloatPos = {
     vertical: "top" | "middle" | "bottom";
     horizontal: "start" | "middle" | "end";
-    pos?: Pos;
+    pos?: cssPos;
 };
-export {};
