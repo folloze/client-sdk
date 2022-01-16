@@ -40,6 +40,7 @@ export interface ILiveBoard extends LitElement {
     get sections(): SectionConfig[];
     get ribbons(): RibbonConfig[];
     getWidget(id: string): WidgetConfig;
+    getWidgetEl(id: string): LiveWidget;
     getSection(id: string): SectionConfig;
     getRibbon(id: string): RibbonConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
