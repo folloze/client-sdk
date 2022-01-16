@@ -24,6 +24,33 @@ describe("testing sdk designer module", () => {
         }
     };
 
+    const personalization = {
+        auto_assign_inviter: {},
+        campaign: {
+            banner: {},
+            contact_card: {card: {}},
+            footer: {},
+            general: {},
+            header: {
+                logo: {
+                    image: {
+                        merge_tag_ids: [18],
+                        rules: [{
+                            attribute_id: 18,
+                            attribute_values: ["any value"],
+                            id: "rule_776.2880741331646",
+                            index: 0,
+                            result: {source_type: 2, isLoading: false}
+                        }]
+                    }
+                }
+            },
+            items: {},
+            promotion: {items: {0: {}}}
+        },
+        is_enabled: true
+    };
+
     it('checks that getCampaignImageGallery mock works as expectes', async () => {
         await sdk.designer.getCampaignImageGallery()
             .then(result => expect(result.length).toBeGreaterThan(10));
@@ -92,6 +119,26 @@ describe("testing sdk designer module", () => {
     it('checks that getBoardHasPersonalization works as expexted', async () => {
         await sdk.designer.getBoardHasPersonalization(1, 1)
             .then(result => expect(result.personalization).not.toBeNull());
+    });
+
+    it('checks that getFeatureSettings works as expected', async () => {
+        await sdk.designer.getFeatureSettings(1)
+            .then(result => expect(result.personalization).not.toBeNull());
+    });
+
+    it('checks that getBoardHasItems works as expected', async () => {
+        await sdk.designer.getBoardHasItems(1, 1)
+            .then(result => expect(result.has_items).not.toBeNull());
+    });
+
+    it('checks that getPersonalization workd as expected', async () => {
+        await sdk.designer.getPersonalization(1)
+            .then(result => expect(result.campaign.header).toHaveProperty('logo.image.merge_tag_ids'));
+    });
+
+    it('checks that savePersonalization workd as expected', async () => {
+        await sdk.designer.savePersonalization(1, personalization)
+            .then(result => expect(result).toEqual(personalization));
     });
 
     it('checks that saveLiveBoard mock working as expected', async () => {

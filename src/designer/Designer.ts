@@ -5,7 +5,7 @@ import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
     UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
-    BoardHasPersonalizationResponseV1
+    BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -269,15 +269,92 @@ export class Designer {
     getBoardHasPersonalization(organizationId: number, boardId: number): Promise<BoardHasPersonalizationResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.get<BoardHasPersonalizationResponseV1>(
-                    `api/v1/organizations/${organizationId}/settings/personalizations`,
-                    {params: {board_id: boardId}}
-                )
+                `api/v1/organizations/${organizationId}/settings/personalizations`,
+                {params: {board_id: boardId}}
+            )
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get personalization setting", e);
                     reject(e);
                 });
         });
+    }
+    
+    /**
+     * Get which features are enables for an organization. Not all features are relevant to the designer
+     * 
+     * @param {number} organizationId 
+     * @returns {FeatureSettingsResponseV1} FeatureSettingsResponse
+     */
+    getFeatureSettings(organizationId: number): Promise<FeatureSettingsResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<FeatureSettingsResponseV1>(
+                `/api/v1/organizations/${organizationId}/settings/features`
+            )
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get feature settings", e);
+                    reject(e);
+                });
+        })
+    }
+
+    /**
+     * Gets whether the board has items or not
+     *  
+     * @param {number} boardId 
+     * @param {number} leadingItemId 
+     * @returns {BoardHasItemsResponseV1} BoardHasItemsResponse
+     */
+    getBoardHasItems(boardId: number, leadingItemId: number): Promise<BoardHasItemsResponseV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<BoardHasItemsResponseV1>("/api/v1/preview/board_items_presence", {
+                params: {
+                    board_id: boardId,
+                    leading_item_id: leadingItemId
+                }
+            })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get board has items", e);
+                    reject(e);
+                });
+        })
+    }
+
+    /**
+     * Get the personalization for the board
+     * 
+     * @param {number} boardId 
+     * @returns {PersonalizationV1} Personalization
+     */
+    getPersonalization(boardId: number): Promise<PersonalizationV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<PersonalizationV1>(`/prism/${boardId}/personalization`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get personalization", e);
+                    reject(e);
+                });
+        })
+    }
+
+    /**
+     * Saves personalizations
+     * 
+     * @param {number} boardId 
+     * @param {PersonalizationV1} personalization 
+     * @returns {PersonalizationV1} Personalization
+     */
+    savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.put<PersonalizationV1>(`/prism/${boardId}/personalization`, personalization)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save personalization", e);
+                    reject(e);
+                });
+        })
     }
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {
