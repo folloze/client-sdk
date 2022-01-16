@@ -296,7 +296,7 @@ export class Designer {
                     console.error("could not get feature settings", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -319,7 +319,7 @@ export class Designer {
                     console.error("could not get board has items", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -336,7 +336,7 @@ export class Designer {
                     console.error("could not get personalization", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     /**
@@ -354,7 +354,7 @@ export class Designer {
                     console.error("could not save personalization", e);
                     reject(e);
                 });
-        })
+        });
     }
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {

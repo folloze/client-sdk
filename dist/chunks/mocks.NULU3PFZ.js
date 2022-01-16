@@ -7,6 +7,32 @@ import "./chunk.5KE7N75L.js";
 // src/designer/mocks.ts
 var rules = (mock) => {
   const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
+  const personalization = {
+    auto_assign_inviter: {},
+    campaign: {
+      banner: {},
+      contact_card: { card: {} },
+      footer: {},
+      general: {},
+      header: {
+        logo: {
+          image: {
+            merge_tag_ids: [18],
+            rules: [{
+              attribute_id: 18,
+              attribute_values: ["any value"],
+              id: "rule_776.2880741331646",
+              index: 0,
+              result: { source_type: 2, isLoading: false }
+            }]
+          }
+        }
+      },
+      items: {},
+      promotion: { items: { 0: {} } }
+    },
+    is_enabled: true
+  };
   mock.onPost("/api/imagegallery", { type: "campaign" }).reply(200, [
     {
       "fit": "cover",
@@ -375,6 +401,26 @@ var rules = (mock) => {
   mock.onGet("api/v1/organizations/1/settings/personalizations").reply(200, {
     personalization: true
   });
+  mock.onGet("/api/v1/organizations/1/settings/features").reply(200, {
+    accounts_dashboard: true,
+    advanced_reports: false,
+    analytics_dashboards: false,
+    app_sso_login: false,
+    articles: true,
+    board_embedding: true,
+    change_custom_domain: false,
+    chat: false,
+    email_callbacks_subscription: false,
+    enable_seo: true,
+    items_limit: true,
+    live_event: true,
+    ms_crm_integration: false,
+    personalization: true,
+    set_group_board: false
+  });
+  mock.onGet("/api/v1/preview/board_items_presence").reply(200, { has_items: true });
+  mock.onGet("/prism/1/personalization").reply(200, personalization);
+  mock.onPut("/prism/1/personalization").reply(200, personalization);
   mock.onPost("/url-for-saving-live-board").reply(200);
 };
 export {

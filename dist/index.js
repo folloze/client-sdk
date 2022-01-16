@@ -5529,7 +5529,7 @@ var MockConnector = class {
     await import("./chunks/mocks.FL5CPGTC.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import liveboard mocks", e5));
   }
   static async bindDesigner(mock) {
-    await import("./chunks/mocks.HQ24ZM2X.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
+    await import("./chunks/mocks.NULU3PFZ.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import designer mocks", e5));
   }
   static async bindAnalytics(mock) {
     await import("./chunks/mocks.E4W6R45M.js").then((module) => module.rules(mock)).catch((e5) => console.error("could not import analytics mocks", e5));
@@ -5745,6 +5745,43 @@ var Designer = class {
     return new Promise((resolve, reject) => {
       this.fetcher.get(`api/v1/organizations/${organizationId}/settings/personalizations`, { params: { board_id: boardId } }).then((result) => resolve(result.data)).catch((e5) => {
         console.error("could not get personalization setting", e5);
+        reject(e5);
+      });
+    });
+  }
+  getFeatureSettings(organizationId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/api/v1/organizations/${organizationId}/settings/features`).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not get feature settings", e5);
+        reject(e5);
+      });
+    });
+  }
+  getBoardHasItems(boardId, leadingItemId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get("/api/v1/preview/board_items_presence", {
+        params: {
+          board_id: boardId,
+          leading_item_id: leadingItemId
+        }
+      }).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not get board has items", e5);
+        reject(e5);
+      });
+    });
+  }
+  getPersonalization(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/prism/${boardId}/personalization`).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not get personalization", e5);
+        reject(e5);
+      });
+    });
+  }
+  savePersonalization(boardId, personalization) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.put(`/prism/${boardId}/personalization`, personalization).then((result) => resolve(result.data)).catch((e5) => {
+        console.error("could not save personalization", e5);
         reject(e5);
       });
     });

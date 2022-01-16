@@ -176,4 +176,37 @@ export declare type PrivacySettingsResponseV1 = PrivacySettings;
 export declare type BoardHasPersonalizationResponseV1 = {
     personalization: boolean;
 };
+export declare type FeatureSettingsResponseV1 = {
+    accounts_dashboard: boolean;
+    advanced_reports: boolean;
+    analytics_dashboards: boolean;
+    app_sso_login: boolean;
+    articles: boolean;
+    board_embedding: boolean;
+    change_custom_domain: boolean;
+    chat: boolean;
+    email_callbacks_subscription: boolean;
+    enable_seo: boolean;
+    items_limit: boolean;
+    live_event: boolean;
+    ms_crm_integration: boolean;
+    personalization: boolean;
+    set_group_board: boolean;
+};
+export declare type BoardHasItemsResponseV1 = {
+    has_items: boolean;
+};
+export declare type PersonalizationV1 = {
+    auto_assign_inviter: object;
+    campaign: {
+        banner: object;
+        contact_card: object;
+        footer: object;
+        general: object;
+        header: object;
+        items: object;
+        promotion: object;
+    };
+    is_enabled: boolean;
+};
 export {};

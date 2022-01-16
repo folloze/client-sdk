@@ -33,7 +33,7 @@ export const rules = (mock: MockAdapter) => {
             promotion: {items: {0: {}}}
         },
         is_enabled: true
-    }
+    };
 
     mock.onPost("/api/imagegallery", {type: "campaign"})
         .reply<GalleryImage[]>(200, [
@@ -435,7 +435,7 @@ export const rules = (mock: MockAdapter) => {
     mock.onGet("api/v1/organizations/1/settings/personalizations")
         .reply<BoardHasPersonalizationResponseV1>(200, {
             personalization: true
-        })
+        });
     
     mock.onGet("/api/v1/organizations/1/settings/features")
         .reply<FeatureSettingsResponseV1>(200, {
@@ -454,16 +454,16 @@ export const rules = (mock: MockAdapter) => {
             ms_crm_integration: false,
             personalization: true,
             set_group_board: false
-        })
+        });
 
     mock.onGet("/api/v1/preview/board_items_presence")
-        .reply<BoardHasItemsResponseV1>(200, {has_items: true})
+        .reply<BoardHasItemsResponseV1>(200, {has_items: true});
 
     mock.onGet("/prism/1/personalization")
-        .reply<PersonalizationV1>(200, personalization)
+        .reply<PersonalizationV1>(200, personalization);
 
     mock.onPut("/prism/1/personalization")
-        .reply<PersonalizationV1>(200, personalization)
+        .reply<PersonalizationV1>(200, personalization);
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);

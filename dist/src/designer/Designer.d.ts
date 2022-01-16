@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1 } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -116,5 +116,35 @@ export declare class Designer {
      * @returns {BoardHasPersonalizationResponseV1} BoardHasPersonalizationResponse
      */
     getBoardHasPersonalization(organizationId: number, boardId: number): Promise<BoardHasPersonalizationResponseV1>;
+    /**
+     * Get which features are enables for an organization. Not all features are relevant to the designer
+     *
+     * @param {number} organizationId
+     * @returns {FeatureSettingsResponseV1} FeatureSettingsResponse
+     */
+    getFeatureSettings(organizationId: number): Promise<FeatureSettingsResponseV1>;
+    /**
+     * Gets whether the board has items or not
+     *
+     * @param {number} boardId
+     * @param {number} leadingItemId
+     * @returns {BoardHasItemsResponseV1} BoardHasItemsResponse
+     */
+    getBoardHasItems(boardId: number, leadingItemId: number): Promise<BoardHasItemsResponseV1>;
+    /**
+     * Get the personalization for the board
+     *
+     * @param {number} boardId
+     * @returns {PersonalizationV1} Personalization
+     */
+    getPersonalization(boardId: number): Promise<PersonalizationV1>;
+    /**
+     * Saves personalizations
+     *
+     * @param {number} boardId
+     * @param {PersonalizationV1} personalization
+     * @returns {PersonalizationV1} Personalization
+     */
+    savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
     saveLiveBoard(payload: any): Promise<AxiosResponse>;
 }
