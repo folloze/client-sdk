@@ -71,5 +71,5 @@ export function fileUpload(file: File, params: FileUploadParams, progressCallbac
 
 export function compareObjects(obj1: any, obj2: any) {
     // todo: (tech-debt) this is not deterministic solution (i.e json-stringify-deterministic)
-    return JSON.stringify(obj1) !== JSON.stringify(obj2.config);
+    return JSON.stringify(obj1) !== JSON.stringify(obj2);
 }
