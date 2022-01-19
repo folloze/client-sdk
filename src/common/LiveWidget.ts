@@ -1,6 +1,7 @@
 import { LiveDraggable } from "./LiveDraggable";
 import {WidgetConfig} from "./interfaces/IWidget";
 import { v4 as uuid_v4 } from "uuid";
+import {PropertyValues} from "lit";
 
 
 export abstract class LiveWidget extends LiveDraggable {
@@ -14,6 +15,13 @@ export abstract class LiveWidget extends LiveDraggable {
     protected constructor() {
         super();
         this._widgetId = uuid_v4();
+    }
+
+    willUpdate(_changedProperties: PropertyValues) {
+        super.willUpdate(_changedProperties);
+        this.dispatchEvent(new CustomEvent("widget-update", {detail: {
+            widgetEl: this,
+        }, bubbles: true, composed: true}));
     }
 
     set config(data: WidgetConfig) {

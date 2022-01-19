@@ -6875,6 +6875,12 @@ var LiveWidget = class extends LiveDraggable {
     super();
     this._widgetId = v4_default();
   }
+  willUpdate(_changedProperties) {
+    super.willUpdate(_changedProperties);
+    this.dispatchEvent(new CustomEvent("widget-update", { detail: {
+      widgetEl: this
+    }, bubbles: true, composed: true }));
+  }
   set config(data) {
     this._widgetId = data.id;
     this._config = data;
