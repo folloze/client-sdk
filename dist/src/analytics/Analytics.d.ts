@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
 declare type PingPayload = {
     time: string;
@@ -72,6 +71,6 @@ export declare class Analytics {
      * @param {EventSources} source where the event happened
      */
     trackEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any, source: EventSources): Promise<void>;
-    sendPing(payload: PingPayload): Promise<AxiosResponse<any>>;
+    sendPing(payload: PingPayload): Promise<import("axios").AxiosResponse<any>>;
 }
 export {};

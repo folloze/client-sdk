@@ -5582,7 +5582,7 @@ var keysToSnakeCase = (params) => {
     return (0, import_lodash.snakeCase)(key);
   });
 };
-var fileUpload = (file, params, progressCallback) => {
+function fileUpload(file, params, progressCallback) {
   return new Promise((resolve, reject) => {
     const url = params.url;
     const headers = params.headers;
@@ -5627,7 +5627,10 @@ var fileUpload = (file, params, progressCallback) => {
     };
     xhr.send(payload);
   });
-};
+}
+function compareObjects(obj1, obj2) {
+  return JSON.stringify(obj1) !== JSON.stringify(obj2.config);
+}
 
 // src/designer/Designer.ts
 var Designer = class {
@@ -7219,6 +7222,7 @@ export {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   Liveboard,
+  compareObjects,
   fileUpload,
   keysToSnakeCase,
   makeDragElement

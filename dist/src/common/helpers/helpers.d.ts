@@ -5,4 +5,5 @@ export declare type FileUploadParams = {
     data?: Record<string, any>;
     method?: string;
 };
-export declare const fileUpload: (file: File, params: FileUploadParams, progressCallback: (file: File, n: number) => any) => Promise<any>;
+export declare function fileUpload(file: File, params: FileUploadParams, progressCallback: (file: File, n: number) => any): Promise<any>;
+export declare function compareObjects(obj1: any, obj2: any): boolean;

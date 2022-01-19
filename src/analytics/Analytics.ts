@@ -1,4 +1,4 @@
-import {AxiosInstance, AxiosResponse} from "axios";
+import {AxiosInstance} from "axios";
 import {FetchService} from "../common/FetchService";
 
 type PingPayload = {

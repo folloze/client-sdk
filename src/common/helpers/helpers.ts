@@ -13,7 +13,7 @@ export type FileUploadParams = {
     method?: string;
 };
 
-export const fileUpload = (file: File, params: FileUploadParams, progressCallback: (file: File, n: number) => any): Promise<any> => {
+export function fileUpload(file: File, params: FileUploadParams, progressCallback: (file: File, n: number) => any): Promise<any> {
     return new Promise((resolve, reject) => {
         const url = params.url;
         const headers = params.headers;
@@ -67,4 +67,9 @@ export const fileUpload = (file: File, params: FileUploadParams, progressCallbac
 
         xhr.send(payload);
     });
-};
+}
+
+export function compareObjects(obj1: any, obj2: any) {
+    // todo: (tech-debt) this is not deterministic solution (i.e json-stringify-deterministic)
+    return JSON.stringify(obj1) !== JSON.stringify(obj2.config);
+}
