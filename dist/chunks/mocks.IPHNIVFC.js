@@ -2,7 +2,7 @@ import {
   CampaignElementsTypes,
   ImageBankType
 } from "./chunk.FPDLHEHA.js";
-import "./chunk.5KE7N75L.js";
+import "./chunk.Z3GS5MY4.js";
 
 // src/designer/mocks.ts
 var rules = (mock) => {

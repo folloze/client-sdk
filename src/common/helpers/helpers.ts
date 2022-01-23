@@ -1,4 +1,5 @@
 import {mapKeys, snakeCase} from "lodash";
+import {sha1} from "object-hash";
 
 export const keysToSnakeCase = (params) => {
     return mapKeys(params, (value, key) => {
@@ -69,7 +70,15 @@ export function fileUpload(file: File, params: FileUploadParams, progressCallbac
     });
 }
 
-export function compareObjects(obj1: any, obj2: any) {
+export function isObjsEqual(obj1: any, obj2: any) {
+    if (obj1 === obj2) {
+        return true;
+    }
+    if (!obj1 || !obj2) {
+        return false;
+    }
+    return sha1(obj1) === sha1(obj2);
+
     // todo: (tech-debt) this is not deterministic solution (i.e json-stringify-deterministic)
-    return JSON.stringify(obj1) !== JSON.stringify(obj2);
+    // return JSON.stringify(obj1) !== JSON.stringify(obj2);
 }
