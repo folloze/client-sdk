@@ -29,6 +29,8 @@ export interface ILiveBoard extends LitElement {
     exampleConfig: BoardConfig;
     config: BoardConfig;
     widgetsEl: LiveWidget[];
+    configHash: string;
+
     getGridStyling(): string;
     positionToGridArea(p: GridPos): string;
     getWidgetPos(p: GridPos | FloatPos): string;
@@ -36,6 +38,7 @@ export interface ILiveBoard extends LitElement {
     preRender(): void;
     refresh(): void;
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig|void>;
+    generateConfigHash(): string;
 
     get widgets(): WidgetConfig[];
     get sections(): SectionConfig[];
