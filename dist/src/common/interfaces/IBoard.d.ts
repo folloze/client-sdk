@@ -1,4 +1,3 @@
-import { IOldGeneral } from "./oldBoardTypes/IOldGeneral";
 import { RibbonConfig, SectionConfig } from "./ISection";
 import { WidgetConfig } from "./IWidget";
 import { LitElement } from "lit";
@@ -6,7 +5,9 @@ import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
 export declare type BoardConfig = {
     boardId: string;
-    meta: IOldGeneral;
+    meta: {
+        savedTime: Date;
+    };
     grid: {
         maxWidth: string;
         gap: {

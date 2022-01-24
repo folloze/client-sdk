@@ -1,4 +1,3 @@
-import {IOldGeneral} from "./oldBoardTypes/IOldGeneral";
 import {RibbonConfig, SectionConfig} from "./ISection";
 import {WidgetConfig} from "./IWidget";
 import {LitElement} from "lit";
@@ -7,7 +6,9 @@ import {FloatPos, GridPos} from "./IPositions";
 
 export type BoardConfig = {
     boardId: string;
-    meta: IOldGeneral;
+    meta: {
+        savedTime: Date;
+    };
     grid: {
         maxWidth: string; // 1024px ?
         gap: { x: string, y: string };
