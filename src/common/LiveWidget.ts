@@ -48,8 +48,16 @@ export abstract class LiveWidget extends LiveDraggable {
         return this._widgetId;
     }
 
-    public emit(action: string, payload: any): void {
-        this.dispatchEvent(new FlzEvent(this, action, payload));
+    public emit(action: string, payload: any, cb?: CallableFunction): void {
+        this.dispatchEvent(new FlzEvent(this, action, payload, cb));
+    }
+
+    /**
+     * you should override this method to use incoming events
+     */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    public incomingEvents(e: FlzEvent) {
+        return;
     }
 
     abstract render();

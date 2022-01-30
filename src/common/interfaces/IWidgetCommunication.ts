@@ -1,4 +1,9 @@
 
+
+
+export const FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
+
+
 // ctaClick - ctaType:string, ctaData:object
 // ctaSubmit - ctaType:string, ctaData:object
 // consentGiven - no params
@@ -7,7 +12,3 @@
 // closeItemViewer - no params (only item viewer widget)
 // itemViewerLoaded - item:object (only item viewer widget)
 // liveEventMounted - no params (only live event widgets)
-
-export const FLZ_EVENT_TYPE = "flz-event-type";
-
-

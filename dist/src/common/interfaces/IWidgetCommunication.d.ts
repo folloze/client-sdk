@@ -1,1 +1,1 @@
-export declare const FLZ_EVENT_TYPE = "flz-event-type";
+export declare const FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
