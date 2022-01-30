@@ -6,3 +6,4 @@ export * from "./LiveDraggable";
 export * from "./makeDraggable";
 export * from "./FloatEditor";
 export * from "./helpers/helpers";
+export * from "./FlzEvent";

@@ -1,4 +1,3 @@
-import {LiveWidget} from "../LiveWidget";
 
 // ctaClick - ctaType:string, ctaData:object
 // ctaSubmit - ctaType:string, ctaData:object
@@ -11,14 +10,4 @@ import {LiveWidget} from "../LiveWidget";
 
 export const FLZ_EVENT_TYPE = "flz-event-type";
 
-export class FlzEvent extends Event {
 
-    private action: string;
-    private payload: any;
-
-    constructor(emitter: LiveWidget, type: string, payload: any) {
-        super(FLZ_EVENT_TYPE, {bubbles: true, composed: true});
-        this.action = type;
-        this.payload = payload;
-    }
-}

@@ -7786,11 +7786,14 @@ var v4_default = v4;
 
 // src/common/interfaces/IWidgetCommunication.ts
 var FLZ_EVENT_TYPE = "flz-event-type";
+
+// src/common/FlzEvent.ts
 var FlzEvent = class extends Event {
-  constructor(emitter, type, payload) {
+  constructor(emitter, action, payload) {
     super(FLZ_EVENT_TYPE, { bubbles: true, composed: true });
-    this.action = type;
+    this.action = action;
     this.payload = payload;
+    this.emitter = emitter;
   }
 };
 
@@ -7825,8 +7828,8 @@ var LiveWidget = class extends LiveDraggable {
   get widgetId() {
     return this._widgetId;
   }
-  emit(type, payload) {
-    this.dispatchEvent(new FlzEvent(this, type, payload));
+  emit(action, payload) {
+    this.dispatchEvent(new FlzEvent(this, action, payload));
   }
 };
 
@@ -8147,6 +8150,7 @@ export {
   EventSources,
   FetchService,
   FloatEditor,
+  FlzEvent,
   ImageBankCategory,
   ImageBankType,
   ImageGalleryTypes,
