@@ -7785,9 +7785,11 @@ function v4(options, buf, offset) {
 var v4_default = v4;
 
 // src/common/interfaces/IWidgetCommunication.ts
+var FLZ_EVENT_TYPE = "flz-event-type";
 var FlzEvent = class extends Event {
   constructor(emitter, type, payload) {
-    super(type, { bubbles: true, composed: true });
+    super(FLZ_EVENT_TYPE, { bubbles: true, composed: true });
+    this.action = type;
     this.payload = payload;
   }
 };
