@@ -28,7 +28,6 @@ export declare type BoardConfig = {
     ribbons: Record<string, RibbonConfig>;
 };
 export interface ILiveBoard extends LitElement {
-    exampleConfig: BoardConfig;
     config: BoardConfig;
     widgetsEl: LiveWidget[];
     configHash: string;

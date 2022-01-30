@@ -2,7 +2,16 @@
 
 
 export const FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
-
+export const FLZ_EVENTS_ACTIONS = {
+    ctaClick: "ctaClick",
+    ctaSubmit: "ctaSubmit",
+    consentGiven: "consentGiven",
+    stopTrackingForVisit: "stopTrackingForVisit",
+    openItemViewer: "openItemViewer",
+    closeItemViewer: "closeItemViewer",
+    itemViewerLoaded: "itemViewerLoaded",
+    liveEventMounted: "liveEventMounted",
+};
 
 // ctaClick - ctaType:string, ctaData:object
 // ctaSubmit - ctaType:string, ctaData:object

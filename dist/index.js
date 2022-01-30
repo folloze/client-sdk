@@ -7786,6 +7786,16 @@ var v4_default = v4;
 
 // src/common/interfaces/IWidgetCommunication.ts
 var FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
+var FLZ_EVENTS_ACTIONS = {
+  ctaClick: "ctaClick",
+  ctaSubmit: "ctaSubmit",
+  consentGiven: "consentGiven",
+  stopTrackingForVisit: "stopTrackingForVisit",
+  openItemViewer: "openItemViewer",
+  closeItemViewer: "closeItemViewer",
+  itemViewerLoaded: "itemViewerLoaded",
+  liveEventMounted: "liveEventMounted"
+};
 
 // src/common/FlzEvent.ts
 var FlzEvent = class extends Event {
@@ -8152,6 +8162,7 @@ export {
   Designer,
   DesignerEventTypes,
   EventSources,
+  FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE,
   FetchService,
   FloatEditor,
