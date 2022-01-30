@@ -10,7 +10,13 @@ esbuild.build({
     format: "esm",
     target: "es2017",
     entryPoints: [
+        // The whole shebang
         "./src/index.ts",
+        "./src/sdk.ts",
+        "./src/analytics/Analytics.ts",
+        "./src/designer/Designer.ts",
+        "./src/liveboard/Liveboard.ts",
+        "./src/common/common.ts",
     ],
     outdir: "dist",
     chunkNames: "chunks/[name].[hash]",

@@ -82,3 +82,7 @@ export function isObjsEqual(obj1: any, obj2: any) {
     // todo: (tech-debt) this is not deterministic solution (i.e json-stringify-deterministic)
     // return JSON.stringify(obj1) !== JSON.stringify(obj2);
 }
+
+export function hashObj(obj: any) {
+    return sha1(obj);
+}

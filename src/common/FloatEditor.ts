@@ -26,7 +26,7 @@ export class FloatEditor extends LitElement {
             background-color: rgb(var(--sys-color-neutral-0));
             //overflow: hidden;
             min-width: 235px;
-            min-height: 150px;
+            min-height: 40px;
 
             overflow: visible;
             max-width: 300px;

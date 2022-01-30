@@ -7,3 +7,4 @@ export declare type FileUploadParams = {
 };
 export declare function fileUpload(file: File, params: FileUploadParams, progressCallback: (file: File, n: number) => any): Promise<any>;
 export declare function isObjsEqual(obj1: any, obj2: any): boolean;
+export declare function hashObj(obj: any): string;
