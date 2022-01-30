@@ -14,5 +14,6 @@ export declare abstract class LiveWidget extends LiveDraggable {
     set data(x: any);
     get data(): any;
     get widgetId(): string;
+    private emit;
     abstract render(): any;
 }

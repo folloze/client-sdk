@@ -2,6 +2,7 @@ import { LiveDraggable } from "./LiveDraggable";
 import {WidgetConfig} from "./interfaces/IWidget";
 import { v4 as uuid_v4 } from "uuid";
 import {PropertyValues} from "lit";
+import {FlzEvent} from "./interfaces/IWidgetCommunication";
 
 
 export abstract class LiveWidget extends LiveDraggable {
@@ -46,6 +47,10 @@ export abstract class LiveWidget extends LiveDraggable {
 
     public get widgetId() {
         return this._widgetId;
+    }
+
+    private emit(type: string, payload: any): void {
+        this.dispatchEvent(new FlzEvent(this, type, payload));
     }
 
     abstract render();

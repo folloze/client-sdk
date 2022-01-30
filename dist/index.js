@@ -7784,6 +7784,14 @@ function v4(options, buf, offset) {
 }
 var v4_default = v4;
 
+// src/common/interfaces/IWidgetCommunication.ts
+var FlzEvent = class extends Event {
+  constructor(emitter, type, payload) {
+    super(type, { bubbles: true, composed: true });
+    this.payload = payload;
+  }
+};
+
 // src/common/LiveWidget.ts
 var LiveWidget = class extends LiveDraggable {
   constructor() {
@@ -7814,6 +7822,9 @@ var LiveWidget = class extends LiveDraggable {
   }
   get widgetId() {
     return this._widgetId;
+  }
+  emit(type, payload) {
+    this.dispatchEvent(new FlzEvent(this, type, payload));
   }
 };
 
