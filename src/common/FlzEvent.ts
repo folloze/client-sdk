@@ -4,10 +4,10 @@ import {FLZ_WIDGET_EVENT_TYPE} from "./interfaces/IWidgetCommunication";
 
 export class FlzEvent extends Event {
 
-    private action: string;
-    private payload: any;
-    private emitter: LiveWidget;
-    private callback: Function;
+    public action: string;
+    public payload: any;
+    public emitter: LiveWidget;
+    public callback: Function | undefined;
 
     constructor(emitter: LiveWidget, action: string, payload: any, cb?: CallableFunction) {
         super(FLZ_WIDGET_EVENT_TYPE, {bubbles: true, composed: true});

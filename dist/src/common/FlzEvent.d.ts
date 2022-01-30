@@ -1,8 +1,8 @@
 import { LiveWidget } from "./LiveWidget";
 export declare class FlzEvent extends Event {
-    private action;
-    private payload;
-    private emitter;
-    private callback;
+    action: string;
+    payload: any;
+    emitter: LiveWidget;
+    callback: Function | undefined;
     constructor(emitter: LiveWidget, action: string, payload: any, cb?: CallableFunction);
 }
