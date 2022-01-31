@@ -17,6 +17,7 @@ esbuild.build({
         "./src/designer/Designer.ts",
         "./src/liveboard/Liveboard.ts",
         "./src/common/common.ts",
+        "./src/common/interfaces/types.ts",
     ],
     outdir: "dist",
     chunkNames: "chunks/[name].[hash]",

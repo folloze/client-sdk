@@ -2,6 +2,9 @@ import {
   require_lodash
 } from "./chunk.FJ3V2PYX.js";
 import {
+  FLZ_WIDGET_EVENT_TYPE
+} from "./chunk.P5WOGPV6.js";
+import {
   __decorateClass,
   __spreadProps,
   __spreadValues,
@@ -694,19 +697,6 @@ function v4(options, buf, offset) {
 }
 var v4_default = v4;
 
-// src/common/interfaces/IWidgetCommunication.ts
-var FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
-var FLZ_EVENTS_ACTIONS = {
-  ctaClick: "ctaClick",
-  ctaSubmit: "ctaSubmit",
-  consentGiven: "consentGiven",
-  stopTrackingForVisit: "stopTrackingForVisit",
-  openItemViewer: "openItemViewer",
-  closeItemViewer: "closeItemViewer",
-  itemViewerLoaded: "itemViewerLoaded",
-  liveEventMounted: "liveEventMounted"
-};
-
 // src/common/FlzEvent.ts
 var FlzEvent = class extends Event {
   constructor(emitter, action, payload, cb) {
@@ -1068,8 +1058,6 @@ __decorateClass([
 
 export {
   LiveDraggable,
-  FLZ_WIDGET_EVENT_TYPE,
-  FLZ_EVENTS_ACTIONS,
   FlzEvent,
   LiveWidget,
   LiveWidgetEdit,
