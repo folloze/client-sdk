@@ -59,6 +59,8 @@
     "/liveboard/",
     "/common.{d.ts.map,d.ts,js.map,js}",
     "/common/",
+    "/types.{d.ts.map,d.ts,js.map,js}",
+    "/common/interfaces/",
     "/designer.{d.ts.map,d.ts,js.map,js}",
     "/designer/",
     "sdk.{d.ts.map,d.ts,js.map,js}",
@@ -79,6 +81,9 @@
     },
     "./common.js": {
       "default": "./dist/common/common.js"
+    },
+    "./types.js": {
+      "default": "./dist/common/interfaces/types.js"
     },
     "./designer.js": {
       "default": "./dist/designer/designer.js"
