@@ -956,7 +956,7 @@ FloatEditor.styles = [
             left: 150px;
             z-index: 110;
             box-shadow: var(--floatBoxShadow);
-            background-color: rgb(var(--sys-color-neutral-0));
+            background-color: var(--sys-color-neutral-0);
             //overflow: hidden;
             min-width: 235px;
             min-height: 40px;
@@ -968,7 +968,7 @@ FloatEditor.styles = [
           .close {
             font-size: 14px;
             cursor: pointer;
-            color: rgb(var(--sys-color-neutral-500));
+            color: var(--sys-color-neutral-500);
             border: none;
             background: none;
 
@@ -982,7 +982,7 @@ FloatEditor.styles = [
             right: 60px;
             font-size: 14px;
             cursor: pointer;
-            color: rgb(var(--sys-color-neutral-500));
+            color: var(--sys-color-neutral-500);
             border: none;
             background: none;
           }
@@ -993,7 +993,7 @@ FloatEditor.styles = [
           }
 
           #handle {
-            background-color: rgb(var(--sys-color-primary-100));
+            background-color: var(--sys-color-primary-100);
             height: 2em;
             display: flex;
             align-items: center;
@@ -1041,7 +1041,7 @@ FloatEditor.styles = [
           select {
             background: transparent;
             border: none;
-            color: rgb(var(--sys-color-neutral-500));
+            color: var(--sys-color-neutral-500);
             outline: none;
             padding: 0.6em;
             margin: 0.4em;
