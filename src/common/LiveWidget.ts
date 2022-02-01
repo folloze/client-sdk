@@ -48,7 +48,7 @@ export abstract class LiveWidget extends LiveDraggable {
         return this._widgetId;
     }
 
-    public emit(action: string, payload: any, cb?: CallableFunction): void {
+    public emit(action: string, payload?: any, cb?: CallableFunction): void {
         this.dispatchEvent(new FlzEvent(this, action, payload, cb));
     }
 

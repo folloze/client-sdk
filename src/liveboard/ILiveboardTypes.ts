@@ -86,6 +86,9 @@ export type ItemResponseV2 = {
     slug: string,
     is_gated?: boolean,
     open_in_new_tab?: boolean
+
+    // todo: maybe add canonical link
+    // canonical: string;
 }
 
 export type ItemsResponseV2 = {
@@ -223,12 +226,12 @@ export type CtaParams = {
     email: string,
     formId: number,
     type: string,
-    message?: string, //message cta
-    formFields?: string[], //form/share cta
-    name?: string, //form/share cta
-    lastName?: string, //form/share cta
-    link?: string, //link cta
-    invitee?: string //share cta
+    message?: string,       // message cta
+    formFields?: string[],  // array of the names of fields (only keys)
+    name?: string,          // form/share cta
+    lastName?: string,      // form/share cta
+    link?: string,          // link cta
+    invitee?: string        // share cta
 }
 
 export type CtaResponseV1 = {
