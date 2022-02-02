@@ -40,6 +40,7 @@ export interface ILiveBoard extends LitElement {
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
     generateConfigHash(): string;
     get widgets(): WidgetConfig[];
+    get widgetElements(): LiveWidget[];
     get sections(): SectionConfig[];
     get ribbons(): RibbonConfig[];
     getWidget(id: string): WidgetConfig;

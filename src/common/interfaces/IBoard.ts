@@ -41,6 +41,7 @@ export interface ILiveBoard extends LitElement {
     generateConfigHash(): string;
 
     get widgets(): WidgetConfig[];
+    get widgetElements(): LiveWidget[];
     get sections(): SectionConfig[];
     get ribbons(): RibbonConfig[];
     getWidget(id: string): WidgetConfig;
