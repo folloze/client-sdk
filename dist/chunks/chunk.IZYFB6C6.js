@@ -65,6 +65,8 @@ var FetchService = class {
     }).catch((e) => console.error(e));
   }
   createAxiosFetcher(options) {
+    options.config.headers["X-Requested-With"] = "XMLHttpRequest";
+    options.config.headers["X-CSRF-Token"] = document.querySelector("meta[name=csrf-token]").content;
     this.fetcher = import_axios.default.create(options.config);
   }
 };
