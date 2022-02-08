@@ -1,3 +1,5 @@
+import {BoardConfig} from "../common/interfaces/IBoard";
+
 export * from "./IDesignerTypes";
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
@@ -13,6 +15,21 @@ export class Designer {
 
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
+    }
+
+    public publishLiveBoard(boardId: number) {
+        return new Promise((resolve, reject) => {
+            this.fetcher.post<any>(
+                `/api/v1/boards/${boardId}/publish`,
+            )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not publish live board", e);
+                    reject(e);
+                });
+        });
     }
     
     /**

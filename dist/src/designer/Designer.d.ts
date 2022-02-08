@@ -5,6 +5,7 @@ import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategor
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
+    publishLiveBoard(boardId: number): Promise<unknown>;
     /**
      * Gets the image gallery for given types
      *

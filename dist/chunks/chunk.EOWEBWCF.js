@@ -14,6 +14,16 @@ var Designer = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
+  publishLiveBoard(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post(`/api/v1/boards/${boardId}/publish`).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not publish live board", e);
+        reject(e);
+      });
+    });
+  }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/api/imagegallery", __spreadValues({}, keysToSnakeCase(payload))).then((result) => {
