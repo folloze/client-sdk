@@ -1,6 +1,6 @@
 import {
   Designer
-} from "../chunks/chunk.EOWEBWCF.js";
+} from "../chunks/chunk.4I3QHWMW.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,

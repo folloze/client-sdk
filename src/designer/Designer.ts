@@ -19,7 +19,7 @@ export class Designer {
 
     public publishLiveBoard(boardId: number) {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<any>(
+            this.fetcher.put<any>(
                 `/api/v1/boards/${boardId}/publish`,
             )
                 .then(result => {
