@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.NG7TLSQO.js";
+} from "./chunk.3ZNLEUXI.js";
 import {
   Analytics
 } from "./chunk.YHWKAM4X.js";
@@ -54,7 +54,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.QMSX7QCF.js").then(async (module) => {
+    return await import("./src.57FVLL6Z.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([
@@ -65,8 +65,10 @@ var FetchService = class {
     }).catch((e) => console.error(e));
   }
   createAxiosFetcher(options) {
-    options.config.headers["X-Requested-With"] = "XMLHttpRequest";
-    options.config.headers["X-CSRF-Token"] = document.querySelector("meta[name=csrf-token]").content;
+    if (document.querySelector("meta[name=csrf-token]")) {
+      options.config.headers["X-Requested-With"] = "XMLHttpRequest";
+      options.config.headers["X-CSRF-Token"] = document.querySelector("meta[name=csrf-token]").content;
+    }
     this.fetcher = import_axios.default.create(options.config);
   }
 };
