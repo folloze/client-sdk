@@ -58,11 +58,12 @@ export class FetchService {
         // options.config.headers["Authorization"] = "get token from?";
         // options.config.xsrfHeaderName = 'X-CSRF-TOKEN';
 
-        if (document.querySelector("meta[name=csrf-token]")) {
-          options.config.headers["X-Requested-With"] = "XMLHttpRequest";
-          // @ts-ignore
-          options.config.headers["X-CSRF-Token"] = document.querySelector("meta[name=csrf-token]").content;
-        }
+        options.config.headers["X-Requested-With"] = "XMLHttpRequest";
+        // if (document?.querySelector("meta[name=csrf-token]")) {
+        //   options.config.headers["X-Requested-With"] = "XMLHttpRequest";
+        //   // @ts-ignore
+        //   options.config.headers["X-CSRF-Token"] = document.querySelector("meta[name=csrf-token]").content;
+        // }
 
         this.fetcher = axios.create(options.config);
     }
