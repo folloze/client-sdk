@@ -8,8 +8,9 @@ export const FLZ_EVENTS_ACTIONS = {
     consentGiven: "consentGiven",
     stopTrackingForVisit: "stopTrackingForVisit",
     openItemViewer: "openItemViewer",
-    closeItemViewer: "closeItemViewer",
+    closeItemViewerRequest: "closeItemViewerRequest",
     itemViewerLoaded: "itemViewerLoaded",
+    itemViewerClosed: "itemViewerClosed",
     liveEventMounted: "liveEventMounted",
 };
 
@@ -74,21 +75,6 @@ export type CtaSubmitData = {
     //     "note": "Very interesting ",
     // }
     fields: Record<string, string>;
-}
-
-// openItemViewer -
-export type OpenItemViewerData = {
-    identifier: number | string; // number for id & string for slug
-    category: number | string; // number for id & string for slug
-    queryString?: string; // previous url string to replace the new queryString when closing the itemViewer
-    options?: {
-        isLanding: boolean; // false when clicked else true - default is true
-    }
-
-    // todo: figure out what to do with canonical
-    // folloze.com/category-slug/item-slug
-    // folloze.com/category-slug3434/item-slug
-    // folloze.com/category-slug3434sdasd/item-slug
 }
 
 // closedItemViewer - no params (only item viewer widget) - fire when item viewer is closed
