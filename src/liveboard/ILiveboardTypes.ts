@@ -61,6 +61,21 @@ export type ItemsParams = {
     perPage?: number
 }
 
+// minimixed data for the item relevant for the item viewer
+export type OpenItemViewerPayload = {
+    id: number;
+    slug: string;
+    name: string;
+    description: string;
+    item_source: number;
+    item_type: string;
+    is_gated: boolean;
+    category: {
+        id: number;
+        slug: string;
+    }
+}
+
 export type JourneyItemParams = {
     query?: string,
     categoryId?: number,
@@ -69,26 +84,20 @@ export type JourneyItemParams = {
 
 export type ItemResponseV2 = {
     id: number,
-    name: string,
-    description: string,
-    views_count: number,
-    image: Image,
-    item_type: string,
-    item_source: number,
-    likes_count: number,
     category_ids: number[],
-    category_item_data: {
-        id: number,
-        position: number
-    }[],
-    link_url: string,
-    status: number, //TODO: enum?
+    category_item_data: {id: number, position: number}[],
+    description: string,
+    image: any, //TODO - Rotem fill the gap
+    is_gated: boolean | null,
+    item_source: number,
+    item_type: string,
+    likes_count: number,
+    link_url: string | null,
+    name: string,
     slug: string,
-    is_gated?: boolean,
-    open_in_new_tab?: boolean
-
-    // todo: maybe add canonical link
-    // canonical: string;
+    status: number,
+    views_count: number,
+    open_in_new_tab: string | null
 }
 
 export type ItemsResponseV2 = {

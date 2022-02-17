@@ -6,12 +6,12 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "./chunks/chunk.KV2Q5FAC.js";
+} from "./chunks/chunk.JUF5QMJL.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.2VIDEHXW.js";
-import "./chunks/chunk.ONP6MM6M.js";
+} from "./chunks/chunk.23AQVHRX.js";
+import "./chunks/chunk.4LCDCOKX.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -20,7 +20,7 @@ import {
 } from "./chunks/chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunks/chunk.4I3QHWMW.js";
+} from "./chunks/chunk.NLYW6P56.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,
@@ -29,18 +29,18 @@ import {
 } from "./chunks/chunk.FPDLHEHA.js";
 import {
   Liveboard
-} from "./chunks/chunk.E2WLG55Y.js";
+} from "./chunks/chunk.E6A7S2SE.js";
 import {
   fileUpload,
   hashObj,
   isObjsEqual,
   keysToSnakeCase
-} from "./chunks/chunk.FJ3V2PYX.js";
+} from "./chunks/chunk.BQMFBATZ.js";
 import {
   FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.P5WOGPV6.js";
-import "./chunks/chunk.Z3GS5MY4.js";
+} from "./chunks/chunk.T2YXGSLP.js";
+import "./chunks/chunk.QHN7EUNM.js";
 export {
   Analytics,
   CampaignElementsTypes,

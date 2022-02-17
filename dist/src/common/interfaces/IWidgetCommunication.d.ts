@@ -5,8 +5,9 @@ export declare const FLZ_EVENTS_ACTIONS: {
     consentGiven: string;
     stopTrackingForVisit: string;
     openItemViewer: string;
-    closeItemViewer: string;
+    closeItemViewerRequest: string;
     itemViewerLoaded: string;
+    itemViewerClosed: string;
     liveEventMounted: string;
 };
 export declare type CtaClickData = {
@@ -55,12 +56,4 @@ export declare type CtaSubmitData = {
     };
     type: "message" | "form" | "share" | "email";
     fields: Record<string, string>;
-};
-export declare type OpenItemViewerData = {
-    identifier: number | string;
-    category: number | string;
-    queryString?: string;
-    options?: {
-        isLanding: boolean;
-    };
 };

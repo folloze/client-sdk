@@ -53,6 +53,19 @@ export declare type ItemsParams = {
     page?: number;
     perPage?: number;
 };
+export declare type OpenItemViewerPayload = {
+    id: number;
+    slug: string;
+    name: string;
+    description: string;
+    item_source: number;
+    item_type: string;
+    is_gated: boolean;
+    category: {
+        id: number;
+        slug: string;
+    };
+};
 export declare type JourneyItemParams = {
     query?: string;
     categoryId?: number;
@@ -60,23 +73,23 @@ export declare type JourneyItemParams = {
 };
 export declare type ItemResponseV2 = {
     id: number;
-    name: string;
-    description: string;
-    views_count: number;
-    image: Image;
-    item_type: string;
-    item_source: number;
-    likes_count: number;
     category_ids: number[];
     category_item_data: {
         id: number;
         position: number;
     }[];
-    link_url: string;
-    status: number;
+    description: string;
+    image: any;
+    is_gated: boolean | null;
+    item_source: number;
+    item_type: string;
+    likes_count: number;
+    link_url: string | null;
+    name: string;
     slug: string;
-    is_gated?: boolean;
-    open_in_new_tab?: boolean;
+    status: number;
+    views_count: number;
+    open_in_new_tab: string | null;
 };
 export declare type ItemsResponseV2 = {
     item_ids: number[];

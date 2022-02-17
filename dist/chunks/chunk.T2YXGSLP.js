@@ -6,8 +6,9 @@ var FLZ_EVENTS_ACTIONS = {
   consentGiven: "consentGiven",
   stopTrackingForVisit: "stopTrackingForVisit",
   openItemViewer: "openItemViewer",
-  closeItemViewer: "closeItemViewer",
+  closeItemViewerRequest: "closeItemViewerRequest",
   itemViewerLoaded: "itemViewerLoaded",
+  itemViewerClosed: "itemViewerClosed",
   liveEventMounted: "liveEventMounted"
 };
 
