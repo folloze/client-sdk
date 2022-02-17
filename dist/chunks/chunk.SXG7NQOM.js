@@ -3,7 +3,7 @@ import {
 } from "./chunk.BQMFBATZ.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunk.T2YXGSLP.js";
+} from "./chunk.F6EFT5DN.js";
 import {
   __decorateClass,
   __spreadProps,

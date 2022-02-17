@@ -6,7 +6,7 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "./chunks/chunk.JUF5QMJL.js";
+} from "./chunks/chunk.SXG7NQOM.js";
 import {
   ClientSDK,
   FetchService
@@ -39,7 +39,7 @@ import {
 import {
   FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.T2YXGSLP.js";
+} from "./chunks/chunk.F6EFT5DN.js";
 import "./chunks/chunk.QHN7EUNM.js";
 export {
   Analytics,

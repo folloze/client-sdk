@@ -5,3 +5,4 @@ export * from "./IPositions";
 export * from "./ISection";
 export * from "./IWidget";
 export * from "./IWidgetCommunication";
+export * from "../../liveboard/ILiveboardTypes";

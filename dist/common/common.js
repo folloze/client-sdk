@@ -6,7 +6,7 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "../chunks/chunk.JUF5QMJL.js";
+} from "../chunks/chunk.SXG7NQOM.js";
 import {
   FetchService
 } from "../chunks/chunk.23AQVHRX.js";
@@ -21,7 +21,7 @@ import {
   isObjsEqual,
   keysToSnakeCase
 } from "../chunks/chunk.BQMFBATZ.js";
-import "../chunks/chunk.T2YXGSLP.js";
+import "../chunks/chunk.F6EFT5DN.js";
 import "../chunks/chunk.QHN7EUNM.js";
 export {
   FetchService,
