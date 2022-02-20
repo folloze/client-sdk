@@ -38,7 +38,7 @@ export class FloatEditor extends LitElement {
           .close {
             font-size: 14px;
             cursor: pointer;
-            color: var(--sys-color-neutral-500);
+            color: var(--fz-color-neutral-0);
             border: none;
             background: none;
 
@@ -68,7 +68,7 @@ export class FloatEditor extends LitElement {
             height: 30px;
             display: flex;
             align-items: center;
-            padding: 3px 16px;
+            padding: var(--fz-spacing-4x-small) var(--fz-spacing-small);
             justify-content: space-between;
 
             white-space: nowrap;
@@ -87,6 +87,7 @@ export class FloatEditor extends LitElement {
           #body {
             padding: var(--fz-spacing-small);
             background-color: var(--sys-color-neutral-0);
+            border-radius: 0 0 var(--fz-border-radius-small) var(--fz-border-radius-small);
           }
           .loading {
             width: 100%;
