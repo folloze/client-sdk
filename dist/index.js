@@ -6,7 +6,7 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "./chunks/chunk.OFDE22Y6.js";
+} from "./chunks/chunk.WA5OEKGI.js";
 import {
   ClientSDK,
   FetchService

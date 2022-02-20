@@ -941,7 +941,7 @@ var FloatEditor = class extends s4 {
     var _a;
     return $`
             ${this.isLoading ? $`<div class="loading"></div>` : ""}
-            <div id="handle" @mouseenter="${this.highlight}" @mouseout="${this.removeHighlight}">
+            <div id="handle" @mouseover="${this.highlight}" @mouseleave="${this.removeHighlight}">
                 <span class="conf-name">
                     ${((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""}
                 </span>
@@ -984,7 +984,8 @@ FloatEditor.styles = [
           }
 
           .close {
-            font-size: 14px;
+            font-size: 15px;
+            font-family: "Roboto", serif;
             cursor: pointer;
             color: var(--fz-color-neutral-0);
             border: none;

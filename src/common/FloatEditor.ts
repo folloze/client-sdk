@@ -36,7 +36,8 @@ export class FloatEditor extends LitElement {
           }
 
           .close {
-            font-size: 14px;
+            font-size: 15px;
+            font-family: "Roboto", serif;
             cursor: pointer;
             color: var(--fz-color-neutral-0);
             border: none;
@@ -215,7 +216,7 @@ export class FloatEditor extends LitElement {
     render() {
         return html`
             ${this.isLoading ? html`<div class="loading"></div>` : ""}
-            <div id="handle" @mouseenter="${this.highlight}" @mouseout="${this.removeHighlight}">
+            <div id="handle" @mouseover="${this.highlight}" @mouseleave="${this.removeHighlight}">
                 <span class="conf-name">
                     ${this.childEl.widget?.widgetTitle || ""}
                 </span>
