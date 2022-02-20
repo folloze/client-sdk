@@ -5,16 +5,30 @@ import MockConnector from "./MockConnector";
 
 export type FetcherOptions = {
     useMock: boolean;
+    isPreview?: boolean,
     config?: AxiosRequestConfig;
 };
 
 const defaultFetcherOptions: FetcherOptions = {
     useMock: false,
+    isPreview: false,
     config: {
         baseURL: "/",
         headers: {},
     }
 };
+
+
+// fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
+// fetchItems: api.fetchItems,                // replace "live_board" with "api"
+// fetchHasItems: api.fetchHasItems,          // replace "live_board" with "api"
+// fetchItem: api.fetchItem,                  // replace "live_board" with "api"
+
+// createServerSessionCookies: () => Promise.resolve(1),
+// updateCookiesConsent: () => Promise.resolve(),
+// setConsentCookie: () => Promise.resolve(),
+// getIsoCode: () => Promise.resolve(),
+// fetchEventUrls: () => Promise.resolve("")
 
 export class FetchService {
 
@@ -51,6 +65,32 @@ export class FetchService {
                 ]);
             })
             .catch(e => console.error(e));
+    }
+
+
+    // todo: connect async polling to get partial data (getItems, getCategory, etc...)
+    withPartialContent(apiCall) {
+        // return (params) => {
+        //     return new Promise((resolve, reject) => {
+        //         apiCall(params)
+        //             .then(({status, data}) => {
+        //                 if(status == PARTIAL_CONTENT) {
+        //                     setTimeout(() => {
+        //                         withPartialContent(apiCall)({
+        //                             ...params,
+        //                             guid: data.guid
+        //                         })
+        //                             .then(resolve)
+        //                             .catch(reject)
+        //                     }, 2000)
+        //                 }
+        //                 else {
+        //                     resolve(data)
+        //                 }
+        //             })
+        //             .catch(error => reject(error))
+        //     })
+        // }
     }
 
     private createAxiosFetcher(options: FetcherOptions) {

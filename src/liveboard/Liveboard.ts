@@ -674,6 +674,10 @@ export class Liveboard {
      */
     createSession(): Promise<SessionResonseV1> {
         return new Promise((resolve, reject) => {
+            // let baseRoute = "live_board";
+            // if (isPreview) {
+            //     baseRoute = "api";
+            // }
             this.fetcher.post<SessionResonseV1>("/live_board/v1/sessions")
                 .then(result => {
                     resolve(result.data);

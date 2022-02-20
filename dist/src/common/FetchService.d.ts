@@ -1,6 +1,7 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 export declare type FetcherOptions = {
     useMock: boolean;
+    isPreview?: boolean;
     config?: AxiosRequestConfig;
 };
 export declare class FetchService {
@@ -11,5 +12,6 @@ export declare class FetchService {
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
+    withPartialContent(apiCall: any): void;
     private createAxiosFetcher;
 }

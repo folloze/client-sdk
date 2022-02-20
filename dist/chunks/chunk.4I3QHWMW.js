@@ -1,9 +1,13 @@
 import {
+  CampaignElementsTypes,
+  ImageGalleryTypes
+} from "./chunk.FPDLHEHA.js";
+import {
   keysToSnakeCase
-} from "./chunk.BQMFBATZ.js";
+} from "./chunk.FJ3V2PYX.js";
 import {
   __spreadValues
-} from "./chunk.QHN7EUNM.js";
+} from "./chunk.Z3GS5MY4.js";
 
 // src/designer/Designer.ts
 var Designer = class {
@@ -31,17 +35,17 @@ var Designer = class {
     });
   }
   getQueryImageGallery(query) {
-    return this.getImageGallery({ type: "search" /* search */, query });
+    return this.getImageGallery({ type: ImageGalleryTypes.search, query });
   }
   getImageBankGallery(organizationId, bankCategory) {
     return this.getImageGallery({
-      type: "image_bank" /* imageBank */,
+      type: ImageGalleryTypes.imageBank,
       organizationId,
       bankCategory
     });
   }
   getCampaignImageGallery() {
-    return this.getImageGallery({ type: "campaign" /* campaign */ });
+    return this.getImageGallery({ type: ImageGalleryTypes.campaign });
   }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
@@ -111,13 +115,13 @@ var Designer = class {
     });
   }
   getFooters(boardId) {
-    return this.getCampaignElements(boardId, 1 /* footer */);
+    return this.getCampaignElements(boardId, CampaignElementsTypes.footer);
   }
   getPrivacyMessages(boardId) {
-    return this.getCampaignElements(boardId, 2 /* privacy_message */);
+    return this.getCampaignElements(boardId, CampaignElementsTypes.privacy_message);
   }
   getFormPrivacyMessages(boardId) {
-    return this.getCampaignElements(boardId, 3 /* form_privacy_message */);
+    return this.getCampaignElements(boardId, CampaignElementsTypes.form_privacy_message);
   }
   getPrivacySettings(organizationId) {
     return new Promise((resolve, reject) => {

@@ -1,5 +1,8 @@
-import "./chunk.FPDLHEHA.js";
-import "./chunk.QHN7EUNM.js";
+import {
+  CampaignElementsTypes,
+  ImageBankType
+} from "./chunk.FPDLHEHA.js";
+import "./chunk.Z3GS5MY4.js";
 
 // src/designer/mocks.ts
 var rules = (mock) => {
@@ -195,18 +198,18 @@ var rules = (mock) => {
     }
   ]);
   mock.onGet("/api/v1/organizations/1/settings/image_bank").reply(200, {
-    icons: "folloze" /* folloze */,
-    logos: "folloze" /* folloze */,
-    banners: "folloze" /* folloze */,
-    thumbnails: "folloze" /* folloze */,
-    mobile_banners: "folloze" /* folloze */
+    icons: ImageBankType.folloze,
+    logos: ImageBankType.folloze,
+    banners: ImageBankType.folloze,
+    thumbnails: ImageBankType.folloze,
+    mobile_banners: ImageBankType.folloze
   });
   mock.onPut("/api/v1/organizations/1/settings/image_bank").reply(200, {
-    icons: "folloze" /* folloze */,
-    logos: "folloze" /* folloze */,
-    banners: "folloze" /* folloze */,
-    thumbnails: "folloze" /* folloze */,
-    mobile_banners: "folloze" /* folloze */
+    icons: ImageBankType.folloze,
+    logos: ImageBankType.folloze,
+    banners: ImageBankType.folloze,
+    thumbnails: ImageBankType.folloze,
+    mobile_banners: ImageBankType.folloze
   });
   mock.onPost("/api/v1/upload_urls").reply(200, {
     file_name: "file_name",
@@ -310,7 +313,7 @@ var rules = (mock) => {
       success_message: "thanks!"
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: 1 /* footer */ } }).reply(200, {
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -330,7 +333,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: 2 /* privacy_message */ } }).reply(200, {
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.privacy_message } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -347,7 +350,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: 3 /* form_privacy_message */ } }).reply(200, {
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.form_privacy_message } }).reply(200, {
     default_id: 0,
     data: {
       "0": {

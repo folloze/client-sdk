@@ -23,13 +23,16 @@ export class FloatEditor extends LitElement {
             left: 150px;
             z-index: 110;
             box-shadow: var(--floatBoxShadow);
-            background-color: var(--sys-color-neutral-0);
+            
             //overflow: hidden;
-            min-width: 235px;
+            min-width: 300px;
             min-height: 40px;
 
             overflow: visible;
             max-width: 300px;
+
+            border-radius: var(--fz-border-radius-small);
+            font-family: Open Sans, serif;
           }
 
           .close {
@@ -60,17 +63,30 @@ export class FloatEditor extends LitElement {
           }
 
           #handle {
-            background-color: var(--sys-color-primary-100);
-            height: 2em;
+            background-color: var(--fz-color-primary-3);
+            border-radius: var(--fz-border-radius-small) var(--fz-border-radius-small) 0 0;
+            height: 30px;
             display: flex;
             align-items: center;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding: 3px 16px;
             justify-content: space-between;
+
+            white-space: nowrap;
+
+            font-family: Open Sans, serif;
+            font-size: 14px;
+            font-style: normal;
+            /*font-weight: 600;*/
+            line-height: 21px;
+            letter-spacing: 0;
+            text-align: left;
+            color: var(--fz-color-neutral-0);
+
           }
 
           #body {
             padding: var(--fz-spacing-small);
+            background-color: var(--sys-color-neutral-0);
           }
           .loading {
             width: 100%;
