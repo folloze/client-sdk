@@ -8,6 +8,8 @@ export abstract class LiveWidget extends LiveDraggable {
 
     public abstract readonly customEditWidgets: string[];
     public abstract readonly editComponents: string[];
+    public abstract readonly widgetTitle: string;
+
     protected _data: any;
     private _widgetId: string;
     private _config: WidgetConfig;

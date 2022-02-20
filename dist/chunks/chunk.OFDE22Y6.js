@@ -890,6 +890,10 @@ var FloatEditor = class extends s4 {
     this.isLoading = true;
     this.childEl = el;
   }
+  disconnectedCallback() {
+    this.removeHighlight();
+    super.disconnectedCallback();
+  }
   firstUpdated() {
     this.isLoading = false;
     this.body.appendChild(this.childEl);
@@ -923,12 +927,23 @@ var FloatEditor = class extends s4 {
     this.style.top = `${this.y + 30 + window.scrollY}px`;
     this.style.left = `${newX}px`;
   }
+  highlight() {
+    if (this.childEl.widget) {
+      this.childEl.widget.classList.add("highlight");
+    }
+  }
+  removeHighlight() {
+    if (this.childEl.widget) {
+      this.childEl.widget.classList.remove("highlight");
+    }
+  }
   render() {
+    var _a;
     return $`
             ${this.isLoading ? $`<div class="loading"></div>` : ""}
-            <div id="handle">
+            <div id="handle" @mouseenter="${this.highlight}" @mouseout="${this.removeHighlight}">
                 <span class="conf-name">
-                    ${this.childEl.widget.tagName.toLowerCase()} ${this.childEl.id ? `#${this.childEl.id}` : ""}
+                    ${((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""}
                 </span>
                 <div class="close" @click=${this.close}>X</div>
             </div>

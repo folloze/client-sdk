@@ -5,6 +5,7 @@ import { FlzEvent } from "./FlzEvent";
 export declare abstract class LiveWidget extends LiveDraggable {
     abstract readonly customEditWidgets: string[];
     abstract readonly editComponents: string[];
+    abstract readonly widgetTitle: string;
     protected _data: any;
     private _widgetId;
     private _config;

@@ -154,6 +154,11 @@ export class FloatEditor extends LitElement {
         this.childEl = el;
     }
 
+    disconnectedCallback() {
+        this.removeHighlight();
+        super.disconnectedCallback();
+    }
+
     protected firstUpdated() {
         this.isLoading = false;
         this.body.appendChild(this.childEl);
@@ -195,12 +200,24 @@ export class FloatEditor extends LitElement {
         this.style.left = `${newX}px`;
     }
 
+    highlight() {
+        if (this.childEl.widget) {
+            this.childEl.widget.classList.add("highlight");
+        }
+    }
+
+    removeHighlight() {
+        if (this.childEl.widget) {
+            this.childEl.widget.classList.remove("highlight");
+        }
+    }
+
     render() {
         return html`
             ${this.isLoading ? html`<div class="loading"></div>` : ""}
-            <div id="handle">
+            <div id="handle" @mouseenter="${this.highlight}" @mouseout="${this.removeHighlight}">
                 <span class="conf-name">
-                    ${this.childEl.widget.tagName.toLowerCase()} ${this.childEl.id ? `#${this.childEl.id}` : ""}
+                    ${this.childEl.widget?.widgetTitle || ""}
                 </span>
                 <div class="close" @click=${this.close}>X</div>
             </div>
