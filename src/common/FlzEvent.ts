@@ -7,8 +7,8 @@ export class FlzEvent extends Event {
     public action: string;
     public payload: any;
     public emitter: LiveWidget;
-    private onSuccess: Function | undefined;
-    private onError: Function | undefined;
+    public onSuccess: Function | undefined;
+    public onError: Function | undefined;
 
     constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
         super(FLZ_WIDGET_EVENT_TYPE, {bubbles: true, composed: true});
