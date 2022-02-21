@@ -96,10 +96,12 @@ var rules = (mock) => {
   });
   mock.onPost("/live_board/v1/chat/user_chat").reply(200, { token: "abcd", chat_id: 123 });
   mock.onGet("/live_board/v2/items/1").reply(200, item);
-  mock.onGet("/live_board/v2/boards/1/items").reply(200, {
-    item_ids: [1],
-    data: { "1": __spreadValues({}, item) },
-    most_viewed_item_id: 1
+  mock.onGet(/\/live_board\/v2\/boards\/(\d+)\/items/).reply((config) => {
+    return [200, {
+      item_ids: [1],
+      data: { "1": __spreadValues({}, item) },
+      most_viewed_item_id: 1
+    }];
   });
   mock.onGet("/live_board/v2/boards/1/items_presence").reply(200, { has_items: true });
   mock.onPost("/live_board/v2/items/1/likes").reply(200);

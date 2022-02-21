@@ -113,11 +113,14 @@ export const rules = (mock: MockAdapter) => {
     mock.onGet("/live_board/v2/items/1")
         .reply<ItemResponseV2>(200, item);
 
-    mock.onGet("/live_board/v2/boards/1/items")
-        .reply<ItemsResponseV2>(200, {
-            item_ids: [1],
-            data: {"1": {...item}},
-            most_viewed_item_id: 1,
+    mock.onGet(/\/live_board\/v2\/boards\/(\d+)\/items/)
+        .reply<ItemsResponseV2>(config => {
+            // console.log(config);
+            return [200, {
+                item_ids: [1],
+                data: {"1": {...item}},
+                most_viewed_item_id: 1,
+            }];
         });
 
     mock.onGet("/live_board/v2/boards/1/items_presence")
