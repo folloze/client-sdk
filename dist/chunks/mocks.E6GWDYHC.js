@@ -59,9 +59,9 @@ var rules = (mock) => {
     description: "home category",
     images: []
   });
-  const boardIdFromCategoriesRegex = /\/live_board\/v2\/boards\/\d+\/categories/;
+  const boardIdFromCategoriesRegex = /\/live_board\/v2\/boards\/(\d+)\/categories/;
   mock.onGet(boardIdFromCategoriesRegex).reply((config) => {
-    const boardId = boardIdFromCategoriesRegex.exec(config.url)[1];
+    const boardId = parseInt(boardIdFromCategoriesRegex.exec(config.url)[1]);
     return [200, {
       data: {
         "1": {

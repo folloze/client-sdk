@@ -32,8 +32,11 @@ describe("test liveboard mocks module", () => {
     });
 
     it('checks that getCategories mock works as expected', async() => {
-        await sdk.liveboard.getCategories(1)
-            .then(result => expect(result.categories_ids).toHaveLength(2));
+        await sdk.liveboard.getCategories(3)
+            .then(result => {
+                expect(result.data["1"].board_id).toEqual(3);
+                expect(result.categories_ids).toHaveLength(2);
+            });
     });
 
     it('checks that getUserChat mock works as expected', async() => {

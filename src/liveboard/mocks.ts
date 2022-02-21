@@ -70,10 +70,10 @@ export const rules = (mock: MockAdapter) => {
             images: []
         });
 
-    const boardIdFromCategoriesRegex: RegExp = /\/live_board\/v2\/boards\/\d+\/categories/;
+    const boardIdFromCategoriesRegex: RegExp = /\/live_board\/v2\/boards\/(\d+)\/categories/;
     mock.onGet(boardIdFromCategoriesRegex)
         .reply<CategoriesResponseV2>((config) => {
-            const boardId = (boardIdFromCategoriesRegex).exec(config.url)[1];
+            const boardId = parseInt((boardIdFromCategoriesRegex).exec(config.url)[1]);
             return [200, {
                 data: {
                     '1': {
@@ -82,7 +82,6 @@ export const rules = (mock: MockAdapter) => {
                         name: 'home',
                         category_type: 1,
                         parent_category_id: 1,
-                        // @ts-ignore
                         board_id: boardId,
                         url: 'url/home',
                         items_count: 3,
