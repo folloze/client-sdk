@@ -6,7 +6,7 @@ import {FloatPos, GridPos} from "./IPositions";
 import {ClientSDK} from "../../sdk";
 
 export type BoardConfig = {
-    boardId: string;
+    boardId: number;
     meta: {
         savedTime: Date;
     };

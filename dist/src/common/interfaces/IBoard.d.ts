@@ -5,7 +5,7 @@ import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
 import { ClientSDK } from "../../sdk";
 export declare type BoardConfig = {
-    boardId: string;
+    boardId: number;
     meta: {
         savedTime: Date;
     };

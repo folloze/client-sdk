@@ -61,7 +61,6 @@ var rules = (mock) => {
   });
   const boardIdFromCategoriesRegex = /\/live_board\/v2\/boards\/\d+\/categories/;
   mock.onGet(boardIdFromCategoriesRegex).reply((config) => {
-    console.log("mock config", config);
     const boardId = boardIdFromCategoriesRegex.exec(config.url)[1];
     return [200, {
       data: {

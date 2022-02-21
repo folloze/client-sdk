@@ -10,7 +10,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.L7TRBSUU.js";
+} from "./chunks/chunk.HO4A4QN3.js";
 import "./chunks/chunk.NG7TLSQO.js";
 import {
   Analytics,
