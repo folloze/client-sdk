@@ -59,36 +59,41 @@ var rules = (mock) => {
     description: "home category",
     images: []
   });
-  mock.onGet("/live_board/v2/boards/1/categories").reply(200, {
-    data: {
-      "1": {
-        id: 1,
-        slug: "home",
-        name: "home",
-        category_type: 1,
-        parent_category_id: 1,
-        board_id: 1,
-        url: "url/home",
-        items_count: 3,
-        subcategories_ids: [],
-        description: "home category",
-        images: []
+  const boardIdFromCategoriesRegex = /\/live_board\/v2\/boards\/\d+\/categories/;
+  mock.onGet(boardIdFromCategoriesRegex).reply((config) => {
+    console.log("mock config", config);
+    const boardId = boardIdFromCategoriesRegex.exec(config.url)[1];
+    return [200, {
+      data: {
+        "1": {
+          id: 1,
+          slug: "home",
+          name: "home",
+          category_type: 1,
+          parent_category_id: 1,
+          board_id: boardId,
+          url: "url/home",
+          items_count: 3,
+          subcategories_ids: [],
+          description: "home category",
+          images: []
+        },
+        "2": {
+          id: 2,
+          slug: "first",
+          name: "first",
+          category_type: 1,
+          parent_category_id: 1,
+          board_id: boardId,
+          url: "url/first",
+          items_count: 3,
+          subcategories_ids: [],
+          description: "first category",
+          images: []
+        }
       },
-      "2": {
-        id: 2,
-        slug: "first",
-        name: "first",
-        category_type: 1,
-        parent_category_id: 1,
-        board_id: 1,
-        url: "url/first",
-        items_count: 3,
-        subcategories_ids: [],
-        description: "first category",
-        images: []
-      }
-    },
-    categories_ids: [1, 2]
+      categories_ids: [1, 2]
+    }];
   });
   mock.onPost("/live_board/v1/chat/user_chat").reply(200, { token: "abcd", chat_id: 123 });
   mock.onGet("/live_board/v2/items/1").reply(200, item);
