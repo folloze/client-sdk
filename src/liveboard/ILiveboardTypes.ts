@@ -55,10 +55,13 @@ export type Image = {
 
 export type ItemsParams = {
     boardId: number,
-    categoryId: number,
-    search: string,
     page?: number,
-    perPage?: number
+    perPage?: number,
+
+    // you need at least one of below to work:
+    categoryIds?: number[],
+    search?: string,
+    multiCategoryIds?: number[][], // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
 }
 
 // minimixed data for the item relevant for the item viewer
