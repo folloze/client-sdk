@@ -50,6 +50,7 @@ export abstract class LiveWidget extends LiveDraggable {
         return this._widgetId;
     }
 
+    // todo: make it an helper indead = "widgetEmit"
     public emit(action: string, payload?: any, cb?: CallableFunction): void {
         this.dispatchEvent(new FlzEvent(this, action, payload, cb));
     }
