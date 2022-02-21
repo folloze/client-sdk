@@ -3,6 +3,7 @@ import {WidgetConfig} from "./IWidget";
 import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
 import {FloatPos, GridPos} from "./IPositions";
+import {ClientSDK} from "../../sdk";
 
 export type BoardConfig = {
     boardId: string;
@@ -30,6 +31,7 @@ export interface ILiveBoard extends LitElement {
     config: BoardConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
+    sdk: ClientSDK;
 
     getGridStyling(): string;
     positionToGridArea(p: GridPos): string;
