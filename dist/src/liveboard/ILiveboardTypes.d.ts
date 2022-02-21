@@ -48,10 +48,11 @@ export declare type Image = {
 };
 export declare type ItemsParams = {
     boardId: number;
-    categoryId: number;
-    search: string;
     page?: number;
     perPage?: number;
+    categoryIds?: number[];
+    search?: string;
+    multiCategoryIds?: number[][];
 };
 export declare type OpenItemViewerPayload = {
     id: number;
