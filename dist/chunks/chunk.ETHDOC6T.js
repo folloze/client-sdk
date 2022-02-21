@@ -701,12 +701,13 @@ var v4_default = v4;
 
 // src/common/FlzEvent.ts
 var FlzEvent = class extends Event {
-  constructor(emitter, action, payload, cb) {
+  constructor(emitter, action, payload, onSuccess, onError) {
     super(FLZ_WIDGET_EVENT_TYPE, { bubbles: true, composed: true });
     this.action = action;
     this.payload = payload;
     this.emitter = emitter;
-    this.callback = cb;
+    this.onSuccess = onSuccess;
+    this.onError = onError;
   }
 };
 

@@ -3,6 +3,7 @@ export declare class FlzEvent extends Event {
     action: string;
     payload: any;
     emitter: LiveWidget;
-    callback: Function | undefined;
-    constructor(emitter: LiveWidget, action: string, payload: any, cb?: CallableFunction);
+    private onSuccess;
+    private onError;
+    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
