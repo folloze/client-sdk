@@ -1,16 +1,17 @@
 import { LiveWidget } from "./LiveWidget";
+import { LitElement } from "lit";
 export declare const FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
 export declare abstract class FlzEvent extends Event {
     action: string;
     payload: any;
-    emitter: LiveWidget;
+    emitter: LitElement;
     onSuccess: Function | undefined;
     onError: Function | undefined;
-    protected constructor(emitter: LiveWidget, listenerStr: string, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
+    protected constructor(emitter: LitElement, listenerStr: string, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
 export declare class FlzBoardEvent extends FlzEvent {
     constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
 export declare class FlzDesignerEvent extends FlzEvent {
-    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
+    constructor(emitter: LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
