@@ -1,12 +1,15 @@
 import {
+  FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
+  FlzBoardEvent,
+  FlzDesignerEvent,
   FlzEvent,
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "../chunks/chunk.ETHDOC6T.js";
+} from "../chunks/chunk.FAK3EMBC.js";
 import {
   FetchService
 } from "../chunks/chunk.HRINL3QT.js";
@@ -24,8 +27,11 @@ import {
 import "../chunks/chunk.F6EFT5DN.js";
 import "../chunks/chunk.Z3GS5MY4.js";
 export {
+  FLZ_DESIGNER_EVENT_TYPE,
   FetchService,
   FloatEditor,
+  FlzBoardEvent,
+  FlzDesignerEvent,
   FlzEvent,
   LiveDraggable,
   LiveWidget,

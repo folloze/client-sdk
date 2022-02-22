@@ -1,12 +1,15 @@
 import {
+  FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
+  FlzBoardEvent,
+  FlzDesignerEvent,
   FlzEvent,
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "./chunks/chunk.ETHDOC6T.js";
+} from "./chunks/chunk.FAK3EMBC.js";
 import {
   ClientSDK,
   FetchService
@@ -48,10 +51,13 @@ export {
   Designer,
   DesignerEventTypes,
   EventSources,
+  FLZ_DESIGNER_EVENT_TYPE,
   FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE,
   FetchService,
   FloatEditor,
+  FlzBoardEvent,
+  FlzDesignerEvent,
   FlzEvent,
   ImageBankCategory,
   ImageBankType,

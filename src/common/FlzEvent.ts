@@ -1,8 +1,8 @@
 import {LiveWidget} from "./LiveWidget";
 import {FLZ_WIDGET_EVENT_TYPE} from "./interfaces/IWidgetCommunication";
+export const FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
 
-
-export class FlzEvent extends Event {
+export abstract class FlzEvent extends Event {
 
     public action: string;
     public payload: any;
@@ -10,12 +10,24 @@ export class FlzEvent extends Event {
     public onSuccess: Function | undefined;
     public onError: Function | undefined;
 
-    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
-        super(FLZ_WIDGET_EVENT_TYPE, {bubbles: true, composed: true});
+    protected constructor(emitter: LiveWidget, listenerStr: string, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+        super(listenerStr, {bubbles: true, composed: true});
         this.action = action;
         this.payload = payload;
         this.emitter = emitter;
         this.onSuccess = onSuccess;
         this.onError = onError;
+    }
+}
+
+export class FlzBoardEvent extends FlzEvent {
+    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+        super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
+    }
+}
+
+export class FlzDesignerEvent extends FlzEvent {
+    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+        super(emitter, FLZ_DESIGNER_EVENT_TYPE, action, payload, onSuccess, onError);
     }
 }

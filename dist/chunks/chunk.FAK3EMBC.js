@@ -699,18 +699,6 @@ function v4(options, buf, offset) {
 }
 var v4_default = v4;
 
-// src/common/FlzEvent.ts
-var FlzEvent = class extends Event {
-  constructor(emitter, action, payload, onSuccess, onError) {
-    super(FLZ_WIDGET_EVENT_TYPE, { bubbles: true, composed: true });
-    this.action = action;
-    this.payload = payload;
-    this.emitter = emitter;
-    this.onSuccess = onSuccess;
-    this.onError = onError;
-  }
-};
-
 // src/common/LiveWidget.ts
 var LiveWidget = class extends LiveDraggable {
   constructor() {
@@ -741,9 +729,6 @@ var LiveWidget = class extends LiveDraggable {
   }
   get widgetId() {
     return this._widgetId;
-  }
-  emit(action, payload, cb) {
-    this.dispatchEvent(new FlzEvent(this, action, payload, cb));
   }
   incomingEvents(e6) {
     return;
@@ -1096,14 +1081,40 @@ __decorateClass([
   e4()
 ], FloatEditor.prototype, "isLoading", 2);
 
+// src/common/FlzEvent.ts
+var FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
+var FlzEvent = class extends Event {
+  constructor(emitter, listenerStr, action, payload, onSuccess, onError) {
+    super(listenerStr, { bubbles: true, composed: true });
+    this.action = action;
+    this.payload = payload;
+    this.emitter = emitter;
+    this.onSuccess = onSuccess;
+    this.onError = onError;
+  }
+};
+var FlzBoardEvent = class extends FlzEvent {
+  constructor(emitter, action, payload, onSuccess, onError) {
+    super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
+  }
+};
+var FlzDesignerEvent = class extends FlzEvent {
+  constructor(emitter, action, payload, onSuccess, onError) {
+    super(emitter, FLZ_DESIGNER_EVENT_TYPE, action, payload, onSuccess, onError);
+  }
+};
+
 export {
   LiveDraggable,
-  FlzEvent,
   LiveWidget,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
   makeDragElement,
-  FloatEditor
+  FloatEditor,
+  FLZ_DESIGNER_EVENT_TYPE,
+  FlzEvent,
+  FlzBoardEvent,
+  FlzDesignerEvent
 };
 /**
  * @license
