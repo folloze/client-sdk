@@ -75,48 +75,53 @@ describe("testing sdk designer module", () => {
         await sdk.designer.getImageBankSettings(1)
             .then(result => expect(result.icons).toEqual("folloze"));
     });
-    
+
     it('checks that saveImageBankSettings mock works as expected', async () => {
         await sdk.designer.saveImageBankSettings(1, "banners", "folloze")
             .then(result => expect(result.icons).toEqual("folloze"));
     });
 
-    it('checks that getForms works as expexted', async () => {
+    it('checks that getForms works as expected', async () => {
         await sdk.designer.getForms(1)
             .then(result => expect(result).toMatchObject({"1": {}, "2": {}, "3": {}}));
     });
 
-    it('checks that createForm works as expexted', async () => {
+    it('checks that createForm works as expected', async () => {
         await sdk.designer.createForm(1, form)
             .then(result => expect(result.board_id).toEqual(1));
     });
 
-    it('checks that updateForm works as expexted', async () => {
+    it('checks that updateForm works as expected', async () => {
         await sdk.designer.updateForm(1, form)
             .then(result => expect(result.board_id).toEqual(1));
     });
 
-    it('checks that getFooters works as expexted', async () => {
+    it('checks that getFooters works as expected', async () => {
         await sdk.designer.getFooters(1)
             .then(result => expect(result.default_id).not.toBeNull());
     });
 
-    it('checks that getPrivacyMessages works as expexted', async () => {
+    it('checks that getPrivacyMessages works as expected', async () => {
         await sdk.designer.getPrivacyMessages(1)
             .then(result => expect(result.default_id).not.toBeNull());
     });
 
-    it('checks that getFooters works as expexted', async () => {
+    it('checks that getFooters works as expected', async () => {
         await sdk.designer.getFooters(1)
             .then(result => expect(result.default_id).not.toBeNull());
     });
 
-    it('checks that getPrivacySettings works as expexted', async () => {
+    it('checks that getPrivacySettings works as expected', async () => {
         await sdk.designer.getPrivacySettings(1)
             .then(result => expect(result.disable_share_button_on_board).not.toBeNull());
     });
 
-    it('checks that getBoardHasPersonalization works as expexted', async () => {
+    it('checks that getEmailTemplates works as expected', async () => {
+        await sdk.designer.getEmailTemplates(1)
+            .then(result => expect(result.template).not.toBeNull());
+    });
+
+    it('checks that getBoardHasPersonalization works as expected', async () => {
         await sdk.designer.getBoardHasPersonalization(1, 1)
             .then(result => expect(result.personalization).not.toBeNull());
     });

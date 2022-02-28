@@ -3,7 +3,7 @@ import {
     ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1, FormV1,
     CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
     BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1,
-    PersonalizationV1
+    PersonalizationV1, EmailTemplateV1
 } from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -127,7 +127,7 @@ export const rules = (mock: MockAdapter) => {
                 url: "https://images.folloze.com/image/upload/v1640684303/iog6rsbluzw2y07koz26.jpg"
             }
         ]);
-    
+
     //icons
     mock.onPost("/api/imagegallery", {type: "image_bank", bank_category: 4, organization_id: 1})
         .reply<GalleryImage[]>(200, [
@@ -208,7 +208,7 @@ export const rules = (mock: MockAdapter) => {
                 fit: "contained"
             }
         ]);
-    
+
     mock.onGet("/api/v1/organizations/1/settings/image_bank")
         .reply<ImageBankResponseV1>(200, {
             icons: ImageBankType.folloze,
@@ -239,7 +239,7 @@ export const rules = (mock: MockAdapter) => {
             get_url: "//images.folloze.com/image/upload/",
             put_url: providerUrl
         });
-    
+
     mock.onPost(providerUrl)
         .reply(200, {secure_url: 'https://uploaded_url.com'});
 
@@ -436,7 +436,7 @@ export const rules = (mock: MockAdapter) => {
         .reply<BoardHasPersonalizationResponseV1>(200, {
             personalization: true
         });
-    
+
     mock.onGet("/api/v1/organizations/1/settings/features")
         .reply<FeatureSettingsResponseV1>(200, {
             accounts_dashboard: true,
@@ -467,4 +467,25 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/url-for-saving-live-board")
         .reply(200);
+
+    mock.onGet("api/v1/boards/1/email_templates")
+        .reply<Record<string, EmailTemplateV1>>(200, {
+            "1": {
+                id: 1,
+                name: "template",
+                board_id: 1,
+                created_by: {
+                    id: 1,
+                    full_name: "template",
+                },
+                created_at: null,
+                updated_at: null,
+                is_default: false,
+                invitation_type: 1,
+                subject: "template",
+                text: "template",
+                logo: "template",
+                template: true
+            }
+        });
 };

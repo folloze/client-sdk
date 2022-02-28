@@ -7,7 +7,8 @@ import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
     UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
-    BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1
+    BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1,
+    EmailTemplateV1
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -31,11 +32,11 @@ export class Designer {
                 });
         });
     }
-    
+
     /**
      * Gets the image gallery for given types
-     * 
-     * @param {ImageGalleryParams} payload 
+     *
+     * @param {ImageGalleryParams} payload
      * @returns {GalleryImage[]} an array of GalleryImage
      */
      public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
@@ -56,19 +57,19 @@ export class Designer {
 
     /**
      * When searching the web for an image
-     * 
-     * @param {string} query 
+     *
+     * @param {string} query
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getQueryImageGallery(query: string): Promise<GalleryImage[]> {
         return this.getImageGallery({type: ImageGalleryTypes.search, query});
     }
-    
+
     /**
      * When a section has image bank set to 'organization'
-     * 
-     * @param {number} organizationId 
-     * @param {ImageBankCategory} bankCategory 
+     *
+     * @param {number} organizationId
+     * @param {ImageBankCategory} bankCategory
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getImageBankGallery(organizationId: number, bankCategory: ImageBankCategory): Promise<GalleryImage[]> {
@@ -82,7 +83,7 @@ export class Designer {
     /**
      * When a section of the designer has image bank set to 'folloze', get generic images
      * or organization doesn't have image bank set
-     * 
+     *
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getCampaignImageGallery(): Promise<GalleryImage[]> {
@@ -91,7 +92,7 @@ export class Designer {
 
     /**
      * Fetches all the parameters required to upload a file
-     * 
+     *
      * @param {string} uploadType the type of file to be uploaded
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
@@ -107,11 +108,11 @@ export class Designer {
                 });
         });
     }
-    
+
     /**
      * Get the settings for the organization's image bank
-     * 
-     * @param organizationId 
+     *
+     * @param organizationId
      * @returns {ImageBankResponseV1} ImageBankResponse
      */
     getImageBankSettings(organizationId: number): Promise<ImageBankResponseV1> {
@@ -132,8 +133,8 @@ export class Designer {
     //TODO: remove if not needed - currently used only in admin tab
     /**
      * Set the settings for the organization's image bank
-     * 
-     * @param {number} organizationId 
+     *
+     * @param {number} organizationId
      * @param {string} categoryName which type of images are being changes
      * @param {string} source the source of the images
      * @returns {ImageBankResponseV1} ImageBankResponse
@@ -163,7 +164,7 @@ export class Designer {
 
     /**
      * Gets all forms of a board
-     * 
+     *
      * @param {number} boardId
      * @returns {Record<string, FormV1>} an object of id and FormResponse
      */
@@ -176,14 +177,14 @@ export class Designer {
                     reject(e);
                 });
         });
-        
+
     }
 
     /**
      * Create a new form
-     * 
-     * @param {number} boardId 
-     * @param {FormV1} form 
+     *
+     * @param {number} boardId
+     * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
     createForm(boardId: number, form: FormV1): Promise<FormV1> {
@@ -199,9 +200,9 @@ export class Designer {
 
     /**
      * Update new form
-     * 
-     * @param {number} boardId 
-     * @param {FormV1} form 
+     *
+     * @param {number} boardId
+     * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
      updateForm(boardId: number, form: FormV1): Promise<FormV1> {
@@ -232,8 +233,8 @@ export class Designer {
 
     /**
      * Gets all of the organization's footers
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {CampaignElementResponseV1} on object of all of the footers and the default
      */
     getFooters(boardId): Promise<CampaignElementResponseV1> {
@@ -242,8 +243,8 @@ export class Designer {
 
     /**
      *  Gets all of the organization's privacy messages (cookie consent)
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {CampaignElementResponseV1} on object of all of the privacy messages and the default
      */
     getPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
@@ -252,8 +253,8 @@ export class Designer {
 
     /**
      * Gets all of the organization's form privacy messages
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {CampaignElementResponseV1} on object of all of the form privacy messages and the default
      */
     getFormPrivacyMessages(boardId): Promise<CampaignElementResponseV1> {
@@ -262,7 +263,7 @@ export class Designer {
 
     /**
      * Gets the privacy setting og the organization
-     * @param {number} organizationId 
+     * @param {number} organizationId
      * @returns {PrivacySettingsResponseV1} PrivacySettingsResponse
      */
     getPrivacySettings(organizationId: number): Promise<PrivacySettingsResponseV1> {
@@ -277,10 +278,28 @@ export class Designer {
     }
 
     /**
+     * Gets all email templates of a board
+     *
+     * @param {number} boardId
+     * @returns {Record<string, EmailTemplateV1>} an object of id and EmailTemplateResponse
+     */
+     getEmailTemplates(boardId: number): Promise<Record<string, EmailTemplateV1>> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<Record<string, EmailTemplateV1>>(`api/v1/boards/${boardId}/email_templates`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get email templates", e);
+                    reject(e);
+                });
+        });
+
+    }
+
+    /**
      * Return if a board has personalization
-     * 
-     * @param {number} organizationId 
-     * @param {number} boardId 
+     *
+     * @param {number} organizationId
+     * @param {number} boardId
      * @returns {BoardHasPersonalizationResponseV1} BoardHasPersonalizationResponse
      */
     getBoardHasPersonalization(organizationId: number, boardId: number): Promise<BoardHasPersonalizationResponseV1> {
@@ -296,11 +315,11 @@ export class Designer {
                 });
         });
     }
-    
+
     /**
      * Get which features are enables for an organization. Not all features are relevant to the designer
-     * 
-     * @param {number} organizationId 
+     *
+     * @param {number} organizationId
      * @returns {FeatureSettingsResponseV1} FeatureSettingsResponse
      */
     getFeatureSettings(organizationId: number): Promise<FeatureSettingsResponseV1> {
@@ -318,9 +337,9 @@ export class Designer {
 
     /**
      * Gets whether the board has items or not
-     *  
-     * @param {number} boardId 
-     * @param {number} leadingItemId 
+     *
+     * @param {number} boardId
+     * @param {number} leadingItemId
      * @returns {BoardHasItemsResponseV1} BoardHasItemsResponse
      */
     getBoardHasItems(boardId: number, leadingItemId: number): Promise<BoardHasItemsResponseV1> {
@@ -341,8 +360,8 @@ export class Designer {
 
     /**
      * Get the personalization for the board
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {PersonalizationV1} Personalization
      */
     getPersonalization(boardId: number): Promise<PersonalizationV1> {
@@ -358,9 +377,9 @@ export class Designer {
 
     /**
      * Saves personalizations
-     * 
-     * @param {number} boardId 
-     * @param {PersonalizationV1} personalization 
+     *
+     * @param {number} boardId
+     * @param {PersonalizationV1} personalization
      * @returns {PersonalizationV1} Personalization
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1> {

@@ -209,4 +209,23 @@ export declare type PersonalizationV1 = {
     };
     is_enabled: boolean;
 };
+
+export declare type EmailTemplateV1 = {
+    id: number;
+    name: string;
+    board_id: number;
+    created_by: {
+        id: number;
+        full_name: string;
+    };
+    created_at: Date;
+    updated_at: Date;
+    is_default: boolean;
+    invitation_type: number;
+    subject: string;
+    text: string;
+    logo: string;
+    template: boolean;
+}
+
 export {};
