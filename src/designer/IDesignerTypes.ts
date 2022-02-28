@@ -155,7 +155,7 @@ export type FootersResponseV1 = {
         dialog_button_label?: string,
         dialog_text?: string
     }
-  } 
+  }
 
 
 export type PrivacyMessageResponseV1 = {
@@ -223,7 +223,7 @@ export type BoardHasItemsResponseV1 = {
     has_items: boolean
 }
 
-export type PersonalizationV1= {
+export type PersonalizationV1 = {
     auto_assign_inviter: object,
     campaign: {
         banner: object,
@@ -235,4 +235,22 @@ export type PersonalizationV1= {
         promotion: object
     },
     is_enabled: boolean
+}
+
+export type EmailTemplateV1 = {
+    id: number,
+    name: string
+    board_id: number,
+    created_by: {
+        id: number,
+        full_name: string
+    },
+    created_at: Date,
+    updated_at: Date,
+    is_default: boolean,
+    invitation_type: number,
+    subject: string,
+    text: string,
+    logo: string,
+    template: boolean
 }
