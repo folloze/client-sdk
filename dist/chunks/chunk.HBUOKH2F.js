@@ -131,6 +131,14 @@ var Designer = class {
       });
     });
   }
+  getEmailTemplates(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`api/v1/boards/${boardId}/email_templates`).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get email templates", e);
+        reject(e);
+      });
+    });
+  }
   getBoardHasPersonalization(organizationId, boardId) {
     return new Promise((resolve, reject) => {
       this.fetcher.get(`api/v1/organizations/${organizationId}/settings/personalizations`, { params: { board_id: boardId } }).then((result) => resolve(result.data)).catch((e) => {

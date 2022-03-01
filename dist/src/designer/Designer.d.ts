@@ -1,11 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import {
-    ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1,
-    CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1,
-    BoardHasItemsResponseV1, PersonalizationV1, EmailTemplateV1
-} from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1, EmailTemplateV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -114,9 +110,10 @@ export declare class Designer {
      */
     getPrivacySettings(organizationId: number): Promise<PrivacySettingsResponseV1>;
     /**
-     * Return board email templates
+     * Gets all email templates of a board
+     *
      * @param {number} boardId
-     * @returns {Record<string, FormV1>} an object of id and FormResponse
+     * @returns {Record<string, EmailTemplateV1>} an object of id and EmailTemplateResponse
      */
     getEmailTemplates(boardId: number): Promise<Record<string, EmailTemplateV1>>;
     /**

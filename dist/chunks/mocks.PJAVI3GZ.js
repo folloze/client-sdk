@@ -422,6 +422,25 @@ var rules = (mock) => {
   mock.onGet("/prism/1/personalization").reply(200, personalization);
   mock.onPut("/prism/1/personalization").reply(200, personalization);
   mock.onPost("/url-for-saving-live-board").reply(200);
+  mock.onGet("api/v1/boards/1/email_templates").reply(200, {
+    "1": {
+      id: 1,
+      name: "template",
+      board_id: 1,
+      created_by: {
+        id: 1,
+        full_name: "template"
+      },
+      created_at: null,
+      updated_at: null,
+      is_default: false,
+      invitation_type: 1,
+      subject: "template",
+      text: "template",
+      logo: "template",
+      template: true
+    }
+  });
 };
 export {
   rules

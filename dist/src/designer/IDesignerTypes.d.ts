@@ -209,7 +209,6 @@ export declare type PersonalizationV1 = {
     };
     is_enabled: boolean;
 };
-
 export declare type EmailTemplateV1 = {
     id: number;
     name: string;
@@ -226,6 +225,5 @@ export declare type EmailTemplateV1 = {
     text: string;
     logo: string;
     template: boolean;
-}
-
+};
 export {};
