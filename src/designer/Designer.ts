@@ -336,29 +336,6 @@ export class Designer {
     }
 
     /**
-     * Gets whether the board has items or not
-     *
-     * @param {number} boardId
-     * @param {number} leadingItemId
-     * @returns {BoardHasItemsResponseV1} BoardHasItemsResponse
-     */
-    getBoardHasItems(boardId: number, leadingItemId: number): Promise<BoardHasItemsResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.get<BoardHasItemsResponseV1>("/api/v1/preview/board_items_presence", {
-                params: {
-                    board_id: boardId,
-                    leading_item_id: leadingItemId
-                }
-            })
-                .then(result => resolve(result.data))
-                .catch(e => {
-                    console.error("could not get board has items", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
      * Get the personalization for the board
      *
      * @param {number} boardId

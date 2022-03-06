@@ -50,7 +50,7 @@ describe("test liveboard mocks module", () => {
     });
 
     it('checks that getItems mock works as expected', async() => {
-        await sdk.liveboard.getItems({boardId: 1, categoryId: 1, search: ""})
+        await sdk.liveboard.getItems({boardId: 1, search: ""})
             .then(result => expect(result.item_ids).toHaveLength(1));
     });
 

@@ -99,11 +99,14 @@ export class FetchService {
         // options.config.xsrfHeaderName = 'X-CSRF-TOKEN';
 
         options.config.headers["X-Requested-With"] = "XMLHttpRequest";
-        // if (document?.querySelector("meta[name=csrf-token]")) {
+        // if (document?.querySelector("meta[name=csrf-token]")) { // doesn't work in a node environment
         //   options.config.headers["X-Requested-With"] = "XMLHttpRequest";
         //   // @ts-ignore
         //   options.config.headers["X-CSRF-Token"] = document.querySelector("meta[name=csrf-token]").content;
         // }
+
+        // ADD HERE EVERYTHING I NEED
+
 
         this.fetcher = axios.create(options.config);
     }

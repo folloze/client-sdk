@@ -131,11 +131,6 @@ describe("testing sdk designer module", () => {
             .then(result => expect(result.personalization).not.toBeNull());
     });
 
-    it('checks that getBoardHasItems works as expected', async () => {
-        await sdk.designer.getBoardHasItems(1, 1)
-            .then(result => expect(result.has_items).not.toBeNull());
-    });
-
     it('checks that getPersonalization workd as expected', async () => {
         await sdk.designer.getPersonalization(1)
             .then(result => expect(result.campaign.header).toHaveProperty('logo.image.merge_tag_ids'));

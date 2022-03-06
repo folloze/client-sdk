@@ -1,32 +1,32 @@
 import {
   require_axios
-} from "./chunk.NPVWZY7A.js";
+} from "./chunk.4LCDCOKX.js";
 import {
   Analytics
 } from "./chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunk.HBUOKH2F.js";
+} from "./chunk.IX7MAVOC.js";
 import {
   Liveboard
-} from "./chunk.E2WLG55Y.js";
+} from "./chunk.E6A7S2SE.js";
 import {
-  __toModule
-} from "./chunk.Z3GS5MY4.js";
+  __toESM
+} from "./chunk.QHN7EUNM.js";
 
 // src/common/FetchService.ts
-var import_axios = __toModule(require_axios());
+var import_axios = __toESM(require_axios(), 1);
 
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.2LDL3FHV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.EYTBGFJP.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.PJAVI3GZ.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.S2J474JX.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.LF7HGLSV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.HEALZGIW.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
@@ -55,7 +55,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.LYFBUYYS.js").then(async (module) => {
+    return await import("./src.73AFOEF4.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([

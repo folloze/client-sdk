@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1, EmailTemplateV1 } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -131,14 +131,6 @@ export declare class Designer {
      * @returns {FeatureSettingsResponseV1} FeatureSettingsResponse
      */
     getFeatureSettings(organizationId: number): Promise<FeatureSettingsResponseV1>;
-    /**
-     * Gets whether the board has items or not
-     *
-     * @param {number} boardId
-     * @param {number} leadingItemId
-     * @returns {BoardHasItemsResponseV1} BoardHasItemsResponse
-     */
-    getBoardHasItems(boardId: number, leadingItemId: number): Promise<BoardHasItemsResponseV1>;
     /**
      * Get the personalization for the board
      *

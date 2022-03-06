@@ -1,6 +1,6 @@
 import {
   __spreadValues
-} from "./chunk.Z3GS5MY4.js";
+} from "./chunk.QHN7EUNM.js";
 
 // src/liveboard/mocks.ts
 var rules = (mock) => {
