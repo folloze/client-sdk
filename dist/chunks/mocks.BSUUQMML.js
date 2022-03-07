@@ -1,5 +1,8 @@
-import "./chunk.FPDLHEHA.js";
-import "./chunk.QHN7EUNM.js";
+import {
+  CampaignElementsTypes,
+  ImageBankType
+} from "./chunk.FPDLHEHA.js";
+import "./chunk.Z3GS5MY4.js";
 
 // src/designer/mocks.ts
 var rules = (mock) => {
@@ -195,18 +198,18 @@ var rules = (mock) => {
     }
   ]);
   mock.onGet("/api/v1/organizations/1/settings/image_bank").reply(200, {
-    icons: "folloze" /* folloze */,
-    logos: "folloze" /* folloze */,
-    banners: "folloze" /* folloze */,
-    thumbnails: "folloze" /* folloze */,
-    mobile_banners: "folloze" /* folloze */
+    icons: ImageBankType.folloze,
+    logos: ImageBankType.folloze,
+    banners: ImageBankType.folloze,
+    thumbnails: ImageBankType.folloze,
+    mobile_banners: ImageBankType.folloze
   });
   mock.onPut("/api/v1/organizations/1/settings/image_bank").reply(200, {
-    icons: "folloze" /* folloze */,
-    logos: "folloze" /* folloze */,
-    banners: "folloze" /* folloze */,
-    thumbnails: "folloze" /* folloze */,
-    mobile_banners: "folloze" /* folloze */
+    icons: ImageBankType.folloze,
+    logos: ImageBankType.folloze,
+    banners: ImageBankType.folloze,
+    thumbnails: ImageBankType.folloze,
+    mobile_banners: ImageBankType.folloze
   });
   mock.onPost("/api/v1/upload_urls").reply(200, {
     file_name: "file_name",
@@ -310,7 +313,7 @@ var rules = (mock) => {
       success_message: "thanks!"
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: 1 /* footer */ } }).reply(200, {
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -330,7 +333,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: 2 /* privacy_message */ } }).reply(200, {
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.privacy_message } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -347,7 +350,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: 3 /* form_privacy_message */ } }).reply(200, {
+  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.form_privacy_message } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -363,18 +366,18 @@ var rules = (mock) => {
       "5": {
         checkbox_area: {
           checkboxes: [{
-            label: "fdsfsd",
+            label: "First Checkbox",
             name: "form_privacy_checkbox_1",
             is_required: false
           }],
-          label: "fsdfds",
+          label: "Checkbox Area",
           threshold: 2
         },
         element_id: 5,
         id: 5,
         is_standard: null,
-        message: { html: "<p>fdsfsdfsdf</p><p>fdsfsdf</p>" },
-        name: "New Form fdsfs Message",
+        message: { html: "<p>privacy text</p><p>more privacy text</p>" },
+        name: "New Form Privacy Message",
         state: null,
         text_area: null
       }
@@ -422,22 +425,42 @@ var rules = (mock) => {
   mock.onGet("api/v1/boards/1/email_templates").reply(200, {
     "1": {
       id: 1,
-      name: "template",
+      name: "template name",
       board_id: 1,
       created_by: {
         id: 1,
-        full_name: "template"
+        full_name: "template full name"
       },
       created_at: null,
       updated_at: null,
       is_default: false,
       invitation_type: 1,
-      subject: "template",
-      text: "template",
-      logo: "template",
+      subject: "template subject",
+      text: "template text",
+      logo: "template logo",
       template: true
     }
   });
+  mock.onGet("/api/v1/search/board_contacts", { params: { board_id: 1, query: "query" } }).reply(200, [
+    {
+      id: 1,
+      name: "user name",
+      email: "user@email.com",
+      bio_settings: {},
+      linkedin: {},
+      twitter: {},
+      image: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
+    },
+    {
+      id: 2,
+      name: "second user name",
+      email: "user_a@email.com",
+      bio_settings: {},
+      linkedin: {},
+      twitter: {},
+      image: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
+    }
+  ]);
 };
 export {
   rules

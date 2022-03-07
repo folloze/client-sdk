@@ -3,7 +3,7 @@ import {
     ImageBankResponseV1, ImageBankType, GalleryImage, UploadUrlResponseV1, FormV1,
     CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
     BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1,
-    PersonalizationV1, EmailTemplateV1
+    PersonalizationV1, EmailTemplateV1, UserV1
 } from "./IDesignerTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -397,18 +397,18 @@ export const rules = (mock: MockAdapter) => {
                 "5": {
                     checkbox_area: {
                         checkboxes: [{
-                            label: "fdsfsd",
+                            label: "First Checkbox",
                             name: "form_privacy_checkbox_1",
                             is_required: false
                         }],
-                        label: "fsdfds",
+                        label: "Checkbox Area",
                         threshold: 2
                     },
                     element_id: 5,
                     id: 5,
                     is_standard: null,
-                    message: {html: "<p>fdsfsdfsdf</p><p>fdsfsdf</p>"},
-                    name: "New Form fdsfs Message",
+                    message: {html: "<p>privacy text</p><p>more privacy text</p>"},
+                    name: "New Form Privacy Message",
                     state: null,
                     text_area: null
                 }
@@ -472,20 +472,43 @@ export const rules = (mock: MockAdapter) => {
         .reply<Record<string, EmailTemplateV1>>(200, {
             "1": {
                 id: 1,
-                name: "template",
+                name: "template name",
                 board_id: 1,
                 created_by: {
                     id: 1,
-                    full_name: "template",
+                    full_name: "template full name",
                 },
                 created_at: null,
                 updated_at: null,
                 is_default: false,
                 invitation_type: 1,
-                subject: "template",
-                text: "template",
-                logo: "template",
+                subject: "template subject",
+                text: "template text",
+                logo: "template logo",
                 template: true
             }
         });
+
+    mock.onGet("/api/v1/search/board_contacts", {params: {board_id: 1, query: "query"}})
+        .reply<UserV1[]>(200, [
+                {
+                    id: 1,
+                    name: "user name",
+                    email: "user@email.com",
+                    bio_settings: {},
+                    linkedin: {},
+                    twitter: {},
+                    image: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
+                },
+                {
+                    id: 2,
+                    name: "second user name",
+                    email: "user_a@email.com",
+                    bio_settings: {},
+                    linkedin: {},
+                    twitter: {},
+                    image: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
+                }
+            ]
+        );
 };
