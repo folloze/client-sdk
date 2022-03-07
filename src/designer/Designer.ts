@@ -8,7 +8,7 @@ import {
     ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
     UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
     BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1,
-    EmailTemplateV1
+    EmailTemplateV1, UserV1
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -401,6 +401,30 @@ export class Designer {
                 })
                 .catch(e => {
                     console.error("could not save liveboard", e);
+                    reject(e);
+                });
+        });
+    }
+
+
+    /**
+     * searches board contacts
+     *
+     * @param {number} boardId
+     * @param {string} query
+     * @returns {UserV1[]} Users array
+     */
+    searchBoardContacts(boardId: number, query: string): Promise<UserV1[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher.get<UserV1[]>("/api/v1/search/board_contacts", {
+                params: {
+                    board_id: boardId,
+                    query: query
+                }
+            })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get board contacts", e);
                     reject(e);
                 });
         });

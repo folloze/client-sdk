@@ -254,3 +254,13 @@ export type EmailTemplateV1 = {
     logo: string,
     template: boolean
 }
+
+export type UserV1 = {
+    id: number,
+    name: string,
+    email: string,
+    bio_settings: object,
+    linkedin: object,
+    twitter: object,
+    image: string
+}

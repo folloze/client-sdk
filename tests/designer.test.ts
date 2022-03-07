@@ -118,7 +118,7 @@ describe("testing sdk designer module", () => {
 
     it('checks that getEmailTemplates works as expected', async () => {
         await sdk.designer.getEmailTemplates(1)
-            .then(result => expect(result.template).not.toBeNull());
+            .then(result => expect(result["1"].template).not.toBeNull());
     });
 
     it('checks that getBoardHasPersonalization works as expected', async () => {
@@ -151,4 +151,8 @@ describe("testing sdk designer module", () => {
             .then(result => expect(result.status == 200));
     });
 
+    it('checks that searchBoardContacts works as expected', async () => {
+        await sdk.designer.searchBoardContacts(1, "query")
+            .then(result => expect(result.length).toEqual(2));
+    });
 });

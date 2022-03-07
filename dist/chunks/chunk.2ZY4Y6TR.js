@@ -194,6 +194,19 @@ var Designer = class {
       });
     });
   }
+  searchBoardContacts(boardId, query) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get("/api/v1/search/board_contacts", {
+        params: {
+          board_id: boardId,
+          query
+        }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get board contacts", e);
+        reject(e);
+      });
+    });
+  }
 };
 
 export {

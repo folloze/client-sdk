@@ -366,18 +366,18 @@ var rules = (mock) => {
       "5": {
         checkbox_area: {
           checkboxes: [{
-            label: "fdsfsd",
+            label: "First Checkbox",
             name: "form_privacy_checkbox_1",
             is_required: false
           }],
-          label: "fsdfds",
+          label: "Checkbox Area",
           threshold: 2
         },
         element_id: 5,
         id: 5,
         is_standard: null,
-        message: { html: "<p>fdsfsdfsdf</p><p>fdsfsdf</p>" },
-        name: "New Form fdsfs Message",
+        message: { html: "<p>privacy text</p><p>more privacy text</p>" },
+        name: "New Form Privacy Message",
         state: null,
         text_area: null
       }
@@ -441,6 +441,26 @@ var rules = (mock) => {
       template: true
     }
   });
+  mock.onGet("/api/v1/search/board_contacts", { params: { board_id: 1, query: "query" } }).reply(200, [
+    {
+      id: 1,
+      name: "user name",
+      email: "user@email.com",
+      bio_settings: {},
+      linkedin: {},
+      twitter: {},
+      image: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
+    },
+    {
+      id: 2,
+      name: "second user name",
+      email: "user_a@email.com",
+      bio_settings: {},
+      linkedin: {},
+      twitter: {},
+      image: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
+    }
+  ]);
 };
 export {
   rules
