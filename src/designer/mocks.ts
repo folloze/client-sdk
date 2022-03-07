@@ -489,7 +489,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onGet("/api/v1/search/board_contacts", {params: {board_id: 1, query: "query"}})
+    mock.onGet("/api/v1/search/board_contacts")
         .reply<UserV1[]>(200, [
                 {
                     id: 1,

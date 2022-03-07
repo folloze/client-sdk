@@ -441,7 +441,7 @@ var rules = (mock) => {
       template: true
     }
   });
-  mock.onGet("/api/v1/search/board_contacts", { params: { board_id: 1, query: "query" } }).reply(200, [
+  mock.onGet("/api/v1/search/board_contacts").reply(200, [
     {
       id: 1,
       name: "user name",
