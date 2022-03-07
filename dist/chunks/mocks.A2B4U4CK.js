@@ -223,7 +223,7 @@ var rules = (mock) => {
     put_url: providerUrl
   });
   mock.onPost(providerUrl).reply(200, { secure_url: "https://uploaded_url.com" });
-  mock.onGet("api/v1/boards/1/forms").reply(200, {
+  mock.onGet(/api\/v1\/boards\/(\d+)\/forms/).reply(200, {
     "1": {
       board_id: 1,
       form_type: 1,
@@ -313,7 +313,7 @@ var rules = (mock) => {
       success_message: "thanks!"
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {
+  mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -333,7 +333,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.privacy_message } }).reply(200, {
+  mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.privacy_message } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -350,7 +350,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("prism/1/campaign_elements", { params: { element_type: CampaignElementsTypes.form_privacy_message } }).reply(200, {
+  mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.form_privacy_message } }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -422,7 +422,7 @@ var rules = (mock) => {
   mock.onGet("/prism/1/personalization").reply(200, personalization);
   mock.onPut("/prism/1/personalization").reply(200, personalization);
   mock.onPost("/url-for-saving-live-board").reply(200);
-  mock.onGet("api/v1/boards/1/email_templates").reply(200, {
+  mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {
       id: 1,
       name: "template name",

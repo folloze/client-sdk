@@ -243,7 +243,7 @@ export const rules = (mock: MockAdapter) => {
     mock.onPost(providerUrl)
         .reply(200, {secure_url: 'https://uploaded_url.com'});
 
-    mock.onGet("api/v1/boards/1/forms")
+    mock.onGet(/api\/v1\/boards\/(\d+)\/forms/)
         .reply<Record<string, FormV1>>(200, {
             "1": {
                 board_id: 1,
@@ -339,7 +339,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.footer}})
+    mock.onGet(/prism\/(\d+)\/campaign_elements/, {params: {element_type: CampaignElementsTypes.footer}})
         .reply<CampaignElementResponseV1>(200, {
             default_id: 0,
             data: {
@@ -361,7 +361,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.privacy_message}})
+    mock.onGet(/prism\/(\d+)\/campaign_elements/, {params: {element_type: CampaignElementsTypes.privacy_message}})
         .reply<CampaignElementResponseV1>(200, {
             default_id: 0,
             data: {
@@ -380,7 +380,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onGet("prism/1/campaign_elements", {params: {element_type: CampaignElementsTypes.form_privacy_message}})
+    mock.onGet(/prism\/(\d+)\/campaign_elements/, {params: {element_type: CampaignElementsTypes.form_privacy_message}})
         .reply<CampaignElementResponseV1>(200, {
             default_id: 0,
             data: {
@@ -468,7 +468,7 @@ export const rules = (mock: MockAdapter) => {
     mock.onPost("/url-for-saving-live-board")
         .reply(200);
 
-    mock.onGet("api/v1/boards/1/email_templates")
+    mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/)
         .reply<Record<string, EmailTemplateV1>>(200, {
             "1": {
                 id: 1,
