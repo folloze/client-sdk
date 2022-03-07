@@ -1,4 +1,4 @@
-import "./chunk.Z3GS5MY4.js";
+import "./chunk.QHN7EUNM.js";
 
 // src/analytics/mocks.ts
 var rules = (mock) => {
