@@ -425,19 +425,19 @@ var rules = (mock) => {
   mock.onGet("api/v1/boards/1/email_templates").reply(200, {
     "1": {
       id: 1,
-      name: "template",
+      name: "template name",
       board_id: 1,
       created_by: {
         id: 1,
-        full_name: "template"
+        full_name: "template full name"
       },
       created_at: null,
       updated_at: null,
       is_default: false,
       invitation_type: 1,
-      subject: "template",
-      text: "template",
-      logo: "template",
+      subject: "template subject",
+      text: "template text",
+      logo: "template logo",
       template: true
     }
   });

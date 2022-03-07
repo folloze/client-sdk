@@ -1,7 +1,7 @@
 export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1 } from "./IDesignerTypes";
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1 } from "./IDesignerTypes";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);

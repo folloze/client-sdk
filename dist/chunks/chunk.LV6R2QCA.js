@@ -155,19 +155,6 @@ var Designer = class {
       });
     });
   }
-  getBoardHasItems(boardId, leadingItemId) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.get("/api/v1/preview/board_items_presence", {
-        params: {
-          board_id: boardId,
-          leading_item_id: leadingItemId
-        }
-      }).then((result) => resolve(result.data)).catch((e) => {
-        console.error("could not get board has items", e);
-        reject(e);
-      });
-    });
-  }
   getPersonalization(boardId) {
     return new Promise((resolve, reject) => {
       this.fetcher.get(`/prism/${boardId}/personalization`).then((result) => resolve(result.data)).catch((e) => {
