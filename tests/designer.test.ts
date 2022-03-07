@@ -98,42 +98,44 @@ describe("testing sdk designer module", () => {
 
     it('checks that getFooters works as expected', async () => {
         await sdk.designer.getFooters(1)
-            .then(result => expect(result.default_id).not.toBeNull());
+            .then(result => expect(result.default_id).toEqual(0));
     });
 
     it('checks that getPrivacyMessages works as expected', async () => {
         await sdk.designer.getPrivacyMessages(1)
-            .then(result => expect(result.default_id).not.toBeNull());
+            .then(result => expect(result.default_id).toEqual(0));
     });
 
     it('checks that getFooters works as expected', async () => {
         await sdk.designer.getFooters(1)
-            .then(result => expect(result.default_id).not.toBeNull());
+            .then(result => expect(result.default_id).toEqual(0));
     });
 
     it('checks that getPrivacySettings works as expected', async () => {
         await sdk.designer.getPrivacySettings(1)
-            .then(result => expect(result.disable_share_button_on_board).not.toBeNull());
+            .then(result => expect(result.disable_share_button_on_board).toBeFalsy());
     });
 
     it('checks that getEmailTemplates works as expected', async () => {
         await sdk.designer.getEmailTemplates(1)
-            .then(result => expect(result["1"].template).not.toBeNull());
+            .then(result => {
+                expect(result["1"].template).toBeTruthy();
+            });
     });
 
     it('checks that getBoardHasPersonalization works as expected', async () => {
         await sdk.designer.getBoardHasPersonalization(1, 1)
-            .then(result => expect(result.personalization).not.toBeNull());
+            .then(result => expect(result.personalization).toBeTruthy());
     });
 
     it('checks that getFeatureSettings works as expected', async () => {
         await sdk.designer.getFeatureSettings(1)
-            .then(result => expect(result.personalization).not.toBeNull());
+            .then(result => expect(result.personalization).toBeTruthy());
     });
 
     it('checks that getBoardHasItems works as expected', async () => {
         await sdk.designer.getBoardHasItems(1, 1)
-            .then(result => expect(result.has_items).not.toBeNull());
+            .then(result => expect(result.has_items).toBeTruthy());
     });
 
     it('checks that getPersonalization workd as expected', async () => {
