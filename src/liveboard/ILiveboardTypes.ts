@@ -58,6 +58,7 @@ export type ItemsParams = {
     page?: number,
     perPage?: number,
 
+    category?: number, // temporarily support old API until new API is released
     // you need at least one of below to work:
     categoryIds?: number[],
     search?: string,

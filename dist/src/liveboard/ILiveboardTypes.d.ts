@@ -50,6 +50,7 @@ export declare type ItemsParams = {
     boardId: number;
     page?: number;
     perPage?: number;
+    category?: number;
     categoryIds?: number[];
     search?: string;
     multiCategoryIds?: number[][];
