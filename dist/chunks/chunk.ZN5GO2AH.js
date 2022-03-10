@@ -1,6 +1,6 @@
 import {
   require_lodash
-} from "./chunk.BQMFBATZ.js";
+} from "./chunk.FJ3V2PYX.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
 } from "./chunk.F6EFT5DN.js";
@@ -8,8 +8,8 @@ import {
   __decorateClass,
   __spreadProps,
   __spreadValues,
-  __toESM
-} from "./chunk.QHN7EUNM.js";
+  __toModule
+} from "./chunk.Z3GS5MY4.js";
 
 // node_modules/@lit/reactive-element/css-tag.js
 var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
@@ -268,7 +268,7 @@ var a = class extends HTMLElement {
   firstUpdated(t3) {
   }
 };
-a.finalized = true, a.elementProperties = /* @__PURE__ */ new Map(), a.elementStyles = [], a.shadowRootOptions = { mode: "open" }, h == null || h({ ReactiveElement: a }), ((s2 = globalThis.reactiveElementVersions) !== null && s2 !== void 0 ? s2 : globalThis.reactiveElementVersions = []).push("1.2.3");
+a.finalized = true, a.elementProperties = /* @__PURE__ */ new Map(), a.elementStyles = [], a.shadowRootOptions = { mode: "open" }, h == null || h({ ReactiveElement: a }), ((s2 = globalThis.reactiveElementVersions) !== null && s2 !== void 0 ? s2 : globalThis.reactiveElementVersions = []).push("1.2.1");
 
 // node_modules/lit-html/lit-html.js
 var t2;
@@ -291,13 +291,13 @@ var a2 = />/g;
 var f = />|[ 	\n\r](?:([^\s"'>=/]+)([ 	\n\r]*=[ 	\n\r]*(?:[^ 	\n\r"'`<>=]|("|')|))|$)/g;
 var _ = /'/g;
 var m = /"/g;
-var g = /^(?:script|style|textarea|title)$/i;
+var g = /^(?:script|style|textarea)$/i;
 var p = (t3) => (i5, ...s5) => ({ _$litType$: t3, strings: i5, values: s5 });
 var $ = p(1);
 var y = p(2);
 var b = Symbol.for("lit-noChange");
 var w = Symbol.for("lit-nothing");
-var T = /* @__PURE__ */ new WeakMap();
+var T = new WeakMap();
 var x = (t3, i5, s5) => {
   var e6, o6;
   const n6 = (e6 = s5 == null ? void 0 : s5.renderBefore) !== null && e6 !== void 0 ? e6 : i5;
@@ -552,7 +552,7 @@ var L = class {
   }
 };
 var z = window.litHtmlPolyfillSupport;
-z == null || z(E, N), ((t2 = globalThis.litHtmlVersions) !== null && t2 !== void 0 ? t2 : globalThis.litHtmlVersions = []).push("2.1.3");
+z == null || z(E, N), ((t2 = globalThis.litHtmlVersions) !== null && t2 !== void 0 ? t2 : globalThis.litHtmlVersions = []).push("2.1.2");
 
 // node_modules/lit-element/lit-element.js
 var l3;
@@ -765,7 +765,7 @@ var LiveWidgetEdit = class extends s4 {
 };
 
 // src/common/LiveWidgetComponentEdit.ts
-var import_lodash = __toESM(require_lodash(), 1);
+var import_lodash = __toModule(require_lodash());
 var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   set propertyPath(path) {
     this._propPath = path;
@@ -965,7 +965,7 @@ FloatEditor.styles = [
             overflow: visible;
             max-width: 300px;
 
-            border-radius: var(--fz-border-radius-small);
+            border-radius: var(--edit-fz-border-radius-small);
             font-family: Open Sans, serif;
           }
 
@@ -973,7 +973,7 @@ FloatEditor.styles = [
             font-size: 15px;
             font-family: "Roboto", serif;
             cursor: pointer;
-            color: var(--fz-color-neutral-0);
+            color: var(--edit-fz-color-neutral-0);
             border: none;
             background: none;
 
@@ -998,12 +998,12 @@ FloatEditor.styles = [
           }
 
           #handle {
-            background-color: var(--fz-color-primary-3);
-            border-radius: var(--fz-border-radius-small) var(--fz-border-radius-small) 0 0;
+            background-color: var(--edit-fz-color-primary-3);
+            border-radius: var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small) 0 0;
             height: 30px;
             display: flex;
             align-items: center;
-            padding: var(--fz-spacing-4x-small) var(--fz-spacing-small);
+            padding: var(--edit-fz-spacing-4x-small) var(--edit-fz-spacing-small);
             justify-content: space-between;
 
             white-space: nowrap;
@@ -1015,14 +1015,14 @@ FloatEditor.styles = [
             line-height: 21px;
             letter-spacing: 0;
             text-align: left;
-            color: var(--fz-color-neutral-0);
+            color: var(--edit-fz-color-neutral-0);
 
           }
 
           #body {
-            padding: var(--fz-spacing-small);
+            padding: var(--edit-fz-spacing-small);
             background-color: var(--sys-color-neutral-0);
-            border-radius: 0 0 var(--fz-border-radius-small) var(--fz-border-radius-small);
+            border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
           }
           .loading {
             width: 100%;
@@ -1069,8 +1069,6 @@ FloatEditor.styles = [
 
           input:focus {
             outline: none;
-            border: 1px thin var(--subCardSelectedColor);
-            background: var(--subCardBgColor);
           }
         `
 ];

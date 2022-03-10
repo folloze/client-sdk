@@ -31,7 +31,7 @@ export class FloatEditor extends LitElement {
             overflow: visible;
             max-width: 300px;
 
-            border-radius: var(--fz-border-radius-small);
+            border-radius: var(--edit-fz-border-radius-small);
             font-family: Open Sans, serif;
           }
 
@@ -39,7 +39,7 @@ export class FloatEditor extends LitElement {
             font-size: 15px;
             font-family: "Roboto", serif;
             cursor: pointer;
-            color: var(--fz-color-neutral-0);
+            color: var(--edit-fz-color-neutral-0);
             border: none;
             background: none;
 
@@ -64,12 +64,12 @@ export class FloatEditor extends LitElement {
           }
 
           #handle {
-            background-color: var(--fz-color-primary-3);
-            border-radius: var(--fz-border-radius-small) var(--fz-border-radius-small) 0 0;
+            background-color: var(--edit-fz-color-primary-3);
+            border-radius: var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small) 0 0;
             height: 30px;
             display: flex;
             align-items: center;
-            padding: var(--fz-spacing-4x-small) var(--fz-spacing-small);
+            padding: var(--edit-fz-spacing-4x-small) var(--edit-fz-spacing-small);
             justify-content: space-between;
 
             white-space: nowrap;
@@ -81,14 +81,14 @@ export class FloatEditor extends LitElement {
             line-height: 21px;
             letter-spacing: 0;
             text-align: left;
-            color: var(--fz-color-neutral-0);
+            color: var(--edit-fz-color-neutral-0);
 
           }
 
           #body {
-            padding: var(--fz-spacing-small);
+            padding: var(--edit-fz-spacing-small);
             background-color: var(--sys-color-neutral-0);
-            border-radius: 0 0 var(--fz-border-radius-small) var(--fz-border-radius-small);
+            border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
           }
           .loading {
             width: 100%;
@@ -135,8 +135,6 @@ export class FloatEditor extends LitElement {
 
           input:focus {
             outline: none;
-            border: 1px thin var(--subCardSelectedColor);
-            background: var(--subCardBgColor);
           }
         `
     ] as CSSResultGroup;
