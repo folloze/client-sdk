@@ -38,9 +38,9 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         const newLeft = el.offsetLeft - pos1;
 
         // vertical limiter
-        if (newTop <= 0 || newTop >= window.innerHeight - el.offsetHeight) {
-            return;
-        }
+        // if (newTop <= 0 || newTop >= window.innerHeight - el.offsetHeight) {
+        //     return;
+        // }
 
         // horizontal limiter
         if (newLeft <= 0 || newLeft >= window.innerWidth - el.offsetWidth) {
