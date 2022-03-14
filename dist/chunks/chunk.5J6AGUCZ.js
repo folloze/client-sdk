@@ -803,6 +803,9 @@ function makeDragElement(dom, el, handleEl) {
     pos4 = e6.clientY;
     const newTop = el.offsetTop - pos2;
     const newLeft = el.offsetLeft - pos1;
+    if (newTop <= 0) {
+      return;
+    }
     if (newLeft <= 0 || newLeft >= window.innerWidth - el.offsetWidth) {
       return;
     }
