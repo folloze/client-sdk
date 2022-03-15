@@ -6,3 +6,4 @@ export * from "./ISection";
 export * from "./IWidget";
 export * from "./IWidgetCommunication";
 export * from "../../liveboard/ILiveboardTypes";
+export * from "./IItemViewer";
