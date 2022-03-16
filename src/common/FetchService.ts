@@ -2,7 +2,7 @@ import {AxiosInstance, AxiosRequestConfig} from "axios";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
-import _ from "lodash";
+import merge from "lodash/merge";
 
 export type FetcherOptions = {
     useMock: boolean;
@@ -44,7 +44,7 @@ export class FetchService {
     }
 
     public static async create(options: FetcherOptions): Promise<FetchService> {
-        options = _.merge(defaultFetcherOptions, options);
+        options = merge(defaultFetcherOptions, options);
         const instance = new FetchService(options);
         if (options.useMock) {
             await instance.createMockFetcher(options);
