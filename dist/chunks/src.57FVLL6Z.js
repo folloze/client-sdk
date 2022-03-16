@@ -1,10 +1,9 @@
-"use strict";
 import {
   require_axios
-} from "./chunk.4LCDCOKX.js";
+} from "./chunk.3ZNLEUXI.js";
 import {
   __commonJS
-} from "./chunk.QHN7EUNM.js";
+} from "./chunk.Z3GS5MY4.js";
 
 // node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
@@ -51,9 +50,9 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// node_modules/is-buffer/index.js
+// node_modules/axios-mock-adapter/node_modules/is-buffer/index.js
 var require_is_buffer = __commonJS({
-  "node_modules/is-buffer/index.js"(exports, module) {
+  "node_modules/axios-mock-adapter/node_modules/is-buffer/index.js"(exports, module) {
     module.exports = function isBuffer(obj) {
       return obj != null && obj.constructor != null && typeof obj.constructor.isBuffer === "function" && obj.constructor.isBuffer(obj);
     };
@@ -318,6 +317,7 @@ var require_handle_request = __commonJS({
 // node_modules/axios-mock-adapter/src/index.js
 var require_src = __commonJS({
   "node_modules/axios-mock-adapter/src/index.js"(exports, module) {
+    "use strict";
     var handleRequest = require_handle_request();
     var utils = require_utils();
     var VERBS = [
@@ -481,7 +481,6 @@ var require_src = __commonJS({
     module.exports.default = MockAdapter;
   }
 });
-"use strict";
 export default require_src();
 /*!
  * Determine if an object is a Buffer

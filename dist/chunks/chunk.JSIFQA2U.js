@@ -1,36 +1,40 @@
 import {
   require_axios
-} from "./chunk.4LCDCOKX.js";
+} from "./chunk.3ZNLEUXI.js";
 import {
   Analytics
 } from "./chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunk.R5INV7ZE.js";
+} from "./chunk.LV6R2QCA.js";
 import {
   Liveboard
-} from "./chunk.E6A7S2SE.js";
+} from "./chunk.E2WLG55Y.js";
 import {
-  __toESM
-} from "./chunk.QHN7EUNM.js";
+  require_lodash
+} from "./chunk.FJ3V2PYX.js";
+import {
+  __toModule
+} from "./chunk.Z3GS5MY4.js";
 
 // src/common/FetchService.ts
-var import_axios = __toESM(require_axios(), 1);
+var import_axios = __toModule(require_axios());
 
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.EYTBGFJP.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.2LDL3FHV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.ZNT536GY.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.A2B4U4CK.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.HEALZGIW.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.LF7HGLSV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
 // src/common/FetchService.ts
+var import_lodash = __toModule(require_lodash());
 var defaultFetcherOptions = {
   useMock: false,
   isPreview: false,
@@ -45,7 +49,7 @@ var FetchService = class {
     this.options = options;
   }
   static async create(options) {
-    options = Object.assign(defaultFetcherOptions, options);
+    options = import_lodash.default.merge(defaultFetcherOptions, options);
     const instance = new FetchService(options);
     if (options.useMock) {
       await instance.createMockFetcher(options);
@@ -55,7 +59,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.73AFOEF4.js").then(async (module) => {
+    return await import("./src.57FVLL6Z.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([
