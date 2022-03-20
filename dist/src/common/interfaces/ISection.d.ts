@@ -13,4 +13,5 @@ export declare type RibbonConfig = {
     sectionId: string;
     position: GridPos;
     background: string | BackgroundImage | any;
+    backgroundMobile: string | BackgroundImage | any;
 };
