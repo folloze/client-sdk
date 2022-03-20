@@ -37,12 +37,12 @@ export class FloatEditor extends LitElement {
             }
 
             .close {
-                font-size: 15px;
-                font-family: "Roboto", serif;
                 cursor: pointer;
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
                 background: none;
+                display: flex;
+                align-items: center;
 
                 &:hover {
                     color: black;
@@ -223,9 +223,9 @@ export class FloatEditor extends LitElement {
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        height="14px"
-                        viewBox="0 0 14 14"
-                        width="14px"
+                        height="24px"
+                        viewBox="0 0 24 24"
+                        width="24px"
                         fill="#ffffff">
                         <path d="M0 0h24v24H0V0z" fill="none" />
                         <path
