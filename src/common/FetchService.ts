@@ -128,14 +128,15 @@ export class FetchService {
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use((config) => {
-            if(this.sessionGuid) {
+            console.log("session guid", this.sessionGuid);
+            if (this.sessionGuid) {
                 config.headers['folloze-session-guid'] = this.sessionGuid;
             }
-
+            console.log("JWT", this.jwt);
             if (this.jwt) {
                 config.headers['Authorization'] = `Bearer ${this.jwt}`;
             }
-
+            console.log("SDK config", config);
             return config;
         });
     }
