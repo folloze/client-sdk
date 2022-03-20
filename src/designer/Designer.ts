@@ -30,7 +30,7 @@ export class Designer {
     public publishLiveBoard(boardId: number) {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .put<any>(`/api/v1/boards/${boardId}/publish`)
+                .post<any>(`/api/v1/boards/${boardId}/publish`)
                 .then(result => {
                     resolve(result.data);
                 })

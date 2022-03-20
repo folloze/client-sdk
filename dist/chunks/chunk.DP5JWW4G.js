@@ -16,7 +16,7 @@ var Designer = class {
   }
   publishLiveBoard(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.put(`/api/v1/boards/${boardId}/publish`).then((result) => {
+      this.fetcher.post(`/api/v1/boards/${boardId}/publish`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not publish live board", e);
