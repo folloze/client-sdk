@@ -1,10 +1,13 @@
-import { LitElement } from "lit";
-import { LiveWidget } from "./LiveWidget";
+import {LitElement} from "lit";
+import {state} from "lit/decorators.js";
+import {LiveWidget} from "./LiveWidget";
 
 export abstract class LiveWidgetEdit extends LitElement {
     protected _widget: LiveWidget;
     protected _data: any;
     protected _propPath: string;
+
+    @state()
     public _handleStyle: string | undefined;
 
     set widget(w: LiveWidget) {
