@@ -6,7 +6,6 @@ import {FloatPos, GridPos} from "./IPositions";
 import {ClientSDK} from "../../sdk";
 
 export type BoardConfig = {
-    boardId: number;
     meta: {
         savedTime: Date;
     };
@@ -28,6 +27,7 @@ export type BoardConfig = {
 };
 
 export interface ILiveBoard extends LitElement {
+    boardId: number;
     config: BoardConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
