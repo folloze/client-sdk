@@ -5,6 +5,7 @@ export declare type FetcherOptions = {
     config?: AxiosRequestConfig;
     jwt?: string;
     sessionGuid?: string;
+    csrfToken?: string;
 };
 export declare class FetchService {
     private readonly useMock;

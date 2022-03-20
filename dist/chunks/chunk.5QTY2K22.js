@@ -1878,6 +1878,9 @@ var FetchService = class {
   }
   createAxiosFetcher(options) {
     options.config.headers["X-Requested-With"] = "XMLHttpRequest";
+    if (options.csrfToken) {
+      options.config.headers["X-CSRF-Token"] = options.csrfToken;
+    }
     this.fetcher = import_axios.default.create(options.config);
     this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
     this.fetcher.interceptors.request.use((config) => {

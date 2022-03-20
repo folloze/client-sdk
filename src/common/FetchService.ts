@@ -11,6 +11,7 @@ export type FetcherOptions = {
     config?: AxiosRequestConfig;
     jwt?: string;
     sessionGuid?: string;
+    csrfToken?: string;
 };
 
 const defaultFetcherOptions: FetcherOptions = {
@@ -124,6 +125,9 @@ export class FetchService {
 
     private createAxiosFetcher(options: FetcherOptions) {
         options.config.headers["X-Requested-With"] = "XMLHttpRequest";
+        if (options.csrfToken) {
+            options.config.headers["X-CSRF-Token"] = options.csrfToken;
+        }
 
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);

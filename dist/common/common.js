@@ -12,7 +12,7 @@ import {
 } from "../chunks/chunk.QLI45QFT.js";
 import {
   FetchService
-} from "../chunks/chunk.37MCXSL6.js";
+} from "../chunks/chunk.5QTY2K22.js";
 import "../chunks/chunk.F7UMJQCK.js";
 import "../chunks/chunk.YHWKAM4X.js";
 import "../chunks/chunk.DP5JWW4G.js";
