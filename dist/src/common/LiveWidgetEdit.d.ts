@@ -4,6 +4,7 @@ export declare abstract class LiveWidgetEdit extends LitElement {
     protected _widget: LiveWidget;
     protected _data: any;
     protected _propPath: string;
+    _handleStyle: string | undefined;
     set widget(w: LiveWidget);
     get widget(): LiveWidget;
     set propertyPath(path: string);

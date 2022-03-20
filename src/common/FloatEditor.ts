@@ -214,7 +214,10 @@ export class FloatEditor extends LitElement {
     render() {
         return html`
             ${this.isLoading ? html`<div class="loading"></div>` : ""}
-            <div id="handle" @mouseover="${this.highlight}" @mouseleave="${this.removeHighlight}">
+            <div id="handle" style="${this.childEl._handleStyle}" 
+                 @mouseover="${this.highlight}" 
+                 @mouseleave="${this.removeHighlight}">
+                
                 <span class="conf-name">
                     ${this.childEl.widget?.widgetTitle || ""}
                 </span>
