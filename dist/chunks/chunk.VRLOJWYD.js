@@ -108,7 +108,9 @@ var Designer = class {
   }
   getCampaignElements(boardId, elementType) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`prism/${boardId}/campaign_elements`, { params: { element_type: elementType } }).then((result) => resolve(result.data)).catch((e) => {
+      this.fetcher.get(`prism/${boardId}/campaign_elements`, {
+        params: { element_type: elementType }
+      }).then((result) => resolve(result.data)).catch((e) => {
         console.error("could not get campaign elements", e);
         reject(e);
       });

@@ -1,14 +1,23 @@
-import {BoardConfig} from "../common/interfaces/IBoard";
-
 export * from "./IDesignerTypes";
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
-    ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageGalleryTypes, ImageBankCategory,
-    UploadUrlResponseV1, FormV1, CampaignElementResponseV1, CampaignElementsTypes, PrivacySettingsResponseV1,
-    BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, BoardHasItemsResponseV1, PersonalizationV1,
-    EmailTemplateV1, UserV1
+    ImageBankResponseV1,
+    ImageGalleryParams,
+    GalleryImage,
+    ImageGalleryTypes,
+    ImageBankCategory,
+    UploadUrlResponseV1,
+    FormV1,
+    CampaignElementResponseV1,
+    CampaignElementsTypes,
+    PrivacySettingsResponseV1,
+    BoardHasPersonalizationResponseV1,
+    FeatureSettingsResponseV1,
+    PersonalizationV1,
+    EmailTemplateV1,
+    UserV1,
 } from "./IDesignerTypes";
 
 export class Designer {
@@ -20,9 +29,8 @@ export class Designer {
 
     public publishLiveBoard(boardId: number) {
         return new Promise((resolve, reject) => {
-            this.fetcher.put<any>(
-                `/api/v1/boards/${boardId}/publish`,
-            )
+            this.fetcher
+                .put<any>(`/api/v1/boards/${boardId}/publish`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -39,12 +47,10 @@ export class Designer {
      * @param {ImageGalleryParams} payload
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-     public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+    public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<GalleryImage[]>(
-                "/api/imagegallery",
-                {...keysToSnakeCase(payload)}
-            )
+            this.fetcher
+                .post<GalleryImage[]>("/api/imagegallery", {...keysToSnakeCase(payload)})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -76,7 +82,7 @@ export class Designer {
         return this.getImageGallery({
             type: ImageGalleryTypes.imageBank,
             organizationId,
-            bankCategory
+            bankCategory,
         });
     }
 
@@ -98,7 +104,8 @@ export class Designer {
      */
     public getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post("/api/v1/upload_urls", {type: uploadType})
+            this.fetcher
+                .post("/api/v1/upload_urls", {type: uploadType})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -117,9 +124,8 @@ export class Designer {
      */
     getImageBankSettings(organizationId: number): Promise<ImageBankResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<ImageBankResponseV1>(
-                `/api/v1/organizations/${organizationId}/settings/image_bank`
-            )
+            this.fetcher
+                .get<ImageBankResponseV1>(`/api/v1/organizations/${organizationId}/settings/image_bank`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -141,15 +147,13 @@ export class Designer {
      */
     saveImageBankSettings(organizationId: number, categoryName: string, source: string): Promise<ImageBankResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.put<ImageBankResponseV1>(
-                `/api/v1/organizations/${organizationId}/settings/image_bank`,
-                {
+            this.fetcher
+                .put<ImageBankResponseV1>(`/api/v1/organizations/${organizationId}/settings/image_bank`, {
                     params: {
                         category_name: categoryName,
-                        value: source
-                    }
-                }
-            )
+                        value: source,
+                    },
+                })
                 .then(result => {
                     resolve(result.data);
                 })
@@ -170,14 +174,14 @@ export class Designer {
      */
     getForms(boardId: number): Promise<Record<string, FormV1>> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`)
+            this.fetcher
+                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get forms", e);
                     reject(e);
                 });
         });
-
     }
 
     /**
@@ -189,7 +193,8 @@ export class Designer {
      */
     createForm(boardId: number, form: FormV1): Promise<FormV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
+            this.fetcher
+                .post<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not save form", e);
@@ -205,9 +210,10 @@ export class Designer {
      * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
-     updateForm(boardId: number, form: FormV1): Promise<FormV1> {
+    updateForm(boardId: number, form: FormV1): Promise<FormV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.put<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
+            this.fetcher
+                .put<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not save form", e);
@@ -217,12 +223,15 @@ export class Designer {
     }
 
     //Campaign elements
-    private getCampaignElements(boardId: number, elementType: CampaignElementsTypes): Promise<CampaignElementResponseV1> {
+    private getCampaignElements(
+        boardId: number,
+        elementType: CampaignElementsTypes,
+    ): Promise<CampaignElementResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<CampaignElementResponseV1>(
-                `prism/${boardId}/campaign_elements`,
-                {params: {element_type: elementType}}
-            )
+            this.fetcher
+                .get<CampaignElementResponseV1>(`prism/${boardId}/campaign_elements`, {
+                    params: {element_type: elementType},
+                })
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get campaign elements", e);
@@ -268,7 +277,8 @@ export class Designer {
      */
     getPrivacySettings(organizationId: number): Promise<PrivacySettingsResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<PrivacySettingsResponseV1>(`/api/v1/organizations/${organizationId}/settings/privacy`)
+            this.fetcher
+                .get<PrivacySettingsResponseV1>(`/api/v1/organizations/${organizationId}/settings/privacy`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get privacy settings", e);
@@ -283,16 +293,16 @@ export class Designer {
      * @param {number} boardId
      * @returns {Record<string, EmailTemplateV1>} an object of id and EmailTemplateResponse
      */
-     getEmailTemplates(boardId: number): Promise<Record<string, EmailTemplateV1>> {
+    getEmailTemplates(boardId: number): Promise<Record<string, EmailTemplateV1>> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<Record<string, EmailTemplateV1>>(`api/v1/boards/${boardId}/email_templates`)
+            this.fetcher
+                .get<Record<string, EmailTemplateV1>>(`api/v1/boards/${boardId}/email_templates`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get email templates", e);
                     reject(e);
                 });
         });
-
     }
 
     /**
@@ -304,10 +314,11 @@ export class Designer {
      */
     getBoardHasPersonalization(organizationId: number, boardId: number): Promise<BoardHasPersonalizationResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<BoardHasPersonalizationResponseV1>(
-                `api/v1/organizations/${organizationId}/settings/personalizations`,
-                {params: {board_id: boardId}}
-            )
+            this.fetcher
+                .get<BoardHasPersonalizationResponseV1>(
+                    `api/v1/organizations/${organizationId}/settings/personalizations`,
+                    {params: {board_id: boardId}},
+                )
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get personalization setting", e);
@@ -324,9 +335,8 @@ export class Designer {
      */
     getFeatureSettings(organizationId: number): Promise<FeatureSettingsResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<FeatureSettingsResponseV1>(
-                `/api/v1/organizations/${organizationId}/settings/features`
-            )
+            this.fetcher
+                .get<FeatureSettingsResponseV1>(`/api/v1/organizations/${organizationId}/settings/features`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get feature settings", e);
@@ -343,7 +353,8 @@ export class Designer {
      */
     getPersonalization(boardId: number): Promise<PersonalizationV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<PersonalizationV1>(`/prism/${boardId}/personalization`)
+            this.fetcher
+                .get<PersonalizationV1>(`/prism/${boardId}/personalization`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get personalization", e);
@@ -361,7 +372,8 @@ export class Designer {
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.put<PersonalizationV1>(`/prism/${boardId}/personalization`, personalization)
+            this.fetcher
+                .put<PersonalizationV1>(`/prism/${boardId}/personalization`, personalization)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not save personalization", e);
@@ -372,7 +384,8 @@ export class Designer {
 
     saveLiveBoard(payload: any): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post("/url-for-saving-live-board", payload)
+            this.fetcher
+                .post("/url-for-saving-live-board", payload)
                 .then(result => {
                     resolve(result);
                 })
@@ -383,7 +396,6 @@ export class Designer {
         });
     }
 
-
     /**
      * searches board contacts
      *
@@ -393,12 +405,13 @@ export class Designer {
      */
     searchBoardContacts(boardId: number, query: string): Promise<UserV1[]> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<UserV1[]>("/api/v1/search/board_contacts", {
-                params: {
-                    board_id: boardId,
-                    query: query
-                }
-            })
+            this.fetcher
+                .get<UserV1[]>("/api/v1/search/board_contacts", {
+                    params: {
+                        board_id: boardId,
+                        query: query,
+                    },
+                })
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get board contacts", e);

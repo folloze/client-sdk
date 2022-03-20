@@ -6,7 +6,7 @@ import merge from "lodash/merge";
 
 export type FetcherOptions = {
     useMock: boolean;
-    isPreview?: boolean,
+    isPreview?: boolean;
     config?: AxiosRequestConfig;
 };
 
@@ -16,9 +16,8 @@ const defaultFetcherOptions: FetcherOptions = {
     config: {
         baseURL: "/",
         headers: {},
-    }
+    },
 };
-
 
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
 // fetchItems: api.fetchItems,                // replace "live_board" with "api"
@@ -32,7 +31,6 @@ const defaultFetcherOptions: FetcherOptions = {
 // fetchEventUrls: () => Promise.resolve("")
 
 export class FetchService {
-
     private readonly useMock: boolean;
     public fetcher: AxiosInstance;
     private mock: MockAdapter;
@@ -68,31 +66,30 @@ export class FetchService {
             .catch(e => console.error(e));
     }
 
-
     // todo: connect async polling to get partial data (getItems, getCategory, etc...)
-    withPartialContent(apiCall) {
-        // return (params) => {
-        //     return new Promise((resolve, reject) => {
-        //         apiCall(params)
-        //             .then(({status, data}) => {
-        //                 if(status == PARTIAL_CONTENT) {
-        //                     setTimeout(() => {
-        //                         withPartialContent(apiCall)({
-        //                             ...params,
-        //                             guid: data.guid
-        //                         })
-        //                             .then(resolve)
-        //                             .catch(reject)
-        //                     }, 2000)
-        //                 }
-        //                 else {
-        //                     resolve(data)
-        //                 }
-        //             })
-        //             .catch(error => reject(error))
-        //     })
-        // }
-    }
+    // withPartialContent(apiCall) {
+    //     return (params) => {
+    //         return new Promise((resolve, reject) => {
+    //             apiCall(params)
+    //                 .then(({status, data}) => {
+    //                     if(status == PARTIAL_CONTENT) {
+    //                         setTimeout(() => {
+    //                             withPartialContent(apiCall)({
+    //                                 ...params,
+    //                                 guid: data.guid
+    //                             })
+    //                                 .then(resolve)
+    //                                 .catch(reject)
+    //                         }, 2000)
+    //                     }
+    //                     else {
+    //                         resolve(data)
+    //                     }
+    //                 })
+    //                 .catch(error => reject(error))
+    //         })
+    //     }
+    // }
 
     private createAxiosFetcher(options: FetcherOptions) {
         // options.config.headers["folloze-session-guid"] = "get guid from cookie?";
@@ -107,7 +104,6 @@ export class FetchService {
         // }
 
         // ADD HERE EVERYTHING I NEED
-
 
         this.fetcher = axios.create(options.config);
     }

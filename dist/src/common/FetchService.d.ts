@@ -12,6 +12,5 @@ export declare class FetchService {
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
-    withPartialContent(apiCall: any): void;
     private createAxiosFetcher;
 }

@@ -6,7 +6,7 @@ import {
 } from "./chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunk.LV6R2QCA.js";
+} from "./chunk.VRLOJWYD.js";
 import {
   Liveboard
 } from "./chunk.E2WLG55Y.js";
@@ -1590,7 +1590,7 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.2LDL3FHV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.EI37NI74.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
     await import("./mocks.A2B4U4CK.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
@@ -1635,8 +1635,6 @@ var FetchService = class {
         MockConnector.bindAnalytics(this.mock)
       ]);
     }).catch((e) => console.error(e));
-  }
-  withPartialContent(apiCall) {
   }
   createAxiosFetcher(options) {
     options.config.headers["X-Requested-With"] = "XMLHttpRequest";
