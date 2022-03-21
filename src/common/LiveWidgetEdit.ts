@@ -7,8 +7,7 @@ export abstract class LiveWidgetEdit extends LitElement {
     protected _data: any;
     protected _propPath: string;
 
-    @state()
-    public _handleStyle: string | undefined;
+    readonly _handleStyle: string | undefined;
 
     set widget(w: LiveWidget) {
         this._widget = w;
