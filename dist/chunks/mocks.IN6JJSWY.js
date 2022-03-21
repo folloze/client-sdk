@@ -421,7 +421,7 @@ var rules = (mock) => {
   mock.onGet("/api/v1/preview/board_items_presence").reply(200, { has_items: true });
   mock.onGet("/prism/1/personalization").reply(200, personalization);
   mock.onPut("/prism/1/personalization").reply(200, personalization);
-  mock.onPost("/url-for-saving-live-board").reply(200);
+  mock.onPut("/api/v1/boards/1/layout/1").reply(200);
   mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {
       id: 1,

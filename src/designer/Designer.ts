@@ -19,6 +19,7 @@ import {
     EmailTemplateV1,
     UserV1,
 } from "./IDesignerTypes";
+import { BoardConfig } from '../common/interfaces/IBoard'
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -382,10 +383,13 @@ export class Designer {
         });
     }
 
-    saveLiveBoard(payload: any): Promise<AxiosResponse> {
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<AxiosResponse> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post("/url-for-saving-live-board", payload)
+                .put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
+                  layout: config,
+                  theme_id: 0
+                })
                 .then(result => {
                     resolve(result);
                 })

@@ -9,12 +9,12 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
   makeDragElement
-} from "./chunks/chunk.6MTWDX65.js";
+} from "./chunks/chunk.MBF45GI2.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.BOXP6Y3L.js";
-import "./chunks/chunk.NPVWZY7A.js";
+} from "./chunks/chunk.QGPM23JW.js";
+import "./chunks/chunk.3ZNLEUXI.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -23,7 +23,7 @@ import {
 } from "./chunks/chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunks/chunk.DP5JWW4G.js";
+} from "./chunks/chunk.DYKQISOW.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,

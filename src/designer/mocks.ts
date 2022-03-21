@@ -465,7 +465,7 @@ export const rules = (mock: MockAdapter) => {
     mock.onPut("/prism/1/personalization")
         .reply<PersonalizationV1>(200, personalization);
 
-    mock.onPost("/url-for-saving-live-board")
+    mock.onPut("/api/v1/boards/1/layout/1")
         .reply(200);
 
     mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/)

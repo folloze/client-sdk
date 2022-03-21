@@ -1,4 +1,5 @@
 import {describe, expect, beforeAll} from "@jest/globals";
+import { BoardConfig } from "../src/common/interfaces/IBoard";
 import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
@@ -144,7 +145,20 @@ describe("testing sdk designer module", () => {
     });
 
     it('checks that saveLiveBoard mock working as expected', async () => {
-        await sdk.designer.saveLiveBoard({type: "test", data: {}})
+        const boardConfig: BoardConfig = {
+          id: 1,
+          meta: null,
+          grid: {
+            maxWidth: "1024px",
+            gap: { x: "0", y: "0" },
+            columns: { colNum: 12, colWidth: "1fr" },
+            rows: { rowNum: 0, rowHeight: "25px" }
+          },
+          sections: {},
+          widgets: {},
+          ribbons: {}
+        };
+        await sdk.designer.saveLiveBoard(1, boardConfig)
             .then(result => expect(result.status == 200));
     });
 

@@ -2,6 +2,7 @@ export * from "./IDesignerTypes";
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
 import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1 } from "./IDesignerTypes";
+import { BoardConfig } from '../common/interfaces/IBoard';
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
@@ -146,7 +147,7 @@ export declare class Designer {
      * @returns {PersonalizationV1} Personalization
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
-    saveLiveBoard(payload: any): Promise<AxiosResponse>;
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<AxiosResponse>;
     /**
      * searches board contacts
      *

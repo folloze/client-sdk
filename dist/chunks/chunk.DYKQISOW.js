@@ -173,9 +173,12 @@ var Designer = class {
       });
     });
   }
-  saveLiveBoard(payload) {
+  saveLiveBoard(boardId, config) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/url-for-saving-live-board", payload).then((result) => {
+      this.fetcher.put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
+        layout: config,
+        theme_id: 0
+      }).then((result) => {
         resolve(result);
       }).catch((e) => {
         console.error("could not save liveboard", e);
