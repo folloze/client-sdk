@@ -101,22 +101,24 @@ export type FormV1 = {
     organization_id: number,
     state: number,
     form_type: number,
-    data: {
-        // both classic and external
-        form_title?: string,
-        submit_label?: string,
-        success_message?: string
-        // for type classic (1)
-        fields?: Record<string, FormField>, // the field's name and properties. There will always be an 'email' field
-        // for type external (2)
-        script?: string,
-        auto_fill?: string,
-        // for type marketo (3)
-        munchkin_id?: string,
-        form_id?: string,
-        base_url?: string,
-        custom_script?: string
-    }
+    data: FormDataV1
+}
+
+export type FormDataV1 = {
+    // both classic and external
+    form_title?: string,
+    submit_label?: string,
+    success_message?: string
+    // for type classic (1)
+    fields?: Record<string, FormField>, // the field's name and properties. There will always be an 'email' field
+    // for type external (2)
+    script?: string,
+    auto_fill?: boolean,
+    // for type marketo (3)
+    munchkin_id?: string,
+    form_id?: string,
+    base_url?: string,
+    custom_script?: string
 }
 
 type Label = {
@@ -155,8 +157,7 @@ export type FootersResponseV1 = {
         dialog_button_label?: string,
         dialog_text?: string
     }
-  }
-
+}
 
 export type PrivacyMessageResponseV1 = {
     id: number,
@@ -171,11 +172,7 @@ export type PrivacyMessageResponseV1 = {
     can_close: boolean
 }
 
-export type FormPrivacyMessageResponseV1 = {
-    id: number,
-    element_id: number,
-    name: string,
-    state: number,
+export type FormPrivacyMessageDataV1 = {
     is_standard: boolean,
     message: {
         html: string
@@ -188,6 +185,17 @@ export type FormPrivacyMessageResponseV1 = {
         label: string,
         checkboxes: Checkbox[]
     }
+}
+
+export type FormPrivacyMessageResponseV1 = {
+    id: number,
+    element_id: number,
+    name: string,
+    state: number
+    is_standard: FormPrivacyMessageDataV1["is_standard"],
+    message: FormPrivacyMessageDataV1["message"]
+    text_area: FormPrivacyMessageDataV1["text_area"]
+    checkbox_area: FormPrivacyMessageDataV1["checkbox_area"]
 }
 
 export type CampaignElementResponseV1 = {

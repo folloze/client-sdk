@@ -283,7 +283,7 @@ export const rules = (mock: MockAdapter) => {
                 state: null,
                 data: {
                     script: "<script type='text/javascript'>alert('hey!')</script>",
-                    auto_fill: "true",
+                    auto_fill: true,
                     form_title: "Enter details here",
                     submit_label: "email me",
                     success_message: "thanks!",
@@ -315,7 +315,7 @@ export const rules = (mock: MockAdapter) => {
             state: null,
             data: {
                 script: "<script type='text/javascript'>alert('hey!')</script>",
-                auto_fill: "true",
+                auto_fill: true,
                 form_title: "Enter details here",
                 submit_label: "email me",
                 success_message: "thanks!",
@@ -332,7 +332,7 @@ export const rules = (mock: MockAdapter) => {
             state: null,
             data: {
                 script: "<script type='text/javascript'>alert('hey!')</script>",
-                auto_fill: "true",
+                auto_fill: true,
                 form_title: "Enter details here",
                 submit_label: "email me",
                 success_message: "thanks!",

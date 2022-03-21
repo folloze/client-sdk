@@ -9,7 +9,8 @@ var FLZ_EVENTS_ACTIONS = {
   closeItemViewerRequest: "closeItemViewerRequest",
   itemViewerLoaded: "itemViewerLoaded",
   itemViewerClosed: "itemViewerClosed",
-  liveEventMounted: "liveEventMounted"
+  liveEventMounted: "liveEventMounted",
+  getFormData: "getFormData"
 };
 
 export {

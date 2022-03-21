@@ -20,6 +20,7 @@ import {
     LiveEventUrlsResponseV2,
     OrganizationSettingsResponseV1,
     SessionResonseV1,
+    FormMetadataDataV1
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -357,4 +358,61 @@ export const rules = (mock: MockAdapter) => {
     });
 
     mock.onPost("/live_board/v1/boards/1/session_cookies").reply<number>(200, 1);
+
+    mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/)
+        .reply<FormMetadataDataV1>(200, {
+            form: {
+                form_title: "form title",
+                submit_label: "form submit label",
+                success_message: "form success message",
+                fields: {
+                    name: {
+                        label: "Name",
+                        order: 1,
+                        placeholder: "First Name",
+                        state: "optional",
+                        type: "text",
+                    },
+                    email: {
+                        label: "Email",
+                        order: 2,
+                        placeholder: "your@email.here",
+                        state: "required",
+                        type: "email"
+                    }
+                },
+                script: "",
+                auto_fill: true,
+                munchkin_id: "170-ADG-863",
+                form_id: "5",
+                base_url: "//app-sj25.marketo.com",
+                custom_script: ""
+            },
+            privacy_message: {
+                is_standard: true,
+                message: {
+                    html: "<div>I'm a privacy message data</div>"
+                },
+                text_area: {
+                    html: "<div>I'm a privacy text area data</div>"
+                },
+                checkbox_area: {
+                    threshold: 1,
+                    label: "checkbox label",
+                    checkboxes: [
+                        {
+                            label: "first checkbox",
+                            name: "first_checkbox",
+                            is_required: false
+                        },
+                        {
+                            label: "second checkbox",
+                            name: "second_checkbox",
+                            is_required: true
+                        }
+                    ]
+                }
+            }
+        }
+    );
 };

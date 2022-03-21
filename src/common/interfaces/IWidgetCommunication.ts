@@ -12,6 +12,7 @@ export const FLZ_EVENTS_ACTIONS = {
     itemViewerLoaded: "itemViewerLoaded",
     itemViewerClosed: "itemViewerClosed",
     liveEventMounted: "liveEventMounted",
+    getFormData: "getFormData"
 };
 
 // ctaClick - ctaType:string, ctaData:object

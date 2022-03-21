@@ -183,4 +183,9 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.setSessionCookie(1)
             .then(result => expect(result).toEqual(1));
     });
+
+    it('checks that form data mock works as expected', async () => {
+        await sdk.liveboard.getFormData(1,1,1)
+            .then(result => expect(result.form.form_title).toEqual("form title"));
+    });
 });

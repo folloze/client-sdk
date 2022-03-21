@@ -7,7 +7,7 @@ import {
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
     LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
     LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResonseV1,
-    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams,
+    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1
 } from './ILiveboardTypes';
 
 export class Liveboard {
@@ -35,13 +35,13 @@ export class Liveboard {
                 });
         });
     }
-    
+
     //TODO: extract partial response logic
     /**
      * gets the seller to be displayed for the board
-     * 
+     *
      * @param {number} boardId the board's id
-     * @param {string=} token 
+     * @param {string=} token
      * @returns {BoardSellerResponseV1} BoardSellerResponse
      */
     getSellerInformation(boardId: number, token?: string): Promise<BoardSellerResponseV1> {
@@ -71,10 +71,10 @@ export class Liveboard {
 
     /**
      * gets category by id, board id, and slug
-     * 
-     * @param {number | string} categoryIdOrSlug 
-     * @param {number} boardId 
-     * @param {boolean} bySlug 
+     *
+     * @param {number | string} categoryIdOrSlug
+     * @param {number} boardId
+     * @param {boolean} bySlug
      * @returns {CategoryResponseV2} CategoryResponse
      */
     getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryResponseV2> {
@@ -100,8 +100,8 @@ export class Liveboard {
 
     /**
      * gets all categories of a board
-     * 
-     * @param {string} boardId 
+     *
+     * @param {string} boardId
      * @returns {CategoriesResponseV2} CategoriesResponse
      */
     getCategories(boardId: number): Promise<CategoriesResponseV2> {
@@ -118,18 +118,18 @@ export class Liveboard {
     }
 
     /**
-     * 
+     *
      * Used for livestreams, get the chat id and token for given lead and board
-     * 
-     * @param {number} boardId 
-     * @param {number} leadId 
+     *
+     * @param {number} boardId
+     * @param {number} leadId
      * @returns {UserChatResponseV1} UserChatResponse
      */
     getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher.post<UserChatResponseV1>(
-                "/live_board/v1/chat/user_chat", 
-                { 
+                "/live_board/v1/chat/user_chat",
+                {
                     board_id: boardId,
                     lead_id: leadId
                 }
@@ -148,10 +148,10 @@ export class Liveboard {
 
     /**
      * Fetches an item
-     * 
+     *
      * @param {number|string} itemId the item id or slug
-     * @param {number} boardId 
-     * @param {boolean} bySlug 
+     * @param {number} boardId
+     * @param {boolean} bySlug
      * @returns {ItemResponseV2} ItemResponse
      */
     getItem(itemId: number|string, boardId: number, bySlug: boolean): Promise<ItemResponseV2> {
@@ -171,8 +171,8 @@ export class Liveboard {
 
     /**
      * Gets all items by params
-     * 
-     * @param {ItemsParams} params 
+     *
+     * @param {ItemsParams} params
      * @returns {ItemsResponseV2} ItemsResponse
      */
     getItems(params: ItemsParams): Promise<ItemsResponseV2> {
@@ -202,8 +202,8 @@ export class Liveboard {
 
     /**
      * Get whether a board has items or not
-     * 
-     * @param boardId 
+     *
+     * @param boardId
      * @returns {HasItemResponseV2} HasItemResponse
      */
     getHasItems(boardId: number): Promise<HasItemResponseV2> {
@@ -230,8 +230,8 @@ export class Liveboard {
 
     /**
      * Like an item
-     * 
-     * @param {number} itemId 
+     *
+     * @param {number} itemId
      */
     likeItem(itemId: number): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -246,8 +246,8 @@ export class Liveboard {
 
     /**
      * Gets the item journey
-     * 
-     * @param {number} itemId 
+     *
+     * @param {number} itemId
      * @param {JourneyItemParams} options JourneyItemParams
      * @returns {JourneyItemsResponseV2} JourneyItemsResponse
      */
@@ -269,8 +269,8 @@ export class Liveboard {
 
     /**
      * Gets the url to download the item
-     * 
-     * @param {number} itemId 
+     *
+     * @param {number} itemId
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2> {
@@ -287,11 +287,11 @@ export class Liveboard {
     }
 
     /**
-     * 
+     *
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
-     * 
-     * @param {number} contentItemId 
-     * @param {number=} guid 
+     *
+     * @param {number} contentItemId
+     * @param {number=} guid
      * @returns {SnapshotUrlResponseV1} SnapshotUrlResponse
      */
     createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1> {
@@ -312,8 +312,8 @@ export class Liveboard {
 
     /**
      * Analyses whether the item is secure or not
-     * 
-     * @param {number} contentItemId 
+     *
+     * @param {number} contentItemId
      * @returns {ItemAnalysisResponseV1} ItemAnalysisResponse
      */
     createItemAnalysis(contentItemId: number): Promise<ItemAnalysisResponseV1> {
@@ -331,8 +331,8 @@ export class Liveboard {
 
     /**
      * Fetches file metadata for given item
-     * 
-     * @param {number} contentItemId 
+     *
+     * @param {number} contentItemId
      * @returns {ItemFileMetadataResponseV1} ItemFileMetadataResponse
      */
     getFileMetadata(contentItemId: number): Promise<ItemFileMetadataResponseV1> {
@@ -361,7 +361,7 @@ export class Liveboard {
 
     /**
      * Sets cookies consent for the lead
-     * 
+     *
      * @param {number} boardId
      * @param {CookieConsentParams} options
      */
@@ -385,9 +385,9 @@ export class Liveboard {
 
     /**
      * submit a message CTA
-     * 
-     * @param {number} boardId 
-     * @param {CtaParams} options 
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
     saveMessageCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
@@ -408,9 +408,9 @@ export class Liveboard {
 
     /**
      * submit a contact CTA
-     * 
-     * @param {number} boardId 
-     * @param {CtaParams} options 
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
     saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
@@ -431,9 +431,9 @@ export class Liveboard {
 
     /**
      * submit a form CTA
-     * 
-     * @param {number} boardId 
-     * @param {CtaParams} options 
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
     saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
@@ -454,9 +454,9 @@ export class Liveboard {
 
     /**
      * submit a link CTA
-     * 
-     * @param {number} boardId 
-     * @param {CtaParams} options 
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
     saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
@@ -477,9 +477,9 @@ export class Liveboard {
 
     /**
      * submit a share CTA
-     * 
-     * @param {number} boardId 
-     * @param {CtaParams} options 
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
      saveShareCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
@@ -500,10 +500,10 @@ export class Liveboard {
 
     /**
      * Submit a share by email cta
-     * 
-     * @param {number} boardId 
-     * @param {string} email 
-     * @param {number} invitationId 
+     *
+     * @param {number} boardId
+     * @param {string} email
+     * @param {number} invitationId
      */
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>{
         return new Promise((resolve, reject) => {
@@ -523,9 +523,9 @@ export class Liveboard {
 
     /**
      * Update the current lead's account's enrichment data
-     * 
-     * @param {string} type 
-     * @param {object} enrichmentData 
+     *
+     * @param {string} type
+     * @param {object} enrichmentData
      */
     updateEnrichment(type: string, enrichmentData: object): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -543,7 +543,7 @@ export class Liveboard {
 
     /**
      * Gets the geo location of the current lead
-     * 
+     *
      * @returns {GeoLocationResponseV1} GeoLocationResponse
      */
     getGeoLocation(): Promise<GeoLocationResponseV1> {
@@ -561,7 +561,7 @@ export class Liveboard {
 
     /**
      * Set invitation wrapper to used
-     * 
+     *
      * @param {string} token
      */
     updateInvitationUsed(token: string): Promise<void> {
@@ -579,7 +579,7 @@ export class Liveboard {
 
     /**
      * Fetches the current lead
-     * 
+     *
      * @returns {LeadResponseV1} LeadResponse
      */
     getCurrentLead(): Promise<LeadResponseV1> {
@@ -597,8 +597,8 @@ export class Liveboard {
 
     /**
      * Validates that the lead is a human
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      */
     validateLead(boardId: number): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -613,7 +613,7 @@ export class Liveboard {
 
     /**
      * Stop tracking and anonimyze lead
-     * 
+     *
      * @returns {LeadResponseV1} LeadResponse new anonymous lead
      */
     stopTrackingForSession(): Promise<LeadResponseV1> {
@@ -631,8 +631,8 @@ export class Liveboard {
 
     /**
      * Gets the urls to use for the live event
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {LiveEventUrlsResponseV2} LiveEventUrlsResponse
      */
     getLiveEventUrls(boardId: number): Promise<LiveEventUrlsResponseV2> {
@@ -650,8 +650,8 @@ export class Liveboard {
 
     /**
      * Gets the organization's settings
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {OrganizationSettingsResponseV1} OrganizationSettingsResponse
      */
     getOrganizationSettings(boardId: number): Promise<OrganizationSettingsResponseV1> {
@@ -669,7 +669,7 @@ export class Liveboard {
 
     /**
      * Create a new session
-     * 
+     *
      * @returns {SessionResonseV1} SessionResonse
      */
     createSession(): Promise<SessionResonseV1> {
@@ -687,7 +687,7 @@ export class Liveboard {
 
     /**
      * Validates the session
-     * 
+     *
      * @returns {SessionResonseV1|void} new SessionResonse if session is invalid, otherwise nothing
      */
     validateSession(): Promise<SessionResonseV1|void> {
@@ -705,8 +705,8 @@ export class Liveboard {
 
     /**
      * Set the lead's session cookie
-     * 
-     * @param {number} boardId 
+     *
+     * @param {number} boardId
      * @returns {number} the lead's id
      */
     setSessionCookie(boardId: number): Promise<number> {
@@ -720,7 +720,25 @@ export class Liveboard {
                     reject(e);
                 });
         });
-    } 
+    }
+
+    getFormData(boardId: number, formId: number, privacyMessageId: number = null): Promise<FormMetadataDataV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<FormMetadataDataV1>(`/live_board/v2/boards/${boardId}/forms/${formId}`, {
+                    params: {
+                        privacy_message_id: privacyMessageId
+                    }
+                })
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get form data", e);
+                    reject(e);
+                });
+        });
+    }
 
     //TODO: pings
 }

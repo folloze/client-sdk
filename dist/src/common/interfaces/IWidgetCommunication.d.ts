@@ -9,6 +9,7 @@ export declare const FLZ_EVENTS_ACTIONS: {
     itemViewerLoaded: string;
     itemViewerClosed: string;
     liveEventMounted: string;
+    getFormData: string;
 };
 export declare type CtaClickData = {
     form: {

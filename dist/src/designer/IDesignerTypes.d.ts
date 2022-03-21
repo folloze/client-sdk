@@ -90,18 +90,19 @@ export declare type FormV1 = {
     organization_id: number;
     state: number;
     form_type: number;
-    data: {
-        form_title?: string;
-        submit_label?: string;
-        success_message?: string;
-        fields?: Record<string, FormField>;
-        script?: string;
-        auto_fill?: string;
-        munchkin_id?: string;
-        form_id?: string;
-        base_url?: string;
-        custom_script?: string;
-    };
+    data: FormDataV1;
+};
+export declare type FormDataV1 = {
+    form_title?: string;
+    submit_label?: string;
+    success_message?: string;
+    fields?: Record<string, FormField>;
+    script?: string;
+    auto_fill?: boolean;
+    munchkin_id?: string;
+    form_id?: string;
+    base_url?: string;
+    custom_script?: string;
 };
 declare type Label = {
     text: string;
@@ -150,11 +151,7 @@ export declare type PrivacyMessageResponseV1 = {
     link: string;
     can_close: boolean;
 };
-export declare type FormPrivacyMessageResponseV1 = {
-    id: number;
-    element_id: number;
-    name: string;
-    state: number;
+export declare type FormPrivacyMessageDataV1 = {
     is_standard: boolean;
     message: {
         html: string;
@@ -167,6 +164,16 @@ export declare type FormPrivacyMessageResponseV1 = {
         label: string;
         checkboxes: Checkbox[];
     };
+};
+export declare type FormPrivacyMessageResponseV1 = {
+    id: number;
+    element_id: number;
+    name: string;
+    state: number;
+    is_standard: FormPrivacyMessageDataV1["is_standard"];
+    message: FormPrivacyMessageDataV1["message"];
+    text_area: FormPrivacyMessageDataV1["text_area"];
+    checkbox_area: FormPrivacyMessageDataV1["checkbox_area"];
 };
 export declare type CampaignElementResponseV1 = {
     data: Record<string, FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1>;

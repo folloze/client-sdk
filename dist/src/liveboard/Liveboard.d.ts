@@ -1,5 +1,5 @@
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResonseV1, ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResonseV1, ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1 } from './ILiveboardTypes';
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -235,4 +235,5 @@ export declare class Liveboard {
      * @returns {number} the lead's id
      */
     setSessionCookie(boardId: number): Promise<number>;
+    getFormData(boardId: number, formId: number, privacyMessageId?: number): Promise<FormMetadataDataV1>;
 }

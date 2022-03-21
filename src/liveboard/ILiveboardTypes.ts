@@ -1,3 +1,4 @@
+import {FormDataV1, FormPrivacyMessageDataV1} from "./../designer/IDesignerTypes";
 import {PrivacySettings} from '../common/ISharedTypes';
 
 export type BoardResponseV1 = {
@@ -298,4 +299,9 @@ export type OrganizationSettingsResponseV1 = {
 
 export type SessionResonseV1 = {
     guid: string
+}
+
+export type FormMetadataDataV1 = {
+    form: FormDataV1,
+    privacy_message: FormPrivacyMessageDataV1
 }

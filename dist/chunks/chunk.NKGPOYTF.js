@@ -370,6 +370,20 @@ var Liveboard = class {
       });
     });
   }
+  getFormData(boardId, formId, privacyMessageId = null) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/boards/${boardId}/forms/${formId}`, {
+        params: {
+          privacy_message_id: privacyMessageId
+        }
+      }).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not get form data", e);
+        reject(e);
+      });
+    });
+  }
 };
 
 export {
