@@ -197,14 +197,14 @@ var rules = (mock) => {
       fit: "contained"
     }
   ]);
-  mock.onGet("/api/v1/organizations/1/settings/image_bank").reply(200, {
+  mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply(200, {
     icons: ImageBankType.folloze,
     logos: ImageBankType.folloze,
     banners: ImageBankType.folloze,
     thumbnails: ImageBankType.folloze,
     mobile_banners: ImageBankType.folloze
   });
-  mock.onPut("/api/v1/organizations/1/settings/image_bank").reply(200, {
+  mock.onPut(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply(200, {
     icons: ImageBankType.folloze,
     logos: ImageBankType.folloze,
     banners: ImageBankType.folloze,
@@ -283,7 +283,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onPost("api/v1/boards/1/forms").reply(200, {
+  mock.onPost(/api\/v1\/boards\/(\d+)\/forms/).reply(200, {
     board_id: 1,
     form_type: 2,
     id: 2,
@@ -298,7 +298,7 @@ var rules = (mock) => {
       success_message: "thanks!"
     }
   });
-  mock.onPut("api/v1/boards/1/forms").reply(200, {
+  mock.onPut(/api\/v1\/boards\/(\d+)\/forms/).reply(200, {
     board_id: 1,
     form_type: 2,
     id: 2,
@@ -383,7 +383,7 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet("api/v1/organizations/1/settings/privacy").reply(200, {
+  mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/privacy/).reply(200, {
     block_mail_blast_auto_approval: false,
     block_mail_blast_quick_approval: false,
     disable_share_button_on_board: false,
@@ -398,10 +398,10 @@ var rules = (mock) => {
     privacy_warning_provider: "app",
     restrict_export_data: false
   });
-  mock.onGet("api/v1/organizations/1/settings/personalizations").reply(200, {
+  mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/personalizations/).reply(200, {
     personalization: true
   });
-  mock.onGet("/api/v1/organizations/1/settings/features").reply(200, {
+  mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/features/).reply(200, {
     accounts_dashboard: true,
     advanced_reports: false,
     analytics_dashboards: false,
@@ -419,9 +419,9 @@ var rules = (mock) => {
     set_group_board: false
   });
   mock.onGet("/api/v1/preview/board_items_presence").reply(200, { has_items: true });
-  mock.onGet("/prism/1/personalization").reply(200, personalization);
-  mock.onPut("/prism/1/personalization").reply(200, personalization);
-  mock.onPut("/api/v1/boards/1/layout/1").reply(200);
+  mock.onGet(/prism\/(\d+)\/personalization/).reply(200, personalization);
+  mock.onPut(/prism\/(\d+)\/personalization/).reply(200, personalization);
+  mock.onPut(/api\/v1\/boards\/(\d+)\/layout\/(\d+)/).reply(200);
   mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {
       id: 1,

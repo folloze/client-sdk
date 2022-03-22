@@ -209,7 +209,7 @@ export const rules = (mock: MockAdapter) => {
             }
         ]);
 
-    mock.onGet("/api/v1/organizations/1/settings/image_bank")
+    mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/)
         .reply<ImageBankResponseV1>(200, {
             icons: ImageBankType.folloze,
             logos: ImageBankType.folloze,
@@ -218,7 +218,7 @@ export const rules = (mock: MockAdapter) => {
             mobile_banners: ImageBankType.folloze
         });
 
-    mock.onPut("/api/v1/organizations/1/settings/image_bank")
+    mock.onPut(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/)
         .reply<ImageBankResponseV1>(200, {
             icons: ImageBankType.folloze,
             logos: ImageBankType.folloze,
@@ -305,7 +305,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onPost("api/v1/boards/1/forms")
+    mock.onPost(/api\/v1\/boards\/(\d+)\/forms/)
         .reply<FormV1>(200, {
             board_id: 1,
             form_type: 2,
@@ -322,7 +322,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onPut("api/v1/boards/1/forms")
+    mock.onPut(/api\/v1\/boards\/(\d+)\/forms/)
         .reply<FormV1>(200, {
             board_id: 1,
             form_type: 2,
@@ -415,7 +415,7 @@ export const rules = (mock: MockAdapter) => {
             }
         });
 
-    mock.onGet("api/v1/organizations/1/settings/privacy")
+    mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/privacy/)
         .reply<PrivacySettingsResponseV1>(200, {
             block_mail_blast_auto_approval: false,
             block_mail_blast_quick_approval: false,
@@ -432,12 +432,12 @@ export const rules = (mock: MockAdapter) => {
             restrict_export_data: false
         });
 
-    mock.onGet("api/v1/organizations/1/settings/personalizations")
+    mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/personalizations/)
         .reply<BoardHasPersonalizationResponseV1>(200, {
             personalization: true
         });
 
-    mock.onGet("/api/v1/organizations/1/settings/features")
+    mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/features/)
         .reply<FeatureSettingsResponseV1>(200, {
             accounts_dashboard: true,
             advanced_reports: false,
@@ -459,13 +459,13 @@ export const rules = (mock: MockAdapter) => {
     mock.onGet("/api/v1/preview/board_items_presence")
         .reply<BoardHasItemsResponseV1>(200, {has_items: true});
 
-    mock.onGet("/prism/1/personalization")
+    mock.onGet(/prism\/(\d+)\/personalization/)
         .reply<PersonalizationV1>(200, personalization);
 
-    mock.onPut("/prism/1/personalization")
+    mock.onPut(/prism\/(\d+)\/personalization/)
         .reply<PersonalizationV1>(200, personalization);
 
-    mock.onPut("/api/v1/boards/1/layout/1")
+    mock.onPut(/api\/v1\/boards\/(\d+)\/layout\/(\d+)/)
         .reply(200);
 
     mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/)
