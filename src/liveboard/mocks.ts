@@ -262,8 +262,7 @@ export const rules = (mock: MockAdapter) => {
         anon_guest: false,
         group_user: false,
     });
-
-    mock.onPost("/live_board/v1/boards/1/campaign/form").reply<CtaResponseV1>(200, {
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/form/).reply<CtaResponseV1>(200, {
         id: 1,
         name: "name",
         last_name: "lastname",

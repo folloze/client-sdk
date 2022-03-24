@@ -14,6 +14,7 @@ describe("test liveboard mocks module", () => {
         formId: 1,
         message: "hey",
         type: "message",
+        aaa: "aaa"
     };
 
     it('checks that getBoard mock works as expected', async () => {

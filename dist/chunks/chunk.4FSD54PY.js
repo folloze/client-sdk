@@ -216,9 +216,7 @@ var Liveboard = class {
   }
   saveFormCta(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
+      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options)).then((result) => resolve(result.data)).catch((e) => {
         console.error("could not submit cta", e);
         reject(e);
       });

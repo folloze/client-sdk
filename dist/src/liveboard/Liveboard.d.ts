@@ -140,7 +140,7 @@ export declare class Liveboard {
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
+    saveFormCta(boardId: number, options: any): Promise<CtaResponseV1>;
     /**
      * submit a link CTA
      *

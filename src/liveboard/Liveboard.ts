@@ -436,15 +436,11 @@ export class Liveboard {
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveFormCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
+    saveFormCta(boardId: number, options: any): Promise<CtaResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<CtaResponseV1>(
-                `/live_board/v1/boards/${boardId}/campaign/form`,
-                {...keysToSnakeCase(options)}
-            )
-                .then(result => {
-                    resolve(result.data);
-                })
+            this.fetcher
+                .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
+                .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not submit cta", e);
                     reject(e);
