@@ -49,12 +49,17 @@ export declare type Image = {
 };
 export declare type ItemsParams = {
     boardId: number;
+    category?: number;
+    multiCategories?: number[][];
+    categoriesScope?: number[];
+    search?: string;
+    sorter?: string;
+    filter?: {
+        type: string;
+        num_items: number;
+    };
     page?: number;
     perPage?: number;
-    category?: number;
-    categoryIds?: number[];
-    search?: string;
-    multiCategoryIds?: number[][];
 };
 export declare type OpenItemViewerPayload = {
     id: number;
@@ -67,6 +72,14 @@ export declare type OpenItemViewerPayload = {
     category: {
         id: number;
         slug: string;
+    };
+    multiCategories?: number[][];
+    categoriesScope?: number[];
+    search?: string;
+    sorter?: string;
+    filter?: {
+        type: string;
+        num_items: number;
     };
 };
 export declare type JourneyItemParams = {

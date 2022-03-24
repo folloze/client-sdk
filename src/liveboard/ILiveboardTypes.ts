@@ -56,14 +56,19 @@ export type Image = {
 
 export type ItemsParams = {
     boardId: number,
+    category?: number,
+    multiCategories?: number[][], // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
+    // always send the categories scope
+    categoriesScope?: number[], // if specified will limit the result to include only items from those categories
+    search?: string,
+    sorter?: string,
+    filter?: {
+        type: string,
+        num_items: number
+    },
+    // defaults are handled in the server
     page?: number,
     perPage?: number,
-
-    category?: number, // temporarily support old API until new API is released
-    // you need at least one of below to work:
-    categoryIds?: number[],
-    search?: string,
-    multiCategoryIds?: number[][], // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
 }
 
 // minimixed data for the item relevant for the item viewer
@@ -78,7 +83,16 @@ export type OpenItemViewerPayload = {
     category: {
         id: number;
         slug: string;
-    }
+    },
+    multiCategories?: number[][], // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
+    // always send the categories scope
+    categoriesScope?: number[], // if specified will limit the result to include only items from those categories
+    search?: string,
+    sorter?: string,
+    filter?: {
+        type: string,
+        num_items: number
+    },
 }
 
 export type JourneyItemParams = {
