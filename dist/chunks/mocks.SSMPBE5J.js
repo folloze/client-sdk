@@ -235,6 +235,7 @@ var rules = (mock) => {
         form_title: "Sign up!",
         submit_label: "email me",
         success_message: "thanks!",
+        submit_redirect_url: "https://www.folloze.com",
         fields: {
           name: {
             label: "Name",
@@ -262,10 +263,7 @@ var rules = (mock) => {
       state: null,
       data: {
         script: "<script type='text/javascript'>alert('hey!')<\/script>",
-        auto_fill: true,
-        form_title: "Enter details here",
-        submit_label: "email me",
-        success_message: "thanks!"
+        form_title: "Enter details here"
       }
     },
     "3": {
@@ -295,7 +293,8 @@ var rules = (mock) => {
       auto_fill: true,
       form_title: "Enter details here",
       submit_label: "email me",
-      success_message: "thanks!"
+      success_message: "thanks!",
+      submit_redirect_url: "https://www.folloze.com"
     }
   });
   mock.onPut(/api\/v1\/boards\/(\d+)\/forms/).reply(200, {
@@ -310,7 +309,8 @@ var rules = (mock) => {
       auto_fill: true,
       form_title: "Enter details here",
       submit_label: "email me",
-      success_message: "thanks!"
+      success_message: "thanks!",
+      submit_redirect_url: "https://www.folloze.com"
     }
   });
   mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {

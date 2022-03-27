@@ -109,6 +109,7 @@ export type FormDataV1 = {
     form_title?: string,
     submit_label?: string,
     success_message?: string
+    submit_redirect_url?: string
     // for type classic (1)
     fields?: Record<string, FormField>, // the field's name and properties. There will always be an 'email' field
     // for type external (2)

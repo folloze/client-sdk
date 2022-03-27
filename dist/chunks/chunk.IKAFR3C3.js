@@ -1803,10 +1803,10 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.OKMHGYX2.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.JPFLZIXG.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.5MI74S6X.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.SSMPBE5J.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
     await import("./mocks.LF7HGLSV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));

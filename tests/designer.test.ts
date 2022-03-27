@@ -22,6 +22,7 @@ describe("testing sdk designer module", () => {
             form_title: "Enter details here",
             submit_label: "email me",
             success_message: "thanks!",
+            submit_redirect_url: "https://www.folloze.com",
         }
     };
 

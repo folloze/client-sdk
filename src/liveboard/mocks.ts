@@ -274,11 +274,11 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v1/boards/1/campaign/link").reply<CtaResponseV1>(200, {
         id: 1,
+        email: "email@company.com",
         name: "name",
         last_name: "lastname",
-        email: "email@company.com",
-        company: null,
         anon_guest: false,
+        company: null,
         group_user: false,
     });
 
@@ -364,6 +364,7 @@ export const rules = (mock: MockAdapter) => {
                 form_title: "form title",
                 submit_label: "form submit label",
                 success_message: "form success message",
+                submit_redirect_url: "https://www.folloze.com",
                 fields: {
                     name: {
                         label: "Name",

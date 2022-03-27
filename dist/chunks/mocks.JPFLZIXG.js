@@ -232,11 +232,11 @@ var rules = (mock) => {
   });
   mock.onPost("/live_board/v1/boards/1/campaign/link").reply(200, {
     id: 1,
+    email: "email@company.com",
     name: "name",
     last_name: "lastname",
-    email: "email@company.com",
-    company: null,
     anon_guest: false,
+    company: null,
     group_user: false
   });
   mock.onPost("/live_board/v1/boards/1/campaign/share").reply(200, {
@@ -307,6 +307,7 @@ var rules = (mock) => {
       form_title: "form title",
       submit_label: "form submit label",
       success_message: "form success message",
+      submit_redirect_url: "https://www.folloze.com",
       fields: {
         name: {
           label: "Name",

@@ -256,6 +256,7 @@ export const rules = (mock: MockAdapter) => {
                     form_title: "Sign up!",
                     submit_label: "email me",
                     success_message: "thanks!",
+                    submit_redirect_url: "https://www.folloze.com",
                     fields: {
                         name: {
                             label: "Name",
@@ -283,10 +284,7 @@ export const rules = (mock: MockAdapter) => {
                 state: null,
                 data: {
                     script: "<script type='text/javascript'>alert('hey!')</script>",
-                    auto_fill: true,
                     form_title: "Enter details here",
-                    submit_label: "email me",
-                    success_message: "thanks!",
                 }
             },
             "3": {
@@ -301,7 +299,7 @@ export const rules = (mock: MockAdapter) => {
                     munchkin_id: "abc-def-ghi",
                     base_url: "//app-sj25.marketo.com",
                     form_id: "1"
-                }
+                },
             }
         });
 
@@ -319,6 +317,7 @@ export const rules = (mock: MockAdapter) => {
                 form_title: "Enter details here",
                 submit_label: "email me",
                 success_message: "thanks!",
+                submit_redirect_url: "https://www.folloze.com",
             }
         });
 
@@ -336,6 +335,7 @@ export const rules = (mock: MockAdapter) => {
                 form_title: "Enter details here",
                 submit_label: "email me",
                 success_message: "thanks!",
+                submit_redirect_url: "https://www.folloze.com",
             }
         });
 

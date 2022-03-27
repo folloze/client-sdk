@@ -96,6 +96,7 @@ export declare type FormDataV1 = {
     form_title?: string;
     submit_label?: string;
     success_message?: string;
+    submit_redirect_url?: string;
     fields?: Record<string, FormField>;
     script?: string;
     auto_fill?: boolean;
