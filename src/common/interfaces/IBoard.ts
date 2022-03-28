@@ -53,3 +53,28 @@ export interface ILiveBoard extends LitElement {
     getRibbon(id: string): RibbonConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
 }
+
+export type Board = {
+    allow_embedding?: boolean;
+    id: number;
+    integrations: {
+        allow_append_params?: boolean;
+        eloqua?: object;
+        ga?: object;
+        marketo?: object;
+        ms_crm?: object;
+        pardot?: object;
+    };
+    is_ssl: boolean;
+    name: string;
+    online_items_count: number;
+    organization_id: number;
+    privacy?: {
+        cookie_management: "internal" | "external";
+        element_id: number;
+        personal_info_concealment: boolean;
+        privacy_warning_check: boolean;
+        regulated_countries_only: boolean;
+    };
+    slug: string;
+};
