@@ -93,6 +93,7 @@ export declare type FormV1 = {
     data: FormDataV1;
 };
 export declare type FormDataV1 = {
+    form_type?: number;
     form_title?: string;
     submit_label?: string;
     success_message?: string;

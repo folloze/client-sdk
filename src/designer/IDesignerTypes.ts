@@ -105,6 +105,7 @@ export type FormV1 = {
 }
 
 export type FormDataV1 = {
+    form_type?: number,
     // both classic and external
     form_title?: string,
     submit_label?: string,

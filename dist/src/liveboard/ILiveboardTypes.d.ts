@@ -282,7 +282,6 @@ export declare type SessionResonseV1 = {
 };
 export declare type FormMetadataDataV1 = {
     form: FormDataV1;
-    form_type: number;
     privacy_message: FormPrivacyMessageDataV1;
 };
 export {};

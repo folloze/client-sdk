@@ -317,6 +317,5 @@ export type SessionResonseV1 = {
 
 export type FormMetadataDataV1 = {
     form: FormDataV1,
-    form_type: number,
     privacy_message: FormPrivacyMessageDataV1
 }
