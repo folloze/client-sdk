@@ -76,4 +76,5 @@ export declare type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
+    state: "draft" | "published" | "unpublished changes";
 };
