@@ -360,6 +360,7 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/)
         .reply<FormMetadataDataV1>(200, {
+            form_type: 1,
             form: {
                 form_title: "form title",
                 submit_label: "form submit label",

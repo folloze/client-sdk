@@ -1803,7 +1803,7 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.R56TMPYP.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.FVPGOP7I.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
     await import("./mocks.SSMPBE5J.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
