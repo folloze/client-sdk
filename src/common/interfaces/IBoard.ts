@@ -28,8 +28,6 @@ export type BoardConfig = {
 };
 
 export interface ILiveBoard extends LitElement {
-    boardId: number;
-    board: Board;
     config: BoardConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
