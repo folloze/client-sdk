@@ -33,7 +33,7 @@ var rules = (mock) => {
     },
     is_enabled: true
   };
-  mock.onPost("/api/v1/image_gallery", { type: "campaign" }).reply(200, [
+  mock.onGet("/api/v1/image_gallery", { params: { type: "campaign" } }).reply(200, [
     {
       "fit": "cover",
       "url": "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
@@ -111,7 +111,7 @@ var rules = (mock) => {
       "fit": "cover"
     }
   ]);
-  mock.onPost("/api/v1/image_gallery", { type: "image_bank", bank_category: 1, organization_id: 1 }).reply(200, [
+  mock.onGet("/api/v1/image_gallery", { params: { type: "image_bank", bank_category: 1, organization_id: 1 } }).reply(200, [
     {
       fit: "cover",
       url: "https://images.folloze.com/image/upload/v1640510372/cjo48nkp0gtsk8pjrkjb.jpg"
@@ -121,7 +121,7 @@ var rules = (mock) => {
       url: "https://images.folloze.com/image/upload/v1640684303/iog6rsbluzw2y07koz26.jpg"
     }
   ]);
-  mock.onPost("/api/v1/image_gallery", { type: "image_bank", bank_category: 4, organization_id: 1 }).reply(200, [
+  mock.onGet("/api/v1/image_gallery", { params: { type: "image_bank", bank_category: 4, organization_id: 1 } }).reply(200, [
     {
       url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
       fit: "cover"
@@ -139,7 +139,7 @@ var rules = (mock) => {
       fit: "cover"
     }
   ]);
-  mock.onPost("/api/v1/image_gallery", { type: "search", query: "bug" }).reply(200, [
+  mock.onGet("/api/v1/image_gallery", { params: { type: "search", query: "bug" } }).reply(200, [
     {
       url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
       fit: "cover"

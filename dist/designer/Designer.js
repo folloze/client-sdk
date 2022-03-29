@@ -1,6 +1,6 @@
 import {
   Designer
-} from "../chunks/chunk.FTUTFTYS.js";
+} from "../chunks/chunk.VEOME6P3.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,
