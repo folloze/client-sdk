@@ -13,7 +13,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.NFQNZAKQ.js";
+} from "./chunks/chunk.OD5KUXJS.js";
 import "./chunks/chunk.3ZNLEUXI.js";
 import {
   Analytics,
@@ -23,7 +23,7 @@ import {
 } from "./chunks/chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunks/chunk.6AKL3VGP.js";
+} from "./chunks/chunk.FTUTFTYS.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,
