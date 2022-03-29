@@ -155,9 +155,10 @@ describe("testing sdk designer module", () => {
             columns: { colNum: 12, colWidth: "1fr" },
             rows: { rowNum: 0, rowHeight: "25px" }
           },
+          state: "draft",
           sections: {},
           widgets: {},
-          ribbons: {}
+          ribbons: {},
         };
         await sdk.designer.saveLiveBoard(1, boardConfig)
             .then(result => expect(result.status == 200));
