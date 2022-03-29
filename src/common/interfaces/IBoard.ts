@@ -6,21 +6,21 @@ import {FloatPos, GridPos} from "./IPositions";
 import {ClientSDK} from "../../sdk";
 
 export type BoardConfig = {
-    id: number,
+    id: number;
     meta: {
         savedTime: Date;
     };
     grid: {
         maxWidth: string; // 1024px ?
-        gap: { x: string, y: string };
+        gap: {x: string; y: string};
         columns: {
             colNum: number; // 12 by default should not change after initial setup.
             colWidth: string; // default should be 'auto' or '1fr'
-        }
+        };
         rows: {
             rowNum: number; // this should change every time a section is added.
             rowHeight: string; // this should always be immutable "40px"
-        }
+        };
     };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
@@ -39,7 +39,7 @@ export interface ILiveBoard extends LitElement {
     setRows(n: number): void;
     preRender(): void;
     refresh(): void;
-    addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig|void>;
+    addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
     generateConfigHash(): string;
 
     get widgets(): WidgetConfig[];
@@ -47,7 +47,7 @@ export interface ILiveBoard extends LitElement {
     get sections(): SectionConfig[];
     get ribbons(): RibbonConfig[];
     getWidget(id: string): WidgetConfig;
-    getWidgetEl(id: string): LiveWidget
+    getWidgetEl(id: string): LiveWidget;
     getSection(id: string): SectionConfig;
     getRibbon(id: string): RibbonConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
@@ -56,6 +56,7 @@ export interface ILiveBoard extends LitElement {
 export type Board = {
     allow_embedding?: boolean;
     id: number;
+    auto_upgrade_widgets?: boolean;
     integrations: {
         allow_append_params?: boolean;
         eloqua?: object;

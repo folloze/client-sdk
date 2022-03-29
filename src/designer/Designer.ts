@@ -19,7 +19,7 @@ import {
     EmailTemplateV1,
     UserV1,
 } from "./IDesignerTypes";
-import { BoardConfig } from '../common/interfaces/IBoard'
+import { BoardConfig } from '../common/interfaces/IBoard';
 
 export class Designer {
     private fetcher: AxiosInstance;

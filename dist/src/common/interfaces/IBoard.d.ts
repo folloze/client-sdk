@@ -54,6 +54,7 @@ export interface ILiveBoard extends LitElement {
 export declare type Board = {
     allow_embedding?: boolean;
     id: number;
+    auto_upgrade_widgets?: boolean;
     integrations: {
         allow_append_params?: boolean;
         eloqua?: object;
