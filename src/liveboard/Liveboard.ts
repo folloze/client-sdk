@@ -177,9 +177,9 @@ export class Liveboard {
      */
     getItems(params: ItemsParams): Promise<ItemsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(
+            this.fetcher.post(
                 `/live_board/v2/boards/${params.boardId}/items`,
-                {params: {...keysToSnakeCase(params)}}
+                keysToSnakeCase(params)
             )
                 .then(result => {
                     if(result.status == 206) {
@@ -253,9 +253,9 @@ export class Liveboard {
      */
     getJourneyItems(itemId: number, options: JourneyItemParams): Promise<JourneyItemsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<JourneyItemsResponseV2>(
+            this.fetcher.post<JourneyItemsResponseV2>(
                 `/live_board/v2/journeys/${itemId}`,
-                { params: keysToSnakeCase(options)}
+                keysToSnakeCase(options)
             )
                 .then(result => {
                     resolve(result.data);

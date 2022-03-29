@@ -88,7 +88,7 @@ var Liveboard = class {
   }
   getItems(params) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${params.boardId}/items`, { params: __spreadValues({}, keysToSnakeCase(params)) }).then((result) => {
+      this.fetcher.post(`/live_board/v2/boards/${params.boardId}/items`, keysToSnakeCase(params)).then((result) => {
         if (result.status == 206) {
           setTimeout(() => {
             this.getItems(params).then(resolve).catch(reject);
@@ -130,7 +130,7 @@ var Liveboard = class {
   }
   getJourneyItems(itemId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/journeys/${itemId}`, { params: keysToSnakeCase(options) }).then((result) => {
+      this.fetcher.post(`/live_board/v2/journeys/${itemId}`, keysToSnakeCase(options)).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get journey items", e);

@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.F7UMJQCK.js";
+} from "./chunk.3ZNLEUXI.js";
 import {
   Analytics
 } from "./chunk.YHWKAM4X.js";
@@ -9,7 +9,7 @@ import {
 } from "./chunk.ZTDDMLEJ.js";
 import {
   Liveboard
-} from "./chunk.4FSD54PY.js";
+} from "./chunk.EFXYWF6R.js";
 import {
   __commonJS,
   __toModule
@@ -1846,7 +1846,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.USDTFVAU.js").then(async (module) => {
+    return await import("./src.57FVLL6Z.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([

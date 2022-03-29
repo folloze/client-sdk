@@ -126,7 +126,7 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onGet("/live_board/v2/items/1").reply<ItemResponseV2>(200, item);
 
-    mock.onGet(/\/live_board\/v2\/boards\/(\d+)\/items/)
+    mock.onPost(/\/live_board\/v2\/boards\/(\d+)\/items/)
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         .reply<ItemsResponseV2>(config => {
             // console.log(config);
@@ -144,7 +144,7 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v2/items/1/likes").reply<void>(200);
 
-    mock.onGet("/live_board/v2/journeys/1").reply<JourneyItemsResponseV2>(200, {
+    mock.onPost("/live_board/v2/journeys/1").reply<JourneyItemsResponseV2>(200, {
         items: {
             "1": {
                 category_id: null,
