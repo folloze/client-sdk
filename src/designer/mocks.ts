@@ -35,7 +35,7 @@ export const rules = (mock: MockAdapter) => {
         is_enabled: true
     };
 
-    mock.onPost("/api/imagegallery", {type: "campaign"})
+    mock.onPost("/api/v1/imagegallery", {type: "campaign"})
         .reply<GalleryImage[]>(200, [
             {
                 "fit": "cover",
@@ -116,7 +116,7 @@ export const rules = (mock: MockAdapter) => {
         ]);
 
     //banners
-    mock.onPost("/api/imagegallery", {type: "image_bank", bank_category: 1, organization_id: 1})
+    mock.onPost("/api/v1/imagegallery", {type: "image_bank", bank_category: 1, organization_id: 1})
         .reply<GalleryImage[]>(200, [
             {
                 fit: "cover",
@@ -129,7 +129,7 @@ export const rules = (mock: MockAdapter) => {
         ]);
 
     //icons
-    mock.onPost("/api/imagegallery", {type: "image_bank", bank_category: 4, organization_id: 1})
+    mock.onPost("/api/v1/imagegallery", {type: "image_bank", bank_category: 4, organization_id: 1})
         .reply<GalleryImage[]>(200, [
             {
                 url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
@@ -149,7 +149,7 @@ export const rules = (mock: MockAdapter) => {
             }
         ]);
 
-    mock.onPost("/api/imagegallery", {type: "search", query: "bug"})
+    mock.onPost("/api/v1/imagegallery", {type: "search", query: "bug"})
         .reply<GalleryImage[]>(200, [
             {
                 url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",

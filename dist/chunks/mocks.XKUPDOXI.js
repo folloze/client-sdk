@@ -33,7 +33,7 @@ var rules = (mock) => {
     },
     is_enabled: true
   };
-  mock.onPost("/api/imagegallery", { type: "campaign" }).reply(200, [
+  mock.onPost("/api/v1/imagegallery", { type: "campaign" }).reply(200, [
     {
       "fit": "cover",
       "url": "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"

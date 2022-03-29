@@ -26,7 +26,7 @@ var Designer = class {
   }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/api/imagegallery", __spreadValues({}, keysToSnakeCase(payload))).then((result) => {
+      this.fetcher.post("/api/v1/imagegallery", __spreadValues({}, keysToSnakeCase(payload))).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get image gallery", e);
