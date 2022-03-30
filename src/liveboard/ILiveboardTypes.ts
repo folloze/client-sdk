@@ -80,7 +80,7 @@ export type OpenItemViewerPayload = {
     item_source: number;
     item_type: string;
     is_gated: boolean;
-    category: {
+    category?: {
         id: number;
         slug: string;
     },
