@@ -42,6 +42,7 @@ export interface ILiveBoard extends LitElement {
     refresh(): void;
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
     generateConfigHash(): string;
+    autoUpgradeWidgets(): void;
 
     get widgets(): WidgetConfig[];
     get widgetElements(): LiveWidget[];
