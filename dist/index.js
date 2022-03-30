@@ -13,8 +13,8 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.UIYVNNGU.js";
-import "./chunks/chunk.62TMOTOU.js";
+} from "./chunks/chunk.2JBDKRHH.js";
+import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
   DesignerEventTypes,

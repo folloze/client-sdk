@@ -25,7 +25,6 @@ export type BoardConfig = {
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
     ribbons: Record<string, RibbonConfig>;
-    state: "draft" | "published" | "unpublished changes";
 };
 
 export interface ILiveBoard extends LitElement {
@@ -79,4 +78,10 @@ export type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
+    layout_info: {
+        [layoutId: number]: {
+            state: "draft" | "published" | "unpublished changes";
+            type: "default" | "gating";
+        }
+    }
 };
