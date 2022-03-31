@@ -8,8 +8,15 @@ import {
   LiveWidget,
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
-  makeDragElement
-} from "../chunks/chunk.MBF45GI2.js";
+  componentEmit,
+  editorEmit,
+  editorEmitPromise,
+  emit,
+  makeDragElement,
+  waitForEvent,
+  widgetEmit,
+  widgetEmitPromise
+} from "../chunks/chunk.RW3Y5NLU.js";
 import {
   FetchService
 } from "../chunks/chunk.2JBDKRHH.js";
@@ -37,9 +44,16 @@ export {
   LiveWidget,
   LiveWidgetComponentEdit,
   LiveWidgetEdit,
+  componentEmit,
+  editorEmit,
+  editorEmitPromise,
+  emit,
   fileUpload,
   hashObj,
   isObjsEqual,
   keysToSnakeCase,
-  makeDragElement
+  makeDragElement,
+  waitForEvent,
+  widgetEmit,
+  widgetEmitPromise
 };

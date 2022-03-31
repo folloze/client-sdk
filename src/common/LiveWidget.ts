@@ -3,6 +3,7 @@ import {WidgetConfig} from "./interfaces/IWidget";
 import { v4 as uuid_v4 } from "uuid";
 import {PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
+import {widgetEmit} from "./helpers/eventHelpers";
 
 export abstract class LiveWidget extends LiveDraggable {
 
@@ -19,11 +20,16 @@ export abstract class LiveWidget extends LiveDraggable {
         this._widgetId = uuid_v4();
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+
+        widgetEmit(this, "widget-connected");
+    }
+
     willUpdate(_changedProperties: PropertyValues) {
         super.willUpdate(_changedProperties);
-        this.dispatchEvent(new CustomEvent("widget-update", {detail: {
-            widgetEl: this,
-        }, bubbles: true, composed: true}));
+
+        widgetEmit(this, "widget-update");
     }
 
     set config(data: WidgetConfig) {

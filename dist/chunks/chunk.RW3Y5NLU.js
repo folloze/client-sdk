@@ -699,17 +699,84 @@ function v4(options, buf, offset) {
 }
 var v4_default = v4;
 
+// src/common/FlzEvent.ts
+var FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
+var FlzEvent = class extends Event {
+  constructor(emitter, listenerStr, action, payload, onSuccess, onError) {
+    super(listenerStr, { bubbles: true, composed: true });
+    this.action = action;
+    this.payload = payload;
+    this.emitter = emitter;
+    this.onSuccess = onSuccess;
+    this.onError = onError;
+  }
+};
+var FlzBoardEvent = class extends FlzEvent {
+  constructor(emitter, action, payload, onSuccess, onError) {
+    super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
+  }
+};
+var FlzDesignerEvent = class extends FlzEvent {
+  constructor(emitter, action, payload, onSuccess, onError) {
+    super(emitter, FLZ_DESIGNER_EVENT_TYPE, action, payload, onSuccess, onError);
+  }
+};
+
+// src/common/helpers/eventHelpers.ts
+function widgetEmit(el, action, payload, onSuccess, onError) {
+  el.dispatchEvent(new FlzBoardEvent(this, action, payload, onSuccess, onError));
+}
+function editorEmit(el, action, payload, onSuccess, onError) {
+  el.dispatchEvent(new FlzDesignerEvent(this, action, payload, onSuccess, onError));
+}
+function componentEmit(el, action, payload, onSuccess, onError) {
+  widgetEmit(el, action, payload, onSuccess, onError);
+}
+function widgetEmitPromise(el, action, payload) {
+  return new Promise((resolve, reject) => {
+    widgetEmit(el, action, payload, resolve, reject);
+  });
+}
+function editorEmitPromise(el, action, payload) {
+  return new Promise((resolve, reject) => {
+    editorEmit(el, action, payload, resolve, reject);
+  });
+}
+function emit(el, name, options) {
+  const event = new CustomEvent(name, Object.assign({
+    bubbles: true,
+    cancelable: false,
+    composed: true,
+    detail: {}
+  }, options));
+  el.dispatchEvent(event);
+  return event;
+}
+function waitForEvent(el, eventName) {
+  return new Promise((resolve) => {
+    function done(event) {
+      if (event.target === el) {
+        el.removeEventListener(eventName, done);
+        resolve();
+      }
+    }
+    el.addEventListener(eventName, done);
+  });
+}
+
 // src/common/LiveWidget.ts
 var LiveWidget = class extends LiveDraggable {
   constructor() {
     super();
     this._widgetId = v4_default();
   }
+  connectedCallback() {
+    super.connectedCallback();
+    widgetEmit(this, "widget-connected");
+  }
   willUpdate(_changedProperties) {
     super.willUpdate(_changedProperties);
-    this.dispatchEvent(new CustomEvent("widget-update", { detail: {
-      widgetEl: this
-    }, bubbles: true, composed: true }));
+    widgetEmit(this, "widget-update");
   }
   set config(data) {
     this._widgetId = data.id;
@@ -1092,40 +1159,24 @@ __decorateClass([
   e4()
 ], FloatEditor.prototype, "isLoading", 2);
 
-// src/common/FlzEvent.ts
-var FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
-var FlzEvent = class extends Event {
-  constructor(emitter, listenerStr, action, payload, onSuccess, onError) {
-    super(listenerStr, { bubbles: true, composed: true });
-    this.action = action;
-    this.payload = payload;
-    this.emitter = emitter;
-    this.onSuccess = onSuccess;
-    this.onError = onError;
-  }
-};
-var FlzBoardEvent = class extends FlzEvent {
-  constructor(emitter, action, payload, onSuccess, onError) {
-    super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
-  }
-};
-var FlzDesignerEvent = class extends FlzEvent {
-  constructor(emitter, action, payload, onSuccess, onError) {
-    super(emitter, FLZ_DESIGNER_EVENT_TYPE, action, payload, onSuccess, onError);
-  }
-};
-
 export {
   LiveDraggable,
+  FLZ_DESIGNER_EVENT_TYPE,
+  FlzEvent,
+  FlzBoardEvent,
+  FlzDesignerEvent,
+  widgetEmit,
+  editorEmit,
+  componentEmit,
+  widgetEmitPromise,
+  editorEmitPromise,
+  emit,
+  waitForEvent,
   LiveWidget,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
   makeDragElement,
-  FloatEditor,
-  FLZ_DESIGNER_EVENT_TYPE,
-  FlzEvent,
-  FlzBoardEvent,
-  FlzDesignerEvent
+  FloatEditor
 };
 /**
  * @license
