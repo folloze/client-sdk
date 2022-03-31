@@ -10,7 +10,7 @@ export declare abstract class FlzEvent extends Event {
     protected constructor(emitter: LitElement, listenerStr: string, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
 export declare class FlzBoardEvent extends FlzEvent {
-    constructor(emitter: LiveWidget | LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
+    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
 export declare class FlzDesignerEvent extends FlzEvent {
     constructor(emitter: LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);

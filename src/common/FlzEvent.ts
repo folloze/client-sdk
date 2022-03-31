@@ -22,7 +22,7 @@ export abstract class FlzEvent extends Event {
 }
 
 export class FlzBoardEvent extends FlzEvent {
-    constructor(emitter: LiveWidget | LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
         super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
     }
 }
