@@ -15,7 +15,6 @@ export abstract class FlzEvent extends Event {
         super(listenerStr, {bubbles: true, composed: true});
         this.action = action;
         this.payload = payload;
-        console.log('FlzEvent emitter', emitter);
         this.emitter = emitter;
         this.onSuccess = onSuccess;
         this.onError = onError;
@@ -24,7 +23,6 @@ export abstract class FlzEvent extends Event {
 
 export class FlzBoardEvent extends FlzEvent {
     constructor(emitter: LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
-        console.log('FlzBoardEvent emitter', emitter);
         super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
     }
 }

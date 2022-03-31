@@ -22,13 +22,13 @@ export abstract class LiveWidget extends LiveDraggable {
 
     connectedCallback() {
         super.connectedCallback();
-        console.log('LIVE WIDGET connectedCallback', this);
+
         widgetEmit(this, "widget-connected");
     }
 
     willUpdate(_changedProperties: PropertyValues) {
         super.willUpdate(_changedProperties);
-        console.log('LIVE WIDGET willUpdate', this);
+
         widgetEmit(this, "widget-update");
     }
 
