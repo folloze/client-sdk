@@ -20,15 +20,18 @@ export abstract class LiveWidget extends LiveDraggable {
         this._widgetId = uuid_v4();
     }
 
+    connectedCallback() {
+        super.connectedCallback();
+        widgetEmit(this, "widget-connected");
+    }
+
     willUpdate(_changedProperties: PropertyValues) {
         super.willUpdate(_changedProperties);
-
         widgetEmit(this, "widget-update");
     }
 
     protected firstUpdated(_changedProperties: PropertyValues) {
         super.firstUpdated(_changedProperties);
-
         widgetEmit(this, "widget-first-updated");
     }
 

@@ -770,6 +770,10 @@ var LiveWidget = class extends LiveDraggable {
     super();
     this._widgetId = v4_default();
   }
+  connectedCallback() {
+    super.connectedCallback();
+    widgetEmit(this, "widget-connected");
+  }
   willUpdate(_changedProperties) {
     super.willUpdate(_changedProperties);
     widgetEmit(this, "widget-update");
