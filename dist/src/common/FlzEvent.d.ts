@@ -1,6 +1,6 @@
 import { LitElement } from "lit";
 export declare const FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
-export declare class FlzEvent extends Event {
+export declare abstract class FlzEvent extends Event {
     action: string;
     payload: any;
     emitter: LitElement;

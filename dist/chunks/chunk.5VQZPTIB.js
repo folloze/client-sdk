@@ -706,6 +706,7 @@ var FlzEvent = class extends Event {
     super(listenerStr, { bubbles: true, composed: true });
     this.action = action;
     this.payload = payload;
+    console.log("FlzEvent emitter", emitter);
     this.emitter = emitter;
     this.onSuccess = onSuccess;
     this.onError = onError;
@@ -713,6 +714,7 @@ var FlzEvent = class extends Event {
 };
 var FlzBoardEvent = class extends FlzEvent {
   constructor(emitter, action, payload, onSuccess, onError) {
+    console.log("FlzBoardEvent emitter", emitter);
     super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
   }
 };
@@ -772,10 +774,12 @@ var LiveWidget = class extends LiveDraggable {
   }
   connectedCallback() {
     super.connectedCallback();
+    console.log("LIVE WIDGET connectedCallback", this);
     widgetEmit(this, "widget-connected");
   }
   willUpdate(_changedProperties) {
     super.willUpdate(_changedProperties);
+    console.log("LIVE WIDGET willUpdate", this);
     widgetEmit(this, "widget-update");
   }
   set config(data) {
