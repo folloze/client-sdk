@@ -1,20 +1,19 @@
 import {LitElement} from "lit";
-import {LiveWidget} from "../LiveWidget";
 import {FlzBoardEvent, FlzDesignerEvent} from "../FlzEvent";
 
-export function widgetEmit(el: LiveWidget | LitElement, action: string, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
-    el.dispatchEvent(new FlzBoardEvent(this, action, payload, onSuccess, onError));
+export function widgetEmit(el: LitElement, action: string, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
+    el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
 
 export function editorEmit(el: LitElement, action: string, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
-    el.dispatchEvent(new FlzDesignerEvent(this, action, payload, onSuccess, onError));
+    el.dispatchEvent(new FlzDesignerEvent(el, action, payload, onSuccess, onError));
 }
 
 export function componentEmit(el: LitElement, action: string, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
     widgetEmit(el, action, payload, onSuccess, onError);
 }
 
-export function widgetEmitPromise(el: LiveWidget, action: string, payload?: any): Promise<any> {
+export function widgetEmitPromise(el: LitElement, action: string, payload?: any): Promise<any> {
     return new Promise((resolve, reject) => {
         widgetEmit(el, action, payload, resolve, reject);
     });

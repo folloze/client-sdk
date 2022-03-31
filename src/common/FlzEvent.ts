@@ -3,7 +3,7 @@ import {FLZ_WIDGET_EVENT_TYPE} from "./interfaces/IWidgetCommunication";
 import {LitElement} from "lit";
 export const FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
 
-export abstract class FlzEvent extends Event {
+export class FlzEvent extends Event {
 
     public action: string;
     public payload: any;
@@ -22,7 +22,7 @@ export abstract class FlzEvent extends Event {
 }
 
 export class FlzBoardEvent extends FlzEvent {
-    constructor(emitter: LiveWidget, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+    constructor(emitter: LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
         super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
     }
 }
