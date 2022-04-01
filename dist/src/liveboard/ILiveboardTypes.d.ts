@@ -205,7 +205,7 @@ export declare type ItemFileMetadataResponseV1 = {
     preview_metadata: {
         url?: string;
         file_id?: number;
-        access_token?: number;
+        access_token?: string;
     };
 };
 export declare type ItemDownloadUrlSuccessResponseV2 = {

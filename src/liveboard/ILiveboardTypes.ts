@@ -227,7 +227,7 @@ export type ItemFileMetadataResponseV1 = {
     preview_metadata: {
         url?: string, //every provider but box
         file_id?: number, //box
-        access_token?: number //box
+        access_token?: string //box
     }
 }
 
