@@ -16,12 +16,12 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.6LI2ISH5.js";
+} from "./chunks/chunk.YVUJCWI5.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.UIYVNNGU.js";
-import "./chunks/chunk.62TMOTOU.js";
+} from "./chunks/chunk.2FNBXPB2.js";
+import "./chunks/chunk.NG7TLSQO.js";
 import {
   Analytics,
   DesignerEventTypes,

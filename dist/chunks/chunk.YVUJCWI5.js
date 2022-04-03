@@ -961,7 +961,7 @@ var FloatEditor = class extends s4 {
     });
   }
   close(e6) {
-    e6.stopPropagation();
+    e6 == null ? void 0 : e6.stopPropagation();
     this.remove();
   }
   setStartPos(x2, y2) {

@@ -168,8 +168,8 @@ export class FloatEditor extends LitElement {
         });
     }
 
-    close(e: Event) {
-        e.stopPropagation();
+    close(e?: Event) {
+        e?.stopPropagation();
         this.remove();
     }
 

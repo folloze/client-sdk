@@ -10,7 +10,7 @@ export declare class FloatEditor extends LitElement {
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit);
     disconnectedCallback(): void;
     protected firstUpdated(): void;
-    close(e: Event): void;
+    close(e?: Event): void;
     setStartPos(x: number, y: number): void;
     moveToPos(): void;
     highlight(): void;
