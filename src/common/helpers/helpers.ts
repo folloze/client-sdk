@@ -91,7 +91,7 @@ export function hashObj(obj: any) {
     return sha1(obj);
 }
 
-function simpleDebounce(callback: CallableFunction, delay: number = 500) {
+export function simpleDebounce(callback: CallableFunction, delay: number = 500) {
     let timeout;
 
     return (...args) => {
