@@ -1956,7 +1956,7 @@ var require_lodash = __commonJS({
           end = end === undefined ? length : end;
           return !start && end >= length ? array : baseSlice(array, start, end);
         }
-        var clearTimeout = ctxClearTimeout || function(id) {
+        var clearTimeout2 = ctxClearTimeout || function(id) {
           return root.clearTimeout(id);
         };
         function cloneBuffer(buffer, isDeep) {
@@ -3805,7 +3805,7 @@ var require_lodash = __commonJS({
           }
           function cancel() {
             if (timerId !== undefined) {
-              clearTimeout(timerId);
+              clearTimeout2(timerId);
             }
             lastInvokeTime = 0;
             lastArgs = lastCallTime = lastThis = timerId = undefined;
@@ -3823,7 +3823,7 @@ var require_lodash = __commonJS({
                 return leadingEdge(lastCallTime);
               }
               if (maxing) {
-                clearTimeout(timerId);
+                clearTimeout2(timerId);
                 timerId = setTimeout2(timerExpired, wait);
                 return invokeFunc(lastCallTime);
               }
@@ -6388,13 +6388,36 @@ function isObjsEqual(obj1, obj2) {
 function hashObj(obj) {
   return (0, import_object_hash.sha1)(obj);
 }
+function simpleThrottle(callback, delay = 500) {
+  let pause = false;
+  let waitingArgs;
+  const timeoutFunc = () => {
+    if (waitingArgs === null) {
+      pause = false;
+    } else {
+      callback(...waitingArgs);
+      waitingArgs = null;
+      setTimeout(timeoutFunc, delay);
+    }
+  };
+  return (...args) => {
+    if (pause) {
+      waitingArgs = args;
+      return;
+    }
+    callback(...args);
+    pause = true;
+    setTimeout(timeoutFunc, delay);
+  };
+}
 
 export {
   require_lodash,
   keysToSnakeCase,
   fileUpload,
   isObjsEqual,
-  hashObj
+  hashObj,
+  simpleThrottle
 };
 /**
  * @license
