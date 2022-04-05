@@ -5,5 +5,4 @@ export interface IItemViewer extends LitElement {
     open(item?: OpenItemViewerPayload): void;
     close(): void;
     changeItem(item: OpenItemViewerPayload);
-    currentItemLiked(): void;
 }
