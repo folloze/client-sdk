@@ -1,5 +1,5 @@
 import {LiveWidgetEdit} from "./LiveWidgetEdit";
-import _ from "lodash";
+import get from "lodash/get";
 
 export abstract class LiveWidgetComponentEdit extends LiveWidgetEdit {
 
@@ -14,6 +14,6 @@ export abstract class LiveWidgetComponentEdit extends LiveWidgetEdit {
     }
 
     protected firstUpdated() {
-        this.data = _.get(this.widget.data, this.propertyPath);
+        this.data = get(this.widget.data, this.propertyPath);
     }
 }

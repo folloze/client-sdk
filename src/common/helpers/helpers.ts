@@ -1,4 +1,5 @@
-import {mapKeys, snakeCase} from "lodash";
+import mapKeys from "lodash/mapKeys";
+import snakeCase from "lodash/snakeCase";
 import {sha1} from "object-hash";
 
 export const keysToSnakeCase = params => {

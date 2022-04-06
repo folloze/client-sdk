@@ -16,12 +16,12 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.KZWDS7FC.js";
+} from "./chunks/chunk.7IADDXWR.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.NPDRUMMM.js";
-import "./chunks/chunk.62TMOTOU.js";
+} from "./chunks/chunk.AYBRJR4X.js";
+import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -30,7 +30,7 @@ import {
 } from "./chunks/chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunks/chunk.BGRJITXE.js";
+} from "./chunks/chunk.LJ2BRNWM.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,
@@ -39,7 +39,7 @@ import {
 } from "./chunks/chunk.FPDLHEHA.js";
 import {
   Liveboard
-} from "./chunks/chunk.SJSCBIIG.js";
+} from "./chunks/chunk.MOU46CME.js";
 import {
   fileUpload,
   hashObj,
@@ -47,7 +47,7 @@ import {
   keysToSnakeCase,
   simpleDebounce,
   simpleThrottle
-} from "./chunks/chunk.ZI4AOOZE.js";
+} from "./chunks/chunk.WXVSHK2H.js";
 import {
   FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE
