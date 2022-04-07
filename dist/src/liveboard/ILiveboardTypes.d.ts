@@ -81,6 +81,15 @@ export declare type OpenItemViewerPayload = {
         type: string;
         num_items: number;
     };
+    viewer_settings: {
+        design: "classic" | "lightbox";
+        visibility: {
+            title: boolean;
+            description: boolean;
+        };
+        allow_download: boolean;
+        allow_likes: boolean;
+    };
 };
 export declare type JourneyItemParams = {
     query?: string;

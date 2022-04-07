@@ -1,6 +1,7 @@
 import {
-  CampaignElementsTypes
-} from "./chunk.B6G457LR.js";
+  CampaignElementsTypes,
+  ImageGalleryTypes
+} from "./chunk.FPDLHEHA.js";
 import {
   keysToSnakeCase
 } from "./chunk.WXVSHK2H.js";
@@ -33,12 +34,50 @@ var Designer = class {
       });
     });
   }
+  getQueryImageGallery(query) {
+    return this.getImageGallery({ type: ImageGalleryTypes.search, query });
+  }
+  getImageBankGallery(organizationId, bankCategory) {
+    return this.getImageGallery({
+      type: ImageGalleryTypes.imageBank,
+      organizationId,
+      bankCategory
+    });
+  }
+  getCampaignImageGallery() {
+    return this.getImageGallery({ type: ImageGalleryTypes.campaign });
+  }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/api/v1/upload_urls", { type: uploadType }).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get upload url", e);
+        reject(e);
+      });
+    });
+  }
+  getImageBankSettings(organizationId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/api/v1/organizations/${organizationId}/settings/image_bank`).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not get image bank settings", e);
+        reject(e);
+      });
+    });
+  }
+  saveImageBankSettings(organizationId, categoryName, source) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.put(`/api/v1/organizations/${organizationId}/settings/image_bank`, {
+        params: {
+          category_name: categoryName,
+          value: source
+        }
+      }).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not set image bank settings", e);
         reject(e);
       });
     });

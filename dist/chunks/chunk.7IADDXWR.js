@@ -1,6 +1,6 @@
 import {
-  require_lodash
-} from "./chunk.FJ3V2PYX.js";
+  require_get
+} from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
 } from "./chunk.TSPPKQSU.js";
@@ -836,7 +836,7 @@ var LiveWidgetEdit = class extends s4 {
 };
 
 // src/common/LiveWidgetComponentEdit.ts
-var import_lodash = __toModule(require_lodash());
+var import_get = __toModule(require_get());
 var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   set propertyPath(path) {
     this._propPath = path;
@@ -845,7 +845,7 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
     return this._propPath;
   }
   firstUpdated() {
-    this.data = import_lodash.default.get(this.widget.data, this.propertyPath);
+    this.data = (0, import_get.default)(this.widget.data, this.propertyPath);
   }
 };
 
@@ -961,7 +961,7 @@ var FloatEditor = class extends s4 {
     });
   }
   close(e6) {
-    e6.stopPropagation();
+    e6 == null ? void 0 : e6.stopPropagation();
     this.remove();
   }
   setStartPos(x2, y2) {
