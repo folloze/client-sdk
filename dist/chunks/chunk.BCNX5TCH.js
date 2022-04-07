@@ -1,12 +1,12 @@
 import {
   require_axios
-} from "./chunk.F7UMJQCK.js";
+} from "./chunk.3ZNLEUXI.js";
 import {
   Analytics
 } from "./chunk.YHWKAM4X.js";
 import {
   Designer
-} from "./chunk.LJ2BRNWM.js";
+} from "./chunk.XSSBJ5E7.js";
 import {
   Liveboard
 } from "./chunk.MOU46CME.js";
@@ -613,7 +613,7 @@ var MockConnector = class {
     await import("./mocks.HSUXV24Y.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.YCFYGMND.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.6VZZR6JC.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
     await import("./mocks.LF7HGLSV.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
@@ -653,7 +653,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.USDTFVAU.js").then(async (module) => {
+    return await import("./src.57FVLL6Z.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([

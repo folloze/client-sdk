@@ -969,7 +969,6 @@ var require_package = __commonJS({
       },
       homepage: "https://axios-http.com",
       jsdelivr: "dist/axios.min.js",
-<<<<<<< HEAD:dist/chunks/chunk.3ZNLEUXI.js
       keywords: [
         "xhr",
         "http",
@@ -998,19 +997,6 @@ var require_package = __commonJS({
       typings: "./index.d.ts",
       unpkg: "dist/axios.min.js",
       version: "0.21.4"
-=======
-      unpkg: "dist/axios.min.js",
-      typings: "./index.d.ts",
-      dependencies: {
-        "follow-redirects": "^1.14.0"
-      },
-      bundlesize: [
-        {
-          path: "./dist/axios.min.js",
-          threshold: "5kB"
-        }
-      ]
->>>>>>> master:dist/chunks/chunk.F7UMJQCK.js
     };
   }
 });
