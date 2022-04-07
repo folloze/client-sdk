@@ -29,9 +29,10 @@ export declare type GalleryImage = {
     viewed?: boolean;
 };
 export declare type ImageGalleryParams = {
-    bank_category: ImageBankCategory;
+    bank_category?: ImageBankCategory;
     type: ImageGalleryTypes;
     organization_id: number;
+    query?: string;
 };
 export declare type ImageBankResponseV1 = {
     icons: ImageBankType;
