@@ -1,7 +1,7 @@
 // src/designer/IDesignerTypes.ts
 var ImageGalleryTypes = /* @__PURE__ */ ((ImageGalleryTypes2) => {
   ImageGalleryTypes2["campaign"] = "campaign";
-  ImageGalleryTypes2["imageBank"] = "image_bank";
+  ImageGalleryTypes2["icon"] = "icon";
   ImageGalleryTypes2["search"] = "search";
   return ImageGalleryTypes2;
 })(ImageGalleryTypes || {});

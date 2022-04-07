@@ -2,7 +2,7 @@ import {PrivacySettings} from '../common/ISharedTypes';
 
 export enum ImageGalleryTypes {
     campaign = "campaign",
-    imageBank = "image_bank",
+    icon = "icon",
     search = "search"
 }
 

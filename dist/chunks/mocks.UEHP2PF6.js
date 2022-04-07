@@ -2,7 +2,7 @@ import {
   CampaignElementsTypes,
   ImageBankCategory,
   ImageGalleryTypes
-} from "./chunk.B6G457LR.js";
+} from "./chunk.2UDISWNO.js";
 import "./chunk.Z3GS5MY4.js";
 
 // src/designer/mocks.ts

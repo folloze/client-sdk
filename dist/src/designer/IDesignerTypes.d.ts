@@ -1,7 +1,7 @@
 import { PrivacySettings } from '../common/ISharedTypes';
 export declare enum ImageGalleryTypes {
     campaign = "campaign",
-    imageBank = "image_bank",
+    icon = "icon",
     search = "search"
 }
 export declare enum ImageBankType {
