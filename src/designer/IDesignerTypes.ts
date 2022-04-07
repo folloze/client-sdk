@@ -37,7 +37,7 @@ export type GalleryImage = {
 export type ImageGalleryParams = {
     bank_category?: ImageBankCategory,
     type: ImageGalleryTypes,
-    organization_id: number,
+    organization_id?: number,
     query?: string
 }
 
