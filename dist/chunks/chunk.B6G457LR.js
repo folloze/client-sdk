@@ -11,12 +11,11 @@ var ImageBankType = /* @__PURE__ */ ((ImageBankType2) => {
   return ImageBankType2;
 })(ImageBankType || {});
 var ImageBankCategory = /* @__PURE__ */ ((ImageBankCategory2) => {
-  ImageBankCategory2[ImageBankCategory2["all"] = 0] = "all";
-  ImageBankCategory2[ImageBankCategory2["banners"] = 1] = "banners";
-  ImageBankCategory2[ImageBankCategory2["mobile_banners"] = 2] = "mobile_banners";
-  ImageBankCategory2[ImageBankCategory2["thumbnails"] = 3] = "thumbnails";
-  ImageBankCategory2[ImageBankCategory2["icons"] = 4] = "icons";
-  ImageBankCategory2[ImageBankCategory2["logos"] = 5] = "logos";
+  ImageBankCategory2["banners"] = "banners";
+  ImageBankCategory2["mobile_banners"] = "mobile_banners";
+  ImageBankCategory2["thumbnails"] = "thumbnails";
+  ImageBankCategory2["icons"] = "icons";
+  ImageBankCategory2["logos"] = "logos";
   return ImageBankCategory2;
 })(ImageBankCategory || {});
 var CampaignElementsTypes = /* @__PURE__ */ ((CampaignElementsTypes2) => {

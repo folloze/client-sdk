@@ -12,12 +12,11 @@ export enum ImageBankType {
 }
 
 export enum ImageBankCategory {
-    all = 0,
-    banners = 1,
-    mobile_banners,
-    thumbnails,
-    icons,
-    logos
+    banners = "banners",
+    mobile_banners = "mobile_banners",
+    thumbnails = "thumbnails",
+    icons = "icons",
+    logos = "logos"
 }
 
 export enum CampaignElementsTypes {
@@ -36,10 +35,9 @@ export type GalleryImage = {
 }
 
 export type ImageGalleryParams = {
+    bank_category: ImageBankCategory,
     type: ImageGalleryTypes,
-    query?: string, // search
-    organizationId?: number, // imageBank This is for cross org users in image bank (agencies, super admins, etc)
-    bankCategory?: ImageBankCategory, // imageBank
+    organization_id: number
 }
 
 export type ImageBankResponseV1 = {

@@ -9,12 +9,11 @@ export declare enum ImageBankType {
     organization = "organization"
 }
 export declare enum ImageBankCategory {
-    all = 0,
-    banners = 1,
-    mobile_banners = 2,
-    thumbnails = 3,
-    icons = 4,
-    logos = 5
+    banners = "banners",
+    mobile_banners = "mobile_banners",
+    thumbnails = "thumbnails",
+    icons = "icons",
+    logos = "logos"
 }
 export declare enum CampaignElementsTypes {
     footer = 1,
@@ -30,10 +29,9 @@ export declare type GalleryImage = {
     viewed?: boolean;
 };
 export declare type ImageGalleryParams = {
+    bank_category: ImageBankCategory;
     type: ImageGalleryTypes;
-    query?: string;
-    organizationId?: number;
-    bankCategory?: ImageBankCategory;
+    organization_id: number;
 };
 export declare type ImageBankResponseV1 = {
     icons: ImageBankType;
