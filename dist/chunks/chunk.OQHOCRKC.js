@@ -782,6 +782,10 @@ var LiveWidget = class extends LiveDraggable {
     super.firstUpdated(_changedProperties);
     widgetEmit(this, "widget-first-updated");
   }
+  updated(_changedProperties) {
+    super.updated(_changedProperties);
+    widgetEmit(this, "widget-updated");
+  }
   set config(data) {
     this._widgetId = data.id;
     this._config = data;
