@@ -35,6 +35,11 @@ export abstract class LiveWidget extends LiveDraggable {
         widgetEmit(this, "widget-first-updated");
     }
 
+    updated(_changedProperties: PropertyValues) {
+        super.updated(_changedProperties);
+        widgetEmit(this, "widget-updated");
+    }
+
     set config(data: WidgetConfig) {
         this._widgetId = data.id;
         this._config = data;
