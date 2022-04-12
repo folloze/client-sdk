@@ -19,7 +19,7 @@ import {
     EmailTemplateV1,
     UserV1,
 } from "./IDesignerTypes";
-import { BoardConfig } from '../common/interfaces/IBoard';
+import {BoardConfig} from "../common/interfaces/IBoard";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -51,7 +51,7 @@ export class Designer {
     public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<GalleryImage[]>("/api/v1/image_gallery", { params: { ...keysToSnakeCase(payload)} })
+                .get<GalleryImage[]>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -383,20 +383,10 @@ export class Designer {
         });
     }
 
-    saveLiveBoard(boardId: number, config: BoardConfig): Promise<AxiosResponse> {
-        return new Promise((resolve, reject) => {
-            this.fetcher
-                .put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
-                  layout: config,
-                  theme_id: null
-                })
-                .then(result => {
-                    resolve(result);
-                })
-                .catch(e => {
-                    console.error("could not save liveboard", e);
-                    reject(e);
-                });
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<any> {
+        return this.fetcher.put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
+            layout: config,
+            theme_id: null,
         });
     }
 

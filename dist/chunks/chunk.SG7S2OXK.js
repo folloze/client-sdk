@@ -174,16 +174,9 @@ var Designer = class {
     });
   }
   saveLiveBoard(boardId, config) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
-        layout: config,
-        theme_id: null
-      }).then((result) => {
-        resolve(result);
-      }).catch((e) => {
-        console.error("could not save liveboard", e);
-        reject(e);
-      });
+    return this.fetcher.put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
+      layout: config,
+      theme_id: null
     });
   }
   searchBoardContacts(boardId, query) {

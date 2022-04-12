@@ -8,6 +8,9 @@ export declare type BoardConfig = {
     id: number;
     meta: {
         savedTime: Date;
+        localSaveTime: number;
+        originHash: string;
+        newHash: string;
     };
     grid: {
         maxWidth: string;

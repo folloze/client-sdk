@@ -18,13 +18,15 @@ var rules = (mock) => {
         logo: {
           image: {
             merge_tag_ids: [18],
-            rules: [{
-              attribute_id: 18,
-              attribute_values: ["any value"],
-              id: "rule_776.2880741331646",
-              index: 0,
-              result: { source_type: 2, isLoading: false }
-            }]
+            rules: [
+              {
+                attribute_id: 18,
+                attribute_values: ["any value"],
+                id: "rule_776.2880741331646",
+                index: 0,
+                result: { source_type: 2, isLoading: false }
+              }
+            ]
           }
         }
       },
@@ -35,80 +37,80 @@ var rules = (mock) => {
   };
   mock.onGet("/api/v1/image_gallery", { params: { type: "campaign" } }).reply(200, [
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293483/heroimage09_hv8u2j.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293483/heroimage09_hv8u2j.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293654/heroimage13_vj9xog.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293654/heroimage13_vj9xog.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293397/heroimage07_kfdzpt.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293397/heroimage07_kfdzpt.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293642/heroimage12_scxoe5.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293642/heroimage12_scxoe5.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293358/heroimage04_juy5ao.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293358/heroimage04_juy5ao.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293629/heroimage11_tmy9fd.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293629/heroimage11_tmy9fd.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293378/heroimage06_vnii1d.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293378/heroimage06_vnii1d.png"
     },
     {
-      "fit": "cover",
-      "url": "https://images.folloze.com/image/upload/v1451293493/heroimage10_jgxm62.png"
+      fit: "cover",
+      url: "https://images.folloze.com/image/upload/v1451293493/heroimage10_jgxm62.png"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimage03_wpxdzu.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimage03_wpxdzu.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimages06_compressed_lgozdi.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimages06_compressed_lgozdi.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimages04_compressed_z9xtqb.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimages04_compressed_z9xtqb.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimages08_compressed_s9lkse.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimages08_compressed_s9lkse.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimages03_compressed_sycsdr.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimages03_compressed_sycsdr.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimage02_dr1wdi.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimage02_dr1wdi.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimage14_oglfdj.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimage14_oglfdj.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimages12_compressed_rlzfx5.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimages12_compressed_rlzfx5.jpg",
+      fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/upload/heroimages11_compressed_uztxpu.jpg",
-      "fit": "cover"
+      url: "https://images.folloze.com/image/upload/heroimages11_compressed_uztxpu.jpg",
+      fit: "cover"
     }
   ]);
   mock.onGet("/api/v1/image_gallery", { params: { type: "image_bank", bank_category: 1, organization_id: 1 } }).reply(200, [
@@ -185,7 +187,7 @@ var rules = (mock) => {
       fit: "cover"
     },
     {
-      "url": "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+      url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
       fit: "contained"
     },
     {
@@ -313,7 +315,9 @@ var rules = (mock) => {
       submit_redirect_url: "https://www.folloze.com"
     }
   });
-  mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.footer } }).reply(200, {
+  mock.onGet(/prism\/(\d+)\/campaign_elements/, {
+    params: { element_type: CampaignElementsTypes.footer }
+  }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -333,7 +337,9 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.privacy_message } }).reply(200, {
+  mock.onGet(/prism\/(\d+)\/campaign_elements/, {
+    params: { element_type: CampaignElementsTypes.privacy_message }
+  }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -350,7 +356,9 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet(/prism\/(\d+)\/campaign_elements/, { params: { element_type: CampaignElementsTypes.form_privacy_message } }).reply(200, {
+  mock.onGet(/prism\/(\d+)\/campaign_elements/, {
+    params: { element_type: CampaignElementsTypes.form_privacy_message }
+  }).reply(200, {
     default_id: 0,
     data: {
       "0": {
@@ -365,11 +373,13 @@ var rules = (mock) => {
       },
       "5": {
         checkbox_area: {
-          checkboxes: [{
-            label: "First Checkbox",
-            name: "form_privacy_checkbox_1",
-            is_required: false
-          }],
+          checkboxes: [
+            {
+              label: "First Checkbox",
+              name: "form_privacy_checkbox_1",
+              is_required: false
+            }
+          ],
           label: "Checkbox Area",
           threshold: 2
         },
@@ -421,7 +431,57 @@ var rules = (mock) => {
   mock.onGet("/api/v1/preview/board_items_presence").reply(200, { has_items: true });
   mock.onGet(/prism\/(\d+)\/personalization/).reply(200, personalization);
   mock.onPut(/prism\/(\d+)\/personalization/).reply(200, personalization);
-  mock.onPut(/api\/v1\/boards\/(\d+)\/layout\/(\d+)/).reply(200);
+  const saveLiveBoardRegex = /api\/v1\/boards\/(\d+)\/layout\/(\d+)/;
+  mock.onPut(saveLiveBoardRegex).reply((config) => {
+    var _a, _b;
+    const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
+    const layout = parseInt(saveLiveBoardRegex.exec(config.url)[2]);
+    if (boardId === 1 && layout === 66) {
+      const someTestOriginHash = "testHash";
+      const originHash = (_a = JSON.parse(config.data).layout.meta) == null ? void 0 : _a.originHash;
+      const newHash = (_b = JSON.parse(config.data).layout.meta) == null ? void 0 : _b.newHash;
+      if (originHash === someTestOriginHash && newHash !== originHash) {
+        return [200];
+      }
+      if (newHash === originHash) {
+        return [208];
+      }
+      return [
+        409,
+        {
+          msg: "conflict - could not save layout",
+          layout: {
+            id: 66,
+            meta: {
+              savedTime: null,
+              localSaveTime: 10,
+              originHash: newHash,
+              newHash
+            },
+            grid: {
+              maxWidth: "1024px",
+              gap: { x: "0", y: "0" },
+              columns: { colNum: 12, colWidth: "1fr" },
+              rows: { rowNum: 0, rowHeight: "25px" }
+            },
+            sections: {},
+            widgets: {},
+            ribbons: {}
+          },
+          user: {
+            id: -1,
+            name: "Itamar",
+            email: "some@example.email",
+            bio_settings: null,
+            linkedin: null,
+            twitter: null,
+            image: "linkToImage"
+          }
+        }
+      ];
+    }
+    return [200];
+  });
   mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {
       id: 1,

@@ -1,4 +1,5 @@
-import { PrivacySettings } from '../common/ISharedTypes';
+import { PrivacySettings } from "../common/ISharedTypes";
+import { BoardConfig } from "../common/interfaces/IBoard";
 export declare enum ImageGalleryTypes {
     campaign = "campaign",
     imageBank = "image_bank",
@@ -243,5 +244,10 @@ export declare type UserV1 = {
     linkedin: object;
     twitter: object;
     image: string;
+};
+export declare type LayoutSavedConflict = {
+    msg: string;
+    layout: BoardConfig;
+    user: UserV1;
 };
 export {};

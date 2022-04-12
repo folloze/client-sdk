@@ -9,6 +9,9 @@ export type BoardConfig = {
     id: number;
     meta: {
         savedTime: Date;
+        localSaveTime: number; // unix time
+        originHash: string;
+        newHash: string;
     };
     grid: {
         maxWidth: string; // 1024px ?
@@ -82,6 +85,6 @@ export type Board = {
         [layoutId: number]: {
             state: "draft" | "published" | "unpublished changes";
             type: "default" | "gating";
-        }
-    }
+        };
+    };
 };
