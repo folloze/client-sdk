@@ -12,11 +12,12 @@ export type FetcherOptions = {
     jwt?: string;
     sessionGuid?: string;
     csrfToken?: string;
+    pingEndpoint?: string;
 };
 
 const defaultFetcherOptions: FetcherOptions = {
     useMock: false,
-    isPreview: false,
+    isPreview: false, // in designer or preview it is true - should indicate to not track analytics
     config: {
         baseURL: "/",
         headers: {}
@@ -38,7 +39,7 @@ export class FetchService {
     private readonly useMock: boolean;
     public fetcher: AxiosInstance;
     private mock: MockAdapter;
-    private options: FetcherOptions;
+    public options: FetcherOptions;
     private sessionGuid: String;
     private jwt: String;
 

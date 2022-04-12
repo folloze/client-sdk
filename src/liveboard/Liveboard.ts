@@ -24,6 +24,7 @@ export class Liveboard {
     * @returns {BoardResponseV1} BoardResponse
     */
     getBoard(boardSlug: string): Promise<BoardResponseV1> {
+        // TODO - remove all promises as Axios already returns a promise
         return new Promise((resolve, reject) => {
             this.fetcher.get<BoardResponseV1>(`/live_board/v1/boards/${boardSlug}/`)
                 .then(result => {

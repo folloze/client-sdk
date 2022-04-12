@@ -6,12 +6,13 @@ export declare type FetcherOptions = {
     jwt?: string;
     sessionGuid?: string;
     csrfToken?: string;
+    pingEndpoint?: string;
 };
 export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
     private mock;
-    private options;
+    options: FetcherOptions;
     private sessionGuid;
     private jwt;
     private constructor();
