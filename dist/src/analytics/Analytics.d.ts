@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
 declare type PingPayload = {
-    time: string;
-    guid: string;
     leadId: number;
     boardId: number;
     itemId?: number;
+    guid: string;
+    sessionGuid: string;
 };
 export declare enum EventSources {
     designer = "api",

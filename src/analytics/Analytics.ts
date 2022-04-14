@@ -2,11 +2,11 @@ import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 
 type PingPayload = {
-    time: string;
-    guid: string;
     leadId: number;
     boardId: number;
     itemId?: number;
+    guid: string;
+    sessionGuid: string;
 }
 
 export enum EventSources {
@@ -135,7 +135,13 @@ export class Analytics {
 
     sendPing(payload: PingPayload) {
         return this.analyticsRequestWrapper(() => {
-            return this.fetcher.post(`${this.pingEndpoint}/pings`, payload);
+            return this.fetcher.post(`${this.pingEndpoint}/pings`, {
+                lead_id: payload.leadId,
+                board_id: payload.boardId,
+                item_id: payload.itemId,
+                client_guid: payload.guid,
+                session_guid: payload.sessionGuid
+            });
         });
     }
 }

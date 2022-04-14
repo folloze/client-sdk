@@ -39,7 +39,7 @@ describe("testing analytics module", () => {
             boardId: 0,
             guid: "",
             leadId: 0,
-            time: ""
+            sessionGuid: ""
         }).then(result => {
             expect(result.status).toEqual(200);
         });

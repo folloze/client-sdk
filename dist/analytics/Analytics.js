@@ -3,7 +3,7 @@ import {
   DesignerEventTypes,
   EventSources,
   LiveBoardEventTypes
-} from "../chunks/chunk.XHLUIBLB.js";
+} from "../chunks/chunk.OXZY72FL.js";
 import "../chunks/chunk.Z3GS5MY4.js";
 export {
   Analytics,

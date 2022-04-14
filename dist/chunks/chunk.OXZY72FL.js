@@ -90,7 +90,13 @@ var Analytics = class {
   }
   sendPing(payload) {
     return this.analyticsRequestWrapper(() => {
-      return this.fetcher.post(`${this.pingEndpoint}/pings`, payload);
+      return this.fetcher.post(`${this.pingEndpoint}/pings`, {
+        lead_id: payload.leadId,
+        board_id: payload.boardId,
+        item_id: payload.itemId,
+        client_guid: payload.guid,
+        session_guid: payload.sessionGuid
+      });
     });
   }
 };
