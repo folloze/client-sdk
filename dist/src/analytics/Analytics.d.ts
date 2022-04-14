@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-declare type PingPayload = {
+export declare type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
@@ -77,4 +77,3 @@ export declare class Analytics {
     trackEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any, source: EventSources): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
 }
-export {};

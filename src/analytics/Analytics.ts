@@ -1,7 +1,7 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 
-type PingPayload = {
+export type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
