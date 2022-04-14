@@ -71,8 +71,8 @@ export abstract class LiveWidget extends LiveDraggable {
      * you can override this method for yourself
      */
     public onEnterViewport(entry: IntersectionObserverEntry) {
-        this.style.setProperty("--fz-animation-name", "inherit");
-        this.style.setProperty("--fz-animation-play-state", "running");
+        this.style.setProperty("--fz-animation-1-name", "inherit");
+        this.style.setProperty("--fz-animation-1-play-state", "running");
     }
 
     /**
