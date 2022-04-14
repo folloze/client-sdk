@@ -5,7 +5,6 @@ export declare type PingPayload = {
     boardId: number;
     itemId?: number;
     guid: string;
-    sessionGuid: string;
 };
 export declare enum EventSources {
     designer = "api",

@@ -3,7 +3,7 @@ import {
 } from "./chunk.F7UMJQCK.js";
 import {
   Analytics
-} from "./chunk.OXZY72FL.js";
+} from "./chunk.B4K6GW7Q.js";
 import {
   Designer
 } from "./chunk.SG7S2OXK.js";

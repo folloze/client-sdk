@@ -94,8 +94,7 @@ var Analytics = class {
         lead_id: payload.leadId,
         board_id: payload.boardId,
         item_id: payload.itemId,
-        client_guid: payload.guid,
-        session_guid: payload.sessionGuid
+        client_guid: payload.guid
       });
     });
   }

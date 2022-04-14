@@ -38,8 +38,7 @@ describe("testing analytics module", () => {
         await sdk.analytics.sendPing({
             boardId: 0,
             guid: "",
-            leadId: 0,
-            sessionGuid: ""
+            leadId: 0
         }).then(result => {
             expect(result.status).toEqual(200);
         });
