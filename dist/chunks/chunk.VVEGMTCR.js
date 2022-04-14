@@ -805,6 +805,13 @@ var LiveWidget = class extends LiveDraggable {
   get widgetId() {
     return this._widgetId;
   }
+  onEnterViewport(entry) {
+    this.style.setProperty("--fz-animation-name", "inherit");
+    this.style.setProperty("--fz-animation-play-state", "running");
+  }
+  onLeaveViewport(entry) {
+    return;
+  }
   incomingEvents(e6) {
     return;
   }

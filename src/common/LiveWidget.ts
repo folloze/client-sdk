@@ -64,6 +64,29 @@ export abstract class LiveWidget extends LiveDraggable {
         return this._widgetId;
     }
 
+    /**
+     * called when the widget enters the viewport 50%
+     * the percentage can be changed in the future
+     *
+     * you can override this method for yourself
+     */
+    public onEnterViewport(entry: IntersectionObserverEntry) {
+        this.style.setProperty("--fz-animation-name", "inherit");
+        this.style.setProperty("--fz-animation-play-state", "running");
+    }
+
+    /**
+     * called when the widget exits the viewport 50%
+     * the percentage can be changed in the future
+     *
+     * you can override this method for yourself
+     */
+    public onLeaveViewport(entry: IntersectionObserverEntry) {
+        // uncomment bellow to have the animation repeat
+        // this.style.setProperty("--fz-animation-play-state", "paused");
+        // this.style.setProperty("--fz-animation-name", "none");
+        return;
+    }
 
     /**
      * you should override this method to use incoming events
