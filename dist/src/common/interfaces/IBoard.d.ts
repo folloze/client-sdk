@@ -83,4 +83,7 @@ export declare type Board = {
             type: "default" | "gating";
         };
     };
+    activation_state: {
+        online: boolean;
+    };
 };

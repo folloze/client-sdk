@@ -85,4 +85,7 @@ export type Board = {
             type: "default" | "gating";
         };
     };
+    activation_state: {
+      online: boolean;
+    };
 };
