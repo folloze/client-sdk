@@ -19,7 +19,7 @@ import {
     EmailTemplateV1,
     UserV1,
 } from "./IDesignerTypes";
-import {BoardConfig} from "../common/interfaces/IBoard";
+import {BoardConfig, Board} from "../common/interfaces/IBoard";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -28,7 +28,7 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
-    public publishLiveBoard(boardId: number) {
+    public publishLiveBoard(boardId: number): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/${boardId}/publish`)
