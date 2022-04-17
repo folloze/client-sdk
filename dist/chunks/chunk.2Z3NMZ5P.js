@@ -24,6 +24,16 @@ var Designer = class {
       });
     });
   }
+  discardLiveBoard(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.delete(`/api/v1/boards/${boardId}/publish`).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not discard live board", e);
+        reject(e);
+      });
+    });
+  }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
       this.fetcher.get("/api/v1/image_gallery", { params: __spreadValues({}, keysToSnakeCase(payload)) }).then((result) => {

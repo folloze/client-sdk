@@ -42,6 +42,20 @@ export class Designer {
         });
     }
 
+    public discardLiveBoard(boardId: number): Promise<Board> {
+      return new Promise((resolve, reject) => {
+          this.fetcher
+              .delete<any>(`/api/v1/boards/${boardId}/publish`)
+              .then(result => {
+                  resolve(result.data);
+              })
+              .catch(e => {
+                  console.error("could not discard live board", e);
+                  reject(e);
+              });
+      });
+  }
+
     /**
      * Gets the image gallery for given types
      *

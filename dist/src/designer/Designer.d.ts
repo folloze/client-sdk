@@ -6,6 +6,7 @@ export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
     publishLiveBoard(boardId: number): Promise<Board>;
+    discardLiveBoard(boardId: number): Promise<Board>;
     /**
      * Gets the image gallery for given types
      *
