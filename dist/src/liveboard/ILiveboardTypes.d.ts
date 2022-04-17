@@ -286,7 +286,7 @@ export declare type LiveEventUrlsResponseV2 = {
 export declare type OrganizationSettingsResponseV1 = {
     privacy: PrivacySettings;
 };
-export declare type SessionResonseV1 = {
+export declare type SessionResponseV1 = {
     guid: string;
 };
 export declare type FormMetadataDataV1 = {

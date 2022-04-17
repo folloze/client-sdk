@@ -1,5 +1,5 @@
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResonseV1, ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1 } from './ILiveboardTypes';
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -217,17 +217,11 @@ export declare class Liveboard {
      */
     getOrganizationSettings(boardId: number): Promise<OrganizationSettingsResponseV1>;
     /**
-     * Create a new session
-     *
-     * @returns {SessionResonseV1} SessionResonse
-     */
-    createSession(): Promise<SessionResonseV1>;
-    /**
      * Validates the session
      *
      * @returns {SessionResonseV1|void} new SessionResonse if session is invalid, otherwise nothing
      */
-    validateSession(): Promise<SessionResonseV1 | void>;
+    validateSession(): Promise<SessionResponseV1 | void>;
     /**
      * Set the lead's session cookie
      *

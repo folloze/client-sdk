@@ -1,15 +1,15 @@
 import {
   require_axios
-} from "./chunk.3ZNLEUXI.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
-} from "./chunk.B4K6GW7Q.js";
+} from "./chunk.GV2WVIQP.js";
 import {
   Designer
 } from "./chunk.SG7S2OXK.js";
 import {
   Liveboard
-} from "./chunk.MOU46CME.js";
+} from "./chunk.FMZ2YAST.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -653,7 +653,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.57FVLL6Z.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.mock = new module.default(this.fetcher);
       await Promise.all([

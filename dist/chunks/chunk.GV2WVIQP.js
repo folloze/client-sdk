@@ -98,6 +98,14 @@ var Analytics = class {
       });
     });
   }
+  createSession() {
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post("/live_board/v1/sessions").catch((e) => {
+        console.error("could not create session", e);
+        throw e;
+      });
+    });
+  }
 };
 
 export {
