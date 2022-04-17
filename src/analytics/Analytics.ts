@@ -1,5 +1,6 @@
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
+import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
 
 export type PingPayload = {
     leadId: number;
@@ -140,6 +141,21 @@ export class Analytics {
                 item_id: payload.itemId,
                 client_guid: payload.guid
             });
+        });
+    }
+
+    /**
+     * Create a new session
+     *
+     * @returns {SessionResponseV1} SessionResponse
+     */
+    createSession(): Promise<AxiosResponse> {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post<SessionResponseV1>("/live_board/v1/sessions")
+                .catch(e => {
+                    console.error("could not create session", e);
+                    throw e;
+                });
         });
     }
 }

@@ -75,4 +75,10 @@ export declare class Analytics {
      */
     trackEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any, source: EventSources): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
+    /**
+     * Create a new session
+     *
+     * @returns {SessionResponseV1} SessionResponse
+     */
+    createSession(): Promise<AxiosResponse>;
 }
