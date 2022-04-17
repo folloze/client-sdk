@@ -298,9 +298,6 @@ var rules = (mock) => {
   mock.onPost("/live_board/v1/sessions").reply(200, {
     guid: "abc"
   });
-  mock.onPost("/live_board/v1/session_validations").reply(200, {
-    guid: "abc"
-  });
   mock.onPost("/live_board/v1/boards/1/session_cookies").reply(200, 1);
   mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/).reply(200, {
     form: {

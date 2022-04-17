@@ -11,6 +11,7 @@ var rules = (mock) => {
     console.debug("sending ping to analytic", data);
     return [200, "ping sent!"];
   });
+  mock.onPost("/live_board/v1/session_validations").reply(200);
 };
 export {
   rules
