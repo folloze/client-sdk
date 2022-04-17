@@ -29,6 +29,17 @@ export declare type GalleryImage = {
     displayable_section?: string;
     transformation?: object;
     viewed?: boolean;
+    bankCategory?: ImageBankCategory;
+};
+export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
+export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
+export declare type FlzEditableImageData = {
+    url: string;
+    bankCategory: ImageBankCategoryType;
+    position?: StringPosition;
+    link?: string;
+    open_in_new_window?: boolean;
+    alt?: string;
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
