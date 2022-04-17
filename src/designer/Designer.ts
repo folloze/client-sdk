@@ -31,7 +31,7 @@ export class Designer {
     public publishLiveBoard(boardId: number, withGoOnline: boolean = true): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`, { withGoOnline })
+                .post<any>(`/api/v1/boards/${boardId}/publish`, { with_go_online: withGoOnline })
                 .then(result => {
                     resolve(result.data);
                 })
