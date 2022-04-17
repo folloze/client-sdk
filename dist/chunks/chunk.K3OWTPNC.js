@@ -14,9 +14,9 @@ var Designer = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
-  publishLiveBoard(boardId) {
+  publishLiveBoard(boardId, withGoOnline = true) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/api/v1/boards/${boardId}/publish`).then((result) => {
+      this.fetcher.post(`/api/v1/boards/${boardId}/publish`, { withGoOnline }).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not publish live board", e);

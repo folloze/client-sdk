@@ -5,8 +5,8 @@ import { BoardConfig, Board } from "../common/interfaces/IBoard";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
-    publishLiveBoard(boardId: number): Promise<Board>;
-    discardLiveBoard(boardId: number): Promise<Board>;
+    publishLiveBoard(boardId: number, withGoOnline?: boolean): Promise<Board>;
+    discardLiveBoard(boardId: number): Promise<BoardConfig[]>;
     /**
      * Gets the image gallery for given types
      *

@@ -28,10 +28,10 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
-    public publishLiveBoard(boardId: number): Promise<Board> {
+    public publishLiveBoard(boardId: number, withGoOnline: boolean = true): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`)
+                .post<any>(`/api/v1/boards/${boardId}/publish`, { withGoOnline })
                 .then(result => {
                     resolve(result.data);
                 })
@@ -42,7 +42,7 @@ export class Designer {
         });
     }
 
-    public discardLiveBoard(boardId: number): Promise<Board> {
+    public discardLiveBoard(boardId: number): Promise<BoardConfig[]> {
       return new Promise((resolve, reject) => {
           this.fetcher
               .delete<any>(`/api/v1/boards/${boardId}/publish`)
