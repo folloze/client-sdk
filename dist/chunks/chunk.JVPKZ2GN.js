@@ -14,12 +14,22 @@ var Designer = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
   }
-  publishLiveBoard(boardId) {
+  publishLiveBoard(boardId, withGoOnline = true) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/api/v1/boards/${boardId}/publish`).then((result) => {
+      this.fetcher.post(`/api/v1/boards/${boardId}/publish`, { with_go_online: withGoOnline }).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not publish live board", e);
+        reject(e);
+      });
+    });
+  }
+  discardLiveBoard(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.delete(`/api/v1/boards/${boardId}/publish`).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not discard live board", e);
         reject(e);
       });
     });
