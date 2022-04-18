@@ -34,6 +34,29 @@ export type GalleryImage = {
     displayable_section?: string;
     transformation?: object; //TODO
     viewed?: boolean;
+    bankCategory?: ImageBankCategory; // imageBank
+};
+
+export type StringPosition =
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "middle-left"
+    | "middle-center"
+    | "middle-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
+
+export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
+
+export type FlzEditableImageData = {
+    url: string;
+    bankCategory: ImageBankCategoryType;
+    position?: StringPosition;
+    link?: string;
+    open_in_new_window?: boolean;
+    alt?: string;
 };
 
 export type ImageGalleryParams = {

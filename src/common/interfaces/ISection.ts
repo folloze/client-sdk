@@ -1,11 +1,12 @@
 import {GridPos} from "./IPositions";
+import {FlzEditableImageData} from "../../designer/IDesignerTypes";
 
 export type SectionConfig = {
     id: string;
 };
 
 export type BackgroundImage = {
-    image: string;
+    image: FlzEditableImageData;
     position: string;
     size: "cover" | "contain" | string;
     repeat: string;
