@@ -1,90 +1,85 @@
 import {describe, expect, beforeAll} from "@jest/globals";
-import { DesignerEventTypes, EventSources, LiveBoardEventTypes } from "../src/analytics/Analytics";
+import {DesignerEventTypes, EventSources, LiveBoardEventTypes} from "../src/analytics/Analytics";
 import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
 
 describe("testing analytics module", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, pingEndpoint: "url-for-ping"});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, pingEndpoint: "url-for-ping"});
     });
 
-    it('checks that trackLeadBoardView mock works as expected', async () => {
+    it("checks that trackLeadBoardView mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.trackLeadBoardView(1)
-            .then(result => expect(result).toBeNull);
+        await sdk.analytics.trackLeadBoardView(1).then(result => expect(result).toBeNull);
         expect(spy).toHaveBeenCalled();
     });
 
-
-    it('checks that trackLeadItemView mock works as expected', async () => {
+    it("checks that trackLeadItemView mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.trackLeadItemView(1, 'abc')
-            .then(result => expect(result).toBeNull);
+        await sdk.analytics.trackLeadItemView(1, "abc").then(result => expect(result).toBeNull);
         expect(spy).toHaveBeenCalled();
     });
 
-    it('checks that trackEvent mock works as expected for liveboard', async () => {
-        await sdk.analytics.trackEvent(LiveBoardEventTypes.changed_category, {}, EventSources.liveboard)
+    it("checks that trackEvent mock works as expected for liveboard", async () => {
+        await sdk.analytics
+            .trackEvent(LiveBoardEventTypes.changed_category, {}, EventSources.liveboard)
             .then(result => expect(result).toBeNull);
     });
 
-    it('checks that trackEvent mock works as expected for designer', async () => {
-        await sdk.analytics.trackEvent(DesignerEventTypes.clicked_on_search_image, {}, EventSources.designer)
+    it("checks that trackEvent mock works as expected for designer", async () => {
+        await sdk.analytics
+            .trackEvent(DesignerEventTypes.clicked_on_search_image, {}, EventSources.designer)
             .then(result => expect(result).toBeNull);
     });
 
-    it('checks that sendPing mock data works', async () => {
-        await sdk.analytics.sendPing({
-            boardId: 0,
-            guid: "",
-            leadId: 0
-        }).then(result => {
-            expect(result.status).toEqual(200);
-        });
+    it("checks that sendPing mock data works", async () => {
+        await sdk.analytics
+            .sendPing({
+                boardId: 0,
+                guid: "",
+                leadId: 0,
+            })
+            .then(result => {
+                expect(result.status).toEqual(200);
+            });
     });
 
-    it('checks that createSession mock works as expected', async () => {
-        await sdk.analytics.createSession()
-            .then(result => expect(result.data.guid).toBeTruthy);
+    it("checks that createSession mock works as expected", async () => {
+        await sdk.analytics.createSession().then(result => expect(result.data.guid).toBeTruthy);
     });
 
-    it('checks that validateSession mock works as expected', async () => {
-        await sdk.analytics.validateSession()
-            .then(result => expect(result.status).toEqual(200));
+    it("checks that validateSession mock works as expected", async () => {
+        await sdk.analytics.validateSession().then(result => expect(result.status).toEqual(200));
     });
 });
 
 describe("testing analytics module in preview", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, pingEndpoint: "url-for-ping", isPreview: true});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, pingEndpoint: "url-for-ping", isPreview: true});
     });
 
     it("checks that trackLeadBoardView isn't triggering an api call", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.trackLeadBoardView(1)
-            .then(result => expect(result.status).toEqual(200));
+        await sdk.analytics.trackLeadBoardView(1).then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 
     it("checks that trackLeadItemView isn't triggering an api call", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.trackLeadItemView(1, 'abc')
-            .then(result => expect(result.status).toEqual(200));
+        await sdk.analytics.trackLeadItemView(1, "abc").then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 
-    it('checks that createSession mock works as expected', async () => {
+    it("checks that createSession mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.createSession()
-            .then(result => expect(result.status).toEqual(200));
+        await sdk.analytics.createSession().then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 
-    it('checks that validateSession mock works as expected', async () => {
+    it("checks that validateSession mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.validateSession()
-            .then(result => expect(result.status).toEqual(200));
+        await sdk.analytics.validateSession().then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 });

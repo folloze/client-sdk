@@ -6,6 +6,7 @@ import merge from "lodash/merge";
 import get from "lodash/get";
 
 export type FetcherOptions = {
+    organizationId: number;
     useMock: boolean;
     isPreview?: boolean;
     config?: AxiosRequestConfig;
@@ -16,12 +17,13 @@ export type FetcherOptions = {
 };
 
 const defaultFetcherOptions: FetcherOptions = {
+    organizationId: -1,
     useMock: false,
     isPreview: false, // in designer or preview it is true - should indicate to not track analytics
     config: {
         baseURL: "/",
-        headers: {}
-    }
+        headers: {},
+    },
 };
 
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
@@ -42,10 +44,12 @@ export class FetchService {
     public options: FetcherOptions;
     private sessionGuid: String;
     private jwt: String;
+    public organizationId: number;
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
         this.options = options;
+        this.organizationId = options.organizationId;
         if (options.sessionGuid) {
             this.sessionGuid = options.sessionGuid;
         }
@@ -106,7 +110,7 @@ export class FetchService {
 
     private handleSuccess(response) {
         if (response.headers?.["authorization"]) {
-            this.jwt = response.headers['authorization'].replace('bearer ', '');
+            this.jwt = response.headers["authorization"].replace("bearer ", "");
         }
         if (response.headers?.["folloze-session-guid"]) {
             this.sessionGuid = response.headers["folloze-session-guid"];
@@ -115,7 +119,7 @@ export class FetchService {
     }
 
     private handleError(error) {
-        switch (get(error, 'response.status')) {
+        switch (get(error, "response.status")) {
             case 410:
                 window.location.reload();
                 break;
@@ -132,12 +136,12 @@ export class FetchService {
 
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
-        this.fetcher.interceptors.request.use((config) => {
+        this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
-                config.headers['folloze-session-guid'] = this.sessionGuid;
+                config.headers["folloze-session-guid"] = this.sessionGuid;
             }
             if (this.jwt) {
-                config.headers['Authorization'] = `Bearer ${this.jwt}`;
+                config.headers["Authorization"] = `Bearer ${this.jwt}`;
             }
             return config;
         });

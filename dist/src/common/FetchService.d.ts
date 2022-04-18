@@ -1,5 +1,6 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
 export declare type FetcherOptions = {
+    organizationId: number;
     useMock: boolean;
     isPreview?: boolean;
     config?: AxiosRequestConfig;
@@ -15,6 +16,7 @@ export declare class FetchService {
     options: FetcherOptions;
     private sessionGuid;
     private jwt;
+    organizationId: number;
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;

@@ -1,7 +1,6 @@
 import {
-  CampaignElementsTypes,
-  ImageBankType
-} from "./chunk.FPDLHEHA.js";
+  CampaignElementsTypes
+} from "./chunk.G52EPVC6.js";
 import "./chunk.Z3GS5MY4.js";
 
 // src/designer/mocks.ts
@@ -35,7 +34,63 @@ var rules = (mock) => {
     },
     is_enabled: true
   };
-  mock.onGet("/api/v1/image_gallery", { params: { type: "campaign" } }).reply(200, [
+  const publishBoardRegex = /api\/v1\/boards\/(\d+)\/publish/;
+  mock.onPost(publishBoardRegex).reply((config) => {
+    const boardId = parseInt(publishBoardRegex.exec(config.url)[1]);
+    if (boardId === 666) {
+      return [208];
+    }
+    return [
+      200,
+      {
+        activation_state: { online: false },
+        allow_embedding: false,
+        auto_upgrade_widgets: false,
+        id: 0,
+        integrations: {},
+        is_ssl: false,
+        layout_info: {},
+        name: "",
+        online_items_count: 0,
+        organization_id: 0,
+        privacy: {
+          cookie_management: void 0,
+          element_id: 0,
+          personal_info_concealment: false,
+          privacy_warning_check: false,
+          regulated_countries_only: false
+        },
+        slug: ""
+      }
+    ];
+  });
+  mock.onDelete(publishBoardRegex).reply((config) => {
+    const boardId = parseInt(publishBoardRegex.exec(config.url)[1]);
+    if (boardId === 666) {
+      return [208];
+    }
+    return [
+      200,
+      [
+        {
+          grid: {
+            columns: { colNum: 0, colWidth: "" },
+            gap: { x: "", y: "" },
+            maxWidth: "",
+            rows: { rowHeight: "", rowNum: 0 }
+          },
+          id: 0,
+          meta: { localSaveTime: 0, newHash: "", originHash: "", savedTime: void 0 },
+          ribbons: void 0,
+          sections: void 0,
+          widgets: void 0
+        }
+      ]
+    ];
+  });
+  mock.onGet("/api/v1/image_gallery", {
+    params: { organization_id: 1, bank_category: "banners", type: "campaign" }
+  }).reply(200, [
     {
       fit: "cover",
       url: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
@@ -113,17 +168,9 @@ var rules = (mock) => {
       fit: "cover"
     }
   ]);
-  mock.onGet("/api/v1/image_gallery", { params: { type: "image_bank", bank_category: 1, organization_id: 1 } }).reply(200, [
-    {
-      fit: "cover",
-      url: "https://images.folloze.com/image/upload/v1640510372/cjo48nkp0gtsk8pjrkjb.jpg"
-    },
-    {
-      fit: "cover",
-      url: "https://images.folloze.com/image/upload/v1640684303/iog6rsbluzw2y07koz26.jpg"
-    }
-  ]);
-  mock.onGet("/api/v1/image_gallery", { params: { type: "image_bank", bank_category: 4, organization_id: 1 } }).reply(200, [
+  mock.onGet("/api/v1/image_gallery", {
+    params: { organization_id: 1, bank_category: "icons", type: "campaign" }
+  }).reply(200, [
     {
       url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
       fit: "cover"
@@ -138,6 +185,34 @@ var rules = (mock) => {
     },
     {
       url: "https://images.folloze.com/image/upload/v1640686376/cjlc8wmtndwp8rfcweq3.png",
+      fit: "cover"
+    }
+  ]);
+  mock.onGet("/api/v1/image_gallery", {
+    params: { organization_id: 1, bank_category: "logos", type: "campaign" }
+  }).reply(200, [
+    {
+      url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+      fit: "cover"
+    },
+    {
+      url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+      fit: "cover"
+    },
+    {
+      url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
+      fit: "cover"
+    }
+  ]);
+  mock.onGet("/api/v1/image_gallery", {
+    params: { organization_id: 1, bank_category: "mobile_banners", type: "campaign" }
+  }).reply(200, [
+    {
+      url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+      fit: "cover"
+    },
+    {
+      url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
       fit: "cover"
     }
   ]);
@@ -199,20 +274,6 @@ var rules = (mock) => {
       fit: "contained"
     }
   ]);
-  mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply(200, {
-    icons: ImageBankType.folloze,
-    logos: ImageBankType.folloze,
-    banners: ImageBankType.folloze,
-    thumbnails: ImageBankType.folloze,
-    mobile_banners: ImageBankType.folloze
-  });
-  mock.onPut(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply(200, {
-    icons: ImageBankType.folloze,
-    logos: ImageBankType.folloze,
-    banners: ImageBankType.folloze,
-    thumbnails: ImageBankType.folloze,
-    mobile_banners: ImageBankType.folloze
-  });
   mock.onPost("/api/v1/upload_urls").reply(200, {
     file_name: "file_name",
     method: "post",

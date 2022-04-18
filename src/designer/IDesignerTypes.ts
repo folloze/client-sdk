@@ -1,25 +1,7 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
 
-export enum ImageGalleryTypes {
-    campaign = "campaign",
-    imageBank = "image_bank",
-    search = "search",
-}
-
-export enum ImageBankType {
-    folloze = "folloze",
-    organization = "organization",
-}
-
-export enum ImageBankCategory {
-    all = 0,
-    banners = 1,
-    mobile_banners,
-    thumbnails,
-    icons,
-    logos,
-}
+export type ImageGalleryTypes = "campaign" | "search";
 
 export enum CampaignElementsTypes {
     footer = 1,
@@ -34,7 +16,8 @@ export type GalleryImage = {
     displayable_section?: string;
     transformation?: object; //TODO
     viewed?: boolean;
-    bankCategory?: ImageBankCategory; // imageBank
+    bankCategory?: ImageBankCategoryType; // todo: not implemented in serverside
+    galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
 };
 
 export type StringPosition =
@@ -63,15 +46,7 @@ export type ImageGalleryParams = {
     type: ImageGalleryTypes;
     query?: string; // search
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
-    bankCategory?: ImageBankCategory; // imageBank
-};
-
-export type ImageBankResponseV1 = {
-    icons: ImageBankType;
-    logos: ImageBankType;
-    banners: ImageBankType;
-    thumbnails: ImageBankType;
-    mobile_banners: ImageBankType;
+    bankCategory?: ImageBankCategoryType; // imageBank
 };
 
 export type UploadUrlResponseV1 = {

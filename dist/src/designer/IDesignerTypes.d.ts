@@ -1,22 +1,6 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
-export declare enum ImageGalleryTypes {
-    campaign = "campaign",
-    imageBank = "image_bank",
-    search = "search"
-}
-export declare enum ImageBankType {
-    folloze = "folloze",
-    organization = "organization"
-}
-export declare enum ImageBankCategory {
-    all = 0,
-    banners = 1,
-    mobile_banners = 2,
-    thumbnails = 3,
-    icons = 4,
-    logos = 5
-}
+export declare type ImageGalleryTypes = "campaign" | "search";
 export declare enum CampaignElementsTypes {
     footer = 1,
     privacy_message = 2,
@@ -29,7 +13,8 @@ export declare type GalleryImage = {
     displayable_section?: string;
     transformation?: object;
     viewed?: boolean;
-    bankCategory?: ImageBankCategory;
+    bankCategory?: ImageBankCategoryType;
+    galleryType?: ImageGalleryTypes;
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
@@ -45,14 +30,7 @@ export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
     query?: string;
     organizationId?: number;
-    bankCategory?: ImageBankCategory;
-};
-export declare type ImageBankResponseV1 = {
-    icons: ImageBankType;
-    logos: ImageBankType;
-    banners: ImageBankType;
-    thumbnails: ImageBankType;
-    mobile_banners: ImageBankType;
+    bankCategory?: ImageBankCategoryType;
 };
 export declare type UploadUrlResponseV1 = {
     file_name: string;

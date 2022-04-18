@@ -1,13 +1,10 @@
 export * from "./IDesignerTypes";
-import {AxiosInstance, AxiosResponse} from "axios";
+import {AxiosInstance} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
-    ImageBankResponseV1,
     ImageGalleryParams,
     GalleryImage,
-    ImageGalleryTypes,
-    ImageBankCategory,
     UploadUrlResponseV1,
     FormV1,
     CampaignElementResponseV1,
@@ -23,15 +20,17 @@ import {BoardConfig, Board} from "../common/interfaces/IBoard";
 
 export class Designer {
     private fetcher: AxiosInstance;
+    private fetchService: FetchService;
 
     constructor(fetch: FetchService) {
+        this.fetchService = fetch;
         this.fetcher = fetch.fetcher;
     }
 
     public publishLiveBoard(boardId: number, withGoOnline: boolean = true): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`, { with_go_online: withGoOnline })
+                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -43,18 +42,18 @@ export class Designer {
     }
 
     public discardLiveBoard(boardId: number): Promise<BoardConfig[]> {
-      return new Promise((resolve, reject) => {
-          this.fetcher
-              .delete<any>(`/api/v1/boards/${boardId}/publish`)
-              .then(result => {
-                  resolve(result.data);
-              })
-              .catch(e => {
-                  console.error("could not discard live board", e);
-                  reject(e);
-              });
-      });
-  }
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete<any>(`/api/v1/boards/${boardId}/publish`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not discard live board", e);
+                    reject(e);
+                });
+        });
+    }
 
     /**
      * Gets the image gallery for given types
@@ -62,7 +61,7 @@ export class Designer {
      * @param {ImageGalleryParams} payload
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    public getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+    private getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<GalleryImage[]>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
@@ -76,6 +75,38 @@ export class Designer {
         });
     }
 
+    public getBannerImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "banners",
+            type: "campaign",
+        });
+    }
+
+    public getMobileImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "mobile_banners",
+            type: "campaign",
+        });
+    }
+
+    public getIconsImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "icons",
+            type: "campaign",
+        });
+    }
+
+    public getLogosImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "logos",
+            type: "campaign",
+        });
+    }
+
     /**
      * When searching the web for an image
      *
@@ -83,32 +114,7 @@ export class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     getQueryImageGallery(query: string): Promise<GalleryImage[]> {
-        return this.getImageGallery({type: ImageGalleryTypes.search, query});
-    }
-
-    /**
-     * When a section has image bank set to 'organization'
-     *
-     * @param {number} organizationId
-     * @param {ImageBankCategory} bankCategory
-     * @returns {GalleryImage[]} an array of GalleryImage
-     */
-    getImageBankGallery(organizationId: number, bankCategory: ImageBankCategory): Promise<GalleryImage[]> {
-        return this.getImageGallery({
-            type: ImageGalleryTypes.imageBank,
-            organizationId,
-            bankCategory,
-        });
-    }
-
-    /**
-     * When a section of the designer has image bank set to 'folloze', get generic images
-     * or organization doesn't have image bank set
-     *
-     * @returns {GalleryImage[]} an array of GalleryImage
-     */
-    getCampaignImageGallery(): Promise<GalleryImage[]> {
-        return this.getImageGallery({type: ImageGalleryTypes.campaign});
+        return this.getImageGallery({type: "search", query});
     }
 
     /**
@@ -131,56 +137,7 @@ export class Designer {
         });
     }
 
-    /**
-     * Get the settings for the organization's image bank
-     *
-     * @param organizationId
-     * @returns {ImageBankResponseV1} ImageBankResponse
-     */
-    getImageBankSettings(organizationId: number): Promise<ImageBankResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher
-                .get<ImageBankResponseV1>(`/api/v1/organizations/${organizationId}/settings/image_bank`)
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not get image bank settings", e);
-                    reject(e);
-                });
-        });
-    }
-
-    //TODO: remove if not needed - currently used only in admin tab
-    /**
-     * Set the settings for the organization's image bank
-     *
-     * @param {number} organizationId
-     * @param {string} categoryName which type of images are being changes
-     * @param {string} source the source of the images
-     * @returns {ImageBankResponseV1} ImageBankResponse
-     */
-    saveImageBankSettings(organizationId: number, categoryName: string, source: string): Promise<ImageBankResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher
-                .put<ImageBankResponseV1>(`/api/v1/organizations/${organizationId}/settings/image_bank`, {
-                    params: {
-                        category_name: categoryName,
-                        value: source,
-                    },
-                })
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not set image bank settings", e);
-                    reject(e);
-                });
-        });
-    }
-
     // Forms
-
     /**
      * Gets all forms of a board
      *

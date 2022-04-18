@@ -20,7 +20,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.DF2INQRT.js";
+} from "./chunks/chunk.YE2LWF3Q.js";
 import "./chunks/chunk.NG7TLSQO.js";
 import {
   Analytics,
@@ -30,13 +30,10 @@ import {
 } from "./chunks/chunk.H6D6LXEY.js";
 import {
   Designer
-} from "./chunks/chunk.JVPKZ2GN.js";
+} from "./chunks/chunk.5NHYO3KJ.js";
 import {
-  CampaignElementsTypes,
-  ImageBankCategory,
-  ImageBankType,
-  ImageGalleryTypes
-} from "./chunks/chunk.FPDLHEHA.js";
+  CampaignElementsTypes
+} from "./chunks/chunk.G52EPVC6.js";
 import {
   Liveboard
 } from "./chunks/chunk.75TFKDHL.js";
@@ -68,9 +65,6 @@ export {
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
-  ImageBankCategory,
-  ImageBankType,
-  ImageGalleryTypes,
   LiveBoardEventTypes,
   LiveDraggable,
   LiveWidget,

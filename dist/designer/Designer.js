@@ -1,18 +1,12 @@
 import {
   Designer
-} from "../chunks/chunk.JVPKZ2GN.js";
+} from "../chunks/chunk.5NHYO3KJ.js";
 import {
-  CampaignElementsTypes,
-  ImageBankCategory,
-  ImageBankType,
-  ImageGalleryTypes
-} from "../chunks/chunk.FPDLHEHA.js";
+  CampaignElementsTypes
+} from "../chunks/chunk.G52EPVC6.js";
 import "../chunks/chunk.WXVSHK2H.js";
 import "../chunks/chunk.Z3GS5MY4.js";
 export {
   CampaignElementsTypes,
-  Designer,
-  ImageBankCategory,
-  ImageBankType,
-  ImageGalleryTypes
+  Designer
 };

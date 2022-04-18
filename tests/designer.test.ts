@@ -1,11 +1,11 @@
 import {describe, expect, beforeAll} from "@jest/globals";
-import {BoardConfig} from "../src/common/interfaces/IBoard";
+import {Board, BoardConfig} from "../src/common/interfaces/IBoard";
 import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
 
 beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true});
+    sdk = await ClientSDK.create({useMock: true, organizationId: 1});
 });
 
 describe("testing sdk designer module", () => {
@@ -55,30 +55,25 @@ describe("testing sdk designer module", () => {
         is_enabled: true,
     };
 
-    it("checks that getCampaignImageGallery mock works as expectes", async () => {
-        await sdk.designer.getCampaignImageGallery().then(result => expect(result.length).toBeGreaterThan(10));
+    it("checks that publish board returns 200 when all is ok", async () => {
+        await sdk.designer.publishLiveBoard(1).then(res => expect(res.id).toBeDefined());
     });
 
-    it("checks that getImageBankGallery for banners mock works as expectes", async () => {
-        await sdk.designer.getImageBankGallery(1, 1).then(result => expect(result.length).toBeGreaterThan(1));
+    it("checks that publish board returns 208 when hashes are the same", async () => {
+        await sdk.designer.publishLiveBoard(666).then(res => expect(res).toBeUndefined());
     });
 
-    it("checks that getImageBankGallery for icons mock works as expectes", async () => {
-        await sdk.designer.getImageBankGallery(1, 4).then(result => expect(result.length).toBeGreaterThan(3));
+    // discardLiveBoard(boardId: number): Promise<BoardConfig[]> {
+    it("checks that discard board work as expected", async () => {
+        // should return 200 when discarded
+        await sdk.designer.discardLiveBoard(1).then(res => expect(res[0].id).toBeDefined());
+
+        // should return 208 when cant discard cuse its already discarded
+        await sdk.designer.discardLiveBoard(666).then(res => expect(res).toBeUndefined());
     });
 
     it("checks that getQueryImageGallery mock works as expectes", async () => {
         await sdk.designer.getQueryImageGallery("bug").then(result => expect(result.length).toEqual(14));
-    });
-
-    it("checks that getImageBankSettings mock works as expected", async () => {
-        await sdk.designer.getImageBankSettings(1).then(result => expect(result.icons).toEqual("folloze"));
-    });
-
-    it("checks that saveImageBankSettings mock works as expected", async () => {
-        await sdk.designer
-            .saveImageBankSettings(1, "banners", "folloze")
-            .then(result => expect(result.icons).toEqual("folloze"));
     });
 
     it("checks that getForms works as expected", async () => {
@@ -135,6 +130,19 @@ describe("testing sdk designer module", () => {
         await sdk.designer
             .savePersonalization(1, personalization)
             .then(result => expect(result).toEqual(personalization));
+    });
+
+    it("checks that savePersonalization workd as expected", async () => {
+        await sdk.designer
+            .savePersonalization(1, personalization)
+            .then(result => expect(result).toEqual(personalization));
+    });
+
+    it("checks that all image gallery requests work as expected", async () => {
+        await sdk.designer.getBannerImageGallery().then(result => expect(result.length).toEqual(19));
+        await sdk.designer.getIconsImageGallery().then(result => expect(result.length).toEqual(4));
+        await sdk.designer.getMobileImageGallery().then(result => expect(result.length).toEqual(2));
+        await sdk.designer.getLogosImageGallery().then(result => expect(result.length).toEqual(3));
     });
 
     it("checks that saveLiveBoard mock working as expected", async () => {

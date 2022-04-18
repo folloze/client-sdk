@@ -1,7 +1,6 @@
 import {
-  CampaignElementsTypes,
-  ImageGalleryTypes
-} from "./chunk.FPDLHEHA.js";
+  CampaignElementsTypes
+} from "./chunk.G52EPVC6.js";
 import {
   keysToSnakeCase
 } from "./chunk.WXVSHK2H.js";
@@ -12,6 +11,7 @@ import {
 // src/designer/Designer.ts
 var Designer = class {
   constructor(fetch) {
+    this.fetchService = fetch;
     this.fetcher = fetch.fetcher;
   }
   publishLiveBoard(boardId, withGoOnline = true) {
@@ -44,18 +44,36 @@ var Designer = class {
       });
     });
   }
-  getQueryImageGallery(query) {
-    return this.getImageGallery({ type: ImageGalleryTypes.search, query });
-  }
-  getImageBankGallery(organizationId, bankCategory) {
+  getBannerImageGallery() {
     return this.getImageGallery({
-      type: ImageGalleryTypes.imageBank,
-      organizationId,
-      bankCategory
+      organizationId: this.fetchService.organizationId,
+      bankCategory: "banners",
+      type: "campaign"
     });
   }
-  getCampaignImageGallery() {
-    return this.getImageGallery({ type: ImageGalleryTypes.campaign });
+  getMobileImageGallery() {
+    return this.getImageGallery({
+      organizationId: this.fetchService.organizationId,
+      bankCategory: "mobile_banners",
+      type: "campaign"
+    });
+  }
+  getIconsImageGallery() {
+    return this.getImageGallery({
+      organizationId: this.fetchService.organizationId,
+      bankCategory: "icons",
+      type: "campaign"
+    });
+  }
+  getLogosImageGallery() {
+    return this.getImageGallery({
+      organizationId: this.fetchService.organizationId,
+      bankCategory: "logos",
+      type: "campaign"
+    });
+  }
+  getQueryImageGallery(query) {
+    return this.getImageGallery({ type: "search", query });
   }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
@@ -63,31 +81,6 @@ var Designer = class {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get upload url", e);
-        reject(e);
-      });
-    });
-  }
-  getImageBankSettings(organizationId) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.get(`/api/v1/organizations/${organizationId}/settings/image_bank`).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not get image bank settings", e);
-        reject(e);
-      });
-    });
-  }
-  saveImageBankSettings(organizationId, categoryName, source) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.put(`/api/v1/organizations/${organizationId}/settings/image_bank`, {
-        params: {
-          category_name: categoryName,
-          value: source
-        }
-      }).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not set image bank settings", e);
         reject(e);
       });
     });

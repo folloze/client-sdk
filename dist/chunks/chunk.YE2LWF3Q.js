@@ -6,7 +6,7 @@ import {
 } from "./chunk.H6D6LXEY.js";
 import {
   Designer
-} from "./chunk.JVPKZ2GN.js";
+} from "./chunk.5NHYO3KJ.js";
 import {
   Liveboard
 } from "./chunk.75TFKDHL.js";
@@ -613,7 +613,7 @@ var MockConnector = class {
     await import("./mocks.524I4IQE.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.DP3K34EY.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.RWQ4NL2F.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
     await import("./mocks.O4XDDJOA.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
@@ -624,6 +624,7 @@ var MockConnector = class {
 var import_merge = __toModule(require_merge());
 var import_get = __toModule(require_get());
 var defaultFetcherOptions = {
+  organizationId: -1,
   useMock: false,
   isPreview: false,
   config: {
@@ -635,6 +636,7 @@ var FetchService = class {
   constructor(options) {
     this.useMock = options.useMock;
     this.options = options;
+    this.organizationId = options.organizationId;
     if (options.sessionGuid) {
       this.sessionGuid = options.sessionGuid;
     }

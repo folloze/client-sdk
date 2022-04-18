@@ -1,7 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
 import {
-    ImageBankResponseV1,
-    ImageBankType,
     GalleryImage,
     UploadUrlResponseV1,
     FormV1,
@@ -16,6 +14,7 @@ import {
     UserV1,
     LayoutSavedConflict,
 } from "./IDesignerTypes";
+import {Board, BoardConfig} from "../common/interfaces/IBoard";
 
 export const rules = (mock: MockAdapter) => {
     const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
@@ -48,7 +47,76 @@ export const rules = (mock: MockAdapter) => {
         is_enabled: true,
     };
 
-    mock.onGet("/api/v1/image_gallery", {params: {type: "campaign"}}).reply<GalleryImage[]>(200, [
+    // publish board
+    const publishBoardRegex = /api\/v1\/boards\/(\d+)\/publish/;
+    mock.onPost(publishBoardRegex).reply<Board>((config): [number, Board?] => {
+        const boardId = parseInt(publishBoardRegex.exec(config.url)[1]);
+
+        // mock for the same hash already saved
+        if (boardId === 666) {
+            return [208];
+        }
+
+        // mock for saved without problem
+        return [
+            200,
+            <Board>{
+                activation_state: {online: false},
+                allow_embedding: false,
+                auto_upgrade_widgets: false,
+                id: 0,
+                integrations: {},
+                is_ssl: false,
+                layout_info: {},
+                name: "",
+                online_items_count: 0,
+                organization_id: 0,
+                privacy: {
+                    cookie_management: undefined,
+                    element_id: 0,
+                    personal_info_concealment: false,
+                    privacy_warning_check: false,
+                    regulated_countries_only: false,
+                },
+                slug: "",
+            },
+        ];
+    });
+
+    // discard board
+    mock.onDelete(publishBoardRegex).reply<Board>((config): [number, BoardConfig[]?] => {
+        const boardId = parseInt(publishBoardRegex.exec(config.url)[1]);
+
+        // mock for the same hash already saved
+        if (boardId === 666) {
+            return [208];
+        }
+
+        // mock for saved without problem
+        return [
+            200,
+            <BoardConfig[]>[
+                {
+                    grid: {
+                        columns: {colNum: 0, colWidth: ""},
+                        gap: {x: "", y: ""},
+                        maxWidth: "",
+                        rows: {rowHeight: "", rowNum: 0},
+                    },
+                    id: 0,
+                    meta: {localSaveTime: 0, newHash: "", originHash: "", savedTime: undefined},
+                    ribbons: undefined,
+                    sections: undefined,
+                    widgets: undefined,
+                },
+            ],
+        ];
+    });
+
+    // banners
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "banners", type: "campaign"},
+    }).reply<GalleryImage[]>(200, [
         {
             fit: "cover",
             url: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png",
@@ -127,24 +195,10 @@ export const rules = (mock: MockAdapter) => {
         },
     ]);
 
-    //banners
-    mock.onGet("/api/v1/image_gallery", {params: {type: "image_bank", bank_category: 1, organization_id: 1}}).reply<
-        GalleryImage[]
-    >(200, [
-        {
-            fit: "cover",
-            url: "https://images.folloze.com/image/upload/v1640510372/cjo48nkp0gtsk8pjrkjb.jpg",
-        },
-        {
-            fit: "cover",
-            url: "https://images.folloze.com/image/upload/v1640684303/iog6rsbluzw2y07koz26.jpg",
-        },
-    ]);
-
     //icons
-    mock.onGet("/api/v1/image_gallery", {params: {type: "image_bank", bank_category: 4, organization_id: 1}}).reply<
-        GalleryImage[]
-    >(200, [
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "icons", type: "campaign"},
+    }).reply<GalleryImage[]>(200, [
         {
             url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
             fit: "cover",
@@ -163,6 +217,39 @@ export const rules = (mock: MockAdapter) => {
         },
     ]);
 
+    //logos
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "logos", type: "campaign"},
+    }).reply<GalleryImage[]>(200, [
+        {
+            url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+            fit: "cover",
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+            fit: "cover",
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
+            fit: "cover",
+        },
+    ]);
+
+    //mobile
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "mobile_banners", type: "campaign"},
+    }).reply<GalleryImage[]>(200, [
+        {
+            url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+            fit: "cover",
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+            fit: "cover",
+        },
+    ]);
+
+    // search
     mock.onGet("/api/v1/image_gallery", {params: {type: "search", query: "bug"}}).reply<GalleryImage[]>(200, [
         {
             url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
@@ -221,22 +308,6 @@ export const rules = (mock: MockAdapter) => {
             fit: "contained",
         },
     ]);
-
-    mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply<ImageBankResponseV1>(200, {
-        icons: ImageBankType.folloze,
-        logos: ImageBankType.folloze,
-        banners: ImageBankType.folloze,
-        thumbnails: ImageBankType.folloze,
-        mobile_banners: ImageBankType.folloze,
-    });
-
-    mock.onPut(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply<ImageBankResponseV1>(200, {
-        icons: ImageBankType.folloze,
-        logos: ImageBankType.folloze,
-        banners: ImageBankType.folloze,
-        thumbnails: ImageBankType.folloze,
-        mobile_banners: ImageBankType.folloze,
-    });
 
     mock.onPost("/api/v1/upload_urls").reply<UploadUrlResponseV1>(200, {
         file_name: "file_name",
