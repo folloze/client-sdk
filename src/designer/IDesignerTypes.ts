@@ -1,4 +1,5 @@
-import {PrivacySettings} from '../common/ISharedTypes';
+import {PrivacySettings} from "../common/ISharedTypes";
+import {BoardConfig} from "../common/interfaces/IBoard";
 
 export enum ImageGalleryTypes {
     campaign = "campaign",
@@ -8,7 +9,7 @@ export enum ImageGalleryTypes {
 
 export enum ImageBankType {
     folloze = "folloze",
-    organization = "organization"
+    organization = "organization",
 }
 
 export enum ImageBankCategory {
@@ -22,17 +23,40 @@ export enum ImageBankCategory {
 export enum CampaignElementsTypes {
     footer = 1,
     privacy_message,
-    form_privacy_message
+    form_privacy_message,
 }
 
 export type GalleryImage = {
-    url: string,
-    fit: string,
-    id?: number,
-    displayable_section?: string,
-    transformation?: object, //TODO
-    viewed?: boolean
-}
+    url: string;
+    fit: string;
+    id?: number;
+    displayable_section?: string;
+    transformation?: object; //TODO
+    viewed?: boolean;
+    bankCategory?: ImageBankCategory; // imageBank
+};
+
+export type StringPosition =
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "middle-left"
+    | "middle-center"
+    | "middle-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
+
+export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
+
+export type FlzEditableImageData = {
+    url: string;
+    bankCategory: ImageBankCategoryType;
+    position?: StringPosition;
+    link?: string;
+    open_in_new_window?: boolean;
+    alt?: string;
+};
 
 export type ImageGalleryParams = {
     bank_category?: ImageBankCategory,
@@ -42,24 +66,24 @@ export type ImageGalleryParams = {
 }
 
 export type ImageBankResponseV1 = {
-    icons: ImageBankType,
-    logos: ImageBankType,
-    banners: ImageBankType,
-    thumbnails: ImageBankType,
-    mobile_banners: ImageBankType
-}
+    icons: ImageBankType;
+    logos: ImageBankType;
+    banners: ImageBankType;
+    thumbnails: ImageBankType;
+    mobile_banners: ImageBankType;
+};
 
 export type UploadUrlResponseV1 = {
-    file_name: string,
-    method: string,
+    file_name: string;
+    method: string;
     params: {
-        api_key: string,
-        signature: string,
-        timestamp: number
-    },
-    get_url: string,
-    put_url: string
-}
+        api_key: string;
+        signature: string;
+        timestamp: number;
+    };
+    get_url: string;
+    put_url: string;
+};
 
 export declare type CloudinaryUploadResult = {
     asset_id: string;
@@ -83,193 +107,199 @@ export declare type CloudinaryUploadResult = {
     original_filename: string;
     original_extension: string;
     api_key: string;
-}
+};
 
 type FormField = {
-    label: string,
-    order: number,
-    placeholder: string,
-    state: string,
-    type: string
-}
+    label: string;
+    order: number;
+    placeholder: string;
+    state: string;
+    type: string;
+};
 
 export type FormV1 = {
-    id: number,
-    name: string,
-    board_id: number,
-    organization_id: number,
-    state: number,
-    form_type: number,
-    data: FormDataV1
-}
+    id: number;
+    name: string;
+    board_id: number;
+    organization_id: number;
+    state: number;
+    form_type: number;
+    data: FormDataV1;
+};
 
 export type FormDataV1 = {
-    form_type?: number,
+    form_type?: number;
     // both classic and external
-    form_title?: string,
-    submit_label?: string,
-    success_message?: string
-    submit_redirect_url?: string
+    form_title?: string;
+    submit_label?: string;
+    success_message?: string;
+    submit_redirect_url?: string;
     // for type classic (1)
-    fields?: Record<string, FormField>, // the field's name and properties. There will always be an 'email' field
+    fields?: Record<string, FormField>; // the field's name and properties. There will always be an 'email' field
     // for type external (2)
-    script?: string,
-    auto_fill?: boolean,
+    script?: string;
+    auto_fill?: boolean;
     // for type marketo (3)
-    munchkin_id?: string,
-    form_id?: string,
-    base_url?: string,
-    custom_script?: string
-}
+    munchkin_id?: string;
+    form_id?: string;
+    base_url?: string;
+    custom_script?: string;
+};
 
 type Label = {
-    text: string,
-    url: string
-}
+    text: string;
+    url: string;
+};
 
 type Checkbox = {
-    label: string,
-    name: string,
-    is_required: boolean
-}
+    label: string;
+    name: string;
+    is_required: boolean;
+};
 
 export type FootersResponseV1 = {
-    id: number,
-    element_id: number,
-    name: string,
-    description: string,
-    state: number,
-    is_standard: boolean,
+    id: number;
+    element_id: number;
+    name: string;
+    description: string;
+    state: number;
+    is_standard: boolean;
     logo: {
-        show: boolean,
-        url?: string
-    },
-    text: string,
-    labels: Label[],
-    background_color: string,
-    show_in_item_view: boolean,
+        show: boolean;
+        url?: string;
+    };
+    text: string;
+    labels: Label[];
+    background_color: string;
+    show_in_item_view: boolean;
     text_color: {
-        type: number,
-        color: string
-    },
+        type: number;
+        color: string;
+    };
     tracking_consent: {
-        show: boolean,
-        button_label?: string,
-        dialog_button_label?: string,
-        dialog_text?: string
-    }
-}
+        show: boolean;
+        button_label?: string;
+        dialog_button_label?: string;
+        dialog_text?: string;
+    };
+};
 
 export type PrivacyMessageResponseV1 = {
-    id: number,
-    element_id: number,
-    name: string,
-    description: string,
-    state: number,
-    is_standard: boolean,
-    is_top: boolean,
-    message: string,
-    link: string,
-    can_close: boolean
-}
+    id: number;
+    element_id: number;
+    name: string;
+    description: string;
+    state: number;
+    is_standard: boolean;
+    is_top: boolean;
+    message: string;
+    link: string;
+    can_close: boolean;
+};
 
 export type FormPrivacyMessageDataV1 = {
-    is_standard: boolean,
+    is_standard: boolean;
     message: {
-        html: string
-    },
+        html: string;
+    };
     text_area: {
-        html: string
-    },
+        html: string;
+    };
     checkbox_area: {
-        threshold: number,
-        label: string,
-        checkboxes: Checkbox[]
-    }
-}
+        threshold: number;
+        label: string;
+        checkboxes: Checkbox[];
+    };
+};
 
 export type FormPrivacyMessageResponseV1 = {
-    id: number,
-    element_id: number,
-    name: string,
-    state: number
-    is_standard: FormPrivacyMessageDataV1["is_standard"],
-    message: FormPrivacyMessageDataV1["message"]
-    text_area: FormPrivacyMessageDataV1["text_area"]
-    checkbox_area: FormPrivacyMessageDataV1["checkbox_area"]
-}
+    id: number;
+    element_id: number;
+    name: string;
+    state: number;
+    is_standard: FormPrivacyMessageDataV1["is_standard"];
+    message: FormPrivacyMessageDataV1["message"];
+    text_area: FormPrivacyMessageDataV1["text_area"];
+    checkbox_area: FormPrivacyMessageDataV1["checkbox_area"];
+};
 
 export type CampaignElementResponseV1 = {
-    data: Record<string, FootersResponseV1|PrivacyMessageResponseV1|FormPrivacyMessageResponseV1>,
-    default_id: number
-}
+    data: Record<string, FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1>;
+    default_id: number;
+};
 
-export type PrivacySettingsResponseV1 = PrivacySettings
+export type PrivacySettingsResponseV1 = PrivacySettings;
 
 export type BoardHasPersonalizationResponseV1 = {
-    personalization: boolean
-}
+    personalization: boolean;
+};
 
 export type FeatureSettingsResponseV1 = {
-    accounts_dashboard: boolean,
-    advanced_reports: boolean,
-    analytics_dashboards: boolean,
-    app_sso_login: boolean,
-    articles: boolean,
-    board_embedding: boolean,
-    change_custom_domain: boolean,
-    chat: boolean,
-    email_callbacks_subscription: boolean,
-    enable_seo: boolean,
-    items_limit: boolean,
-    live_event: boolean,
-    ms_crm_integration: boolean,
-    personalization: boolean,
-    set_group_board: boolean
-}
+    accounts_dashboard: boolean;
+    advanced_reports: boolean;
+    analytics_dashboards: boolean;
+    app_sso_login: boolean;
+    articles: boolean;
+    board_embedding: boolean;
+    change_custom_domain: boolean;
+    chat: boolean;
+    email_callbacks_subscription: boolean;
+    enable_seo: boolean;
+    items_limit: boolean;
+    live_event: boolean;
+    ms_crm_integration: boolean;
+    personalization: boolean;
+    set_group_board: boolean;
+};
 
 export type BoardHasItemsResponseV1 = {
-    has_items: boolean
-}
+    has_items: boolean;
+};
 
 export type PersonalizationV1 = {
-    auto_assign_inviter: object,
+    auto_assign_inviter: object;
     campaign: {
-        banner: object,
-        contact_card: object,
-        footer: object,
-        general: object,
-        header: object,
-        items: object,
-        promotion: object
-    },
-    is_enabled: boolean
-}
+        banner: object;
+        contact_card: object;
+        footer: object;
+        general: object;
+        header: object;
+        items: object;
+        promotion: object;
+    };
+    is_enabled: boolean;
+};
 
 export type EmailTemplateV1 = {
-    id: number,
-    name: string
-    board_id: number,
+    id: number;
+    name: string;
+    board_id: number;
     created_by: {
-        id: number,
-        full_name: string
-    },
-    created_at: Date,
-    updated_at: Date,
-    is_default: boolean,
-    invitation_type: number,
-    subject: string,
-    text: string,
-    logo: string,
-    template: boolean
-}
+        id: number;
+        full_name: string;
+    };
+    created_at: Date;
+    updated_at: Date;
+    is_default: boolean;
+    invitation_type: number;
+    subject: string;
+    text: string;
+    logo: string;
+    template: boolean;
+};
 
 export type UserV1 = {
-    id: number,
-    name: string,
-    email: string,
-    bio_settings: object,
-    linkedin: object,
-    twitter: object,
-    image: string
-}
+    id: number;
+    name: string;
+    email: string;
+    bio_settings: object;
+    linkedin: object;
+    twitter: object;
+    image: string;
+};
+
+export type LayoutSavedConflict = {
+    msg: string;
+    layout: BoardConfig;
+    user: UserV1;
+};

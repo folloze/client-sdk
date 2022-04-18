@@ -13,11 +13,26 @@ export declare abstract class LiveWidget extends LiveDraggable {
     connectedCallback(): void;
     willUpdate(_changedProperties: PropertyValues): void;
     protected firstUpdated(_changedProperties: PropertyValues): void;
+    updated(_changedProperties: PropertyValues): void;
     set config(data: WidgetConfig);
     get config(): WidgetConfig;
     set data(x: any);
     get data(): any;
     get widgetId(): string;
+    /**
+     * called when the widget enters the viewport 50%
+     * the percentage can be changed in the future
+     *
+     * you can override this method for yourself
+     */
+    onEnterViewport(entry: IntersectionObserverEntry): void;
+    /**
+     * called when the widget exits the viewport 50%
+     * the percentage can be changed in the future
+     *
+     * you can override this method for yourself
+     */
+    onLeaveViewport(entry: IntersectionObserverEntry): void;
     /**
      * you should override this method to use incoming events
      */

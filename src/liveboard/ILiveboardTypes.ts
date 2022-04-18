@@ -320,7 +320,7 @@ export type OrganizationSettingsResponseV1 = {
     privacy: PrivacySettings
 }
 
-export type SessionResonseV1 = {
+export type SessionResponseV1 = {
     guid: string
 }
 

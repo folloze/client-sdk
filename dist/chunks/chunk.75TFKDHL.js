@@ -338,26 +338,6 @@ var Liveboard = class {
       });
     });
   }
-  createSession() {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post("/live_board/v1/sessions").then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not create session", e);
-        reject(e);
-      });
-    });
-  }
-  validateSession() {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post("/live_board/v1/session_validations").then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not validate session", e);
-        reject(e);
-      });
-    });
-  }
   setSessionCookie(boardId) {
     return new Promise((resolve, reject) => {
       this.fetcher.post(`/live_board/v1/boards/${boardId}/session_cookies`).then((result) => {

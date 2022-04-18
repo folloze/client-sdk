@@ -1,11 +1,11 @@
 // src/analytics/Analytics.ts
 var EventSources = /* @__PURE__ */ ((EventSources2) => {
-  EventSources2["desginer"] = "api";
+  EventSources2["designer"] = "api";
   EventSources2["liveboard"] = "live_board";
   return EventSources2;
 })(EventSources || {});
 var eventPlatformBySource = {
-  ["api" /* desginer */]: "App",
+  ["api" /* designer */]: "App",
   ["live_board" /* liveboard */]: "Campaign"
 };
 var LiveBoardEventTypes = /* @__PURE__ */ ((LiveBoardEventTypes2) => {
@@ -50,45 +50,69 @@ var DesignerEventTypes = /* @__PURE__ */ ((DesignerEventTypes2) => {
 var Analytics = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
+    this.pingEndpoint = fetch.options.pingEndpoint;
+    this.isPreview = fetch.options.isPreview;
   }
-  sendLeadBoardView(boardId) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`).then(() => {
-        resolve();
-      }).catch((e) => {
+  analyticsRequestWrapper(apiCall) {
+    if (this.isPreview) {
+      return new Promise((resolve) => resolve({ status: 200 }));
+    } else {
+      return apiCall();
+    }
+  }
+  trackLeadBoardView(boardId) {
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`).catch((e) => {
         console.error("could not track lead board view", e);
-        reject(e);
+        throw e;
       });
     });
   }
-  sendLeadItemView(itemId, guid) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, { guid }).then(() => {
-        resolve();
-      }).catch((e) => {
+  trackLeadItemView(itemId, guid) {
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, { guid }).catch((e) => {
         console.error("could not track lead item view", e);
-        reject(e);
+        throw e;
       });
     });
   }
   trackEvent(eventId, data, source) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/${source}/v1/tracking`, {
-        event: {
-          id: eventId,
-          data,
-          platform: eventPlatformBySource[source]
-        }
-      }).then(() => {
-        resolve();
-      }).catch((e) => {
-        console.error("could not track action", e);
-        reject(e);
-      });
+    return this.fetcher.post(`/${source}/v1/tracking`, {
+      event: {
+        id: eventId,
+        data,
+        platform: eventPlatformBySource[source]
+      }
+    }).catch((e) => {
+      console.error("could not track action", e);
+      throw e;
     });
   }
   sendPing(payload) {
-    return this.fetcher.post("/url-for-ping", payload);
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post(`${this.pingEndpoint}/pings`, {
+        lead_id: payload.leadId,
+        board_id: payload.boardId,
+        item_id: payload.itemId,
+        client_guid: payload.guid
+      });
+    });
+  }
+  validateSession() {
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post("/live_board/v1/session_validations").catch((e) => {
+        console.error("could not validate session", e);
+        throw e;
+      });
+    });
+  }
+  createSession() {
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post("/live_board/v1/sessions").catch((e) => {
+        console.error("could not create session", e);
+        throw e;
+      });
+    });
   }
 };
 

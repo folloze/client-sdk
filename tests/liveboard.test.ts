@@ -170,16 +170,6 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result.privacy.privacy_warning_provider).toEqual("app"));
     });
 
-    it('checks that createSession mock works as expected', async () => {
-        await sdk.liveboard.createSession()
-            .then(result => expect(result.guid).toBeTruthy);
-    });
-
-    it('checks that validateSession mock works as expected', async () => {
-        await sdk.liveboard.validateSession()
-            .then(result => expect(result).toHaveProperty('guid'));
-    });
-
     it('checks that setSessionCookie mock works as expected', async () => {
         await sdk.liveboard.setSessionCookie(1)
             .then(result => expect(result).toEqual(1));

@@ -1,12 +1,12 @@
 export * from "./IDesignerTypes";
-import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { ImageGalleryParams, GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1 } from "./IDesignerTypes";
-import { BoardConfig } from '../common/interfaces/IBoard';
+import { ImageBankResponseV1, ImageGalleryParams, GalleryImage, ImageBankCategory, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1 } from "./IDesignerTypes";
+import { BoardConfig, Board } from "../common/interfaces/IBoard";
 export declare class Designer {
     private fetcher;
     constructor(fetch: FetchService);
-    publishLiveBoard(boardId: number): Promise<unknown>;
+    publishLiveBoard(boardId: number, withGoOnline?: boolean): Promise<Board>;
+    discardLiveBoard(boardId: number): Promise<BoardConfig[]>;
     /**
      * Gets the image gallery for given types
      *
@@ -15,12 +15,50 @@ export declare class Designer {
      */
     getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]>;
     /**
+     * When searching the web for an image
+     *
+     * @param {string} query
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getQueryImageGallery(query: string): Promise<GalleryImage[]>;
+    /**
+     * When a section has image bank set to 'organization'
+     *
+     * @param {number} organizationId
+     * @param {ImageBankCategory} bankCategory
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getImageBankGallery(organizationId: number, bankCategory: ImageBankCategory): Promise<GalleryImage[]>;
+    /**
+     * When a section of the designer has image bank set to 'folloze', get generic images
+     * or organization doesn't have image bank set
+     *
+     * @returns {GalleryImage[]} an array of GalleryImage
+     */
+    getCampaignImageGallery(): Promise<GalleryImage[]>;
+    /**
      * Fetches all the parameters required to upload a file
      *
      * @param {string} uploadType the type of file to be uploaded
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
     getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1>;
+    /**
+     * Get the settings for the organization's image bank
+     *
+     * @param organizationId
+     * @returns {ImageBankResponseV1} ImageBankResponse
+     */
+    getImageBankSettings(organizationId: number): Promise<ImageBankResponseV1>;
+    /**
+     * Set the settings for the organization's image bank
+     *
+     * @param {number} organizationId
+     * @param {string} categoryName which type of images are being changes
+     * @param {string} source the source of the images
+     * @returns {ImageBankResponseV1} ImageBankResponse
+     */
+    saveImageBankSettings(organizationId: number, categoryName: string, source: string): Promise<ImageBankResponseV1>;
     /**
      * Gets all forms of a board
      *
@@ -109,7 +147,7 @@ export declare class Designer {
      * @returns {PersonalizationV1} Personalization
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
-    saveLiveBoard(boardId: number, config: BoardConfig): Promise<AxiosResponse>;
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<any>;
     /**
      * searches board contacts
      *

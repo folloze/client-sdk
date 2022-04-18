@@ -3,11 +3,13 @@ import { WidgetConfig } from "./IWidget";
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
-import { ClientSDK } from "../../sdk";
 export declare type BoardConfig = {
     id: number;
     meta: {
         savedTime: Date;
+        localSaveTime: number;
+        originHash: string;
+        newHash: string;
     };
     grid: {
         maxWidth: string;
@@ -32,7 +34,6 @@ export interface ILiveBoard extends LitElement {
     config: BoardConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
-    sdk: ClientSDK;
     getGridStyling(): string;
     positionToGridArea(p: GridPos): string;
     getWidgetPos(p: GridPos | FloatPos): string;
@@ -81,5 +82,8 @@ export declare type Board = {
             state: "draft" | "published" | "unpublished changes";
             type: "default" | "gating";
         };
+    };
+    activation_state: {
+        online: boolean;
     };
 };

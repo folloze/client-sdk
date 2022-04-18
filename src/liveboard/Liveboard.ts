@@ -6,7 +6,7 @@ import {
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
     LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
-    LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResonseV1,
+    LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResponseV1,
     ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1
 } from './ILiveboardTypes';
 
@@ -24,6 +24,7 @@ export class Liveboard {
     * @returns {BoardResponseV1} BoardResponse
     */
     getBoard(boardSlug: string): Promise<BoardResponseV1> {
+        // TODO - remove all promises as Axios already returns a promise
         return new Promise((resolve, reject) => {
             this.fetcher.get<BoardResponseV1>(`/live_board/v1/boards/${boardSlug}/`)
                 .then(result => {
@@ -658,42 +659,6 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get organization settings", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * Create a new session
-     *
-     * @returns {SessionResonseV1} SessionResonse
-     */
-    createSession(): Promise<SessionResonseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post<SessionResonseV1>("/live_board/v1/sessions")
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not create session", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * Validates the session
-     *
-     * @returns {SessionResonseV1|void} new SessionResonse if session is invalid, otherwise nothing
-     */
-    validateSession(): Promise<SessionResonseV1|void> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post("/live_board/v1/session_validations")
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not validate session", e);
                     reject(e);
                 });
         });

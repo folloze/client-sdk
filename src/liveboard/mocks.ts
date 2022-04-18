@@ -19,7 +19,7 @@ import {
     LeadResponseV1,
     LiveEventUrlsResponseV2,
     OrganizationSettingsResponseV1,
-    SessionResonseV1,
+    SessionResponseV1,
     FormMetadataDataV1
 } from "./ILiveboardTypes";
 
@@ -348,11 +348,7 @@ export const rules = (mock: MockAdapter) => {
         },
     });
 
-    mock.onPost("/live_board/v1/sessions").reply<SessionResonseV1>(200, {
-        guid: "abc",
-    });
-
-    mock.onPost("/live_board/v1/session_validations").reply<SessionResonseV1>(200, {
+    mock.onPost("/live_board/v1/sessions").reply<SessionResponseV1>(200, {
         guid: "abc",
     });
 

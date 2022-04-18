@@ -1,13 +1,13 @@
+import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-declare type PingPayload = {
-    time: string;
-    guid: string;
+export declare type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
+    guid: string;
 };
 export declare enum EventSources {
-    desginer = "api",
+    designer = "api",
     liveboard = "live_board"
 }
 export declare enum LiveBoardEventTypes {
@@ -49,20 +49,23 @@ export declare enum DesignerEventTypes {
 }
 export declare class Analytics {
     private fetcher;
+    private pingEndpoint;
+    private isPreview;
     constructor(fetch: FetchService);
+    analyticsRequestWrapper(apiCall: Function): Promise<any>;
     /**
      * Lead viewed board
      *
      * @param {number} boardId
      */
-    sendLeadBoardView(boardId: number): Promise<void>;
+    trackLeadBoardView(boardId: number): Promise<AxiosResponse>;
     /**
      * Lead viewed item
      *
      * @param {number} itemId
      * @param {string} guid
      */
-    sendLeadItemView(itemId: number, guid: string): Promise<void>;
+    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
     /**
      * Tracks an event
      *
@@ -70,7 +73,8 @@ export declare class Analytics {
      * @param {any} data the data to report
      * @param {EventSources} source where the event happened
      */
-    trackEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any, source: EventSources): Promise<void>;
-    sendPing(payload: PingPayload): Promise<import("axios").AxiosResponse<any>>;
+    trackEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any, source: EventSources): Promise<AxiosResponse>;
+    sendPing(payload: PingPayload): Promise<any>;
+    validateSession(): Promise<AxiosResponse>;
+    createSession(): Promise<AxiosResponse>;
 }
-export {};

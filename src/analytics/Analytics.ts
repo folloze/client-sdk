@@ -1,21 +1,21 @@
-import {AxiosInstance} from "axios";
+import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
+import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
 
-type PingPayload = {
-    time: string;
-    guid: string;
+export type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
+    guid: string;
 }
 
 export enum EventSources {
-    desginer = "api",
+    designer = "api",
     liveboard = "live_board"
 }
 
 const eventPlatformBySource = {
-    [EventSources.desginer]: "App",
+    [EventSources.designer]: "App",
     [EventSources.liveboard]: "Campaign"
 };
 
@@ -60,9 +60,21 @@ export enum DesignerEventTypes {
 
 export class Analytics {
     private fetcher: AxiosInstance;
+    private pingEndpoint: string;
+    private isPreview: boolean;
 
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
+        this.pingEndpoint = fetch.options.pingEndpoint;
+        this.isPreview = fetch.options.isPreview;
+    }
+
+    analyticsRequestWrapper(apiCall: Function): Promise<any> {
+        if (this.isPreview) {
+            return new Promise(resolve => resolve({status: 200}));
+        } else {
+            return apiCall();
+        }
     }
 
     /**
@@ -70,13 +82,12 @@ export class Analytics {
      * 
      * @param {number} boardId 
      */
-    sendLeadBoardView(boardId: number): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`)
-                .then(() => { resolve(); })
+    trackLeadBoardView(boardId: number): Promise<AxiosResponse> {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`)
                 .catch(e => {
                     console.error("could not track lead board view", e);
-                    reject(e);
+                    throw e;
                 });
         });
     }
@@ -87,13 +98,12 @@ export class Analytics {
      * @param {number} itemId 
      * @param {string} guid 
      */
-    sendLeadItemView(itemId: number, guid: string): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, {guid})
-                .then(() => { resolve(); })
+    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse> {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, {guid})
                 .catch(e => {
                     console.error("could not track lead item view", e);
-                    reject(e);
+                    throw e;
                 });
         });
     }
@@ -109,24 +119,48 @@ export class Analytics {
         eventId: LiveBoardEventTypes|DesignerEventTypes,
         data: any,
         source: EventSources
-    ): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post(`/${source}/v1/tracking`, {
-                event: {
-                    id: eventId,
-                    data: data,
-                    platform: eventPlatformBySource[source]
-                  }
-            })
-                .then(() => { resolve(); })
+    ): Promise<AxiosResponse> {
+        return this.fetcher.post(`/${source}/v1/tracking`, {
+            event: {
+                id: eventId,
+                data: data,
+                platform: eventPlatformBySource[source]
+              }
+        })
+            .catch(e => {
+                console.error("could not track action", e);
+                throw e;
+            });
+    }
+
+    sendPing(payload: PingPayload) {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post(`${this.pingEndpoint}/pings`, {
+                lead_id: payload.leadId,
+                board_id: payload.boardId,
+                item_id: payload.itemId,
+                client_guid: payload.guid
+            });
+        });
+    }
+
+    validateSession(): Promise<AxiosResponse> {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post("/live_board/v1/session_validations")
                 .catch(e => {
-                    console.error("could not track action", e);
-                    reject(e);
+                    console.error("could not validate session", e);
+                    throw e;
                 });
         });
     }
 
-    sendPing(payload: PingPayload) {
-        return this.fetcher.post("/url-for-ping", payload);
+    createSession(): Promise<AxiosResponse> {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post<SessionResponseV1>("/live_board/v1/sessions")
+                .catch(e => {
+                    console.error("could not create session", e);
+                    throw e;
+                });
+        });
     }
 }

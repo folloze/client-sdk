@@ -1,8 +1,7 @@
 import {
   CampaignElementsTypes,
-  ImageBankCategory,
-  ImageGalleryTypes
-} from "./chunk.2UDISWNO.js";
+  ImageBankType
+} from "./chunk.FPDLHEHA.js";
 import "./chunk.Z3GS5MY4.js";
 
 // src/designer/mocks.ts
@@ -36,13 +35,6 @@ var rules = (mock) => {
     },
     is_enabled: true
   };
-<<<<<<< HEAD:dist/chunks/mocks.UEHP2PF6.js
-  mock.onGet("/api/v1/image_gallery", {
-    params: {
-      bank_category: ImageBankCategory.banners,
-      type: ImageGalleryTypes.campaign,
-      organization_id: 1
-=======
   mock.onGet("/api/v1/image_gallery", { params: { type: "campaign" } }).reply(200, [
     {
       fit: "cover",
@@ -147,14 +139,22 @@ var rules = (mock) => {
     {
       url: "https://images.folloze.com/image/upload/v1640686376/cjlc8wmtndwp8rfcweq3.png",
       fit: "cover"
->>>>>>> master:dist/chunks/mocks.DP3K34EY.js
     }
-  }).reply(200, [
+  ]);
+  mock.onGet("/api/v1/image_gallery", { params: { type: "search", query: "bug" } }).reply(200, [
     {
-<<<<<<< HEAD:dist/chunks/mocks.UEHP2PF6.js
-      "fit": "cover",
-      "url": "campaign-image-url"
-=======
+      url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+      fit: "cover"
+    },
+    {
+      url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+      fit: "contained"
+    },
+    {
+      url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+      fit: "cover"
+    },
+    {
       url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
       fit: "contained"
     },
@@ -197,9 +197,22 @@ var rules = (mock) => {
     {
       url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
       fit: "contained"
->>>>>>> master:dist/chunks/mocks.DP3K34EY.js
     }
   ]);
+  mock.onGet(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply(200, {
+    icons: ImageBankType.folloze,
+    logos: ImageBankType.folloze,
+    banners: ImageBankType.folloze,
+    thumbnails: ImageBankType.folloze,
+    mobile_banners: ImageBankType.folloze
+  });
+  mock.onPut(/api\/v1\/organizations\/(\d+)\/settings\/image_bank/).reply(200, {
+    icons: ImageBankType.folloze,
+    logos: ImageBankType.folloze,
+    banners: ImageBankType.folloze,
+    thumbnails: ImageBankType.folloze,
+    mobile_banners: ImageBankType.folloze
+  });
   mock.onPost("/api/v1/upload_urls").reply(200, {
     file_name: "file_name",
     method: "post",

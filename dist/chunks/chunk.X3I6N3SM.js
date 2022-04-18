@@ -782,6 +782,10 @@ var LiveWidget = class extends LiveDraggable {
     super.firstUpdated(_changedProperties);
     widgetEmit(this, "widget-first-updated");
   }
+  updated(_changedProperties) {
+    super.updated(_changedProperties);
+    widgetEmit(this, "widget-updated");
+  }
   set config(data) {
     this._widgetId = data.id;
     this._config = data;
@@ -800,6 +804,13 @@ var LiveWidget = class extends LiveDraggable {
   }
   get widgetId() {
     return this._widgetId;
+  }
+  onEnterViewport(entry) {
+    this.style.setProperty("--fz-animation-1-name", "inherit");
+    this.style.setProperty("--fz-animation-1-play-state", "running");
+  }
+  onLeaveViewport(entry) {
+    return;
   }
   incomingEvents(e6) {
     return;

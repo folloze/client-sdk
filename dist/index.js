@@ -16,30 +16,30 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.7IADDXWR.js";
+} from "./chunks/chunk.X3I6N3SM.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.S4K3YFVV.js";
-import "./chunks/chunk.3ZNLEUXI.js";
+} from "./chunks/chunk.DF2INQRT.js";
+import "./chunks/chunk.NG7TLSQO.js";
 import {
   Analytics,
   DesignerEventTypes,
   EventSources,
   LiveBoardEventTypes
-} from "./chunks/chunk.YHWKAM4X.js";
+} from "./chunks/chunk.H6D6LXEY.js";
 import {
   Designer
-} from "./chunks/chunk.AFSEGF22.js";
+} from "./chunks/chunk.JVPKZ2GN.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,
   ImageBankType,
   ImageGalleryTypes
-} from "./chunks/chunk.2UDISWNO.js";
+} from "./chunks/chunk.FPDLHEHA.js";
 import {
   Liveboard
-} from "./chunks/chunk.MOU46CME.js";
+} from "./chunks/chunk.75TFKDHL.js";
 import {
   fileUpload,
   hashObj,
