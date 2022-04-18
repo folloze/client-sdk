@@ -1,4 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
+import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
 
@@ -20,4 +21,7 @@ export const rules = (mock: MockAdapter) => {
             console.debug("sending ping to analytic", data);
             return [200, "ping sent!"];
         });
+
+    mock.onPost("/live_board/v1/session_validations")
+        .reply<void>(200);
 };

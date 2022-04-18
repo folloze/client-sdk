@@ -20,17 +20,17 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.G5GOCPHS.js";
-import "./chunks/chunk.3ZNLEUXI.js";
+} from "./chunks/chunk.DQKTLVEJ.js";
+import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
   DesignerEventTypes,
   EventSources,
   LiveBoardEventTypes
-} from "./chunks/chunk.GV2WVIQP.js";
+} from "./chunks/chunk.H6D6LXEY.js";
 import {
   Designer
-} from "./chunks/chunk.JVPKZ2GN.js";
+} from "./chunks/chunk.SG7S2OXK.js";
 import {
   CampaignElementsTypes,
   ImageBankCategory,
@@ -39,7 +39,7 @@ import {
 } from "./chunks/chunk.FPDLHEHA.js";
 import {
   Liveboard
-} from "./chunks/chunk.FMZ2YAST.js";
+} from "./chunks/chunk.75TFKDHL.js";
 import {
   fileUpload,
   hashObj,

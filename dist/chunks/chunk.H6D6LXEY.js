@@ -98,6 +98,14 @@ var Analytics = class {
       });
     });
   }
+  validateSession() {
+    return this.analyticsRequestWrapper(() => {
+      return this.fetcher.post("/live_board/v1/session_validations").catch((e) => {
+        console.error("could not validate session", e);
+        throw e;
+      });
+    });
+  }
   createSession() {
     return this.analyticsRequestWrapper(() => {
       return this.fetcher.post("/live_board/v1/sessions").catch((e) => {

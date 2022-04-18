@@ -49,6 +49,10 @@ describe("testing analytics module", () => {
             .then(result => expect(result.data.guid).toBeTruthy);
     });
 
+    it('checks that validateSession mock works as expected', async () => {
+        await sdk.analytics.validateSession()
+            .then(result => expect(result.status).toEqual(200));
+    });
 });
 
 describe("testing analytics module in preview", () => {
@@ -73,6 +77,13 @@ describe("testing analytics module in preview", () => {
     it('checks that createSession mock works as expected', async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.analytics.createSession()
+            .then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it('checks that validateSession mock works as expected', async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.analytics.validateSession()
             .then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });

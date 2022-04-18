@@ -352,10 +352,6 @@ export const rules = (mock: MockAdapter) => {
         guid: "abc",
     });
 
-    mock.onPost("/live_board/v1/session_validations").reply<SessionResponseV1>(200, {
-        guid: "abc",
-    });
-
     mock.onPost("/live_board/v1/boards/1/session_cookies").reply<number>(200, 1);
 
     mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/)

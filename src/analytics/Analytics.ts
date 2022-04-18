@@ -144,11 +144,16 @@ export class Analytics {
         });
     }
 
-    /**
-     * Create a new session
-     *
-     * @returns {SessionResponseV1} SessionResponse
-     */
+    validateSession(): Promise<AxiosResponse> {
+        return this.analyticsRequestWrapper(() => {
+            return this.fetcher.post("/live_board/v1/session_validations")
+                .catch(e => {
+                    console.error("could not validate session", e);
+                    throw e;
+                });
+        });
+    }
+
     createSession(): Promise<AxiosResponse> {
         return this.analyticsRequestWrapper(() => {
             return this.fetcher.post<SessionResponseV1>("/live_board/v1/sessions")

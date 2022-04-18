@@ -665,24 +665,6 @@ export class Liveboard {
     }
 
     /**
-     * Validates the session
-     *
-     * @returns {SessionResonseV1|void} new SessionResonse if session is invalid, otherwise nothing
-     */
-    validateSession(): Promise<SessionResponseV1|void> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post("/live_board/v1/session_validations")
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not validate session", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
      * Set the lead's session cookie
      *
      * @param {number} boardId
