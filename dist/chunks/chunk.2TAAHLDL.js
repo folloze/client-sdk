@@ -278,16 +278,6 @@ var Liveboard = class {
       });
     });
   }
-  updateInvitationUsed(token) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/invitation_wrappers/${token}`).then(() => {
-        resolve();
-      }).catch((e) => {
-        console.error("could not update invitation wrapper", e);
-        reject(e);
-      });
-    });
-  }
   getCurrentLead() {
     return new Promise((resolve, reject) => {
       this.fetcher.get("/live_board/v1/leads/me").then((result) => {

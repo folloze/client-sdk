@@ -20,14 +20,14 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.YE2LWF3Q.js";
-import "./chunks/chunk.NG7TLSQO.js";
+} from "./chunks/chunk.DABIPKS5.js";
+import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
   DesignerEventTypes,
   EventSources,
   LiveBoardEventTypes
-} from "./chunks/chunk.H6D6LXEY.js";
+} from "./chunks/chunk.TP6LCZ3M.js";
 import {
   Designer
 } from "./chunks/chunk.5NHYO3KJ.js";
@@ -36,7 +36,7 @@ import {
 } from "./chunks/chunk.G52EPVC6.js";
 import {
   Liveboard
-} from "./chunks/chunk.75TFKDHL.js";
+} from "./chunks/chunk.2TAAHLDL.js";
 import {
   fileUpload,
   hashObj,

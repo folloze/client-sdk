@@ -179,12 +179,6 @@ export declare class Liveboard {
      */
     getGeoLocation(): Promise<GeoLocationResponseV1>;
     /**
-     * Set invitation wrapper to used
-     *
-     * @param {string} token
-     */
-    updateInvitationUsed(token: string): Promise<void>;
-    /**
      * Fetches the current lead
      *
      * @returns {LeadResponseV1} LeadResponse

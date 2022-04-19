@@ -257,7 +257,6 @@ var rules = (mock) => {
     country_code: "il",
     state: "ta"
   });
-  mock.onPost("/live_board/v2/invitation_wrappers/1").reply(200);
   mock.onGet("/live_board/v1/leads/me").reply(200, {
     id: 1,
     name: "John",

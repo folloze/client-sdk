@@ -24,4 +24,8 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v1/session_validations")
         .reply<void>(200);
+
+
+    mock.onPost("/live_board/v2/invitation_wrappers/1")
+        .reply<void>(200);
 };

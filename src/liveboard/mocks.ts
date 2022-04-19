@@ -304,8 +304,6 @@ export const rules = (mock: MockAdapter) => {
         state: "ta",
     });
 
-    mock.onPost("/live_board/v2/invitation_wrappers/1").reply<void>(200);
-
     mock.onGet("/live_board/v1/leads/me").reply<LeadResponseV1>(200, {
         id: 1,
         name: "John",

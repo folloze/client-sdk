@@ -77,4 +77,5 @@ export declare class Analytics {
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
+    updateInvitationUsed(token: string): Promise<AxiosResponse>;
 }

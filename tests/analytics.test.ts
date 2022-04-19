@@ -52,6 +52,10 @@ describe("testing analytics module", () => {
     it("checks that validateSession mock works as expected", async () => {
         await sdk.analytics.validateSession().then(result => expect(result.status).toEqual(200));
     });
+
+    it("checks that updateInvitationUsed mock works as expected", async () => {
+        await sdk.analytics.updateInvitationUsed("1").then(result => expect(result.status).toEqual(200));
+    });
 });
 
 describe("testing analytics module in preview", () => {
@@ -80,6 +84,12 @@ describe("testing analytics module in preview", () => {
     it("checks that validateSession mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.analytics.validateSession().then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that updateInvitationUsed mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.analytics.updateInvitationUsed("1").then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 });
