@@ -1,8 +1,12 @@
 import {GridPos} from "./IPositions";
 import {FlzEditableImageData} from "../../designer/IDesignerTypes";
 
+export type SectionType = "header" | "footer" | "body";
+
 export type SectionConfig = {
     id: string;
+    name: string;
+    type: SectionType;
 };
 
 export type BackgroundImage = {
