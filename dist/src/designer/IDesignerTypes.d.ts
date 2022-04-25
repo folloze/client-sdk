@@ -8,7 +8,7 @@ export declare enum CampaignElementsTypes {
 }
 export declare type GalleryImage = {
     url: string;
-    original_url: string;
+    original_url?: string;
     fit: string;
     id?: number;
     displayable_section?: string;
@@ -34,7 +34,7 @@ export declare type StringPosition = "top-left" | "top-center" | "top-right" | "
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 export declare type FlzEditableImageData = {
     url: string;
-    original_url: string;
+    original_url?: string;
     bankCategory: ImageBankCategoryType;
     transformation?: ImageTransformation;
     position?: StringPosition;
