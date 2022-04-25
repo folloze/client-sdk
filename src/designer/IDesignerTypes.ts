@@ -11,14 +11,29 @@ export enum CampaignElementsTypes {
 
 export type GalleryImage = {
     url: string;
+    original_url: string;
     fit: string;
     id?: number;
     displayable_section?: string;
-    transformation?: object; //TODO
+    transformation?: ImageTransformation;
     viewed?: boolean;
     bankCategory?: ImageBankCategoryType; // todo: not implemented in serverside
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
 };
+
+export type ImageTransformation = {
+    crop: {
+        x: number;
+        y: number;
+        crop: string; // "crop"
+        unit: string; // "%"
+        width: number;
+        aspect: number;
+        height: number;
+        radius: number;
+    },
+    "shape": "rectangle" | "circle"
+}
 
 export type StringPosition =
     | "top-left"
