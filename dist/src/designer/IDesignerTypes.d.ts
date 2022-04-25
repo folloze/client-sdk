@@ -8,13 +8,27 @@ export declare enum CampaignElementsTypes {
 }
 export declare type GalleryImage = {
     url: string;
+    original_url: string;
     fit: string;
     id?: number;
     displayable_section?: string;
-    transformation?: object;
+    transformation?: ImageTransformation;
     viewed?: boolean;
     bankCategory?: ImageBankCategoryType;
     galleryType?: ImageGalleryTypes;
+};
+export declare type ImageTransformation = {
+    crop: {
+        x: number;
+        y: number;
+        crop: string;
+        unit: string;
+        width: number;
+        aspect: number;
+        height: number;
+        radius: number;
+    };
+    "shape": "rectangle" | "circle";
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
