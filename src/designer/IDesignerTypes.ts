@@ -50,7 +50,9 @@ export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" 
 
 export type FlzEditableImageData = {
     url: string;
+    original_url: string;
     bankCategory: ImageBankCategoryType;
+    transformation?: ImageTransformation;
     position?: StringPosition;
     link?: string;
     open_in_new_window?: boolean;
