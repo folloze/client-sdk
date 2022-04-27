@@ -145,6 +145,11 @@ describe("testing sdk designer module", () => {
         await sdk.designer.getLogosImageGallery().then(result => expect(result.length).toEqual(3));
     });
 
+    it("checks that get image gallery by bing search is working as expected", async () => {
+        await sdk.designer.getQueryImageGallery("bug").then(result => expect(result.length).toEqual(14));
+        await sdk.designer.getQueryImageGallery("test").then(result => expect(result.length).toEqual(14));
+    });
+
     it("checks that saveLiveBoard mock working as expected", async () => {
         const boardConfig: BoardConfig = {
             id: 1,

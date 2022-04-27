@@ -885,30 +885,34 @@ var require_mergeConfig = __commonJS({
 var require_package = __commonJS({
   "node_modules/axios/package.json"(exports, module) {
     module.exports = {
-      _from: "axios@^0.21.1",
+      _args: [
+        [
+          "axios@0.21.4",
+          "/Users/rotem/workspace/client-sdk"
+        ]
+      ],
+      _from: "axios@0.21.4",
       _id: "axios@0.21.4",
       _inBundle: false,
       _integrity: "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==",
       _location: "/axios",
       _phantomChildren: {},
       _requested: {
-        type: "range",
+        type: "version",
         registry: true,
-        raw: "axios@^0.21.1",
+        raw: "axios@0.21.4",
         name: "axios",
         escapedName: "axios",
-        rawSpec: "^0.21.1",
+        rawSpec: "0.21.4",
         saveSpec: null,
-        fetchSpec: "^0.21.1"
+        fetchSpec: "0.21.4"
       },
       _requiredBy: [
-        "#USER",
         "/"
       ],
       _resolved: "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
-      _shasum: "c67b90dc0568e5c1cf2b0b858c43ba28e2eda575",
-      _spec: "axios@^0.21.1",
-      _where: "C:\\Users\\Rotem\\workspace\\sdk",
+      _spec: "0.21.4",
+      _where: "/Users/rotem/workspace/client-sdk",
       author: {
         name: "Matt Zabriskie"
       },
@@ -918,7 +922,6 @@ var require_package = __commonJS({
       bugs: {
         url: "https://github.com/axios/axios/issues"
       },
-      bundleDependencies: false,
       bundlesize: [
         {
           path: "./dist/axios.min.js",
@@ -928,7 +931,6 @@ var require_package = __commonJS({
       dependencies: {
         "follow-redirects": "^1.14.0"
       },
-      deprecated: false,
       description: "Promise based HTTP client for the browser and node.js",
       devDependencies: {
         coveralls: "^3.0.0",

@@ -250,64 +250,75 @@ export const rules = (mock: MockAdapter) => {
     ]);
 
     // search
-    mock.onGet("/api/v1/image_gallery", {params: {type: "search", query: "bug"}}).reply<GalleryImage[]>(200, [
-        {
-            url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
-            fit: "contained",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
-            fit: "contained",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
-            fit: "contained",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
-            fit: "contained",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
-            fit: "contained",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
-            fit: "contained",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
-            fit: "cover",
-        },
-        {
-            url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
-            fit: "contained",
-        },
-    ]);
+    mock.onGet("/api/v1/image_gallery").reply<GalleryImage[]>((config): [number, Object] => {
+        if (config.params.type !== "search") {
+            throw new Error("this mock is only for search type query");
+        }
+        if (!config.params.query) {
+            throw new Error("there is no query attached to this request");
+        }
+        return [
+            200,
+            [
+                {
+                    url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+                    fit: "contained",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+                    fit: "contained",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
+                    fit: "contained",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+                    fit: "contained",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+                    fit: "contained",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+                    fit: "contained",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+                    fit: "cover",
+                },
+                {
+                    url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+                    fit: "contained",
+                },
+            ]
+        ];
+    });
 
     mock.onPost("/api/v1/upload_urls").reply<UploadUrlResponseV1>(200, {
         file_name: "file_name",
