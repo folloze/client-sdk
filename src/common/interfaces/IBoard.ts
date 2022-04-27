@@ -83,6 +83,7 @@ export type Board = {
         [layoutId: number]: {
             state: "draft" | "published" | "unpublished changes";
             type: "default" | "gating";
+            published_hash: string;
         };
     };
     activation_state: {
