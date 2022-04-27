@@ -41,20 +41,6 @@ export class Designer {
         });
     }
 
-    public discardLiveBoard(boardId: number): Promise<BoardConfig[]> {
-        return new Promise((resolve, reject) => {
-            this.fetcher
-                .delete<any>(`/api/v1/boards/${boardId}/publish`)
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not discard live board", e);
-                    reject(e);
-                });
-        });
-    }
-
     /**
      * Gets the image gallery for given types
      *
@@ -359,6 +345,13 @@ export class Designer {
             layout: config,
             theme_id: null,
         });
+    }
+
+    getLiveBoardConfig(boardId: number, configId: number): Promise<any> {
+      return new Promise((resolve, reject) => {
+          return this.fetcher.get(`/api/v1/boards/${boardId}/layout/${configId}`)
+              .then(result => resolve(result.data));
+      });
     }
 
     /**

@@ -279,3 +279,8 @@ export type LayoutSavedConflict = {
     layout: BoardConfig;
     user: UserV1;
 };
+
+export type FullLayout = {
+    published_layout: BoardConfig;
+    unpublished_layout: BoardConfig;
+}

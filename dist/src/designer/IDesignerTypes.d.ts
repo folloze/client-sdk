@@ -239,4 +239,8 @@ export declare type LayoutSavedConflict = {
     layout: BoardConfig;
     user: UserV1;
 };
+export declare type FullLayout = {
+    published_layout: BoardConfig;
+    unpublished_layout: BoardConfig;
+};
 export {};
