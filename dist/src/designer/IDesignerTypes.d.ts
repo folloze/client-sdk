@@ -30,7 +30,14 @@ export declare type ImageTransformation = {
         height: number;
         radius: string | number;
     };
-    "shape": "square" | "rectangle" | "circle" | "none";
+    shape?: "square" | "rectangle" | "circle" | "none";
+    artisticFilter?: string;
+    flipY?: boolean;
+    flipX?: boolean;
+    tint?: {
+        color: string;
+        opacity: number;
+    };
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";

@@ -34,7 +34,14 @@ export type ImageTransformation = {
         height: number;
         radius: string | number;
     },
-    "shape": "square" | "rectangle" | "circle" | "none";
+    shape?: "square" | "rectangle" | "circle" | "none";
+    artisticFilter?: string;
+    flipY?: boolean;
+    flipX?: boolean;
+    tint?: {
+        color: string;
+        opacity: number;
+    };
 }
 
 export type StringPosition =
