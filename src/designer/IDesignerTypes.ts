@@ -19,6 +19,8 @@ export type GalleryImage = {
     viewed?: boolean;
     bankCategory?: ImageBankCategoryType; // todo: not implemented in serverside
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
+    maxWidth?: number;
+    maxHeight?: number;
 };
 
 export type ImageTransformation = {
@@ -57,6 +59,8 @@ export type FlzEditableImageData = {
     link?: string;
     open_in_new_window?: boolean;
     alt?: string;
+    maxWidth?: number;
+    maxHeight?: number;
 };
 
 export type ImageGalleryParams = {

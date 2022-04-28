@@ -16,6 +16,8 @@ export declare type GalleryImage = {
     viewed?: boolean;
     bankCategory?: ImageBankCategoryType;
     galleryType?: ImageGalleryTypes;
+    maxWidth?: number;
+    maxHeight?: number;
 };
 export declare type ImageTransformation = {
     crop: {
@@ -41,6 +43,8 @@ export declare type FlzEditableImageData = {
     link?: string;
     open_in_new_window?: boolean;
     alt?: string;
+    maxWidth?: number;
+    maxHeight?: number;
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
