@@ -20,8 +20,8 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.Z7ZBFXDO.js";
-import "./chunks/chunk.3ZNLEUXI.js";
+} from "./chunks/chunk.RE77ZEHO.js";
+import "./chunks/chunk.NPVWZY7A.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -30,7 +30,7 @@ import {
 } from "./chunks/chunk.TP6LCZ3M.js";
 import {
   Designer
-} from "./chunks/chunk.4N4ECQOQ.js";
+} from "./chunks/chunk.KPQYPK4O.js";
 import {
   CampaignElementsTypes
 } from "./chunks/chunk.G52EPVC6.js";

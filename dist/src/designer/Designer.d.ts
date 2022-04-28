@@ -51,10 +51,11 @@ export declare class Designer {
      * Update new form
      *
      * @param {number} boardId
+     * @param {number} formId
      * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
-    updateForm(boardId: number, form: FormV1): Promise<FormV1>;
+    updateForm(boardId: number, formId: number, form: FormV1): Promise<FormV1>;
     private getCampaignElements;
     /**
      * Gets all of the organization's footers
