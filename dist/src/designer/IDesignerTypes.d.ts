@@ -24,13 +24,13 @@ export declare type ImageTransformation = {
         x: number;
         y: number;
         crop: string;
-        unit: string;
+        unit?: string;
         width: number;
-        aspect: number;
+        aspect?: number;
         height: number;
-        radius: number;
+        radius: string | number;
     };
-    "shape": "rectangle" | "circle";
+    "shape": "square" | "rectangle" | "circle" | "none";
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";

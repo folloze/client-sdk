@@ -28,13 +28,13 @@ export type ImageTransformation = {
         x: number;
         y: number;
         crop: string; // "crop"
-        unit: string; // "%"
+        unit?: string; // "%"
         width: number;
-        aspect: number;
+        aspect?: number;
         height: number;
-        radius: number;
+        radius: string | number;
     },
-    "shape": "rectangle" | "circle"
+    "shape": "square" | "rectangle" | "circle" | "none";
 }
 
 export type StringPosition =
