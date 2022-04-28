@@ -23,7 +23,7 @@ export declare type ImageTransformation = {
     crop: {
         x: number;
         y: number;
-        crop: string;
+        crop?: string;
         unit?: string;
         width: number;
         aspect?: number;

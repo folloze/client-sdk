@@ -27,7 +27,7 @@ export type ImageTransformation = {
     crop: {
         x: number;
         y: number;
-        crop: string; // "crop"
+        crop?: string; // "crop"
         unit?: string; // "%"
         width: number;
         aspect?: number;
