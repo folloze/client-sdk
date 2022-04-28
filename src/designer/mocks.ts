@@ -410,7 +410,7 @@ export const rules = (mock: MockAdapter) => {
         },
     });
 
-    mock.onPut(/api\/v1\/boards\/(\d+)\/forms/).reply<FormV1>(200, {
+    mock.onPut(/api\/v1\/boards\/(\d+)\/forms\/(\d+)/).reply<FormV1>(200, {
         board_id: 1,
         form_type: 2,
         id: 2,

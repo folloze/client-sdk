@@ -179,20 +179,21 @@ export class Designer {
      * Update new form
      *
      * @param {number} boardId
+     * @param {number} formId
      * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
-    updateForm(boardId: number, form: FormV1): Promise<FormV1> {
+     updateForm(boardId: number, formId: number, form: FormV1): Promise<FormV1> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .put<FormV1>(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form))
+                .put<FormV1>(`api/v1/boards/${boardId}/forms/${formId}`, keysToSnakeCase(form))
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not save form", e);
                     reject(e);
                 });
         });
-    }
+      }
 
     //Campaign elements
     private getCampaignElements(
