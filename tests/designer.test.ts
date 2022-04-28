@@ -85,7 +85,7 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that updateForm works as expected", async () => {
-        await sdk.designer.updateForm(1, form).then(result => expect(result.board_id).toEqual(1));
+        await sdk.designer.updateForm(1, 1, form).then(result => expect(result.board_id).toEqual(1));
     });
 
     it("checks that getFooters works as expected", async () => {

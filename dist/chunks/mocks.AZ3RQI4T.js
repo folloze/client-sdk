@@ -227,10 +227,6 @@ var rules = (mock) => {
       200,
       [
         {
-          url: "this is mock images!",
-          fit: "cover"
-        },
-        {
           url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
           fit: "cover"
         },
@@ -375,7 +371,7 @@ var rules = (mock) => {
       submit_redirect_url: "https://www.folloze.com"
     }
   });
-  mock.onPut(/api\/v1\/boards\/(\d+)\/forms/).reply(200, {
+  mock.onPut(/api\/v1\/boards\/(\d+)\/forms\/(\d+)/).reply(200, {
     board_id: 1,
     form_type: 2,
     id: 2,
