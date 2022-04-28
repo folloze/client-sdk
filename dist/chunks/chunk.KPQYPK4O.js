@@ -101,9 +101,9 @@ var Designer = class {
       });
     });
   }
-  updateForm(boardId, form) {
+  updateForm(boardId, formId, form) {
     return new Promise((resolve, reject) => {
-      this.fetcher.put(`api/v1/boards/${boardId}/forms`, keysToSnakeCase(form)).then((result) => resolve(result.data)).catch((e) => {
+      this.fetcher.put(`api/v1/boards/${boardId}/forms/${formId}`, keysToSnakeCase(form)).then((result) => resolve(result.data)).catch((e) => {
         console.error("could not save form", e);
         reject(e);
       });
