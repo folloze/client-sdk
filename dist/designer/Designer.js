@@ -1,6 +1,6 @@
 import {
   Designer
-} from "../chunks/chunk.KPQYPK4O.js";
+} from "../chunks/chunk.E2SDYCPV.js";
 import {
   CampaignElementsTypes
 } from "../chunks/chunk.G52EPVC6.js";

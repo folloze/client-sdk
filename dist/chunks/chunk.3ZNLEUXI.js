@@ -888,11 +888,7 @@ var require_package = __commonJS({
       _args: [
         [
           "axios@0.21.4",
-<<<<<<< HEAD:dist/chunks/chunk.3ZNLEUXI.js
           "/Users/tanyalaushkin/workspace/unicorn/client-sdk"
-=======
-          "/Users/shimritsn/workspace/u3/client-sdk"
->>>>>>> master:dist/chunks/chunk.NPVWZY7A.js
         ]
       ],
       _from: "axios@0.21.4",
@@ -916,11 +912,7 @@ var require_package = __commonJS({
       ],
       _resolved: "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
       _spec: "0.21.4",
-<<<<<<< HEAD:dist/chunks/chunk.3ZNLEUXI.js
       _where: "/Users/tanyalaushkin/workspace/unicorn/client-sdk",
-=======
-      _where: "/Users/shimritsn/workspace/u3/client-sdk",
->>>>>>> master:dist/chunks/chunk.NPVWZY7A.js
       author: {
         name: "Matt Zabriskie"
       },
