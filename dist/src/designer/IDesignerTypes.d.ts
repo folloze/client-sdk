@@ -7,7 +7,7 @@ export declare enum CampaignElementsTypes {
     form_privacy_message = 3
 }
 export declare type GalleryImage = {
-    url: string;
+    url?: string;
     fit: string;
     original_url: string;
     id?: number;
@@ -42,7 +42,7 @@ export declare type ImageTransformation = {
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 export declare type FlzEditableImageData = {
-    url: string;
+    url?: string;
     bankCategory: ImageBankCategoryType;
     original_url: string;
     transformation?: ImageTransformation;

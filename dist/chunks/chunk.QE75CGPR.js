@@ -613,7 +613,7 @@ var MockConnector = class {
     await import("./mocks.YHPOVE2Z.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.3ZATDQVO.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.JCCDT2OA.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
     await import("./mocks.63ZRL77K.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
