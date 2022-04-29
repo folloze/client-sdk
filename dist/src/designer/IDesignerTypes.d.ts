@@ -36,7 +36,7 @@ export declare type ImageTransformation = {
     flipX?: boolean;
     tint?: {
         color: string;
-        opacity: number;
+        alpha: number;
     };
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";

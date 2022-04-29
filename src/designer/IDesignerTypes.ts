@@ -40,7 +40,7 @@ export type ImageTransformation = {
     flipX?: boolean;
     tint?: {
         color: string;
-        opacity: number;
+        alpha: number;
     };
 }
 
