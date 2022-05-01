@@ -888,7 +888,7 @@ var require_package = __commonJS({
       _args: [
         [
           "axios@0.21.4",
-          "/Users/shimritsn/workspace/u3/client-sdk"
+          "/Users/tanyalaushkin/workspace/unicorn/client-sdk"
         ]
       ],
       _from: "axios@0.21.4",
@@ -912,7 +912,7 @@ var require_package = __commonJS({
       ],
       _resolved: "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
       _spec: "0.21.4",
-      _where: "/Users/shimritsn/workspace/u3/client-sdk",
+      _where: "/Users/tanyalaushkin/workspace/unicorn/client-sdk",
       author: {
         name: "Matt Zabriskie"
       },

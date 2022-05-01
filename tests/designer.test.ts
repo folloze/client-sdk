@@ -63,13 +63,10 @@ describe("testing sdk designer module", () => {
         await sdk.designer.publishLiveBoard(666).then(res => expect(res).toBeUndefined());
     });
 
-    // discardLiveBoard(boardId: number): Promise<BoardConfig[]> {
-    it("checks that discard board work as expected", async () => {
-        // should return 200 when discarded
-        await sdk.designer.discardLiveBoard(1).then(res => expect(res[0].id).toBeDefined());
+    it("checks that get liveboard config work as expected", async () => {
+        await sdk.designer.getLiveBoardConfig(1, 2).then(res => expect(res.published_layout.grid).toBeDefined());
 
-        // should return 208 when cant discard cuse its already discarded
-        await sdk.designer.discardLiveBoard(666).then(res => expect(res).toBeUndefined());
+        await sdk.designer.getLiveBoardConfig(1, 2).then(res => expect(res.unpublished_layout.grid).toBeDefined());
     });
 
     it("checks that getQueryImageGallery mock works as expectes", async () => {

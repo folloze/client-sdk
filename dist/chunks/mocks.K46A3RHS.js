@@ -64,30 +64,6 @@ var rules = (mock) => {
       }
     ];
   });
-  mock.onDelete(publishBoardRegex).reply((config) => {
-    const boardId = parseInt(publishBoardRegex.exec(config.url)[1]);
-    if (boardId === 666) {
-      return [208];
-    }
-    return [
-      200,
-      [
-        {
-          grid: {
-            columns: { colNum: 0, colWidth: "" },
-            gap: { x: "", y: "" },
-            maxWidth: "",
-            rows: { rowHeight: "", rowNum: 0 }
-          },
-          id: 0,
-          meta: { localSaveTime: 0, newHash: "", originHash: "", savedTime: void 0 },
-          ribbons: void 0,
-          sections: void 0,
-          widgets: void 0
-        }
-      ]
-    ];
-  });
   mock.onGet("/api/v1/image_gallery", {
     params: { organization_id: 1, bank_category: "banners", type: "campaign" }
   }).reply(200, [
@@ -553,6 +529,49 @@ var rules = (mock) => {
       ];
     }
     return [200];
+  });
+  mock.onGet(saveLiveBoardRegex).reply((config) => {
+    return [
+      200,
+      {
+        published_layout: {
+          id: 66,
+          meta: {
+            savedTime: null,
+            localSaveTime: 10,
+            originHash: "bla",
+            newHash: "bla"
+          },
+          grid: {
+            maxWidth: "1024px",
+            gap: { x: "0", y: "0" },
+            columns: { colNum: 12, colWidth: "1fr" },
+            rows: { rowNum: 0, rowHeight: "25px" }
+          },
+          sections: {},
+          widgets: {},
+          ribbons: {}
+        },
+        unpublished_layout: {
+          id: 66,
+          meta: {
+            savedTime: null,
+            localSaveTime: 10,
+            originHash: "bla",
+            newHash: "bla"
+          },
+          grid: {
+            maxWidth: "1024px",
+            gap: { x: "0", y: "0" },
+            columns: { colNum: 12, colWidth: "1fr" },
+            rows: { rowNum: 0, rowHeight: "25px" }
+          },
+          sections: {},
+          widgets: {},
+          ribbons: {}
+        }
+      }
+    ];
   });
   mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {
