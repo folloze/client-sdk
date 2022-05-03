@@ -12,6 +12,10 @@ export type BoardConfig = {
         originHash: string;
         newHash: string;
     };
+    pages: Record<string, PageConfig>;
+};
+
+export type PageConfig = {
     grid: {
         maxWidth: string; // 1024px ?
         gap: {x: string; y: string};
@@ -87,6 +91,6 @@ export type Board = {
         };
     };
     activation_state: {
-      online: boolean;
+        online: boolean;
     };
 };

@@ -11,6 +11,9 @@ export declare type BoardConfig = {
         originHash: string;
         newHash: string;
     };
+    pages: Record<string, PageConfig>;
+};
+export declare type PageConfig = {
     grid: {
         maxWidth: string;
         gap: {

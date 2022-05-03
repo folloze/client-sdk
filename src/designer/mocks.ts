@@ -13,7 +13,7 @@ import {
     EmailTemplateV1,
     UserV1,
     LayoutSavedConflict,
-    FullLayout
+    FullLayout,
 } from "./IDesignerTypes";
 import {Board, BoardConfig} from "../common/interfaces/IBoard";
 
@@ -287,7 +287,7 @@ export const rules = (mock: MockAdapter) => {
                     url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
                     fit: "contained",
                 },
-            ]
+            ],
         ];
     });
 
@@ -526,104 +526,105 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPut(/prism\/(\d+)\/personalization/).reply<PersonalizationV1>(200, personalization);
 
-    const saveLiveBoardRegex: RegExp = /api\/v1\/boards\/(\d+)\/layout\/(\d+)/;
-    mock.onPut(saveLiveBoardRegex).reply((config): [number, LayoutSavedConflict?] => {
-        const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
-        const layout = parseInt(saveLiveBoardRegex.exec(config.url)[2]);
-
-        // mock for conflict with server data
-        if (boardId === 1 && layout === 66) {
-            const someTestOriginHash = "testHash";
-            const originHash = JSON.parse(config.data).layout.meta?.originHash;
-            const newHash = JSON.parse(config.data).layout.meta?.newHash;
-            if (originHash === someTestOriginHash && newHash !== originHash) {
-                return [200];
-            }
-            if (newHash === originHash) {
-                return [208];
-            }
-            return [
-                409,
-                {
-                    msg: "conflict - could not save layout",
-                    layout: {
-                        id: 66,
-                        meta: {
-                            savedTime: null,
-                            localSaveTime: 10,
-                            originHash: newHash,
-                            newHash: newHash,
-                        },
-                        grid: {
-                            maxWidth: "1024px",
-                            gap: {x: "0", y: "0"},
-                            columns: {colNum: 12, colWidth: "1fr"},
-                            rows: {rowNum: 0, rowHeight: "25px"},
-                        },
-                        sections: {},
-                        widgets: {},
-                        ribbons: {},
-                    },
-                    user: {
-                        id: -1,
-                        name: "Itamar",
-                        email: "some@example.email",
-                        bio_settings: null,
-                        linkedin: null,
-                        twitter: null,
-                        image: "linkToImage",
-                    },
-                },
-            ];
-        }
-
-        // mock for saved without problem
-        return [200];
-    });
-
-    mock.onGet(saveLiveBoardRegex).reply((config): [number, FullLayout] => {
-        return [
-            200,
-            {
-                published_layout: {
-                    id: 66,
-                    meta: {
-                        savedTime: null,
-                        localSaveTime: 10,
-                        originHash: "bla",
-                        newHash: "bla",
-                    },
-                    grid: {
-                        maxWidth: "1024px",
-                        gap: {x: "0", y: "0"},
-                        columns: {colNum: 12, colWidth: "1fr"},
-                        rows: {rowNum: 0, rowHeight: "25px"},
-                    },
-                    sections: {},
-                    widgets: {},
-                    ribbons: {},
-                },
-                unpublished_layout: {
-                    id: 66,
-                    meta: {
-                        savedTime: null,
-                        localSaveTime: 10,
-                        originHash: "bla",
-                        newHash: "bla",
-                    },
-                    grid: {
-                        maxWidth: "1024px",
-                        gap: {x: "0", y: "0"},
-                        columns: {colNum: 12, colWidth: "1fr"},
-                        rows: {rowNum: 0, rowHeight: "25px"},
-                    },
-                    sections: {},
-                    widgets: {},
-                    ribbons: {},
-                }
-            },
-        ];
-    });
+    // todo: (multi-pages) implement different save board
+    // const saveLiveBoardRegex: RegExp = /api\/v1\/boards\/(\d+)\/layout\/(\d+)/;
+    // mock.onPut(saveLiveBoardRegex).reply((config): [number, LayoutSavedConflict?] => {
+    //     const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
+    //     const layout = parseInt(saveLiveBoardRegex.exec(config.url)[2]);
+    //
+    //     // mock for conflict with server data
+    //     if (boardId === 1 && layout === 66) {
+    //         const someTestOriginHash = "testHash";
+    //         const originHash = JSON.parse(config.data).layout.meta?.originHash;
+    //         const newHash = JSON.parse(config.data).layout.meta?.newHash;
+    //         if (originHash === someTestOriginHash && newHash !== originHash) {
+    //             return [200];
+    //         }
+    //         if (newHash === originHash) {
+    //             return [208];
+    //         }
+    //         return [
+    //             409,
+    //             {
+    //                 msg: "conflict - could not save layout",
+    //                 layout: {
+    //                     id: 66,
+    //                     meta: {
+    //                         savedTime: null,
+    //                         localSaveTime: 10,
+    //                         originHash: newHash,
+    //                         newHash: newHash,
+    //                     },
+    //                     grid: {
+    //                         maxWidth: "1024px",
+    //                         gap: {x: "0", y: "0"},
+    //                         columns: {colNum: 12, colWidth: "1fr"},
+    //                         rows: {rowNum: 0, rowHeight: "25px"},
+    //                     },
+    //                     sections: {},
+    //                     widgets: {},
+    //                     ribbons: {},
+    //                 },
+    //                 user: {
+    //                     id: -1,
+    //                     name: "Itamar",
+    //                     email: "some@example.email",
+    //                     bio_settings: null,
+    //                     linkedin: null,
+    //                     twitter: null,
+    //                     image: "linkToImage",
+    //                 },
+    //             },
+    //         ];
+    //     }
+    //
+    //     // mock for saved without problem
+    //     return [200];
+    // });
+    //
+    // mock.onGet(saveLiveBoardRegex).reply((config): [number, FullLayout] => {
+    //     return [
+    //         200,
+    //         {
+    //             published_layout: {
+    //                 id: 66,
+    //                 meta: {
+    //                     savedTime: null,
+    //                     localSaveTime: 10,
+    //                     originHash: "bla",
+    //                     newHash: "bla",
+    //                 },
+    //                 grid: {
+    //                     maxWidth: "1024px",
+    //                     gap: {x: "0", y: "0"},
+    //                     columns: {colNum: 12, colWidth: "1fr"},
+    //                     rows: {rowNum: 0, rowHeight: "25px"},
+    //                 },
+    //                 sections: {},
+    //                 widgets: {},
+    //                 ribbons: {},
+    //             },
+    //             unpublished_layout: {
+    //                 id: 66,
+    //                 meta: {
+    //                     savedTime: null,
+    //                     localSaveTime: 10,
+    //                     originHash: "bla",
+    //                     newHash: "bla",
+    //                 },
+    //                 grid: {
+    //                     maxWidth: "1024px",
+    //                     gap: {x: "0", y: "0"},
+    //                     columns: {colNum: 12, colWidth: "1fr"},
+    //                     rows: {rowNum: 0, rowHeight: "25px"},
+    //                 },
+    //                 sections: {},
+    //                 widgets: {},
+    //                 ribbons: {},
+    //             }
+    //         },
+    //     ];
+    // });
 
     mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply<Record<string, EmailTemplateV1>>(200, {
         "1": {
