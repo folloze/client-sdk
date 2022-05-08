@@ -12,6 +12,7 @@ export declare type BoardConfig = {
         newHash: string;
     };
     pages: Record<string, PageConfig>;
+    _selectedPage?: string;
 };
 export declare type PageConfig = {
     name: "default" | string;
@@ -36,6 +37,7 @@ export declare type PageConfig = {
 };
 export interface ILiveBoard extends LitElement {
     config: BoardConfig;
+    currentPage: PageConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
     getGridStyling(): string;
@@ -47,6 +49,7 @@ export interface ILiveBoard extends LitElement {
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
     generateConfigHash(): string;
     autoUpgradeWidgets(): void;
+    setForceUpdate(): void;
     get widgets(): WidgetConfig[];
     get widgetElements(): LiveWidget[];
     get sections(): SectionConfig[];

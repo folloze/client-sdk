@@ -13,6 +13,7 @@ export type BoardConfig = {
         newHash: string;
     };
     pages: Record<string, PageConfig>;
+    _selectedPage?: string; // the selected page name
 };
 
 export type PageConfig = {
@@ -36,6 +37,7 @@ export type PageConfig = {
 
 export interface ILiveBoard extends LitElement {
     config: BoardConfig;
+    currentPage: PageConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
 
@@ -48,6 +50,7 @@ export interface ILiveBoard extends LitElement {
     addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
     generateConfigHash(): string;
     autoUpgradeWidgets(): void;
+    setForceUpdate(): void;
 
     get widgets(): WidgetConfig[];
     get widgetElements(): LiveWidget[];
