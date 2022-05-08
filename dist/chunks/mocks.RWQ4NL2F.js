@@ -93,78 +93,78 @@ var rules = (mock) => {
   }).reply(200, [
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
+      url: "https://images.folloze.com/image/upload/v1451293464/heroimage08_cac4xn.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
+      url: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293483/heroimage09_hv8u2j.png"
+      url: "https://images.folloze.com/image/upload/v1451293483/heroimage09_hv8u2j.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293654/heroimage13_vj9xog.png"
+      url: "https://images.folloze.com/image/upload/v1451293654/heroimage13_vj9xog.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293397/heroimage07_kfdzpt.png"
+      url: "https://images.folloze.com/image/upload/v1451293397/heroimage07_kfdzpt.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293642/heroimage12_scxoe5.png"
+      url: "https://images.folloze.com/image/upload/v1451293642/heroimage12_scxoe5.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293358/heroimage04_juy5ao.png"
+      url: "https://images.folloze.com/image/upload/v1451293358/heroimage04_juy5ao.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293629/heroimage11_tmy9fd.png"
+      url: "https://images.folloze.com/image/upload/v1451293629/heroimage11_tmy9fd.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293378/heroimage06_vnii1d.png"
+      url: "https://images.folloze.com/image/upload/v1451293378/heroimage06_vnii1d.png"
     },
     {
       fit: "cover",
-      original_url: "https://images.folloze.com/image/upload/v1451293493/heroimage10_jgxm62.png"
+      url: "https://images.folloze.com/image/upload/v1451293493/heroimage10_jgxm62.png"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimage03_wpxdzu.jpg",
+      url: "https://images.folloze.com/image/upload/heroimage03_wpxdzu.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimages06_compressed_lgozdi.jpg",
+      url: "https://images.folloze.com/image/upload/heroimages06_compressed_lgozdi.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimages04_compressed_z9xtqb.jpg",
+      url: "https://images.folloze.com/image/upload/heroimages04_compressed_z9xtqb.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimages08_compressed_s9lkse.jpg",
+      url: "https://images.folloze.com/image/upload/heroimages08_compressed_s9lkse.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimages03_compressed_sycsdr.jpg",
+      url: "https://images.folloze.com/image/upload/heroimages03_compressed_sycsdr.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimage02_dr1wdi.jpg",
+      url: "https://images.folloze.com/image/upload/heroimage02_dr1wdi.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimage14_oglfdj.jpg",
+      url: "https://images.folloze.com/image/upload/heroimage14_oglfdj.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimages12_compressed_rlzfx5.jpg",
+      url: "https://images.folloze.com/image/upload/heroimages12_compressed_rlzfx5.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/heroimages11_compressed_uztxpu.jpg",
+      url: "https://images.folloze.com/image/upload/heroimages11_compressed_uztxpu.jpg",
       fit: "cover"
     }
   ]);
@@ -172,19 +172,19 @@ var rules = (mock) => {
     params: { organization_id: 1, bank_category: "icons", type: "campaign" }
   }).reply(200, [
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+      url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+      url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
+      url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686376/cjlc8wmtndwp8rfcweq3.png",
+      url: "https://images.folloze.com/image/upload/v1640686376/cjlc8wmtndwp8rfcweq3.png",
       fit: "cover"
     }
   ]);
@@ -192,15 +192,15 @@ var rules = (mock) => {
     params: { organization_id: 1, bank_category: "logos", type: "campaign" }
   }).reply(200, [
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+      url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+      url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
+      url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.png",
       fit: "cover"
     }
   ]);
@@ -208,69 +208,69 @@ var rules = (mock) => {
     params: { organization_id: 1, bank_category: "mobile_banners", type: "campaign" }
   }).reply(200, [
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
+      url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+      url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
       fit: "cover"
     }
   ]);
   mock.onGet("/api/v1/image_gallery", { params: { type: "search", query: "bug" } }).reply(200, [
     {
-      original_url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+      url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+      url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
       fit: "contained"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+      url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+      url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
       fit: "contained"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
+      url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
+      url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
       fit: "contained"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+      url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+      url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
       fit: "contained"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+      url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+      url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
       fit: "contained"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+      url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+      url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
       fit: "contained"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+      url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
       fit: "cover"
     },
     {
-      original_url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+      url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
       fit: "contained"
     }
   ]);

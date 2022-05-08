@@ -10,9 +10,9 @@ export enum CampaignElementsTypes {
 }
 
 export type GalleryImage = {
-    url?: string;
+    url: string;
     fit: string;
-    original_url: string;
+    optimized_url?: string;
     id?: number;
     displayable_section?: string;
     transformation?: ImageTransformation;
@@ -58,9 +58,9 @@ export type StringPosition =
 export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 
 export type FlzEditableImageData = {
-    url?: string;
+    url: string;
     bankCategory: ImageBankCategoryType;
-    original_url: string;
+    optimized_url?: string;
     transformation?: ImageTransformation;
     position?: StringPosition;
     link?: string;
