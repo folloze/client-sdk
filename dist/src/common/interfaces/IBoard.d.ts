@@ -14,6 +14,7 @@ export declare type BoardConfig = {
     pages: Record<string, PageConfig>;
 };
 export declare type PageConfig = {
+    name: "default" | string;
     grid: {
         maxWidth: string;
         gap: {
@@ -80,12 +81,11 @@ export declare type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    layout_info: {
-        [layoutId: number]: {
-            state: "draft" | "published" | "unpublished changes";
-            type: "default" | "gating";
-            published_hash: string;
-        };
+    landing_page: "registration";
+    config: BoardConfig;
+    config_info: {
+        state: "draft" | "published" | "unpublished changes";
+        published_hash: string;
     };
     activation_state: {
         online: boolean;

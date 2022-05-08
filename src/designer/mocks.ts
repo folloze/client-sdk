@@ -58,6 +58,29 @@ export const rules = (mock: MockAdapter) => {
             return [208];
         }
 
+        const board: Board = {
+            activation_state: {online: false},
+            allow_embedding: false,
+            auto_upgrade_widgets: false,
+            config: undefined,
+            config_info: {published_hash: "", state: undefined},
+            id: 0,
+            integrations: {},
+            is_ssl: false,
+            landing_page: "registration",
+            name: "",
+            online_items_count: 0,
+            organization_id: 0,
+            privacy: {
+                cookie_management: undefined,
+                element_id: 0,
+                personal_info_concealment: false,
+                privacy_warning_check: false,
+                regulated_countries_only: false,
+            },
+            slug: "",
+        };
+
         // mock for saved without problem
         return [
             200,
@@ -65,10 +88,12 @@ export const rules = (mock: MockAdapter) => {
                 activation_state: {online: false},
                 allow_embedding: false,
                 auto_upgrade_widgets: false,
+                config: undefined,
+                config_info: {published_hash: "", state: undefined},
                 id: 0,
                 integrations: {},
                 is_ssl: false,
-                layout_info: {},
+                landing_page: "registration",
                 name: "",
                 online_items_count: 0,
                 organization_id: 0,

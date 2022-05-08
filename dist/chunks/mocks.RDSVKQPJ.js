@@ -40,16 +40,40 @@ var rules = (mock) => {
     if (boardId === 666) {
       return [208];
     }
+    const board = {
+      activation_state: { online: false },
+      allow_embedding: false,
+      auto_upgrade_widgets: false,
+      config: void 0,
+      config_info: { published_hash: "", state: void 0 },
+      id: 0,
+      integrations: {},
+      is_ssl: false,
+      landing_page: "registration",
+      name: "",
+      online_items_count: 0,
+      organization_id: 0,
+      privacy: {
+        cookie_management: void 0,
+        element_id: 0,
+        personal_info_concealment: false,
+        privacy_warning_check: false,
+        regulated_countries_only: false
+      },
+      slug: ""
+    };
     return [
       200,
       {
         activation_state: { online: false },
         allow_embedding: false,
         auto_upgrade_widgets: false,
+        config: void 0,
+        config_info: { published_hash: "", state: void 0 },
         id: 0,
         integrations: {},
         is_ssl: false,
-        layout_info: {},
+        landing_page: "registration",
         name: "",
         online_items_count: 0,
         organization_id: 0,

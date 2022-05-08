@@ -16,6 +16,7 @@ export type BoardConfig = {
 };
 
 export type PageConfig = {
+    name: "default" | string;
     grid: {
         maxWidth: string; // 1024px ?
         gap: {x: string; y: string};
@@ -83,12 +84,11 @@ export type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    layout_info: {
-        [layoutId: number]: {
-            state: "draft" | "published" | "unpublished changes";
-            type: "default" | "gating";
-            published_hash: string;
-        };
+    landing_page: "registration";
+    config: BoardConfig;
+    config_info: {
+        state: "draft" | "published" | "unpublished changes";
+        published_hash: string;
     };
     activation_state: {
         online: boolean;
