@@ -63,13 +63,10 @@ describe("testing sdk designer module", () => {
         await sdk.designer.publishLiveBoard(666).then(res => expect(res).toBeUndefined());
     });
 
-    // discardLiveBoard(boardId: number): Promise<BoardConfig[]> {
-    it("checks that discard board work as expected", async () => {
-        // should return 200 when discarded
-        await sdk.designer.discardLiveBoard(1).then(res => expect(res[0].id).toBeDefined());
+    it("checks that get liveboard config work as expected", async () => {
+        await sdk.designer.getLiveBoardConfig(1, 2).then(res => expect(res.published_layout.grid).toBeDefined());
 
-        // should return 208 when cant discard cuse its already discarded
-        await sdk.designer.discardLiveBoard(666).then(res => expect(res).toBeUndefined());
+        await sdk.designer.getLiveBoardConfig(1, 2).then(res => expect(res.unpublished_layout.grid).toBeDefined());
     });
 
     it("checks that getQueryImageGallery mock works as expectes", async () => {
@@ -85,7 +82,7 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that updateForm works as expected", async () => {
-        await sdk.designer.updateForm(1, form).then(result => expect(result.board_id).toEqual(1));
+        await sdk.designer.updateForm(1, 1, form).then(result => expect(result.board_id).toEqual(1));
     });
 
     it("checks that getFooters works as expected", async () => {
@@ -143,6 +140,11 @@ describe("testing sdk designer module", () => {
         await sdk.designer.getIconsImageGallery().then(result => expect(result.length).toEqual(4));
         await sdk.designer.getMobileImageGallery().then(result => expect(result.length).toEqual(2));
         await sdk.designer.getLogosImageGallery().then(result => expect(result.length).toEqual(3));
+    });
+
+    it("checks that get image gallery by bing search is working as expected", async () => {
+        await sdk.designer.getQueryImageGallery("bug").then(result => expect(result.length).toEqual(14));
+        await sdk.designer.getQueryImageGallery("test").then(result => expect(result.length).toEqual(14));
     });
 
     it("checks that saveLiveBoard mock working as expected", async () => {

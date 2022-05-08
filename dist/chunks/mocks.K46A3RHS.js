@@ -64,30 +64,6 @@ var rules = (mock) => {
       }
     ];
   });
-  mock.onDelete(publishBoardRegex).reply((config) => {
-    const boardId = parseInt(publishBoardRegex.exec(config.url)[1]);
-    if (boardId === 666) {
-      return [208];
-    }
-    return [
-      200,
-      [
-        {
-          grid: {
-            columns: { colNum: 0, colWidth: "" },
-            gap: { x: "", y: "" },
-            maxWidth: "",
-            rows: { rowHeight: "", rowNum: 0 }
-          },
-          id: 0,
-          meta: { localSaveTime: 0, newHash: "", originHash: "", savedTime: void 0 },
-          ribbons: void 0,
-          sections: void 0,
-          widgets: void 0
-        }
-      ]
-    ];
-  });
   mock.onGet("/api/v1/image_gallery", {
     params: { organization_id: 1, bank_category: "banners", type: "campaign" }
   }).reply(200, [
@@ -216,64 +192,75 @@ var rules = (mock) => {
       fit: "cover"
     }
   ]);
-  mock.onGet("/api/v1/image_gallery", { params: { type: "search", query: "bug" } }).reply(200, [
-    {
-      url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
-      fit: "contained"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
-      fit: "contained"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
-      fit: "contained"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
-      fit: "contained"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
-      fit: "contained"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
-      fit: "contained"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
-      fit: "cover"
-    },
-    {
-      url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
-      fit: "contained"
+  mock.onGet("/api/v1/image_gallery").reply((config) => {
+    if (config.params.type !== "search") {
+      throw new Error("this mock is only for search type query");
     }
-  ]);
+    if (!config.params.query) {
+      throw new Error("there is no query attached to this request");
+    }
+    return [
+      200,
+      [
+        {
+          url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+          fit: "contained"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+          fit: "contained"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115&ssl=1",
+          fit: "contained"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+          fit: "contained"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+          fit: "contained"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+          fit: "contained"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+          fit: "cover"
+        },
+        {
+          url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+          fit: "contained"
+        }
+      ]
+    ];
+  });
   mock.onPost("/api/v1/upload_urls").reply(200, {
     file_name: "file_name",
     method: "post",
@@ -360,7 +347,7 @@ var rules = (mock) => {
       submit_redirect_url: "https://www.folloze.com"
     }
   });
-  mock.onPut(/api\/v1\/boards\/(\d+)\/forms/).reply(200, {
+  mock.onPut(/api\/v1\/boards\/(\d+)\/forms\/(\d+)/).reply(200, {
     board_id: 1,
     form_type: 2,
     id: 2,
@@ -542,6 +529,49 @@ var rules = (mock) => {
       ];
     }
     return [200];
+  });
+  mock.onGet(saveLiveBoardRegex).reply((config) => {
+    return [
+      200,
+      {
+        published_layout: {
+          id: 66,
+          meta: {
+            savedTime: null,
+            localSaveTime: 10,
+            originHash: "bla",
+            newHash: "bla"
+          },
+          grid: {
+            maxWidth: "1024px",
+            gap: { x: "0", y: "0" },
+            columns: { colNum: 12, colWidth: "1fr" },
+            rows: { rowNum: 0, rowHeight: "25px" }
+          },
+          sections: {},
+          widgets: {},
+          ribbons: {}
+        },
+        unpublished_layout: {
+          id: 66,
+          meta: {
+            savedTime: null,
+            localSaveTime: 10,
+            originHash: "bla",
+            newHash: "bla"
+          },
+          grid: {
+            maxWidth: "1024px",
+            gap: { x: "0", y: "0" },
+            columns: { colNum: 12, colWidth: "1fr" },
+            rows: { rowNum: 0, rowHeight: "25px" }
+          },
+          sections: {},
+          widgets: {},
+          ribbons: {}
+        }
+      }
+    ];
   });
   mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {

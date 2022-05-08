@@ -7,7 +7,6 @@ export declare class Designer {
     private fetchService;
     constructor(fetch: FetchService);
     publishLiveBoard(boardId: number, withGoOnline?: boolean): Promise<Board>;
-    discardLiveBoard(boardId: number): Promise<BoardConfig[]>;
     /**
      * Gets the image gallery for given types
      *
@@ -52,10 +51,11 @@ export declare class Designer {
      * Update new form
      *
      * @param {number} boardId
+     * @param {number} formId
      * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
-    updateForm(boardId: number, form: FormV1): Promise<FormV1>;
+    updateForm(boardId: number, formId: number, form: FormV1): Promise<FormV1>;
     private getCampaignElements;
     /**
      * Gets all of the organization's footers
@@ -122,6 +122,7 @@ export declare class Designer {
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
     saveLiveBoard(boardId: number, config: BoardConfig): Promise<any>;
+    getLiveBoardConfig(boardId: number, configId: number): Promise<any>;
     /**
      * searches board contacts
      *
