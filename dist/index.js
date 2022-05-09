@@ -1,4 +1,5 @@
 import {
+  CloudinaryHelper,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
   FlzBoardEvent,
@@ -16,7 +17,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.X3I6N3SM.js";
+} from "./chunks/chunk.ZO2AJUN2.js";
 import {
   ClientSDK,
   FetchService
@@ -54,6 +55,7 @@ export {
   Analytics,
   CampaignElementsTypes,
   ClientSDK,
+  CloudinaryHelper,
   Designer,
   DesignerEventTypes,
   EventSources,

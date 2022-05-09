@@ -9,22 +9,49 @@ export declare enum CampaignElementsTypes {
 export declare type GalleryImage = {
     url: string;
     fit: string;
+    optimized_url?: string;
     id?: number;
     displayable_section?: string;
-    transformation?: object;
+    transformation?: ImageTransformation;
     viewed?: boolean;
     bankCategory?: ImageBankCategoryType;
     galleryType?: ImageGalleryTypes;
+    maxWidth?: number;
+    maxHeight?: number;
+};
+export declare type ImageTransformation = {
+    crop: {
+        x: number;
+        y: number;
+        crop?: string;
+        unit?: string;
+        width: number;
+        aspect?: number;
+        height: number;
+        radius: string | number;
+    };
+    shape?: "square" | "rectangle" | "circle" | "none";
+    artisticFilter?: string;
+    flipY?: boolean;
+    flipX?: boolean;
+    tint?: {
+        color: string;
+        alpha: number;
+    };
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 export declare type FlzEditableImageData = {
     url: string;
     bankCategory: ImageBankCategoryType;
+    optimized_url?: string;
+    transformation?: ImageTransformation;
     position?: StringPosition;
     link?: string;
     open_in_new_window?: boolean;
     alt?: string;
+    maxWidth?: number;
+    maxHeight?: number;
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
