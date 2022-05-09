@@ -7,7 +7,6 @@ import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotat
 import {artisticFilter} from "@cloudinary/url-gen/actions/effect";
 import {tint} from "@cloudinary/url-gen/actions/adjust";
 
-
 export class CloudinaryHelper {
     private cloudinary: Cloudinary;
     private imagesDomain: string;
@@ -36,7 +35,19 @@ export class CloudinaryHelper {
         return this.cloudinary.image(cldImageId);
     }
 
-    getTransformedUrl(image: FlzEditableImageData | GalleryImage, maxWidth?: number, maxHeight?: number, reOptimize: boolean = false): string {
+    getTransformedUrl(
+        image: FlzEditableImageData | GalleryImage,
+        maxWidth?: number,
+        maxHeight?: number,
+        reOptimize: boolean = false,
+    ): string {
+        if (typeof image === "string") {
+            image = {
+                bankCategory: "banners",
+                url: image,
+            };
+        }
+
         if (image.optimized_url && !reOptimize) {
             return image.optimized_url;
         }
@@ -74,7 +85,9 @@ export class CloudinaryHelper {
             cldImage.effect(artisticFilter(image.transformation.artisticFilter));
         }
         if (image.transformation?.tint?.color) {
-            const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(1)}`;
+            const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(
+                1,
+            )}`;
             cldImage.effect(tint(tintTransformation));
         }
         cldImage.format("auto").quality("auto");
