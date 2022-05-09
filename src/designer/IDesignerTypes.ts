@@ -12,13 +12,37 @@ export enum CampaignElementsTypes {
 export type GalleryImage = {
     url: string;
     fit: string;
+    optimized_url?: string;
     id?: number;
     displayable_section?: string;
-    transformation?: object; //TODO
+    transformation?: ImageTransformation;
     viewed?: boolean;
     bankCategory?: ImageBankCategoryType; // todo: not implemented in serverside
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
+    maxWidth?: number;
+    maxHeight?: number;
 };
+
+export type ImageTransformation = {
+    crop: {
+        x: number;
+        y: number;
+        crop?: string; // "crop"
+        unit?: string; // "%"
+        width: number;
+        aspect?: number;
+        height: number;
+        radius: string | number;
+    },
+    shape?: "square" | "rectangle" | "circle" | "none";
+    artisticFilter?: string;
+    flipY?: boolean;
+    flipX?: boolean;
+    tint?: {
+        color: string;
+        alpha: number;
+    };
+}
 
 export type StringPosition =
     | "top-left"
@@ -36,10 +60,14 @@ export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" 
 export type FlzEditableImageData = {
     url: string;
     bankCategory: ImageBankCategoryType;
+    optimized_url?: string;
+    transformation?: ImageTransformation;
     position?: StringPosition;
     link?: string;
     open_in_new_window?: boolean;
     alt?: string;
+    maxWidth?: number;
+    maxHeight?: number;
 };
 
 export type ImageGalleryParams = {
