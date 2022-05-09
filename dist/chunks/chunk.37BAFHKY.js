@@ -2766,6 +2766,12 @@ var CloudinaryHelper = class {
   }
   getTransformedUrl(image, maxWidth, maxHeight, reOptimize = false) {
     var _a, _b, _c, _d, _e, _f;
+    if (typeof image === "string") {
+      image = {
+        bankCategory: "banners",
+        url: image
+      };
+    }
     if (image.optimized_url && !reOptimize) {
       return image.optimized_url;
     }
