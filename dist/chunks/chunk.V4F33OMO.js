@@ -2814,6 +2814,7 @@ var CloudinaryHelper = class {
   }
   getPublicId(url) {
     const publicId = url.replace(this.cloudinaryUrlRegex, "");
+    console.log("publicId", publicId.split("?")[0]);
     return publicId.split("?")[0];
   }
   isCloudinaryImage(url) {

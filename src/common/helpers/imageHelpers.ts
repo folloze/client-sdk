@@ -96,6 +96,7 @@ export class CloudinaryHelper {
 
     getPublicId(url: string) {
         const publicId = url.replace(this.cloudinaryUrlRegex, "");
+        console.log('publicId', publicId.split('?')[0]);
         return publicId.split('?')[0];
     }
 
