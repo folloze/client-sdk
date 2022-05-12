@@ -2813,7 +2813,7 @@ var CloudinaryHelper = class {
     cldImage.format("auto").quality("auto");
     const imageUrl = cldImage.toURL();
     if (this.cloudinaryFetchUrlRegex.test(image.url)) {
-      imageUrl.replace(`https://${this.imagesDomain}/upload`, `https://${this.imagesDomain}/fetch`);
+      imageUrl.replace("/upload/", "/fetch/");
     }
     return cldImage.toURL();
   }

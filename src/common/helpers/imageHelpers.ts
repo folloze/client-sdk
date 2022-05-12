@@ -98,7 +98,7 @@ export class CloudinaryHelper {
         const imageUrl = cldImage.toURL();
         // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
         if (this.cloudinaryFetchUrlRegex.test(image.url)) {
-            imageUrl.replace(`https://${this.imagesDomain}/upload`, `https://${this.imagesDomain}/fetch`);
+            imageUrl.replace("/upload/", "/fetch/");
         }
         return cldImage.toURL();
     }
