@@ -2813,7 +2813,8 @@ var CloudinaryHelper = class {
     return cldImage.toURL();
   }
   getPublicId(url) {
-    return url.replace(this.cloudinaryUrlRegex, "");
+    const publicId = url.replace(this.cloudinaryUrlRegex, "");
+    return publicId.split("?")[0];
   }
   isCloudinaryImage(url) {
     return url.startsWith(`https://${this.imagesDomain}`);

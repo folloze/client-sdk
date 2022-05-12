@@ -95,7 +95,8 @@ export class CloudinaryHelper {
     }
 
     getPublicId(url: string) {
-        return url.replace(this.cloudinaryUrlRegex, "");
+        const publicId = url.replace(this.cloudinaryUrlRegex, "");
+        return publicId.split('?')[0];
     }
 
     private isCloudinaryImage(url: string) {
