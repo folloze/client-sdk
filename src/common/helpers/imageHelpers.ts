@@ -11,11 +11,15 @@ export class CloudinaryHelper {
     private cloudinary: Cloudinary;
     private imagesDomain: string;
     private cloudinaryUrlRegex: RegExp;
+    private cloudinaryFetchUrlRegex: RegExp;
 
     constructor() {
         this.imagesDomain = "images.folloze.com";
         this.cloudinaryUrlRegex = new RegExp(
             `(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch|upload)/`,
+        );
+        this.cloudinaryFetchUrlRegex = new RegExp(
+            `(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch)/`,
         );
         this.cloudinary = new Cloudinary({
             cloud: {
@@ -91,12 +95,17 @@ export class CloudinaryHelper {
             cldImage.effect(tint(tintTransformation));
         }
         cldImage.format("auto").quality("auto");
+        const imageUrl = cldImage.toURL();
+        // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
+        if (this.cloudinaryFetchUrlRegex.test(image.url)) {
+            imageUrl.replace(`https://${this.imagesDomain}/upload`, `https://${this.imagesDomain}/fetch`);
+        }
         return cldImage.toURL();
     }
 
     getPublicId(url: string) {
         const publicId = url.replace(this.cloudinaryUrlRegex, "");
-        console.log('publicId', publicId.split('?')[0]);
+        // for cases that the image is fetched from a remote url and has a queryString
         return publicId.split('?')[0];
     }
 
