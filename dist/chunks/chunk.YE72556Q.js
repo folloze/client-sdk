@@ -2812,6 +2812,7 @@ var CloudinaryHelper = class {
     }
     cldImage.format("auto").quality("auto");
     const imageUrl = cldImage.toURL();
+    console.log("test fetch", this.cloudinaryFetchUrlRegex.test(image.url), image.url);
     if (this.cloudinaryFetchUrlRegex.test(image.url)) {
       imageUrl.replace("/upload/", "/fetch/");
     }
