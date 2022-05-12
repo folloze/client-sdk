@@ -2811,12 +2811,11 @@ var CloudinaryHelper = class {
       cldImage.effect(tint(tintTransformation));
     }
     cldImage.format("auto").quality("auto");
-    const imageUrl = cldImage.toURL();
-    console.log("test fetch", this.cloudinaryFetchUrlRegex.test(image.url), image.url);
+    let imageUrl = cldImage.toURL();
     if (this.cloudinaryFetchUrlRegex.test(image.url)) {
-      imageUrl.replace("/upload/", "/fetch/");
+      imageUrl = imageUrl.replace("/upload/", "/fetch/");
     }
-    return cldImage.toURL();
+    return imageUrl;
   }
   getPublicId(url) {
     const publicId = url.replace(this.cloudinaryUrlRegex, "");

@@ -95,13 +95,12 @@ export class CloudinaryHelper {
             cldImage.effect(tint(tintTransformation));
         }
         cldImage.format("auto").quality("auto");
-        const imageUrl = cldImage.toURL();
+        let imageUrl = cldImage.toURL();
         // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
-        console.log("test fetch", this.cloudinaryFetchUrlRegex.test(image.url),image.url);
         if (this.cloudinaryFetchUrlRegex.test(image.url)) {
-            imageUrl.replace("/upload/", "/fetch/");
+            imageUrl = imageUrl.replace("/upload/", "/fetch/");
         }
-        return cldImage.toURL();
+        return imageUrl;
     }
 
     getPublicId(url: string) {
