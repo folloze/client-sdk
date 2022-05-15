@@ -23,5 +23,6 @@ export declare class FetchService {
     withPartialContent(apiCall: any): void;
     private handleSuccess;
     private handleError;
+    private MockHandleError;
     private createAxiosFetcher;
 }

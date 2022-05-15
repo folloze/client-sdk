@@ -657,7 +657,7 @@ var FetchService = class {
   async createMockFetcher(options) {
     return await import("./src.QMSX7QCF.js").then(async (module) => {
       this.createAxiosFetcher(options);
-      this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
+      this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
       await Promise.all([
         MockConnector.bindLiveBoard(this.mock),
@@ -679,12 +679,23 @@ var FetchService = class {
     return response;
   }
   handleError(error) {
+    var _a;
     switch ((0, import_get.default)(error, "response.status")) {
       case 410:
         window.location.reload();
         break;
     }
-    console.error("could not complete axios request", error);
+    console.error(`could not complete axios request to: ${(_a = error.config) == null ? void 0 : _a.url}`, error.config);
+    return Promise.reject(error);
+  }
+  MockHandleError(error) {
+    var _a;
+    switch ((0, import_get.default)(error, "response.status")) {
+      case 410:
+        window.location.reload();
+        break;
+    }
+    console.warn(`could not complete mock request to: ${(_a = error.config) == null ? void 0 : _a.url}`, error.config);
     return Promise.reject(error);
   }
   createAxiosFetcher(options) {

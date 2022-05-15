@@ -73,7 +73,7 @@ export class FetchService {
         return await import("axios-mock-adapter")
             .then(async module => {
                 this.createAxiosFetcher(options);
-                this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
+                this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
                 this.mock = new module.default(this.fetcher);
                 await Promise.all([
                     MockConnector.bindLiveBoard(this.mock),
@@ -125,7 +125,17 @@ export class FetchService {
                 window.location.reload();
                 break;
         }
-        console.error("could not complete axios request", error);
+        console.error(`could not complete axios request to: ${error.config?.url}`, error.config);
+        return Promise.reject(error);
+    }
+
+    private MockHandleError(error) {
+        switch (get(error, "response.status")) {
+            case 410:
+                window.location.reload();
+                break;
+        }
+        console.warn(`could not complete mock request to: ${error.config?.url}`, error.config);
         return Promise.reject(error);
     }
 
