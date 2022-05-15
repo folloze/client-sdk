@@ -3,6 +3,7 @@ export declare class CloudinaryHelper {
     private cloudinary;
     private imagesDomain;
     private cloudinaryUrlRegex;
+    private cloudinaryFetchUrlRegex;
     constructor();
     getImage(image: FlzEditableImageData | GalleryImage): import("@cloudinary/url-gen/assets/CloudinaryImage").CloudinaryImage;
     getTransformedUrl(image: FlzEditableImageData | GalleryImage, maxWidth?: number, maxHeight?: number, reOptimize?: boolean): string;

@@ -2748,6 +2748,7 @@ var CloudinaryHelper = class {
   constructor() {
     this.imagesDomain = "images.folloze.com";
     this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch|upload)/`);
+    this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch)/`);
     this.cloudinary = new Cloudinary({
       cloud: {
         cloudName: "folloze"
@@ -2810,10 +2811,15 @@ var CloudinaryHelper = class {
       cldImage.effect(tint(tintTransformation));
     }
     cldImage.format("auto").quality("auto");
-    return cldImage.toURL();
+    let imageUrl = cldImage.toURL();
+    if (this.cloudinaryFetchUrlRegex.test(image.url)) {
+      imageUrl = imageUrl.replace("/upload/", "/fetch/");
+    }
+    return imageUrl;
   }
   getPublicId(url) {
-    return url.replace(this.cloudinaryUrlRegex, "");
+    const publicId = url.replace(this.cloudinaryUrlRegex, "");
+    return publicId.split("?")[0];
   }
   isCloudinaryImage(url) {
     return url.startsWith(`https://${this.imagesDomain}`);
