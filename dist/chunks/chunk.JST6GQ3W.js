@@ -657,13 +657,14 @@ var FetchService = class {
   async createMockFetcher(options) {
     return await import("./src.QMSX7QCF.js").then(async (module) => {
       this.createAxiosFetcher(options);
+      this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
       this.mock = new module.default(this.fetcher);
       await Promise.all([
         MockConnector.bindLiveBoard(this.mock),
         MockConnector.bindDesigner(this.mock),
         MockConnector.bindAnalytics(this.mock)
       ]);
-    }).catch((e) => console.error(e));
+    }).catch((e) => console.error("could not create mock fetcher", e));
   }
   withPartialContent(apiCall) {
   }
@@ -683,6 +684,7 @@ var FetchService = class {
         window.location.reload();
         break;
     }
+    console.error("could not complete axios request", error);
     return Promise.reject(error);
   }
   createAxiosFetcher(options) {
