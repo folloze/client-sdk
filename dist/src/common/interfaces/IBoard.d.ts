@@ -5,14 +5,13 @@ import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
 export declare type BoardConfig = {
     id: number;
-    meta: {
-        savedTime: Date;
-        localSaveTime: number;
-        originHash: string;
-        newHash: string;
+    meta: null | {
+        savedTime?: Date;
+        localSaveTime?: number;
+        originHash?: string;
+        newHash?: string;
     };
     pages: Record<string, PageConfig>;
-    _selectedPage?: string;
 };
 export declare type PageConfig = {
     name: "default" | string;
@@ -50,6 +49,9 @@ export interface ILiveBoard extends LitElement {
     generateConfigHash(): string;
     autoUpgradeWidgets(): void;
     setForceUpdate(): void;
+    setPageByName(str: string): void;
+    getCurrentPageName(): string;
+    get pages(): PageConfig[];
     get widgets(): WidgetConfig[];
     get widgetElements(): LiveWidget[];
     get sections(): SectionConfig[];

@@ -6,14 +6,13 @@ import {FloatPos, GridPos} from "./IPositions";
 
 export type BoardConfig = {
     id: number;
-    meta: {
-        savedTime: Date;
-        localSaveTime: number; // unix time
-        originHash: string;
-        newHash: string;
+    meta: null | {
+        savedTime?: Date;
+        localSaveTime?: number; // unix time
+        originHash?: string;
+        newHash?: string;
     };
     pages: Record<string, PageConfig>;
-    _selectedPage?: string; // the selected page name
 };
 
 export type PageConfig = {
@@ -51,7 +50,10 @@ export interface ILiveBoard extends LitElement {
     generateConfigHash(): string;
     autoUpgradeWidgets(): void;
     setForceUpdate(): void;
+    setPageByName(str: string): void;
+    getCurrentPageName(): string;
 
+    get pages(): PageConfig[];
     get widgets(): WidgetConfig[];
     get widgetElements(): LiveWidget[];
     get sections(): SectionConfig[];
