@@ -10,6 +10,7 @@ export declare type BoardConfig = {
         localSaveTime?: number;
         originHash?: string;
         newHash?: string;
+        currentPageName?: string;
     };
     pages: Record<string, PageConfig>;
 };
