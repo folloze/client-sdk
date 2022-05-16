@@ -122,7 +122,7 @@ export declare class Designer {
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
     saveLiveBoard(boardId: number, config: BoardConfig): Promise<any>;
-    getLiveBoardConfig(boardId: number, configId: number): Promise<any>;
+    getLiveBoardConfig(boardId: number): Promise<any>;
     /**
      * searches board contacts
      *

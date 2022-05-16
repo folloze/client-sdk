@@ -261,13 +261,13 @@ export declare type UserV1 = {
     twitter: object;
     image: string;
 };
-export declare type LayoutSavedConflict = {
+export declare type ConfigSavedConflict = {
     msg: string;
-    layout: BoardConfig;
+    config: BoardConfig;
     user: UserV1;
 };
-export declare type FullLayout = {
-    published_layout: BoardConfig;
-    unpublished_layout: BoardConfig;
+export declare type PublishedUnpublishedConfig = {
+    published_config: BoardConfig;
+    unpublished_config: BoardConfig;
 };
 export {};

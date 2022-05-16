@@ -33,7 +33,7 @@ export type ImageTransformation = {
         aspect?: number;
         height: number;
         radius: string | number;
-    },
+    };
     shape?: "square" | "rectangle" | "circle" | "none";
     artisticFilter?: string;
     flipY?: boolean;
@@ -42,7 +42,7 @@ export type ImageTransformation = {
         color: string;
         alpha: number;
     };
-}
+};
 
 export type StringPosition =
     | "top-left"
@@ -302,13 +302,13 @@ export type UserV1 = {
     image: string;
 };
 
-export type LayoutSavedConflict = {
+export type ConfigSavedConflict = {
     msg: string;
-    layout: BoardConfig;
+    config: BoardConfig;
     user: UserV1;
 };
 
-export type FullLayout = {
-    published_layout: BoardConfig;
-    unpublished_layout: BoardConfig;
-}
+export type PublishedUnpublishedConfig = {
+    published_config: BoardConfig;
+    unpublished_config: BoardConfig;
+};

@@ -503,6 +503,114 @@ var rules = (mock) => {
   mock.onGet("/api/v1/preview/board_items_presence").reply(200, { has_items: true });
   mock.onGet(/prism\/(\d+)\/personalization/).reply(200, personalization);
   mock.onPut(/prism\/(\d+)\/personalization/).reply(200, personalization);
+  const saveLiveBoardRegex = /api\/v1\/boards\/(\d+)\/config/;
+  mock.onPut(saveLiveBoardRegex).reply((config) => {
+    var _a, _b;
+    const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
+    if (boardId === 1) {
+      const someTestOriginHash = "testHash";
+      const originHash = (_a = JSON.parse(config.data).config.meta) == null ? void 0 : _a.originHash;
+      const newHash = (_b = JSON.parse(config.data).config.meta) == null ? void 0 : _b.newHash;
+      if (originHash === someTestOriginHash && newHash !== originHash) {
+        return [200];
+      }
+      if (newHash === originHash) {
+        return [208];
+      }
+      return [
+        409,
+        {
+          msg: "conflict - could not save config",
+          config: {
+            id: 1,
+            meta: {
+              savedTime: null,
+              localSaveTime: 10,
+              originHash: newHash,
+              newHash
+            },
+            pages: {
+              default: {
+                name: "default",
+                grid: {
+                  maxWidth: "1024px",
+                  gap: { x: "0", y: "0" },
+                  columns: { colNum: 12, colWidth: "1fr" },
+                  rows: { rowNum: 0, rowHeight: "25px" }
+                },
+                sections: {},
+                widgets: {},
+                ribbons: {}
+              }
+            }
+          },
+          user: {
+            id: -1,
+            name: "Itamar",
+            email: "some@example.email",
+            bio_settings: null,
+            linkedin: null,
+            twitter: null,
+            image: "linkToImage"
+          }
+        }
+      ];
+    }
+    return [200];
+  });
+  mock.onGet(saveLiveBoardRegex).reply((config) => {
+    return [
+      200,
+      {
+        published_config: {
+          id: 66,
+          meta: {
+            savedTime: null,
+            localSaveTime: 10,
+            originHash: "bla",
+            newHash: "bla"
+          },
+          pages: {
+            default: {
+              name: "default",
+              grid: {
+                maxWidth: "1024px",
+                gap: { x: "0", y: "0" },
+                columns: { colNum: 12, colWidth: "1fr" },
+                rows: { rowNum: 0, rowHeight: "25px" }
+              },
+              sections: {},
+              widgets: {},
+              ribbons: {}
+            }
+          }
+        },
+        unpublished_config: {
+          id: 66,
+          meta: {
+            savedTime: null,
+            localSaveTime: 10,
+            originHash: "bla",
+            newHash: "bla"
+          },
+          pages: {
+            default: {
+              name: "default",
+              grid: {
+                maxWidth: "1024px",
+                gap: { x: "0", y: "0" },
+                columns: { colNum: 12, colWidth: "1fr" },
+                rows: { rowNum: 0, rowHeight: "25px" }
+              },
+              sections: {},
+              widgets: {},
+              ribbons: {}
+            }
+          }
+        }
+      }
+    ];
+  });
   mock.onGet(/api\/v1\/boards\/(\d+)\/email_templates/).reply(200, {
     "1": {
       id: 1,

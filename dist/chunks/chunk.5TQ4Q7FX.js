@@ -167,14 +167,14 @@ var Designer = class {
     });
   }
   saveLiveBoard(boardId, config) {
-    return this.fetcher.put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
-      layout: config,
+    return this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
+      config,
       theme_id: null
     });
   }
-  getLiveBoardConfig(boardId, configId) {
+  getLiveBoardConfig(boardId) {
     return new Promise((resolve, reject) => {
-      return this.fetcher.get(`/api/v1/boards/${boardId}/layout/${configId}`).then((result) => resolve(result.data));
+      return this.fetcher.get(`/api/v1/boards/${boardId}/config`).then((result) => resolve(result.data));
     });
   }
   searchBoardContacts(boardId, query) {

@@ -64,10 +64,10 @@ describe("testing sdk designer module", () => {
     });
 
     // todo: (multi-pages) implement new getLiveBoardConfig
-    // it("checks that get liveboard config work as expected", async () => {
-    //     await sdk.designer.getLiveBoardConfig(1, 2).then(res => expect(res.published_layout.grid).toBeDefined());
-    //     await sdk.designer.getLiveBoardConfig(1, 2).then(res => expect(res.unpublished_layout.grid).toBeDefined());
-    // });
+    it("checks that get liveboard config work as expected", async () => {
+        await sdk.designer.getLiveBoardConfig(1).then(res => expect(res.published_config.pages).toBeDefined());
+        await sdk.designer.getLiveBoardConfig(1).then(res => expect(res.unpublished_config.pages).toBeDefined());
+    });
 
     it("checks that getQueryImageGallery mock works as expectes", async () => {
         await sdk.designer.getQueryImageGallery("bug").then(result => expect(result.length).toEqual(14));
@@ -148,41 +148,46 @@ describe("testing sdk designer module", () => {
     });
 
     // todo(multi-pages): implement a new test for save liveboard
-    // it("checks that saveLiveBoard mock working as expected", async () => {
-    //     const boardConfig: BoardConfig = {
-    //         id: 1,
-    //         meta: null,
-    //         grid: {
-    //             maxWidth: "1024px",
-    //             gap: {x: "0", y: "0"},
-    //             columns: {colNum: 12, colWidth: "1fr"},
-    //             rows: {rowNum: 0, rowHeight: "25px"},
-    //         },
-    //         sections: {},
-    //         widgets: {},
-    //         ribbons: {},
-    //     };
-    //
-    //     // saved success
-    //     await sdk.designer.saveLiveBoard(1, boardConfig).then(result => expect(result.status == 200));
-    //
-    //     // saved conflict
-    //     const boardConfig2 = Object.assign(boardConfig, {id: 66, meta: {originHash: "test"}});
-    //     await sdk.designer
-    //         .saveLiveBoard(1, boardConfig2)
-    //         .then(() => {
-    //             throw new Error("should not succeed here");
-    //         })
-    //         .catch(e => expect(e.response?.status).toEqual(409));
-    //
-    //     // saved already exists
-    //     const boardConfig3 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash"}});
-    //     await sdk.designer.saveLiveBoard(1, boardConfig3).then(res => expect(res.status).toEqual(208));
-    //
-    //     // saved success
-    //     const boardConfig4 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash2"}});
-    //     await sdk.designer.saveLiveBoard(1, boardConfig4).then(res => expect(res.status).toEqual(200));
-    // });
+    it("checks that saveLiveBoard mock working as expected", async () => {
+        const boardConfig: BoardConfig = {
+            id: 1,
+            meta: null,
+            pages: {
+                default: {
+                    name: "default",
+                    grid: {
+                        maxWidth: "1024px",
+                        gap: {x: "0", y: "0"},
+                        columns: {colNum: 12, colWidth: "1fr"},
+                        rows: {rowNum: 0, rowHeight: "25px"},
+                    },
+                    sections: {},
+                    widgets: {},
+                    ribbons: {},
+                },
+            },
+        };
+
+        // saved success
+        await sdk.designer.saveLiveBoard(1, boardConfig).then(result => expect(result.status == 200));
+
+        // saved conflict
+        const boardConfig2 = Object.assign(boardConfig, {id: 66, meta: {originHash: "test"}});
+        await sdk.designer
+            .saveLiveBoard(1, boardConfig2)
+            .then(() => {
+                throw new Error("should not succeed here");
+            })
+            .catch(e => expect(e.response?.status).toEqual(409));
+
+        // saved already exists
+        const boardConfig3 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash"}});
+        await sdk.designer.saveLiveBoard(1, boardConfig3).then(res => expect(res.status).toEqual(208));
+
+        // saved success
+        const boardConfig4 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash2"}});
+        await sdk.designer.saveLiveBoard(1, boardConfig4).then(res => expect(res.status).toEqual(200));
+    });
 
     it("checks that searchBoardContacts works as expected", async () => {
         await sdk.designer.searchBoardContacts(1, "query").then(result => expect(result.length).toEqual(2));

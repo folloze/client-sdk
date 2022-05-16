@@ -169,7 +169,7 @@ export class Designer {
      * @param {FormV1} form
      * @returns {FormV1} the form after it's been saved (include id)
      */
-     updateForm(boardId: number, formId: number, form: FormV1): Promise<FormV1> {
+    updateForm(boardId: number, formId: number, form: FormV1): Promise<FormV1> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .put<FormV1>(`api/v1/boards/${boardId}/forms/${formId}`, keysToSnakeCase(form))
@@ -179,7 +179,7 @@ export class Designer {
                     reject(e);
                 });
         });
-      }
+    }
 
     //Campaign elements
     private getCampaignElements(
@@ -342,17 +342,16 @@ export class Designer {
     }
 
     saveLiveBoard(boardId: number, config: BoardConfig): Promise<any> {
-        return this.fetcher.put(`/api/v1/boards/${boardId}/layout/${config.id}`, {
-            layout: config,
+        return this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
+            config: config,
             theme_id: null,
         });
     }
 
-    getLiveBoardConfig(boardId: number, configId: number): Promise<any> {
-      return new Promise((resolve, reject) => {
-          return this.fetcher.get(`/api/v1/boards/${boardId}/layout/${configId}`)
-              .then(result => resolve(result.data));
-      });
+    getLiveBoardConfig(boardId: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            return this.fetcher.get(`/api/v1/boards/${boardId}/config`).then(result => resolve(result.data));
+        });
     }
 
     /**
