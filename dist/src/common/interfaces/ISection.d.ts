@@ -1,10 +1,24 @@
 import { GridPos } from "./IPositions";
 import { FlzEditableImageData } from "../../designer/IDesignerTypes";
+import { WidgetConfig } from "./IWidget";
 export declare type SectionType = "header" | "footer" | "body";
 export declare type SectionConfig = {
     id: string;
     name: string;
     type: SectionType;
+};
+export declare type SectionListItem = {
+    category: string;
+    type: SectionType;
+    config: PredefinedSection;
+    description: string;
+    image: string;
+    name: string;
+};
+export declare type PredefinedSection = {
+    sections: Record<string, SectionConfig>;
+    widgets?: Record<string, WidgetConfig>;
+    ribbons?: Record<string, RibbonConfig>;
 };
 export declare type BackgroundImage = {
     image: FlzEditableImageData;
