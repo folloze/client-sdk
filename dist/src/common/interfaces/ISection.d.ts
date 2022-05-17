@@ -4,8 +4,8 @@ import { WidgetConfig } from "./IWidget";
 export declare type SectionType = "header" | "footer" | "body";
 export declare type SectionConfig = {
     id: string;
-    name: string;
-    type: SectionType;
+    name?: string;
+    type?: SectionType;
 };
 export declare type SectionListItem = {
     category: string;

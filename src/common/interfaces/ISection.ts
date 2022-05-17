@@ -6,8 +6,8 @@ export type SectionType = "header" | "footer" | "body";
 
 export type SectionConfig = {
     id: string;
-    name: string;
-    type: SectionType;
+    name?: string;
+    type?: SectionType;
 };
 
 export type SectionListItem = {
