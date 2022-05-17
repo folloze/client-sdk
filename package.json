@@ -12,7 +12,7 @@
     "lint:fix": "eslint --fix **/*.ts",
     "dev": "npm-run-all --parallel build:es test:watch",
     "ts-types": " tsc --emitDeclarationOnly --outDir dist",
-    "build": "npm run build:es",
+    "build": "npm run build:es && git add ./dist",
     "build:es": "npm run lint:fix && rimraf dist && node ./esbuild.config.js && npm run ts-types",
     "dont:use:build:ts": "tsc --build",
     "dont:use:build:ts:watch": "tsc --build --watch",
