@@ -768,6 +768,7 @@ function waitForEvent(el, eventName) {
 var LiveWidget = class extends LiveDraggable {
   constructor() {
     super();
+    this.setConfigOnlyOnce = false;
     this._widgetId = v4_default();
   }
   connectedCallback() {
