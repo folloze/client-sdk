@@ -21,7 +21,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.JAAJJ4DJ.js";
+} from "./chunks/chunk.M6WIVDLS.js";
 import "./chunks/chunk.NG7TLSQO.js";
 import {
   Analytics,
@@ -31,7 +31,7 @@ import {
 } from "./chunks/chunk.TP6LCZ3M.js";
 import {
   Designer
-} from "./chunks/chunk.5TQ4Q7FX.js";
+} from "./chunks/chunk.OM5G2JNY.js";
 import {
   CampaignElementsTypes
 } from "./chunks/chunk.G52EPVC6.js";

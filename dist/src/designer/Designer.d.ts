@@ -1,5 +1,4 @@
 export * from "./IDesignerTypes";
-import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
 import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
@@ -122,8 +121,8 @@ export declare class Designer {
      * @returns {PersonalizationV1} Personalization
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
-    saveLiveBoard(boardId: number, config: BoardConfig): Promise<AxiosResponse<ConfigSavedConflict | ConfigSavedSuccess>>;
-    getLiveBoardConfig(boardId: number): Promise<AxiosResponse<PublishedUnpublishedConfig>>;
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<ConfigSavedConflict | ConfigSavedSuccess>;
+    getLiveBoardConfig(boardId: number): Promise<PublishedUnpublishedConfig>;
     /**
      * searches board contacts
      *

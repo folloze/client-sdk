@@ -134,6 +134,13 @@ export class FetchService {
             case 410:
                 window.location.reload();
                 break;
+            case 409:
+                // do nothings - conflict of liveBoard versions
+                return Promise.reject(error);
+        }
+        // checks ifs its a test process
+        if (process?.env) {
+            return Promise.reject(error);
         }
         console.warn(`could not complete mock request to: ${error.config?.url}`, error.config);
         return Promise.reject(error);

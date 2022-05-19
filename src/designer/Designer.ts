@@ -344,19 +344,30 @@ export class Designer {
         });
     }
 
-    saveLiveBoard(
-        boardId: number,
-        config: BoardConfig,
-    ): Promise<AxiosResponse<ConfigSavedConflict | ConfigSavedSuccess>> {
-        return this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
-            config: config,
-            theme_id: null,
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<ConfigSavedConflict | ConfigSavedSuccess> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .put(`/api/v1/boards/${boardId}/config`, {
+                    config: config,
+                    theme_id: null,
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save liveBoard config", e);
+                    reject(e);
+                });
         });
     }
 
-    getLiveBoardConfig(boardId: number): Promise<AxiosResponse<PublishedUnpublishedConfig>> {
+    getLiveBoardConfig(boardId: number): Promise<PublishedUnpublishedConfig> {
         return new Promise((resolve, reject) => {
-            return this.fetcher.get(`/api/v1/boards/${boardId}/config`).then(result => resolve(result.data));
+            this.fetcher
+                .get(`/api/v1/boards/${boardId}/config`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save get liveBoard config", e);
+                    reject(e);
+                });
         });
     }
 

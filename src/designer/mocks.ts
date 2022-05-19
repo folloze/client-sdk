@@ -554,17 +554,18 @@ export const rules = (mock: MockAdapter) => {
     mock.onPut(/prism\/(\d+)\/personalization/).reply<PersonalizationV1>(200, personalization);
 
     const saveLiveBoardRegex: RegExp = /api\/v1\/boards\/(\d+)\/config/;
-    mock.onPut(saveLiveBoardRegex).reply<AxiosResponse<ConfigSavedConflict | ConfigSavedSuccess>>(config => {
+    mock.onPut(saveLiveBoardRegex).reply((config): [409, ConfigSavedConflict] | [200, ConfigSavedSuccess] | [208] => {
         const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
+        const newHash = JSON.parse(config.data).config.meta?.newHash;
 
         // mock for conflict with server data
         if (boardId === 1) {
             const someTestOriginHash = "testHash";
             const originHash = JSON.parse(config.data).config.meta?.originHash;
-            const newHash = JSON.parse(config.data).config.meta?.newHash;
-            if (originHash === someTestOriginHash && newHash !== originHash) {
-                return [200];
+            if (!originHash || (originHash === someTestOriginHash && newHash !== originHash)) {
+                return [200, {config: JSON.parse(config.data).config, published_hash: newHash || "newHash"}];
             }
+            // no change, already saved
             if (newHash === originHash) {
                 return [208];
             }
@@ -609,7 +610,7 @@ export const rules = (mock: MockAdapter) => {
         }
 
         // mock for saved without problem
-        return [200];
+        return [200, {config: JSON.parse(config.data).config, published_hash: newHash}];
     });
 
     mock.onGet(saveLiveBoardRegex).reply((config): [number, PublishedUnpublishedConfig] => {

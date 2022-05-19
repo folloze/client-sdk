@@ -1,6 +1,8 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {Board, BoardConfig} from "../src/common/interfaces/IBoard";
 import {ClientSDK} from "../src/sdk";
+import {AxiosResponse} from "axios";
+import {ConfigSavedConflict, ConfigSavedSuccess} from "../src";
 
 let sdk: ClientSDK;
 
@@ -169,7 +171,10 @@ describe("testing sdk designer module", () => {
         };
 
         // saved success
-        await sdk.designer.saveLiveBoard(1, boardConfig).then(result => expect(result.status == 200));
+        await sdk.designer.saveLiveBoard(1, boardConfig).then((result: ConfigSavedSuccess) => {
+            expect(result.config).toBeDefined();
+            expect(result.published_hash).toBeDefined();
+        });
 
         // saved conflict
         const boardConfig2 = Object.assign(boardConfig, {id: 66, meta: {originHash: "test"}});
@@ -182,11 +187,15 @@ describe("testing sdk designer module", () => {
 
         // saved already exists
         const boardConfig3 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash"}});
-        await sdk.designer.saveLiveBoard(1, boardConfig3).then(res => expect(res.status).toEqual(208));
+        await sdk.designer.saveLiveBoard(1, boardConfig3).then(res => {
+            expect(res).toBeUndefined();
+        });
 
         // saved success
         const boardConfig4 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash2"}});
-        await sdk.designer.saveLiveBoard(1, boardConfig4).then(res => expect(res.status).toEqual(200));
+        await sdk.designer.saveLiveBoard(1, boardConfig4).then(res => {
+            expect(res.config.pages).toBeDefined();
+        });
     });
 
     it("checks that searchBoardContacts works as expected", async () => {
