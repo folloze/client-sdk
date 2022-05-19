@@ -1,5 +1,5 @@
 export * from "./IDesignerTypes";
-import {AxiosInstance} from "axios";
+import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
@@ -15,6 +15,9 @@ import {
     PersonalizationV1,
     EmailTemplateV1,
     UserV1,
+    PublishedUnpublishedConfig,
+    ConfigSavedConflict,
+    ConfigSavedSuccess,
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 
@@ -341,14 +344,17 @@ export class Designer {
         });
     }
 
-    saveLiveBoard(boardId: number, config: BoardConfig): Promise<any> {
+    saveLiveBoard(
+        boardId: number,
+        config: BoardConfig,
+    ): Promise<AxiosResponse<ConfigSavedConflict | ConfigSavedSuccess>> {
         return this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
             config: config,
             theme_id: null,
         });
     }
 
-    getLiveBoardConfig(boardId: number): Promise<any> {
+    getLiveBoardConfig(boardId: number): Promise<AxiosResponse<PublishedUnpublishedConfig>> {
         return new Promise((resolve, reject) => {
             return this.fetcher.get(`/api/v1/boards/${boardId}/config`).then(result => resolve(result.data));
         });

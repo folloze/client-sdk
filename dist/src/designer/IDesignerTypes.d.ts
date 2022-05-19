@@ -266,6 +266,10 @@ export declare type ConfigSavedConflict = {
     config: BoardConfig;
     user: UserV1;
 };
+export declare type ConfigSavedSuccess = {
+    config: BoardConfig;
+    published_hash: string;
+};
 export declare type PublishedUnpublishedConfig = {
     published_config: BoardConfig;
     unpublished_config: BoardConfig;

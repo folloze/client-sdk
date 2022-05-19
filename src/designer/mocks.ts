@@ -14,8 +14,10 @@ import {
     UserV1,
     ConfigSavedConflict,
     PublishedUnpublishedConfig,
+    ConfigSavedSuccess,
 } from "./IDesignerTypes";
 import {Board} from "../common/interfaces/IBoard";
+import {AxiosResponse} from "axios";
 
 export const rules = (mock: MockAdapter) => {
     const providerUrl = "https://api.cloudinary.com/v1_1/folloze/image/upload";
@@ -552,7 +554,7 @@ export const rules = (mock: MockAdapter) => {
     mock.onPut(/prism\/(\d+)\/personalization/).reply<PersonalizationV1>(200, personalization);
 
     const saveLiveBoardRegex: RegExp = /api\/v1\/boards\/(\d+)\/config/;
-    mock.onPut(saveLiveBoardRegex).reply((config): [number, ConfigSavedConflict?] => {
+    mock.onPut(saveLiveBoardRegex).reply<AxiosResponse<ConfigSavedConflict | ConfigSavedSuccess>>(config => {
         const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
 
         // mock for conflict with server data

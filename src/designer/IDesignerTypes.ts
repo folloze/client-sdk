@@ -308,6 +308,11 @@ export type ConfigSavedConflict = {
     user: UserV1;
 };
 
+export type ConfigSavedSuccess = {
+    config: BoardConfig;
+    published_hash: string;
+};
+
 export type PublishedUnpublishedConfig = {
     published_config: BoardConfig;
     unpublished_config: BoardConfig;
