@@ -11,6 +11,7 @@ export type BoardConfig = {
         localSaveTime?: number; // unix time
         originHash?: string;
         newHash?: string;
+        publishedHash?: string;
         currentPageName?: string;
     };
     pages: Record<string, PageConfig>;
