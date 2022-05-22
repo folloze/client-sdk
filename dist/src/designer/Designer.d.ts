@@ -121,7 +121,10 @@ export declare class Designer {
      * @returns {PersonalizationV1} Personalization
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
-    saveLiveBoard(boardId: number, config: BoardConfig): Promise<ConfigSavedConflict | ConfigSavedSuccess>;
+    saveLiveBoard(boardId: number, config: BoardConfig): Promise<{
+        status: number;
+        data: ConfigSavedConflict | ConfigSavedSuccess;
+    }>;
     getLiveBoardConfig(boardId: number): Promise<PublishedUnpublishedConfig>;
     /**
      * searches board contacts

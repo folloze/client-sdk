@@ -171,30 +171,37 @@ describe("testing sdk designer module", () => {
         };
 
         // saved success
-        await sdk.designer.saveLiveBoard(1, boardConfig).then((result: ConfigSavedSuccess) => {
-            expect(result.config).toBeDefined();
-            expect(result.published_hash).toBeDefined();
+        await sdk.designer.saveLiveBoard(1, boardConfig).then(result => {
+            if (result.status === 200) {
+                const data = <ConfigSavedSuccess>result.data;
+                expect(data.config).toBeDefined();
+                expect(data.published_hash).toBeDefined();
+            } else {
+                throw new Error("should have status 200");
+            }
         });
 
         // saved conflict
         const boardConfig2 = Object.assign(boardConfig, {id: 66, meta: {originHash: "test"}});
         await sdk.designer
             .saveLiveBoard(1, boardConfig2)
-            .then(() => {
-                throw new Error("should not succeed here");
+            .then(res => {
+                expect(res.status).toEqual(409);
             })
-            .catch(e => expect(e.response?.status).toEqual(409));
+            .catch(() => {
+                throw new Error("should not fail here");
+            });
 
         // saved already exists
-        const boardConfig3 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash"}});
+        const boardConfig3 = Object.assign(boardConfig, {id: 1, meta: {originHash: "testHash", newHash: "testHash"}});
         await sdk.designer.saveLiveBoard(1, boardConfig3).then(res => {
-            expect(res).toBeUndefined();
+            expect(res.status).toEqual(208);
         });
 
         // saved success
         const boardConfig4 = Object.assign(boardConfig, {id: 66, meta: {originHash: "testHash", newHash: "testHash2"}});
         await sdk.designer.saveLiveBoard(1, boardConfig4).then(res => {
-            expect(res.config.pages).toBeDefined();
+            expect(res.status).toEqual(200);
         });
     });
 

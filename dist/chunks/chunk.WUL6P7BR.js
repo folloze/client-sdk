@@ -171,9 +171,15 @@ var Designer = class {
       this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
         config,
         theme_id: null
-      }).then((result) => resolve(result.data)).catch((e) => {
-        console.error("could not save liveBoard config", e);
-        reject(e);
+      }).then((result) => resolve({ status: result.status, data: result.data })).catch((e) => {
+        var _a;
+        if (((_a = e.response) == null ? void 0 : _a.status) === 409) {
+          console.warn("could not save - conflict");
+          resolve({ status: e.response.status, data: e.response.data });
+        } else {
+          console.error("could not save liveBoard config", e);
+          reject(e);
+        }
       });
     });
   }

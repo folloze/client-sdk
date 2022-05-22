@@ -344,17 +344,25 @@ export class Designer {
         });
     }
 
-    saveLiveBoard(boardId: number, config: BoardConfig): Promise<ConfigSavedConflict | ConfigSavedSuccess> {
+    saveLiveBoard(
+        boardId: number,
+        config: BoardConfig,
+    ): Promise<{status: number; data: ConfigSavedConflict | ConfigSavedSuccess}> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .put(`/api/v1/boards/${boardId}/config`, {
                     config: config,
                     theme_id: null,
                 })
-                .then(result => resolve(result.data))
+                .then(result => resolve({status: result.status, data: result.data}))
                 .catch(e => {
-                    console.error("could not save liveBoard config", e);
-                    reject(e);
+                    if (e.response?.status === 409) {
+                        console.warn("could not save - conflict");
+                        resolve({status: e.response.status, data: (e.response as AxiosResponse).data});
+                    } else {
+                        console.error("could not save liveBoard config", e);
+                        reject(e);
+                    }
                 });
         });
     }

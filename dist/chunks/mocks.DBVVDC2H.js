@@ -508,53 +508,57 @@ var rules = (mock) => {
     var _a, _b;
     const boardId = parseInt(saveLiveBoardRegex.exec(config.url)[1]);
     const newHash = (_a = JSON.parse(config.data).config.meta) == null ? void 0 : _a.newHash;
+    const data = JSON.parse(config.data).config;
+    const layoutId = data.id;
     if (boardId === 1) {
       const someTestOriginHash = "testHash";
       const originHash = (_b = JSON.parse(config.data).config.meta) == null ? void 0 : _b.originHash;
       if (!originHash || originHash === someTestOriginHash && newHash !== originHash) {
         return [200, { config: JSON.parse(config.data).config, published_hash: newHash || "newHash" }];
       }
+      if (layoutId === 66) {
+        return [
+          409,
+          {
+            msg: "conflict - could not save config",
+            config: {
+              id: 1,
+              meta: {
+                savedTime: null,
+                localSaveTime: 10,
+                originHash: newHash,
+                newHash
+              },
+              pages: {
+                default: {
+                  name: "default",
+                  grid: {
+                    maxWidth: "1024px",
+                    gap: { x: "0", y: "0" },
+                    columns: { colNum: 12, colWidth: "1fr" },
+                    rows: { rowNum: 0, rowHeight: "25px" }
+                  },
+                  sections: {},
+                  widgets: {},
+                  ribbons: {}
+                }
+              }
+            },
+            user: {
+              id: -1,
+              name: "Itamar",
+              email: "some@example.email",
+              bio_settings: null,
+              linkedin: null,
+              twitter: null,
+              image: "linkToImage"
+            }
+          }
+        ];
+      }
       if (newHash === originHash) {
         return [208];
       }
-      return [
-        409,
-        {
-          msg: "conflict - could not save config",
-          config: {
-            id: 1,
-            meta: {
-              savedTime: null,
-              localSaveTime: 10,
-              originHash: newHash,
-              newHash
-            },
-            pages: {
-              default: {
-                name: "default",
-                grid: {
-                  maxWidth: "1024px",
-                  gap: { x: "0", y: "0" },
-                  columns: { colNum: 12, colWidth: "1fr" },
-                  rows: { rowNum: 0, rowHeight: "25px" }
-                },
-                sections: {},
-                widgets: {},
-                ribbons: {}
-              }
-            }
-          },
-          user: {
-            id: -1,
-            name: "Itamar",
-            email: "some@example.email",
-            bio_settings: null,
-            linkedin: null,
-            twitter: null,
-            image: "linkToImage"
-          }
-        }
-      ];
     }
     return [200, { config: JSON.parse(config.data).config, published_hash: newHash }];
   });
