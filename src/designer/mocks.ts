@@ -697,6 +697,8 @@ export const rules = (mock: MockAdapter) => {
                         },
                     },
                 },
+                published_hash: "asdasdasdasd",
+                is_board_online: true,
             },
         ];
     });

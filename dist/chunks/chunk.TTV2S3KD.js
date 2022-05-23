@@ -185,7 +185,10 @@ var Designer = class {
   }
   getLiveBoardConfig(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/api/v1/boards/${boardId}/config`).then((result) => resolve(result.data)).catch((e) => {
+      this.fetcher.get(`/api/v1/boards/${boardId}/config`).then((result) => {
+        result.data.published_hash = result.data.unpublished_config.meta.newHash;
+        resolve(result.data);
+      }).catch((e) => {
         console.error("could not save get liveBoard config", e);
         reject(e);
       });

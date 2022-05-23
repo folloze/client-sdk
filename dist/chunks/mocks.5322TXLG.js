@@ -634,7 +634,9 @@ var rules = (mock) => {
               ribbons: {}
             }
           }
-        }
+        },
+        published_hash: "asdasdasdasd",
+        is_board_online: true
       }
     ];
   });

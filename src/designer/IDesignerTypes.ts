@@ -319,4 +319,6 @@ export type ConfigSavedSuccess = {
 export type PublishedUnpublishedConfig = {
     published_config: BoardConfig;
     unpublished_config: BoardConfig;
+    published_hash: string;
+    is_board_online: boolean;
 };
