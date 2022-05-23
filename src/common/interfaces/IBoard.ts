@@ -11,7 +11,7 @@ export type BoardConfig = {
         localSaveTime?: number; // unix time
         originHash?: string;
         newHash?: string;
-        publishedHash?: string;
+        // publishedHash?: string; - maybe we dont need it on the meta?? - saving it can cause problems
         currentPageName?: string;
     };
     pages: Record<string, PageConfig>;
