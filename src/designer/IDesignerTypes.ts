@@ -305,12 +305,15 @@ export type UserV1 = {
 export type ConfigSavedConflict = {
     msg: string;
     config: BoardConfig;
+    published_hash: string;
+    is_board_online: boolean;
     user: UserV1;
 };
 
 export type ConfigSavedSuccess = {
     config: BoardConfig;
     published_hash: string;
+    is_board_online: boolean;
 };
 
 export type PublishedUnpublishedConfig = {

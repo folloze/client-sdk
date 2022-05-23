@@ -264,11 +264,14 @@ export declare type UserV1 = {
 export declare type ConfigSavedConflict = {
     msg: string;
     config: BoardConfig;
+    published_hash: string;
+    is_board_online: boolean;
     user: UserV1;
 };
 export declare type ConfigSavedSuccess = {
     config: BoardConfig;
     published_hash: string;
+    is_board_online: boolean;
 };
 export declare type PublishedUnpublishedConfig = {
     published_config: BoardConfig;

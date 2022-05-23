@@ -514,7 +514,14 @@ var rules = (mock) => {
       const someTestOriginHash = "testHash";
       const originHash = (_b = JSON.parse(config.data).config.meta) == null ? void 0 : _b.originHash;
       if (!originHash || originHash === someTestOriginHash && newHash !== originHash) {
-        return [200, { config: JSON.parse(config.data).config, published_hash: newHash || "newHash" }];
+        return [
+          200,
+          {
+            config: JSON.parse(config.data).config,
+            published_hash: newHash || "newHash",
+            is_board_online: true
+          }
+        ];
       }
       if (layoutId === 66) {
         return [
@@ -544,6 +551,8 @@ var rules = (mock) => {
                 }
               }
             },
+            published_hash: "",
+            is_board_online: true,
             user: {
               id: -1,
               name: "Itamar",
@@ -557,10 +566,24 @@ var rules = (mock) => {
         ];
       }
       if (newHash === originHash) {
-        return [208];
+        return [
+          208,
+          {
+            config: JSON.parse(config.data).config,
+            published_hash: newHash || "newHash",
+            is_board_online: true
+          }
+        ];
       }
     }
-    return [200, { config: JSON.parse(config.data).config, published_hash: newHash }];
+    return [
+      200,
+      {
+        config: JSON.parse(config.data).config,
+        published_hash: newHash,
+        is_board_online: true
+      }
+    ];
   });
   mock.onGet(saveLiveBoardRegex).reply((config) => {
     return [
