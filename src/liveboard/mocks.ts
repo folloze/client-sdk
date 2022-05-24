@@ -20,7 +20,8 @@ import {
     LiveEventUrlsResponseV2,
     OrganizationSettingsResponseV1,
     SessionResponseV1,
-    FormMetadataDataV1
+    FormMetadataDataV1,
+    CampaignElementDataV2
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -407,6 +408,39 @@ export const rules = (mock: MockAdapter) => {
                         }
                     ]
                 }
+            }
+        }
+    );
+
+    // campaign element - form privacy message
+    mock.onGet(/live_board\/v2\/campaign_elements\/(\d+)/)
+    .reply<CampaignElementDataV2>(200, {
+            id: 1,
+            element_id: 1,
+            name: "form privacy message",
+            state: 1,
+            is_standard: true,
+            message: {
+                html: "<div>I'm a privacy message data</div>"
+            },
+            text_area: {
+                html: "<div>I'm a privacy text area data</div>"
+            },
+            checkbox_area: {
+                threshold: 1,
+                label: "checkbox label",
+                checkboxes: [
+                    {
+                        label: "first checkbox",
+                        name: "first_checkbox",
+                        is_required: false
+                    },
+                    {
+                        label: "second checkbox",
+                        name: "second_checkbox",
+                        is_required: true
+                    }
+                ]
             }
         }
     );
