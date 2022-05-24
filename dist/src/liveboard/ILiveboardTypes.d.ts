@@ -1,4 +1,4 @@
-import { FormDataV1, FormPrivacyMessageDataV1 } from "./../designer/IDesignerTypes";
+import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
 import { PrivacySettings } from '../common/ISharedTypes';
 export declare type BoardResponseV1 = {
     id: number;
@@ -293,4 +293,5 @@ export declare type FormMetadataDataV1 = {
     form: FormDataV1;
     privacy_message: FormPrivacyMessageDataV1;
 };
+export declare type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
 export {};
