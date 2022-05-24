@@ -6,9 +6,13 @@ import {
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
     ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
     LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
-    LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, SessionResponseV1,
-    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1
+    LiveEventUrlsResponseV2, OrganizationSettingsResponseV1,
+    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1,
+    CampaignElementDataV2
 } from './ILiveboardTypes';
+import {
+    CampaignElementsTypes,
+} from "../designer/IDesignerTypes";
 
 export class Liveboard {
     private fetcher: AxiosInstance;
@@ -680,6 +684,26 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get form data", e);
+                    reject(e);
+                });
+        });
+    }
+
+
+    //Campaign element
+    getCampaignElement(
+        boardId: number,
+        elementType: CampaignElementsTypes,
+        elementId: number
+    ): Promise<CampaignElementDataV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
+                    params: {element_type: elementType, board_id: boardId},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get campaign element", e);
                     reject(e);
                 });
         });
