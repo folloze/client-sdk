@@ -8,15 +8,6 @@ beforeAll(async () => {
 });
 
 describe("test liveboard mocks module", () => {
-    const ctaParams = {
-        cta: {area: "banner", label: null},
-        email: "email@company.com",
-        formId: 1,
-        message: "hey",
-        type: "message",
-        aaa: "aaa",
-    };
-
     it("checks that getBoard mock works as expected", async () => {
         await sdk.liveboard.getBoard("board_slug").then(result => expect(result.id).toEqual(1));
     });
@@ -86,30 +77,6 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard
             .setCookiesConsent(1, {leadId: 1, constentOrigin: "CallToAction", isoCode: "IL"})
             .then(result => expect(result).toBeNull);
-    });
-
-    it("checks that saveMessageCta mock works as expected", async () => {
-        await sdk.liveboard.saveMessageCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveContactCta mock works as expected", async () => {
-        await sdk.liveboard.saveContactCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveFormCta mock works as expected", async () => {
-        await sdk.liveboard.saveFormCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveLinkCta mock works as expected", async () => {
-        await sdk.liveboard.saveLinkCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveShareCta mock works as expected", async () => {
-        await sdk.liveboard.saveShareCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveShareByEmailCta mock works as expected", async () => {
-        await sdk.liveboard.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result).toBeNull);
     });
 
     it("checks that updateEnrichment mock works as expected", async () => {

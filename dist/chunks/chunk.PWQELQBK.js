@@ -1,6 +1,6 @@
 import {
   keysToSnakeCase
-} from "./chunk.WXVSHK2H.js";
+} from "./chunk.JQDT3QVW.js";
 import {
   __spreadValues
 } from "./chunk.Z3GS5MY4.js";
@@ -190,67 +190,6 @@ var Liveboard = class {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get file url", e);
-        reject(e);
-      });
-    });
-  }
-  saveMessageCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveContactCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveFormCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options)).then((result) => resolve(result.data)).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveLinkCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveShareCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveShareByEmailCta(boardId, email, invitationId) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/shares`, {
-        email,
-        invitation_id: invitationId
-      }).then(() => {
-        resolve();
-      }).catch((e) => {
-        console.error("could not submit cta", e);
         reject(e);
       });
     });

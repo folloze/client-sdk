@@ -3,13 +3,13 @@ import {
 } from "./chunk.NPVWZY7A.js";
 import {
   Analytics
-} from "./chunk.TP6LCZ3M.js";
+} from "./chunk.EDRNJONZ.js";
 import {
   Designer
-} from "./chunk.TTV2S3KD.js";
+} from "./chunk.MPW3P5XA.js";
 import {
   Liveboard
-} from "./chunk.5DY2TGOL.js";
+} from "./chunk.PWQELQBK.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -33,7 +33,7 @@ import {
   require_isTypedArray,
   require_overArg,
   require_root
-} from "./chunk.WXVSHK2H.js";
+} from "./chunk.JQDT3QVW.js";
 import {
   __commonJS,
   __toModule
@@ -610,13 +610,13 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.75OSORFR.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.3YW5VJQZ.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
     await import("./mocks.5322TXLG.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.63ZRL77K.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.UGRWNCB6.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
