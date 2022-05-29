@@ -97,10 +97,6 @@ export type OpenItemViewerPayload = {
     },
     viewer_settings: {
         design: "classic" | "lightbox",
-        visibility: {
-            title: boolean,
-            description: boolean,
-        };
         allow_download: boolean,
         allow_likes: boolean
     },
