@@ -861,6 +861,22 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   }
 };
 
+// src/common/LiveWidgetComponentPersonalization.ts
+var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
+  set editTag(tag) {
+    this._editTag = tag;
+  }
+  get editTag() {
+    return this._editTag;
+  }
+  set viewTag(tag) {
+    this._viewTag = tag;
+  }
+  get viewTag() {
+    return this._viewTag;
+  }
+};
+
 // src/common/makeDraggable.ts
 function makeDragElement(dom, el, handleEl) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -2843,6 +2859,7 @@ export {
   LiveWidget,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
+  LiveWidgetComponentPersonalization,
   makeDragElement,
   FloatEditor,
   CloudinaryHelper

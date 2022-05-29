@@ -8,6 +8,7 @@ import {
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
+  LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
   editorEmit,
@@ -17,7 +18,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.BQJ3W4SJ.js";
+} from "../chunks/chunk.PTZ3HZOK.js";
 import {
   FetchService
 } from "../chunks/chunk.U2ZAOAQW.js";
@@ -47,6 +48,7 @@ export {
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
+  LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
   editorEmit,
