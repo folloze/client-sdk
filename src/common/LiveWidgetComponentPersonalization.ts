@@ -17,7 +17,7 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
     }
 
     set viewTag(tag: string) {
-      this._viewTag = tag;
+        this._viewTag = tag;
     }
 
     get viewTag(): string {
@@ -25,7 +25,7 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
     }
 
     set board(board: ILiveBoard) {
-      this._board = board;
+        this._board = board;
     }
 
     get board(): ILiveBoard {

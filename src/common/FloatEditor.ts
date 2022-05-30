@@ -145,12 +145,14 @@ export class FloatEditor extends LitElement {
     @property()
     private isLoading: boolean = true;
     private readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
+    private editorTitle: string;
     private x: number;
     private y: number;
 
-    constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit) {
+    constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit, editorTitle: string = "") {
         super();
         this.childEl = el;
+        this.editorTitle = editorTitle;
     }
 
     disconnectedCallback() {
@@ -211,6 +213,10 @@ export class FloatEditor extends LitElement {
         }
     }
 
+    getEditorTitle() {
+        return this.editorTitle || this.childEl.widget?.widgetTitle || "";
+    }
+
     render() {
         return html`
             ${this.isLoading ? html`<div class="loading"></div>` : ""}
@@ -219,7 +225,7 @@ export class FloatEditor extends LitElement {
                 style="${this.childEl._handleStyle}"
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
-                <span class="conf-name"> ${this.childEl.widget?.widgetTitle || ""} </span>
+                <span class="conf-name"> ${this.getEditorTitle()} </span>
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

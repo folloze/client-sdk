@@ -976,10 +976,11 @@ var e5 = ((n5 = window.HTMLSlotElement) === null || n5 === void 0 ? void 0 : n5.
 
 // src/common/FloatEditor.ts
 var FloatEditor = class extends s4 {
-  constructor(el) {
+  constructor(el, editorTitle = "") {
     super();
     this.isLoading = true;
     this.childEl = el;
+    this.editorTitle = editorTitle;
   }
   disconnectedCallback() {
     this.removeHighlight();
@@ -1028,8 +1029,11 @@ var FloatEditor = class extends s4 {
       this.childEl.widget.classList.remove("highlight");
     }
   }
-  render() {
+  getEditorTitle() {
     var _a;
+    return this.editorTitle || ((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || "";
+  }
+  render() {
     return $`
             ${this.isLoading ? $`<div class="loading"></div>` : ""}
             <div
@@ -1037,7 +1041,7 @@ var FloatEditor = class extends s4 {
                 style="${this.childEl._handleStyle}"
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
-                <span class="conf-name"> ${((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""} </span>
+                <span class="conf-name"> ${this.getEditorTitle()} </span>
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
