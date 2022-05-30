@@ -1,6 +1,5 @@
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1, CampaignElementDataV2 } from './ILiveboardTypes';
-import { CampaignElementsTypes } from "../designer/IDesignerTypes";
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2 } from './ILiveboardTypes';
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -119,54 +118,6 @@ export declare class Liveboard {
      */
     setCookiesConsent(boardId: number, options: CookieConsentParams): Promise<void>;
     /**
-     * submit a message CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveMessageCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
-    /**
-     * submit a contact CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
-    /**
-     * submit a form CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveFormCta(boardId: number, options: any): Promise<CtaResponseV1>;
-    /**
-     * submit a link CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
-    /**
-     * submit a share CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveShareCta(boardId: number, options: CtaParams): Promise<CtaResponseV1>;
-    /**
-     * Submit a share by email cta
-     *
-     * @param {number} boardId
-     * @param {string} email
-     * @param {number} invitationId
-     */
-    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>;
-    /**
      * Update the current lead's account's enrichment data
      *
      * @param {string} type
@@ -219,5 +170,7 @@ export declare class Liveboard {
      */
     setSessionCookie(boardId: number): Promise<number>;
     getFormData(boardId: number, formId: number, privacyMessageId?: number): Promise<FormMetadataDataV1>;
-    getCampaignElement(boardId: number, elementType: CampaignElementsTypes, elementId: number): Promise<CampaignElementDataV2>;
+    getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
+    getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
+    getFormPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
 }

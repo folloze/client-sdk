@@ -203,52 +203,6 @@ var rules = (mock) => {
     preview_metadata: { url: "preview.url.com" }
   });
   mock.onPost("/live_board/v1/boards/1/cookies_consents").reply(200);
-  mock.onPost("/live_board/v1/boards/1/campaign/message").reply(200, {
-    id: 1,
-    name: "name",
-    last_name: "lastname",
-    email: "email@company.com",
-    company: null,
-    anon_guest: false,
-    group_user: false
-  });
-  mock.onPost("/live_board/v1/boards/1/campaign/contact").reply(200, {
-    id: 1,
-    name: "name",
-    last_name: "lastname",
-    email: "email@company.com",
-    company: null,
-    anon_guest: false,
-    group_user: false
-  });
-  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/form/).reply(200, {
-    id: 1,
-    name: "name",
-    last_name: "lastname",
-    email: "email@company.com",
-    company: null,
-    anon_guest: false,
-    group_user: false
-  });
-  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link/).reply(200, {
-    id: 1,
-    email: "email@company.com",
-    name: "name",
-    last_name: "lastname",
-    anon_guest: false,
-    company: null,
-    group_user: false
-  });
-  mock.onPost("/live_board/v1/boards/1/campaign/share").reply(200, {
-    id: 1,
-    name: "name",
-    last_name: "lastname",
-    email: "email@company.com",
-    company: null,
-    anon_guest: false,
-    group_user: false
-  });
-  mock.onPost("/live_board/v1/boards/1/shares").reply(200);
   mock.onPost("/live_board/v2/enrichments").reply(200);
   mock.onGet("/live_board/v1/geo_location").reply(200, {
     city: "tel aviv",
@@ -354,34 +308,85 @@ var rules = (mock) => {
       }
     }
   });
-  mock.onGet(/live_board\/v2\/campaign_elements\/(\d+)/).reply(200, {
-    id: 1,
-    element_id: 1,
-    name: "form privacy message",
-    state: 1,
-    is_standard: true,
-    message: {
-      html: "<div>I'm a privacy message data</div>"
-    },
-    text_area: {
-      html: "<div>I'm a privacy text area data</div>"
-    },
-    checkbox_area: {
-      threshold: 1,
-      label: "checkbox label",
-      checkboxes: [
-        {
-          label: "first checkbox",
-          name: "first_checkbox",
-          is_required: false
+  mock.onGet(/live_board\/v2\/campaign_elements\/(\d+)/).reply((config) => {
+    let data = {};
+    if (config.params.element_type == "1") {
+      data = {
+        id: 1,
+        element_id: 1,
+        name: "footer",
+        description: "The Folloze standard footer.",
+        state: 1,
+        is_standard: true,
+        logo: {
+          show: true,
+          url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png"
         },
-        {
-          label: "second checkbox",
-          name: "second_checkbox",
-          is_required: true
+        text: "my footer text",
+        labels: [
+          {
+            text: "section",
+            url: "https://www.folloze.com"
+          }
+        ],
+        background_color: "organce",
+        show_in_item_view: true,
+        text_color: {
+          type: 0,
+          color: "#eeeeee"
+        },
+        tracking_consent: {
+          show: true,
+          button_label: "Do not track me",
+          dialog_button_label: "my help text",
+          dialog_text: "my dialog text"
         }
-      ]
+      };
+    } else if (config.params.element_type == "2") {
+      data = {
+        can_close: true,
+        description: "The Folloze standard privacy message.",
+        element_id: 0,
+        id: 2,
+        is_standard: true,
+        is_top: true,
+        link: "https://sites.google.com/a/folloze.com/terms-of-service/privacy-policy",
+        message: "We use cookies to give you the best experience. if you do nothing, we'll assume that's ok",
+        name: "Standard Privacy Message",
+        state: 1
+      };
+    } else if (config.params.element_type == "3") {
+      data = {
+        id: 1,
+        element_id: 1,
+        name: "form privacy message",
+        state: 1,
+        is_standard: true,
+        message: {
+          html: "<div>I'm a privacy message data</div>"
+        },
+        text_area: {
+          html: "<div>I'm a privacy text area data</div>"
+        },
+        checkbox_area: {
+          threshold: 1,
+          label: "checkbox label",
+          checkboxes: [
+            {
+              label: "first checkbox",
+              name: "first_checkbox",
+              is_required: false
+            },
+            {
+              label: "second checkbox",
+              name: "second_checkbox",
+              is_required: true
+            }
+          ]
+        }
+      };
     }
+    return [200, data];
   });
 };
 export {

@@ -8,15 +8,6 @@ beforeAll(async () => {
 });
 
 describe("test liveboard mocks module", () => {
-    const ctaParams = {
-        cta: {area: "banner", label: null},
-        email: "email@company.com",
-        formId: 1,
-        message: "hey",
-        type: "message",
-        aaa: "aaa",
-    };
-
     it("checks that getBoard mock works as expected", async () => {
         await sdk.liveboard.getBoard("board_slug").then(result => expect(result.id).toEqual(1));
     });
@@ -88,30 +79,6 @@ describe("test liveboard mocks module", () => {
             .then(result => expect(result).toBeNull);
     });
 
-    it("checks that saveMessageCta mock works as expected", async () => {
-        await sdk.liveboard.saveMessageCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveContactCta mock works as expected", async () => {
-        await sdk.liveboard.saveContactCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveFormCta mock works as expected", async () => {
-        await sdk.liveboard.saveFormCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveLinkCta mock works as expected", async () => {
-        await sdk.liveboard.saveLinkCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveShareCta mock works as expected", async () => {
-        await sdk.liveboard.saveShareCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveShareByEmailCta mock works as expected", async () => {
-        await sdk.liveboard.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result).toBeNull);
-    });
-
     it("checks that updateEnrichment mock works as expected", async () => {
         await sdk.liveboard.updateEnrichment("dnb", {name: "company"}).then(result => expect(result).toBeNull);
     });
@@ -150,7 +117,15 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.getFormData(1, 1, 1).then(result => expect(result.form.form_title).toEqual("form title"));
     });
 
-    it("checks that campaign element mock works as expected", async () => {
-        await sdk.liveboard.getCampaignElement(1, 3, 1).then(result => expect(result.name).toEqual("form privacy message"));
+    it("checks that campaign element footer mock works as expected", async () => {
+        await sdk.liveboard.getFooter(1, 1).then(result => expect(result.name).toEqual("footer"));
+    });
+
+    it("checks that campaign element privacy message mock works as expected", async () => {
+        await sdk.liveboard.getPrivacyMessage(1, 1).then(result => expect(result.name).toEqual("Standard Privacy Message"));
+    });
+
+    it("checks that campaign element form privacy message mock works as expected", async () => {
+        await sdk.liveboard.getFormPrivacyMessage(1, 1).then(result => expect(result.name).toEqual("form privacy message"));
     });
 });
