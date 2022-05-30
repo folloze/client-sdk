@@ -1,6 +1,5 @@
 import { FetchService } from "../common/FetchService";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2 } from './ILiveboardTypes';
-import { CampaignElementsTypes } from "../designer/IDesignerTypes";
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
