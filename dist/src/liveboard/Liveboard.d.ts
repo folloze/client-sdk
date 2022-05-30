@@ -1,6 +1,5 @@
 import { FetchService } from "../common/FetchService";
 import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2 } from './ILiveboardTypes';
-import { CampaignElementsTypes } from "../designer/IDesignerTypes";
 export declare class Liveboard {
     private fetcher;
     constructor(fetch: FetchService);
@@ -171,5 +170,7 @@ export declare class Liveboard {
      */
     setSessionCookie(boardId: number): Promise<number>;
     getFormData(boardId: number, formId: number, privacyMessageId?: number): Promise<FormMetadataDataV1>;
-    getCampaignElement(boardId: number, elementType: CampaignElementsTypes, elementId: number): Promise<CampaignElementDataV2>;
+    getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
+    getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
+    getFormPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
 }

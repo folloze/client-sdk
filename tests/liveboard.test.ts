@@ -117,7 +117,15 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.getFormData(1, 1, 1).then(result => expect(result.form.form_title).toEqual("form title"));
     });
 
-    it("checks that campaign element mock works as expected", async () => {
-        await sdk.liveboard.getCampaignElement(1, 3, 1).then(result => expect(result.name).toEqual("form privacy message"));
+    it("checks that campaign element footer mock works as expected", async () => {
+        await sdk.liveboard.getFooter(1, 1).then(result => expect(result.name).toEqual("footer"));
+    });
+
+    it("checks that campaign element privacy message mock works as expected", async () => {
+        await sdk.liveboard.getPrivacyMessage(1, 1).then(result => expect(result.name).toEqual("Standard Privacy Message"));
+    });
+
+    it("checks that campaign element form privacy message mock works as expected", async () => {
+        await sdk.liveboard.getFormPrivacyMessage(1, 1).then(result => expect(result.name).toEqual("form privacy message"));
     });
 });
