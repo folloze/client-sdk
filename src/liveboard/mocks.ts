@@ -1,3 +1,4 @@
+import {PrivacyMessageResponseV1} from "./../designer/IDesignerTypes";
 import MockAdapter from "axios-mock-adapter";
 import {
     BoardResponseV1,
@@ -412,36 +413,89 @@ export const rules = (mock: MockAdapter) => {
         }
     );
 
-    // campaign element - form privacy message
+
+    // campaign elements
     mock.onGet(/live_board\/v2\/campaign_elements\/(\d+)/)
-    .reply<CampaignElementDataV2>(200, {
-            id: 1,
-            element_id: 1,
-            name: "form privacy message",
-            state: 1,
-            is_standard: true,
-            message: {
-                html: "<div>I'm a privacy message data</div>"
-            },
-            text_area: {
-                html: "<div>I'm a privacy text area data</div>"
-            },
-            checkbox_area: {
-                threshold: 1,
-                label: "checkbox label",
-                checkboxes: [
+    .reply<CampaignElementDataV2>(config => {
+        let data = {};
+
+        if (config.params.element_type == "1") {
+            data = {
+                id: 1,
+                element_id: 1,
+                name: "footer",
+                description: "The Folloze standard footer.",
+                state: 1,
+                is_standard: true,
+                logo: {
+                    show: true,
+                    url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png"
+                },
+                text: "my footer text",
+                labels: [
                     {
-                        label: "first checkbox",
-                        name: "first_checkbox",
-                        is_required: false
-                    },
-                    {
-                        label: "second checkbox",
-                        name: "second_checkbox",
-                        is_required: true
+                        text: "section",
+                        url: "https://www.folloze.com"
                     }
-                ]
-            }
+                ],
+                background_color: "organce",
+                show_in_item_view: true,
+                text_color: {
+                    type: 0,
+                    color: "#eeeeee"
+                },
+                tracking_consent: {
+                    show: true,
+                    button_label: "Do not track me",
+                    dialog_button_label: "my help text",
+                    dialog_text: "my dialog text"
+                }
+            };
+        } else if (config.params.element_type == "2") {
+            data = {
+                can_close: true,
+                description: "The Folloze standard privacy message.",
+                element_id: 0,
+                id: 2,
+                is_standard: true,
+                is_top: true,
+                link: "https://sites.google.com/a/folloze.com/terms-of-service/privacy-policy",
+                message: "We use cookies to give you the best experience. if you do nothing, we'll assume that's ok",
+                name: "Standard Privacy Message",
+                state: 1,
+            };
+        } else if (config.params.element_type == "3") {
+            data = {
+                id: 1,
+                element_id: 1,
+                name: "form privacy message",
+                state: 1,
+                is_standard: true,
+                message: {
+                    html: "<div>I'm a privacy message data</div>"
+                },
+                text_area: {
+                    html: "<div>I'm a privacy text area data</div>"
+                },
+                checkbox_area: {
+                    threshold: 1,
+                    label: "checkbox label",
+                    checkboxes: [
+                        {
+                            label: "first checkbox",
+                            name: "first_checkbox",
+                            is_required: false
+                        },
+                        {
+                            label: "second checkbox",
+                            name: "second_checkbox",
+                            is_required: true
+                        }
+                    ]
+                }
+            };
         }
-    );
+
+        return [200, data];
+    });
 };

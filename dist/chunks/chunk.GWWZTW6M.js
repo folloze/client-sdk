@@ -6,10 +6,10 @@ import {
 } from "./chunk.TP6LCZ3M.js";
 import {
   Designer
-} from "./chunk.TTV2S3KD.js";
+} from "./chunk.W3VWLZRX.js";
 import {
   Liveboard
-} from "./chunk.5DY2TGOL.js";
+} from "./chunk.JWGZ2AMK.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -610,7 +610,7 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.75OSORFR.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.6YRBJVDG.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
     await import("./mocks.5322TXLG.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));

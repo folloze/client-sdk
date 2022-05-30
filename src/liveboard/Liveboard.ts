@@ -690,20 +690,53 @@ export class Liveboard {
     }
 
 
-    //Campaign element
-    getCampaignElement(
+    //Campaign Elements
+    getPrivacyMessage(
         boardId: number,
-        elementType: CampaignElementsTypes,
         elementId: number
     ): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
-                    params: {element_type: elementType, board_id: boardId},
+                    params: {element_type: CampaignElementsTypes.privacy_message, board_id: boardId},
                 })
                 .then(result => resolve(result.data))
                 .catch(e => {
-                    console.error("could not get campaign element", e);
+                    console.error("could not get form privacy message", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getFooter(
+        boardId: number,
+        elementId: number
+    ): Promise<CampaignElementDataV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
+                    params: {element_type: CampaignElementsTypes.footer, board_id: boardId},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get form privacy message", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getFormPrivacyMessage(
+        boardId: number,
+        elementId: number
+    ): Promise<CampaignElementDataV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
+                    params: {element_type: CampaignElementsTypes.form_privacy_message, board_id: boardId},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get form privacy message", e);
                     reject(e);
                 });
         });

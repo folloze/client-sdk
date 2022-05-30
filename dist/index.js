@@ -21,7 +21,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.7P4UVUQ2.js";
+} from "./chunks/chunk.GWWZTW6M.js";
 import "./chunks/chunk.NPVWZY7A.js";
 import {
   Analytics,
@@ -31,13 +31,10 @@ import {
 } from "./chunks/chunk.TP6LCZ3M.js";
 import {
   Designer
-} from "./chunks/chunk.TTV2S3KD.js";
-import {
-  CampaignElementsTypes
-} from "./chunks/chunk.G52EPVC6.js";
+} from "./chunks/chunk.W3VWLZRX.js";
 import {
   Liveboard
-} from "./chunks/chunk.5DY2TGOL.js";
+} from "./chunks/chunk.JWGZ2AMK.js";
 import {
   fileUpload,
   hashObj,
@@ -46,6 +43,9 @@ import {
   simpleDebounce,
   simpleThrottle
 } from "./chunks/chunk.WXVSHK2H.js";
+import {
+  CampaignElementsTypes
+} from "./chunks/chunk.G52EPVC6.js";
 import {
   FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE

@@ -2,6 +2,9 @@ import {
   keysToSnakeCase
 } from "./chunk.WXVSHK2H.js";
 import {
+  CampaignElementsTypes
+} from "./chunk.G52EPVC6.js";
+import {
   __spreadValues
 } from "./chunk.Z3GS5MY4.js";
 
@@ -352,12 +355,32 @@ var Liveboard = class {
       });
     });
   }
-  getCampaignElement(boardId, elementType, elementId) {
+  getPrivacyMessage(boardId, elementId) {
     return new Promise((resolve, reject) => {
       this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
-        params: { element_type: elementType, board_id: boardId }
+        params: { element_type: CampaignElementsTypes.privacy_message, board_id: boardId }
       }).then((result) => resolve(result.data)).catch((e) => {
-        console.error("could not get campaign element", e);
+        console.error("could not get form privacy message", e);
+        reject(e);
+      });
+    });
+  }
+  getFooter(boardId, elementId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+        params: { element_type: CampaignElementsTypes.footer, board_id: boardId }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get form privacy message", e);
+        reject(e);
+      });
+    });
+  }
+  getFormPrivacyMessage(boardId, elementId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+        params: { element_type: CampaignElementsTypes.form_privacy_message, board_id: boardId }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get form privacy message", e);
         reject(e);
       });
     });
