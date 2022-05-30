@@ -1,3 +1,10 @@
+import {
+  keysToSnakeCase
+} from "./chunk.JQDT3QVW.js";
+import {
+  __spreadValues
+} from "./chunk.Z3GS5MY4.js";
+
 // src/analytics/Analytics.ts
 var EventSources = /* @__PURE__ */ ((EventSources2) => {
   EventSources2["designer"] = "api";
@@ -119,6 +126,79 @@ var Analytics = class {
       return this.fetcher.post(`/live_board/v2/invitation_wrappers/${token}`).catch((e) => {
         console.error("could not update invitation wrapper", e);
         throw e;
+      });
+    });
+  }
+  saveMessageCta(boardId, options) {
+    return this.analyticsRequestWrapper(() => {
+      return new Promise((resolve, reject) => {
+        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+          resolve(result.data);
+        }).catch((e) => {
+          console.error("could not submit cta", e);
+          reject(e);
+        });
+      });
+    });
+  }
+  saveContactCta(boardId, options) {
+    return this.analyticsRequestWrapper(() => {
+      return new Promise((resolve, reject) => {
+        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+          resolve(result.data);
+        }).catch((e) => {
+          console.error("could not submit cta", e);
+          reject(e);
+        });
+      });
+    });
+  }
+  saveFormCta(boardId, options) {
+    return this.analyticsRequestWrapper(() => {
+      return new Promise((resolve, reject) => {
+        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options)).then((result) => resolve(result.data)).catch((e) => {
+          console.error("could not submit cta", e);
+          reject(e);
+        });
+      });
+    });
+  }
+  saveLinkCta(boardId, options) {
+    return this.analyticsRequestWrapper(() => {
+      return new Promise((resolve, reject) => {
+        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+          resolve(result.data);
+        }).catch((e) => {
+          console.error("could not submit cta", e);
+          reject(e);
+        });
+      });
+    });
+  }
+  saveShareCta(boardId, options) {
+    return this.analyticsRequestWrapper(() => {
+      return new Promise((resolve, reject) => {
+        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+          resolve(result.data);
+        }).catch((e) => {
+          console.error("could not submit cta", e);
+          reject(e);
+        });
+      });
+    });
+  }
+  saveShareByEmailCta(boardId, email, invitationId) {
+    return this.analyticsRequestWrapper(() => {
+      return new Promise((resolve, reject) => {
+        this.fetcher.post(`/live_board/v1/boards/${boardId}/shares`, {
+          email,
+          invitation_id: invitationId
+        }).then(() => {
+          resolve();
+        }).catch((e) => {
+          console.error("could not submit cta", e);
+          reject(e);
+        });
       });
     });
   }
