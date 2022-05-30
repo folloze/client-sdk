@@ -875,6 +875,12 @@ var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
   get viewTag() {
     return this._viewTag;
   }
+  set board(board) {
+    this._board = board;
+  }
+  get board() {
+    return this._board;
+  }
 };
 
 // src/common/makeDraggable.ts
