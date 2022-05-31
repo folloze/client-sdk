@@ -185,7 +185,11 @@ export class FloatEditor extends LitElement {
 
         const rect = this.getBoundingClientRect();
         const width = rect.width;
-        const viewPortWidth = document.body.getBoundingClientRect().width;
+        const height = rect.height;
+        const bounds = document.body.getBoundingClientRect();
+        const viewPortWidth = bounds.width;
+        const viewPortHeight =
+            Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
 
         // calculate new X position
         let newX = this.x - width / 2;
@@ -195,7 +199,13 @@ export class FloatEditor extends LitElement {
             newX = viewPortWidth - width - 5;
         }
 
-        this.style.top = `${this.y + 30 + window.scrollY}px`;
+        // calculate new Y position in case of out of viewport
+        let newY = this.y + 30 + window.scrollY;
+        if (newY + height > viewPortHeight - 5) {
+            newY = this.y - height - 30 + window.scrollY;
+        }
+
+        this.style.top = `${newY}px`;
         this.style.left = `${newX}px`;
     }
 
