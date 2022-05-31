@@ -885,38 +885,6 @@ var require_mergeConfig = __commonJS({
 var require_package = __commonJS({
   "node_modules/axios/package.json"(exports, module) {
     module.exports = {
-<<<<<<< HEAD:dist/chunks/chunk.3ZNLEUXI.js
-      _args: [
-        [
-          "axios@0.21.4",
-          "/Users/tanyalaushkin/workspace/unicorn/client-sdk"
-        ]
-      ],
-      _from: "axios@0.21.4",
-      _id: "axios@0.21.4",
-      _inBundle: false,
-      _integrity: "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==",
-      _location: "/axios",
-      _phantomChildren: {},
-      _requested: {
-        type: "version",
-        registry: true,
-        raw: "axios@0.21.4",
-        name: "axios",
-        escapedName: "axios",
-        rawSpec: "0.21.4",
-        saveSpec: null,
-        fetchSpec: "0.21.4"
-      },
-      _requiredBy: [
-        "/"
-      ],
-      _resolved: "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
-      _spec: "0.21.4",
-      _where: "/Users/tanyalaushkin/workspace/unicorn/client-sdk",
-      author: {
-        name: "Matt Zabriskie"
-=======
       name: "axios",
       version: "0.21.4",
       description: "Promise based HTTP client for the browser and node.js",
@@ -931,7 +899,6 @@ var require_package = __commonJS({
         examples: "node ./examples/server.js",
         coveralls: "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         fix: "eslint --fix lib/**/*.js"
->>>>>>> master:dist/chunks/chunk.62TMOTOU.js
       },
       repository: {
         type: "git",

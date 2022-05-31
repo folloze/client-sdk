@@ -4,10 +4,10 @@ import { FetchService } from "../common/FetchService";
 import {
     BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
     UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
-    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, CtaResponseV1, GeoLocationResponseV1,
+    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1,
     LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
     LiveEventUrlsResponseV2, OrganizationSettingsResponseV1,
-    ItemsParams, JourneyItemParams, CookieConsentParams, CtaParams, FormMetadataDataV1,
+    ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1,
     CampaignElementDataV2
 } from './ILiveboardTypes';
 import {
@@ -386,142 +386,6 @@ export class Liveboard {
         });
     }
 
-    // CTA
-
-    /**
-     * submit a message CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveMessageCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post<CtaResponseV1>(
-                `/live_board/v1/boards/${boardId}/campaign/message`,
-                {...keysToSnakeCase(options)}
-            )
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not submit cta", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * submit a contact CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveContactCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post<CtaResponseV1>(
-                `/live_board/v1/boards/${boardId}/campaign/contact`,
-                {...keysToSnakeCase(options)}
-            )
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not submit cta", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * submit a form CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveFormCta(boardId: number, options: any): Promise<CtaResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher
-                .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
-                .then(result => resolve(result.data))
-                .catch(e => {
-                    console.error("could not submit cta", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * submit a link CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveLinkCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post<CtaResponseV1>(
-                `/live_board/v1/boards/${boardId}/campaign/link`,
-                {...keysToSnakeCase(options)}
-            )
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not submit cta", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * submit a share CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-     saveShareCta(boardId: number, options: CtaParams): Promise<CtaResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher.post<CtaResponseV1>(
-                `/live_board/v1/boards/${boardId}/campaign/share`,
-                {...keysToSnakeCase(options)}
-            )
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not submit cta", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * Submit a share by email cta
-     *
-     * @param {number} boardId
-     * @param {string} email
-     * @param {number} invitationId
-     */
-    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<void>{
-        return new Promise((resolve, reject) => {
-            this.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
-                email,
-                invitation_id: invitationId
-            })
-                .then(() => { resolve(); })
-                .catch(e => {
-                    console.error("could not submit cta", e);
-                    reject(e);
-                });
-        });
-    }
-
-    // end CTA
-
     /**
      * Update the current lead's account's enrichment data
      *
@@ -690,20 +554,53 @@ export class Liveboard {
     }
 
 
-    //Campaign element
-    getCampaignElement(
+    //Campaign Elements
+    getPrivacyMessage(
         boardId: number,
-        elementType: CampaignElementsTypes,
         elementId: number
     ): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
-                    params: {element_type: elementType, board_id: boardId},
+                    params: {element_type: CampaignElementsTypes.privacy_message, board_id: boardId},
                 })
                 .then(result => resolve(result.data))
                 .catch(e => {
-                    console.error("could not get campaign element", e);
+                    console.error("could not get form privacy message", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getFooter(
+        boardId: number,
+        elementId: number
+    ): Promise<CampaignElementDataV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
+                    params: {element_type: CampaignElementsTypes.footer, board_id: boardId},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get form privacy message", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getFormPrivacyMessage(
+        boardId: number,
+        elementId: number
+    ): Promise<CampaignElementDataV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
+                    params: {element_type: CampaignElementsTypes.form_privacy_message, board_id: boardId},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get form privacy message", e);
                     reject(e);
                 });
         });

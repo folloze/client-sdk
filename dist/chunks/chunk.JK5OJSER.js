@@ -861,28 +861,6 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   }
 };
 
-// src/common/LiveWidgetComponentPersonalization.ts
-var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
-  set editTag(tag) {
-    this._editTag = tag;
-  }
-  get editTag() {
-    return this._editTag;
-  }
-  set viewTag(tag) {
-    this._viewTag = tag;
-  }
-  get viewTag() {
-    return this._viewTag;
-  }
-  set board(board) {
-    this._board = board;
-  }
-  get board() {
-    return this._board;
-  }
-};
-
 // src/common/makeDraggable.ts
 function makeDragElement(dom, el, handleEl) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -976,11 +954,10 @@ var e5 = ((n5 = window.HTMLSlotElement) === null || n5 === void 0 ? void 0 : n5.
 
 // src/common/FloatEditor.ts
 var FloatEditor = class extends s4 {
-  constructor(el, editorTitle = "") {
+  constructor(el) {
     super();
     this.isLoading = true;
     this.childEl = el;
-    this.editorTitle = editorTitle;
   }
   disconnectedCallback() {
     this.removeHighlight();
@@ -1029,11 +1006,8 @@ var FloatEditor = class extends s4 {
       this.childEl.widget.classList.remove("highlight");
     }
   }
-  getEditorTitle() {
-    var _a;
-    return this.editorTitle || ((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || "";
-  }
   render() {
+    var _a;
     return $`
             ${this.isLoading ? $`<div class="loading"></div>` : ""}
             <div
@@ -1041,7 +1015,7 @@ var FloatEditor = class extends s4 {
                 style="${this.childEl._handleStyle}"
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
-                <span class="conf-name"> ${this.getEditorTitle()} </span>
+                <span class="conf-name"> ${((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""} </span>
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -2869,7 +2843,6 @@ export {
   LiveWidget,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
-  LiveWidgetComponentPersonalization,
   makeDragElement,
   FloatEditor,
   CloudinaryHelper

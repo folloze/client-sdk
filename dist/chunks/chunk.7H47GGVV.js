@@ -1,6 +1,9 @@
 import {
+  CampaignElementsTypes
+} from "./chunk.G52EPVC6.js";
+import {
   keysToSnakeCase
-} from "./chunk.WXVSHK2H.js";
+} from "./chunk.JQDT3QVW.js";
 import {
   __spreadValues
 } from "./chunk.Z3GS5MY4.js";
@@ -194,67 +197,6 @@ var Liveboard = class {
       });
     });
   }
-  saveMessageCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveContactCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveFormCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options)).then((result) => resolve(result.data)).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveLinkCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveShareCta(boardId, options) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
-  saveShareByEmailCta(boardId, email, invitationId) {
-    return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/shares`, {
-        email,
-        invitation_id: invitationId
-      }).then(() => {
-        resolve();
-      }).catch((e) => {
-        console.error("could not submit cta", e);
-        reject(e);
-      });
-    });
-  }
   updateEnrichment(type, enrichmentData) {
     return new Promise((resolve, reject) => {
       this.fetcher.post("/live_board/v2/enrichments", {
@@ -352,12 +294,32 @@ var Liveboard = class {
       });
     });
   }
-  getCampaignElement(boardId, elementType, elementId) {
+  getPrivacyMessage(boardId, elementId) {
     return new Promise((resolve, reject) => {
       this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
-        params: { element_type: elementType, board_id: boardId }
+        params: { element_type: CampaignElementsTypes.privacy_message, board_id: boardId }
       }).then((result) => resolve(result.data)).catch((e) => {
-        console.error("could not get campaign element", e);
+        console.error("could not get form privacy message", e);
+        reject(e);
+      });
+    });
+  }
+  getFooter(boardId, elementId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+        params: { element_type: CampaignElementsTypes.footer, board_id: boardId }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get form privacy message", e);
+        reject(e);
+      });
+    });
+  }
+  getFormPrivacyMessage(boardId, elementId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+        params: { element_type: CampaignElementsTypes.form_privacy_message, board_id: boardId }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get form privacy message", e);
         reject(e);
       });
     });
