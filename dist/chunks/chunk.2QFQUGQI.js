@@ -976,11 +976,12 @@ var e5 = ((n5 = window.HTMLSlotElement) === null || n5 === void 0 ? void 0 : n5.
 
 // src/common/FloatEditor.ts
 var FloatEditor = class extends s4 {
-  constructor(el, editorTitle = "") {
+  constructor(el) {
     super();
     this.isLoading = true;
+    this.editorTitle = "";
+    this.addPadding = true;
     this.childEl = el;
-    this.editorTitle = editorTitle;
   }
   disconnectedCallback() {
     this.removeHighlight();
@@ -1003,20 +1004,33 @@ var FloatEditor = class extends s4 {
     this.x = x2;
     this.y = y2;
   }
+  setEditorTitle(editorTitle) {
+    this.editorTitle = editorTitle;
+  }
+  setAddPadding(addPadding) {
+    this.addPadding = addPadding;
+  }
   moveToPos() {
     if (!this.x || !this.y) {
       return;
     }
     const rect = this.getBoundingClientRect();
     const width = rect.width;
-    const viewPortWidth = document.body.getBoundingClientRect().width;
+    const height = rect.height;
+    const bounds = document.body.getBoundingClientRect();
+    const viewPortWidth = bounds.width;
+    const viewPortHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
     let newX = this.x - width / 2;
     if (newX < 5) {
       newX = 5;
     } else if (newX + width > viewPortWidth - 5) {
       newX = viewPortWidth - width - 5;
     }
-    this.style.top = `${this.y + 30 + window.scrollY}px`;
+    let newY = this.y + 30 + window.scrollY;
+    if (newY + height > viewPortHeight - 5) {
+      newY = this.y - height - 30 + window.scrollY;
+    }
+    this.style.top = `${newY}px`;
     this.style.left = `${newX}px`;
   }
   highlight() {
@@ -1055,7 +1069,7 @@ var FloatEditor = class extends s4 {
                     </svg>
                 </div>
             </div>
-            <div id="body"></div>
+            <div id="body" class="${this.addPadding ? "with-padding" : ""}"></div>
         `;
   }
 };
@@ -1142,10 +1156,14 @@ FloatEditor.styles = [
             }
 
             #body {
-                padding: var(--edit-fz-spacing-small);
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
             }
+
+            #body .with-padding {
+                padding: var(--edit-fz-spacing-small);
+            }
+
             .loading {
                 width: 100%;
                 height: calc(100% - 2em);
