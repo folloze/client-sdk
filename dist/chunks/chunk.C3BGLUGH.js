@@ -986,14 +986,21 @@ var FloatEditor = class extends s4 {
     }
     const rect = this.getBoundingClientRect();
     const width = rect.width;
-    const viewPortWidth = document.body.getBoundingClientRect().width;
+    const height = rect.height;
+    const bounds = document.body.getBoundingClientRect();
+    const viewPortWidth = bounds.width;
+    const viewPortHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
     let newX = this.x - width / 2;
     if (newX < 5) {
       newX = 5;
     } else if (newX + width > viewPortWidth - 5) {
       newX = viewPortWidth - width - 5;
     }
-    this.style.top = `${this.y + 30 + window.scrollY}px`;
+    let newY = this.y + 30 + window.scrollY;
+    if (newY + height > viewPortHeight - 5) {
+      newY = this.y - height - 30 + window.scrollY;
+    }
+    this.style.top = `${newY}px`;
     this.style.left = `${newX}px`;
   }
   highlight() {
