@@ -979,8 +979,6 @@ var FloatEditor = class extends s4 {
   constructor(el) {
     super();
     this.isLoading = true;
-    this.editorTitle = "";
-    this.addPadding = true;
     this.childEl = el;
   }
   disconnectedCallback() {
@@ -1003,12 +1001,6 @@ var FloatEditor = class extends s4 {
   setStartPos(x2, y2) {
     this.x = x2;
     this.y = y2;
-  }
-  setEditorTitle(editorTitle) {
-    this.editorTitle = editorTitle;
-  }
-  setAddPadding(addPadding) {
-    this.addPadding = addPadding;
   }
   moveToPos() {
     if (!this.x || !this.y) {
@@ -1043,11 +1035,8 @@ var FloatEditor = class extends s4 {
       this.childEl.widget.classList.remove("highlight");
     }
   }
-  getEditorTitle() {
-    var _a;
-    return this.editorTitle || ((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || "";
-  }
   render() {
+    var _a;
     return $`
             ${this.isLoading ? $`<div class="loading"></div>` : ""}
             <div
@@ -1055,7 +1044,7 @@ var FloatEditor = class extends s4 {
                 style="${this.childEl._handleStyle}"
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
-                <span class="conf-name"> ${this.getEditorTitle()} </span>
+                <span class="conf-name"> ${((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""} </span>
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1069,7 +1058,7 @@ var FloatEditor = class extends s4 {
                     </svg>
                 </div>
             </div>
-            <div id="body" class="${this.addPadding ? "with-padding" : ""}"></div>
+            <div id="body"></div>
         `;
   }
 };
@@ -1156,12 +1145,9 @@ FloatEditor.styles = [
             }
 
             #body {
+                padding: var(--edit-fz-spacing-small);
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
-            }
-
-            #body .with-padding {
-                padding: var(--edit-fz-spacing-small);
             }
 
             .loading {

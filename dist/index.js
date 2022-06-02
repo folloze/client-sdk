@@ -8,6 +8,7 @@ import {
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
+  LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
   editorEmit,
@@ -17,12 +18,12 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.C3BGLUGH.js";
+} from "./chunks/chunk.UDCG45YG.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.PLKKP6FT.js";
-import "./chunks/chunk.NG7TLSQO.js";
+} from "./chunks/chunk.MU6JNHFP.js";
+import "./chunks/chunk.3ZNLEUXI.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -71,6 +72,7 @@ export {
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
+  LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   Liveboard,
   componentEmit,

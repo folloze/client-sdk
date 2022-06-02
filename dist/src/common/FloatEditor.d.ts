@@ -5,8 +5,6 @@ export declare class FloatEditor extends LitElement {
     body: HTMLElement;
     private isLoading;
     private readonly childEl;
-    private editorTitle;
-    private addPadding;
     private x;
     private y;
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit);
@@ -14,11 +12,8 @@ export declare class FloatEditor extends LitElement {
     protected firstUpdated(): void;
     close(e?: Event): void;
     setStartPos(x: number, y: number): void;
-    setEditorTitle(editorTitle: string): void;
-    setAddPadding(addPadding: boolean): void;
     moveToPos(): void;
     highlight(): void;
     removeHighlight(): void;
-    getEditorTitle(): string;
     render(): import("lit-html").TemplateResult<1>;
 }
