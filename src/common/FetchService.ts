@@ -111,6 +111,7 @@ export class FetchService {
 
     private handleSuccess(response) {
         if (response.headers?.["authorization"]) {
+            console.log("handleSucces this === ", this);
             this.jwt = response.headers["authorization"].replace("bearer ", "");
         }
         if (response.headers?.["folloze-session-guid"]) {
