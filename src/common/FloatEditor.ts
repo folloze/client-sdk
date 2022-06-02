@@ -86,12 +86,9 @@ export class FloatEditor extends LitElement {
             }
 
             #body {
+                padding: var(--edit-fz-spacing-small);
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
-            }
-
-            #body .with-padding {
-                padding: var(--edit-fz-spacing-small);
             }
 
             .loading {
@@ -149,8 +146,6 @@ export class FloatEditor extends LitElement {
     @property()
     private isLoading: boolean = true;
     private readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
-    private editorTitle: string = "";
-    private addPadding: boolean = true;
     private x: number;
     private y: number;
 
@@ -182,14 +177,6 @@ export class FloatEditor extends LitElement {
     setStartPos(x: number, y: number) {
         this.x = x;
         this.y = y;
-    }
-
-    setEditorTitle(editorTitle: string) {
-        this.editorTitle = editorTitle;
-    }
-
-    setAddPadding(addPadding: boolean) {
-        this.addPadding = addPadding;
     }
 
     moveToPos() {
@@ -261,7 +248,7 @@ export class FloatEditor extends LitElement {
                     </svg>
                 </div>
             </div>
-            <div id="body" class="${this.addPadding ? "with-padding" : ""}"></div>
+            <div id="body"></div>
         `;
     }
 }
