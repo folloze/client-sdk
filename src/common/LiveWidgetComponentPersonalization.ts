@@ -7,6 +7,7 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
     protected _editTag: string;
     protected _viewTag: string;
     protected _board: ILiveBoard;
+    protected _onCancel: Function;
 
     set editTag(tag: string) {
         this._editTag = tag;
@@ -30,5 +31,13 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
 
     get board(): ILiveBoard {
         return this._board;
+    }
+
+    set onCancel(onCancel: Function) {
+      this._onCancel = onCancel;
+    }
+
+    get onCancel(): Function {
+        return this._onCancel;
     }
 }

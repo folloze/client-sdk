@@ -881,6 +881,12 @@ var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
   get board() {
     return this._board;
   }
+  set onCancel(onCancel) {
+    this._onCancel = onCancel;
+  }
+  get onCancel() {
+    return this._onCancel;
+  }
 };
 
 // src/common/makeDraggable.ts
