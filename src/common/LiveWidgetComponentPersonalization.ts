@@ -6,6 +6,7 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
     protected _propPath: string;
     protected _editTag: string;
     protected _viewTag: string;
+    protected _viewTagDataProperty: string;
     protected _board: ILiveBoard;
     protected _onCancel: Function;
 
@@ -23,6 +24,14 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
 
     get viewTag(): string {
         return this._viewTag;
+    }
+
+    set viewTagDataProperty(tagProp: string) {
+      this._viewTagDataProperty = tagProp;
+    }
+
+    get viewTagDataProperty(): string {
+        return this._viewTagDataProperty;
     }
 
     set board(board: ILiveBoard) {

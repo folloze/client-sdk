@@ -875,6 +875,12 @@ var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
   get viewTag() {
     return this._viewTag;
   }
+  set viewTagDataProperty(tagProp) {
+    this._viewTagDataProperty = tagProp;
+  }
+  get viewTagDataProperty() {
+    return this._viewTagDataProperty;
+  }
   set board(board) {
     this._board = board;
   }
