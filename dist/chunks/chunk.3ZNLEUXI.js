@@ -885,7 +885,6 @@ var require_mergeConfig = __commonJS({
 var require_package = __commonJS({
   "node_modules/axios/package.json"(exports, module) {
     module.exports = {
-<<<<<<< HEAD:dist/chunks/chunk.3ZNLEUXI.js
       _args: [
         [
           "axios@0.21.4",
@@ -916,40 +915,13 @@ var require_package = __commonJS({
       _where: "/Users/tanyalaushkin/workspace/unicorn/client-sdk",
       author: {
         name: "Matt Zabriskie"
-=======
-      name: "axios",
-      version: "0.21.4",
-      description: "Promise based HTTP client for the browser and node.js",
-      main: "index.js",
-      scripts: {
-        test: "grunt test",
-        start: "node ./sandbox/server.js",
-        build: "NODE_ENV=production grunt build",
-        preversion: "npm test",
-        version: "npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json",
-        postversion: "git push && git push --tags",
-        examples: "node ./examples/server.js",
-        coveralls: "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-        fix: "eslint --fix lib/**/*.js"
->>>>>>> master:dist/chunks/chunk.62TMOTOU.js
       },
-      repository: {
-        type: "git",
-        url: "https://github.com/axios/axios.git"
+      browser: {
+        "./lib/adapters/http.js": "./lib/adapters/xhr.js"
       },
-      keywords: [
-        "xhr",
-        "http",
-        "ajax",
-        "promise",
-        "node"
-      ],
-      author: "Matt Zabriskie",
-      license: "MIT",
       bugs: {
         url: "https://github.com/axios/axios/issues"
       },
-<<<<<<< HEAD:dist/chunks/chunk.3ZNLEUXI.js
       bundlesize: [
         {
           path: "./dist/axios.min.js",
@@ -960,9 +932,6 @@ var require_package = __commonJS({
         "follow-redirects": "^1.14.0"
       },
       description: "Promise based HTTP client for the browser and node.js",
-=======
-      homepage: "https://axios-http.com",
->>>>>>> master:dist/chunks/chunk.62TMOTOU.js
       devDependencies: {
         coveralls: "^3.0.0",
         "es6-promise": "^4.2.4",
@@ -998,24 +967,36 @@ var require_package = __commonJS({
         webpack: "^4.44.2",
         "webpack-dev-server": "^3.11.0"
       },
-      browser: {
-        "./lib/adapters/http.js": "./lib/adapters/xhr.js"
-      },
+      homepage: "https://axios-http.com",
       jsdelivr: "dist/axios.min.js",
-      unpkg: "dist/axios.min.js",
-      typings: "./index.d.ts",
-      dependencies: {
-        "follow-redirects": "^1.14.0"
-      },
-      bundlesize: [
-        {
-          path: "./dist/axios.min.js",
-          threshold: "5kB"
-        }
+      keywords: [
+        "xhr",
+        "http",
+        "ajax",
+        "promise",
+        "node"
       ],
-      _resolved: "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz",
-      _integrity: "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==",
-      _from: "axios@0.21.4"
+      license: "MIT",
+      main: "index.js",
+      name: "axios",
+      repository: {
+        type: "git",
+        url: "git+https://github.com/axios/axios.git"
+      },
+      scripts: {
+        build: "NODE_ENV=production grunt build",
+        coveralls: "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+        examples: "node ./examples/server.js",
+        fix: "eslint --fix lib/**/*.js",
+        postversion: "git push && git push --tags",
+        preversion: "npm test",
+        start: "node ./sandbox/server.js",
+        test: "grunt test",
+        version: "npm run build && grunt version && git add -A dist && git add CHANGELOG.md bower.json package.json"
+      },
+      typings: "./index.d.ts",
+      unpkg: "dist/axios.min.js",
+      version: "0.21.4"
     };
   }
 });
