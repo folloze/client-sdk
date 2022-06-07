@@ -8,7 +8,6 @@ import {
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
-  LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
   editorEmit,
@@ -18,11 +17,11 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.QI434IDV.js";
+} from "../chunks/chunk.C3BGLUGH.js";
 import {
   FetchService
-} from "../chunks/chunk.MU6JNHFP.js";
-import "../chunks/chunk.3ZNLEUXI.js";
+} from "../chunks/chunk.6SF6TJPT.js";
+import "../chunks/chunk.62TMOTOU.js";
 import "../chunks/chunk.EDRNJONZ.js";
 import "../chunks/chunk.MPW3P5XA.js";
 import "../chunks/chunk.7H47GGVV.js";
@@ -48,7 +47,6 @@ export {
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
-  LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
   editorEmit,
