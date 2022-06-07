@@ -861,6 +861,40 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
   }
 };
 
+// src/common/LiveWidgetComponentPersonalization.ts
+var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
+  set editTag(tag) {
+    this._editTag = tag;
+  }
+  get editTag() {
+    return this._editTag;
+  }
+  set viewTag(tag) {
+    this._viewTag = tag;
+  }
+  get viewTag() {
+    return this._viewTag;
+  }
+  set viewTagDataProperty(tagProp) {
+    this._viewTagDataProperty = tagProp;
+  }
+  get viewTagDataProperty() {
+    return this._viewTagDataProperty;
+  }
+  set board(board) {
+    this._board = board;
+  }
+  get board() {
+    return this._board;
+  }
+  set onCancel(onCancel) {
+    this._onCancel = onCancel;
+  }
+  get onCancel() {
+    return this._onCancel;
+  }
+};
+
 // src/common/makeDraggable.ts
 function makeDragElement(dom, el, handleEl) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
@@ -1127,6 +1161,7 @@ FloatEditor.styles = [
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
             }
+
             .loading {
                 width: 100%;
                 height: calc(100% - 2em);
@@ -2850,6 +2885,7 @@ export {
   LiveWidget,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
+  LiveWidgetComponentPersonalization,
   makeDragElement,
   FloatEditor,
   CloudinaryHelper
