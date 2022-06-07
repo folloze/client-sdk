@@ -90,7 +90,6 @@ export class FloatEditor extends LitElement {
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
             }
-
             .loading {
                 width: 100%;
                 height: calc(100% - 2em);
