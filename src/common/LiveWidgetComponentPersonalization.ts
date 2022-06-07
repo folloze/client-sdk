@@ -1,5 +1,5 @@
 import {LiveWidgetComponentEdit} from "./LiveWidgetComponentEdit";
-import { ILiveBoard } from './interfaces/IBoard'
+import { ILiveBoard } from './interfaces/IBoard';
 
 export abstract class LiveWidgetComponentPersonalization extends LiveWidgetComponentEdit {
 
