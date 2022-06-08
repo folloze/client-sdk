@@ -6,5 +6,19 @@ export declare type WidgetConfig = {
     widgetTag: string;
     widgetScripts: string;
     data: any;
-    floatPos?: FloatPos;
 };
+export interface FloatingWidgetConfig extends WidgetConfig {
+    floatPos?: FloatPos;
+    triggers: [
+        {
+            page: "default";
+            on: null;
+        },
+        {
+            page: "about";
+            on: null;
+        }
+    ];
+    pages: ["default", "about"];
+    trigger: null;
+}

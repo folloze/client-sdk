@@ -1,5 +1,5 @@
 import {RibbonConfig, SectionConfig} from "./ISection";
-import {WidgetConfig} from "./IWidget";
+import {FloatingWidgetConfig, WidgetConfig} from "./IWidget";
 import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
 import {FloatPos, GridPos} from "./IPositions";
@@ -15,6 +15,7 @@ export type BoardConfig = {
         currentPageName?: string;
     };
     pages: Record<string, PageConfig>;
+    floatingWidgets?: Record<string, FloatingWidgetConfig>;
 };
 
 export type PageConfig = {
@@ -57,6 +58,7 @@ export interface ILiveBoard extends LitElement {
 
     get pages(): PageConfig[];
     get widgets(): WidgetConfig[];
+    get floatingWidgets(): WidgetConfig[];
     get widgetElements(): LiveWidget[];
     get sections(): SectionConfig[];
     get ribbons(): RibbonConfig[];
