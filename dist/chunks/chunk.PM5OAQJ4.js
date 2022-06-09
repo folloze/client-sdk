@@ -1093,7 +1093,7 @@ FloatEditor.styles = [
                 position: absolute;
                 top: 100px;
                 left: 150px;
-                z-index: 110;
+                z-index: 104;
                 box-shadow: var(--floatBoxShadow);
 
                 //overflow: hidden;
