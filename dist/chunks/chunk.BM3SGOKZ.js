@@ -903,6 +903,7 @@ function makeDragElement(dom, el, handleEl) {
   } else {
     el.onmousedown = dragMouseDown;
   }
+  const topLimit = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--edit-fz-system-control-bar-height")) || 0;
   function dragMouseDown(e6) {
     e6 = e6 || window.event;
     e6.preventDefault();
@@ -918,13 +919,17 @@ function makeDragElement(dom, el, handleEl) {
     pos2 = pos4 - e6.clientY;
     pos3 = e6.clientX;
     pos4 = e6.clientY;
-    const newTop = el.offsetTop - pos2;
-    const newLeft = el.offsetLeft - pos1;
-    if (newTop <= 0) {
-      return;
+    let newTop = el.offsetTop - pos2;
+    let newLeft = el.offsetLeft - pos1;
+    if (newTop <= topLimit) {
+      newTop = topLimit + 1;
     }
     if (newLeft <= 0 || newLeft >= window.innerWidth - el.offsetWidth) {
-      return;
+      if (newLeft < 5) {
+        newLeft = 1;
+      } else {
+        newLeft = window.innerWidth - el.offsetWidth - 1;
+      }
     }
     el.style.top = newTop + "px";
     el.style.left = newLeft + "px";
