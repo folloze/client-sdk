@@ -14,6 +14,10 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         el.onmousedown = dragMouseDown;
     }
 
+    const topLimit =
+        parseInt(getComputedStyle(document.documentElement).getPropertyValue("--edit-fz-system-control-bar-height")) ||
+        0;
+
     function dragMouseDown(e: any) {
         e = e || window.event;
         e.preventDefault();
@@ -34,20 +38,24 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         pos3 = e.clientX;
         pos4 = e.clientY;
 
-        const newTop = el.offsetTop - pos2;
-        const newLeft = el.offsetLeft - pos1;
+        let newTop = el.offsetTop - pos2;
+        let newLeft = el.offsetLeft - pos1;
 
         // vertical limiter
         // if (newTop <= 0 || newTop >= window.innerHeight - el.offsetHeight) {
         //     return;
         // }
-        if (newTop <= 0) {
-            return;
+        if (newTop <= topLimit) {
+            newTop = topLimit + 1;
         }
 
         // horizontal limiter
         if (newLeft <= 0 || newLeft >= window.innerWidth - el.offsetWidth) {
-            return;
+            if (newLeft < 5) {
+                newLeft = 1;
+            } else {
+                newLeft = window.innerWidth - el.offsetWidth - 1;
+            }
         }
 
         // set the element's new position:
