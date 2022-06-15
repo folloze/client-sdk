@@ -9,16 +9,10 @@ export declare type WidgetConfig = {
 };
 export interface FloatingWidgetConfig extends WidgetConfig {
     floatPos?: FloatPos;
-    triggers: [
-        {
-            page: "default";
-            on: null;
-        },
-        {
-            page: "about";
-            on: null;
-        }
-    ];
-    pages: ["default", "about"];
-    trigger: null;
+    triggers: Array<{
+        page: string;
+        on: any;
+    }>;
+    pages: string[];
+    trigger: any;
 }

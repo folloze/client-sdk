@@ -18,6 +18,8 @@ import {
     PublishedUnpublishedConfig,
     ConfigSavedConflict,
     ConfigSavedSuccess,
+    MergeTagAttribute,
+    MergeTagValue
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 
@@ -401,6 +403,55 @@ export class Designer {
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get board contacts", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * gets board merge tags
+     *
+     * @param {number} boardId
+     * @param {string} contextType
+     * @returns {MergeTagAttribute[]} merge tags array
+     */
+    public getMergeTagsByBoard(
+        boardId: number,
+        contextType: string
+    ): Promise<MergeTagAttribute[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<MergeTagAttribute[]>(`/api/v1/boards/${boardId}/merge_tags`, {
+                    params: {context_type: contextType},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get board merge tags", e);
+                    reject(e);
+                });
+        });
+    }
+
+
+    /**
+     * gets merge tag lookup values
+     *
+     * @param {number} organizationId
+     * @param {number} mergeTagId
+     * @returns {<Record<number, MergeTagValue[]>>} array of values per merge tag id
+     */
+    public getMergeTagValues(
+        organizationId: number,
+        mergeTagId: number,
+    ): Promise<Record<number, MergeTagValue[]>> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<Record<number, MergeTagValue[]>>(`/api/v1/merge_tags/${mergeTagId}/merge_tags_lookups`, {
+                    params: {organization_id: organizationId},
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get merge tag values", e);
                     reject(e);
                 });
         });

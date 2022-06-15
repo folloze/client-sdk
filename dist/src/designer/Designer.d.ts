@@ -1,6 +1,6 @@
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess } from "./IDesignerTypes";
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 export declare class Designer {
     private fetcher;
@@ -134,4 +134,20 @@ export declare class Designer {
      * @returns {UserV1[]} Users array
      */
     searchBoardContacts(boardId: number, query: string): Promise<UserV1[]>;
+    /**
+     * gets board merge tags
+     *
+     * @param {number} boardId
+     * @param {string} contextType
+     * @returns {MergeTagAttribute[]} merge tags array
+     */
+    getMergeTagsByBoard(boardId: number, contextType: string): Promise<MergeTagAttribute[]>;
+    /**
+     * gets merge tag lookup values
+     *
+     * @param {number} organizationId
+     * @param {number} mergeTagId
+     * @returns {<Record<number, MergeTagValue[]>>} array of values per merge tag id
+     */
+    getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
 }

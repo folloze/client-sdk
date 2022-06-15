@@ -14,18 +14,9 @@ export interface FloatingWidgetConfig extends WidgetConfig {
 
     // todo: we dont necessarily need both options for temporary use
     // option 1
-    triggers: [
-        {
-            page: "default";
-            on: null; // null will open straight when loaded - could be an object with other instructions..?
-        },
-        {
-            page: "about";
-            on: null; // null will open straight when loaded - could be an object with other instructions..?
-        },
-    ];
+    triggers: Array<{page: string; on: any}>;
 
     // option 2
-    pages: ["default", "about"];
-    trigger: null;
+    pages: string[];
+    trigger: any;
 }
