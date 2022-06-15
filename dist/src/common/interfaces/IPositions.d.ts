@@ -15,8 +15,11 @@ export declare type GridPos = {
     padding?: cssPos;
     minHeight?: string;
 };
+declare type Vertical = "top" | "middle" | "bottom";
+declare type Horizontal = "start" | "middle" | "end";
 export declare type FloatPos = {
-    vertical: "top" | "middle" | "bottom";
-    horizontal: "start" | "middle" | "end";
-    pos?: cssPos;
+    pos: [number, number];
+    isFixedToViewPort?: boolean;
+    originPoint?: [Horizontal, Vertical];
 };
+export {};
