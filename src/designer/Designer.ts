@@ -408,7 +408,14 @@ export class Designer {
         });
     }
 
-    getMergeTagsByBoard(
+    /**
+     * gets board merge tags
+     *
+     * @param {number} boardId
+     * @param {string} contextType
+     * @returns {MergeTagAttribute[]} merge tags array
+     */
+    public getMergeTagsByBoard(
         boardId: number,
         contextType: string
     ): Promise<MergeTagAttribute[]> {
@@ -425,7 +432,15 @@ export class Designer {
         });
     }
 
-    getMergeTagValues(
+
+    /**
+     * gets merge tag lookup values
+     *
+     * @param {number} organizationId
+     * @param {number} mergeTagId
+     * @returns {<Record<number, MergeTagValue[]>>} array of values per merge tag id
+     */
+    public getMergeTagValues(
         organizationId: number,
         mergeTagId: number,
     ): Promise<Record<number, MergeTagValue[]>> {

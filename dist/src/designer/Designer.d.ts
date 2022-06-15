@@ -134,6 +134,20 @@ export declare class Designer {
      * @returns {UserV1[]} Users array
      */
     searchBoardContacts(boardId: number, query: string): Promise<UserV1[]>;
+    /**
+     * gets board merge tags
+     *
+     * @param {number} boardId
+     * @param {string} contextType
+     * @returns {MergeTagAttribute[]} merge tags array
+     */
     getMergeTagsByBoard(boardId: number, contextType: string): Promise<MergeTagAttribute[]>;
+    /**
+     * gets merge tag lookup values
+     *
+     * @param {number} organizationId
+     * @param {number} mergeTagId
+     * @returns {<Record<number, MergeTagValue[]>>} array of values per merge tag id
+     */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
 }
