@@ -208,4 +208,12 @@ describe("testing sdk designer module", () => {
     it("checks that searchBoardContacts works as expected", async () => {
         await sdk.designer.searchBoardContacts(1, "query").then(result => expect(result.length).toEqual(2));
     });
+
+    it("checks that board merge tags are fetched", async () => {
+        await sdk.designer.getMergeTagsByBoard(1, "context type").then(result => expect(result.length).toEqual(2));
+    });
+
+    it("checks that merge tag values are fetched", async () => {
+        await sdk.designer.getMergeTagValues(1, 1).then(result => expect(result[1][0].id).toEqual("any value"));
+    });
 });

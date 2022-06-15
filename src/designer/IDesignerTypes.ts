@@ -322,3 +322,18 @@ export type PublishedUnpublishedConfig = {
     published_hash: string;
     is_board_online: boolean;
 };
+
+export type MergeTagAttribute = {
+    id: number;
+    is_enabled: boolean;
+    label: string;
+    name: string;
+    provider: string;
+    allow_text_replacement: boolean;
+    allow_user_input: boolean;
+}
+
+export type MergeTagValue = {
+    id: string;
+    name: string;
+}

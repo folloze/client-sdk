@@ -207,6 +207,26 @@ var Designer = class {
       });
     });
   }
+  getMergeTagsByBoard(boardId, contextType) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/api/v1/boards/${boardId}/merge_tags`, {
+        params: { context_type: contextType }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get board merge tags", e);
+        reject(e);
+      });
+    });
+  }
+  getMergeTagValues(organizationId, mergeTagId) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.get(`/api/v1/merge_tags/${mergeTagId}/merge_tags_lookups`, {
+        params: { organization_id: organizationId }
+      }).then((result) => resolve(result.data)).catch((e) => {
+        console.error("could not get merge tag values", e);
+        reject(e);
+      });
+    });
+  }
 };
 
 export {

@@ -279,4 +279,17 @@ export declare type PublishedUnpublishedConfig = {
     published_hash: string;
     is_board_online: boolean;
 };
+export declare type MergeTagAttribute = {
+    id: number;
+    is_enabled: boolean;
+    label: string;
+    name: string;
+    provider: string;
+    allow_text_replacement: boolean;
+    allow_user_input: boolean;
+};
+export declare type MergeTagValue = {
+    id: string;
+    name: string;
+};
 export {};

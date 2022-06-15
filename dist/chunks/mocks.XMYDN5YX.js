@@ -679,6 +679,38 @@ var rules = (mock) => {
       image: "https://images.folloze.com/image/upload/v1451293367/heroimage05_fv80gz.png"
     }
   ]);
+  mock.onGet(/api\/v1\/boards\/(\d+)\/merge_tags/).reply(200, [
+    {
+      id: 1,
+      is_enabled: true,
+      label: "Lead Company",
+      name: "lead_company",
+      provider: "folloze",
+      allow_text_replacement: true,
+      allow_user_input: true
+    },
+    {
+      id: 2,
+      is_enabled: true,
+      label: "Account Revenue Range",
+      name: "kickfire_account_revenue_range",
+      provider: "kickfire",
+      allow_text_replacement: true,
+      allow_user_input: false
+    }
+  ]);
+  mock.onGet(/api\/v1\/merge_tags\/(\d+)\/merge_tags_lookups/).reply(200, {
+    1: [
+      {
+        id: "any value",
+        name: "any value"
+      },
+      {
+        id: "first value",
+        name: "First Value"
+      }
+    ]
+  });
 };
 export {
   rules
