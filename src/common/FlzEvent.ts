@@ -4,14 +4,21 @@ import {LitElement} from "lit";
 export const FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
 
 export abstract class FlzEvent extends Event {
-
     public action: string;
     public payload: any;
     public emitter: LitElement;
     public onSuccess: Function | undefined;
     public onError: Function | undefined;
+    public skipWidgetsNotify: boolean = false;
 
-    protected constructor(emitter: LitElement, listenerStr: string, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+    protected constructor(
+        emitter: LitElement,
+        listenerStr: string,
+        action: string,
+        payload: any,
+        onSuccess?: CallableFunction,
+        onError?: CallableFunction,
+    ) {
         super(listenerStr, {bubbles: true, composed: true});
         this.action = action;
         this.payload = payload;
@@ -22,13 +29,25 @@ export abstract class FlzEvent extends Event {
 }
 
 export class FlzBoardEvent extends FlzEvent {
-    constructor(emitter: LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+    constructor(
+        emitter: LitElement,
+        action: string,
+        payload: any,
+        onSuccess?: CallableFunction,
+        onError?: CallableFunction,
+    ) {
         super(emitter, FLZ_WIDGET_EVENT_TYPE, action, payload, onSuccess, onError);
     }
 }
 
 export class FlzDesignerEvent extends FlzEvent {
-    constructor(emitter: LitElement, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction) {
+    constructor(
+        emitter: LitElement,
+        action: string,
+        payload: any,
+        onSuccess?: CallableFunction,
+        onError?: CallableFunction,
+    ) {
         super(emitter, FLZ_DESIGNER_EVENT_TYPE, action, payload, onSuccess, onError);
     }
 }
