@@ -56,6 +56,9 @@ export interface ILiveBoard extends LitElement {
     setPageByName(str: string): void;
     getCurrentPageName(): string;
 
+    registerFloatingWidgetsTriggers(): void;
+    unRegisterFloatingWidgetsTriggers(): void;
+
     get pages(): PageConfig[];
     get widgets(): WidgetConfig[];
     get floatingWidgets(): FloatingWidgetConfig[];

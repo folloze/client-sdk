@@ -704,6 +704,7 @@ var FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
 var FlzEvent = class extends Event {
   constructor(emitter, listenerStr, action, payload, onSuccess, onError) {
     super(listenerStr, { bubbles: true, composed: true });
+    this.skipWidgetsNotify = false;
     this.action = action;
     this.payload = payload;
     this.emitter = emitter;

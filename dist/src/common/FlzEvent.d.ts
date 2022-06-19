@@ -6,6 +6,7 @@ export declare abstract class FlzEvent extends Event {
     emitter: LitElement;
     onSuccess: Function | undefined;
     onError: Function | undefined;
+    skipWidgetsNotify: boolean;
     protected constructor(emitter: LitElement, listenerStr: string, action: string, payload: any, onSuccess?: CallableFunction, onError?: CallableFunction);
 }
 export declare class FlzBoardEvent extends FlzEvent {
