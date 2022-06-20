@@ -1,12 +1,12 @@
 import {
   require_axios
-} from "./chunk.NG7TLSQO.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
 } from "./chunk.EDRNJONZ.js";
 import {
   Designer
-} from "./chunk.77LBCQPC.js";
+} from "./chunk.TAXWBRS4.js";
 import {
   Liveboard
 } from "./chunk.7H47GGVV.js";
@@ -655,7 +655,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.QMSX7QCF.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -671,6 +671,7 @@ var FetchService = class {
   handleSuccess(response) {
     var _a, _b;
     if ((_a = response.headers) == null ? void 0 : _a["authorization"]) {
+      console.log("handleSucces this === ", this);
       this.jwt = response.headers["authorization"].replace("bearer ", "");
     }
     if ((_b = response.headers) == null ? void 0 : _b["folloze-session-guid"]) {
