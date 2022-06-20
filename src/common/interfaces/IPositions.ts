@@ -25,8 +25,13 @@ type Vertical = "top" | "middle" | "bottom";
 type Horizontal = "start" | "middle" | "end";
 
 export type FloatPos = {
-    // pos will align the floating widget by percentage from [left, top] as (x, y) convention
-    pos: [number, number];
+    // pos will align the floating widget by distance from the edge and the origin point
+    pos?: {
+        top?: number;
+        right?: number;
+        bottom?: number;
+        left?: number;
+    };
 
     // whether or not to make it float as not part of the page
     // default is true

@@ -18,7 +18,12 @@ export declare type GridPos = {
 declare type Vertical = "top" | "middle" | "bottom";
 declare type Horizontal = "start" | "middle" | "end";
 export declare type FloatPos = {
-    pos: [number, number];
+    pos?: {
+        top?: number;
+        right?: number;
+        bottom?: number;
+        left?: number;
+    };
     isFixedToViewPort?: boolean;
     originPoint?: [Horizontal, Vertical];
 };
