@@ -58,6 +58,7 @@ export declare type ImageGalleryParams = {
     query?: string;
     organizationId?: number;
     bankCategory?: ImageBankCategoryType;
+    count?: number;
 };
 export declare type UploadUrlResponseV1 = {
     file_name: string;
