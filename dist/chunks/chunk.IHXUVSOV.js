@@ -6,7 +6,7 @@ import {
 } from "./chunk.EDRNJONZ.js";
 import {
   Designer
-} from "./chunk.KU6WGHRP.js";
+} from "./chunk.KU62VLN2.js";
 import {
   Liveboard
 } from "./chunk.7H47GGVV.js";
@@ -671,7 +671,6 @@ var FetchService = class {
   handleSuccess(response) {
     var _a, _b;
     if ((_a = response.headers) == null ? void 0 : _a["authorization"]) {
-      console.log("handleSucces this === ", this);
       this.jwt = response.headers["authorization"].replace("bearer ", "");
     }
     if ((_b = response.headers) == null ? void 0 : _b["folloze-session-guid"]) {

@@ -24,7 +24,7 @@ export declare class Designer {
      * @param {string} query
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getQueryImageGallery(query: string): Promise<GalleryImage[]>;
+    getQueryImageGallery(query: string, count?: number): Promise<GalleryImage[]>;
     /**
      * Fetches all the parameters required to upload a file
      *
