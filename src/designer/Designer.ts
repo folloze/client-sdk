@@ -104,8 +104,8 @@ export class Designer {
      * @param {string} query
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    getQueryImageGallery(query: string): Promise<GalleryImage[]> {
-        return this.getImageGallery({type: "search", query, count: 20});
+    getQueryImageGallery(query: string, count?: number): Promise<GalleryImage[]> {
+        return this.getImageGallery({type: "search", query, count});
     }
 
     /**
