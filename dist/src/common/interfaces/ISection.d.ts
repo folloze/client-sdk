@@ -1,6 +1,6 @@
 import { GridPos } from "./IPositions";
 import { FlzEditableImageData } from "../../designer/IDesignerTypes";
-import { WidgetConfig } from "./IWidget";
+import { FloatingWidgetConfig, WidgetConfig } from "./IWidget";
 export declare type AddListItem = {
     category: string;
     type: string;
@@ -15,7 +15,7 @@ export interface SectionListItem extends AddListItem {
 }
 export interface WidgetListItem extends AddListItem {
     type: WidgetType;
-    config: WidgetConfig;
+    config: WidgetConfig | FloatingWidgetConfig;
 }
 export declare type SectionType = "header" | "footer" | "body";
 export declare type WidgetType = "contact-card" | string;

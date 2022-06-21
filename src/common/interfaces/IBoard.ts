@@ -20,6 +20,7 @@ export type BoardConfig = {
 
 export type PageConfig = {
     name: "default" | string;
+    displayName?: string;
     grid: {
         maxWidth: string; // 1024px ?
         gap: {x: string; y: string};

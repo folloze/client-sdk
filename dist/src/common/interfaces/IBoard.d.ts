@@ -17,6 +17,7 @@ export declare type BoardConfig = {
 };
 export declare type PageConfig = {
     name: "default" | string;
+    displayName?: string;
     grid: {
         maxWidth: string;
         gap: {
