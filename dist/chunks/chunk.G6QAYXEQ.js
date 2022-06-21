@@ -26,7 +26,6 @@ var Designer = class {
   }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
-      payload.count = 2;
       this.fetcher.get("/api/v1/image_gallery", { params: __spreadValues({}, keysToSnakeCase(payload)) }).then((result) => {
         resolve(result.data);
       }).catch((e) => {
