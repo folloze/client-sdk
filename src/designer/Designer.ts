@@ -54,7 +54,6 @@ export class Designer {
      */
     private getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
-            payload.count = 2;
             this.fetcher
                 .get<GalleryImage[]>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
                 .then(result => {
