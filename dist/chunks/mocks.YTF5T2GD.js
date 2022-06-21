@@ -539,6 +539,7 @@ var rules = (mock) => {
               pages: {
                 default: {
                   name: "default",
+                  displayName: "Main Page",
                   grid: {
                     maxWidth: "1024px",
                     gap: { x: "0", y: "0" },
@@ -600,6 +601,7 @@ var rules = (mock) => {
           pages: {
             default: {
               name: "default",
+              displayName: "Main Page",
               grid: {
                 maxWidth: "1024px",
                 gap: { x: "0", y: "0" },
@@ -623,6 +625,7 @@ var rules = (mock) => {
           pages: {
             default: {
               name: "default",
+              displayName: "Main Page",
               grid: {
                 maxWidth: "1024px",
                 gap: { x: "0", y: "0" },

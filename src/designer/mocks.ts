@@ -16,7 +16,7 @@ import {
     PublishedUnpublishedConfig,
     ConfigSavedSuccess,
     MergeTagAttribute,
-    MergeTagValue
+    MergeTagValue,
 } from "./IDesignerTypes";
 import {Board} from "../common/interfaces/IBoard";
 
@@ -596,6 +596,7 @@ export const rules = (mock: MockAdapter) => {
                                 pages: {
                                     default: {
                                         name: "default",
+                                        displayName: "Main Page",
                                         grid: {
                                             maxWidth: "1024px",
                                             gap: {x: "0", y: "0"},
@@ -663,6 +664,7 @@ export const rules = (mock: MockAdapter) => {
                     pages: {
                         default: {
                             name: "default",
+                            displayName: "Main Page",
                             grid: {
                                 maxWidth: "1024px",
                                 gap: {x: "0", y: "0"},
@@ -686,6 +688,7 @@ export const rules = (mock: MockAdapter) => {
                     pages: {
                         default: {
                             name: "default",
+                            displayName: "Main Page",
                             grid: {
                                 maxWidth: "1024px",
                                 gap: {x: "0", y: "0"},
@@ -768,14 +771,14 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onGet(/api\/v1\/merge_tags\/(\d+)\/merge_tags_lookups/).reply<Record<number, MergeTagValue[]>>(200, {
         1: [
-        {
-            id: "any value",
-            name: "any value"
-        },
-        {
-            id: "first value",
-            name: "First Value"
-        },
-       ]
+            {
+                id: "any value",
+                name: "any value",
+            },
+            {
+                id: "first value",
+                name: "First Value",
+            },
+        ],
     });
 };
