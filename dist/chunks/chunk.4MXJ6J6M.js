@@ -63,7 +63,7 @@ var Designer = class {
     });
   }
   getQueryImageGallery(query, count) {
-    return this.getImageGallery({ type: "search", query, count: count || 20 });
+    return this.getImageGallery({ type: "search", query, count: count || 2 });
   }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
