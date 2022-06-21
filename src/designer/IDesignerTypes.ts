@@ -75,6 +75,7 @@ export type ImageGalleryParams = {
     query?: string; // search
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategoryType; // imageBank
+    count?: number;
 };
 
 export type UploadUrlResponseV1 = {

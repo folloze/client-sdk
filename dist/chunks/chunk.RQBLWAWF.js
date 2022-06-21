@@ -62,8 +62,8 @@ var Designer = class {
       type: "campaign"
     });
   }
-  getQueryImageGallery(query) {
-    return this.getImageGallery({ type: "search", query });
+  getQueryImageGallery(query, count) {
+    return this.getImageGallery({ type: "search", query, count: count || 20 });
   }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
