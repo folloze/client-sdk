@@ -26,8 +26,6 @@ var Designer = class {
   }
   getImageGallery(payload) {
     return new Promise((resolve, reject) => {
-      console.log("payload: ", payload);
-      payload.count = 20;
       this.fetcher.get("/api/v1/image_gallery", { params: __spreadValues({}, keysToSnakeCase(payload)) }).then((result) => {
         resolve(result.data);
       }).catch((e) => {
@@ -65,7 +63,7 @@ var Designer = class {
     });
   }
   getQueryImageGallery(query, count) {
-    return this.getImageGallery({ type: "search", query, count });
+    return this.getImageGallery({ type: "search", query, count: count || 20 });
   }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {
