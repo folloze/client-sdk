@@ -2,27 +2,38 @@ import {GridPos} from "./IPositions";
 import {FlzEditableImageData} from "../../designer/IDesignerTypes";
 import {WidgetConfig} from "./IWidget";
 
-export type SectionType = "header" | "footer" | "body";
-
-export type SectionConfig = {
-    id: string;
-    name?: string;
-    type?: SectionType;
-};
-
-export type SectionListItem = {
+export type AddListItem = {
     category: string;
-    type: SectionType;
-    config: PredefinedSection;
+    type: string;
+    config: any;
     description: string;
     image: string;
     name: string;
 };
 
+export interface SectionListItem extends AddListItem {
+    type: SectionType;
+    config: PredefinedSection;
+}
+
+export interface WidgetListItem extends AddListItem {
+    type: WidgetType;
+    config: WidgetConfig;
+}
+
+export type SectionType = "header" | "footer" | "body";
+export type WidgetType = "contact-card" | string;
+
 export type PredefinedSection = {
     sections: Record<string, SectionConfig>;
     widgets?: Record<string, WidgetConfig>;
     ribbons?: Record<string, RibbonConfig>;
+};
+
+export type SectionConfig = {
+    id: string;
+    name?: string;
+    type?: SectionType;
 };
 
 export type BackgroundImage = {
