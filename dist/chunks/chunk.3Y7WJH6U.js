@@ -9,7 +9,7 @@ import {
 } from "./chunk.RQBLWAWF.js";
 import {
   Liveboard
-} from "./chunk.7H47GGVV.js";
+} from "./chunk.SISSCIDI.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -634,6 +634,7 @@ var defaultFetcherOptions = {
 };
 var FetchService = class {
   constructor(options) {
+    var _a, _b;
     this.useMock = options.useMock;
     this.options = options;
     this.organizationId = options.organizationId;
@@ -642,6 +643,10 @@ var FetchService = class {
     }
     if (options.jwt) {
       this.jwt = options.jwt;
+    }
+    const token = typeof window !== "undefined" && ((_a = window["FollozeState"].initialState) == null ? void 0 : _a.token) ? (_b = window["FollozeState"].initialState) == null ? void 0 : _b.token : void 0;
+    if (token) {
+      this.urlToken = token;
     }
   }
   static async create(options) {

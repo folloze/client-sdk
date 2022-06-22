@@ -13,7 +13,7 @@ describe("test liveboard mocks module", () => {
     });
 
     it("checks that getSellerInformation mock works as expected", async () => {
-        await sdk.liveboard.getSellerInformation(1, "abcd").then(result => expect(result.email).toContain("@"));
+        await sdk.liveboard.getSellerInformation(1).then(result => expect(result.email).toContain("@"));
     });
 
     it("checks that getCategory mock works as expected", async () => {
@@ -122,10 +122,14 @@ describe("test liveboard mocks module", () => {
     });
 
     it("checks that campaign element privacy message mock works as expected", async () => {
-        await sdk.liveboard.getPrivacyMessage(1, 1).then(result => expect(result.name).toEqual("Standard Privacy Message"));
+        await sdk.liveboard
+            .getPrivacyMessage(1, 1)
+            .then(result => expect(result.name).toEqual("Standard Privacy Message"));
     });
 
     it("checks that campaign element form privacy message mock works as expected", async () => {
-        await sdk.liveboard.getFormPrivacyMessage(1, 1).then(result => expect(result.name).toEqual("form privacy message"));
+        await sdk.liveboard
+            .getFormPrivacyMessage(1, 1)
+            .then(result => expect(result.name).toEqual("form privacy message"));
     });
 });

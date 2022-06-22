@@ -12,6 +12,7 @@ import {
 var Liveboard = class {
   constructor(fetch) {
     this.fetcher = fetch.fetcher;
+    this.urlToken = fetch.urlToken;
   }
   getBoard(boardSlug) {
     return new Promise((resolve, reject) => {
@@ -23,12 +24,14 @@ var Liveboard = class {
       });
     });
   }
-  getSellerInformation(boardId, token) {
+  getSellerInformation(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/boards/${boardId}/presenter`, { params: { token } }).then((result) => {
+      this.fetcher.get(`/live_board/v1/boards/${boardId}/presenter`, {
+        params: { token: this.urlToken }
+      }).then((result) => {
         if (result.status == 206) {
           setTimeout(() => {
-            this.getSellerInformation(boardId, token).then(resolve).catch(reject);
+            this.getSellerInformation(boardId).then(resolve).catch(reject);
           }, 2e3);
         } else {
           resolve(result.data);

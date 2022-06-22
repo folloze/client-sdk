@@ -22,7 +22,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.BNXQAYE4.js";
+} from "./chunks/chunk.3Y7WJH6U.js";
 import "./chunks/chunk.NG7TLSQO.js";
 import {
   Analytics,
@@ -35,7 +35,7 @@ import {
 } from "./chunks/chunk.RQBLWAWF.js";
 import {
   Liveboard
-} from "./chunks/chunk.7H47GGVV.js";
+} from "./chunks/chunk.SISSCIDI.js";
 import {
   CampaignElementsTypes
 } from "./chunks/chunk.G52EPVC6.js";

@@ -17,6 +17,7 @@ export declare class FetchService {
     private sessionGuid;
     private jwt;
     organizationId: number;
+    urlToken: string;
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;

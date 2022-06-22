@@ -45,6 +45,7 @@ export class FetchService {
     private sessionGuid: String;
     private jwt: String;
     public organizationId: number;
+    public urlToken: string;
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
@@ -55,6 +56,14 @@ export class FetchService {
         }
         if (options.jwt) {
             this.jwt = options.jwt;
+        }
+
+        const token =
+            typeof window !== "undefined" && window["FollozeState"].initialState?.token
+                ? window["FollozeState"].initialState?.token
+                : undefined;
+        if (token) {
+            this.urlToken = token;
         }
     }
 

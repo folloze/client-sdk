@@ -1,23 +1,23 @@
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2 } from './ILiveboardTypes';
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2 } from "./ILiveboardTypes";
 export declare class Liveboard {
     private fetcher;
+    private urlToken;
     constructor(fetch: FetchService);
     /**
-    * given the board slug (i.e. /best-board) it will retrieve the corresponding board
-    *
-    * @param {string} boardSlug the board's slug
-    * @returns {BoardResponseV1} BoardResponse
-    */
+     * given the board slug (i.e. /best-board) it will retrieve the corresponding board
+     *
+     * @param {string} boardSlug the board's slug
+     * @returns {BoardResponseV1} BoardResponse
+     */
     getBoard(boardSlug: string): Promise<BoardResponseV1>;
     /**
      * gets the seller to be displayed for the board
      *
      * @param {number} boardId the board's id
-     * @param {string=} token
      * @returns {BoardSellerResponseV1} BoardSellerResponse
      */
-    getSellerInformation(boardId: number, token?: string): Promise<BoardSellerResponseV1>;
+    getSellerInformation(boardId: number): Promise<BoardSellerResponseV1>;
     /**
      * gets category by id, board id, and slug
      *

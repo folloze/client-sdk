@@ -1,36 +1,53 @@
-import { AxiosInstance } from "axios";
+import {AxiosInstance} from "axios";
 import {keysToSnakeCase} from "../common/helpers/helpers";
-import { FetchService } from "../common/FetchService";
+import {FetchService} from "../common/FetchService";
 import {
-    BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2,
-    UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1,
-    ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1,
-    LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2,
-    LiveEventUrlsResponseV2, OrganizationSettingsResponseV1,
-    ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1,
-    CampaignElementDataV2
-} from './ILiveboardTypes';
-import {
-    CampaignElementsTypes,
-} from "../designer/IDesignerTypes";
+    BoardResponseV1,
+    BoardSellerResponseV1,
+    CategoryResponseV2,
+    CategoriesResponseV2,
+    UserChatResponseV1,
+    ItemResponseV2,
+    ItemsResponseV2,
+    HasItemResponseV2,
+    SnapshotUrlResponseV1,
+    ItemAnalysisResponseV1,
+    ItemFileMetadataResponseV1,
+    GeoLocationResponseV1,
+    LeadResponseV1,
+    JourneyItemsResponseV2,
+    ItemDownloadUrlSuccessResponseV2,
+    ItemDownloadUrlFailedResponseV2,
+    LiveEventUrlsResponseV2,
+    OrganizationSettingsResponseV1,
+    ItemsParams,
+    JourneyItemParams,
+    CookieConsentParams,
+    FormMetadataDataV1,
+    CampaignElementDataV2,
+} from "./ILiveboardTypes";
+import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 
 export class Liveboard {
     private fetcher: AxiosInstance;
+    private urlToken: string;
 
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
+        this.urlToken = fetch.urlToken;
     }
 
     /**
-    * given the board slug (i.e. /best-board) it will retrieve the corresponding board
-    *
-    * @param {string} boardSlug the board's slug
-    * @returns {BoardResponseV1} BoardResponse
-    */
+     * given the board slug (i.e. /best-board) it will retrieve the corresponding board
+     *
+     * @param {string} boardSlug the board's slug
+     * @returns {BoardResponseV1} BoardResponse
+     */
     getBoard(boardSlug: string): Promise<BoardResponseV1> {
         // TODO - remove all promises as Axios already returns a promise
         return new Promise((resolve, reject) => {
-            this.fetcher.get<BoardResponseV1>(`/live_board/v1/boards/${boardSlug}/`)
+            this.fetcher
+                .get<BoardResponseV1>(`/live_board/v1/boards/${boardSlug}/`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -46,24 +63,20 @@ export class Liveboard {
      * gets the seller to be displayed for the board
      *
      * @param {number} boardId the board's id
-     * @param {string=} token
      * @returns {BoardSellerResponseV1} BoardSellerResponse
      */
-    getSellerInformation(boardId: number, token?: string): Promise<BoardSellerResponseV1> {
+    getSellerInformation(boardId: number): Promise<BoardSellerResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<BoardSellerResponseV1>(
-                `/live_board/v1/boards/${boardId}/presenter`,
-                {params: {token}}
-            )
+            this.fetcher
+                .get<BoardSellerResponseV1>(`/live_board/v1/boards/${boardId}/presenter`, {
+                    params: {token: this.urlToken},
+                })
                 .then(result => {
-                    if(result.status == 206) {
+                    if (result.status == 206) {
                         setTimeout(() => {
-                            this.getSellerInformation(boardId, token)
-                            .then(resolve)
-                          . catch(reject);
+                            this.getSellerInformation(boardId).then(resolve).catch(reject);
                         }, 2000);
-                    }
-                    else {
+                    } else {
                         resolve(result.data);
                     }
                 })
@@ -84,15 +97,13 @@ export class Liveboard {
      */
     getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<CategoryResponseV2>(
-                `/live_board/v2/categories/${categoryIdOrSlug}`,
-                {
+            this.fetcher
+                .get<CategoryResponseV2>(`/live_board/v2/categories/${categoryIdOrSlug}`, {
                     params: {
                         board_id: boardId,
-                        by_slug: bySlug
-                    }
-                }
-            )
+                        by_slug: bySlug,
+                    },
+                })
                 .then(result => {
                     resolve(result.data);
                 })
@@ -111,7 +122,8 @@ export class Liveboard {
      */
     getCategories(boardId: number): Promise<CategoriesResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<CategoriesResponseV2>(`/live_board/v2/boards/${boardId}/categories`)
+            this.fetcher
+                .get<CategoriesResponseV2>(`/live_board/v2/boards/${boardId}/categories`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -132,13 +144,11 @@ export class Liveboard {
      */
     getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<UserChatResponseV1>(
-                "/live_board/v1/chat/user_chat",
-                {
+            this.fetcher
+                .post<UserChatResponseV1>("/live_board/v1/chat/user_chat", {
                     board_id: boardId,
-                    lead_id: leadId
-                }
-            )
+                    lead_id: leadId,
+                })
                 .then(result => {
                     resolve(result.data);
                 })
@@ -159,11 +169,12 @@ export class Liveboard {
      * @param {boolean} bySlug
      * @returns {ItemResponseV2} ItemResponse
      */
-    getItem(itemId: number|string, boardId: number, bySlug: boolean): Promise<ItemResponseV2> {
-        return new Promise(((resolve, reject) => {
-            this.fetcher.get(`/live_board/v2/items/${itemId}`, {
-                params: { by_slug: bySlug, board_id: boardId }
-            })
+    getItem(itemId: number | string, boardId: number, bySlug: boolean): Promise<ItemResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/live_board/v2/items/${itemId}`, {
+                    params: {by_slug: bySlug, board_id: boardId},
+                })
                 .then(result => {
                     resolve(result.data);
                 })
@@ -171,7 +182,7 @@ export class Liveboard {
                     console.error("could not get item", e);
                     reject(e);
                 });
-        }));
+        });
     }
 
     /**
@@ -182,19 +193,14 @@ export class Liveboard {
      */
     getItems(params: ItemsParams): Promise<ItemsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(
-                `/live_board/v2/boards/${params.boardId}/items`,
-                keysToSnakeCase(params)
-            )
+            this.fetcher
+                .post(`/live_board/v2/boards/${params.boardId}/items`, keysToSnakeCase(params))
                 .then(result => {
-                    if(result.status == 206) {
+                    if (result.status == 206) {
                         setTimeout(() => {
-                            this.getItems(params)
-                            .then(resolve)
-                        . catch(reject);
+                            this.getItems(params).then(resolve).catch(reject);
                         }, 2000);
-                    }
-                    else {
+                    } else {
                         resolve(result.data);
                     }
                 })
@@ -213,16 +219,14 @@ export class Liveboard {
      */
     getHasItems(boardId: number): Promise<HasItemResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v2/boards/${boardId}/items_presence`)
+            this.fetcher
+                .get(`/live_board/v2/boards/${boardId}/items_presence`)
                 .then(result => {
-                    if(result.status == 206) {
+                    if (result.status == 206) {
                         setTimeout(() => {
-                            this.getHasItems(boardId)
-                            .then(resolve)
-                        . catch(reject);
+                            this.getHasItems(boardId).then(resolve).catch(reject);
                         }, 2000);
-                    }
-                    else {
+                    } else {
                         resolve(result.data);
                     }
                 })
@@ -240,8 +244,11 @@ export class Liveboard {
      */
     likeItem(itemId: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<void>(`/live_board/v2/items/${itemId}/likes`)
-                .then(() => { resolve(); })
+            this.fetcher
+                .post<void>(`/live_board/v2/items/${itemId}/likes`)
+                .then(() => {
+                    resolve();
+                })
                 .catch(e => {
                     console.error("could not like item", e);
                     reject(e);
@@ -258,10 +265,8 @@ export class Liveboard {
      */
     getJourneyItems(itemId: number, options: JourneyItemParams): Promise<JourneyItemsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<JourneyItemsResponseV2>(
-                `/live_board/v2/journeys/${itemId}`,
-                keysToSnakeCase(options)
-            )
+            this.fetcher
+                .post<JourneyItemsResponseV2>(`/live_board/v2/journeys/${itemId}`, keysToSnakeCase(options))
                 .then(result => {
                     resolve(result.data);
                 })
@@ -278,9 +283,10 @@ export class Liveboard {
      * @param {number} itemId
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
-    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2> {
+    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get(`/live_board/v2/items/${itemId}/downloads`)
+            this.fetcher
+                .get(`/live_board/v2/items/${itemId}/downloads`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -301,10 +307,8 @@ export class Liveboard {
      */
     createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<SnapshotUrlResponseV1>(
-                `/live_board/v1/content_items/${contentItemId}/snapshots`,
-                {guid}
-            )
+            this.fetcher
+                .post<SnapshotUrlResponseV1>(`/live_board/v1/content_items/${contentItemId}/snapshots`, {guid})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -323,7 +327,8 @@ export class Liveboard {
      */
     createItemAnalysis(contentItemId: number): Promise<ItemAnalysisResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<ItemAnalysisResponseV1>(`/live_board/v1/content_items/${contentItemId}/analyses`)
+            this.fetcher
+                .post<ItemAnalysisResponseV1>(`/live_board/v1/content_items/${contentItemId}/analyses`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -342,16 +347,14 @@ export class Liveboard {
      */
     getFileMetadata(contentItemId: number): Promise<ItemFileMetadataResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<ItemFileMetadataResponseV1>(`/live_board/v1/content_items/${contentItemId}/files`)
+            this.fetcher
+                .get<ItemFileMetadataResponseV1>(`/live_board/v1/content_items/${contentItemId}/files`)
                 .then(result => {
-                    if(result.status == 206) {
+                    if (result.status == 206) {
                         setTimeout(() => {
-                            this.getFileMetadata(contentItemId)
-                            .then(resolve)
-                        . catch(reject);
+                            this.getFileMetadata(contentItemId).then(resolve).catch(reject);
                         }, 2000);
-                    }
-                    else {
+                    } else {
                         resolve(result.data);
                     }
                 })
@@ -372,10 +375,8 @@ export class Liveboard {
      */
     setCookiesConsent(boardId: number, options: CookieConsentParams): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(
-                `/live_board/v1/boards/${boardId}/cookies_consents`,
-                {...keysToSnakeCase(options)}
-            )
+            this.fetcher
+                .post(`/live_board/v1/boards/${boardId}/cookies_consents`, {...keysToSnakeCase(options)})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -394,11 +395,14 @@ export class Liveboard {
      */
     updateEnrichment(type: string, enrichmentData: object): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<void>("/live_board/v2/enrichments", {
-                type,
-                enrichment_data: enrichmentData
-            })
-                .then(() => { resolve(); })
+            this.fetcher
+                .post<void>("/live_board/v2/enrichments", {
+                    type,
+                    enrichment_data: enrichmentData,
+                })
+                .then(() => {
+                    resolve();
+                })
                 .catch(e => {
                     console.error("could not update enrichment", e);
                     reject(e);
@@ -413,7 +417,8 @@ export class Liveboard {
      */
     getGeoLocation(): Promise<GeoLocationResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<GeoLocationResponseV1>("/live_board/v1/geo_location")
+            this.fetcher
+                .get<GeoLocationResponseV1>("/live_board/v1/geo_location")
                 .then(result => {
                     resolve(result.data);
                 })
@@ -433,7 +438,8 @@ export class Liveboard {
      */
     getCurrentLead(): Promise<LeadResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<LeadResponseV1>("/live_board/v1/leads/me")
+            this.fetcher
+                .get<LeadResponseV1>("/live_board/v1/leads/me")
                 .then(result => {
                     resolve(result.data);
                 })
@@ -451,8 +457,11 @@ export class Liveboard {
      */
     validateLead(boardId: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post<void>("/live_board/v2/lead_validations", {board_id: boardId})
-                .then(() => { resolve(); })
+            this.fetcher
+                .post<void>("/live_board/v2/lead_validations", {board_id: boardId})
+                .then(() => {
+                    resolve();
+                })
                 .catch(e => {
                     console.error("could not validate lead", e);
                     reject(e);
@@ -467,7 +476,8 @@ export class Liveboard {
      */
     stopTrackingForSession(): Promise<LeadResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.delete<LeadResponseV1>("/live_board/v2/track_leads")
+            this.fetcher
+                .delete<LeadResponseV1>("/live_board/v2/track_leads")
                 .then(result => {
                     resolve(result.data);
                 })
@@ -486,7 +496,8 @@ export class Liveboard {
      */
     getLiveEventUrls(boardId: number): Promise<LiveEventUrlsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<LiveEventUrlsResponseV2>(`/live_board/v2/boards/${boardId}/live_event`)
+            this.fetcher
+                .get<LiveEventUrlsResponseV2>(`/live_board/v2/boards/${boardId}/live_event`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -505,7 +516,8 @@ export class Liveboard {
      */
     getOrganizationSettings(boardId: number): Promise<OrganizationSettingsResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher.get<OrganizationSettingsResponseV1>(`/live_board/v1/boards/${boardId}/organization_settings`)
+            this.fetcher
+                .get<OrganizationSettingsResponseV1>(`/live_board/v1/boards/${boardId}/organization_settings`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -524,7 +536,8 @@ export class Liveboard {
      */
     setSessionCookie(boardId: number): Promise<number> {
         return new Promise((resolve, reject) => {
-            this.fetcher.post(`/live_board/v1/boards/${boardId}/session_cookies`)
+            this.fetcher
+                .post(`/live_board/v1/boards/${boardId}/session_cookies`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -540,8 +553,8 @@ export class Liveboard {
             this.fetcher
                 .get<FormMetadataDataV1>(`/live_board/v2/boards/${boardId}/forms/${formId}`, {
                     params: {
-                        privacy_message_id: privacyMessageId
-                    }
+                        privacy_message_id: privacyMessageId,
+                    },
                 })
                 .then(result => {
                     resolve(result.data);
@@ -553,12 +566,8 @@ export class Liveboard {
         });
     }
 
-
     //Campaign Elements
-    getPrivacyMessage(
-        boardId: number,
-        elementId: number
-    ): Promise<CampaignElementDataV2> {
+    getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
@@ -572,10 +581,7 @@ export class Liveboard {
         });
     }
 
-    getFooter(
-        boardId: number,
-        elementId: number
-    ): Promise<CampaignElementDataV2> {
+    getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
@@ -589,10 +595,7 @@ export class Liveboard {
         });
     }
 
-    getFormPrivacyMessage(
-        boardId: number,
-        elementId: number
-    ): Promise<CampaignElementDataV2> {
+    getFormPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
