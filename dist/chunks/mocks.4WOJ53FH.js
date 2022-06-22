@@ -35,16 +35,16 @@ var rules = (mock) => {
     name: "board",
     is_ssl: true
   });
-  mock.onGet("/live_board/v1/boards/1/presenter").reply(200, {
-    name: "Jane",
-    last_name: "Doe",
-    email: "mock@email.com",
-    phone: "050-1234567",
-    headline: "headline",
-    company: "company",
-    photo: "image_url",
-    twitter: "twitter",
-    linkedin: "linkedin"
+  mock.onGet(/\/live_board\/v1\/boards\/(\d+)\/presenter/).reply(200, {
+    company: "Folloze",
+    email: "itamarg@folloze.com",
+    headline: "VP of R&D",
+    last_name: "Golan",
+    linkedin: "https://www.linkedin.com/in/itamar-golan-014b9789/",
+    name: "Itamar",
+    phone: "054-3423804",
+    photo: "//images.folloze.com/image/upload/fifb4zu6yfam4bzx0vdm.jpg",
+    twitter: "itamarGolan1"
   });
   mock.onGet("/live_board/v2/categories/1").reply(200, {
     id: 1,

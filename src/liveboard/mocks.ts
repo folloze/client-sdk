@@ -21,7 +21,7 @@ import {
     OrganizationSettingsResponseV1,
     SessionResponseV1,
     FormMetadataDataV1,
-    CampaignElementDataV2
+    CampaignElementDataV2,
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -58,16 +58,16 @@ export const rules = (mock: MockAdapter) => {
         is_ssl: true,
     });
 
-    mock.onGet("/live_board/v1/boards/1/presenter").reply<BoardSellerResponseV1>(200, {
-        name: "Jane",
-        last_name: "Doe",
-        email: "mock@email.com",
-        phone: "050-1234567",
-        headline: "headline",
-        company: "company",
-        photo: "image_url",
-        twitter: "twitter",
-        linkedin: "linkedin",
+    mock.onGet(/\/live_board\/v1\/boards\/(\d+)\/presenter/).reply<BoardSellerResponseV1>(200, {
+        company: "Folloze",
+        email: "itamarg@folloze.com",
+        headline: "VP of R&D",
+        last_name: "Golan",
+        linkedin: "https://www.linkedin.com/in/itamar-golan-014b9789/",
+        name: "Itamar",
+        phone: "054-3423804",
+        photo: "//images.folloze.com/image/upload/fifb4zu6yfam4bzx0vdm.jpg",
+        twitter: "itamarGolan1",
     });
 
     mock.onGet("/live_board/v2/categories/1").reply<CategoryResponseV2>(200, {
@@ -302,69 +302,65 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost("/live_board/v1/boards/1/session_cookies").reply<number>(200, 1);
 
-    mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/)
-        .reply<FormMetadataDataV1>(200, {
-            form: {
-                form_type: 1,
-                form_title: "form title",
-                submit_label: "form submit label",
-                success_message: "form success message",
-                submit_redirect_url: "https://www.folloze.com",
-                fields: {
-                    name: {
-                        label: "Name",
-                        order: 1,
-                        placeholder: "First Name",
-                        state: "optional",
-                        type: "text",
-                    },
-                    email: {
-                        label: "Email",
-                        order: 2,
-                        placeholder: "your@email.here",
-                        state: "required",
-                        type: "email"
-                    }
+    mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/).reply<FormMetadataDataV1>(200, {
+        form: {
+            form_type: 1,
+            form_title: "form title",
+            submit_label: "form submit label",
+            success_message: "form success message",
+            submit_redirect_url: "https://www.folloze.com",
+            fields: {
+                name: {
+                    label: "Name",
+                    order: 1,
+                    placeholder: "First Name",
+                    state: "optional",
+                    type: "text",
                 },
-                script: "",
-                auto_fill: true,
-                munchkin_id: "170-ADG-863",
-                form_id: "5",
-                base_url: "//app-sj25.marketo.com",
-                custom_script: ""
+                email: {
+                    label: "Email",
+                    order: 2,
+                    placeholder: "your@email.here",
+                    state: "required",
+                    type: "email",
+                },
             },
-            privacy_message: {
-                is_standard: true,
-                message: {
-                    html: "<div>I'm a privacy message data</div>"
-                },
-                text_area: {
-                    html: "<div>I'm a privacy text area data</div>"
-                },
-                checkbox_area: {
-                    threshold: 1,
-                    label: "checkbox label",
-                    checkboxes: [
-                        {
-                            label: "first checkbox",
-                            name: "first_checkbox",
-                            is_required: false
-                        },
-                        {
-                            label: "second checkbox",
-                            name: "second_checkbox",
-                            is_required: true
-                        }
-                    ]
-                }
-            }
-        }
-    );
-
+            script: "",
+            auto_fill: true,
+            munchkin_id: "170-ADG-863",
+            form_id: "5",
+            base_url: "//app-sj25.marketo.com",
+            custom_script: "",
+        },
+        privacy_message: {
+            is_standard: true,
+            message: {
+                html: "<div>I'm a privacy message data</div>",
+            },
+            text_area: {
+                html: "<div>I'm a privacy text area data</div>",
+            },
+            checkbox_area: {
+                threshold: 1,
+                label: "checkbox label",
+                checkboxes: [
+                    {
+                        label: "first checkbox",
+                        name: "first_checkbox",
+                        is_required: false,
+                    },
+                    {
+                        label: "second checkbox",
+                        name: "second_checkbox",
+                        is_required: true,
+                    },
+                ],
+            },
+        },
+    });
 
     // campaign elements
-    mock.onGet(/live_board\/v2\/campaign_elements\/(\d+)/)
-    .reply<CampaignElementDataV2>(config => {
+    mock.onGet(/live_board\/v2\/campaign_elements\/(\d+)/).reply<CampaignElementDataV2>(config => {
         let data = {};
 
         if (config.params.element_type == "1") {
@@ -377,27 +373,27 @@ export const rules = (mock: MockAdapter) => {
                 is_standard: true,
                 logo: {
                     show: true,
-                    url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png"
+                    url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png",
                 },
                 text: "my footer text",
                 labels: [
                     {
                         text: "section",
-                        url: "https://www.folloze.com"
-                    }
+                        url: "https://www.folloze.com",
+                    },
                 ],
                 background_color: "organce",
                 show_in_item_view: true,
                 text_color: {
                     type: 0,
-                    color: "#eeeeee"
+                    color: "#eeeeee",
                 },
                 tracking_consent: {
                     show: true,
                     button_label: "Do not track me",
                     dialog_button_label: "my help text",
-                    dialog_text: "my dialog text"
-                }
+                    dialog_text: "my dialog text",
+                },
             };
         } else if (config.params.element_type == "2") {
             data = {
@@ -420,10 +416,10 @@ export const rules = (mock: MockAdapter) => {
                 state: 1,
                 is_standard: true,
                 message: {
-                    html: "<div>I'm a privacy message data</div>"
+                    html: "<div>I'm a privacy message data</div>",
                 },
                 text_area: {
-                    html: "<div>I'm a privacy text area data</div>"
+                    html: "<div>I'm a privacy text area data</div>",
                 },
                 checkbox_area: {
                     threshold: 1,
@@ -432,15 +428,15 @@ export const rules = (mock: MockAdapter) => {
                         {
                             label: "first checkbox",
                             name: "first_checkbox",
-                            is_required: false
+                            is_required: false,
                         },
                         {
                             label: "second checkbox",
                             name: "second_checkbox",
-                            is_required: true
-                        }
-                    ]
-                }
+                            is_required: true,
+                        },
+                    ],
+                },
             };
         }
 
