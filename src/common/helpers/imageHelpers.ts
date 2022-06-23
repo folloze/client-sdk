@@ -65,6 +65,7 @@ export class CloudinaryHelper {
             const originalUrl = urlParts[urlParts.length - 1];
             // fetch images have an external url which needs to be encoded to avoid errors
             const encodedUrl = encodeURIComponent(decodeURIComponent(originalUrl));
+            console.log("CLOUDINARY HELPER", originalUrl, encodedUrl);
             image.url = image.url.replace(originalUrl, encodedUrl);
         }
 

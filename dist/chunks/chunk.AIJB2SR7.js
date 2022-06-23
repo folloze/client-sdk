@@ -2833,6 +2833,7 @@ var CloudinaryHelper = class {
       const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
       const originalUrl = urlParts[urlParts.length - 1];
       const encodedUrl = encodeURIComponent(decodeURIComponent(originalUrl));
+      console.log("CLOUDINARY HELPER", originalUrl, encodedUrl);
       image.url = image.url.replace(originalUrl, encodedUrl);
     }
     const cldImage = this.getImage(image);
