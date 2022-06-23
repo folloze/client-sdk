@@ -60,6 +60,7 @@ export interface ILiveBoard extends LitElement {
     get widgets(): WidgetConfig[];
     get floatingWidgets(): FloatingWidgetConfig[];
     get widgetElements(): LiveWidget[];
+    get floatingWidgetElements(): LiveWidget[];
     get sections(): SectionConfig[];
     get ribbons(): RibbonConfig[];
     getWidget(id: string): WidgetConfig;
