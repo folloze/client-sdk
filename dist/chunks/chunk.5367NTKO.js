@@ -1160,6 +1160,7 @@ FloatEditor.styles = [
                 letter-spacing: 0;
                 text-align: left;
                 color: var(--edit-fz-color-neutral-0);
+                cursor: move;
             }
 
             #body {
