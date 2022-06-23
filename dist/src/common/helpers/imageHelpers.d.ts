@@ -1,7 +1,8 @@
 import { FlzEditableImageData, GalleryImage } from "../../designer/IDesignerTypes";
 export declare class CloudinaryHelper {
     private cloudinary;
-    private imagesDomain;
+    private flzImagesDomain;
+    private cloudinaryImagesDomain;
     private cloudinaryUrlRegex;
     private cloudinaryFetchUrlRegex;
     constructor();

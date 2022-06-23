@@ -2794,16 +2794,17 @@ function tint(value = "") {
 // src/common/helpers/imageHelpers.ts
 var CloudinaryHelper = class {
   constructor() {
-    this.imagesDomain = "images.folloze.com";
-    this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch|upload)/`);
-    this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch)/`);
+    this.flzImagesDomain = "images.folloze.com";
+    this.cloudinaryImagesDomain = "res.cloudinary.com/folloze";
+    this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`);
+    this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`);
     this.cloudinary = new Cloudinary({
       cloud: {
         cloudName: "folloze"
       },
       url: {
-        secureDistribution: this.imagesDomain,
-        cname: this.imagesDomain,
+        secureDistribution: this.flzImagesDomain,
+        cname: this.flzImagesDomain,
         secure: true,
         privateCdn: true
       }
@@ -2826,6 +2827,12 @@ var CloudinaryHelper = class {
     }
     if (!this.isCloudinaryImage(image.url)) {
       return image.url;
+    }
+    const isFetch = this.cloudinaryFetchUrlRegex.test(image.url);
+    if (isFetch) {
+      const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
+      const originalUrl = urlParts[urlParts.length - 1];
+      image.url = image.url.replace(originalUrl, encodeURIComponent(originalUrl));
     }
     const cldImage = this.getImage(image);
     if ((_a = image.transformation) == null ? void 0 : _a.crop) {
@@ -2860,7 +2867,7 @@ var CloudinaryHelper = class {
     }
     cldImage.format("auto").quality("auto");
     let imageUrl = cldImage.toURL();
-    if (this.cloudinaryFetchUrlRegex.test(image.url)) {
+    if (isFetch) {
       imageUrl = imageUrl.replace("/upload/", "/fetch/");
     }
     return imageUrl;
@@ -2870,7 +2877,7 @@ var CloudinaryHelper = class {
     return publicId.split("?")[0];
   }
   isCloudinaryImage(url) {
-    return url.startsWith(`https://${this.imagesDomain}`);
+    return url.startsWith(`https://${this.flzImagesDomain}`);
   }
 };
 

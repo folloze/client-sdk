@@ -9,25 +9,25 @@ import {tint} from "@cloudinary/url-gen/actions/adjust";
 
 export class CloudinaryHelper {
     private cloudinary: Cloudinary;
-    private imagesDomain: string;
+    private flzImagesDomain: string = "images.folloze.com";
+    private cloudinaryImagesDomain: string = "res.cloudinary.com/folloze";
     private cloudinaryUrlRegex: RegExp;
     private cloudinaryFetchUrlRegex: RegExp;
 
     constructor() {
-        this.imagesDomain = "images.folloze.com";
         this.cloudinaryUrlRegex = new RegExp(
-            `(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch|upload)/`,
+            `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`
         );
         this.cloudinaryFetchUrlRegex = new RegExp(
-            `(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch)/`,
+            `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
         );
         this.cloudinary = new Cloudinary({
             cloud: {
                 cloudName: "folloze",
             },
             url: {
-                secureDistribution: this.imagesDomain,
-                cname: this.imagesDomain,
+                secureDistribution: this.flzImagesDomain,
+                cname: this.flzImagesDomain,
                 secure: true,
                 privateCdn: true,
             },
@@ -58,6 +58,14 @@ export class CloudinaryHelper {
 
         if (!this.isCloudinaryImage(image.url)) {
             return image.url;
+        }
+
+        const isFetch = this.cloudinaryFetchUrlRegex.test(image.url);
+        if (isFetch) {
+            const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
+            const originalUrl = urlParts[urlParts.length - 1];
+            // fetch images have an external url which needs to be encoded to avoid errors
+            image.url = image.url.replace(originalUrl, encodeURIComponent(originalUrl));
         }
 
         const cldImage = this.getImage(image);
@@ -97,7 +105,7 @@ export class CloudinaryHelper {
         cldImage.format("auto").quality("auto");
         let imageUrl = cldImage.toURL();
         // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
-        if (this.cloudinaryFetchUrlRegex.test(image.url)) {
+        if (isFetch) {
             imageUrl = imageUrl.replace("/upload/", "/fetch/");
         }
         return imageUrl;
@@ -110,6 +118,6 @@ export class CloudinaryHelper {
     }
 
     private isCloudinaryImage(url: string) {
-        return url.startsWith(`https://${this.imagesDomain}`);
+        return url.startsWith(`https://${this.flzImagesDomain}`);
     }
 }
