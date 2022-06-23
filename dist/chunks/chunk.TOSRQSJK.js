@@ -2829,7 +2829,6 @@ var CloudinaryHelper = class {
       return image.url;
     }
     const isFetch = this.cloudinaryFetchUrlRegex.test(image.url);
-    console.log("Cloudinary helper", isFetch, image.url);
     if (isFetch) {
       const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
       const originalUrl = urlParts[urlParts.length - 1];
