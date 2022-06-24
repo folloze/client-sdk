@@ -61,24 +61,7 @@ export class CloudinaryHelper {
             return image.url;
         }
 
-        const isFetch = this.cloudinaryFetchUrlRegex.test(image.url);
-        if (isFetch) {
-            try {
-                // fetch images have an external url which needs to be encoded to avoid errors
-                const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
-                const originalUrl = urlParts[urlParts.length - 1];
-                const urlObj = new URL(originalUrl);
-                // Cloudinary will remove the search part of the query so we need to encode it
-                // decode before encoding for cases when it's already encoded
-                const encodedUrl = originalUrl.replace(urlObj.search, encodeURIComponent(decodeURIComponent(urlObj.search)));
-                // image.url = image.url.replace(originalUrl, encodedUrl);
-            } catch (e) {
-                console.error(e);
-            }
-        }
-
         const cldImage = this.getImage(image);
-        console.log("DIFFERENCE", image.url, cldImage.toURL());
         if (image.transformation?.crop) {
             const {x, y, width, height, aspect, radius} = image.transformation.crop;
             const cropTransformation = crop();
@@ -114,9 +97,22 @@ export class CloudinaryHelper {
         }
         cldImage.format("auto").quality("auto");
         let imageUrl = cldImage.toURL();
+
         // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
-        if (isFetch) {
+        if (this.cloudinaryFetchUrlRegex.test(image.url)) {
             imageUrl = imageUrl.replace("/upload/", "/fetch/");
+            let queryString = "";
+            try {
+                // fetch images might have a query string in the external url which is removed by cloudinary
+                // needs to be added after encoding to avoid errors
+                const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
+                const originalUrl = urlParts[urlParts.length - 1];
+                const urlObj = new URL(originalUrl);
+                queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
+            } catch (e) {
+                console.error(e);
+            }
+            imageUrl = imageUrl.concat(queryString);
         }
         return imageUrl;
     }

@@ -2829,19 +2829,7 @@ var CloudinaryHelper = class {
     if (!this.isCloudinaryImage(image.url)) {
       return image.url;
     }
-    const isFetch = this.cloudinaryFetchUrlRegex.test(image.url);
-    if (isFetch) {
-      try {
-        const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
-        const originalUrl = urlParts[urlParts.length - 1];
-        const urlObj = new URL(originalUrl);
-        const encodedUrl = originalUrl.replace(urlObj.search, encodeURIComponent(decodeURIComponent(urlObj.search)));
-      } catch (e6) {
-        console.error(e6);
-      }
-    }
     const cldImage = this.getImage(image);
-    console.log("DIFFERENCE", image.url, cldImage.toURL());
     if ((_a = image.transformation) == null ? void 0 : _a.crop) {
       const { x: x2, y: y2, width, height, aspect, radius } = image.transformation.crop;
       const cropTransformation = crop();
@@ -2874,8 +2862,18 @@ var CloudinaryHelper = class {
     }
     cldImage.format("auto").quality("auto");
     let imageUrl = cldImage.toURL();
-    if (isFetch) {
+    if (this.cloudinaryFetchUrlRegex.test(image.url)) {
       imageUrl = imageUrl.replace("/upload/", "/fetch/");
+      let queryString = "";
+      try {
+        const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
+        const originalUrl = urlParts[urlParts.length - 1];
+        const urlObj = new URL(originalUrl);
+        queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
+      } catch (e6) {
+        console.error(e6);
+      }
+      imageUrl = imageUrl.concat(queryString);
     }
     return imageUrl;
   }
