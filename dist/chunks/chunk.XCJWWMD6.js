@@ -2835,7 +2835,6 @@ var CloudinaryHelper = class {
         const originalUrl = urlParts[urlParts.length - 1];
         const urlObj = new URL(originalUrl);
         const encodedUrl = originalUrl.replace(urlObj.search, encodeURIComponent(decodeURIComponent(urlObj.search)));
-        image.url = image.url.replace(originalUrl, encodedUrl);
       } catch (e6) {
         console.error(e6);
       }

@@ -69,7 +69,7 @@ export class CloudinaryHelper {
                 const urlObj = new URL(originalUrl);
                 // decode before encoding for cases when it's already encoded
                 const encodedUrl = originalUrl.replace(urlObj.search, encodeURIComponent(decodeURIComponent(urlObj.search)));
-                image.url = image.url.replace(originalUrl, encodedUrl);
+                // image.url = image.url.replace(originalUrl, encodedUrl);
             } catch (e) {
                 console.error(e);
             }
