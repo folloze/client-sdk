@@ -30,7 +30,8 @@ export class CloudinaryHelper {
                 cname: this.flzImagesDomain,
                 secure: true,
                 privateCdn: true,
-            },
+                analytics: false
+            }
         });
     }
 
@@ -67,6 +68,7 @@ export class CloudinaryHelper {
                 const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
                 const originalUrl = urlParts[urlParts.length - 1];
                 const urlObj = new URL(originalUrl);
+                // Cloudinary will remove the search part of the query so we need to encode it
                 // decode before encoding for cases when it's already encoded
                 const encodedUrl = originalUrl.replace(urlObj.search, encodeURIComponent(decodeURIComponent(urlObj.search)));
                 // image.url = image.url.replace(originalUrl, encodedUrl);
