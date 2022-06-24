@@ -76,6 +76,7 @@ export class CloudinaryHelper {
         }
 
         const cldImage = this.getImage(image);
+        console.log("DIFFERENCE", image.url, cldImage.toURL());
         if (image.transformation?.crop) {
             const {x, y, width, height, aspect, radius} = image.transformation.crop;
             const cropTransformation = crop();

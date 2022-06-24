@@ -2841,6 +2841,7 @@ var CloudinaryHelper = class {
       }
     }
     const cldImage = this.getImage(image);
+    console.log("DIFFERENCE", image.url, cldImage.toURL());
     if ((_a = image.transformation) == null ? void 0 : _a.crop) {
       const { x: x2, y: y2, width, height, aspect, radius } = image.transformation.crop;
       const cropTransformation = crop();
