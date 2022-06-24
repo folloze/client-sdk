@@ -59,14 +59,20 @@ export class CloudinaryHelper {
         if (!this.isCloudinaryImage(image.url)) {
             return image.url;
         }
+
         const isFetch = this.cloudinaryFetchUrlRegex.test(image.url);
         if (isFetch) {
-            const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
-            const originalUrl = urlParts[urlParts.length - 1];
-            // fetch images have an external url which needs to be encoded to avoid errors
-            const encodedUrl = encodeURIComponent(decodeURIComponent(originalUrl));
-            console.log("CLOUDINARY HELPER", originalUrl, encodedUrl);
-            image.url = image.url.replace(originalUrl, encodedUrl);
+            try {
+                // fetch images have an external url which needs to be encoded to avoid errors
+                const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
+                const originalUrl = urlParts[urlParts.length - 1];
+                const urlObj = new URL(originalUrl);
+                // decode before encoding for cases when it's already encoded
+                const encodedUrl = originalUrl.replace(urlObj.search, encodeURIComponent(decodeURIComponent(urlObj.search)));
+                image.url = image.url.replace(originalUrl, encodedUrl);
+            } catch (e) {
+                console.error(e);
+            }
         }
 
         const cldImage = this.getImage(image);
