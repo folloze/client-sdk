@@ -11,16 +11,14 @@ export class CloudinaryHelper {
     private cloudinary: Cloudinary;
     private flzImagesDomain: string = "images.folloze.com";
     private cloudinaryImagesDomain: string = "res.cloudinary.com/folloze";
-    private cloudinaryUrlRegex: RegExp;
-    private cloudinaryFetchUrlRegex: RegExp;
+    private cloudinaryUrlRegex: RegExp = new RegExp(
+        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`
+    );
+    private cloudinaryFetchUrlRegex: RegExp = new RegExp(
+        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
+    );
 
     constructor() {
-        this.cloudinaryUrlRegex = new RegExp(
-            `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`
-        );
-        this.cloudinaryFetchUrlRegex = new RegExp(
-            `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
-        );
         this.cloudinary = new Cloudinary({
             cloud: {
                 cloudName: "folloze",
@@ -105,8 +103,7 @@ export class CloudinaryHelper {
             try {
                 // fetch images might have a query string in the external url which is removed by cloudinary
                 // needs to be added after encoding to avoid errors
-                const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
-                const originalUrl = urlParts[urlParts.length - 1];
+                const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
                 const urlObj = new URL(originalUrl);
                 queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
             } catch (e) {
@@ -124,6 +121,6 @@ export class CloudinaryHelper {
     }
 
     private isCloudinaryImage(url: string) {
-        return url.startsWith(`https://${this.flzImagesDomain}`);
+        return this.cloudinaryUrlRegex.test(url);
     }
 }

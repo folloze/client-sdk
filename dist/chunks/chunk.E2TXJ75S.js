@@ -2867,8 +2867,7 @@ var CloudinaryHelper = class {
       imageUrl = imageUrl.replace("/upload/", "/fetch/");
       let queryString = "";
       try {
-        const urlParts = image.url.split(this.cloudinaryFetchUrlRegex);
-        const originalUrl = urlParts[urlParts.length - 1];
+        const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
         const urlObj = new URL(originalUrl);
         queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
       } catch (e6) {
@@ -2883,7 +2882,7 @@ var CloudinaryHelper = class {
     return publicId.split("?")[0];
   }
   isCloudinaryImage(url) {
-    return url.startsWith(`https://${this.flzImagesDomain}`);
+    return this.cloudinaryUrlRegex.test(url);
   }
 };
 
