@@ -2795,18 +2795,20 @@ function tint(value = "") {
 // src/common/helpers/imageHelpers.ts
 var CloudinaryHelper = class {
   constructor() {
-    this.imagesDomain = "images.folloze.com";
-    this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch|upload)/`);
-    this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch)/`);
+    this.flzImagesDomain = "images.folloze.com";
+    this.cloudinaryImagesDomain = "res.cloudinary.com/folloze";
+    this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`);
+    this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`);
     this.cloudinary = new Cloudinary({
       cloud: {
         cloudName: "folloze"
       },
       url: {
-        secureDistribution: this.imagesDomain,
-        cname: this.imagesDomain,
+        secureDistribution: this.flzImagesDomain,
+        cname: this.flzImagesDomain,
         secure: true,
-        privateCdn: true
+        privateCdn: true,
+        analytics: false
       }
     });
   }
@@ -2863,6 +2865,15 @@ var CloudinaryHelper = class {
     let imageUrl = cldImage.toURL();
     if (this.cloudinaryFetchUrlRegex.test(image.url)) {
       imageUrl = imageUrl.replace("/upload/", "/fetch/");
+      let queryString = "";
+      try {
+        const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
+        const urlObj = new URL(originalUrl);
+        queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
+      } catch (e6) {
+        console.error(e6);
+      }
+      imageUrl = imageUrl.concat(queryString);
     }
     return imageUrl;
   }
@@ -2871,7 +2882,7 @@ var CloudinaryHelper = class {
     return publicId.split("?")[0];
   }
   isCloudinaryImage(url) {
-    return url.startsWith(`https://${this.imagesDomain}`);
+    return this.cloudinaryUrlRegex.test(url);
   }
 };
 

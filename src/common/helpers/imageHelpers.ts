@@ -9,28 +9,27 @@ import {tint} from "@cloudinary/url-gen/actions/adjust";
 
 export class CloudinaryHelper {
     private cloudinary: Cloudinary;
-    private imagesDomain: string;
-    private cloudinaryUrlRegex: RegExp;
-    private cloudinaryFetchUrlRegex: RegExp;
+    private flzImagesDomain: string = "images.folloze.com";
+    private cloudinaryImagesDomain: string = "res.cloudinary.com/folloze";
+    private cloudinaryUrlRegex: RegExp = new RegExp(
+        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`
+    );
+    private cloudinaryFetchUrlRegex: RegExp = new RegExp(
+        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
+    );
 
     constructor() {
-        this.imagesDomain = "images.folloze.com";
-        this.cloudinaryUrlRegex = new RegExp(
-            `(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch|upload)/`,
-        );
-        this.cloudinaryFetchUrlRegex = new RegExp(
-            `(?:((http|https):)?)//(${this.imagesDomain}|res.cloudinary.com/folloze)/(image|video).(fetch)/`,
-        );
         this.cloudinary = new Cloudinary({
             cloud: {
                 cloudName: "folloze",
             },
             url: {
-                secureDistribution: this.imagesDomain,
-                cname: this.imagesDomain,
+                secureDistribution: this.flzImagesDomain,
+                cname: this.flzImagesDomain,
                 secure: true,
                 privateCdn: true,
-            },
+                analytics: false
+            }
         });
     }
 
@@ -96,9 +95,21 @@ export class CloudinaryHelper {
         }
         cldImage.format("auto").quality("auto");
         let imageUrl = cldImage.toURL();
+
         // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
         if (this.cloudinaryFetchUrlRegex.test(image.url)) {
             imageUrl = imageUrl.replace("/upload/", "/fetch/");
+            let queryString = "";
+            try {
+                // fetch images might have a query string in the external url which is removed by cloudinary
+                // needs to be added after encoding to avoid errors
+                const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
+                const urlObj = new URL(originalUrl);
+                queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
+            } catch (e) {
+                console.error(e);
+            }
+            imageUrl = imageUrl.concat(queryString);
         }
         return imageUrl;
     }
@@ -110,6 +121,6 @@ export class CloudinaryHelper {
     }
 
     private isCloudinaryImage(url: string) {
-        return url.startsWith(`https://${this.imagesDomain}`);
+        return this.cloudinaryUrlRegex.test(url);
     }
 }
