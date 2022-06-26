@@ -1,5 +1,5 @@
 {
-  "name": "folloze-sdk",
+  "name": "client-sdk",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/src/index.d.js",
