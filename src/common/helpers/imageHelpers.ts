@@ -93,7 +93,12 @@ export class CloudinaryHelper {
             )}`;
             cldImage.effect(tint(tintTransformation));
         }
-        cldImage.format("auto").quality("auto");
+
+        console.log("CLD RESOURCE TYPE", cldImage.getResourceType());
+        if (!cldImage.toURL().endsWith(".svg")) {
+            cldImage.format("auto").quality("auto");
+        }
+
         let imageUrl = cldImage.toURL();
 
         // for cases that the image is fetched from a remote url keep serving it as fetch instead of upload
