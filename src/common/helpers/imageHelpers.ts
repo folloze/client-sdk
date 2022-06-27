@@ -94,7 +94,6 @@ export class CloudinaryHelper {
             cldImage.effect(tint(tintTransformation));
         }
 
-        console.log("CLD RESOURCE TYPE", cldImage.getResourceType());
         if (!cldImage.toURL().endsWith(".svg")) {
             cldImage.format("auto").quality("auto");
         }
