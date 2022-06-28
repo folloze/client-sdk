@@ -71,8 +71,8 @@ describe("testing sdk designer module", () => {
         await sdk.designer.getLiveBoardConfig(1).then(res => expect(res.unpublished_config.pages).toBeDefined());
     });
 
-    it("checks that getQueryImageGallery mock works as expectes", async () => {
-        await sdk.designer.getQueryImageGallery("bug").then(result => expect(result.length).toEqual(14));
+    it("checks that searchImageGallery mock works as expectes", async () => {
+        await sdk.designer.searchImageGallery("bug").then(result => expect(result.length).toEqual(14));
     });
 
     it("checks that getForms works as expected", async () => {
@@ -145,8 +145,8 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that get image gallery by bing search is working as expected", async () => {
-        await sdk.designer.getQueryImageGallery("bug").then(result => expect(result.length).toEqual(14));
-        await sdk.designer.getQueryImageGallery("test").then(result => expect(result.length).toEqual(14));
+        await sdk.designer.searchImageGallery("bug").then(result => expect(result.length).toEqual(14));
+        await sdk.designer.searchImageGallery("test").then(result => expect(result.length).toEqual(14));
     });
 
     // todo(multi-pages): implement a new test for save liveboard
