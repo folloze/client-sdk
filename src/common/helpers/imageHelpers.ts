@@ -87,6 +87,7 @@ export class CloudinaryHelper {
             cldImage.effect(artisticFilter(image.transformation.artisticFilter));
         }
         if (image.transformation?.tint?.color) {
+            console.log("TINT COLOR", image.transformation.tint, image.transformation.tint.color.substring(1));
             const colorHex = "#" + image.transformation.tint.color.substring(1);
             cldImage.effect(colorize(Math.round(image.transformation.tint.alpha)).color(colorHex));
         }
