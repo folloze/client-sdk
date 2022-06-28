@@ -1,5 +1,5 @@
 import {FlzEditableImageData, GalleryImage} from "../../designer/IDesignerTypes";
-import {crop, limitFit} from "@cloudinary/url-gen/actions/resize";
+import {crop, limitFit, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
@@ -94,7 +94,16 @@ export class CloudinaryHelper {
             cldImage.effect(tint(tintTransformation));
         }
 
-        if (!cldImage.toURL().endsWith(".svg")) {
+        if (cldImage.toURL().endsWith(".svg")) {
+            // if the image was cropped - serve the svg in the max size so it isn't blurred but still croppable
+            if (image.transformation?.crop?.width || image.transformation?.crop?.height) {
+                const fitTransformation = fit();
+                maxWidth && fitTransformation.width(maxWidth);
+                maxHeight && fitTransformation.height(maxHeight);
+                cldImage.resize(fitTransformation);
+                cldImage.format("auto").quality("auto");
+            }
+        } else {
             cldImage.format("auto").quality("auto");
         }
 

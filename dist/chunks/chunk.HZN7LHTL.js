@@ -1904,6 +1904,9 @@ var ResizeLimitFitAction = class extends ResizeSimpleAction {
 function crop(width, height) {
   return new ResizeCropAction("crop", width, height);
 }
+function fit(width, height) {
+  return new ResizeSimpleAction("fit", width, height);
+}
 function limitFit(width, height) {
   return new ResizeLimitFitAction("limit", width, height);
 }
@@ -2803,7 +2806,7 @@ var CloudinaryHelper = class {
     return this.cloudinary.image(cldImageId);
   }
   getTransformedUrl(image, maxWidth, maxHeight, reOptimize = false) {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     if (typeof image === "string") {
       image = {
         bankCategory: "banners",
@@ -2847,7 +2850,15 @@ var CloudinaryHelper = class {
       const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(1)}`;
       cldImage.effect(tint(tintTransformation));
     }
-    if (!cldImage.toURL().endsWith(".svg")) {
+    if (cldImage.toURL().endsWith(".svg")) {
+      if (((_h = (_g = image.transformation) == null ? void 0 : _g.crop) == null ? void 0 : _h.width) || ((_j = (_i = image.transformation) == null ? void 0 : _i.crop) == null ? void 0 : _j.height)) {
+        const fitTransformation = fit();
+        maxWidth && fitTransformation.width(maxWidth);
+        maxHeight && fitTransformation.height(maxHeight);
+        cldImage.resize(fitTransformation);
+        cldImage.format("auto").quality("auto");
+      }
+    } else {
       cldImage.format("auto").quality("auto");
     }
     let imageUrl = cldImage.toURL();
