@@ -1904,6 +1904,9 @@ var ResizeLimitFitAction = class extends ResizeSimpleAction {
 function crop(width, height) {
   return new ResizeCropAction("crop", width, height);
 }
+function fit(width, height) {
+  return new ResizeSimpleAction("fit", width, height);
+}
 function limitFit(width, height) {
   return new ResizeLimitFitAction("limit", width, height);
 }
@@ -2847,7 +2850,18 @@ var CloudinaryHelper = class {
       const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(1)}`;
       cldImage.effect(tint(tintTransformation));
     }
-    cldImage.format("auto").quality("auto");
+    if (cldImage.toURL().endsWith(".svg")) {
+      const { width, height } = image.transformation.crop;
+      if (width || height) {
+        const fitTransformation = fit();
+        maxWidth && fitTransformation.width(maxWidth);
+        maxHeight && fitTransformation.height(maxHeight);
+        cldImage.resize(fitTransformation);
+        cldImage.format("auto").quality("auto");
+      }
+    } else {
+      cldImage.format("auto").quality("auto");
+    }
     let imageUrl = cldImage.toURL();
     if (this.cloudinaryFetchUrlRegex.test(image.url)) {
       imageUrl = imageUrl.replace("/upload/", "/fetch/");
