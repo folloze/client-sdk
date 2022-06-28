@@ -1896,34 +1896,16 @@ var ResizeCropAction = class extends ResizeAdvancedAction {
   }
 };
 
-// node_modules/@cloudinary/url-gen/actions/resize/ResizeFillAction.js
-var ResizeFillAction = class extends ResizeAdvancedAction {
-  x(x2) {
-    this._actionModel.x = x2;
-    return this.addQualifier(new Qualifier("x", x2));
-  }
-  y(y2) {
-    this._actionModel.y = y2;
-    return this.addQualifier(new Qualifier("y", y2));
-  }
-  static fromJson(actionModel) {
-    const result = super.fromJson.apply(this, [actionModel]);
-    actionModel.x && result.x(actionModel.x);
-    actionModel.y && result.y(actionModel.y);
-    return result;
-  }
-};
-
-// node_modules/@cloudinary/url-gen/actions/resize/ResizeLimitFillAction.js
-var ResizeLimitFillAction = class extends ResizeFillAction {
+// node_modules/@cloudinary/url-gen/actions/resize/ResizeLimitFitAction.js
+var ResizeLimitFitAction = class extends ResizeSimpleAction {
 };
 
 // node_modules/@cloudinary/url-gen/actions/resize.js
 function crop(width, height) {
   return new ResizeCropAction("crop", width, height);
 }
-function limitFill(width, height) {
-  return new ResizeLimitFillAction("lfill", width, height);
+function limitFit(width, height) {
+  return new ResizeLimitFitAction("limit", width, height);
 }
 
 // node_modules/@cloudinary/url-gen/config/BaseConfig.js
@@ -2847,7 +2829,7 @@ var CloudinaryHelper = class {
       radius == "max" && cldImage.roundCorners(max());
     }
     if (maxWidth || maxHeight) {
-      const sizeTransformation = limitFill();
+      const sizeTransformation = limitFit();
       maxWidth && sizeTransformation.width(maxWidth);
       maxHeight && sizeTransformation.height(maxHeight);
       cldImage.resize(sizeTransformation);

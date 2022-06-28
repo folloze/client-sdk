@@ -1,5 +1,5 @@
 import {FlzEditableImageData, GalleryImage} from "../../designer/IDesignerTypes";
-import {crop, limitFill} from "@cloudinary/url-gen/actions/resize";
+import {crop, limitFit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
@@ -73,7 +73,7 @@ export class CloudinaryHelper {
             radius == "max" && cldImage.roundCorners(max());
         }
         if (maxWidth || maxHeight) {
-            const sizeTransformation = limitFill();
+            const sizeTransformation = limitFit();
             maxWidth && sizeTransformation.width(maxWidth);
             maxHeight && sizeTransformation.height(maxHeight);
             cldImage.resize(sizeTransformation);
