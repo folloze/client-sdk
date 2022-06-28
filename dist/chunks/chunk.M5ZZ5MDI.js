@@ -2887,9 +2887,8 @@ var CloudinaryHelper = class {
       cldImage.effect(artisticFilter(image.transformation.artisticFilter));
     }
     if ((_f = (_e = image.transformation) == null ? void 0 : _e.tint) == null ? void 0 : _f.color) {
-      console.log("TINT COLOR", image.transformation.tint, image.transformation.tint.color.substring(1));
       const colorHex = "#" + image.transformation.tint.color.substring(1);
-      cldImage.effect(colorize(Math.round(image.transformation.tint.alpha)).color(colorHex));
+      cldImage.effect(colorize(image.transformation.tint.alpha).color(colorHex));
     }
     if (cldImage.toURL().endsWith(".svg")) {
       if (((_h = (_g = image.transformation) == null ? void 0 : _g.crop) == null ? void 0 : _h.width) || ((_j = (_i = image.transformation) == null ? void 0 : _i.crop) == null ? void 0 : _j.height)) {
