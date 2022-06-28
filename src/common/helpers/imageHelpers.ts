@@ -4,8 +4,7 @@ import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
-import {artisticFilter} from "@cloudinary/url-gen/actions/effect";
-import {tint} from "@cloudinary/url-gen/actions/adjust";
+import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 
 export class CloudinaryHelper {
     private cloudinary: Cloudinary;
@@ -88,10 +87,8 @@ export class CloudinaryHelper {
             cldImage.effect(artisticFilter(image.transformation.artisticFilter));
         }
         if (image.transformation?.tint?.color) {
-            const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(
-                1,
-            )}`;
-            cldImage.effect(tint(tintTransformation));
+            const colorHex = "#" + image.transformation.tint.color.substring(1);
+            cldImage.effect(colorize(image.transformation.tint.alpha).color(colorHex));
         }
 
         if (cldImage.toURL().endsWith(".svg")) {
