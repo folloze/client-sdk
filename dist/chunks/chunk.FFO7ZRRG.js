@@ -2750,7 +2750,52 @@ var SimpleEffectAction = class extends Action {
   }
 };
 
+// node_modules/@cloudinary/url-gen/actions/effect/EffectActions/LeveledEffectAction.js
+var LeveledEffectAction = class extends SimpleEffectAction {
+  constructor(effectType, level) {
+    super(effectType, level);
+    this.LEVEL_NAME = "level";
+    this._actionModel = {};
+    this.effectType = effectType;
+    this._actionModel.actionType = EFFECT_MODE_TO_ACTION_TYPE_MAP[effectType] || effectType;
+    if (level) {
+      this.setLevel(level);
+    }
+  }
+  setLevel(level) {
+    this._actionModel[this.LEVEL_NAME] = level;
+    const qualifierEffect = this.createEffectQualifier(this.effectType, level);
+    this.addQualifier(qualifierEffect);
+    return this;
+  }
+};
+
+// node_modules/@cloudinary/url-gen/actions/effect/EffectActions/EffectActionWithLevel.js
+var EffectActionWithLevel = class extends LeveledEffectAction {
+  level(value) {
+    this._actionModel.level = value;
+    return this.setLevel(value);
+  }
+};
+
+// node_modules/@cloudinary/url-gen/actions/effect/Colorize.js
+var ColorizeEffectAction = class extends EffectActionWithLevel {
+  color(color) {
+    this._actionModel.color = color;
+    return this.addQualifier(new Qualifier("co", new QualifierValue(prepareColor(color))));
+  }
+  static fromJson(actionModel) {
+    const { actionType, level, color } = actionModel;
+    const result = new this(actionType, level);
+    color && result.color(color);
+    return result;
+  }
+};
+
 // node_modules/@cloudinary/url-gen/actions/effect.js
+function colorize(colorizeLevel) {
+  return new ColorizeEffectAction("colorize", colorizeLevel);
+}
 function artisticFilter(artisticFilterType) {
   return new SimpleEffectAction("art", artisticFilterType);
 }
@@ -2774,11 +2819,6 @@ var RotateAction_default = RotateAction;
 // node_modules/@cloudinary/url-gen/actions/rotate.js
 function mode(rotationMode) {
   return new RotateAction_default().mode(rotationMode);
-}
-
-// node_modules/@cloudinary/url-gen/actions/adjust.js
-function tint(value = "") {
-  return new SimpleEffectAction("tint", value);
 }
 
 // src/common/helpers/imageHelpers.ts
@@ -2847,8 +2887,9 @@ var CloudinaryHelper = class {
       cldImage.effect(artisticFilter(image.transformation.artisticFilter));
     }
     if ((_f = (_e = image.transformation) == null ? void 0 : _e.tint) == null ? void 0 : _f.color) {
-      const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(1)}`;
-      cldImage.effect(tint(tintTransformation));
+      const color = image.transformation.tint.color.substring(1);
+      console.log("TINT color", color);
+      cldImage.effect(colorize(image.transformation.tint.alpha).color(color));
     }
     if (cldImage.toURL().endsWith(".svg")) {
       if (((_h = (_g = image.transformation) == null ? void 0 : _g.crop) == null ? void 0 : _h.width) || ((_j = (_i = image.transformation) == null ? void 0 : _i.crop) == null ? void 0 : _j.height)) {
