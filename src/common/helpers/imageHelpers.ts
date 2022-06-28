@@ -95,9 +95,8 @@ export class CloudinaryHelper {
         }
 
         if (cldImage.toURL().endsWith(".svg")) {
-            const {width, height } = image.transformation.crop;
             // if the image was cropped - serve the svg in the max size so it isn't blurred but still croppable
-            if (width || height) {
+            if (image.transformation?.crop?.width || image.transformation?.crop?.height) {
                 const fitTransformation = fit();
                 maxWidth && fitTransformation.width(maxWidth);
                 maxHeight && fitTransformation.height(maxHeight);

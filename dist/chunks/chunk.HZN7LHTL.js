@@ -2806,7 +2806,7 @@ var CloudinaryHelper = class {
     return this.cloudinary.image(cldImageId);
   }
   getTransformedUrl(image, maxWidth, maxHeight, reOptimize = false) {
-    var _a, _b, _c, _d, _e, _f;
+    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
     if (typeof image === "string") {
       image = {
         bankCategory: "banners",
@@ -2851,8 +2851,7 @@ var CloudinaryHelper = class {
       cldImage.effect(tint(tintTransformation));
     }
     if (cldImage.toURL().endsWith(".svg")) {
-      const { width, height } = image.transformation.crop;
-      if (width || height) {
+      if (((_h = (_g = image.transformation) == null ? void 0 : _g.crop) == null ? void 0 : _h.width) || ((_j = (_i = image.transformation) == null ? void 0 : _i.crop) == null ? void 0 : _j.height)) {
         const fitTransformation = fit();
         maxWidth && fitTransformation.width(maxWidth);
         maxHeight && fitTransformation.height(maxHeight);
