@@ -1914,12 +1914,16 @@ var ResizeFillAction = class extends ResizeAdvancedAction {
   }
 };
 
+// node_modules/@cloudinary/url-gen/actions/resize/ResizeLimitFillAction.js
+var ResizeLimitFillAction = class extends ResizeFillAction {
+};
+
 // node_modules/@cloudinary/url-gen/actions/resize.js
 function crop(width, height) {
   return new ResizeCropAction("crop", width, height);
 }
-function fill(width, height) {
-  return new ResizeFillAction("fill", width, height);
+function limitFill(width, height) {
+  return new ResizeLimitFillAction("lfill", width, height);
 }
 
 // node_modules/@cloudinary/url-gen/config/BaseConfig.js
@@ -2843,7 +2847,7 @@ var CloudinaryHelper = class {
       radius == "max" && cldImage.roundCorners(max());
     }
     if (maxWidth || maxHeight) {
-      const sizeTransformation = fill();
+      const sizeTransformation = limitFill();
       maxWidth && sizeTransformation.width(maxWidth);
       maxHeight && sizeTransformation.height(maxHeight);
       cldImage.resize(sizeTransformation);
