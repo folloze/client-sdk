@@ -2847,9 +2847,7 @@ var CloudinaryHelper = class {
       const tintTransformation = `${image.transformation.tint.alpha}:${image.transformation.tint.color.substring(1)}`;
       cldImage.effect(tint(tintTransformation));
     }
-    if (!cldImage.toURL().endsWith(".svg")) {
-      cldImage.format("auto").quality("auto");
-    }
+    cldImage.format("auto").quality("auto");
     let imageUrl = cldImage.toURL();
     if (this.cloudinaryFetchUrlRegex.test(image.url)) {
       imageUrl = imageUrl.replace("/upload/", "/fetch/");

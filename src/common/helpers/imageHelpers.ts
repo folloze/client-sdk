@@ -94,9 +94,9 @@ export class CloudinaryHelper {
             cldImage.effect(tint(tintTransformation));
         }
 
-        if (!cldImage.toURL().endsWith(".svg")) {
+        // if (!cldImage.toURL().endsWith(".svg")) {
             cldImage.format("auto").quality("auto");
-        }
+        // }
 
         let imageUrl = cldImage.toURL();
 
