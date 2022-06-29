@@ -897,7 +897,7 @@ var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
 };
 
 // src/common/makeDraggable.ts
-function makeDragElement(dom, el, handleEl) {
+function makeDragElement(dom, el, handleEl, containEl) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (handleEl) {
     dom.querySelector(handleEl).onmousedown = dragMouseDown;
@@ -913,15 +913,9 @@ function makeDragElement(dom, el, handleEl) {
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
-  function elementDrag(e6) {
-    e6 = e6 || window.event;
-    e6.preventDefault();
-    pos1 = pos3 - e6.clientX;
-    pos2 = pos4 - e6.clientY;
-    pos3 = e6.clientX;
-    pos4 = e6.clientY;
-    let newTop = el.offsetTop - pos2;
-    let newLeft = el.offsetLeft - pos1;
+  function defaultLimiter(pos12, pos22) {
+    let newTop = el.offsetTop - pos22;
+    let newLeft = el.offsetLeft - pos12;
     if (newTop <= topLimit) {
       newTop = topLimit + 1;
     }
@@ -931,6 +925,41 @@ function makeDragElement(dom, el, handleEl) {
       } else {
         newLeft = window.innerWidth - el.offsetWidth - 1;
       }
+    }
+    return [newLeft, newTop];
+  }
+  function elementContainerLimiter(x2, y2) {
+    const floatingRect = el.getBoundingClientRect();
+    const limiterRect = containEl.getBoundingClientRect();
+    let newTop = el.offsetTop - y2;
+    let newLeft = el.offsetLeft - x2;
+    if (newTop <= 0) {
+      newTop = 1;
+    } else if (newTop >= limiterRect.height - floatingRect.height) {
+      newTop = containEl.offsetHeight - el.offsetHeight - 1;
+    }
+    if (newLeft <= 0 || newLeft >= limiterRect.width - floatingRect.width) {
+      if (newLeft < 5) {
+        newLeft = 1;
+      } else {
+        newLeft = containEl.offsetWidth - el.offsetWidth - 1;
+      }
+    }
+    return [newLeft, newTop];
+  }
+  function elementDrag(e6) {
+    e6 = e6 || window.event;
+    e6.preventDefault();
+    pos1 = pos3 - e6.clientX;
+    pos2 = pos4 - e6.clientY;
+    pos3 = e6.clientX;
+    pos4 = e6.clientY;
+    let newLeft;
+    let newTop;
+    if (containEl) {
+      [newLeft, newTop] = elementContainerLimiter(pos1, pos2);
+    } else {
+      [newLeft, newTop] = defaultLimiter(pos1, pos2);
     }
     el.style.top = newTop + "px";
     el.style.left = newLeft + "px";

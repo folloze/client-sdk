@@ -1,6 +1,6 @@
 type DocOrShadowRoot = Document | DocumentFragment | DocumentOrShadowRoot | null;
 
-export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl: string) {
+export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl: string, containEl?: HTMLElement) {
     let pos1 = 0,
         pos2 = 0,
         pos3 = 0,
@@ -29,15 +29,7 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         document.onmousemove = elementDrag;
     }
 
-    function elementDrag(e: any) {
-        e = e || window.event;
-        e.preventDefault();
-        // calculate the new cursor position:
-        pos1 = pos3 - e.clientX;
-        pos2 = pos4 - e.clientY;
-        pos3 = e.clientX;
-        pos4 = e.clientY;
-
+    function defaultLimiter(pos1, pos2) {
         let newTop = el.offsetTop - pos2;
         let newLeft = el.offsetLeft - pos1;
 
@@ -56,6 +48,52 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
             } else {
                 newLeft = window.innerWidth - el.offsetWidth - 1;
             }
+        }
+
+        return [newLeft, newTop];
+    }
+
+    function elementContainerLimiter(x, y) {
+        const floatingRect = el.getBoundingClientRect();
+        const limiterRect = containEl.getBoundingClientRect();
+
+        let newTop = el.offsetTop - y;
+        let newLeft = el.offsetLeft - x;
+
+        // vertical limiter
+        if (newTop <= 0) {
+            newTop = 1;
+        } else if (newTop >= limiterRect.height - floatingRect.height) {
+            newTop = containEl.offsetHeight - el.offsetHeight - 1;
+        }
+
+        // horizontal limiter
+        if (newLeft <= 0 || newLeft >= limiterRect.width - floatingRect.width) {
+            if (newLeft < 5) {
+                newLeft = 1;
+            } else {
+                newLeft = containEl.offsetWidth - el.offsetWidth - 1;
+            }
+        }
+
+        return [newLeft, newTop];
+    }
+
+    function elementDrag(e: any) {
+        e = e || window.event;
+        e.preventDefault();
+        // calculate the new cursor position:
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+
+        let newLeft: number;
+        let newTop: number;
+        if (containEl) {
+            [newLeft, newTop] = elementContainerLimiter(pos1, pos2);
+        } else {
+            [newLeft, newTop] = defaultLimiter(pos1, pos2);
         }
 
         // set the element's new position:
