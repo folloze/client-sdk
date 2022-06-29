@@ -905,10 +905,6 @@ function makeDragElement(dom, el, handleEl, containEl) {
     el.onmousedown = dragMouseDown;
   }
   const topLimit = parseInt(getComputedStyle(document.documentElement).getPropertyValue("--edit-fz-system-control-bar-height")) || 0;
-  let limiterRect;
-  if (containEl) {
-    limiterRect = containEl.getBoundingClientRect();
-  }
   function dragMouseDown(e6) {
     e6 = e6 || window.event;
     e6.preventDefault();
@@ -934,6 +930,7 @@ function makeDragElement(dom, el, handleEl, containEl) {
   }
   function elementContainerLimiter(x2, y2) {
     const floatingRect = el.getBoundingClientRect();
+    const limiterRect = containEl.getBoundingClientRect();
     let newTop = el.offsetTop - y2;
     let newLeft = el.offsetLeft - x2;
     if (newTop <= 0) {

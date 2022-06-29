@@ -14,13 +14,9 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         el.onmousedown = dragMouseDown;
     }
 
-    const topLimit = parseInt(getComputedStyle(document.documentElement)
-        .getPropertyValue("--edit-fz-system-control-bar-height")) || 0;
-
-    let limiterRect: DOMRect;
-    if (containEl) {
-        limiterRect = containEl.getBoundingClientRect();
-    }
+    const topLimit =
+        parseInt(getComputedStyle(document.documentElement).getPropertyValue("--edit-fz-system-control-bar-height")) ||
+        0;
 
     function dragMouseDown(e: any) {
         e = e || window.event;
@@ -34,7 +30,6 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
     }
 
     function defaultLimiter(pos1, pos2) {
-
         let newTop = el.offsetTop - pos2;
         let newLeft = el.offsetLeft - pos1;
 
@@ -60,6 +55,7 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
 
     function elementContainerLimiter(x, y) {
         const floatingRect = el.getBoundingClientRect();
+        const limiterRect = containEl.getBoundingClientRect();
 
         let newTop = el.offsetTop - y;
         let newLeft = el.offsetLeft - x;
