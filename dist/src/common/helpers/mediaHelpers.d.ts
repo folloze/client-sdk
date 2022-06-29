@@ -5,9 +5,13 @@ export declare class CloudinaryHelper {
     private cloudinaryImagesDomain;
     private cloudinaryUrlRegex;
     private cloudinaryFetchUrlRegex;
+    videoPlayerScriptUrl: string;
     constructor();
     getImage(image: FlzEditableImageData | GalleryImage): import("@cloudinary/url-gen/assets/CloudinaryImage").CloudinaryImage;
     getTransformedUrl(image: FlzEditableImageData | GalleryImage, maxWidth?: number, maxHeight?: number, reOptimize?: boolean): string;
     getPublicId(url: string): string;
+    loadVideoPlayerScript(): Promise<void>;
+    createVideoPlayer(url: string, playerId: string, options: object, transformation: object): any;
+    getVideoPlayer(url: string, playerId: string, options: object, transformation: object): void;
     private isCloudinaryImage;
 }

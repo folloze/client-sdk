@@ -2850,13 +2850,15 @@ function mode(rotationMode) {
   return new RotateAction_default().mode(rotationMode);
 }
 
-// src/common/helpers/imageHelpers.ts
+// src/common/helpers/mediaHelpers.ts
+var supportedVideoFormats = ["mov", "mp4", "webm"];
 var CloudinaryHelper = class {
   constructor() {
     this.flzImagesDomain = "images.folloze.com";
     this.cloudinaryImagesDomain = "res.cloudinary.com/folloze";
     this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`);
     this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`);
+    this.videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.min.js";
     this.cloudinary = new Cloudinary({
       cloud: {
         cloudName: "folloze"
@@ -2948,6 +2950,38 @@ var CloudinaryHelper = class {
   getPublicId(url) {
     const publicId = url.replace(this.cloudinaryUrlRegex, "");
     return publicId.split("?")[0];
+  }
+  loadVideoPlayerScript() {
+    return new Promise((resolve, reject) => {
+      if (document.querySelector(`script[src="${this.videoPlayerScriptUrl}"]`)) {
+        resolve();
+      } else {
+        const script = document.createElement("script");
+        script.src = this.videoPlayerScriptUrl;
+        script.onload = () => {
+          resolve();
+        };
+        script.onerror = (e6) => {
+          reject(e6);
+        };
+        document.head.appendChild(script);
+      }
+    });
+  }
+  createVideoPlayer(url, playerId, options, transformation) {
+    const player = this.cloudinary.videoPlayer(playerId, __spreadProps(__spreadValues({}, options), { showLogo: false }));
+    const videoType = url.split(".").pop();
+    const videoSource = supportedVideoFormats.includes(videoType) ? url : url.replace(videoType, "mp4");
+    player.source(videoSource, {
+      sourceTypes: supportedVideoFormats,
+      transformation
+    });
+    return player;
+  }
+  getVideoPlayer(url, playerId, options, transformation) {
+    this.loadVideoPlayerScript().then(() => {
+      this.createVideoPlayer(url, playerId, options, transformation);
+    });
   }
   isCloudinaryImage(url) {
     return this.cloudinaryUrlRegex.test(url);
