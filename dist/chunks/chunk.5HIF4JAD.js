@@ -2978,7 +2978,7 @@ var CloudinaryHelper = class {
     });
     return player;
   }
-  getVideoPlayer(url, playerId, options, transformation) {
+  getVideoPlayer(url, playerId, options = {}, transformation = {}) {
     this.loadVideoPlayerScript().then(() => {
       this.createVideoPlayer(url, playerId, options, transformation);
     });

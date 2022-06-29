@@ -165,7 +165,7 @@ export class CloudinaryHelper {
         return player;
     }
 
-    getVideoPlayer(url: string, playerId: string, options: object, transformation: object) {
+    getVideoPlayer(url: string, playerId: string, options: object = {}, transformation: object = {}) {
         this.loadVideoPlayerScript()
             .then(() => {this.createVideoPlayer(url, playerId, options, transformation);});
     }
