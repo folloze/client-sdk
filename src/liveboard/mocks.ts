@@ -305,6 +305,7 @@ export const rules = (mock: MockAdapter) => {
     mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/).reply<FormMetadataDataV1>(200, {
         form: {
             form_type: 1,
+            name: "form name",
             form_title: "form title",
             submit_label: "form submit label",
             success_message: "form success message",
