@@ -167,7 +167,7 @@ export class CloudinaryHelper {
 
     getVideoPlayer(url: string, playerId: string, options: object = {}, transformation: object = {}) {
         this.loadVideoPlayerScript()
-            .then(() => {this.createVideoPlayer(url, playerId, options, transformation);});
+            .then(() => {return this.createVideoPlayer(url, playerId, options, transformation);});
     }
 
     private isCloudinaryImage(url: string) {
