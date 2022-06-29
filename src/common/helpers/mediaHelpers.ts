@@ -135,7 +135,7 @@ export class CloudinaryHelper {
         return publicId.split('?')[0];
     }
 
-    loadVideoPlayerScript() {
+    private loadVideoPlayerScript() {
         return new Promise<void>((resolve, reject) => {
             if(document.querySelector(`script[src="${this.videoPlayerScriptUrl}"]`)) {
                 resolve();
@@ -150,7 +150,7 @@ export class CloudinaryHelper {
     }
 
     // This is the basic player needed for the cloudinary player, will need to add more functionality for simulive
-    createVideoPlayer(url: string, playerId: string, options: object, transformation: object) {
+    private createVideoPlayer(url: string, playerId: string, options: object, transformation: object) {
         // @ts-ignore
         const player = this.cloudinary.videoPlayer(playerId, {...options, showLogo: false});
 
