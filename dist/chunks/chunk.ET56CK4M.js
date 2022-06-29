@@ -2979,7 +2979,7 @@ var CloudinaryHelper = class {
     return player;
   }
   getVideoPlayer(url, playerId, options = {}, transformation = {}) {
-    this.loadVideoPlayerScript().then(() => {
+    return this.loadVideoPlayerScript().then(() => {
       return this.createVideoPlayer(url, playerId, options, transformation);
     });
   }
