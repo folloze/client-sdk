@@ -62,7 +62,7 @@ var Designer = class {
       type: "campaign"
     });
   }
-  getQueryImageGallery(query, count) {
+  searchImageGallery(query, count) {
     return this.getImageGallery({ type: "search", query, count: count || 20 });
   }
   getImageUploadUrl(uploadType) {

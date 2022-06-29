@@ -83,7 +83,7 @@ export class FloatEditor extends LitElement {
                 letter-spacing: 0;
                 text-align: left;
                 color: var(--edit-fz-color-neutral-0);
-                cursor: move;
+                cursor: grab;
             }
 
             #body {
