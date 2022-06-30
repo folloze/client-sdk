@@ -5,7 +5,6 @@ import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
-import isEmpty from "lodash/isEmpty";
 
 const supportedVideoFormats = ['mov', 'mp4', 'webm'];
 
@@ -20,7 +19,7 @@ export class CloudinaryHelper {
         `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
     );
 
-    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.min.js";
+    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.5.1/dist/cld-video-player.min.js";
 
     constructor() {
         this.cloudinary = new Cloudinary({
