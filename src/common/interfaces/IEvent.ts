@@ -15,6 +15,8 @@ export type FLZ_EVENT_ACTION =
     "widget-update" |
     "widget-updated" |
     "widget-first-updated" |
+    "widgets-scripts-loaded" |
+    "resize" |
     "change-category" |
     "changeItem" |
     "close-modal" |
