@@ -169,7 +169,7 @@ var rules = (mock) => {
     }
   ]);
   mock.onGet("/api/v1/image_gallery", {
-    params: { organization_id: 1, bank_category: "icons", type: "campaign" }
+    params: { organization_id: 1, bank_category: "icons", type: "icon" }
   }).reply(200, [
     {
       url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.png",
