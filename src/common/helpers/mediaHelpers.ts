@@ -19,7 +19,7 @@ export class CloudinaryHelper {
         `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
     );
 
-    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.5.1/dist/cld-video-player.min.js";
+    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.min.js";
 
     constructor() {
         this.cloudinary = new Cloudinary({
@@ -151,7 +151,7 @@ export class CloudinaryHelper {
     // This is the basic player needed for the cloudinary player, will need to add more functionality for simulive
     private createVideoPlayer(url: string, playerId: string, options: object, transformation: object) {
         // @ts-ignore
-        const player = this.cloudinary.videoPlayer(playerId, {...options, showLogo: false});
+        const player = cloudinary.videoPlayer(playerId, {...options, showLogo: false});
 
         const videoType = url.split(".").pop();
         const videoSource = supportedVideoFormats.includes(videoType) ? url : url.replace(videoType, "mp4");
