@@ -6,7 +6,7 @@ import {
 } from "./chunk.EDRNJONZ.js";
 import {
   Designer
-} from "./chunk.VSQ4KPKK.js";
+} from "./chunk.Z36SWVOE.js";
 import {
   Liveboard
 } from "./chunk.SISSCIDI.js";
@@ -613,7 +613,7 @@ var MockConnector = class {
     await import("./mocks.YFGNWN5O.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.YTF5T2GD.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.ZZSOHRO5.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
     await import("./mocks.UGRWNCB6.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));

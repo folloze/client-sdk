@@ -2877,7 +2877,7 @@ var CloudinaryHelper = class {
     return this.cloudinary.image(cldImageId);
   }
   getTransformedUrl(image, maxWidth, maxHeight, reOptimize = false) {
-    var _a, _b, _c, _d, _e, _f, _g, _h, _i, _j;
+    var _a, _b, _c, _d, _e, _f;
     if (typeof image === "string") {
       image = {
         bankCategory: "banners",
@@ -2891,6 +2891,7 @@ var CloudinaryHelper = class {
       return image.url;
     }
     const cldImage = this.getImage(image);
+    const isSvg = cldImage.toURL().endsWith(".svg");
     if ((_a = image.transformation) == null ? void 0 : _a.crop) {
       const { x: x2, y: y2, width, height, aspect, radius } = image.transformation.crop;
       const cropTransformation = crop();
@@ -2901,6 +2902,13 @@ var CloudinaryHelper = class {
       aspect && cropTransformation.aspectRatio(aspect);
       cldImage.resize(cropTransformation);
       radius == "max" && cldImage.roundCorners(max());
+      if (isSvg && (width || height)) {
+        const fitTransformation = fit();
+        maxWidth && fitTransformation.width(maxWidth);
+        maxHeight && fitTransformation.height(maxHeight);
+        cldImage.resize(fitTransformation);
+        cldImage.format("auto").quality("auto");
+      }
     }
     if (maxWidth || maxHeight) {
       const sizeTransformation = limitFit();
@@ -2921,15 +2929,7 @@ var CloudinaryHelper = class {
       const colorHex = "#" + image.transformation.tint.color.substring(1);
       cldImage.effect(colorize(image.transformation.tint.alpha).color(colorHex));
     }
-    if (cldImage.toURL().endsWith(".svg")) {
-      if (((_h = (_g = image.transformation) == null ? void 0 : _g.crop) == null ? void 0 : _h.width) || ((_j = (_i = image.transformation) == null ? void 0 : _i.crop) == null ? void 0 : _j.height)) {
-        const fitTransformation = fit();
-        maxWidth && fitTransformation.width(maxWidth);
-        maxHeight && fitTransformation.height(maxHeight);
-        cldImage.resize(fitTransformation);
-        cldImage.format("auto").quality("auto");
-      }
-    } else {
+    if (!isSvg) {
       cldImage.format("auto").quality("auto");
     }
     let imageUrl = cldImage.toURL();
