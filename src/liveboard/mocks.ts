@@ -29,7 +29,7 @@ export const rules = (mock: MockAdapter) => {
     const item = {
         id: 1,
         category_ids: [1],
-        category_item_data: [{id: 1, position: 65536}],
+        category_item_data: [{id: 1, position: 65536, route: "foo.bar.com/baz/boo/amazoncom-spend-less-smile-more"}],
         description: "item description",
         image: {
             id: 21,
@@ -48,6 +48,7 @@ export const rules = (mock: MockAdapter) => {
         slug: "amazoncom-spend-less-smile-more",
         status: 1,
         views_count: 17,
+        route: "foo.bar.com/baz/items/amazoncom-spend-less-smile-more"
     };
 
     mock.onGet("/live_board/v1/boards/board_slug/").reply<BoardResponseV1>(200, {
