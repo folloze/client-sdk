@@ -12,6 +12,6 @@ export declare class CloudinaryHelper {
     getPublicId(url: string): string;
     private loadVideoPlayerScript;
     private createVideoPlayer;
-    getVideoPlayer(url: string, playerId: string, options?: object, transformation?: object): Promise<any>;
+    getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
     private isCloudinaryImage;
 }

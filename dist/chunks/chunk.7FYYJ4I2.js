@@ -2968,8 +2968,8 @@ var CloudinaryHelper = class {
       }
     });
   }
-  createVideoPlayer(url, playerId, options, transformation) {
-    const player = cloudinary.videoPlayer(playerId, __spreadProps(__spreadValues({}, options), { showLogo: false }));
+  createVideoPlayer(url, playerElement, options, transformation) {
+    const player = cloudinary.videoPlayer(playerElement, __spreadProps(__spreadValues({}, options), { showLogo: false }));
     const videoType = url.split(".").pop();
     const videoSource = supportedVideoFormats.includes(videoType) ? url : url.replace(videoType, "mp4");
     player.source(videoSource, {
@@ -2978,9 +2978,9 @@ var CloudinaryHelper = class {
     });
     return player;
   }
-  getVideoPlayer(url, playerId, options = {}, transformation = {}) {
+  getVideoPlayer(url, playerElement, options = {}, transformation = {}) {
     return this.loadVideoPlayerScript().then(() => {
-      return this.createVideoPlayer(url, playerId, options, transformation);
+      return this.createVideoPlayer(url, playerElement, options, transformation);
     });
   }
   isCloudinaryImage(url) {

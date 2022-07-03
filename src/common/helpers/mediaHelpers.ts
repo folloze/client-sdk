@@ -149,9 +149,9 @@ export class CloudinaryHelper {
     }
 
     // This is the basic player needed for the cloudinary player, will need to add more functionality for simulive
-    private createVideoPlayer(url: string, playerId: string, options: object, transformation: object) {
+    private createVideoPlayer(url: string, playerElement: HTMLVideoElement, options: object, transformation: object) {
         // @ts-ignore
-        const player = cloudinary.videoPlayer(playerId, {...options, showLogo: false});
+        const player = cloudinary.videoPlayer(playerElement, {...options, showLogo: false});
 
         const videoType = url.split(".").pop();
         const videoSource = supportedVideoFormats.includes(videoType) ? url : url.replace(videoType, "mp4");
@@ -164,9 +164,9 @@ export class CloudinaryHelper {
         return player;
     }
 
-    getVideoPlayer(url: string, playerId: string, options: object = {}, transformation: object = {}) {
+    getVideoPlayer(url: string, playerElement: HTMLVideoElement, options: object = {}, transformation: object = {}) {
         return this.loadVideoPlayerScript()
-            .then(() => {return this.createVideoPlayer(url, playerId, options, transformation);});
+            .then(() => {return this.createVideoPlayer(url, playerElement, options, transformation);});
     }
 
     private isCloudinaryImage(url: string) {
