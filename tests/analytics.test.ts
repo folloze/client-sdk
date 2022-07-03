@@ -1,18 +1,8 @@
-import {CtaResponseV1} from "./../src/liveboard/ILiveboardTypes";
 import {describe, expect, beforeAll} from "@jest/globals";
 import {DesignerEventTypes, EventSources, LiveBoardEventTypes} from "../src/analytics/Analytics";
 import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
-
-const ctaParams = {
-    cta: {area: "banner", label: null},
-    email: "email@company.com",
-    formId: 1,
-    message: "hey",
-    type: "message",
-    aaa: "aaa",
-};
 
 describe("testing analytics module", () => {
     beforeAll(async () => {
@@ -66,30 +56,6 @@ describe("testing analytics module", () => {
     it("checks that updateInvitationUsed mock works as expected", async () => {
         await sdk.analytics.updateInvitationUsed("1").then(result => expect(result.status).toEqual(200));
     });
-
-    it("checks that saveMessageCta mock works as expected", async () => {
-        await sdk.analytics.saveMessageCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveContactCta mock works as expected", async () => {
-        await sdk.analytics.saveContactCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveFormCta mock works as expected", async () => {
-        await sdk.analytics.saveFormCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveLinkCta mock works as expected", async () => {
-        await sdk.analytics.saveLinkCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveShareCta mock works as expected", async () => {
-        await sdk.analytics.saveShareCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
-    });
-
-    it("checks that saveShareByEmailCta mock works as expected", async () => {
-        await sdk.analytics.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result).toBeNull);
-    });
 });
 
 describe("testing analytics module in preview", () => {
@@ -124,42 +90,6 @@ describe("testing analytics module in preview", () => {
     it("checks that updateInvitationUsed mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.analytics.updateInvitationUsed("1").then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that saveMessageCta mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.saveMessageCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that saveContactCta mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.saveContactCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that saveFormCta mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.saveFormCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that saveLinkCta mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.saveLinkCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that saveShareCta mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.saveShareCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that saveShareByEmailCta mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 });

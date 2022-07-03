@@ -1,6 +1,6 @@
 import {
   require_get
-} from "./chunk.JQDT3QVW.js";
+} from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
 } from "./chunk.TSPPKQSU.js";
