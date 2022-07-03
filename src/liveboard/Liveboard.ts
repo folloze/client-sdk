@@ -1,4 +1,4 @@
-import {AxiosInstance, AxiosResponse} from "axios";
+import {AxiosResponse} from "axios";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {FetchService} from "../common/FetchService";
 import {
@@ -31,22 +31,10 @@ import {
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 
 export class Liveboard {
-    private fetcher: AxiosInstance;
-    private urlToken: string;
-    private isPreview: boolean;
+    private fetchService: FetchService;
 
     constructor(fetch: FetchService) {
-        this.fetcher = fetch.fetcher;
-        this.urlToken = fetch.urlToken;
-        this.isPreview = fetch.options.isPreview;
-    }
-
-    disableOnPreviewWrapper(apiCall: Function): Promise<any> {
-        if (this.isPreview) {
-            return new Promise(resolve => resolve({status: 200}));
-        } else {
-            return apiCall();
-        }
+        this.fetchService = fetch;
     }
 
     /**
@@ -58,7 +46,7 @@ export class Liveboard {
     getBoard(boardSlug: string): Promise<BoardResponseV1> {
         // TODO - remove all promises as Axios already returns a promise
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<BoardResponseV1>(`/live_board/v1/boards/${boardSlug}/`)
                 .then(result => {
                     resolve(result.data);
@@ -79,9 +67,9 @@ export class Liveboard {
      */
     getSellerInformation(boardId: number): Promise<BoardSellerResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<BoardSellerResponseV1>(`/live_board/v1/boards/${boardId}/presenter`, {
-                    params: {token: this.urlToken},
+                    params: {token: this.fetchService.urlToken},
                 })
                 .then(result => {
                     if (result.status == 206) {
@@ -109,7 +97,7 @@ export class Liveboard {
      */
     getCategory(categoryIdOrSlug: number | string, boardId: number, bySlug: boolean): Promise<CategoryResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<CategoryResponseV2>(`/live_board/v2/categories/${categoryIdOrSlug}`, {
                     params: {
                         board_id: boardId,
@@ -134,7 +122,7 @@ export class Liveboard {
      */
     getCategories(boardId: number): Promise<CategoriesResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<CategoriesResponseV2>(`/live_board/v2/boards/${boardId}/categories`)
                 .then(result => {
                     resolve(result.data);
@@ -156,7 +144,7 @@ export class Liveboard {
      */
     getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<UserChatResponseV1>("/live_board/v1/chat/user_chat", {
                     board_id: boardId,
                     lead_id: leadId,
@@ -183,7 +171,7 @@ export class Liveboard {
      */
     getItem(itemId: number | string, boardId: number, bySlug: boolean): Promise<ItemResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get(`/live_board/v2/items/${itemId}`, {
                     params: {by_slug: bySlug, board_id: boardId},
                 })
@@ -205,7 +193,7 @@ export class Liveboard {
      */
     getItems(params: ItemsParams): Promise<ItemsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post(`/live_board/v2/boards/${params.boardId}/items`, keysToSnakeCase(params))
                 .then(result => {
                     if (result.status == 206) {
@@ -231,7 +219,7 @@ export class Liveboard {
      */
     getHasItems(boardId: number): Promise<HasItemResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get(`/live_board/v2/boards/${boardId}/items_presence`)
                 .then(result => {
                     if (result.status == 206) {
@@ -256,7 +244,7 @@ export class Liveboard {
      */
     likeItem(itemId: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<void>(`/live_board/v2/items/${itemId}/likes`)
                 .then(() => {
                     resolve();
@@ -277,7 +265,7 @@ export class Liveboard {
      */
     getJourneyItems(itemId: number, options: JourneyItemParams): Promise<JourneyItemsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<JourneyItemsResponseV2>(`/live_board/v2/journeys/${itemId}`, keysToSnakeCase(options))
                 .then(result => {
                     resolve(result.data);
@@ -297,7 +285,7 @@ export class Liveboard {
      */
     getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get(`/live_board/v2/items/${itemId}/downloads`)
                 .then(result => {
                     resolve(result.data);
@@ -319,7 +307,7 @@ export class Liveboard {
      */
     createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<SnapshotUrlResponseV1>(`/live_board/v1/content_items/${contentItemId}/snapshots`, {guid})
                 .then(result => {
                     resolve(result.data);
@@ -339,7 +327,7 @@ export class Liveboard {
      */
     createItemAnalysis(contentItemId: number): Promise<ItemAnalysisResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<ItemAnalysisResponseV1>(`/live_board/v1/content_items/${contentItemId}/analyses`)
                 .then(result => {
                     resolve(result.data);
@@ -359,7 +347,7 @@ export class Liveboard {
      */
     getFileMetadata(contentItemId: number): Promise<ItemFileMetadataResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<ItemFileMetadataResponseV1>(`/live_board/v1/content_items/${contentItemId}/files`)
                 .then(result => {
                     if (result.status == 206) {
@@ -387,7 +375,7 @@ export class Liveboard {
      */
     setCookiesConsent(boardId: number, options: CookieConsentParams): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post(`/live_board/v1/boards/${boardId}/cookies_consents`, {...keysToSnakeCase(options)})
                 .then(result => {
                     resolve(result.data);
@@ -407,7 +395,7 @@ export class Liveboard {
      */
     updateEnrichment(type: string, enrichmentData: object): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<void>("/live_board/v2/enrichments", {
                     type,
                     enrichment_data: enrichmentData,
@@ -429,7 +417,7 @@ export class Liveboard {
      */
     getGeoLocation(): Promise<GeoLocationResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<GeoLocationResponseV1>("/live_board/v1/geo_location")
                 .then(result => {
                     resolve(result.data);
@@ -450,7 +438,7 @@ export class Liveboard {
      */
     getCurrentLead(): Promise<LeadResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<LeadResponseV1>("/live_board/v1/leads/me")
                 .then(result => {
                     resolve(result.data);
@@ -469,7 +457,7 @@ export class Liveboard {
      */
     validateLead(boardId: number): Promise<void> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post<void>("/live_board/v2/lead_validations", {board_id: boardId})
                 .then(() => {
                     resolve();
@@ -488,7 +476,7 @@ export class Liveboard {
      */
     stopTrackingForSession(): Promise<LeadResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .delete<LeadResponseV1>("/live_board/v2/track_leads")
                 .then(result => {
                     resolve(result.data);
@@ -508,7 +496,7 @@ export class Liveboard {
      */
     getLiveEventUrls(boardId: number): Promise<LiveEventUrlsResponseV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<LiveEventUrlsResponseV2>(`/live_board/v2/boards/${boardId}/live_event`)
                 .then(result => {
                     resolve(result.data);
@@ -528,7 +516,7 @@ export class Liveboard {
      */
     getOrganizationSettings(boardId: number): Promise<OrganizationSettingsResponseV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<OrganizationSettingsResponseV1>(`/live_board/v1/boards/${boardId}/organization_settings`)
                 .then(result => {
                     resolve(result.data);
@@ -548,7 +536,7 @@ export class Liveboard {
      */
     setSessionCookie(boardId: number): Promise<number> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .post(`/live_board/v1/boards/${boardId}/session_cookies`)
                 .then(result => {
                     resolve(result.data);
@@ -562,7 +550,7 @@ export class Liveboard {
 
     getFormData(boardId: number, formId: number, privacyMessageId: number = null): Promise<FormMetadataDataV1> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<FormMetadataDataV1>(`/live_board/v2/boards/${boardId}/forms/${formId}`, {
                     params: {
                         privacy_message_id: privacyMessageId,
@@ -581,7 +569,7 @@ export class Liveboard {
     //Campaign Elements
     getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
                     params: {element_type: CampaignElementsTypes.privacy_message, board_id: boardId},
                 })
@@ -595,7 +583,7 @@ export class Liveboard {
 
     getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
                     params: {element_type: CampaignElementsTypes.footer, board_id: boardId},
                 })
@@ -609,7 +597,7 @@ export class Liveboard {
 
     getFormPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2> {
         return new Promise((resolve, reject) => {
-            this.fetcher
+           this.fetchService.fetcher
                 .get<CampaignElementDataV2>(`/live_board/v2/campaign_elements/${elementId}`, {
                     params: {element_type: CampaignElementsTypes.form_privacy_message, board_id: boardId},
                 })
@@ -633,9 +621,9 @@ export class Liveboard {
      * @returns {CtaResponseV1} CtaResponse
      */
      saveMessageCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.disableOnPreviewWrapper(() => {
+        return this.fetchService.withDisableOnPreview(() => {
             return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
+               this.fetchService.fetcher.post<CtaResponseV1>(
                     `/live_board/v1/boards/${boardId}/campaign/message`,
                     {...keysToSnakeCase(options)}
                     )
@@ -658,9 +646,9 @@ export class Liveboard {
      * @returns {CtaResponseV1} CtaResponse
      */
     saveContactCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+        return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
+               this.fetchService.fetcher.post<CtaResponseV1>(
                     `/live_board/v1/boards/${boardId}/campaign/contact`,
                     {...keysToSnakeCase(options)}
                 )
@@ -683,9 +671,9 @@ export class Liveboard {
      * @returns {CtaResponseV1} CtaResponse
      */
     saveFormCta(boardId: number, options: any): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+        return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetcher
+               this.fetchService.fetcher
                     .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
                     .then(result => resolve(result.data))
                     .catch(e => {
@@ -704,9 +692,9 @@ export class Liveboard {
      * @returns {CtaResponseV1} CtaResponse
      */
     saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+        return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
+               this.fetchService.fetcher.post<CtaResponseV1>(
                     `/live_board/v1/boards/${boardId}/campaign/link`,
                     {...keysToSnakeCase(options)}
                 )
@@ -729,9 +717,9 @@ export class Liveboard {
      * @returns {CtaResponseV1} CtaResponse
      */
      saveShareCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+        return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
+               this.fetchService.fetcher.post<CtaResponseV1>(
                     `/live_board/v1/boards/${boardId}/campaign/share`,
                     {...keysToSnakeCase(options)}
                 )
@@ -754,9 +742,9 @@ export class Liveboard {
      * @param {number} invitationId
      */
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>{
-        return this.disableOnPreviewWrapper((): Promise<void> => {
+        return this.fetchService.withDisableOnPreview((): Promise<void> => {
             return new Promise((resolve, reject) => {
-                this.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
+               this.fetchService.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
                     email,
                     invitation_id: invitationId
                 })
