@@ -52,7 +52,7 @@ var Designer = class {
     return this.getImageGallery({
       organizationId: this.fetchService.organizationId,
       bankCategory: "icons",
-      type: "campaign"
+      type: "icon"
     });
   }
   getLogosImageGallery() {

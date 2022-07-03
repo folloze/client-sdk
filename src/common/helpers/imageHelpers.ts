@@ -59,6 +59,7 @@ export class CloudinaryHelper {
         }
 
         const cldImage = this.getImage(image);
+        const isSvg = cldImage.toURL().endsWith(".svg");
         if (image.transformation?.crop) {
             const {x, y, width, height, aspect, radius} = image.transformation.crop;
             const cropTransformation = crop();
@@ -68,8 +69,16 @@ export class CloudinaryHelper {
             y && cropTransformation.y(y);
             aspect && cropTransformation.aspectRatio(aspect);
             cldImage.resize(cropTransformation);
-            // @ts-ignore
             radius == "max" && cldImage.roundCorners(max());
+
+            // In order to allow SVG cropping and resizing to the needed dimensions
+            if (isSvg && (width || height)) {
+                const fitTransformation = fit();
+                maxWidth && fitTransformation.width(maxWidth);
+                maxHeight && fitTransformation.height(maxHeight);
+                cldImage.resize(fitTransformation);
+                cldImage.format("auto").quality("auto");
+            }
         }
         if (maxWidth || maxHeight) {
             const sizeTransformation = limitFit();
@@ -91,16 +100,8 @@ export class CloudinaryHelper {
             cldImage.effect(colorize(image.transformation.tint.alpha).color(colorHex));
         }
 
-        if (cldImage.toURL().endsWith(".svg")) {
-            // if the image was cropped - serve the svg in the max size so it isn't blurred but still croppable
-            if (image.transformation?.crop?.width || image.transformation?.crop?.height) {
-                const fitTransformation = fit();
-                maxWidth && fitTransformation.width(maxWidth);
-                maxHeight && fitTransformation.height(maxHeight);
-                cldImage.resize(fitTransformation);
-                cldImage.format("auto").quality("auto");
-            }
-        } else {
+        // do not add f_auto & q_auto on SVG images unless needed (when cropped - handled above)
+        if (!isSvg) {
             cldImage.format("auto").quality("auto");
         }
 
