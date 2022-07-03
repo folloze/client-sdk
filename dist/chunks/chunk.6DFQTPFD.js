@@ -3,7 +3,7 @@ import {
 } from "./chunk.F7UMJQCK.js";
 import {
   Analytics
-} from "./chunk.EDRNJONZ.js";
+} from "./chunk.P64VMG2H.js";
 import {
   Designer
 } from "./chunk.VSQ4KPKK.js";
@@ -616,7 +616,7 @@ var MockConnector = class {
     await import("./mocks.YTF5T2GD.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.UGRWNCB6.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.4K5MNHBD.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 

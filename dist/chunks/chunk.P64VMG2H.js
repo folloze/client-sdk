@@ -123,7 +123,7 @@ var Analytics = class {
   }
   updateInvitationUsed(token) {
     return this.analyticsRequestWrapper(() => {
-      return this.fetcher.post(`/live_board/v2/invitation_wrappers/${token}`).catch((e) => {
+      return this.fetcher.put(`/live_board/v2/invitation_wrappers/${token}`).catch((e) => {
         console.error("could not update invitation wrapper", e);
         throw e;
       });

@@ -1,12 +1,11 @@
 
-export const FLZ_PUBLIC_EVENT_ACTION = {
-    ctaClick: 'Folloze.ctaClick',
-    ctaSubmit: 'Folloze.ctaSubmit',
-    pageView: 'Folloze.pageview',
-    onConsent: 'Folloze.onConsent',
-    consentGiven: 'Folloze.consentGiven',
-    stopTrackingForVisit: 'Folloze.stopTrackingForVisit'
-};
+export type FLZ_PUBLIC_EVENT_ACTION =
+    "Folloze.ctaClick" |
+    "Folloze.ctaSubmit" |
+    "Folloze.pageview" |
+    "Folloze.onConsent" |
+    "Folloze.consentGiven" |
+    "Folloze.stopTrackingForVisit";
 
 export type FLZ_EVENT_ACTION =
     "append-to-liveboard" |

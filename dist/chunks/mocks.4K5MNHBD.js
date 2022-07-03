@@ -12,7 +12,7 @@ var rules = (mock) => {
     return [200, "ping sent!"];
   });
   mock.onPost("/live_board/v1/session_validations").reply(200);
-  mock.onPost("/live_board/v2/invitation_wrappers/1").reply(200);
+  mock.onPut("/live_board/v2/invitation_wrappers/1").reply(200);
   mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/message/).reply(200, {
     id: 1,
     name: "name",

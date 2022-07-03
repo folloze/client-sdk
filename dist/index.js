@@ -18,18 +18,18 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.A776UF6T.js";
+} from "./chunks/chunk.MLHIJ5NV.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.RNKNFFPB.js";
+} from "./chunks/chunk.6DFQTPFD.js";
 import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
   DesignerEventTypes,
   EventSources,
   LiveBoardEventTypes
-} from "./chunks/chunk.EDRNJONZ.js";
+} from "./chunks/chunk.P64VMG2H.js";
 import {
   Designer
 } from "./chunks/chunk.VSQ4KPKK.js";
@@ -48,9 +48,8 @@ import {
   simpleThrottle
 } from "./chunks/chunk.JQDT3QVW.js";
 import {
-  FLZ_PUBLIC_EVENT_ACTION,
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.S2QZKYK3.js";
+} from "./chunks/chunk.L366ULXG.js";
 import "./chunks/chunk.Z3GS5MY4.js";
 export {
   Analytics,
@@ -61,7 +60,6 @@ export {
   DesignerEventTypes,
   EventSources,
   FLZ_DESIGNER_EVENT_TYPE,
-  FLZ_PUBLIC_EVENT_ACTION,
   FLZ_WIDGET_EVENT_TYPE,
   FetchService,
   FloatEditor,
