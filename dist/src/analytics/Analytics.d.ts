@@ -48,11 +48,8 @@ export declare enum DesignerEventTypes {
     change_rule_set_priority = 292
 }
 export declare class Analytics {
-    private fetcher;
-    private pingEndpoint;
-    private isPreview;
+    private fetchService;
     constructor(fetch: FetchService);
-    analyticsRequestWrapper(apiCall: Function): Promise<any>;
     /**
      * Lead viewed board
      *

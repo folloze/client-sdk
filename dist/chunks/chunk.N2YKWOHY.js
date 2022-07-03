@@ -3,13 +3,13 @@ import {
 } from "./chunk.NPVWZY7A.js";
 import {
   Analytics
-} from "./chunk.TP6LCZ3M.js";
+} from "./chunk.5L3E2ZST.js";
 import {
   Designer
 } from "./chunk.AQ3ETNLA.js";
 import {
   Liveboard
-} from "./chunk.CAKNB7Y2.js";
+} from "./chunk.H64FWCCZ.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -672,6 +672,14 @@ var FetchService = class {
     }).catch((e) => console.error("could not create mock fetcher", e));
   }
   withPartialContent(apiCall) {
+  }
+  withDisableOnPreview(apiCall) {
+    var _a;
+    if ((_a = this.options) == null ? void 0 : _a.isPreview) {
+      return new Promise((resolve) => resolve({ status: 200 }));
+    } else {
+      return apiCall();
+    }
   }
   handleSuccess(response) {
     var _a, _b;

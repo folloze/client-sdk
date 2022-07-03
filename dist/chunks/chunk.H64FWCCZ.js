@@ -11,20 +11,11 @@ import {
 // src/liveboard/Liveboard.ts
 var Liveboard = class {
   constructor(fetch) {
-    this.fetcher = fetch.fetcher;
-    this.urlToken = fetch.urlToken;
-    this.isPreview = fetch.options.isPreview;
-  }
-  disableOnPreviewWrapper(apiCall) {
-    if (this.isPreview) {
-      return new Promise((resolve) => resolve({ status: 200 }));
-    } else {
-      return apiCall();
-    }
+    this.fetchService = fetch;
   }
   getBoard(boardSlug) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/boards/${boardSlug}/`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v1/boards/${boardSlug}/`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get board");
@@ -34,8 +25,8 @@ var Liveboard = class {
   }
   getSellerInformation(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/boards/${boardId}/presenter`, {
-        params: { token: this.urlToken }
+      this.fetchService.fetcher.get(`/live_board/v1/boards/${boardId}/presenter`, {
+        params: { token: this.fetchService.urlToken }
       }).then((result) => {
         if (result.status == 206) {
           setTimeout(() => {
@@ -52,7 +43,7 @@ var Liveboard = class {
   }
   getCategory(categoryIdOrSlug, boardId, bySlug) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/categories/${categoryIdOrSlug}`, {
+      this.fetchService.fetcher.get(`/live_board/v2/categories/${categoryIdOrSlug}`, {
         params: {
           board_id: boardId,
           by_slug: bySlug
@@ -67,7 +58,7 @@ var Liveboard = class {
   }
   getCategories(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${boardId}/categories`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v2/boards/${boardId}/categories`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get categories", e);
@@ -77,7 +68,7 @@ var Liveboard = class {
   }
   getUserChat(boardId, leadId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/live_board/v1/chat/user_chat", {
+      this.fetchService.fetcher.post("/live_board/v1/chat/user_chat", {
         board_id: boardId,
         lead_id: leadId
       }).then((result) => {
@@ -90,7 +81,7 @@ var Liveboard = class {
   }
   getItem(itemId, boardId, bySlug) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/items/${itemId}`, {
+      this.fetchService.fetcher.get(`/live_board/v2/items/${itemId}`, {
         params: { by_slug: bySlug, board_id: boardId }
       }).then((result) => {
         resolve(result.data);
@@ -102,7 +93,7 @@ var Liveboard = class {
   }
   getItems(params) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/boards/${params.boardId}/items`, keysToSnakeCase(params)).then((result) => {
+      this.fetchService.fetcher.post(`/live_board/v2/boards/${params.boardId}/items`, keysToSnakeCase(params)).then((result) => {
         if (result.status == 206) {
           setTimeout(() => {
             this.getItems(params).then(resolve).catch(reject);
@@ -118,7 +109,7 @@ var Liveboard = class {
   }
   getHasItems(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${boardId}/items_presence`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v2/boards/${boardId}/items_presence`).then((result) => {
         if (result.status == 206) {
           setTimeout(() => {
             this.getHasItems(boardId).then(resolve).catch(reject);
@@ -134,7 +125,7 @@ var Liveboard = class {
   }
   likeItem(itemId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/items/${itemId}/likes`).then(() => {
+      this.fetchService.fetcher.post(`/live_board/v2/items/${itemId}/likes`).then(() => {
         resolve();
       }).catch((e) => {
         console.error("could not like item", e);
@@ -144,7 +135,7 @@ var Liveboard = class {
   }
   getJourneyItems(itemId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v2/journeys/${itemId}`, keysToSnakeCase(options)).then((result) => {
+      this.fetchService.fetcher.post(`/live_board/v2/journeys/${itemId}`, keysToSnakeCase(options)).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get journey items", e);
@@ -154,7 +145,7 @@ var Liveboard = class {
   }
   getItemDownloadUrl(itemId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/items/${itemId}/downloads`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v2/items/${itemId}/downloads`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get download url", e);
@@ -164,7 +155,7 @@ var Liveboard = class {
   }
   createSnapshotUrl(contentItemId, guid) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/snapshots`, { guid }).then((result) => {
+      this.fetchService.fetcher.post(`/live_board/v1/content_items/${contentItemId}/snapshots`, { guid }).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not create snapshot", e);
@@ -174,7 +165,7 @@ var Liveboard = class {
   }
   createItemAnalysis(contentItemId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/content_items/${contentItemId}/analyses`).then((result) => {
+      this.fetchService.fetcher.post(`/live_board/v1/content_items/${contentItemId}/analyses`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not create analysis", e);
@@ -184,7 +175,7 @@ var Liveboard = class {
   }
   getFileMetadata(contentItemId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/content_items/${contentItemId}/files`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v1/content_items/${contentItemId}/files`).then((result) => {
         if (result.status == 206) {
           setTimeout(() => {
             this.getFileMetadata(contentItemId).then(resolve).catch(reject);
@@ -200,7 +191,7 @@ var Liveboard = class {
   }
   setCookiesConsent(boardId, options) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/cookies_consents`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+      this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/cookies_consents`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get file url", e);
@@ -210,7 +201,7 @@ var Liveboard = class {
   }
   updateEnrichment(type, enrichmentData) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/live_board/v2/enrichments", {
+      this.fetchService.fetcher.post("/live_board/v2/enrichments", {
         type,
         enrichment_data: enrichmentData
       }).then(() => {
@@ -223,7 +214,7 @@ var Liveboard = class {
   }
   getGeoLocation() {
     return new Promise((resolve, reject) => {
-      this.fetcher.get("/live_board/v1/geo_location").then((result) => {
+      this.fetchService.fetcher.get("/live_board/v1/geo_location").then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get geolocation", e);
@@ -233,7 +224,7 @@ var Liveboard = class {
   }
   getCurrentLead() {
     return new Promise((resolve, reject) => {
-      this.fetcher.get("/live_board/v1/leads/me").then((result) => {
+      this.fetchService.fetcher.get("/live_board/v1/leads/me").then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get current lead", e);
@@ -243,7 +234,7 @@ var Liveboard = class {
   }
   validateLead(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post("/live_board/v2/lead_validations", { board_id: boardId }).then(() => {
+      this.fetchService.fetcher.post("/live_board/v2/lead_validations", { board_id: boardId }).then(() => {
         resolve();
       }).catch((e) => {
         console.error("could not validate lead", e);
@@ -253,7 +244,7 @@ var Liveboard = class {
   }
   stopTrackingForSession() {
     return new Promise((resolve, reject) => {
-      this.fetcher.delete("/live_board/v2/track_leads").then((result) => {
+      this.fetchService.fetcher.delete("/live_board/v2/track_leads").then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get stop tracking lead", e);
@@ -263,7 +254,7 @@ var Liveboard = class {
   }
   getLiveEventUrls(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${boardId}/live_event`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v2/boards/${boardId}/live_event`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get current lead", e);
@@ -273,7 +264,7 @@ var Liveboard = class {
   }
   getOrganizationSettings(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v1/boards/${boardId}/organization_settings`).then((result) => {
+      this.fetchService.fetcher.get(`/live_board/v1/boards/${boardId}/organization_settings`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not get organization settings", e);
@@ -283,7 +274,7 @@ var Liveboard = class {
   }
   setSessionCookie(boardId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.post(`/live_board/v1/boards/${boardId}/session_cookies`).then((result) => {
+      this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/session_cookies`).then((result) => {
         resolve(result.data);
       }).catch((e) => {
         console.error("could not create session cookie", e);
@@ -293,7 +284,7 @@ var Liveboard = class {
   }
   getFormData(boardId, formId, privacyMessageId = null) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/boards/${boardId}/forms/${formId}`, {
+      this.fetchService.fetcher.get(`/live_board/v2/boards/${boardId}/forms/${formId}`, {
         params: {
           privacy_message_id: privacyMessageId
         }
@@ -307,7 +298,7 @@ var Liveboard = class {
   }
   getPrivacyMessage(boardId, elementId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+      this.fetchService.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
         params: { element_type: CampaignElementsTypes.privacy_message, board_id: boardId }
       }).then((result) => resolve(result.data)).catch((e) => {
         console.error("could not get form privacy message", e);
@@ -317,7 +308,7 @@ var Liveboard = class {
   }
   getFooter(boardId, elementId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+      this.fetchService.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
         params: { element_type: CampaignElementsTypes.footer, board_id: boardId }
       }).then((result) => resolve(result.data)).catch((e) => {
         console.error("could not get form privacy message", e);
@@ -327,7 +318,7 @@ var Liveboard = class {
   }
   getFormPrivacyMessage(boardId, elementId) {
     return new Promise((resolve, reject) => {
-      this.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
+      this.fetchService.fetcher.get(`/live_board/v2/campaign_elements/${elementId}`, {
         params: { element_type: CampaignElementsTypes.form_privacy_message, board_id: boardId }
       }).then((result) => resolve(result.data)).catch((e) => {
         console.error("could not get form privacy message", e);
@@ -336,9 +327,9 @@ var Liveboard = class {
     });
   }
   saveMessageCta(boardId, options) {
-    return this.disableOnPreviewWrapper(() => {
+    return this.fetchService.withDisableOnPreview(() => {
       return new Promise((resolve, reject) => {
-        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+        this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/message`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
           resolve(result.data);
         }).catch((e) => {
           console.error("could not submit cta", e);
@@ -348,9 +339,9 @@ var Liveboard = class {
     });
   }
   saveContactCta(boardId, options) {
-    return this.disableOnPreviewWrapper(() => {
+    return this.fetchService.withDisableOnPreview(() => {
       return new Promise((resolve, reject) => {
-        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+        this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/contact`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
           resolve(result.data);
         }).catch((e) => {
           console.error("could not submit cta", e);
@@ -360,9 +351,9 @@ var Liveboard = class {
     });
   }
   saveFormCta(boardId, options) {
-    return this.disableOnPreviewWrapper(() => {
+    return this.fetchService.withDisableOnPreview(() => {
       return new Promise((resolve, reject) => {
-        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options)).then((result) => resolve(result.data)).catch((e) => {
+        this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options)).then((result) => resolve(result.data)).catch((e) => {
           console.error("could not submit cta", e);
           reject(e);
         });
@@ -370,9 +361,9 @@ var Liveboard = class {
     });
   }
   saveLinkCta(boardId, options) {
-    return this.disableOnPreviewWrapper(() => {
+    return this.fetchService.withDisableOnPreview(() => {
       return new Promise((resolve, reject) => {
-        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+        this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/link`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
           resolve(result.data);
         }).catch((e) => {
           console.error("could not submit cta", e);
@@ -382,9 +373,9 @@ var Liveboard = class {
     });
   }
   saveShareCta(boardId, options) {
-    return this.disableOnPreviewWrapper(() => {
+    return this.fetchService.withDisableOnPreview(() => {
       return new Promise((resolve, reject) => {
-        this.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
+        this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/campaign/share`, __spreadValues({}, keysToSnakeCase(options))).then((result) => {
           resolve(result.data);
         }).catch((e) => {
           console.error("could not submit cta", e);
@@ -394,9 +385,9 @@ var Liveboard = class {
     });
   }
   saveShareByEmailCta(boardId, email, invitationId) {
-    return this.disableOnPreviewWrapper(() => {
+    return this.fetchService.withDisableOnPreview(() => {
       return new Promise((resolve, reject) => {
-        this.fetcher.post(`/live_board/v1/boards/${boardId}/shares`, {
+        this.fetchService.fetcher.post(`/live_board/v1/boards/${boardId}/shares`, {
           email,
           invitation_id: invitationId
         }).then(() => {
