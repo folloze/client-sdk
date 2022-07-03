@@ -1,4 +1,4 @@
-import {AxiosInstance} from "axios";
+import {AxiosInstance, AxiosResponse} from "axios";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {FetchService} from "../common/FetchService";
 import {
@@ -25,16 +25,28 @@ import {
     CookieConsentParams,
     FormMetadataDataV1,
     CampaignElementDataV2,
+    CtaParams,
+    CtaResponseV1
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 
 export class Liveboard {
     private fetcher: AxiosInstance;
     private urlToken: string;
+    private isPreview: boolean;
 
     constructor(fetch: FetchService) {
         this.fetcher = fetch.fetcher;
         this.urlToken = fetch.urlToken;
+        this.isPreview = fetch.options.isPreview;
+    }
+
+    disableOnPreviewWrapper(apiCall: Function): Promise<any> {
+        if (this.isPreview) {
+            return new Promise(resolve => resolve({status: 200}));
+        } else {
+            return apiCall();
+        }
     }
 
     /**
@@ -610,4 +622,152 @@ export class Liveboard {
     }
 
     //TODO: pings
+
+    // CTA
+
+    /**
+     * submit a message CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+     saveMessageCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+        return this.disableOnPreviewWrapper(() => {
+            return new Promise((resolve, reject) => {
+                this.fetcher.post<CtaResponseV1>(
+                    `/live_board/v1/boards/${boardId}/campaign/message`,
+                    {...keysToSnakeCase(options)}
+                    )
+                    .then(result => {
+                        resolve(result.data);
+                    })
+                    .catch(e => {
+                        console.error("could not submit cta", e);
+                        reject(e);
+                    });
+                });
+        });
+    }
+
+    /**
+     * submit a contact CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveContactCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetcher.post<CtaResponseV1>(
+                    `/live_board/v1/boards/${boardId}/campaign/contact`,
+                    {...keysToSnakeCase(options)}
+                )
+                    .then(result => {
+                        resolve(result.data);
+                    })
+                    .catch(e => {
+                        console.error("could not submit cta", e);
+                        reject(e);
+                    });
+                });
+        });
+    }
+
+    /**
+     * submit a form CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveFormCta(boardId: number, options: any): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetcher
+                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
+                    .then(result => resolve(result.data))
+                    .catch(e => {
+                        console.error("could not submit cta", e);
+                        reject(e);
+                    });
+                });
+        });
+    }
+
+    /**
+     * submit a link CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetcher.post<CtaResponseV1>(
+                    `/live_board/v1/boards/${boardId}/campaign/link`,
+                    {...keysToSnakeCase(options)}
+                )
+                    .then(result => {
+                        resolve(result.data);
+                    })
+                    .catch(e => {
+                        console.error("could not submit cta", e);
+                        reject(e);
+                    });
+            });
+        });
+    }
+
+    /**
+     * submit a share CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+     saveShareCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+        return this.disableOnPreviewWrapper((): Promise<CtaResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetcher.post<CtaResponseV1>(
+                    `/live_board/v1/boards/${boardId}/campaign/share`,
+                    {...keysToSnakeCase(options)}
+                )
+                    .then(result => {
+                        resolve(result.data);
+                    })
+                    .catch(e => {
+                        console.error("could not submit cta", e);
+                        reject(e);
+                    });
+            });
+        });
+    }
+
+    /**
+     * Submit a share by email cta
+     *
+     * @param {number} boardId
+     * @param {string} email
+     * @param {number} invitationId
+     */
+    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>{
+        return this.disableOnPreviewWrapper((): Promise<void> => {
+            return new Promise((resolve, reject) => {
+                this.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
+                    email,
+                    invitation_id: invitationId
+                })
+                    .then(() => { resolve(); })
+                    .catch(e => {
+                        console.error("could not submit cta", e);
+                        reject(e);
+                    });
+            });
+        });
+    }
+
+    // end CTA
 }

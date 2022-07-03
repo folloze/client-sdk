@@ -389,6 +389,52 @@ var rules = (mock) => {
     }
     return [200, data];
   });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/message/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/contact/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/form/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link/).reply(200, {
+    id: 1,
+    email: "email@company.com",
+    name: "name",
+    last_name: "lastname",
+    anon_guest: false,
+    company: null,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/shares/).reply(200);
 };
 export {
   rules
