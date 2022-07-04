@@ -19,7 +19,7 @@ export class CloudinaryHelper {
         `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
     );
 
-    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.min.js";
+    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.light.min.js";
 
     constructor() {
         this.cloudinary = new Cloudinary({
