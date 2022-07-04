@@ -1,8 +1,8 @@
+import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2 } from "./ILiveboardTypes";
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1 } from "./ILiveboardTypes";
 export declare class Liveboard {
-    private fetcher;
-    private urlToken;
+    private fetchService;
     constructor(fetch: FetchService);
     /**
      * given the board slug (i.e. /best-board) it will retrieve the corresponding board
@@ -173,4 +173,52 @@ export declare class Liveboard {
     getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
     getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
     getFormPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
+    /**
+     * submit a message CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveMessageCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    /**
+     * submit a contact CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveContactCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    /**
+     * submit a form CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveFormCta(boardId: number, options: any): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    /**
+     * submit a link CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    /**
+     * submit a share CTA
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveShareCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    /**
+     * Submit a share by email cta
+     *
+     * @param {number} boardId
+     * @param {string} email
+     * @param {number} invitationId
+     */
+    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>;
 }

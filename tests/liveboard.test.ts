@@ -3,11 +3,19 @@ import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
 
-beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true, organizationId: 1});
-});
+const ctaParams = {
+    cta: {area: "banner", label: "label"},
+    email: "email@company.com",
+    formId: 1,
+    message: "hey",
+    type: "message",
+};
 
 describe("test liveboard mocks module", () => {
+    beforeAll(async () => {
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1});
+    });
+
     it("checks that getBoard mock works as expected", async () => {
         await sdk.liveboard.getBoard("board_slug").then(result => expect(result.id).toEqual(1));
     });
@@ -49,7 +57,7 @@ describe("test liveboard mocks module", () => {
 
     it("checks that getJourneyItems mock works as expected", async () => {
         await sdk.liveboard
-            .getJourneyItems(1, {categoryId: null, boardId: null, query: null})
+            .getJourneyItems(1, {categoryId: undefined, boardId: undefined, query: undefined})
             .then(result => expect(result.items_count).toBeGreaterThan(3));
     });
 
@@ -131,5 +139,71 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard
             .getFormPrivacyMessage(1, 1)
             .then(result => expect(result.name).toEqual("form privacy message"));
+    });
+
+    it("checks that saveMessageCta mock works as expected", async () => {
+        await sdk.liveboard.saveMessageCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
+    });
+
+    it("checks that saveContactCta mock works as expected", async () => {
+        await sdk.liveboard.saveContactCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
+    });
+
+    it("checks that saveFormCta mock works as expected", async () => {
+        await sdk.liveboard.saveFormCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
+    });
+
+    it("checks that saveLinkCta mock works as expected", async () => {
+        await sdk.liveboard.saveLinkCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
+    });
+
+    it("checks that saveShareCta mock works as expected", async () => {
+        await sdk.liveboard.saveShareCta(1, ctaParams).then(result => expect(result.id).toEqual(1));
+    });
+
+    it("checks that saveShareByEmailCta mock works as expected", async () => {
+        await sdk.liveboard.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result).toBeNull);
+    });
+});
+
+describe("testing liveboard module in preview", () => {
+    beforeAll(async () => {
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true});
+    });
+
+    it("checks that saveMessageCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.saveMessageCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that saveContactCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.saveContactCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that saveFormCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.saveFormCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that saveLinkCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.saveLinkCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that saveShareCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.saveShareCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that saveShareByEmailCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
     });
 });

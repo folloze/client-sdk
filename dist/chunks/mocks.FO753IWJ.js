@@ -7,7 +7,7 @@ var rules = (mock) => {
   const item = {
     id: 1,
     category_ids: [1],
-    category_item_data: [{ id: 1, position: 65536 }],
+    category_item_data: [{ id: 1, position: 65536, route: "foo.bar.com/baz/boo/amazoncom-spend-less-smile-more" }],
     description: "item description",
     image: {
       id: 21,
@@ -25,7 +25,8 @@ var rules = (mock) => {
     open_in_new_tab: null,
     slug: "amazoncom-spend-less-smile-more",
     status: 1,
-    views_count: 17
+    views_count: 17,
+    route: "foo.bar.com/baz/items/amazoncom-spend-less-smile-more"
   };
   mock.onGet("/live_board/v1/boards/board_slug/").reply(200, {
     id: 1,
@@ -389,6 +390,52 @@ var rules = (mock) => {
     }
     return [200, data];
   });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/message/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/contact/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/form/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link/).reply(200, {
+    id: 1,
+    email: "email@company.com",
+    name: "name",
+    last_name: "lastname",
+    anon_guest: false,
+    company: null,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share/).reply(200, {
+    id: 1,
+    name: "name",
+    last_name: "lastname",
+    email: "email@company.com",
+    company: null,
+    anon_guest: false,
+    group_user: false
+  });
+  mock.onPost(/live_board\/v1\/boards\/(\d+)\/shares/).reply(200);
 };
 export {
   rules

@@ -1,15 +1,15 @@
 import {
   require_axios
-} from "./chunk.NPVWZY7A.js";
+} from "./chunk.62TMOTOU.js";
 import {
   Analytics
-} from "./chunk.EDRNJONZ.js";
+} from "./chunk.5L3E2ZST.js";
 import {
   Designer
-} from "./chunk.Z36SWVOE.js";
+} from "./chunk.AQ3ETNLA.js";
 import {
   Liveboard
-} from "./chunk.SISSCIDI.js";
+} from "./chunk.H64FWCCZ.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -33,7 +33,7 @@ import {
   require_isTypedArray,
   require_overArg,
   require_root
-} from "./chunk.JQDT3QVW.js";
+} from "./chunk.WXVSHK2H.js";
 import {
   __commonJS,
   __toModule
@@ -610,13 +610,13 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.YFGNWN5O.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.FO753IWJ.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
     await import("./mocks.ZZSOHRO5.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.UGRWNCB6.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.63ZRL77K.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.LYFBUYYS.js").then(async (module) => {
+    return await import("./src.Q3H55HCX.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -672,6 +672,14 @@ var FetchService = class {
     }).catch((e) => console.error("could not create mock fetcher", e));
   }
   withPartialContent(apiCall) {
+  }
+  withDisableOnPreview(apiCall) {
+    var _a;
+    if ((_a = this.options) == null ? void 0 : _a.isPreview) {
+      return new Promise((resolve) => resolve({ status: 200 }));
+    } else {
+      return apiCall();
+    }
   }
   handleSuccess(response) {
     var _a, _b;
