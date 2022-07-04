@@ -247,7 +247,6 @@ export type ItemDownloadUrlFailedResponseV2 = {
     text: string
 }
 
-
 export type CookieConsentParams = {
     leadId: number,
     constentOrigin: string,
