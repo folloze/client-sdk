@@ -1,6 +1,5 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { CtaParams, CtaResponseV1 } from "../liveboard/ILiveboardTypes";
 export declare type PingPayload = {
     leadId: number;
     boardId: number;
@@ -49,11 +48,8 @@ export declare enum DesignerEventTypes {
     change_rule_set_priority = 292
 }
 export declare class Analytics {
-    private fetcher;
-    private pingEndpoint;
-    private isPreview;
+    private fetchService;
     constructor(fetch: FetchService);
-    analyticsRequestWrapper(apiCall: Function): Promise<any>;
     /**
      * Lead viewed board
      *
@@ -79,52 +75,4 @@ export declare class Analytics {
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
     updateInvitationUsed(token: string): Promise<AxiosResponse>;
-    /**
-     * submit a message CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveMessageCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
-    /**
-     * submit a contact CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveContactCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
-    /**
-     * submit a form CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveFormCta(boardId: number, options: any): Promise<AxiosResponse> | Promise<CtaResponseV1>;
-    /**
-     * submit a link CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
-    /**
-     * submit a share CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveShareCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
-    /**
-     * Submit a share by email cta
-     *
-     * @param {number} boardId
-     * @param {string} email
-     * @param {number} invitationId
-     */
-    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>;
 }

@@ -118,6 +118,14 @@ export class FetchService {
         // };
     }
 
+    public withDisableOnPreview(apiCall: Function): Promise<any> {
+        if (this.options?.isPreview) {
+            return new Promise(resolve => resolve({status: 200}));
+        } else {
+            return apiCall();
+        }
+    }
+
     private handleSuccess(response) {
         if (response.headers?.["authorization"]) {
             this.jwt = response.headers["authorization"].replace("bearer ", "");

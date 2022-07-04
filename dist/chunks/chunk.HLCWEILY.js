@@ -1,6 +1,6 @@
 import {
   require_get
-} from "./chunk.JQDT3QVW.js";
+} from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
 } from "./chunk.TSPPKQSU.js";
@@ -2858,7 +2858,7 @@ var CloudinaryHelper = class {
     this.cloudinaryImagesDomain = "res.cloudinary.com/folloze";
     this.cloudinaryUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`);
     this.cloudinaryFetchUrlRegex = new RegExp(`(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`);
-    this.videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.min.js";
+    this.videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.light.min.js";
     this.cloudinary = new Cloudinary({
       cloud: {
         cloudName: "folloze"
