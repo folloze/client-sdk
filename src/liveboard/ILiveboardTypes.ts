@@ -35,7 +35,8 @@ export type CategoryResponseV2 = {
     items_count: number,
     subcategories_ids: number[],
     description: string,
-    images: object[] //TODO: what is the structure of images
+    images: object[], //TODO: what is the structure of images
+    route: string
 }
 
 export type CategoriesResponseV2 = {
