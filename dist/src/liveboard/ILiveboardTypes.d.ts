@@ -31,6 +31,7 @@ export declare type CategoryResponseV2 = {
     subcategories_ids: number[];
     description: string;
     images: object[];
+    route: string;
 };
 export declare type CategoriesResponseV2 = {
     categories_ids: number[];

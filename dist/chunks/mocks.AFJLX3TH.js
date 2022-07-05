@@ -58,7 +58,8 @@ var rules = (mock) => {
     items_count: 3,
     subcategories_ids: [],
     description: "home category",
-    images: []
+    images: [],
+    route: "/foo/home"
   });
   const boardIdFromCategoriesRegex = /\/live_board\/v2\/boards\/(\d+)\/categories/;
   mock.onGet(boardIdFromCategoriesRegex).reply((config) => {
@@ -78,7 +79,8 @@ var rules = (mock) => {
             items_count: 3,
             subcategories_ids: [],
             description: "home category",
-            images: []
+            images: [],
+            route: "/foo/home"
           },
           "2": {
             id: 2,
@@ -91,7 +93,8 @@ var rules = (mock) => {
             items_count: 3,
             subcategories_ids: [],
             description: "first category",
-            images: []
+            images: [],
+            route: "/foo/first"
           }
         },
         categories_ids: [1, 2]

@@ -84,6 +84,7 @@ export const rules = (mock: MockAdapter) => {
         subcategories_ids: [],
         description: "home category",
         images: [],
+        route: "/foo/home"
     });
 
     const boardIdFromCategoriesRegex: RegExp = /\/live_board\/v2\/boards\/(\d+)\/categories/;
@@ -105,6 +106,7 @@ export const rules = (mock: MockAdapter) => {
                         subcategories_ids: [],
                         description: "home category",
                         images: [],
+                        route: "/foo/home"
                     },
                     "2": {
                         id: 2,
@@ -118,6 +120,7 @@ export const rules = (mock: MockAdapter) => {
                         subcategories_ids: [],
                         description: "first category",
                         images: [],
+                        route: "/foo/first"
                     },
                 },
                 categories_ids: [1, 2],
