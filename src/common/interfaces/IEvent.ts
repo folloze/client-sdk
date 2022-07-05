@@ -23,8 +23,6 @@ export type FLZ_EVENT_ACTION =
     "ctaClick" |
     "ctaSubmit" |
     "consentGiven" |
-    "itemViewerClosed" |
-    "itemViewerLoaded" |
     "get-current-item" |
     "get-current-journey" |
     "get-category-slug" |
@@ -41,10 +39,9 @@ export type FLZ_EVENT_ACTION =
     "get-file-download-url" |
     "get-footers" |
     "get-org-header-config" |
-    "stop-tracking-consent" |
+    "stop-tracking-for-visit" |
     "like-item" |
     "open-link-by-target-type" |
     "openItemViewer" |
     "open-modal" |
-    "register-floating-widgets-triggers" |
-    "stopTrackingForVisit";
+    "register-floating-widgets-triggers";
