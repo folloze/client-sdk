@@ -53,4 +53,9 @@ export type FLZ_EVENT_ACTION =
     "get-forms" |
     "get-form-privacy-messages" |
     "get-merge-tag-values" |
-    "get-board-merge-tags";
+    "get-board-merge-tags" |
+    "saveFormCta" |
+    "saveLinkCta" |
+    "saveShareCta" |
+    "saveContactCta" |
+    "saveMessageCta";
