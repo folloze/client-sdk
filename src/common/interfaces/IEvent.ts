@@ -43,5 +43,14 @@ export type FLZ_EVENT_ACTION =
     "like-item" |
     "open-link-by-target-type" |
     "openItemViewer" |
+    "itemViewerClosed" |
     "open-modal" |
-    "register-floating-widgets-triggers";
+    "register-floating-widgets-triggers" |
+    "searchBoardContacts" |
+    "update-form" |
+    "create-form" |
+    "get-email-templates" |
+    "get-forms" |
+    "get-form-privacy-messages" |
+    "get-merge-tag-values" |
+    "get-board-merge-tags";
