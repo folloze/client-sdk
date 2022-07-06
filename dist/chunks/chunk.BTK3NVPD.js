@@ -3,13 +3,13 @@ import {
 } from "./chunk.F7UMJQCK.js";
 import {
   Analytics
-} from "./chunk.P64VMG2H.js";
+} from "./chunk.Y7N5PQ2A.js";
 import {
   Designer
-} from "./chunk.VSQ4KPKK.js";
+} from "./chunk.AQ3ETNLA.js";
 import {
   Liveboard
-} from "./chunk.SISSCIDI.js";
+} from "./chunk.H64FWCCZ.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -33,7 +33,7 @@ import {
   require_isTypedArray,
   require_overArg,
   require_root
-} from "./chunk.JQDT3QVW.js";
+} from "./chunk.WXVSHK2H.js";
 import {
   __commonJS,
   __toModule
@@ -610,13 +610,13 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.YFGNWN5O.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.AFJLX3TH.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
-    await import("./mocks.YTF5T2GD.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
+    await import("./mocks.ZZSOHRO5.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.4K5MNHBD.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.UY6BSN75.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
@@ -672,6 +672,14 @@ var FetchService = class {
     }).catch((e) => console.error("could not create mock fetcher", e));
   }
   withPartialContent(apiCall) {
+  }
+  withDisableOnPreview(apiCall) {
+    var _a;
+    if ((_a = this.options) == null ? void 0 : _a.isPreview) {
+      return new Promise((resolve) => resolve({ status: 200 }));
+    } else {
+      return apiCall();
+    }
   }
   handleSuccess(response) {
     var _a, _b;

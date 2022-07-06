@@ -31,6 +31,7 @@ export declare type CategoryResponseV2 = {
     subcategories_ids: number[];
     description: string;
     images: object[];
+    route: string;
 };
 export declare type CategoriesResponseV2 = {
     categories_ids: number[];
@@ -98,6 +99,7 @@ export declare type ItemResponseV2 = {
     category_item_data: {
         id: number;
         position: number;
+        route: string;
     }[];
     description: string;
     image: any;
@@ -111,6 +113,7 @@ export declare type ItemResponseV2 = {
     status: number;
     views_count: number;
     open_in_new_tab: string | null;
+    route: string;
 };
 export declare type ItemsResponseV2 = {
     item_ids: number[];

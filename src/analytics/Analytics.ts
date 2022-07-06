@@ -1,7 +1,6 @@
-import {AxiosInstance, AxiosResponse} from "axios";
-import {keysToSnakeCase} from "../common/helpers/helpers";
+import {AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import {SessionResponseV1, CtaParams, CtaResponseV1} from "../liveboard/ILiveboardTypes";
+import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
 
 export type PingPayload = {
     leadId: number;
@@ -60,22 +59,10 @@ export enum DesignerEventTypes {
 }
 
 export class Analytics {
-    private fetcher: AxiosInstance;
-    private pingEndpoint: string;
-    private isPreview: boolean;
+    private fetchService: FetchService;
 
     constructor(fetch: FetchService) {
-        this.fetcher = fetch.fetcher;
-        this.pingEndpoint = fetch.options.pingEndpoint;
-        this.isPreview = fetch.options.isPreview;
-    }
-
-    analyticsRequestWrapper(apiCall: Function): Promise<any> {
-        if (this.isPreview) {
-            return new Promise(resolve => resolve({status: 200}));
-        } else {
-            return apiCall();
-        }
+        this.fetchService = fetch;
     }
 
     /**
@@ -84,8 +71,8 @@ export class Analytics {
      * @param {number} boardId
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse> {
-        return this.analyticsRequestWrapper(() => {
-            return this.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`)
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`)
                 .catch(e => {
                     console.error("could not track lead board view", e);
                     throw e;
@@ -100,8 +87,8 @@ export class Analytics {
      * @param {string} guid
      */
     trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse> {
-        return this.analyticsRequestWrapper(() => {
-            return this.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, {guid})
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, {guid})
                 .catch(e => {
                     console.error("could not track lead item view", e);
                     throw e;
@@ -121,7 +108,7 @@ export class Analytics {
         data: any,
         source: EventSources
     ): Promise<AxiosResponse> {
-        return this.fetcher.post(`/${source}/v1/tracking`, {
+        return this.fetchService.fetcher.post(`/${source}/v1/tracking`, {
             event: {
                 id: eventId,
                 data: data,
@@ -135,8 +122,8 @@ export class Analytics {
     }
 
     sendPing(payload: PingPayload) {
-        return this.analyticsRequestWrapper(() => {
-            return this.fetcher.post(`${this.pingEndpoint}/pings`, {
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher.post(`${this.fetchService.options.pingEndpoint}/pings`, {
                 lead_id: payload.leadId,
                 board_id: payload.boardId,
                 item_id: payload.itemId,
@@ -146,8 +133,8 @@ export class Analytics {
     }
 
     validateSession(): Promise<AxiosResponse> {
-        return this.analyticsRequestWrapper(() => {
-            return this.fetcher.post("/live_board/v1/session_validations")
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher.post("/live_board/v1/session_validations")
                 .catch(e => {
                     console.error("could not validate session", e);
                     throw e;
@@ -156,8 +143,8 @@ export class Analytics {
     }
 
     createSession(): Promise<AxiosResponse> {
-        return this.analyticsRequestWrapper(() => {
-            return this.fetcher.post<SessionResponseV1>("/live_board/v1/sessions")
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher.post<SessionResponseV1>("/live_board/v1/sessions")
                 .catch(e => {
                     console.error("could not create session", e);
                     throw e;
@@ -166,160 +153,12 @@ export class Analytics {
     }
 
     updateInvitationUsed(token: string): Promise<AxiosResponse> {
-        return this.analyticsRequestWrapper(() => {
-            return this.fetcher.put(`/live_board/v2/invitation_wrappers/${token}`)
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher.put(`/live_board/v2/invitation_wrappers/${token}`)
                 .catch(e => {
                     console.error("could not update invitation wrapper", e);
                     throw e;
                 });
         });
     }
-
-    // CTA
-
-    /**
-     * submit a message CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-     saveMessageCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.analyticsRequestWrapper(() => {
-            return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
-                    `/live_board/v1/boards/${boardId}/campaign/message`,
-                    {...keysToSnakeCase(options)}
-                    )
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
-                });
-        });
-    }
-
-    /**
-     * submit a contact CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveContactCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.analyticsRequestWrapper((): Promise<CtaResponseV1> => {
-            return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
-                    `/live_board/v1/boards/${boardId}/campaign/contact`,
-                    {...keysToSnakeCase(options)}
-                )
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
-                });
-        });
-    }
-
-    /**
-     * submit a form CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveFormCta(boardId: number, options: any): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.analyticsRequestWrapper((): Promise<CtaResponseV1> => {
-            return new Promise((resolve, reject) => {
-                this.fetcher
-                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
-                    .then(result => resolve(result.data))
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
-                });
-        });
-    }
-
-    /**
-     * submit a link CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-    saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.analyticsRequestWrapper((): Promise<CtaResponseV1> => {
-            return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
-                    `/live_board/v1/boards/${boardId}/campaign/link`,
-                    {...keysToSnakeCase(options)}
-                )
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
-            });
-        });
-    }
-
-    /**
-     * submit a share CTA
-     *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
-     */
-     saveShareCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
-        return this.analyticsRequestWrapper((): Promise<CtaResponseV1> => {
-            return new Promise((resolve, reject) => {
-                this.fetcher.post<CtaResponseV1>(
-                    `/live_board/v1/boards/${boardId}/campaign/share`,
-                    {...keysToSnakeCase(options)}
-                )
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
-            });
-        });
-    }
-
-    /**
-     * Submit a share by email cta
-     *
-     * @param {number} boardId
-     * @param {string} email
-     * @param {number} invitationId
-     */
-    saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>{
-        return this.analyticsRequestWrapper((): Promise<void> => {
-            return new Promise((resolve, reject) => {
-                this.fetcher.post<void>(`/live_board/v1/boards/${boardId}/shares`, {
-                    email,
-                    invitation_id: invitationId
-                })
-                    .then(() => { resolve(); })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
-            });
-        });
-    }
-
-    // end CTA
 }

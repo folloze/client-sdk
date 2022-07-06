@@ -35,7 +35,8 @@ export type CategoryResponseV2 = {
     items_count: number,
     subcategories_ids: number[],
     description: string,
-    images: object[] //TODO: what is the structure of images
+    images: object[], //TODO: what is the structure of images
+    route: string
 }
 
 export type CategoriesResponseV2 = {
@@ -111,7 +112,7 @@ export type JourneyItemParams = {
 export type ItemResponseV2 = {
     id: number,
     category_ids: number[],
-    category_item_data: {id: number, position: number}[],
+    category_item_data: {id: number, position: number, route: string}[],
     description: string,
     image: any, //TODO - Rotem fill the gap
     is_gated: boolean | null,
@@ -123,7 +124,8 @@ export type ItemResponseV2 = {
     slug: string,
     status: number,
     views_count: number,
-    open_in_new_tab: string | null
+    open_in_new_tab: string | null,
+    route: string
 }
 
 export type ItemsResponseV2 = {
@@ -245,7 +247,6 @@ export type ItemDownloadUrlSuccessResponseV2 = {
 export type ItemDownloadUrlFailedResponseV2 = {
     text: string
 }
-
 
 export type CookieConsentParams = {
     leadId: number,

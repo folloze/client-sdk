@@ -1,9 +1,9 @@
 import {
+  keysToSnakeCase
+} from "./chunk.WXVSHK2H.js";
+import {
   CampaignElementsTypes
 } from "./chunk.G52EPVC6.js";
-import {
-  keysToSnakeCase
-} from "./chunk.JQDT3QVW.js";
 import {
   __spreadValues
 } from "./chunk.Z3GS5MY4.js";
@@ -52,7 +52,7 @@ var Designer = class {
     return this.getImageGallery({
       organizationId: this.fetchService.organizationId,
       bankCategory: "icons",
-      type: "campaign"
+      type: "icon"
     });
   }
   getLogosImageGallery() {
