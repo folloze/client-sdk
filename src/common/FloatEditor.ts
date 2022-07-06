@@ -91,7 +91,7 @@ export class FloatEditor extends LitElement {
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
                 max-height: 540px;
-                overflow: auto;
+                overflow: visible; /* so that the url-editor popup (that appears below the component) can be seen */
             }
             .loading {
                 width: 100%;
