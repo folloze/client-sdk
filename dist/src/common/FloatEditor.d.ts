@@ -12,6 +12,9 @@ export declare class FloatEditor extends LitElement {
     protected firstUpdated(): void;
     close(e?: Event): void;
     setStartPos(x: number, y: number): void;
+    checkIfYOverflow(y: number, height: number): boolean;
+    getY(): number;
+    getYWithOverflow(height: number): number;
     moveToPos(): void;
     handleResize(): void;
     highlight(): void;

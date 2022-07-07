@@ -182,6 +182,21 @@ export class FloatEditor extends LitElement {
         this.y = y;
     }
 
+    checkIfYOverflow(y: number, height: number) {
+        const viewPortHeight =
+            Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
+
+        return y + height > viewPortHeight - 5;
+    }
+
+    getY() {
+        return this.y + 30 + window.scrollY;
+    }
+
+    getYWithOverflow(height: number) {
+        return this.y - height - 30 + window.scrollY;
+    }
+
     moveToPos() {
         if (!this.x || !this.y) {
             return;
@@ -192,8 +207,6 @@ export class FloatEditor extends LitElement {
         const height = rect.height;
         const bounds = document.body.getBoundingClientRect();
         const viewPortWidth = bounds.width;
-        const viewPortHeight =
-            Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
 
         // calculate new X position
         let newX = this.x - width / 2;
@@ -204,9 +217,9 @@ export class FloatEditor extends LitElement {
         }
 
         // calculate new Y position in case of out of viewport
-        let newY = this.y + 30 + window.scrollY;
-        if (newY + height > viewPortHeight - 5) {
-            newY = this.y - height - 30 + window.scrollY;
+        let newY = this.getY();
+        if (this.checkIfYOverflow(newY, height)) {
+            newY = this.getYWithOverflow(height);
         }
 
         this.style.top = `${newY}px`;
@@ -220,13 +233,11 @@ export class FloatEditor extends LitElement {
 
         const rect = this.getBoundingClientRect();
         const height = rect.height;
-        const viewPortHeight =
-            Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
 
-        let newY = this.y + 30 + window.scrollY;
+        let newY = this.getY();
         let newTop = parseInt(this.style.top.replace("px", ""));
-        if (newY + height > viewPortHeight - 5) {
-            newY = this.y - height - 30 + window.scrollY;
+        if (this.checkIfYOverflow(newY, height)) {
+            newY = this.getYWithOverflow(height);
 
             if(newY < newTop) {
                 newTop = newY;
