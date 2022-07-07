@@ -18,7 +18,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.V7OZF2NG.js";
+} from "./chunks/chunk.4UAZISJX.js";
 import {
   ClientSDK,
   FetchService

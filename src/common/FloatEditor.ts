@@ -225,7 +225,7 @@ export class FloatEditor extends LitElement {
 
         const top = parseInt(this.style.top.replace("px", ""));
         const diff = top - height;
-        if (top + diff > viewPortHeight - 5) {
+        if (top + diff + 30 + window.scrollY > viewPortHeight - 5) {
             this.style.top = `${top + diff}px`;
         }
 
