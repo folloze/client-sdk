@@ -169,6 +169,7 @@ export class FloatEditor extends LitElement {
             this.moveToPos();
             this.style.opacity = "1";
         });
+        new ResizeObserver(this.moveToPos.bind(this)).observe(this);
     }
 
     close(e?: Event) {
