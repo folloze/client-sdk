@@ -222,10 +222,12 @@ export class FloatEditor extends LitElement {
         const height = rect.height;
 
         const newY = this.y - height - 30 + window.scrollY;
-        const top = parseInt(this.style.top.replace("px", ""));
-        if(newY < top) {
-            this.style.top = `${newY}px`;
+        let newTop = parseInt(this.style.top.replace("px", ""));
+        if(newY < newTop) {
+            newTop = newY;
         }
+
+        this.style.top = `${newTop}`;
     }
 
     highlight() {
