@@ -227,7 +227,7 @@ export class FloatEditor extends LitElement {
             newTop = newY;
         }
 
-        this.style.top = `${newTop}`;
+        this.style.top = `${newTop}px`;
     }
 
     highlight() {

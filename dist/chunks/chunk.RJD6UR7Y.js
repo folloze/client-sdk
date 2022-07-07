@@ -1084,7 +1084,7 @@ var FloatEditor = class extends s4 {
     if (newY < newTop) {
       newTop = newY;
     }
-    this.style.top = `${newTop}`;
+    this.style.top = `${newTop}px`;
   }
   highlight() {
     if (this.childEl.widget) {
