@@ -220,15 +220,12 @@ export class FloatEditor extends LitElement {
 
         const rect = this.getBoundingClientRect();
         const height = rect.height;
-        const viewPortHeight =
-            Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
 
+        const newY = this.y - height - 30 + window.scrollY;
         const top = parseInt(this.style.top.replace("px", ""));
-        const diff = top - height;
-        if (top + diff + 30 + window.scrollY > viewPortHeight - 5) {
-            this.style.top = `${top + diff}px`;
+        if(newY < top) {
+            this.style.top = `${newY}px`;
         }
-
     }
 
     highlight() {
