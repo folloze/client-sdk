@@ -169,7 +169,7 @@ export class FloatEditor extends LitElement {
             this.moveToPos();
             this.style.opacity = "1";
         });
-        new ResizeObserver(this.moveToPos.bind(this)).observe(this);
+        new ResizeObserver(this.handleResize.bind(this)).observe(this);
     }
 
     close(e?: Event) {
@@ -211,6 +211,24 @@ export class FloatEditor extends LitElement {
 
         this.style.top = `${newY}px`;
         this.style.left = `${newX}px`;
+    }
+
+    handleResize() {
+        if (!this.y) {
+            return;
+        }
+
+        const rect = this.getBoundingClientRect();
+        const height = rect.height;
+        const viewPortHeight =
+            Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
+
+        const top = parseInt(this.style.top.replace("px", ""));
+        const diff = top - height;
+        if (top + diff > viewPortHeight - 5) {
+            this.style.top = `${top + diff}px`;
+        }
+
     }
 
     highlight() {

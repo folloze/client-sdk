@@ -13,6 +13,7 @@ export declare class FloatEditor extends LitElement {
     close(e?: Event): void;
     setStartPos(x: number, y: number): void;
     moveToPos(): void;
+    handleResize(): void;
     highlight(): void;
     removeHighlight(): void;
     render(): import("lit-html").TemplateResult<1>;
