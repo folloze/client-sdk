@@ -1040,6 +1040,7 @@ var FloatEditor = class extends s4 {
       this.moveToPos();
       this.style.opacity = "1";
     });
+    new ResizeObserver(this.moveToPos.bind(this)).observe(this);
   }
   close(e6) {
     e6 == null ? void 0 : e6.stopPropagation();
