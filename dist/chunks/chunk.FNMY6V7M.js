@@ -1079,7 +1079,11 @@ var FloatEditor = class extends s4 {
     }
     const rect = this.getBoundingClientRect();
     const height = rect.height;
-    const newY = this.y + 30 + window.scrollY + height;
+    const viewPortHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
+    let newY = this.y + 30 + window.scrollY;
+    if (newY + height > viewPortHeight - 5) {
+      newY = this.y - height - 30 + window.scrollY;
+    }
     let newTop = parseInt(this.style.top.replace("px", ""));
     if (newY < newTop) {
       newTop = newY;
