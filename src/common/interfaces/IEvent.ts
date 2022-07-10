@@ -74,4 +74,7 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     "saveLinkCta" |
     "saveShareCta" |
     "saveContactCta" |
-    "saveMessageCta";
+    "saveMessageCta" |
+    "edit-floating-widget" |
+    "save-section-config" |
+    "delete-widget";
