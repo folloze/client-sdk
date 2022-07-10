@@ -7,7 +7,10 @@ export type FLZ_PUBLIC_EVENT_ACTION =
     "Folloze.consentGiven" |
     "Folloze.stopTrackingForVisit";
 
-export type FLZ_EVENT_ACTION =
+
+export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
+
+export type FLZ_LIVEBOARD_EVENT_ACTION =
     "append-to-liveboard" |
     "append-to-liveboard-light-dom" |
     "widget-connected" |
@@ -22,7 +25,7 @@ export type FLZ_EVENT_ACTION =
     "closeItemViewerRequest" |
     "ctaClick" |
     "ctaSubmit" |
-    "consentGiven" |
+    "consent-given" |
     "get-current-item" |
     "get-current-journey" |
     "get-category-slug" |
@@ -44,6 +47,19 @@ export type FLZ_EVENT_ACTION =
     "open-link-by-target-type" |
     "openItemViewer" |
     "itemViewerClosed" |
+    "open-modal" |
+    "register-floating-widgets-triggers" |
+    "get-form-privacy-messages";
+
+export type FLZ_DESIGNER_EVENT_ACTION =
+    "get-modal-element" |
+    "getFormData" |
+    "get-form-privacy-message" |
+    "get-contact-card-info" |
+    "get-footers" |
+    "get-org-header-config" |
+    "get-items" |
+    "get-all-categories" |
     "open-modal" |
     "register-floating-widgets-triggers" |
     "searchBoardContacts" |

@@ -724,6 +724,9 @@ var FlzDesignerEvent = class extends FlzEvent {
 };
 
 // src/common/helpers/eventHelpers.ts
+function customEmit(el, action, payload, onSuccess, onError) {
+  el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
+}
 function widgetEmit(el, action, payload, onSuccess, onError) {
   el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
@@ -1040,6 +1043,7 @@ var FloatEditor = class extends s4 {
       this.moveToPos();
       this.style.opacity = "1";
     });
+    new ResizeObserver(this.handleResize.bind(this)).observe(this);
   }
   close(e6) {
     e6 == null ? void 0 : e6.stopPropagation();
@@ -1048,6 +1052,16 @@ var FloatEditor = class extends s4 {
   setStartPos(x2, y2) {
     this.x = x2;
     this.y = y2;
+  }
+  checkIfYOverflow(y2, height) {
+    const viewPortHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
+    return y2 + height > viewPortHeight - 5;
+  }
+  getY() {
+    return this.y + 30 + window.scrollY;
+  }
+  getYWithOverflow(height) {
+    return this.y - height - 30 + window.scrollY;
   }
   moveToPos() {
     if (!this.x || !this.y) {
@@ -1058,19 +1072,34 @@ var FloatEditor = class extends s4 {
     const height = rect.height;
     const bounds = document.body.getBoundingClientRect();
     const viewPortWidth = bounds.width;
-    const viewPortHeight = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0) + window.scrollY;
     let newX = this.x - width / 2;
     if (newX < 5) {
       newX = 5;
     } else if (newX + width > viewPortWidth - 5) {
       newX = viewPortWidth - width - 5;
     }
-    let newY = this.y + 30 + window.scrollY;
-    if (newY + height > viewPortHeight - 5) {
-      newY = this.y - height - 30 + window.scrollY;
+    let newY = this.getY();
+    if (this.checkIfYOverflow(newY, height)) {
+      newY = this.getYWithOverflow(height);
     }
     this.style.top = `${newY}px`;
     this.style.left = `${newX}px`;
+  }
+  handleResize() {
+    if (!this.y) {
+      return;
+    }
+    const rect = this.getBoundingClientRect();
+    const height = rect.height;
+    let newY = this.getY();
+    let newTop = parseInt(this.style.top.replace("px", ""));
+    if (this.checkIfYOverflow(newY, height)) {
+      newY = this.getYWithOverflow(height);
+      if (newY < newTop) {
+        newTop = newY;
+      }
+    }
+    this.style.top = `${newTop}px`;
   }
   highlight() {
     if (this.childEl.widget) {
@@ -2996,6 +3025,7 @@ export {
   FlzEvent,
   FlzBoardEvent,
   FlzDesignerEvent,
+  customEmit,
   widgetEmit,
   editorEmit,
   componentEmit,
