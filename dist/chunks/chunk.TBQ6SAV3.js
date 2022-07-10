@@ -3,7 +3,7 @@ import {
 } from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunk.TSPPKQSU.js";
+} from "./chunk.L366ULXG.js";
 import {
   __decorateClass,
   __spreadProps,
@@ -724,6 +724,9 @@ var FlzDesignerEvent = class extends FlzEvent {
 };
 
 // src/common/helpers/eventHelpers.ts
+function customEmit(el, action, payload, onSuccess, onError) {
+  el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
+}
 function widgetEmit(el, action, payload, onSuccess, onError) {
   el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
@@ -3022,6 +3025,7 @@ export {
   FlzEvent,
   FlzBoardEvent,
   FlzDesignerEvent,
+  customEmit,
   widgetEmit,
   editorEmit,
   componentEmit,

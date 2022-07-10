@@ -25,6 +25,6 @@ export const rules = (mock: MockAdapter) => {
         .reply<void>(200);
 
 
-    mock.onPost("/live_board/v2/invitation_wrappers/1")
+    mock.onPut("/live_board/v2/invitation_wrappers/1")
         .reply<void>(200);
 };

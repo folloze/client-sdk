@@ -11,6 +11,7 @@ import {
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
+  customEmit,
   editorEmit,
   editorEmitPromise,
   emit,
@@ -18,18 +19,18 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.CLPQOBIB.js";
+} from "./chunks/chunk.TBQ6SAV3.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.MV7EVUWF.js";
-import "./chunks/chunk.62TMOTOU.js";
+} from "./chunks/chunk.BTK3NVPD.js";
+import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
   DesignerEventTypes,
   EventSources,
   LiveBoardEventTypes
-} from "./chunks/chunk.5L3E2ZST.js";
+} from "./chunks/chunk.Y7N5PQ2A.js";
 import {
   Designer
 } from "./chunks/chunk.AQ3ETNLA.js";
@@ -48,9 +49,8 @@ import {
   CampaignElementsTypes
 } from "./chunks/chunk.G52EPVC6.js";
 import {
-  FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.TSPPKQSU.js";
+} from "./chunks/chunk.L366ULXG.js";
 import "./chunks/chunk.Z3GS5MY4.js";
 export {
   Analytics,
@@ -61,7 +61,6 @@ export {
   DesignerEventTypes,
   EventSources,
   FLZ_DESIGNER_EVENT_TYPE,
-  FLZ_EVENTS_ACTIONS,
   FLZ_WIDGET_EVENT_TYPE,
   FetchService,
   FloatEditor,
@@ -76,6 +75,7 @@ export {
   LiveWidgetEdit,
   Liveboard,
   componentEmit,
+  customEmit,
   editorEmit,
   editorEmitPromise,
   emit,
