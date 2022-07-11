@@ -177,6 +177,9 @@ export class FloatEditor extends LitElement {
 
     close(e?: Event) {
         e?.stopPropagation();
+        this.dispatchEvent(
+          new CustomEvent("flz-float-editor-close"),
+        );
         this.remove();
     }
 
