@@ -3,7 +3,7 @@ import {
 } from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunk.TSPPKQSU.js";
+} from "./chunk.L366ULXG.js";
 import {
   __decorateClass,
   __spreadProps,
@@ -724,6 +724,9 @@ var FlzDesignerEvent = class extends FlzEvent {
 };
 
 // src/common/helpers/eventHelpers.ts
+function customEmit(el, action, payload, onSuccess, onError) {
+  el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
+}
 function widgetEmit(el, action, payload, onSuccess, onError) {
   el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
@@ -1222,8 +1225,11 @@ FloatEditor.styles = [
                 padding: var(--edit-fz-spacing-small);
                 background-color: var(--sys-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
-                max-height: 540px;
-                overflow: auto;
+
+                // some editors need to open other popups that overflow outside of the editor
+                // this is breaking them.
+                //max-height: 540px;
+                //overflow: auto;
             }
             .loading {
                 width: 100%;
@@ -3022,6 +3028,7 @@ export {
   FlzEvent,
   FlzBoardEvent,
   FlzDesignerEvent,
+  customEmit,
   widgetEmit,
   editorEmit,
   componentEmit,

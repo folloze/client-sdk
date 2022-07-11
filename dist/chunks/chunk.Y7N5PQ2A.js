@@ -107,7 +107,7 @@ var Analytics = class {
   }
   updateInvitationUsed(token) {
     return this.fetchService.withDisableOnPreview(() => {
-      return this.fetchService.fetcher.post(`/live_board/v2/invitation_wrappers/${token}`).catch((e) => {
+      return this.fetchService.fetcher.put(`/live_board/v2/invitation_wrappers/${token}`).catch((e) => {
         console.error("could not update invitation wrapper", e);
         throw e;
       });

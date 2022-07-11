@@ -11,6 +11,7 @@ import {
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
+  customEmit,
   editorEmit,
   editorEmitPromise,
   emit,
@@ -18,12 +19,12 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.CLPQOBIB.js";
+} from "../chunks/chunk.S3PH3SNU.js";
 import {
   FetchService
-} from "../chunks/chunk.MV7EVUWF.js";
-import "../chunks/chunk.62TMOTOU.js";
-import "../chunks/chunk.5L3E2ZST.js";
+} from "../chunks/chunk.BTK3NVPD.js";
+import "../chunks/chunk.F7UMJQCK.js";
+import "../chunks/chunk.Y7N5PQ2A.js";
 import "../chunks/chunk.AQ3ETNLA.js";
 import "../chunks/chunk.H64FWCCZ.js";
 import {
@@ -35,7 +36,7 @@ import {
   simpleThrottle
 } from "../chunks/chunk.WXVSHK2H.js";
 import "../chunks/chunk.G52EPVC6.js";
-import "../chunks/chunk.TSPPKQSU.js";
+import "../chunks/chunk.L366ULXG.js";
 import "../chunks/chunk.Z3GS5MY4.js";
 export {
   CloudinaryHelper,
@@ -51,6 +52,7 @@ export {
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
   componentEmit,
+  customEmit,
   editorEmit,
   editorEmitPromise,
   emit,

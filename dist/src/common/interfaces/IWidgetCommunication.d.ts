@@ -1,16 +1,4 @@
 export declare const FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
-export declare const FLZ_EVENTS_ACTIONS: {
-    ctaClick: string;
-    ctaSubmit: string;
-    consentGiven: string;
-    stopTrackingForVisit: string;
-    openItemViewer: string;
-    closeItemViewerRequest: string;
-    itemViewerLoaded: string;
-    itemViewerClosed: string;
-    liveEventMounted: string;
-    getFormData: string;
-};
 export declare type CtaClickData = {
     form: {
         "fields": {

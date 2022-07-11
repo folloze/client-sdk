@@ -1,9 +1,9 @@
 import {
   require_axios
-} from "./chunk.62TMOTOU.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
-} from "./chunk.5L3E2ZST.js";
+} from "./chunk.Y7N5PQ2A.js";
 import {
   Designer
 } from "./chunk.AQ3ETNLA.js";
@@ -616,7 +616,7 @@ var MockConnector = class {
     await import("./mocks.ZZSOHRO5.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.63ZRL77K.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.UY6BSN75.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.Q3H55HCX.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
