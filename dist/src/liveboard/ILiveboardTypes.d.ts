@@ -87,7 +87,7 @@ export declare type OpenItemViewerPayload = {
         allow_download: boolean;
         allow_likes: boolean;
     };
-    route: string;
+    route?: string;
 };
 export declare type JourneyItemParams = {
     query?: string;
