@@ -101,6 +101,7 @@ export type OpenItemViewerPayload = {
         allow_download: boolean,
         allow_likes: boolean
     },
+    route?: string,
 }
 
 export type JourneyItemParams = {
