@@ -46,7 +46,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "itemViewerClosed"
     | "open-modal"
     | "register-floating-widgets-triggers"
-    | "get-form-privacy-messages";
+    | "get-form-privacy-messages"
+    | "share-by-email";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"
