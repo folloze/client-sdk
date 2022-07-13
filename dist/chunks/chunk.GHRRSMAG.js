@@ -1221,6 +1221,10 @@ FloatEditor.styles = [
                 cursor: grab;
             }
 
+            #handle:active {
+                cursor: grabbing;
+            }
+
             #body {
                 padding: var(--edit-fz-spacing-small);
                 background-color: var(--sys-color-neutral-0);
