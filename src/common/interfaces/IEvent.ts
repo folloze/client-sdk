@@ -24,7 +24,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "ctaSubmit"
     | "consent-given"
     | "get-current-item"
-    | "get-current-journey-item"
+    | "get-initial-journey-item"
     | "get-category-slug"
     | "get-all-categories"
     | "get-modal-element"
