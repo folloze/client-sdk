@@ -3063,6 +3063,7 @@ export {
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
   makeDragElement,
+  Floatable,
   FloatEditor,
   CloudinaryHelper
 };
