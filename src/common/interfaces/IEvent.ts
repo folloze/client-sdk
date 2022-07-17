@@ -76,4 +76,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "saveMessageCta"
     | "edit-floating-widget"
     | "save-section-config"
-    | "delete-widget";
+    | "delete-widget"
+    | "append-to-designer";
