@@ -1025,6 +1025,7 @@ var n5;
 var e5 = ((n5 = window.HTMLSlotElement) === null || n5 === void 0 ? void 0 : n5.prototype.assignedElements) != null ? (o6, n6) => o6.assignedElements(n6) : (o6, n6) => o6.assignedNodes(n6).filter((o7) => o7.nodeType === Node.ELEMENT_NODE);
 
 // src/common/FloatEditor.ts
+var TOP_MARGIN = 30;
 var FloatEditor = class extends s4 {
   constructor(el) {
     super();
@@ -1058,10 +1059,10 @@ var FloatEditor = class extends s4 {
     return y2 + height > viewPortHeight - 5;
   }
   getY() {
-    return this.y + 30 + window.scrollY;
+    return this.y + TOP_MARGIN + window.scrollY;
   }
   getYWithOverflow(height) {
-    return this.y - height - 30 + window.scrollY;
+    return Math.max(this.y - height - TOP_MARGIN + window.scrollY, TOP_MARGIN);
   }
   moveToPos() {
     if (!this.x || !this.y) {

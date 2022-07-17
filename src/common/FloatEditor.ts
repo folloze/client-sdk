@@ -2,6 +2,8 @@ import {css, CSSResultGroup, html, LitElement} from "lit";
 import {property, query} from "lit/decorators.js";
 import {LiveWidgetEdit, LiveWidgetComponentEdit, makeDragElement} from "../index";
 
+const TOP_MARGIN = 30;
+
 export class FloatEditor extends LitElement {
     static styles = [
         css`
@@ -197,11 +199,11 @@ export class FloatEditor extends LitElement {
     }
 
     getY() {
-        return this.y + 30 + window.scrollY;
+        return this.y + TOP_MARGIN + window.scrollY;
     }
 
     getYWithOverflow(height: number) {
-        return this.y - height - 30 + window.scrollY;
+        return Math.max(this.y - height - TOP_MARGIN + window.scrollY, TOP_MARGIN);
     }
 
     moveToPos() {
