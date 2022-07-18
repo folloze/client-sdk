@@ -1,5 +1,3 @@
-
-
 export * from "./FetchService";
 export * from "./LiveWidget";
 export * from "./LiveWidgetEdit";
@@ -12,3 +10,5 @@ export * from "./helpers/helpers";
 export * from "./helpers/eventHelpers";
 export * from "./helpers/mediaHelpers";
 export * from "./FlzEvent";
+
+export * from "./mixins/FloatableMixin";
