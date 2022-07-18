@@ -1045,7 +1045,6 @@ var Floatable = (superClass) => {
         this.moveToPos();
         this.style.opacity = "1";
       });
-      new ResizeObserver(this.handleResize.bind(this)).observe(this);
     }
     setLayer(layer) {
       this.layer = layer;
@@ -1093,22 +1092,6 @@ var Floatable = (superClass) => {
       }
       this.style.top = `${newY}px`;
       this.style.left = `${newX}px`;
-    }
-    handleResize() {
-      if (!this.y) {
-        return;
-      }
-      const rect = this.getBoundingClientRect();
-      const height = rect.height;
-      let newY = this.getY();
-      let newTop = parseInt(this.style.top.replace("px", ""));
-      if (this.checkIfYOverflow(newY, height)) {
-        newY = this.getYWithOverflow(height);
-        if (newY < newTop) {
-          newTop = newY;
-        }
-      }
-      this.style.top = `${newTop}px`;
     }
   }
   FloatingElement2.styles = [
