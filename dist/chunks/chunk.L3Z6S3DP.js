@@ -1035,6 +1035,13 @@ var Floatable = (superClass) => {
       });
       new ResizeObserver(this.handleResize.bind(this)).observe(this);
     }
+    setLayer(layer) {
+      this.layer = layer;
+      this.style.zIndex = 104 + layer.toString();
+    }
+    getLayer() {
+      return this.layer;
+    }
     close(e6) {
       e6 == null ? void 0 : e6.stopPropagation();
       this.remove();
