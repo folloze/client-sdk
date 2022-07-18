@@ -56,7 +56,7 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                 this.moveToPos();
                 this.style.opacity = "1";
             });
-            new ResizeObserver(this.handleResize.bind(this)).observe(this);
+            // new ResizeObserver(this.handleResize.bind(this)).observe(this);
         }
 
         setLayer(layer: number) {
@@ -122,26 +122,26 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
             this.style.left = `${newX}px`;
         }
 
-        handleResize() {
-            if (!this.y) {
-                return;
-            }
+        // handleResize() {
+        //     if (!this.y) {
+        //         return;
+        //     }
 
-            const rect = this.getBoundingClientRect();
-            const height = rect.height;
+        //     const rect = this.getBoundingClientRect();
+        //     const height = rect.height;
 
-            let newY = this.getY();
-            let newTop = parseInt(this.style.top.replace("px", ""));
-            if (this.checkIfYOverflow(newY, height)) {
-                newY = this.getYWithOverflow(height);
+        //     let newY = this.getY();
+        //     let newTop = parseInt(this.style.top.replace("px", ""));
+        //     if (this.checkIfYOverflow(newY, height)) {
+        //         newY = this.getYWithOverflow(height);
 
-                if (newY < newTop) {
-                    newTop = newY;
-                }
-            }
+        //         if (newY < newTop) {
+        //             newTop = newY;
+        //         }
+        //     }
 
-            this.style.top = `${newTop}px`;
-        }
+        //     this.style.top = `${newTop}px`;
+        // }
     }
     return FloatingElement as Constructor<IFloatingElement> & T;
 };
