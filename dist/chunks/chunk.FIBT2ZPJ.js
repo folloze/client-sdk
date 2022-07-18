@@ -1145,6 +1145,7 @@ var FloatEditor = class extends FloatingElement {
     this.isLoading = false;
     this.body.appendChild(this.childEl);
     makeDragElement(this.shadowRoot, this, "#handle");
+    super.firstUpdated(_changedProperties);
   }
   highlight() {
     if (this.childEl.widget) {
