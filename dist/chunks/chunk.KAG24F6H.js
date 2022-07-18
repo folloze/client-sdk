@@ -824,6 +824,14 @@ var LiveWidget = class extends LiveDraggable {
 
 // src/common/LiveWidgetEdit.ts
 var LiveWidgetEdit = class extends s4 {
+  constructor() {
+    super(...arguments);
+    this.childFloaters = [];
+  }
+  disconnectedCallback() {
+    this.closeAllChildFloaters();
+    super.disconnectedCallback();
+  }
   set widget(w2) {
     this._widget = w2;
     this.data = w2.data;
@@ -848,6 +856,10 @@ var LiveWidgetEdit = class extends s4 {
   }
   get data() {
     return this._data;
+  }
+  closeAllChildFloaters() {
+    this.childFloaters.forEach((f2) => f2.close());
+    this.childFloaters = [];
   }
 };
 

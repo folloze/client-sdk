@@ -1,6 +1,6 @@
 import {LitElement} from "lit";
-import {state} from "lit/decorators.js";
 import {LiveWidget} from "./LiveWidget";
+import {IFloatingElement} from "./mixins/FloatableMixin";
 
 export abstract class LiveWidgetEdit extends LitElement {
     protected _widget: LiveWidget;
@@ -8,6 +8,12 @@ export abstract class LiveWidgetEdit extends LitElement {
     protected _propPath: string;
 
     readonly _handleStyle: string | undefined;
+    protected childFloaters: IFloatingElement[] = [];
+
+    disconnectedCallback() {
+        this.closeAllChildFloaters();
+        super.disconnectedCallback();
+    }
 
     set widget(w: LiveWidget) {
         this._widget = w;
@@ -40,6 +46,11 @@ export abstract class LiveWidgetEdit extends LitElement {
 
     get data() {
         return this._data;
+    }
+
+    closeAllChildFloaters() {
+        this.childFloaters.forEach(f => f.close());
+        this.childFloaters = [];
     }
 
     abstract render();
