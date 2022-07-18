@@ -4,6 +4,8 @@ type Constructor<T> = new (...args: any[]) => T;
 
 export declare class IFloatingElement {
     setStartPos(x: number, y: number): void;
+    setLayer(layer: number): void;
+    getLayer(): number;
     close(e?: Event);
 }
 
@@ -46,6 +48,7 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
 
         private x: number;
         private y: number;
+        private layer: number;
 
         protected firstUpdated(_changedProperties) {
             super.firstUpdated(_changedProperties);
@@ -54,6 +57,15 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                 this.style.opacity = "1";
             });
             new ResizeObserver(this.handleResize.bind(this)).observe(this);
+        }
+
+        setLayer(layer: number) {
+            this.layer = layer;
+            this.style.zIndex = 104 + layer.toString();
+        }
+
+        getLayer(): number {
+            return this.layer;
         }
 
         close(e?: Event) {
