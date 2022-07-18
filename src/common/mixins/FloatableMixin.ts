@@ -26,8 +26,8 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                     //opacity: 0;
                     transition: opacity 500ms ease-in;
                     position: absolute;
-                    top: 100px;
-                    left: 150px;
+                    //top: 100px;
+                    //left: 150px;
                     z-index: 104;
                     box-shadow: var(--floatBoxShadow);
 
