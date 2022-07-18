@@ -23,7 +23,7 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                     resize: both;
                     pointer-events: all;
 
-                    opacity: 0;
+                    //opacity: 0;
                     transition: opacity 500ms ease-in;
                     position: absolute;
                     top: 100px;
