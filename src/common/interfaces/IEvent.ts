@@ -77,4 +77,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "edit-floating-widget"
     | "save-section-config"
     | "delete-widget"
+    | "close-all-editors"
     | "append-to-designer";
