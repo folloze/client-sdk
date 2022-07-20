@@ -2,6 +2,7 @@ import {
   CloudinaryHelper,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
+  Floatable,
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
@@ -19,7 +20,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.GHRRSMAG.js";
+} from "./chunks/chunk.7SAAGOKK.js";
 import {
   ClientSDK,
   FetchService
@@ -64,6 +65,7 @@ export {
   FLZ_WIDGET_EVENT_TYPE,
   FetchService,
   FloatEditor,
+  Floatable,
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
