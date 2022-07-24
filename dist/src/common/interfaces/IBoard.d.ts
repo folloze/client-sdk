@@ -1,5 +1,5 @@
-import { RibbonConfig, SectionConfig } from "./ISection";
-import { FloatingWidgetConfig, WidgetConfig } from "./IWidget";
+import { SectionConfig } from "./ISection";
+import { FloatingWidgetConfig, RibbonConfig, WidgetConfig } from "./IWidget";
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
