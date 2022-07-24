@@ -1,7 +1,6 @@
 import {LitElement} from "lit";
 import {LiveWidget} from "./LiveWidget";
 import {IFloatingElement} from "./mixins/FloatableMixin";
-import {editorEmit} from "./helpers/eventHelpers";
 
 export abstract class LiveWidgetEdit extends LitElement {
     protected _widget: LiveWidget;
@@ -39,19 +38,6 @@ export abstract class LiveWidgetEdit extends LitElement {
 
     updateWidget() {
         this._widget.data = this._data;
-    }
-
-    updateContentWidget() {
-        this.updateWidget();
-        this.updateItemViewerSettings();
-    }
-
-    updateItemViewerSettings() {
-        editorEmit(this, "update-item-viewer-settings", {
-            widgetId: this.widgetId,
-            itemViewer: this._widget.data.item_viewer,
-            sources: this._widget.data.sources
-        });
     }
 
     set data(x: any) {

@@ -14,8 +14,6 @@ export declare abstract class LiveWidgetEdit extends LitElement {
     get propertyPath(): string;
     get widgetId(): string;
     updateWidget(): void;
-    updateContentWidget(): void;
-    updateItemViewerSettings(): void;
     set data(x: any);
     get data(): any;
     closeAllChildFloaters(): void;

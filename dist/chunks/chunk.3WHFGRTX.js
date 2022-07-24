@@ -851,17 +851,6 @@ var LiveWidgetEdit = class extends s4 {
   updateWidget() {
     this._widget.data = this._data;
   }
-  updateContentWidget() {
-    this.updateWidget();
-    this.updateItemViewerSettings();
-  }
-  updateItemViewerSettings() {
-    editorEmit(this, "update-item-viewer-settings", {
-      widgetId: this.widgetId,
-      itemViewer: this._widget.data.item_viewer,
-      sources: this._widget.data.sources
-    });
-  }
   set data(x2) {
     this._data = x2;
   }
