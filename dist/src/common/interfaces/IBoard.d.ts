@@ -67,7 +67,6 @@ export interface ILiveBoard extends LitElement {
     get floatingWidgets(): FloatingWidgetConfig[];
     get floatingWidgetElements(): LiveWidget[];
     get ribbons(): RibbonConfig[];
-    get ribbonElements(): FloatWidgetElement[];
     getLiveConfigById(id: string): LiveConfig;
     getLoadableConfigById(id: string): LoadableConfig;
     getGridConfigById(id: string): GridConfig;
@@ -80,6 +79,7 @@ export interface ILiveBoard extends LitElement {
     getFloatingWidgetConfig(id: string): FloatingWidgetConfig;
     getAllLiveElements(): LiveElement[];
     getAllLoadableElements(): LoadableElement[];
+    getAllRibbonElements(): RibbonElement[];
     getSection(id: string): SectionConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
 }
