@@ -79,4 +79,10 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "delete-widget"
     | "close-all-editors"
     | "append-to-designer"
-    | "update-item-viewer-settings";
+    | "update-item-viewer-settings"
+    | "resize"
+    | "widget-connected"
+    | "widget-first-updated"
+    | "widgets-scripts-loaded"
+    | "widget-update"
+    | "widget-updated";
