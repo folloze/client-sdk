@@ -2,6 +2,7 @@ import {
     FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1,
 } from "./../designer/IDesignerTypes";
 import {PrivacySettings} from '../common/ISharedTypes';
+import {FlzVItemViewerSettings} from "../common/interfaces/IContentWidget";
 
 export type BoardResponseV1 = {
     id: number,
@@ -96,11 +97,7 @@ export type OpenItemViewerPayload = {
         type: string,
         num_items: number
     },
-    viewer_settings: {
-        design: "classic" | "lightbox",
-        allow_download: boolean,
-        allow_likes: boolean
-    },
+    viewer_settings: FlzVItemViewerSettings,
     route?: string,
 }
 
