@@ -1,10 +1,12 @@
 import { SectionConfig } from "./ISection";
-import { FloatingWidgetConfig, GridElement, LiveElement, LoadableElement, RibbonConfig, WidgetConfig } from "./IWidget";
+import { FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonConfig, WidgetConfig } from "./IWidget";
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
 export declare type RibbonElement = LitElement & RibbonConfig;
 export declare type FloatWidgetElement = LitElement & FloatingWidgetConfig;
+export declare type LiveElement = LitElement & LiveConfig;
+export declare type LoadableElement = LitElement & LoadableConfig;
 export declare type BoardConfig = {
     id: number;
     meta: null | {
@@ -66,15 +68,18 @@ export interface ILiveBoard extends LitElement {
     get floatingWidgetElements(): LiveWidget[];
     get ribbons(): RibbonConfig[];
     get ribbonElements(): FloatWidgetElement[];
-    getLiveElement(id: string): LiveElement;
-    getLoadableElement(id: string): LoadableElement;
-    getGridElement(id: string): GridElement;
+    getLiveConfigById(id: string): LiveConfig;
+    getLoadableConfigById(id: string): LoadableConfig;
+    getGridConfigById(id: string): GridConfig;
     getWidgetEl(id: string): LiveWidget;
     getRibbonEl(id: string): RibbonElement;
     getFloatEl(id: string): FloatWidgetElement;
-    getWidget(id: string): WidgetConfig;
-    getRibbon(id: string): RibbonConfig;
-    getFloatingWidget(id: string): FloatingWidgetConfig;
+    getLiveEl(id: string): LiveElement;
+    getWidgetConfig(id: string): WidgetConfig;
+    getRibbonConfig(id: string): RibbonConfig;
+    getFloatingWidgetConfig(id: string): FloatingWidgetConfig;
+    getAllLiveElements(): LiveElement[];
+    getAllLoadableElements(): LoadableElement[];
     getSection(id: string): SectionConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
 }

@@ -1,31 +1,31 @@
 import {FloatPos, GridPos} from "./IPositions";
 import {BackgroundImage} from "./ISection";
 
-export interface LiveElement {
+export interface LiveConfig {
     id: string;
     data: any;
 }
 
-export interface GridElement {
+export interface GridConfig {
     sectionId: string;
     position: GridPos;
 }
 
-export interface LoadableElement {
+export interface LoadableConfig {
     widgetTag: string; // 'folloze-header-hor' | 'header' | 'gallery' | 'banner' ...
     widgetScripts: string; // url to the widget CDN | lib
 }
 
-export interface WidgetConfig extends LiveElement, GridElement, LoadableElement {}
+export interface WidgetConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
-export interface RibbonConfig extends LiveElement, GridElement {
+export interface RibbonConfig extends LiveConfig, GridConfig {
     data: {
         background: string | BackgroundImage | any; // url(/images/GreenBtn.svg) 50% 50% no-repeat rgb(255, 0, 0);
         backgroundMobile: string | BackgroundImage | any;
     };
 }
 
-export interface FloatingWidgetConfig extends LiveElement, LoadableElement {
+export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
 
     // todo: we dont necessarily need both options for temporary use
