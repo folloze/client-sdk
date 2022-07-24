@@ -78,4 +78,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "save-section-config"
     | "delete-widget"
     | "close-all-editors"
-    | "append-to-designer";
+    | "append-to-designer"
+    | "update-item-viewer-settings";
