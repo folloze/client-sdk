@@ -822,6 +822,10 @@ var LiveWidget = class extends LiveDraggable {
   }
 };
 
+// src/common/ContentWidget.ts
+var ContentWidget = class extends LiveWidget {
+};
+
 // src/common/LiveWidgetEdit.ts
 var LiveWidgetEdit = class extends s4 {
   constructor() {
@@ -3059,6 +3063,7 @@ export {
   emit,
   waitForEvent,
   LiveWidget,
+  ContentWidget,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,

@@ -1,5 +1,6 @@
 import {
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
   Floatable,
@@ -20,7 +21,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.3WHFGRTX.js";
+} from "./chunks/chunk.GFHJUC4D.js";
 import {
   ClientSDK,
   FetchService
@@ -58,6 +59,7 @@ export {
   CampaignElementsTypes,
   ClientSDK,
   CloudinaryHelper,
+  ContentWidget,
   Designer,
   DesignerEventTypes,
   EventSources,
