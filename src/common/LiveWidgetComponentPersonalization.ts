@@ -4,7 +4,7 @@ import {LitElement} from "lit";
 import {PersonalizationElement} from "./interfaces/IPersonalization";
 
 export abstract class LiveWidgetComponentPersonalization extends LitElement {
-    public webComponents: Map<string, PersonalizationElement>;
+    public liveElementsMap: Map<string, PersonalizationElement>;
     protected _propPath: string;
     protected _editTag: string;
     protected _viewTag: string;
