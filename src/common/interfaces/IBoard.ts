@@ -4,10 +4,10 @@ import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
 import {FloatPos, GridPos} from "./IPositions";
 
-export type RibbonElement = LitElement & RibbonConfig;
-export type FloatWidgetElement = LitElement & FloatingWidgetConfig;
-export type LiveElement = LitElement & LiveConfig;
-export type LoadableElement = LitElement & LoadableConfig;
+export type RibbonElement = LitElement & {config: RibbonConfig; data: RibbonConfig["data"]};
+export type FloatWidgetElement = LitElement & {config: FloatingWidgetConfig; data: FloatingWidgetConfig["data"]};
+export type LiveElement = LitElement & {config: LiveConfig; data: LiveConfig["data"]};
+export type LoadableElement = LitElement & {config: LoadableConfig};
 
 export type BoardConfig = {
     id: number;
