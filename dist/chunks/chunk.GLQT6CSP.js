@@ -878,7 +878,7 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
 };
 
 // src/common/LiveWidgetComponentPersonalization.ts
-var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
+var LiveWidgetComponentPersonalization = class extends s4 {
   set editTag(tag) {
     this._editTag = tag;
   }
