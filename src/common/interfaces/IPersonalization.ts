@@ -1,9 +1,8 @@
-import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./IWidget";
-import {LiveWidget} from "../LiveWidget";
+import {LiveConfig} from "./IWidget";
+import {LiveElement} from "./IBoard";
 
 export type PersonalizationElement = {
     id: string;
-    type: "widget" | "ribbon" | "floating";
-    config: WidgetConfig | RibbonConfig | FloatingWidgetConfig;
-    element: LiveWidget;
+    config: LiveConfig;
+    element: LiveElement;
 };
