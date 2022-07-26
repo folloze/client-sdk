@@ -102,9 +102,17 @@ export type OpenItemViewerPayload = {
 }
 
 export type JourneyItemParams = {
-    query?: string,
     categoryId?: number,
-    boardId?: number
+    boardId?: number,
+    categoriesScope?: number[],
+    multiCategories?: number[][],
+    search?: string,
+    sorter?: string,
+    filter?: {
+        type: string,
+        num_items: number
+    },
+    virtualCategory?: { items_ids: number[] }
 }
 
 export type ItemResponseV2 = {
