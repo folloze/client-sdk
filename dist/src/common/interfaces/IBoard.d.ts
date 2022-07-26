@@ -3,18 +3,18 @@ import { FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonCon
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
-export declare type RibbonElement = LitElement & {
+export interface RibbonElement extends LitElement {
     config: RibbonConfig;
     data: RibbonConfig["data"];
-};
-export declare type FloatWidgetElement = LitElement & {
+}
+export interface FloatWidgetElement extends LitElement {
     config: FloatingWidgetConfig;
     data: FloatingWidgetConfig["data"];
-};
-export declare type LiveElement = LitElement & {
+}
+export interface LiveElement extends LitElement {
     config: LiveConfig;
     data: LiveConfig["data"];
-};
+}
 export declare type LoadableElement = LitElement & {
     config: LoadableConfig;
 };
