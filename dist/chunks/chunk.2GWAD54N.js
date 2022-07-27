@@ -3044,6 +3044,48 @@ var CloudinaryHelper = class {
   }
 };
 
+// src/common/controllers/CloseOnOutSideClickController.ts
+var CloseOnOutSideClickController = class {
+  constructor(host) {
+    this._onMouseClick = (e6) => {
+      if (e6.target !== this.host && !e6.composedPath().includes(this.host)) {
+        this.host.close();
+      }
+    };
+    this.host = host;
+    host.addController(this);
+  }
+  hostConnected() {
+    setTimeout(() => {
+      window.addEventListener("click", this._onMouseClick, true);
+    });
+  }
+  hostDisconnected() {
+    window.removeEventListener("click", this._onMouseClick, true);
+  }
+};
+
+// src/common/controllers/CloseOnESCController.ts
+var CloseOnESCController = class {
+  constructor(host) {
+    this._onKeyUp = (e6) => {
+      if (e6.key === "Escape") {
+        this.host.close();
+      }
+    };
+    this.host = host;
+    host.addController(this);
+  }
+  hostConnected() {
+    setTimeout(() => {
+      window.addEventListener("keyup", this._onKeyUp, true);
+    });
+  }
+  hostDisconnected() {
+    window.removeEventListener("keyup", this._onKeyUp, true);
+  }
+};
+
 export {
   LiveDraggable,
   FLZ_DESIGNER_EVENT_TYPE,
@@ -3065,7 +3107,9 @@ export {
   makeDragElement,
   Floatable,
   FloatEditor,
-  CloudinaryHelper
+  CloudinaryHelper,
+  CloseOnOutSideClickController,
+  CloseOnESCController
 };
 /**
  * @license

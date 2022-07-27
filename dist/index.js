@@ -1,4 +1,6 @@
 import {
+  CloseOnESCController,
+  CloseOnOutSideClickController,
   CloudinaryHelper,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
@@ -20,7 +22,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.GLQT6CSP.js";
+} from "./chunks/chunk.2GWAD54N.js";
 import {
   ClientSDK,
   FetchService
@@ -57,6 +59,8 @@ export {
   Analytics,
   CampaignElementsTypes,
   ClientSDK,
+  CloseOnESCController,
+  CloseOnOutSideClickController,
   CloudinaryHelper,
   Designer,
   DesignerEventTypes,

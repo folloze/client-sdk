@@ -1,6 +1,8 @@
 import {FloatPos, GridPos} from "./IPositions";
 import {BackgroundImage} from "./ISection";
 
+export type closable = {close: () => void};
+
 export interface LiveConfig {
     id: string;
     data: any;
