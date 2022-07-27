@@ -2,7 +2,13 @@ import {FloatChildrenContainer, hasFloatingChildren} from "./controllers/Floater
 
 type DocOrShadowRoot = Document | DocumentFragment | DocumentOrShadowRoot | null;
 
-export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl: string, containEl?: HTMLElement) {
+export function makeDragElement(
+    dom: DocOrShadowRoot,
+    el: HTMLElement,
+    handleEl: string,
+    containEl?: HTMLElement,
+    childrenContainer?: FloatChildrenContainer,
+) {
     let pos1 = 0,
         pos2 = 0,
         pos3 = 0,
@@ -103,8 +109,8 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         el.style.top = newTop + "px";
         el.style.left = newLeft + "px";
 
-        if ((el as unknown as hasFloatingChildren).floatChildrenContainer) {
-            ((el as unknown as hasFloatingChildren).floatChildrenContainer as FloatChildrenContainer).all().map(x => {
+        if (childrenContainer) {
+            childrenContainer.all().map(x => {
                 x.style.top = e.movementY + parseInt(x.style.top) + "px";
                 x.style.left = e.movementX + parseInt(x.style.left) + "px";
             });

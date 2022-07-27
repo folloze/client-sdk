@@ -936,7 +936,7 @@ var LiveWidgetComponentPersonalization = class extends s4 {
 };
 
 // src/common/makeDraggable.ts
-function makeDragElement(dom, el, handleEl, containEl) {
+function makeDragElement(dom, el, handleEl, containEl, childrenContainer) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (handleEl) {
     dom.querySelector(handleEl).onmousedown = dragMouseDown;
@@ -1002,8 +1002,8 @@ function makeDragElement(dom, el, handleEl, containEl) {
     }
     el.style.top = newTop + "px";
     el.style.left = newLeft + "px";
-    if (el.floatChildrenContainer) {
-      el.floatChildrenContainer.all().map((x2) => {
+    if (childrenContainer) {
+      childrenContainer.all().map((x2) => {
         x2.style.top = e6.movementY + parseInt(x2.style.top) + "px";
         x2.style.left = e6.movementX + parseInt(x2.style.left) + "px";
       });
