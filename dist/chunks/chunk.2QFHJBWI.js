@@ -822,15 +822,40 @@ var LiveWidget = class extends LiveDraggable {
   }
 };
 
+// src/common/controllers/FloatersChildrenContainer.ts
+var FloatChildrenContainer = class {
+  constructor(host) {
+    this.childFloaters = [];
+    this.host = host;
+    host.addController(this);
+  }
+  hostDisconnected() {
+    this.closeAllChildFloaters();
+  }
+  add(floater) {
+    this.childFloaters.push(floater);
+  }
+  remove(floater) {
+    const index = this.childFloaters.indexOf(floater);
+    if (index > -1) {
+      this.childFloaters.splice(index, 1);
+    }
+  }
+  removeAndClose(floater) {
+    floater.close();
+    this.remove(floater);
+  }
+  closeAllChildFloaters() {
+    this.childFloaters.forEach((f2) => f2.close());
+    this.childFloaters = [];
+  }
+};
+
 // src/common/LiveWidgetEdit.ts
 var LiveWidgetEdit = class extends s4 {
   constructor() {
     super(...arguments);
-    this.childFloaters = [];
-  }
-  disconnectedCallback() {
-    this.closeAllChildFloaters();
-    super.disconnectedCallback();
+    this.floatChildrenContainer = new FloatChildrenContainer(this);
   }
   set widget(w2) {
     this._widget = w2;
@@ -856,10 +881,6 @@ var LiveWidgetEdit = class extends s4 {
   }
   get data() {
     return this._data;
-  }
-  closeAllChildFloaters() {
-    this.childFloaters.forEach((f2) => f2.close());
-    this.childFloaters = [];
   }
 };
 
