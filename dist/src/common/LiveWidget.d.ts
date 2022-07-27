@@ -10,7 +10,7 @@ export declare abstract class LiveWidget extends LiveDraggable {
     protected _data: any;
     private _widgetId;
     private _config;
-    protected constructor();
+    constructor();
     connectedCallback(): void;
     willUpdate(_changedProperties: PropertyValues): void;
     protected firstUpdated(_changedProperties: PropertyValues): void;

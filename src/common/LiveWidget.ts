@@ -15,7 +15,7 @@ export abstract class LiveWidget extends LiveDraggable {
     private _widgetId: string;
     private _config: WidgetConfig;
 
-    protected constructor() {
+    constructor() {
         super();
         this._widgetId = uuid_v4();
     }
