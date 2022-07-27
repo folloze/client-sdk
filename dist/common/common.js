@@ -3,6 +3,7 @@ import {
   CloseOnOutSideClickController,
   CloudinaryHelper,
   FLZ_DESIGNER_EVENT_TYPE,
+  FloatChildrenContainer,
   FloatEditor,
   Floatable,
   FlzBoardEvent,
@@ -22,7 +23,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.2QFHJBWI.js";
+} from "../chunks/chunk.7R6VLW6A.js";
 import {
   FetchService
 } from "../chunks/chunk.BTK3NVPD.js";
@@ -47,6 +48,7 @@ export {
   CloudinaryHelper,
   FLZ_DESIGNER_EVENT_TYPE,
   FetchService,
+  FloatChildrenContainer,
   FloatEditor,
   Floatable,
   FlzBoardEvent,

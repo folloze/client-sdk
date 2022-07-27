@@ -3122,6 +3122,7 @@ export {
   emit,
   waitForEvent,
   LiveWidget,
+  FloatChildrenContainer,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
