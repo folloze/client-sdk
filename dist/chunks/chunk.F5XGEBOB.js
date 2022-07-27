@@ -845,6 +845,9 @@ var FloatChildrenContainer = class {
     floater.close();
     this.remove(floater);
   }
+  all() {
+    return this.childFloaters;
+  }
   closeAllChildFloaters() {
     this.childFloaters.forEach((f2) => f2.close());
     this.childFloaters = [];
@@ -999,6 +1002,12 @@ function makeDragElement(dom, el, handleEl, containEl) {
     }
     el.style.top = newTop + "px";
     el.style.left = newLeft + "px";
+    if (el.floatChildrenContainer) {
+      el.floatChildrenContainer.all().map((x2) => {
+        x2.style.top = e6.movementY + parseInt(x2.style.top) + "px";
+        x2.style.left = e6.movementX + parseInt(x2.style.left) + "px";
+      });
+    }
   }
   function closeDragElement() {
     document.onmouseup = null;

@@ -1,6 +1,6 @@
 import { LitElement } from "lit";
 declare type Constructor<T> = new (...args: any[]) => T;
-export declare class IFloatingElement {
+export declare class IFloatingElement extends LitElement {
     setStartPos(x: number, y: number): void;
     setLayer(layer: number): void;
     getLayer(): number;

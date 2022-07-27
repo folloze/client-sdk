@@ -1,14 +1,14 @@
 import {LitElement} from "lit";
 import {LiveWidget} from "./LiveWidget";
-import {FloatChildrenContainer} from "./controllers/FloatersChildrenContainer";
+import {FloatChildrenContainer, hasFloatingChildren} from "./controllers/FloatersChildrenContainer";
 
-export abstract class LiveWidgetEdit extends LitElement {
+export abstract class LiveWidgetEdit extends LitElement implements hasFloatingChildren {
     protected _widget: LiveWidget;
     protected _data: any;
     protected _propPath: string;
 
     readonly _handleStyle: string | undefined;
-    protected floatChildrenContainer = new FloatChildrenContainer(this);
+    public floatChildrenContainer = new FloatChildrenContainer(this);
 
     set widget(w: LiveWidget) {
         this._widget = w;

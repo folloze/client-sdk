@@ -1,5 +1,8 @@
 import { LitElement, ReactiveController } from "lit";
 import { IFloatingElement } from "../mixins/FloatableMixin";
+export interface hasFloatingChildren {
+    floatChildrenContainer: FloatChildrenContainer;
+}
 export declare class FloatChildrenContainer implements ReactiveController {
     private readonly host;
     private childFloaters;
@@ -8,5 +11,6 @@ export declare class FloatChildrenContainer implements ReactiveController {
     add(floater: IFloatingElement): void;
     remove(floater: IFloatingElement): void;
     removeAndClose(floater: IFloatingElement): void;
+    all(): IFloatingElement[];
     closeAllChildFloaters(): void;
 }
