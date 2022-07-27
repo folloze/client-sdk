@@ -1,4 +1,4 @@
-import {FloatChildrenContainer, hasFloatingChildren} from "./controllers/FloatersChildrenContainer";
+import {FloatChildrenContainer} from "./controllers/FloatersChildrenContainer";
 
 type DocOrShadowRoot = Document | DocumentFragment | DocumentOrShadowRoot | null;
 
@@ -109,7 +109,7 @@ export function makeDragElement(
         el.style.top = newTop + "px";
         el.style.left = newLeft + "px";
 
-        if (childrenContainer) {
+        if (childrenContainer && childrenContainer?.all().length > 0) {
             childrenContainer.all().map(x => {
                 x.style.top = e.movementY + parseInt(x.style.top) + "px";
                 x.style.left = e.movementX + parseInt(x.style.left) + "px";

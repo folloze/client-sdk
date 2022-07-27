@@ -826,10 +826,21 @@ var LiveWidget = class extends LiveDraggable {
 var FloatChildrenContainer = class {
   constructor(host) {
     this.childFloaters = [];
+    this._addFloatChild = (e6) => {
+      if (!e6.detail.child) {
+        throw new Error("child is required to add to float children container");
+      }
+      e6.stopPropagation();
+      this.add(e6.detail.child);
+    };
     this.host = host;
     host.addController(this);
   }
+  hostConnected() {
+    this.host.addEventListener("add-float-child", this._addFloatChild);
+  }
   hostDisconnected() {
+    this.host.removeEventListener("add-float-child", this._addFloatChild);
     this.closeAllChildFloaters();
   }
   add(floater) {
@@ -1002,7 +1013,7 @@ function makeDragElement(dom, el, handleEl, containEl, childrenContainer) {
     }
     el.style.top = newTop + "px";
     el.style.left = newLeft + "px";
-    if (childrenContainer) {
+    if (childrenContainer && (childrenContainer == null ? void 0 : childrenContainer.all().length) > 0) {
       childrenContainer.all().map((x2) => {
         x2.style.top = e6.movementY + parseInt(x2.style.top) + "px";
         x2.style.left = e6.movementX + parseInt(x2.style.left) + "px";

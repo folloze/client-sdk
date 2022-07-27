@@ -9,12 +9,25 @@ export class FloatChildrenContainer implements ReactiveController {
     private readonly host: LitElement;
     private childFloaters: IFloatingElement[] = [];
 
+    _addFloatChild = (e: CustomEvent) => {
+        if (!e.detail.child) {
+            throw new Error("child is required to add to float children container");
+        }
+        e.stopPropagation();
+        this.add(e.detail.child);
+    };
+
     constructor(host: LitElement) {
         this.host = host;
         host.addController(this);
     }
 
+    hostConnected() {
+        this.host.addEventListener("add-float-child", this._addFloatChild);
+    }
+
     hostDisconnected() {
+        this.host.removeEventListener("add-float-child", this._addFloatChild);
         this.closeAllChildFloaters();
     }
 
