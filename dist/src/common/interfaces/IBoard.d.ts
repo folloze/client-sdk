@@ -63,7 +63,7 @@ export interface ILiveBoard extends LitElement {
     setRows(n: number): void;
     preRender(): void;
     refresh(): void;
-    addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
+    addScriptForWidget(w: LoadableConfig): Promise<LoadableConfig | void>;
     generateConfigHash(): string;
     autoUpgradeWidgets(): void;
     setForceUpdate(): void;
