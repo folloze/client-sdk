@@ -355,6 +355,8 @@ export class Designer {
                 .put(`/api/v1/boards/${boardId}/config`, {
                     config: config,
                     theme_id: null,
+                    // TODO: remove when issue with conflict alert is solved
+                    force: true,
                 })
                 .then(result => resolve({status: result.status, data: result.data}))
                 .catch(e => {
