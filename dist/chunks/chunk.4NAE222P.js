@@ -1089,7 +1089,7 @@ var Floatable = (superClass) => {
     }
     setLayer(layer) {
       this.layer = layer;
-      this.style.zIndex = 104 + layer.toString();
+      this.style.zIndex = (104 + layer).toString();
     }
     getLayer() {
       return this.layer;
@@ -1146,7 +1146,7 @@ var Floatable = (superClass) => {
                     --floatBoxBorder: thin solid rgb(103 103 103 / 78%);
                     --outlineShadow: 1px 1px 3px #ccc;
 
-                    resize: both;
+                    //resize: both;
                     pointer-events: all;
 
                     opacity: 0;
