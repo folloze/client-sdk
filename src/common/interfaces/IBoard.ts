@@ -3,6 +3,7 @@ import {FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonConf
 import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
 import {FloatPos, GridPos} from "./IPositions";
+import {IPersonalizationConfig} from "./IPersonalization";
 
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
@@ -30,6 +31,7 @@ export type BoardConfig = {
     };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
+    personalization?: IPersonalizationConfig;
 };
 
 export type PageConfig = {

@@ -7,3 +7,14 @@ export declare type PersonalizationElement = {
     element: LiveElement;
     _display?: string;
 };
+export declare type ruleId = string;
+export interface IPersonalizationConfig {
+    rules: Record<ruleId, IPersonalizationRule>;
+    rulesBatches: Record<string, ruleId[]>;
+}
+export interface IPersonalizationRule {
+    key: ruleId;
+    mergeTagId: number;
+    mergeTagValues: string[];
+    _appliedOn?: string[];
+}

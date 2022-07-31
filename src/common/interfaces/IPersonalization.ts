@@ -8,3 +8,17 @@ export type PersonalizationElement = {
     element: LiveElement;
     _display?: string;
 };
+
+export type ruleId = string; // ru_string
+
+export interface IPersonalizationConfig {
+    rules: Record<ruleId, IPersonalizationRule>;
+    rulesBatches: Record<string, ruleId[]>;
+}
+
+export interface IPersonalizationRule {
+    key: ruleId;
+    mergeTagId: number;
+    mergeTagValues: string[];
+    _appliedOn?: string[]; // widget / ribbon / floating ids
+}
