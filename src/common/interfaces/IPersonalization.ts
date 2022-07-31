@@ -18,7 +18,8 @@ export interface IPersonalizationConfig {
 
 export interface IPersonalizationRule {
     key: ruleId;
-    mergeTagId: number;
+    mergeTagId: string;
     mergeTagValues: string[];
     _appliedOn?: string[]; // widget / ribbon / floating ids
+    // index?: number;
 }
