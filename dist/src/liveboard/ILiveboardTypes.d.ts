@@ -87,9 +87,19 @@ export declare type OpenItemViewerPayload = {
     route?: string;
 };
 export declare type JourneyItemParams = {
-    query?: string;
     categoryId?: number;
     boardId?: number;
+    categoriesScope?: number[];
+    multiCategories?: number[][];
+    search?: string;
+    sorter?: string;
+    filter?: {
+        type: string;
+        num_items: number;
+    };
+    virtualCategory?: {
+        items_ids: number[];
+    };
 };
 export declare type ItemResponseV2 = {
     id: number;
