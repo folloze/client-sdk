@@ -17,6 +17,10 @@ export interface LiveElement extends LitElement {
     config: LiveConfig;
     data: LiveConfig["data"];
 }
+export interface GridElement extends LitElement {
+    config: LiveConfig & GridConfig;
+    data: LiveConfig["data"] | RibbonConfig["data"];
+}
 export type LoadableElement = LitElement & {config: LoadableConfig};
 
 export type BoardConfig = {

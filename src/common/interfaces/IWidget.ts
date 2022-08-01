@@ -13,12 +13,12 @@ export interface LiveConfig {
     };
 }
 
-export interface GridConfig {
+export interface GridConfig extends LiveConfig {
     sectionId: string;
     position: GridPos;
 }
 
-export interface LoadableConfig {
+export interface LoadableConfig extends LiveConfig {
     widgetTag: string; // 'folloze-header-hor' | 'header' | 'gallery' | 'banner' ...
     widgetScripts: string; // url to the widget CDN | lib
 }
