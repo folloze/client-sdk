@@ -41,4 +41,5 @@ export declare type RibbonConfig = {
     position: GridPos;
     background: string | BackgroundImage | any;
     backgroundMobile: string | BackgroundImage | any;
+    optimizedForMobile?: boolean;
 };
