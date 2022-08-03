@@ -97,6 +97,9 @@ export type OpenItemViewerPayload = {
         type: string,
         num_items: number
     },
+    virtual_category?: {
+        item_ids: number[];
+    },
     viewer_settings: FlzVItemViewerSettings,
     route?: string,
 }
