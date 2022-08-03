@@ -12,6 +12,9 @@ export interface SourcesConfig {
         name: string;
         description: string;
     };
+    virtual_category?: {
+        item_ids: number[];
+    };
 }
 export interface FlzVItemViewerSettings {
     design: "classic" | "lightbox";

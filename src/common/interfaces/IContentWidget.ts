@@ -12,6 +12,9 @@ export interface SourcesConfig {
         visible: boolean;
         name: string;
         description: string;
+    },
+    virtual_category?: {
+        item_ids: number[];
     }
 }
 
