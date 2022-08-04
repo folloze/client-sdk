@@ -1,5 +1,6 @@
 import {
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
   Floatable,
@@ -20,11 +21,11 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.7SAAGOKK.js";
+} from "../chunks/chunk.GFHJUC4D.js";
 import {
   FetchService
-} from "../chunks/chunk.BDBHK5A7.js";
-import "../chunks/chunk.3ZNLEUXI.js";
+} from "../chunks/chunk.J3OY5UAX.js";
+import "../chunks/chunk.62TMOTOU.js";
 import "../chunks/chunk.Y7N5PQ2A.js";
 import "../chunks/chunk.AQ3ETNLA.js";
 import "../chunks/chunk.H64FWCCZ.js";
@@ -37,10 +38,11 @@ import {
   simpleThrottle
 } from "../chunks/chunk.WXVSHK2H.js";
 import "../chunks/chunk.G52EPVC6.js";
-import "../chunks/chunk.L366ULXG.js";
+import "../chunks/chunk.PNCHJ2BU.js";
 import "../chunks/chunk.Z3GS5MY4.js";
 export {
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FetchService,
   FloatEditor,

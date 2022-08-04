@@ -1,5 +1,6 @@
 import {
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatEditor,
   Floatable,
@@ -20,12 +21,12 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.7SAAGOKK.js";
+} from "./chunks/chunk.GFHJUC4D.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.BDBHK5A7.js";
-import "./chunks/chunk.3ZNLEUXI.js";
+} from "./chunks/chunk.J3OY5UAX.js";
+import "./chunks/chunk.62TMOTOU.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -51,13 +52,14 @@ import {
 } from "./chunks/chunk.G52EPVC6.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.L366ULXG.js";
+} from "./chunks/chunk.PNCHJ2BU.js";
 import "./chunks/chunk.Z3GS5MY4.js";
 export {
   Analytics,
   CampaignElementsTypes,
   ClientSDK,
   CloudinaryHelper,
+  ContentWidget,
   Designer,
   DesignerEventTypes,
   EventSources,

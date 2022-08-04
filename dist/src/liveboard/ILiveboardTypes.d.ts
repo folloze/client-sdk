@@ -1,5 +1,6 @@
 import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
 import { PrivacySettings } from '../common/ISharedTypes';
+import { FlzVItemViewerSettings } from "../common/interfaces/IContentWidget";
 export declare type BoardResponseV1 = {
     id: number;
     slug: string;
@@ -48,9 +49,7 @@ export declare type Image = {
     transformation: object;
     displayable_section?: string;
 };
-export declare type ItemsParams = {
-    boardId: number;
-    category?: number;
+declare type ItemNavigationParams = {
     multiCategories?: number[][];
     categoriesScope?: number[];
     search?: string;
@@ -59,10 +58,17 @@ export declare type ItemsParams = {
         type: string;
         num_items: number;
     };
+    virtual_category?: {
+        item_ids: number[];
+    };
+};
+export declare type ItemsParams = ItemNavigationParams & {
+    boardId: number;
+    category?: number;
     page?: number;
     perPage?: number;
 };
-export declare type OpenItemViewerPayload = {
+export declare type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
     slug: string;
     name: string;
@@ -74,23 +80,10 @@ export declare type OpenItemViewerPayload = {
         id: number;
         slug: string;
     };
-    multiCategories?: number[][];
-    categoriesScope?: number[];
-    search?: string;
-    sorter?: string;
-    filter?: {
-        type: string;
-        num_items: number;
-    };
-    viewer_settings: {
-        design: "classic" | "lightbox";
-        allow_download: boolean;
-        allow_likes: boolean;
-    };
+    viewer_settings: FlzVItemViewerSettings;
     route?: string;
 };
-export declare type JourneyItemParams = {
-    query?: string;
+export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
     boardId?: number;
 };
