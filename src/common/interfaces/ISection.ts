@@ -49,4 +49,5 @@ export type RibbonConfig = {
     position: GridPos;
     background: string | BackgroundImage | any; // url(/images/GreenBtn.svg) 50% 50% no-repeat rgb(255, 0, 0);
     backgroundMobile: string | BackgroundImage | any;
+    optimizedForMobile?: boolean;
 };
