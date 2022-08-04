@@ -58,11 +58,8 @@ export type Image = {
     displayable_section?: string
 }
 
-export type ItemsParams = {
-    boardId: number,
-    category?: number,
+type ItemNavigationParams = {
     multiCategories?: number[][], // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
-    // always send the categories scope
     categoriesScope?: number[], // if specified will limit the result to include only items from those categories
     search?: string,
     sorter?: string,
@@ -70,13 +67,20 @@ export type ItemsParams = {
         type: string,
         num_items: number
     },
-    // defaults are handled in the server
+    virtual_category?: {
+        item_ids: number[];
+    }
+}
+
+export type ItemsParams = ItemNavigationParams & {
+    boardId: number,
+    category?: number,
     page?: number,
     perPage?: number,
 }
 
 // minimixed data for the item relevant for the item viewer
-export type OpenItemViewerPayload = {
+export type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
     slug: string;
     name: string;
@@ -88,34 +92,13 @@ export type OpenItemViewerPayload = {
         id: number;
         slug: string;
     },
-    multiCategories?: number[][], // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
-    // always send the categories scope
-    categoriesScope?: number[], // if specified will limit the result to include only items from those categories
-    search?: string,
-    sorter?: string,
-    filter?: {
-        type: string,
-        num_items: number
-    },
-    virtual_category?: {
-        item_ids: number[];
-    },
     viewer_settings: FlzVItemViewerSettings,
     route?: string,
 }
 
-export type JourneyItemParams = {
+export type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number,
     boardId?: number,
-    categoriesScope?: number[],
-    multiCategories?: number[][],
-    search?: string,
-    sorter?: string,
-    filter?: {
-        type: string,
-        num_items: number
-    },
-    virtualCategory?: { items_ids: number[] }
 }
 
 export type ItemResponseV2 = {

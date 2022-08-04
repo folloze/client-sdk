@@ -49,32 +49,7 @@ export declare type Image = {
     transformation: object;
     displayable_section?: string;
 };
-export declare type ItemsParams = {
-    boardId: number;
-    category?: number;
-    multiCategories?: number[][];
-    categoriesScope?: number[];
-    search?: string;
-    sorter?: string;
-    filter?: {
-        type: string;
-        num_items: number;
-    };
-    page?: number;
-    perPage?: number;
-};
-export declare type OpenItemViewerPayload = {
-    id: number;
-    slug: string;
-    name: string;
-    description: string;
-    item_source: number;
-    item_type: string;
-    is_gated: boolean;
-    category?: {
-        id: number;
-        slug: string;
-    };
+declare type ItemNavigationParams = {
     multiCategories?: number[][];
     categoriesScope?: number[];
     search?: string;
@@ -86,23 +61,31 @@ export declare type OpenItemViewerPayload = {
     virtual_category?: {
         item_ids: number[];
     };
+};
+export declare type ItemsParams = ItemNavigationParams & {
+    boardId: number;
+    category?: number;
+    page?: number;
+    perPage?: number;
+};
+export declare type OpenItemViewerPayload = ItemNavigationParams & {
+    id: number;
+    slug: string;
+    name: string;
+    description: string;
+    item_source: number;
+    item_type: string;
+    is_gated: boolean;
+    category?: {
+        id: number;
+        slug: string;
+    };
     viewer_settings: FlzVItemViewerSettings;
     route?: string;
 };
-export declare type JourneyItemParams = {
+export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
     boardId?: number;
-    categoriesScope?: number[];
-    multiCategories?: number[][];
-    search?: string;
-    sorter?: string;
-    filter?: {
-        type: string;
-        num_items: number;
-    };
-    virtualCategory?: {
-        items_ids: number[];
-    };
 };
 export declare type ItemResponseV2 = {
     id: number;
