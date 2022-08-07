@@ -20,9 +20,10 @@ export interface GridElement extends LitElement {
     config: LiveConfig & GridConfig;
     data: LiveConfig["data"] | RibbonConfig["data"];
 }
-export declare type LoadableElement = LitElement & {
+export interface LoadableElement extends LitElement {
     config: LoadableConfig;
-};
+    data: LoadableConfig["data"];
+}
 export declare type BoardConfig = {
     id: number;
     meta: null | {
