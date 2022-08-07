@@ -25,12 +25,7 @@ export interface LoadableConfig extends LiveConfig {
 
 export interface WidgetConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
-export interface RibbonConfig extends LiveConfig, GridConfig {
-    data: {
-        background: string | BackgroundImage | any; // url(/images/GreenBtn.svg) 50% 50% no-repeat rgb(255, 0, 0);
-        backgroundMobile: string | BackgroundImage | any;
-    };
-}
+export interface RibbonConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
 export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
