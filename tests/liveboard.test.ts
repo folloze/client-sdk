@@ -57,7 +57,7 @@ describe("test liveboard mocks module", () => {
 
     it("checks that getJourneyItems mock works as expected", async () => {
         await sdk.liveboard
-            .getJourneyItems(1, {categoryId: undefined, boardId: undefined, query: undefined})
+            .getJourneyItems(1, {categoryId: undefined, boardId: undefined})
             .then(result => expect(result.items_count).toBeGreaterThan(3));
     });
 

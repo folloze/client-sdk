@@ -24,7 +24,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "ctaSubmit"
     | "consent-given"
     | "get-current-item"
-    | "get-current-journey"
+    | "get-initial-journey-item"
     | "get-category-slug"
     | "get-all-categories"
     | "get-modal-element"
@@ -78,4 +78,11 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "save-section-config"
     | "delete-widget"
     | "close-all-editors"
-    | "append-to-designer";
+    | "resize"
+    | "widget-connected"
+    | "widget-first-updated"
+    | "widgets-scripts-loaded"
+    | "widget-update"
+    | "widget-updated"
+    | "append-to-designer"
+    | "get-user";

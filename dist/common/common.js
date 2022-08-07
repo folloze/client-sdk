@@ -2,6 +2,7 @@ import {
   CloseOnESCController,
   CloseOnOutSideClickController,
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatChildrenContainer,
   FloatEditor,
@@ -23,7 +24,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.4NAE222P.js";
+} from "../chunks/chunk.T3FTD4RC.js";
 import {
   FetchService
 } from "../chunks/chunk.BTK3NVPD.js";
@@ -40,12 +41,13 @@ import {
   simpleThrottle
 } from "../chunks/chunk.WXVSHK2H.js";
 import "../chunks/chunk.G52EPVC6.js";
-import "../chunks/chunk.BN4QYR7M.js";
+import "../chunks/chunk.C7O4HBVL.js";
 import "../chunks/chunk.Z3GS5MY4.js";
 export {
   CloseOnESCController,
   CloseOnOutSideClickController,
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FetchService,
   FloatChildrenContainer,

@@ -2,6 +2,7 @@ import {
   CloseOnESCController,
   CloseOnOutSideClickController,
   CloudinaryHelper,
+  ContentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatChildrenContainer,
   FloatEditor,
@@ -23,7 +24,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.4NAE222P.js";
+} from "./chunks/chunk.T3FTD4RC.js";
 import {
   ClientSDK,
   FetchService
@@ -54,7 +55,7 @@ import {
 } from "./chunks/chunk.G52EPVC6.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.BN4QYR7M.js";
+} from "./chunks/chunk.C7O4HBVL.js";
 import "./chunks/chunk.Z3GS5MY4.js";
 export {
   Analytics,
@@ -63,6 +64,7 @@ export {
   CloseOnESCController,
   CloseOnOutSideClickController,
   CloudinaryHelper,
+  ContentWidget,
   Designer,
   DesignerEventTypes,
   EventSources,

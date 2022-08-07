@@ -3,7 +3,7 @@ import {
 } from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunk.BN4QYR7M.js";
+} from "./chunk.C7O4HBVL.js";
 import {
   __decorateClass,
   __spreadProps,
@@ -820,6 +820,10 @@ var LiveWidget = class extends LiveDraggable {
   incomingEvents(e6) {
     return;
   }
+};
+
+// src/common/ContentWidget.ts
+var ContentWidget = class extends LiveWidget {
 };
 
 // src/common/controllers/FloatersChildrenContainer.ts
@@ -3142,6 +3146,7 @@ export {
   emit,
   waitForEvent,
   LiveWidget,
+  ContentWidget,
   FloatChildrenContainer,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
