@@ -47,7 +47,9 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "open-modal"
     | "register-floating-widgets-triggers"
     | "get-form-privacy-messages"
-    | "share-by-email";
+    | "share-by-email"
+    | "get-privacy-messages"
+    | "get-is-internal-cookie-management";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"
@@ -85,4 +87,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "widget-update"
     | "widget-updated"
     | "append-to-designer"
-    | "get-user";
+    | "get-user"
+    | "get-privacy-messages";
