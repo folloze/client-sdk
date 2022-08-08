@@ -96,5 +96,12 @@ export abstract class LiveWidget extends LiveDraggable {
         return;
     }
 
+    /**
+     * you should override this method to listen to state changes
+     */
+    public stateChanged(state: any) {
+        return;
+    }
+
     abstract render();
 }
