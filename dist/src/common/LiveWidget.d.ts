@@ -38,5 +38,9 @@ export declare abstract class LiveWidget extends LiveDraggable {
      * you should override this method to use incoming events
      */
     incomingEvents(e: FlzEvent): void;
+    /**
+     * you should override this method to listen to state changes
+     */
+    stateChanged(state: any): void;
     abstract render(): any;
 }

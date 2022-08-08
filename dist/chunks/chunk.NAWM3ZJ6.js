@@ -820,6 +820,9 @@ var LiveWidget = class extends LiveDraggable {
   incomingEvents(e6) {
     return;
   }
+  stateChanged(state) {
+    return;
+  }
 };
 
 // src/common/ContentWidget.ts
