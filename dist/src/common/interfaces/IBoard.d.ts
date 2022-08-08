@@ -78,6 +78,14 @@ export interface ILiveBoard extends LitElement {
     getCurrentPageName(): string;
     registerFloatingWidgetsTriggers(): void;
     unRegisterFloatingWidgetsTriggers(): void;
+    turnOnPersonalization(): void;
+    turnOffPersonalization(): void;
+    set personalizationResolved(result: {
+        [key: string]: boolean;
+    });
+    get personalizationResolved(): {
+        [key: string]: boolean;
+    };
     get pages(): PageConfig[];
     get sections(): SectionConfig[];
     get widgets(): WidgetConfig[];
