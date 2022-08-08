@@ -6,4 +6,5 @@ export interface IItemViewer extends LitElement {
     open(item?: OpenItemViewerPayload, journey?: JourneyItemsResponseV2, headerElement?: LiveWidget): void;
     close(): void;
     changeItem(item: OpenItemViewerPayload);
+    stateChanged(state: any);
 }
