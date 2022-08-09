@@ -3,7 +3,7 @@ import {
 } from "./chunk.WXVSHK2H.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunk.PNCHJ2BU.js";
+} from "./chunk.C7O4HBVL.js";
 import {
   __decorateClass,
   __spreadProps,
@@ -829,15 +829,54 @@ var LiveWidget = class extends LiveDraggable {
 var ContentWidget = class extends LiveWidget {
 };
 
+// src/common/controllers/FloatersChildrenContainer.ts
+var FloatChildrenContainer = class {
+  constructor(host) {
+    this.childFloaters = [];
+    this._addFloatChild = (e6) => {
+      if (!e6.detail.child) {
+        throw new Error("child is required to add to float children container");
+      }
+      e6.stopPropagation();
+      this.add(e6.detail.child);
+    };
+    this.host = host;
+    host.addController(this);
+  }
+  hostConnected() {
+    this.host.addEventListener("add-float-child", this._addFloatChild);
+  }
+  hostDisconnected() {
+    this.host.removeEventListener("add-float-child", this._addFloatChild);
+    this.closeAllChildFloaters();
+  }
+  add(floater) {
+    this.childFloaters.push(floater);
+  }
+  remove(floater) {
+    const index = this.childFloaters.indexOf(floater);
+    if (index > -1) {
+      this.childFloaters.splice(index, 1);
+    }
+  }
+  removeAndClose(floater) {
+    floater.close();
+    this.remove(floater);
+  }
+  all() {
+    return this.childFloaters;
+  }
+  closeAllChildFloaters() {
+    this.childFloaters.forEach((f2) => f2.close());
+    this.childFloaters = [];
+  }
+};
+
 // src/common/LiveWidgetEdit.ts
 var LiveWidgetEdit = class extends s4 {
   constructor() {
     super(...arguments);
-    this.childFloaters = [];
-  }
-  disconnectedCallback() {
-    this.closeAllChildFloaters();
-    super.disconnectedCallback();
+    this.floatChildrenContainer = new FloatChildrenContainer(this);
   }
   set widget(w2) {
     this._widget = w2;
@@ -864,10 +903,6 @@ var LiveWidgetEdit = class extends s4 {
   get data() {
     return this._data;
   }
-  closeAllChildFloaters() {
-    this.childFloaters.forEach((f2) => f2.close());
-    this.childFloaters = [];
-  }
 };
 
 // src/common/LiveWidgetComponentEdit.ts
@@ -885,7 +920,7 @@ var LiveWidgetComponentEdit = class extends LiveWidgetEdit {
 };
 
 // src/common/LiveWidgetComponentPersonalization.ts
-var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
+var LiveWidgetComponentPersonalization = class extends s4 {
   set editTag(tag) {
     this._editTag = tag;
   }
@@ -919,7 +954,7 @@ var LiveWidgetComponentPersonalization = class extends LiveWidgetComponentEdit {
 };
 
 // src/common/makeDraggable.ts
-function makeDragElement(dom, el, handleEl, containEl) {
+function makeDragElement(dom, el, handleEl, containEl, childrenContainer) {
   let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
   if (handleEl) {
     dom.querySelector(handleEl).onmousedown = dragMouseDown;
@@ -985,6 +1020,12 @@ function makeDragElement(dom, el, handleEl, containEl) {
     }
     el.style.top = newTop + "px";
     el.style.left = newLeft + "px";
+    if (childrenContainer && (childrenContainer == null ? void 0 : childrenContainer.all().length) > 0) {
+      childrenContainer.all().map((x2) => {
+        x2.style.top = e6.movementY + parseInt(x2.style.top) + "px";
+        x2.style.left = e6.movementX + parseInt(x2.style.left) + "px";
+      });
+    }
   }
   function closeDragElement() {
     document.onmouseup = null;
@@ -1055,7 +1096,7 @@ var Floatable = (superClass) => {
     }
     setLayer(layer) {
       this.layer = layer;
-      this.style.zIndex = 104 + layer.toString();
+      this.style.zIndex = (104 + layer).toString();
     }
     getLayer() {
       return this.layer;
@@ -1112,7 +1153,7 @@ var Floatable = (superClass) => {
                     --floatBoxBorder: thin solid rgb(103 103 103 / 78%);
                     --outlineShadow: 1px 1px 3px #ccc;
 
-                    resize: both;
+                    //resize: both;
                     pointer-events: all;
 
                     opacity: 0;
@@ -1153,7 +1194,7 @@ var FloatEditor = class extends FloatingElement {
   firstUpdated(_changedProperties) {
     this.isLoading = false;
     this.body.appendChild(this.childEl);
-    makeDragElement(this.shadowRoot, this, "#handle");
+    makeDragElement(this.shadowRoot, this, "#handle", void 0, this.childEl.floatChildrenContainer);
     super.firstUpdated(_changedProperties);
   }
   highlight() {
@@ -3051,6 +3092,48 @@ var CloudinaryHelper = class {
   }
 };
 
+// src/common/controllers/CloseOnOutSideClickController.ts
+var CloseOnOutSideClickController = class {
+  constructor(host) {
+    this._onMouseClick = (e6) => {
+      if (e6.target !== this.host && !e6.composedPath().includes(this.host)) {
+        this.host.close();
+      }
+    };
+    this.host = host;
+    host.addController(this);
+  }
+  hostConnected() {
+    setTimeout(() => {
+      window.addEventListener("click", this._onMouseClick, true);
+    });
+  }
+  hostDisconnected() {
+    window.removeEventListener("click", this._onMouseClick, true);
+  }
+};
+
+// src/common/controllers/CloseOnESCController.ts
+var CloseOnESCController = class {
+  constructor(host) {
+    this._onKeyUp = (e6) => {
+      if (e6.key === "Escape") {
+        this.host.close();
+      }
+    };
+    this.host = host;
+    host.addController(this);
+  }
+  hostConnected() {
+    setTimeout(() => {
+      window.addEventListener("keyup", this._onKeyUp, true);
+    });
+  }
+  hostDisconnected() {
+    window.removeEventListener("keyup", this._onKeyUp, true);
+  }
+};
+
 export {
   LiveDraggable,
   FLZ_DESIGNER_EVENT_TYPE,
@@ -3067,13 +3150,16 @@ export {
   waitForEvent,
   LiveWidget,
   ContentWidget,
+  FloatChildrenContainer,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
   makeDragElement,
   Floatable,
   FloatEditor,
-  CloudinaryHelper
+  CloudinaryHelper,
+  CloseOnOutSideClickController,
+  CloseOnESCController
 };
 /**
  * @license
