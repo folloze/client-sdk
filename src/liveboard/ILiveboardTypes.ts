@@ -94,7 +94,8 @@ export type OpenItemViewerPayload = ItemNavigationParams & {
     },
     viewer_settings: FlzVItemViewerSettings,
     route?: string,
-    open_in_new_tab?: boolean
+    open_in_new_tab?: boolean,
+    link_url?: string
 }
 
 export type JourneyItemParams = ItemNavigationParams & {
