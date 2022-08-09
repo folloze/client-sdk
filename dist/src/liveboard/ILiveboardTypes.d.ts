@@ -82,6 +82,7 @@ export declare type OpenItemViewerPayload = ItemNavigationParams & {
     };
     viewer_settings: FlzVItemViewerSettings;
     route?: string;
+    open_in_new_tab?: boolean;
 };
 export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
