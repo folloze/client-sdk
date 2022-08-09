@@ -14,7 +14,7 @@ export interface IPersonalizationConfig {
 }
 export interface IPersonalizationRule {
     key: ruleId;
-    mergeTagId: string;
+    mergeTagId: number;
     mergeTagValues: string[];
     _appliedOn?: string[];
 }
