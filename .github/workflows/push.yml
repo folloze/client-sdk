@@ -1,69 +1,61 @@
----
-on:
-  push:
-    branches:
-      - '**'
-
-# Jobs definition
-jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-latest
-    outputs:
-      new_version: ${{ steps.new_version.outputs.version }}
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: recursive
-      - uses: actions/setup-node@v2
-        with:
-          node-version: '16'
-      - name: Calculate dependencies hash
-        run: cat package.json | jq .dependencies,.devDependencies | md5sum > package.json.hash
-      - uses: actions/cache@v2
-        id: npm-cache
-        with:
-          path: ./node_modules
-          key: ${{ runner.os }}-npm-cache-${{ hashFiles('./package.json.hash') }}
-      - name: Install Dependencies
-        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
-        run: |
-          sudo apt update -y
-          npm install
-      - name: Semantic Release
-        if: ${{ github.ref_name == 'master' }}
-        uses: docker://ghcr.io/codfish/semantic-release-action:v1
-        id: semver
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        with:
-          dry_run: true
-      - name: Update version in package.json
-        if: ${{ github.ref_name == 'master' }}
-        id: new_version
-        run: bash .github/scripts/update-version.sh ${{ steps.semver.outputs.release-version }}
-#      - name: NPM Build
-#        run: npm run build
-      - name: Set ENV
-#        if: ${{ github.ref_name == 'master' }}
-        run: |
-          echo "${{ steps.semver.outputs.release-notes }}" >> notes.txt
-          echo "FINAL_NOTES=$(cat notes.txt | tr "\n" "." | sed -e 's/\"//g')" >> $GITHUB_ENV
-          rm -f notes.txt
-      - name: Test
-        run: npm run test
-      - name: Build & update dist
-        run: |
-          npm run build
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-          git add package.json
-          git commit -m "build update (${{ steps.new_version.outputs.version }})
-          $FINAL_NOTES
-          "
-          git push
+#---
+#on:
+#  push:
+#    branches:
+#      - '**'
+#
+## Jobs definition
+#jobs:
+#  build:
+#    name: Build
+#    runs-on: ubuntu-latest
+#    outputs:
+#      new_version: ${{ steps.new_version.outputs.version }}
+#    steps:
+#      - uses: actions/checkout@v2
+#        with:
+#          submodules: recursive
+#      - uses: actions/setup-node@v2
+#        with:
+#          node-version: '16'
+#      - name: Calculate dependencies hash
+#        run: cat package.json | jq .dependencies,.devDependencies | md5sum > package.json.hash
+#      - uses: actions/cache@v2
+#        id: npm-cache
+#        with:
+#          path: ./node_modules
+#          key: ${{ runner.os }}-npm-cache-${{ hashFiles('./package.json.hash') }}
+#      - name: Install Dependencies
+#        if: ${{ steps.npm-cache.outputs.cache-hit != 'true' }}
 #        run: |
+#          sudo apt update -y
+#          npm install
+#      - name: Semantic Release
+#        if: ${{ github.ref_name == 'master' }}
+#        uses: docker://ghcr.io/codfish/semantic-release-action:v1
+#        id: semver
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+#        with:
+#          dry_run: true
+#      - name: Update version in package.json
+#        if: ${{ github.ref_name == 'master' }}
+#        id: new_version
+#        run: bash .github/scripts/update-version.sh ${{ steps.semver.outputs.release-version }}
+##      - name: NPM Build
+##        run: npm run build
+#      - name: Set ENV
+##        if: ${{ github.ref_name == 'master' }}
+#        run: |
+#          echo "${{ steps.semver.outputs.release-notes }}" >> notes.txt
+#          echo "FINAL_NOTES=$(cat notes.txt | tr "\n" "." | sed -e 's/\"//g')" >> $GITHUB_ENV
+#          rm -f notes.txt
+#      - name: Test
+#        run: npm run test
+#      - name: Build & update dist
+#        run: |
+#          npm run build
 #          git config user.name github-actions
 #          git config user.email github-actions@github.com
 #          git add package.json
@@ -71,28 +63,36 @@ jobs:
 #          $FINAL_NOTES
 #          "
 #          git push
-#          git tag v${{ steps.new_version.outputs.version }}
-#          git push --tags
-      - uses: actions/cache@v2
-        with:
-          path: |
-            ./package.json.hash
-            ./package.json
-            ./dist/
-            ./node_modules/
-          key: ${{ runner.os }}-build-cache-${{ github.run_id }}
-      - name: Report Status
-        if: always()
-        uses: ravsamhq/notify-slack-action@master
-        with:
-          status: ${{ job.status }}
-          notification_title: '{emoji} | *{repo}* -> {branch} | *{status_message}*'
-          message_format: '${{ github.event.pusher.name }}, *Build failed abruptly!* what in the world could happen? 😲'
-          footer: '<{repo_url}|repo> | <{commit_url}|commit> | <{run_url}|view run>'
-          notify_when: 'failure'
-          mention_groups: '!channel'
-          mention_groups_when: 'failure'
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_ALERT_HOOK }}
-
-
+##        run: |
+##          git config user.name github-actions
+##          git config user.email github-actions@github.com
+##          git add package.json
+##          git commit -m "build update (${{ steps.new_version.outputs.version }})
+##          $FINAL_NOTES
+##          "
+##          git push
+##          git tag v${{ steps.new_version.outputs.version }}
+##          git push --tags
+#      - uses: actions/cache@v2
+#        with:
+#          path: |
+#            ./package.json.hash
+#            ./package.json
+#            ./dist/
+#            ./node_modules/
+#          key: ${{ runner.os }}-build-cache-${{ github.run_id }}
+#      - name: Report Status
+#        if: always()
+#        uses: ravsamhq/notify-slack-action@master
+#        with:
+#          status: ${{ job.status }}
+#          notification_title: '{emoji} | *{repo}* -> {branch} | *{status_message}*'
+#          message_format: '${{ github.event.pusher.name }}, *Build failed abruptly!* what in the world could happen? 😲'
+#          footer: '<{repo_url}|repo> | <{commit_url}|commit> | <{run_url}|view run>'
+#          notify_when: 'failure'
+#          mention_groups: '!channel'
+#          mention_groups_when: 'failure'
+#        env:
+#          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_ALERT_HOOK }}
+#
+#
