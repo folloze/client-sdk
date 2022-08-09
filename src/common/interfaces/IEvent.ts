@@ -49,7 +49,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-form-privacy-messages"
     | "share-by-email"
     | "get-privacy-messages"
-    | "get-is-internal-cookie-management";
+    | "get-is-internal-cookie-management"
+    | "get-state";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"
