@@ -89,4 +89,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "widget-updated"
     | "append-to-designer"
     | "get-user"
-    | "get-privacy-messages";
+    | "get-privacy-messages"
+    | "get-is-internal-cookie-management";
