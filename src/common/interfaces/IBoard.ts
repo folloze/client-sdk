@@ -35,6 +35,7 @@ export type BoardConfig = {
         newHash?: string;
         // publishedHash?: string; - maybe we dont need it on the meta?? - saving it can cause problems
         currentPageName?: string;
+        clearCacheBefore?: string; // iso date
     };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;

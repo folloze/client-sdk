@@ -32,6 +32,7 @@ export declare type BoardConfig = {
         originHash?: string;
         newHash?: string;
         currentPageName?: string;
+        clearCacheBefore?: string;
     };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
