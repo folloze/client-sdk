@@ -2,7 +2,9 @@ import {LiveElement} from "../interfaces/IBoard";
 
 type Constructor<T> = abstract new (...args: any[]) => T;
 
-export declare class IPersonalizable {}
+export declare class IPersonalizable {
+    isConfigSet(): boolean;
+}
 
 export const Personalizable = <T extends Constructor<LiveElement>>(superClass: T) => {
     abstract class PersonalizableClass extends superClass implements IPersonalizable {
