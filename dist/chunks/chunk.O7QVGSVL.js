@@ -11,6 +11,61 @@ import {
   __toModule
 } from "./chunk.Z3GS5MY4.js";
 
+// node_modules/uuid/dist/esm-browser/rng.js
+var getRandomValues;
+var rnds8 = new Uint8Array(16);
+function rng() {
+  if (!getRandomValues) {
+    getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== "undefined" && typeof msCrypto.getRandomValues === "function" && msCrypto.getRandomValues.bind(msCrypto);
+    if (!getRandomValues) {
+      throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
+    }
+  }
+  return getRandomValues(rnds8);
+}
+
+// node_modules/uuid/dist/esm-browser/regex.js
+var regex_default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
+
+// node_modules/uuid/dist/esm-browser/validate.js
+function validate(uuid) {
+  return typeof uuid === "string" && regex_default.test(uuid);
+}
+var validate_default = validate;
+
+// node_modules/uuid/dist/esm-browser/stringify.js
+var byteToHex = [];
+for (i5 = 0; i5 < 256; ++i5) {
+  byteToHex.push((i5 + 256).toString(16).substr(1));
+}
+var i5;
+function stringify(arr) {
+  var offset = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
+  var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
+  if (!validate_default(uuid)) {
+    throw TypeError("Stringified UUID is invalid");
+  }
+  return uuid;
+}
+var stringify_default = stringify;
+
+// node_modules/uuid/dist/esm-browser/v4.js
+function v4(options, buf, offset) {
+  options = options || {};
+  var rnds = options.random || (options.rng || rng)();
+  rnds[6] = rnds[6] & 15 | 64;
+  rnds[8] = rnds[8] & 63 | 128;
+  if (buf) {
+    offset = offset || 0;
+    for (var i5 = 0; i5 < 16; ++i5) {
+      buf[offset + i5] = rnds[i5];
+    }
+    return buf;
+  }
+  return stringify_default(rnds);
+}
+var v4_default = v4;
+
 // node_modules/@lit/reactive-element/css-tag.js
 var t = window.ShadowRoot && (window.ShadyCSS === void 0 || window.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype;
 var e = Symbol();
@@ -587,118 +642,6 @@ var n4 = globalThis.litElementPolyfillSupport;
 n4 == null || n4({ LitElement: s4 });
 ((o4 = globalThis.litElementVersions) !== null && o4 !== void 0 ? o4 : globalThis.litElementVersions = []).push("3.1.2");
 
-// src/common/LiveDraggable.ts
-var LiveDraggable = class extends s4 {
-  constructor() {
-    super();
-    this.zIndex = 10;
-    this.xOffset = 0;
-    this.yOffset = 0;
-    this.currentX = 0;
-    this.currentY = 0;
-    this.initialX = 0;
-    this.initialY = 0;
-    this.isDraggable = true;
-  }
-  resetPosition() {
-    this.zIndex = 10;
-    this.xOffset = 0;
-    this.yOffset = 0;
-    this.currentX = 0;
-    this.currentY = 0;
-    this.initialX = 0;
-    this.initialY = 0;
-    this.setAttribute("style", "");
-  }
-  set pos(pos) {
-    if (pos) {
-      this._pos = pos;
-    } else {
-      this._pos = { x: 0, y: 0 };
-    }
-    this.currentX = this.xOffset = this.initialX = this._pos.x;
-    this.currentY = this.yOffset = this.initialY = this._pos.y;
-    this.moveTo(this._pos);
-  }
-  get pos() {
-    return this._pos;
-  }
-  moveTo(pos) {
-    this.setAttribute("style", `transform: translate(${pos.x}px, ${pos.y}px); z-index: ${this.zIndex}`);
-  }
-  onDragStart(e6) {
-    console.log(e6);
-  }
-  onDragEnd(e6) {
-    this._pos = { x: Math.round(this.currentX), y: Math.round(this.currentY) };
-    console.log("new pos", this._pos);
-  }
-  onDrag(e6) {
-    this.setAttribute("style", `transform: translate(${this.currentX}px, ${this.currentY}px);`);
-  }
-  onClick(e6) {
-    console.log("inner ckick", e6);
-  }
-  refreshPos() {
-    this.onDragEnd();
-  }
-};
-
-// node_modules/uuid/dist/esm-browser/rng.js
-var getRandomValues;
-var rnds8 = new Uint8Array(16);
-function rng() {
-  if (!getRandomValues) {
-    getRandomValues = typeof crypto !== "undefined" && crypto.getRandomValues && crypto.getRandomValues.bind(crypto) || typeof msCrypto !== "undefined" && typeof msCrypto.getRandomValues === "function" && msCrypto.getRandomValues.bind(msCrypto);
-    if (!getRandomValues) {
-      throw new Error("crypto.getRandomValues() not supported. See https://github.com/uuidjs/uuid#getrandomvalues-not-supported");
-    }
-  }
-  return getRandomValues(rnds8);
-}
-
-// node_modules/uuid/dist/esm-browser/regex.js
-var regex_default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
-
-// node_modules/uuid/dist/esm-browser/validate.js
-function validate(uuid) {
-  return typeof uuid === "string" && regex_default.test(uuid);
-}
-var validate_default = validate;
-
-// node_modules/uuid/dist/esm-browser/stringify.js
-var byteToHex = [];
-for (i5 = 0; i5 < 256; ++i5) {
-  byteToHex.push((i5 + 256).toString(16).substr(1));
-}
-var i5;
-function stringify(arr) {
-  var offset = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
-  var uuid = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
-  if (!validate_default(uuid)) {
-    throw TypeError("Stringified UUID is invalid");
-  }
-  return uuid;
-}
-var stringify_default = stringify;
-
-// node_modules/uuid/dist/esm-browser/v4.js
-function v4(options, buf, offset) {
-  options = options || {};
-  var rnds = options.random || (options.rng || rng)();
-  rnds[6] = rnds[6] & 15 | 64;
-  rnds[8] = rnds[8] & 63 | 128;
-  if (buf) {
-    offset = offset || 0;
-    for (var i5 = 0; i5 < 16; ++i5) {
-      buf[offset + i5] = rnds[i5];
-    }
-    return buf;
-  }
-  return stringify_default(rnds);
-}
-var v4_default = v4;
-
 // src/common/FlzEvent.ts
 var FLZ_DESIGNER_EVENT_TYPE = "flz-designer-event-type";
 var FlzEvent = class extends Event {
@@ -768,8 +711,8 @@ function waitForEvent(el, eventName) {
   });
 }
 
-// src/common/LiveWidget.ts
-var LiveWidget = class extends LiveDraggable {
+// src/common/LiveWidgetElement.ts
+var LiveWidgetElement = class extends s4 {
   constructor() {
     super();
     this.setConfigOnlyOnce = false;
@@ -823,6 +766,35 @@ var LiveWidget = class extends LiveDraggable {
   stateChanged(state) {
     return;
   }
+};
+
+// src/common/mixins/PersonalaziableMixin.ts
+var Personalizable = (superClass) => {
+  class PersonalizableClass extends superClass {
+    constructor() {
+      super(...arguments);
+      this._isConfigSet = false;
+    }
+    set config(x2) {
+      super.config = x2;
+      this._isConfigSet = true;
+    }
+    get config() {
+      return super.config;
+    }
+    shouldUpdate(changedProperties) {
+      if (this._isConfigSet) {
+        return super.shouldUpdate(changedProperties);
+      } else {
+        return false;
+      }
+    }
+  }
+  return PersonalizableClass;
+};
+
+// src/common/LiveWidget.ts
+var LiveWidget = class extends Personalizable(LiveWidgetElement) {
 };
 
 // src/common/ContentWidget.ts
@@ -950,6 +922,63 @@ var LiveWidgetComponentPersonalization = class extends s4 {
   }
   get onCancel() {
     return this._onCancel;
+  }
+};
+
+// src/common/LiveDraggable.ts
+var LiveDraggable = class extends s4 {
+  constructor() {
+    super();
+    this.zIndex = 10;
+    this.xOffset = 0;
+    this.yOffset = 0;
+    this.currentX = 0;
+    this.currentY = 0;
+    this.initialX = 0;
+    this.initialY = 0;
+    this.isDraggable = true;
+  }
+  resetPosition() {
+    this.zIndex = 10;
+    this.xOffset = 0;
+    this.yOffset = 0;
+    this.currentX = 0;
+    this.currentY = 0;
+    this.initialX = 0;
+    this.initialY = 0;
+    this.setAttribute("style", "");
+  }
+  set pos(pos) {
+    if (pos) {
+      this._pos = pos;
+    } else {
+      this._pos = { x: 0, y: 0 };
+    }
+    this.currentX = this.xOffset = this.initialX = this._pos.x;
+    this.currentY = this.yOffset = this.initialY = this._pos.y;
+    this.moveTo(this._pos);
+  }
+  get pos() {
+    return this._pos;
+  }
+  moveTo(pos) {
+    this.setAttribute("style", `transform: translate(${pos.x}px, ${pos.y}px); z-index: ${this.zIndex}`);
+  }
+  onDragStart(e6) {
+    console.log(e6);
+  }
+  onDragEnd(e6) {
+    this._pos = { x: Math.round(this.currentX), y: Math.round(this.currentY) };
+    console.log("new pos", this._pos);
+  }
+  onDrag(e6) {
+    this.setAttribute("style", `transform: translate(${this.currentX}px, ${this.currentY}px);`);
+  }
+  onClick(e6) {
+    console.log("inner ckick", e6);
+  }
+  refreshPos() {
+    this.onDragEnd();
   }
 };
 
@@ -3134,33 +3163,7 @@ var CloseOnESCController = class {
   }
 };
 
-// src/common/mixins/PersonalaziableMixin.ts
-var Personalizable = (superClass) => {
-  class PersonalizableClass extends superClass {
-    constructor() {
-      super(...arguments);
-      this._isConfigSet = false;
-    }
-    set config(x2) {
-      super.config = x2;
-      this._isConfigSet = true;
-    }
-    get config() {
-      return super.config;
-    }
-    shouldUpdate(changedProperties) {
-      if (this._isConfigSet) {
-        return super.shouldUpdate(changedProperties);
-      } else {
-        return false;
-      }
-    }
-  }
-  return PersonalizableClass;
-};
-
 export {
-  LiveDraggable,
   FLZ_DESIGNER_EVENT_TYPE,
   FlzEvent,
   FlzBoardEvent,
@@ -3173,19 +3176,21 @@ export {
   editorEmitPromise,
   emit,
   waitForEvent,
+  LiveWidgetElement,
+  Personalizable,
   LiveWidget,
   ContentWidget,
   FloatChildrenContainer,
   LiveWidgetEdit,
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
+  LiveDraggable,
   makeDragElement,
   Floatable,
   FloatEditor,
   CloudinaryHelper,
   CloseOnOutSideClickController,
-  CloseOnESCController,
-  Personalizable
+  CloseOnESCController
 };
 /**
  * @license
