@@ -782,6 +782,9 @@ var Personalizable = (superClass) => {
     get config() {
       return super.config;
     }
+    isConfigSet() {
+      return this._isConfigSet;
+    }
     shouldUpdate(changedProperties) {
       if (this._isConfigSet) {
         return super.shouldUpdate(changedProperties);

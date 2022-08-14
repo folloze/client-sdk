@@ -17,6 +17,10 @@ export const Personalizable = <T extends Constructor<LiveElement>>(superClass: T
             return super.config;
         }
 
+        public isConfigSet(): boolean {
+            return this._isConfigSet;
+        }
+
         shouldUpdate(changedProperties: Map<string, any>): boolean {
             if (this._isConfigSet) {
                 return super.shouldUpdate(changedProperties);
