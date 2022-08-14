@@ -358,8 +358,9 @@ export class Designer {
                 })
                 .then(result => resolve({status: result.status, data: result.data}))
                 .catch(e => {
-                    if (e.response?.status === 409) {
-                        console.warn("could not save - conflict");
+                    if (e.response?.status === 409 || e.response?.status === 406) {
+                        const reason = e.response?.status === 409 ? "conflict" : "unacceptable";
+                        console.warn(`could not save - ${reason}`);
                         resolve({status: e.response.status, data: (e.response as AxiosResponse).data});
                     } else {
                         console.error("could not save liveBoard config", e);
