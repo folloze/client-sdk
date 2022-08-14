@@ -2,7 +2,7 @@ import {LitElement, html, css} from "lit";
 
 type Constructor<T> = new (...args: any[]) => T;
 
-export declare class IFloatingElement {
+export declare class IFloatingElement extends LitElement {
     setStartPos(x: number, y: number): void;
     setLayer(layer: number): void;
     getLayer(): number;
@@ -22,7 +22,7 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                     --floatBoxBorder: thin solid rgb(103 103 103 / 78%);
                     --outlineShadow: 1px 1px 3px #ccc;
 
-                    resize: both;
+                    //resize: both;
                     pointer-events: all;
 
                     opacity: 0;
@@ -61,7 +61,8 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
 
         setLayer(layer: number) {
             this.layer = layer;
-            this.style.zIndex = 104 + layer.toString();
+            // 104 is the default z-index of the floating editor
+            this.style.zIndex = (104 + layer).toString();
         }
 
         getLayer(): number {

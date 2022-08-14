@@ -1,8 +1,29 @@
-import { RibbonConfig, SectionConfig } from "./ISection";
-import { FloatingWidgetConfig, WidgetConfig } from "./IWidget";
+import { SectionConfig } from "./ISection";
+import { FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonConfig, WidgetConfig } from "./IWidget";
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { FloatPos, GridPos } from "./IPositions";
+import { IPersonalizationConfig } from "./IPersonalization";
+export interface RibbonElement extends LitElement {
+    config: RibbonConfig;
+    data: RibbonConfig["data"];
+}
+export interface FloatWidgetElement extends LitElement {
+    config: FloatingWidgetConfig;
+    data: FloatingWidgetConfig["data"];
+}
+export interface LiveElement extends LitElement {
+    config: LiveConfig;
+    data: LiveConfig["data"];
+}
+export interface GridElement extends LitElement {
+    config: LiveConfig & GridConfig;
+    data: LiveConfig["data"] | RibbonConfig["data"];
+}
+export interface LoadableElement extends LitElement {
+    config: LoadableConfig;
+    data: LoadableConfig["data"];
+}
 export declare type BoardConfig = {
     id: number;
     meta: null | {
@@ -11,9 +32,11 @@ export declare type BoardConfig = {
         originHash?: string;
         newHash?: string;
         currentPageName?: string;
+        clearCacheBefore?: string;
     };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
+    personalization?: IPersonalizationConfig;
 };
 export declare type PageConfig = {
     name: "default" | string;
@@ -48,7 +71,7 @@ export interface ILiveBoard extends LitElement {
     setRows(n: number): void;
     preRender(): void;
     refresh(): void;
-    addScriptForWidget(w: WidgetConfig): Promise<WidgetConfig | void>;
+    addScriptForWidget(w: LoadableConfig): Promise<LoadableConfig | void>;
     generateConfigHash(): string;
     autoUpgradeWidgets(): void;
     setForceUpdate(): void;
@@ -56,17 +79,37 @@ export interface ILiveBoard extends LitElement {
     getCurrentPageName(): string;
     registerFloatingWidgetsTriggers(): void;
     unRegisterFloatingWidgetsTriggers(): void;
+    turnOnPersonalization(): void;
+    turnOffPersonalization(): void;
+    set personalizationResolved(result: {
+        [key: string]: boolean;
+    });
+    get personalizationResolved(): {
+        [key: string]: boolean;
+    };
     get pages(): PageConfig[];
-    get widgets(): WidgetConfig[];
-    get floatingWidgets(): FloatingWidgetConfig[];
-    get widgetElements(): LiveWidget[];
-    get floatingWidgetElements(): LiveWidget[];
     get sections(): SectionConfig[];
+    get widgets(): WidgetConfig[];
+    get widgetElements(): LiveWidget[];
+    get floatingWidgets(): FloatingWidgetConfig[];
+    get floatingWidgetElements(): LiveWidget[];
     get ribbons(): RibbonConfig[];
-    getWidget(id: string): WidgetConfig;
+    getLiveConfigById(id: string): LiveConfig;
+    getLoadableConfigById(id: string): LoadableConfig;
+    getGridConfigById(id: string): GridConfig;
     getWidgetEl(id: string): LiveWidget;
+    getRibbonEl(id: string): RibbonElement;
+    getFloatEl(id: string): FloatWidgetElement;
+    getLiveEl(id: string): LiveElement;
+    getWidgetConfig(id: string): WidgetConfig;
+    getRibbonConfig(id: string): RibbonConfig;
+    getFloatingWidgetConfig(id: string): FloatingWidgetConfig;
+    getAllLiveElements(): LiveElement[];
+    getAllLoadableElements(): LoadableElement[];
+    getAllRibbonElements(): RibbonElement[];
+    getAllGridElements(): GridElement[];
+    getAllWidgetsElements(): LiveWidget[];
     getSection(id: string): SectionConfig;
-    getRibbon(id: string): RibbonConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
 }
 export declare type Board = {

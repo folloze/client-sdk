@@ -1,6 +1,14 @@
+import {FloatChildrenContainer} from "./controllers/FloatersChildrenContainer";
+
 type DocOrShadowRoot = Document | DocumentFragment | DocumentOrShadowRoot | null;
 
-export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl: string, containEl?: HTMLElement) {
+export function makeDragElement(
+    dom: DocOrShadowRoot,
+    el: HTMLElement,
+    handleEl: string,
+    containEl?: HTMLElement,
+    childrenContainer?: FloatChildrenContainer,
+) {
     let pos1 = 0,
         pos2 = 0,
         pos3 = 0,
@@ -79,7 +87,8 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         return [newLeft, newTop];
     }
 
-    function elementDrag(e: any) {
+    function elementDrag(e: DragEvent) {
+        // @ts-ignore
         e = e || window.event;
         e.preventDefault();
         // calculate the new cursor position:
@@ -99,6 +108,13 @@ export function makeDragElement(dom: DocOrShadowRoot, el: HTMLElement, handleEl:
         // set the element's new position:
         el.style.top = newTop + "px";
         el.style.left = newLeft + "px";
+
+        if (childrenContainer && childrenContainer?.all().length > 0) {
+            childrenContainer.all().map(x => {
+                x.style.top = e.movementY + parseInt(x.style.top) + "px";
+                x.style.left = e.movementX + parseInt(x.style.left) + "px";
+            });
+        }
     }
 
     function closeDragElement() {

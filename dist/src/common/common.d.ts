@@ -11,4 +11,8 @@ export * from "./helpers/helpers";
 export * from "./helpers/eventHelpers";
 export * from "./helpers/mediaHelpers";
 export * from "./FlzEvent";
+export * from "./controllers/CloseOnOutSideClickController";
+export * from "./controllers/CloseOnESCController";
+export * from "./controllers/FloatersChildrenContainer";
 export * from "./mixins/FloatableMixin";
+export * from "./mixins/PersonalaziableMixin";

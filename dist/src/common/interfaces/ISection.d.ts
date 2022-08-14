@@ -1,6 +1,5 @@
-import { GridPos } from "./IPositions";
 import { FlzEditableImageData } from "../../designer/IDesignerTypes";
-import { FloatingWidgetConfig, WidgetConfig } from "./IWidget";
+import { FloatingWidgetConfig, RibbonConfig, WidgetConfig } from "./IWidget";
 export declare type AddListItem = {
     category: string;
     type: string;
@@ -34,11 +33,4 @@ export declare type BackgroundImage = {
     position: string;
     size: "cover" | "contain" | string;
     repeat: string;
-};
-export declare type RibbonConfig = {
-    id: string;
-    sectionId: string;
-    position: GridPos;
-    background: string | BackgroundImage | any;
-    backgroundMobile: string | BackgroundImage | any;
 };

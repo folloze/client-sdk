@@ -1,19 +1,14 @@
 import {LitElement} from "lit";
 import {LiveWidget} from "./LiveWidget";
-import {IFloatingElement} from "./mixins/FloatableMixin";
+import {FloatChildrenContainer, hasFloatingChildren} from "./controllers/FloatersChildrenContainer";
 
-export abstract class LiveWidgetEdit extends LitElement {
+export abstract class LiveWidgetEdit extends LitElement implements hasFloatingChildren {
     protected _widget: LiveWidget;
     protected _data: any;
     protected _propPath: string;
 
     readonly _handleStyle: string | undefined;
-    protected childFloaters: IFloatingElement[] = [];
-
-    disconnectedCallback() {
-        this.closeAllChildFloaters();
-        super.disconnectedCallback();
-    }
+    public floatChildrenContainer = new FloatChildrenContainer(this);
 
     set widget(w: LiveWidget) {
         this._widget = w;
@@ -46,11 +41,6 @@ export abstract class LiveWidgetEdit extends LitElement {
 
     get data() {
         return this._data;
-    }
-
-    closeAllChildFloaters() {
-        this.childFloaters.forEach(f => f.close());
-        this.childFloaters = [];
     }
 
     abstract render();

@@ -1,8 +1,10 @@
 import {LiveWidgetComponentEdit} from "./LiveWidgetComponentEdit";
-import { ILiveBoard } from './interfaces/IBoard';
+import {ILiveBoard} from "./interfaces/IBoard";
+import {LitElement} from "lit";
+import {PersonalizationElement} from "./interfaces/IPersonalization";
 
-export abstract class LiveWidgetComponentPersonalization extends LiveWidgetComponentEdit {
-
+export abstract class LiveWidgetComponentPersonalization extends LitElement {
+    public liveElementsMap: Map<string, PersonalizationElement>;
     protected _propPath: string;
     protected _editTag: string;
     protected _viewTag: string;
@@ -27,7 +29,7 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
     }
 
     set viewTagDataProperty(tagProp: string) {
-      this._viewTagDataProperty = tagProp;
+        this._viewTagDataProperty = tagProp;
     }
 
     get viewTagDataProperty(): string {
@@ -43,7 +45,7 @@ export abstract class LiveWidgetComponentPersonalization extends LiveWidgetCompo
     }
 
     set onCancel(onCancel: Function) {
-      this._onCancel = onCancel;
+        this._onCancel = onCancel;
     }
 
     get onCancel(): Function {

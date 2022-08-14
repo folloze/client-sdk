@@ -142,7 +142,7 @@ export class FloatEditor extends FloatingElement {
     protected firstUpdated(_changedProperties) {
         this.isLoading = false;
         this.body.appendChild(this.childEl);
-        makeDragElement(this.shadowRoot, this, "#handle");
+        makeDragElement(this.shadowRoot, this, "#handle", undefined, this.childEl.floatChildrenContainer);
         super.firstUpdated(_changedProperties);
     }
 
