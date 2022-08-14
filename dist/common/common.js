@@ -15,6 +15,7 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
+  Personalizable,
   componentEmit,
   customEmit,
   editorEmit,
@@ -24,7 +25,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.Z7XKXVTV.js";
+} from "../chunks/chunk.6QF27KP2.js";
 import {
   FetchService
 } from "../chunks/chunk.BTK3NVPD.js";
@@ -61,6 +62,7 @@ export {
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
+  Personalizable,
   componentEmit,
   customEmit,
   editorEmit,

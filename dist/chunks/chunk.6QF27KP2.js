@@ -3134,6 +3134,31 @@ var CloseOnESCController = class {
   }
 };
 
+// src/common/mixins/PersonalaziableMixin.ts
+var Personalizable = (superClass) => {
+  class PersonalizableClass extends superClass {
+    constructor() {
+      super(...arguments);
+      this._isConfigSet = false;
+    }
+    set config(x2) {
+      super.config = x2;
+      this._isConfigSet = true;
+    }
+    get config() {
+      return super.config;
+    }
+    shouldUpdate(changedProperties) {
+      if (this._isConfigSet) {
+        return super.shouldUpdate(changedProperties);
+      } else {
+        return false;
+      }
+    }
+  }
+  return PersonalizableClass;
+};
+
 export {
   LiveDraggable,
   FLZ_DESIGNER_EVENT_TYPE,
@@ -3159,7 +3184,8 @@ export {
   FloatEditor,
   CloudinaryHelper,
   CloseOnOutSideClickController,
-  CloseOnESCController
+  CloseOnESCController,
+  Personalizable
 };
 /**
  * @license
