@@ -91,4 +91,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-user"
     | "get-privacy-messages"
     | "get-is-internal-cookie-management"
-    | "add-merge-tag-values";
+    | "add-merge-tag-values"
+    | "is-personalization-mod";
