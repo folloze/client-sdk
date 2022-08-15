@@ -15,6 +15,7 @@ import {
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
+  LiveWidgetElement,
   Personalizable,
   componentEmit,
   customEmit,
@@ -25,11 +26,11 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.6QF27KP2.js";
+} from "./chunks/chunk.BP74GBZE.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.J3OY5UAX.js";
+} from "./chunks/chunk.UNL3BNRK.js";
 import "./chunks/chunk.62TMOTOU.js";
 import {
   Analytics,
@@ -39,7 +40,7 @@ import {
 } from "./chunks/chunk.Y7N5PQ2A.js";
 import {
   Designer
-} from "./chunks/chunk.AQ3ETNLA.js";
+} from "./chunks/chunk.I44N3SMO.js";
 import {
   Liveboard
 } from "./chunks/chunk.H64FWCCZ.js";
@@ -84,6 +85,7 @@ export {
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
   LiveWidgetEdit,
+  LiveWidgetElement,
   Liveboard,
   Personalizable,
   componentEmit,
