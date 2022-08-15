@@ -103,12 +103,12 @@ export declare type ItemResponseV2 = {
     item_source: number;
     item_type: string;
     likes_count: number;
-    link_url: string | null;
+    link_url?: string;
     name: string;
     slug: string;
     status: number;
     views_count: number;
-    open_in_new_tab: string | null;
+    open_in_new_tab?: boolean;
     route: string;
 };
 export declare type ItemsResponseV2 = {
