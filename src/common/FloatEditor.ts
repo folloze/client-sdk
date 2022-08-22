@@ -135,6 +135,9 @@ export class FloatEditor extends FloatingElement {
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit) {
         super();
         this.childEl = el;
+
+        // @ts-ignore hack to get the floating editor inside the editor so it will be controlled by the editor
+        this.childEl._floatingEditor = this;
     }
 
     disconnectedCallback() {

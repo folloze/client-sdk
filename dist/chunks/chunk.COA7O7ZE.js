@@ -1218,6 +1218,7 @@ var FloatEditor = class extends FloatingElement {
     super();
     this.isLoading = true;
     this.childEl = el;
+    this.childEl._floatingEditor = this;
   }
   disconnectedCallback() {
     this.removeHighlight();
