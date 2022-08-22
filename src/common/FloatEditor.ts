@@ -129,6 +129,9 @@ export class FloatEditor extends FloatingElement {
     private isLoading: boolean = true;
     private readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
 
+    @property()
+    public title: string;
+
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit) {
         super();
         this.childEl = el;
@@ -166,7 +169,7 @@ export class FloatEditor extends FloatingElement {
                 style="${this.childEl._handleStyle}"
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
-                <span class="conf-name"> ${this.childEl.widget?.widgetTitle || ""} </span>
+                <span class="conf-name"> ${this.title || this.childEl.widget?.widgetTitle || ""} </span>
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"

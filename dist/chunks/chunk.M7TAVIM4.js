@@ -1248,7 +1248,7 @@ var FloatEditor = class extends FloatingElement {
                 style="${this.childEl._handleStyle}"
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
-                <span class="conf-name"> ${((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""} </span>
+                <span class="conf-name"> ${this.title || ((_a = this.childEl.widget) == null ? void 0 : _a.widgetTitle) || ""} </span>
                 <div class="close" @click=${this.close}>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -1387,6 +1387,9 @@ __decorateClass([
 __decorateClass([
   e4()
 ], FloatEditor.prototype, "isLoading", 2);
+__decorateClass([
+  e4()
+], FloatEditor.prototype, "title", 2);
 
 // node_modules/@cloudinary/url-gen/internal/qualifier/QualifierValue.js
 var QualifierValue = class {

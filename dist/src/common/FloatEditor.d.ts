@@ -6,6 +6,7 @@ export declare class FloatEditor extends FloatingElement {
     body: HTMLElement;
     private isLoading;
     private readonly childEl;
+    title: string;
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit);
     disconnectedCallback(): void;
     protected firstUpdated(_changedProperties: any): void;
