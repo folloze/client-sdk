@@ -3,6 +3,7 @@ import {
   CloseOnOutSideClickController,
   CloudinaryHelper,
   ContentWidget,
+  CookieConsentWidget,
   FLZ_DESIGNER_EVENT_TYPE,
   FloatChildrenContainer,
   FloatEditor,
@@ -26,7 +27,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.COA7O7ZE.js";
+} from "./chunks/chunk.MHSORP7G.js";
 import {
   ClientSDK,
   FetchService
@@ -67,6 +68,7 @@ export {
   CloseOnOutSideClickController,
   CloudinaryHelper,
   ContentWidget,
+  CookieConsentWidget,
   Designer,
   DesignerEventTypes,
   EventSources,
