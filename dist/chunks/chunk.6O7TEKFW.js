@@ -3172,6 +3172,10 @@ var CloseOnESCController = class {
 
 // src/common/CookieConsentWidget.ts
 var CookieConsentWidget = class extends LiveWidget {
+  constructor() {
+    super(...arguments);
+    this.isCookieConsentable = true;
+  }
 };
 
 export {
