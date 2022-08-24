@@ -27,7 +27,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.6O7TEKFW.js";
+} from "./chunks/chunk.SYYTYLF2.js";
 import {
   ClientSDK,
   FetchService
@@ -58,7 +58,7 @@ import {
 } from "./chunks/chunk.G52EPVC6.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
-} from "./chunks/chunk.C7O4HBVL.js";
+} from "./chunks/chunk.PNCHJ2BU.js";
 import "./chunks/chunk.Z3GS5MY4.js";
 export {
   Analytics,
