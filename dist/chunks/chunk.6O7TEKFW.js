@@ -3170,6 +3170,14 @@ var CloseOnESCController = class {
   }
 };
 
+// src/common/CookieConsentWidget.ts
+var CookieConsentWidget = class extends LiveWidget {
+  constructor() {
+    super(...arguments);
+    this.isCookieConsentable = true;
+  }
+};
+
 export {
   FLZ_DESIGNER_EVENT_TYPE,
   FlzEvent,
@@ -3197,7 +3205,8 @@ export {
   FloatEditor,
   CloudinaryHelper,
   CloseOnOutSideClickController,
-  CloseOnESCController
+  CloseOnESCController,
+  CookieConsentWidget
 };
 /**
  * @license
