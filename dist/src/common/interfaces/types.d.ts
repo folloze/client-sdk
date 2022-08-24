@@ -9,3 +9,4 @@ export * from "./IWidgetCommunication";
 export * from "./IEvent";
 export * from "../../liveboard/ILiveboardTypes";
 export * from "./IItemViewer";
+export * from "./IPersonalization";
