@@ -1298,6 +1298,7 @@ var LiveWidgetEdit = class extends s4 {
     return this._widget.id;
   }
   updateWidget() {
+    console.log("updateWidget");
     this._widget.data = (0, import_cloneDeep.cloneDeep)(this._data);
   }
   set data(x2) {

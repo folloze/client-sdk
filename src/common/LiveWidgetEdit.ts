@@ -33,6 +33,7 @@ export abstract class LiveWidgetEdit extends LitElement implements hasFloatingCh
     }
 
     updateWidget() {
+        console.log("updateWidget");
         this._widget.data = cloneDeep(this._data);
     }
 
