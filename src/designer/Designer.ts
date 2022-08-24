@@ -444,10 +444,10 @@ export class Designer {
     public getMergeTagValues(
         organizationId: number,
         mergeTagId: number,
-    ): Promise<Record<number, MergeTagValue[]>> {
+    ): Promise<Record<number, Record<number, MergeTagValue[]>>> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<Record<number, MergeTagValue[]>>(`/api/v1/merge_tags/${mergeTagId}/merge_tags_lookups`, {
+                .get<Record<number, Record<number, MergeTagValue[]>>>(`/api/v1/merge_tags/${mergeTagId}/merge_tags_lookups`, {
                     params: {organization_id: organizationId},
                 })
                 .then(result => resolve(result.data))

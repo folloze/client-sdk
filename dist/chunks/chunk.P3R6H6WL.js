@@ -1,15 +1,15 @@
 import {
   require_axios
-} from "./chunk.3ZNLEUXI.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
 import {
   Designer
-} from "./chunk.I44N3SMO.js";
+} from "./chunk.STSXZFTL.js";
 import {
   Liveboard
-} from "./chunk.H64FWCCZ.js";
+} from "./chunk.MBZ7QEZ6.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -33,7 +33,7 @@ import {
   require_isTypedArray,
   require_overArg,
   require_root
-} from "./chunk.WXVSHK2H.js";
+} from "./chunk.4FLWX6PW.js";
 import {
   __commonJS,
   __toModule
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.57FVLL6Z.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -751,6 +751,15 @@ var ClientSDK = class {
 };
 
 export {
+  require_cloneBuffer,
+  require_cloneArrayBuffer,
+  require_cloneTypedArray,
+  require_copyArray,
+  require_getPrototype,
+  require_initCloneObject,
+  require_assignValue,
+  require_copyObject,
+  require_keysIn,
   FetchService,
   ClientSDK
 };

@@ -149,5 +149,5 @@ export declare class Designer {
      * @param {number} mergeTagId
      * @returns {<Record<number, MergeTagValue[]>>} array of values per merge tag id
      */
-    getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
+    getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, Record<number, MergeTagValue[]>>>;
 }

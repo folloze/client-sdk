@@ -1,6 +1,7 @@
 import {LitElement} from "lit";
 import {LiveWidget} from "./LiveWidget";
 import {FloatChildrenContainer, hasFloatingChildren} from "./controllers/FloatersChildrenContainer";
+import {cloneDeep} from "lodash/cloneDeep";
 
 export abstract class LiveWidgetEdit extends LitElement implements hasFloatingChildren {
     protected _widget: LiveWidget;
@@ -32,7 +33,7 @@ export abstract class LiveWidgetEdit extends LitElement implements hasFloatingCh
     }
 
     updateWidget() {
-        this._widget.data = this._data;
+        this._widget.data = cloneDeep(this._data);
     }
 
     set data(x: any) {
