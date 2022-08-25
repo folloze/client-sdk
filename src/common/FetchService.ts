@@ -93,29 +93,20 @@ export class FetchService {
             .catch(e => console.error("could not create mock fetcher", e));
     }
 
-    // todo: connect async polling to get partial data (getItems, getCategory, etc...)
-    withPartialContent(apiCall) {
-        // return (params) => {
-        //     return new Promise((resolve, reject) => {
-        //         apiCall(params)
-        //             .then(({status, data}) => {
-        //                 if(status == 206) {
-        //                     setTimeout(() => {
-        //                         this.withPartialContent(apiCall)({
-        //                             ...params,
-        //                             guid: data.guid
-        //                         })
-        //                             .then(resolve)
-        //                             .catch(reject);
-        //                     }, 2000);
-        //                 }
-        //                 else {
-        //                     resolve(data);
-        //                 }
-        //             })
-        //             .catch(error => reject(error));
-        //     });
-        // };
+    // todo: this method will need backoff implementation
+    withPartialContent(promiseFunc: (resolve, reject) => any, timeout: number = 2000): Promise<any> {
+        return new Promise((resolve, reject) => {
+            const innerPromise = new Promise(promiseFunc);
+            innerPromise
+                .then((result: any) => {
+                    if (result.status == 206) {
+                        setTimeout(() => this.withPartialContent(promiseFunc), timeout);
+                    } else {
+                        resolve(result);
+                    }
+                })
+                .catch(e => reject(e));
+        });
     }
 
     public withDisableOnPreview(apiCall: Function): Promise<any> {

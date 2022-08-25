@@ -27,6 +27,7 @@ import {
     CampaignElementDataV2,
     CtaParams,
     CtaResponseV1,
+    EnrichmentBoardConfigV3,
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 
@@ -761,9 +762,8 @@ export class Liveboard {
     }
     // end CTA
 
-    getEnrichment(boardId: number): Promise<any> {
-        // return this.fetchService.withPartialContent((): Promise<void> => {
-        return new Promise((resolve, reject) => {
+    getEnrichment(boardId: number): Promise<EnrichmentBoardConfigV3> {
+        const func = (resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v3/boards/${boardId}/board_configuration`)
                 .then(result => {
@@ -771,8 +771,9 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get enrichment", e);
+                    reject();
                 });
-        });
-        // });
+        };
+        return this.fetchService.withPartialContent(func) as Promise<EnrichmentBoardConfigV3>;
     }
 }
