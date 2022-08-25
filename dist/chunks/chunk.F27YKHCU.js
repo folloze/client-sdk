@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.3ZNLEUXI.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
@@ -9,7 +9,7 @@ import {
 } from "./chunk.I44N3SMO.js";
 import {
   Liveboard
-} from "./chunk.H64FWCCZ.js";
+} from "./chunk.42UWQJOA.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.57FVLL6Z.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -671,7 +671,17 @@ var FetchService = class {
       ]);
     }).catch((e) => console.error("could not create mock fetcher", e));
   }
-  withPartialContent(apiCall) {
+  withPartialContent(promiseFunc, timeout = 2e3) {
+    return new Promise((resolve, reject) => {
+      const innerPromise = new Promise(promiseFunc);
+      innerPromise.then((result) => {
+        if (result.status == 206) {
+          setTimeout(() => this.withPartialContent(promiseFunc), timeout);
+        } else {
+          resolve(result);
+        }
+      }).catch((e) => reject(e));
+    });
   }
   withDisableOnPreview(apiCall) {
     var _a;
