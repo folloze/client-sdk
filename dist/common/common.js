@@ -11,6 +11,7 @@ import {
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
+  GatingFormWidget,
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
@@ -27,11 +28,11 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.6O7TEKFW.js";
+} from "../chunks/chunk.MISLEJP4.js";
 import {
   FetchService
-} from "../chunks/chunk.F27YKHCU.js";
-import "../chunks/chunk.F7UMJQCK.js";
+} from "../chunks/chunk.XOPV6XFJ.js";
+import "../chunks/chunk.3ZNLEUXI.js";
 import "../chunks/chunk.Y7N5PQ2A.js";
 import "../chunks/chunk.I44N3SMO.js";
 import "../chunks/chunk.42UWQJOA.js";
@@ -60,6 +61,7 @@ export {
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
+  GatingFormWidget,
   LiveDraggable,
   LiveWidget,
   LiveWidgetComponentEdit,
