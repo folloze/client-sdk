@@ -3178,6 +3178,14 @@ var CookieConsentWidget = class extends LiveWidget {
   }
 };
 
+// src/common/GatingFormWidget.ts
+var GatingFormWidget = class extends LiveWidget {
+  constructor() {
+    super(...arguments);
+    this.isGatingForm = true;
+  }
+};
+
 export {
   FLZ_DESIGNER_EVENT_TYPE,
   FlzEvent,
@@ -3206,7 +3214,8 @@ export {
   CloudinaryHelper,
   CloseOnOutSideClickController,
   CloseOnESCController,
-  CookieConsentWidget
+  CookieConsentWidget,
+  GatingFormWidget
 };
 /**
  * @license

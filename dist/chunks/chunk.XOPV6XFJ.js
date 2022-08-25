@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.F7UMJQCK.js";
+} from "./chunk.3ZNLEUXI.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.USDTFVAU.js").then(async (module) => {
+    return await import("./src.57FVLL6Z.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
