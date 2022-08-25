@@ -16,6 +16,5 @@ export * from "./controllers/CloseOnOutSideClickController";
 export * from "./controllers/CloseOnESCController";
 export * from "./controllers/FloatersChildrenContainer";
 export * from "./CookieConsentWidget";
-
 export * from "./mixins/FloatableMixin";
 export * from "./mixins/PersonalaziableMixin";
