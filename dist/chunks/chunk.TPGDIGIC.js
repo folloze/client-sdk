@@ -399,6 +399,15 @@ var Liveboard = class {
       });
     });
   }
+  getEnrichment(boardId) {
+    return new Promise((resolve, reject) => {
+      this.fetchService.fetcher.get(`/live_board/v3/boards/${boardId}/board_configuration`).then((result) => {
+        resolve(result);
+      }).catch((e) => {
+        console.error("could not get enrichment", e);
+      });
+    });
+  }
 };
 
 export {
