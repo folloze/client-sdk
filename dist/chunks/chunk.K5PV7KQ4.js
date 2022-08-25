@@ -408,7 +408,7 @@ var Liveboard = class {
         reject();
       });
     };
-    return this.fetchService.withPartialContent(func);
+    return this.fetchService.withPartialContent(func, 500, 20);
   }
 };
 

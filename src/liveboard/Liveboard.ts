@@ -774,6 +774,6 @@ export class Liveboard {
                     reject();
                 });
         };
-        return this.fetchService.withPartialContent(func) as Promise<EnrichmentBoardConfigV3>;
+        return this.fetchService.withPartialContent(func, 500, 20) as Promise<EnrichmentBoardConfigV3>;
     }
 }
