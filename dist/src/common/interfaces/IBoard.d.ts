@@ -145,4 +145,5 @@ export declare type Board = {
     activation_state: {
         online: boolean;
     };
+    is_v3_live: boolean;
 };

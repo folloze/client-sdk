@@ -70,6 +70,7 @@ export const rules = (mock: MockAdapter) => {
             id: 0,
             integrations: {},
             is_ssl: false,
+            is_v3_live: true,
             landing_page: "registration",
             name: "",
             online_items_count: 0,
