@@ -21,7 +21,7 @@ export declare class FetchService {
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
-    withPartialContent(promiseFunc: (resolve: any, reject: any) => any, timeout?: number): Promise<any>;
+    withPartialContent(promiseFunc: (resolve: any, reject: any) => any, timeout?: number, retry?: number): Promise<any>;
     withDisableOnPreview(apiCall: Function): Promise<any>;
     private handleSuccess;
     private handleError;

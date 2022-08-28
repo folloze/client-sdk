@@ -439,6 +439,10 @@ var rules = (mock) => {
     group_user: false
   });
   mock.onPost(/live_board\/v1\/boards\/(\d+)\/shares/).reply(200);
+  mock.onGet(/live_board\/v3\/boards\/(\d+)\/board_configuration/).reply(200, {
+    board_configuration: void 0,
+    personalization_rules_results: {}
+  });
 };
 export {
   rules

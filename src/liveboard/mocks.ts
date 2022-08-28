@@ -22,7 +22,7 @@ import {
     SessionResponseV1,
     FormMetadataDataV1,
     CampaignElementDataV2,
-    CtaResponseV1
+    CtaResponseV1,
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -48,7 +48,7 @@ export const rules = (mock: MockAdapter) => {
         slug: "amazoncom-spend-less-smile-more",
         status: 1,
         views_count: 17,
-        route: "foo.bar.com/baz/items/amazoncom-spend-less-smile-more"
+        route: "foo.bar.com/baz/items/amazoncom-spend-less-smile-more",
     };
 
     mock.onGet("/live_board/v1/boards/board_slug/").reply<BoardResponseV1>(200, {
@@ -84,7 +84,7 @@ export const rules = (mock: MockAdapter) => {
         subcategories_ids: [],
         description: "home category",
         images: [],
-        route: "/foo/home"
+        route: "/foo/home",
     });
 
     const boardIdFromCategoriesRegex: RegExp = /\/live_board\/v2\/boards\/(\d+)\/categories/;
@@ -106,7 +106,7 @@ export const rules = (mock: MockAdapter) => {
                         subcategories_ids: [],
                         description: "home category",
                         images: [],
-                        route: "/foo/home"
+                        route: "/foo/home",
                     },
                     "2": {
                         id: 2,
@@ -120,7 +120,7 @@ export const rules = (mock: MockAdapter) => {
                         subcategories_ids: [],
                         description: "first category",
                         images: [],
-                        route: "/foo/first"
+                        route: "/foo/first",
                     },
                 },
                 categories_ids: [1, 2],
@@ -501,4 +501,9 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/shares/).reply<void>(200);
     // END -CTA
+
+    mock.onGet(/live_board\/v3\/boards\/(\d+)\/board_configuration/).reply<any>(200, {
+        board_configuration: undefined,
+        personalization_rules_results: {},
+    });
 };

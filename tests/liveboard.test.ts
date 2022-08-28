@@ -1,5 +1,7 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
+import {AxiosResponse} from "axios";
+import {EnrichmentBoardConfigV3} from "../src";
 
 let sdk: ClientSDK;
 
@@ -164,6 +166,12 @@ describe("test liveboard mocks module", () => {
     it("checks that saveShareByEmailCta mock works as expected", async () => {
         await sdk.liveboard.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result).toBeNull);
     });
+
+    it("checks that enrichment partial content work as expected", async () => {
+        await sdk.liveboard
+            .getEnrichment(1)
+            .then((result: EnrichmentBoardConfigV3) => expect(result.personalization_rules_results).toBeDefined());
+    });
 });
 
 describe("testing liveboard module in preview", () => {
@@ -203,7 +211,9 @@ describe("testing liveboard module in preview", () => {
 
     it("checks that saveShareByEmailCta mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.liveboard.saveShareByEmailCta(1, "email@company.com", 1234).then(result => expect(result.status).toEqual(200));
+        await sdk.liveboard
+            .saveShareByEmailCta(1, "email@company.com", 1234)
+            .then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 });

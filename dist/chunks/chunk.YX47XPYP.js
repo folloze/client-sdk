@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.3ZNLEUXI.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
@@ -9,7 +9,7 @@ import {
 } from "./chunk.I44N3SMO.js";
 import {
   Liveboard
-} from "./chunk.42UWQJOA.js";
+} from "./chunk.K5PV7KQ4.js";
 import {
   require_Stack,
   require_Uint8Array,
@@ -610,7 +610,7 @@ var import_axios = __toModule(require_axios());
 // src/common/MockConnector.ts
 var MockConnector = class {
   static async bindLiveBoard(mock) {
-    await import("./mocks.AFJLX3TH.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
+    await import("./mocks.MKA7FRPD.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import liveboard mocks", e));
   }
   static async bindDesigner(mock) {
     await import("./mocks.ZZSOHRO5.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.57FVLL6Z.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -671,14 +671,19 @@ var FetchService = class {
       ]);
     }).catch((e) => console.error("could not create mock fetcher", e));
   }
-  withPartialContent(promiseFunc, timeout = 2e3) {
+  withPartialContent(promiseFunc, timeout = 2e3, retry = 1) {
     return new Promise((resolve, reject) => {
+      if (retry <= 0) {
+        reject("stop retrying");
+        return;
+      }
       const innerPromise = new Promise(promiseFunc);
       innerPromise.then((result) => {
         if (result.status == 206) {
-          setTimeout(() => this.withPartialContent(promiseFunc), timeout);
+          retry = retry - 1;
+          setTimeout(() => this.withPartialContent(promiseFunc, timeout, retry));
         } else {
-          resolve(result);
+          resolve(result.data);
         }
       }).catch((e) => reject(e));
     });
