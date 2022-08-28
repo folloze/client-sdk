@@ -51,7 +51,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-privacy-messages"
     | "get-is-internal-cookie-management"
     | "get-state"
-    | "is-personalization-mod";
+    | "is-personalization-mod"
+    | "show-gating-form";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"
