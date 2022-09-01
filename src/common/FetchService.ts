@@ -107,7 +107,9 @@ export class FetchService {
                     if (result.status == 206) {
                         console.debug(`retry partial content ${retry}`);
                         retry = retry - 1;
-                        setTimeout(() => this.withPartialContent(promiseFunc, timeout, retry));
+                        setTimeout(() => {
+                            resolve(this.withPartialContent(promiseFunc, timeout, retry));
+                        }, timeout);
                     } else {
                         console.debug(`partial content resolved`, result.data);
                         resolve(result.data);
