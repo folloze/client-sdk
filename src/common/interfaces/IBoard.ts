@@ -67,6 +67,7 @@ export interface ILiveBoard extends LitElement {
     currentPage: PageConfig;
     widgetsEl: LiveWidget[];
     configHash: string;
+    isBoardApproved: boolean;
 
     getGridStyling(): string;
     positionToGridArea(p: GridPos): string;
