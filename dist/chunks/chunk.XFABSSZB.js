@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.3ZNLEUXI.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
@@ -660,7 +660,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.57FVLL6Z.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -674,18 +674,24 @@ var FetchService = class {
   withPartialContent(promiseFunc, timeout = 2e3, retry = 1) {
     return new Promise((resolve, reject) => {
       if (retry <= 0) {
+        console.warn("stop retrying partial content");
         reject("stop retrying");
         return;
       }
       const innerPromise = new Promise(promiseFunc);
       innerPromise.then((result) => {
         if (result.status == 206) {
+          console.debug(`retry partial content ${retry}`);
           retry = retry - 1;
           setTimeout(() => this.withPartialContent(promiseFunc, timeout, retry));
         } else {
+          console.debug(`partial content resolved`, result.data);
           resolve(result.data);
         }
-      }).catch((e) => reject(e));
+      }).catch((e) => {
+        console.error("could not finish partial content request", e);
+        reject(e);
+      });
     });
   }
   withDisableOnPreview(apiCall) {

@@ -97,6 +97,7 @@ export class FetchService {
     withPartialContent(promiseFunc: (resolve, reject) => any, timeout: number = 2000, retry: number = 1): Promise<any> {
         return new Promise((resolve, reject) => {
             if (retry <= 0) {
+                console.warn("stop retrying partial content");
                 reject("stop retrying");
                 return;
             }
@@ -104,13 +105,18 @@ export class FetchService {
             innerPromise
                 .then((result: any) => {
                     if (result.status == 206) {
+                        console.debug(`retry partial content ${retry}`);
                         retry = retry - 1;
                         setTimeout(() => this.withPartialContent(promiseFunc, timeout, retry));
                     } else {
+                        console.debug(`partial content resolved`, result.data);
                         resolve(result.data);
                     }
                 })
-                .catch(e => reject(e));
+                .catch(e => {
+                    console.error("could not finish partial content request", e);
+                    reject(e);
+                });
         });
     }
 
