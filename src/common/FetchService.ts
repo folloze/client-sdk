@@ -46,6 +46,7 @@ export class FetchService {
     private jwt: String;
     public organizationId: number;
     public urlToken: string;
+    private handleSuccess: any;
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
@@ -65,6 +66,7 @@ export class FetchService {
         if (token) {
             this.urlToken = token;
         }
+        this.handleSuccess = this.successHandler.bind(this);
     }
 
     public static async create(options: FetcherOptions): Promise<FetchService> {
@@ -122,7 +124,7 @@ export class FetchService {
         }
     }
 
-    private handleSuccess(response) {
+    private successHandler(response) {
         if (response.headers?.["authorization"]) {
             this.jwt = response.headers["authorization"].replace("bearer ", "");
         }

@@ -1,6 +1,6 @@
 import {
   require_axios
-} from "./chunk.3ZNLEUXI.js";
+} from "./chunk.F7UMJQCK.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
@@ -648,6 +648,7 @@ var FetchService = class {
     if (token) {
       this.urlToken = token;
     }
+    this.handleSuccess = this.successHandler.bind(this);
   }
   static async create(options) {
     options = (0, import_merge.default)(defaultFetcherOptions, options);
@@ -660,7 +661,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-    return await import("./src.57FVLL6Z.js").then(async (module) => {
+    return await import("./src.USDTFVAU.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);
@@ -696,7 +697,7 @@ var FetchService = class {
       return apiCall();
     }
   }
-  handleSuccess(response) {
+  successHandler(response) {
     var _a, _b;
     if ((_a = response.headers) == null ? void 0 : _a["authorization"]) {
       this.jwt = response.headers["authorization"].replace("bearer ", "");

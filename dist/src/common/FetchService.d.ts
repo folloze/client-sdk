@@ -18,12 +18,13 @@ export declare class FetchService {
     private jwt;
     organizationId: number;
     urlToken: string;
+    private handleSuccess;
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
     withPartialContent(promiseFunc: (resolve: any, reject: any) => any, timeout?: number, retry?: number): Promise<any>;
     withDisableOnPreview(apiCall: Function): Promise<any>;
-    private handleSuccess;
+    private successHandler;
     private handleError;
     private MockHandleError;
     private createAxiosFetcher;
