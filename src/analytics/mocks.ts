@@ -1,4 +1,5 @@
 import MockAdapter from "axios-mock-adapter";
+import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
 
@@ -24,6 +25,10 @@ export const rules = (mock: MockAdapter) => {
     mock.onPost("/live_board/v1/session_validations")
         .reply<void>(200);
 
+    mock.onPost("/live_board/v1/sessions")
+        .reply<SessionResponseV1>(config => {
+            return [200, {guid: "foo"}, {"folloze-session-guid": "foo"}];
+        });
 
     mock.onPut("/live_board/v2/invitation_wrappers/1")
         .reply<void>(200);

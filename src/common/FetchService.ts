@@ -1,4 +1,4 @@
-import {AxiosInstance, AxiosRequestConfig} from "axios";
+import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
@@ -130,7 +130,7 @@ export class FetchService {
         }
     }
 
-    private handleSuccess(response) {
+    private handleSuccess = (response): AxiosResponse => {
         if (response.headers?.["authorization"]) {
             this.jwt = response.headers["authorization"].replace("bearer ", "");
         }
@@ -138,7 +138,7 @@ export class FetchService {
             this.sessionGuid = response.headers["folloze-session-guid"];
         }
         return response;
-    }
+    };
 
     private handleError(error) {
         switch (get(error, "response.status")) {
