@@ -1,6 +1,6 @@
 import {
   ClientSDK
-} from "./chunks/chunk.PKQWMPXR.js";
+} from "./chunks/chunk.CQNIWZIZ.js";
 import "./chunks/chunk.62TMOTOU.js";
 import "./chunks/chunk.Y7N5PQ2A.js";
 import "./chunks/chunk.I44N3SMO.js";

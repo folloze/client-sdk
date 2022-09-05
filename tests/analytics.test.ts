@@ -46,7 +46,10 @@ describe("testing analytics module", () => {
     });
 
     it("checks that createSession mock works as expected", async () => {
-        await sdk.analytics.createSession().then(result => expect(result.data.guid).toBeTruthy);
+        await sdk.analytics.createSession().then(result => {
+            expect(result.data.guid).toBeTruthy;
+            expect(Object.keys(result.headers)).toContain("folloze-session-guid");
+        });
     });
 
     it("checks that validateSession mock works as expected", async () => {

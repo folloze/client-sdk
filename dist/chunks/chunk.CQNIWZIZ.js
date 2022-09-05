@@ -616,7 +616,7 @@ var MockConnector = class {
     await import("./mocks.AQHQRNV4.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import designer mocks", e));
   }
   static async bindAnalytics(mock) {
-    await import("./mocks.UY6BSN75.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
+    await import("./mocks.QBNHTAQ5.js").then((module) => module.rules(mock)).catch((e) => console.error("could not import analytics mocks", e));
   }
 };
 
@@ -634,6 +634,16 @@ var defaultFetcherOptions = {
 };
 var FetchService = class {
   constructor(options) {
+    this.handleSuccess = (response) => {
+      var _a, _b;
+      if ((_a = response.headers) == null ? void 0 : _a["authorization"]) {
+        this.jwt = response.headers["authorization"].replace("bearer ", "");
+      }
+      if ((_b = response.headers) == null ? void 0 : _b["folloze-session-guid"]) {
+        this.sessionGuid = response.headers["folloze-session-guid"];
+      }
+      return response;
+    };
     var _a, _b;
     this.useMock = options.useMock;
     this.options = options;
@@ -703,16 +713,6 @@ var FetchService = class {
     } else {
       return apiCall();
     }
-  }
-  handleSuccess(response) {
-    var _a, _b;
-    if ((_a = response.headers) == null ? void 0 : _a["authorization"]) {
-      this.jwt = response.headers["authorization"].replace("bearer ", "");
-    }
-    if ((_b = response.headers) == null ? void 0 : _b["folloze-session-guid"]) {
-      this.sessionGuid = response.headers["folloze-session-guid"];
-    }
-    return response;
   }
   handleError(error) {
     var _a;

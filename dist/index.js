@@ -32,7 +32,7 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.PKQWMPXR.js";
+} from "./chunks/chunk.CQNIWZIZ.js";
 import "./chunks/chunk.62TMOTOU.js";
 import {
   Analytics,
