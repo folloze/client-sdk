@@ -3,10 +3,10 @@ export interface ContentWidgetConfig {
     item_viewer: FlzVItemViewerSettings;
 }
 export interface SourcesConfig {
-    categories?: number[];
+    flz_category_ids?: number[];
     sort: "popular" | "newest" | "order_on_board";
     options?: "dynamic" | "manual";
-    id?: number;
+    flz_item_id?: number;
     all_items_categories?: {
         visible: boolean;
         name: string;
