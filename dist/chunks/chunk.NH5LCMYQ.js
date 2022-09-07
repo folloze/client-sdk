@@ -1,10 +1,6 @@
 import {
   require_axios
-<<<<<<< HEAD:dist/chunks/chunk.CQNIWZIZ.js
-} from "./chunk.62TMOTOU.js";
-=======
-} from "./chunk.F7UMJQCK.js";
->>>>>>> master:dist/chunks/chunk.CIBJW56F.js
+} from "./chunk.3ZNLEUXI.js";
 import {
   Analytics
 } from "./chunk.Y7N5PQ2A.js";
@@ -674,11 +670,7 @@ var FetchService = class {
     return instance;
   }
   async createMockFetcher(options) {
-<<<<<<< HEAD:dist/chunks/chunk.CQNIWZIZ.js
-    return await import("./src.Q3H55HCX.js").then(async (module) => {
-=======
-    return await import("./src.USDTFVAU.js").then(async (module) => {
->>>>>>> master:dist/chunks/chunk.CIBJW56F.js
+    return await import("./src.57FVLL6Z.js").then(async (module) => {
       this.createAxiosFetcher(options);
       this.fetcher.interceptors.response.use(this.handleSuccess, this.MockHandleError);
       this.mock = new module.default(this.fetcher);

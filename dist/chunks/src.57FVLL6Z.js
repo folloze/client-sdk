@@ -1,10 +1,6 @@
 import {
   require_axios
-<<<<<<< HEAD:dist/chunks/src.Q3H55HCX.js
-} from "./chunk.62TMOTOU.js";
-=======
-} from "./chunk.F7UMJQCK.js";
->>>>>>> master:dist/chunks/src.USDTFVAU.js
+} from "./chunk.3ZNLEUXI.js";
 import {
   __commonJS
 } from "./chunk.Z3GS5MY4.js";
