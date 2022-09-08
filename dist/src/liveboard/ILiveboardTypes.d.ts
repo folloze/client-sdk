@@ -84,7 +84,7 @@ export declare type OpenItemViewerPayload = ItemNavigationParams & {
     route?: string;
     open_in_new_tab?: boolean;
     link_url?: string;
-    is_landing: boolean;
+    is_landing?: boolean;
 };
 export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
