@@ -79,6 +79,7 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "saveContactCta"
     | "saveMessageCta"
     | "edit-floating-widget"
+    | "edit-floating-widget-perso"
     | "save-section-config"
     | "delete-widget"
     | "close-all-editors"
