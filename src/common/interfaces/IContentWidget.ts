@@ -14,7 +14,7 @@ export interface SourcesConfig {
         description: string;
     },
     virtual_category?: {
-        item_ids: number[];
+        flz_item_ids: number[];
     }
 }
 

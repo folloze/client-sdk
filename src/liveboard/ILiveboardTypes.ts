@@ -72,7 +72,7 @@ type ItemNavigationParams = {
         num_items: number;
     };
     virtual_category?: {
-        item_ids: number[];
+        flz_item_ids: number[];
     };
 };
 
