@@ -13,6 +13,7 @@ import {
   FlzEvent,
   GatingFormWidget,
   LiveDraggable,
+  LiveFloatingWidget,
   LiveWidget,
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,
@@ -28,7 +29,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "../chunks/chunk.MISLEJP4.js";
+} from "../chunks/chunk.SFP75EYB.js";
 import {
   FetchService
 } from "../chunks/chunk.CIBJW56F.js";
@@ -63,6 +64,7 @@ export {
   FlzEvent,
   GatingFormWidget,
   LiveDraggable,
+  LiveFloatingWidget,
   LiveWidget,
   LiveWidgetComponentEdit,
   LiveWidgetComponentPersonalization,

@@ -1,6 +1,7 @@
 export * from "./FetchService";
 export * from "./LiveWidgetElement";
 export * from "./LiveWidget";
+export * from "./LiveFloatingWidget";
 export * from "./ContentWidget";
 export * from "./LiveWidgetEdit";
 export * from "./LiveWidgetComponentEdit";

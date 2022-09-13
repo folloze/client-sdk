@@ -800,6 +800,14 @@ var Personalizable = (superClass) => {
 var LiveWidget = class extends Personalizable(LiveWidgetElement) {
 };
 
+// src/common/LiveFloatingWidget.ts
+var LiveFloatingWidget = class extends LiveWidget {
+  onClose() {
+  }
+  onShow() {
+  }
+};
+
 // src/common/ContentWidget.ts
 var ContentWidget = class extends LiveWidget {
 };
@@ -3202,6 +3210,7 @@ export {
   LiveWidgetElement,
   Personalizable,
   LiveWidget,
+  LiveFloatingWidget,
   ContentWidget,
   FloatChildrenContainer,
   LiveWidgetEdit,
