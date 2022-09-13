@@ -1,6 +1,5 @@
 import {ruleId} from "./IPersonalization";
 import {FloatPos, GridPos} from "./IPositions";
-import {BackgroundImage} from "./ISection";
 
 export type closable = {close: () => void};
 
