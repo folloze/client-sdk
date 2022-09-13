@@ -1,11 +1,11 @@
 import {LiveWidget} from "./LiveWidget";
 
 export abstract class LiveFloatingWidget extends LiveWidget {
-    protected onClose() {
+    public onClose() {
         //
     }
 
-    protected onShow() {
+    public onShow() {
         //
     }
 }
