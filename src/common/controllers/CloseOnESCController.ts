@@ -17,11 +17,19 @@ export class CloseOnESCController implements ReactiveController {
 
     hostConnected() {
         setTimeout(() => {
-            window.addEventListener("keyup", this._onKeyUp, true);
+            this.addListener();
         });
     }
 
     hostDisconnected() {
+        this.removeListener();
+    }
+
+    addListener() {
+        window.addEventListener("keyup", this._onKeyUp, true);
+    }
+
+    removeListener() {
         window.removeEventListener("keyup", this._onKeyUp, true);
     }
 }

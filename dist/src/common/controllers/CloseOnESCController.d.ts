@@ -6,4 +6,6 @@ export declare class CloseOnESCController implements ReactiveController {
     constructor(host: LitElement & closable);
     hostConnected(): void;
     hostDisconnected(): void;
+    addListener(): void;
+    removeListener(): void;
 }

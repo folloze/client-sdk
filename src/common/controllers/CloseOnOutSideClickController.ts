@@ -17,11 +17,19 @@ export class CloseOnOutSideClickController implements ReactiveController {
 
     hostConnected() {
         setTimeout(() => {
-            window.addEventListener("click", this._onMouseClick, true);
+            this.addListener();
         });
     }
 
     hostDisconnected() {
+        this.removeListener();
+    }
+
+    addListener() {
+        window.addEventListener("click", this._onMouseClick, true);
+    }
+
+    removeListener() {
         window.removeEventListener("click", this._onMouseClick, true);
     }
 }

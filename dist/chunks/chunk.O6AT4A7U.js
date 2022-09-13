@@ -3149,10 +3149,16 @@ var CloseOnOutSideClickController = class {
   }
   hostConnected() {
     setTimeout(() => {
-      window.addEventListener("click", this._onMouseClick, true);
+      this.addListener();
     });
   }
   hostDisconnected() {
+    this.removeListener();
+  }
+  addListener() {
+    window.addEventListener("click", this._onMouseClick, true);
+  }
+  removeListener() {
     window.removeEventListener("click", this._onMouseClick, true);
   }
 };
@@ -3170,10 +3176,16 @@ var CloseOnESCController = class {
   }
   hostConnected() {
     setTimeout(() => {
-      window.addEventListener("keyup", this._onKeyUp, true);
+      this.addListener();
     });
   }
   hostDisconnected() {
+    this.removeListener();
+  }
+  addListener() {
+    window.addEventListener("keyup", this._onKeyUp, true);
+  }
+  removeListener() {
     window.removeEventListener("keyup", this._onKeyUp, true);
   }
 };
