@@ -16,23 +16,43 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
     if (fwc.floatPos.isFixedToViewPort) {
         position = "fixed";
     }
+
     let calculatedStyles = `position: ${position};`;
     if (fwc.floatPos.pos.top !== undefined) {
-        // @ts-ignore
-        if (position === "fixed" && fwc.floatPos.pos?.top?.startsWith("0")) {
-            calculatedStyles += `top: calc(${fwc.floatPos.pos.top} + var(--edit-fz-system-control-bar-height, 0px));`;
+        // @ts-ignore - todo: this is only to support strings when in the schema its numbers without migrations.
+        let top: string = fwc.floatPos.pos.top;
+        if (typeof top === "number") {
+            top = top + "px";
+        }
+        if (position === "fixed" && top.startsWith("0")) {
+            calculatedStyles += `top: calc(${top} + var(--edit-fz-system-control-bar-height, 0px));`;
         } else {
-            calculatedStyles += `top: ${fwc.floatPos.pos.top};`;
+            calculatedStyles += `top: ${top};`;
         }
     }
     if (fwc.floatPos.pos.right !== undefined) {
-        calculatedStyles += `right: ${fwc.floatPos.pos.right};`;
+        // @ts-ignore
+        let right: string = fwc.floatPos.pos.right;
+        if (typeof right === "number") {
+            right = right + "px";
+        }
+        calculatedStyles += `right: ${right};`;
     }
     if (fwc.floatPos.pos.bottom !== undefined) {
-        calculatedStyles += `bottom: ${fwc.floatPos.pos.bottom};`;
+        // @ts-ignore
+        let bottom: string = fwc.floatPos.pos.bottom;
+        if (typeof bottom === "number") {
+            bottom = bottom + "px";
+        }
+        calculatedStyles += `bottom: ${bottom};`;
     }
     if (fwc.floatPos.pos.left !== undefined) {
-        calculatedStyles += `left: ${fwc.floatPos.pos.left};`;
+        // @ts-ignore
+        let left: string = fwc.floatPos.pos.left;
+        if (typeof left === "number") {
+            left = left + "px";
+        }
+        calculatedStyles += `left: ${left};`;
     }
 
     // change origin point
