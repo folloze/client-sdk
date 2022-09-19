@@ -25,11 +25,13 @@ import {
   editorEmit,
   editorEmitPromise,
   emit,
+  floatingPosStrToPercent,
+  getFloatingWidgetPosition,
   makeDragElement,
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.O6AT4A7U.js";
+} from "./chunks/chunk.ZJYFEI5U.js";
 import {
   ClientSDK,
   FetchService
@@ -100,6 +102,8 @@ export {
   editorEmitPromise,
   emit,
   fileUpload,
+  floatingPosStrToPercent,
+  getFloatingWidgetPosition,
   hashObj,
   isObjsEqual,
   keysToSnakeCase,

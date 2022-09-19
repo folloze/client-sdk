@@ -10,6 +10,7 @@ export * from "./LiveDraggable";
 export * from "./makeDraggable";
 export * from "./FloatEditor";
 export * from "./helpers/helpers";
+export * from "./helpers/PositionHelpers";
 export * from "./helpers/eventHelpers";
 export * from "./helpers/mediaHelpers";
 export * from "./FlzEvent";

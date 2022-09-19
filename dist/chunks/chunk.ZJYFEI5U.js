@@ -1400,6 +1400,46 @@ __decorateClass([
   e4()
 ], FloatEditor.prototype, "title", 2);
 
+// src/common/helpers/PositionHelpers.ts
+function floatingPosStrToPercent(str) {
+  const obj = {
+    top: "0%",
+    bottom: "-100%",
+    start: "0%",
+    middle: "-50%",
+    end: "-100%"
+  };
+  return obj[str];
+}
+function getFloatingWidgetPosition(fwc) {
+  var _a, _b, _c, _d;
+  let position = "absolute";
+  if (fwc.floatPos.isFixedToViewPort) {
+    position = "fixed";
+  }
+  let calculatedStyles = `position: ${position};`;
+  if (fwc.floatPos.pos.top !== void 0) {
+    if (position === "fixed" && ((_b = (_a = fwc.floatPos.pos) == null ? void 0 : _a.top) == null ? void 0 : _b.startsWith("0"))) {
+      calculatedStyles += `top: calc(${fwc.floatPos.pos.top} + var(--edit-fz-system-control-bar-height, 0px));`;
+    } else {
+      calculatedStyles += `top: ${fwc.floatPos.pos.top};`;
+    }
+  }
+  if (fwc.floatPos.pos.right !== void 0) {
+    calculatedStyles += `right: ${fwc.floatPos.pos.right};`;
+  }
+  if (fwc.floatPos.pos.bottom !== void 0) {
+    calculatedStyles += `bottom: ${fwc.floatPos.pos.bottom};`;
+  }
+  if (fwc.floatPos.pos.left !== void 0) {
+    calculatedStyles += `left: ${fwc.floatPos.pos.left};`;
+  }
+  const vertical = ((_c = fwc.floatPos.originPoint) == null ? void 0 : _c[0]) || "0";
+  const horizontal = ((_d = fwc.floatPos.originPoint) == null ? void 0 : _d[1]) || "0";
+  calculatedStyles += `translate: ${floatingPosStrToPercent(vertical)} ${floatingPosStrToPercent(horizontal)}`;
+  return calculatedStyles;
+}
+
 // node_modules/@cloudinary/url-gen/internal/qualifier/QualifierValue.js
 var QualifierValue = class {
   constructor(qualifierValue) {
@@ -3232,6 +3272,8 @@ export {
   makeDragElement,
   Floatable,
   FloatEditor,
+  floatingPosStrToPercent,
+  getFloatingWidgetPosition,
   CloudinaryHelper,
   CloseOnOutSideClickController,
   CloseOnESCController,
