@@ -213,12 +213,14 @@ var Liveboard = class {
     });
   }
   getGeoLocation() {
-    return new Promise((resolve, reject) => {
-      this.fetchService.fetcher.get("/live_board/v1/geo_location").then((result) => {
-        resolve(result.data);
-      }).catch((e) => {
-        console.error("could not get geolocation", e);
-        reject(e);
+    return this.fetchService.withDisableOnPreview(() => {
+      return new Promise((resolve, reject) => {
+        this.fetchService.fetcher.get("/live_board/v1/geo_location").then((result) => {
+          resolve(result.data);
+        }).catch((e) => {
+          console.error("could not get geolocation", e);
+          reject(e);
+        });
       });
     });
   }

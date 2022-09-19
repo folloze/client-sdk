@@ -802,6 +802,12 @@ var LiveWidget = class extends Personalizable(LiveWidgetElement) {
 
 // src/common/LiveFloatingWidget.ts
 var LiveFloatingWidget = class extends LiveWidget {
+  set config(data) {
+    super.config = data;
+  }
+  get config() {
+    return super.config;
+  }
   onClose() {
   }
   onShow() {

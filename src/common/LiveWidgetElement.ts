@@ -1,4 +1,4 @@
-import {WidgetConfig} from "./interfaces/IWidget";
+import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./interfaces/IWidget";
 import {v4 as uuid_v4} from "uuid";
 import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
@@ -11,8 +11,8 @@ export abstract class LiveWidgetElement extends LitElement {
     public setConfigOnlyOnce: boolean = false;
 
     protected _data: any;
-    private _widgetId: string;
-    private _config: WidgetConfig;
+    protected _widgetId: string;
+    protected _config: WidgetConfig | FloatingWidgetConfig | RibbonConfig;
 
     constructor() {
         super();
@@ -39,14 +39,14 @@ export abstract class LiveWidgetElement extends LitElement {
         widgetEmit(this, "widget-updated");
     }
 
-    set config(data: WidgetConfig) {
+    set config(data: WidgetConfig | FloatingWidgetConfig | RibbonConfig) {
         this._widgetId = data.id;
         this._config = data;
         this._data = data?.data;
         this.requestUpdate();
     }
 
-    public get config(): WidgetConfig {
+    public get config(): WidgetConfig | FloatingWidgetConfig | RibbonConfig {
         return this._config;
     }
 

@@ -29,6 +29,9 @@ export interface RibbonConfig extends LiveConfig, GridConfig, LoadableConfig {}
 export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
 
+    // whether or not to show an opacity overlay behind the widget
+    hasOverlay?: boolean;
+
     // todo: we dont necessarily need both options for temporary use
     // option 1
     triggers: Array<{page: string; on: any}>;
