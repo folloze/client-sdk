@@ -417,16 +417,18 @@ export class Liveboard {
      * @returns {GeoLocationResponseV1} GeoLocationResponse
      */
     getGeoLocation(): Promise<GeoLocationResponseV1> {
-        return new Promise((resolve, reject) => {
-            this.fetchService.fetcher
-                .get<GeoLocationResponseV1>("/live_board/v1/geo_location")
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not get geolocation", e);
-                    reject(e);
-                });
+        return this.fetchService.withDisableOnPreview((): Promise<GeoLocationResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetchService.fetcher
+                    .get<GeoLocationResponseV1>("/live_board/v1/geo_location")
+                    .then(result => {
+                        resolve(result.data);
+                    })
+                    .catch(e => {
+                        console.error("could not get geolocation", e);
+                        reject(e);
+                    });
+            });
         });
     }
 
