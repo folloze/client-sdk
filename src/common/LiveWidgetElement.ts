@@ -12,7 +12,7 @@ export abstract class LiveWidgetElement extends LitElement {
 
     protected _data: any;
     protected _widgetId: string;
-    protected _config: WidgetConfig | FloatingWidgetConfig | RibbonConfig;
+    protected _config: WidgetConfig;
 
     constructor() {
         super();
@@ -39,14 +39,14 @@ export abstract class LiveWidgetElement extends LitElement {
         widgetEmit(this, "widget-updated");
     }
 
-    set config(data: WidgetConfig | FloatingWidgetConfig | RibbonConfig) {
+    set config(data: WidgetConfig) {
         this._widgetId = data.id;
         this._config = data;
         this._data = data?.data;
         this.requestUpdate();
     }
 
-    public get config(): WidgetConfig | FloatingWidgetConfig | RibbonConfig {
+    public get config(): WidgetConfig {
         return this._config;
     }
 

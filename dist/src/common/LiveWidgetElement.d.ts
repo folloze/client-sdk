@@ -1,4 +1,4 @@
-import { FloatingWidgetConfig, RibbonConfig, WidgetConfig } from "./interfaces/IWidget";
+import { WidgetConfig } from "./interfaces/IWidget";
 import { LitElement, PropertyValues } from "lit";
 import { FlzEvent } from "./FlzEvent";
 export declare abstract class LiveWidgetElement extends LitElement {
@@ -8,14 +8,14 @@ export declare abstract class LiveWidgetElement extends LitElement {
     setConfigOnlyOnce: boolean;
     protected _data: any;
     protected _widgetId: string;
-    protected _config: WidgetConfig | FloatingWidgetConfig | RibbonConfig;
+    protected _config: WidgetConfig;
     constructor();
     connectedCallback(): void;
     willUpdate(_changedProperties: PropertyValues): void;
     protected firstUpdated(_changedProperties: PropertyValues): void;
     updated(_changedProperties: PropertyValues): void;
-    set config(data: WidgetConfig | FloatingWidgetConfig | RibbonConfig);
-    get config(): WidgetConfig | FloatingWidgetConfig | RibbonConfig;
+    set config(data: WidgetConfig);
+    get config(): WidgetConfig;
     set data(x: any);
     get data(): any;
     get widgetId(): string;
