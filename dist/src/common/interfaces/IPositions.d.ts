@@ -24,6 +24,12 @@ export declare type FloatPos = {
         bottom?: number;
         left?: number;
     };
+    padding?: {
+        top?: string;
+        right?: string;
+        bottom?: string;
+        left?: string;
+    };
     isFixedToViewPort?: boolean;
     originPoint?: [Horizontal, Vertical];
 };

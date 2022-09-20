@@ -33,6 +33,13 @@ export type FloatPos = {
         left?: number;
     };
 
+    padding?: {
+        top?: string;
+        right?: string;
+        bottom?: string;
+        left?: string;
+    };
+
     // whether or not to make it float as not part of the page
     // default is true
     isFixedToViewPort?: boolean;
