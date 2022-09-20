@@ -20,6 +20,7 @@ export interface GridConfig extends LiveConfig {
 export interface LoadableConfig extends LiveConfig {
     widgetTag: string; // 'folloze-header-hor' | 'header' | 'gallery' | 'banner' ...
     widgetScripts: string; // url to the widget CDN | lib
+    _widgetScripts?: string; // temporary dynamically calculated field to use with the designer to load the edit scripts for the widget
 }
 
 export interface WidgetConfig extends LiveConfig, GridConfig, LoadableConfig {}

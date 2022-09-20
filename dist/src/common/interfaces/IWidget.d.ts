@@ -20,6 +20,7 @@ export interface GridConfig extends LiveConfig {
 export interface LoadableConfig extends LiveConfig {
     widgetTag: string;
     widgetScripts: string;
+    _widgetScripts?: string;
 }
 export interface WidgetConfig extends LiveConfig, GridConfig, LoadableConfig {
 }
