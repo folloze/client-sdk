@@ -27,10 +27,10 @@ type Horizontal = "start" | "middle" | "end";
 export type FloatPos = {
     // pos will align the floating widget by distance from the edge and the origin point
     pos?: {
-        top?: number;
-        right?: number;
-        bottom?: number;
-        left?: number;
+        top?: number | string;
+        right?: number | string;
+        bottom?: number | string;
+        left?: number | string;
     };
 
     padding?: {

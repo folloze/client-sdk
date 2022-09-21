@@ -19,10 +19,10 @@ declare type Vertical = "top" | "middle" | "bottom";
 declare type Horizontal = "start" | "middle" | "end";
 export declare type FloatPos = {
     pos?: {
-        top?: number;
-        right?: number;
-        bottom?: number;
-        left?: number;
+        top?: number | string;
+        right?: number | string;
+        bottom?: number | string;
+        left?: number | string;
     };
     padding?: {
         top?: string;

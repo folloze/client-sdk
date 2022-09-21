@@ -55,6 +55,14 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
         calculatedStyles += `left: ${left};`;
     }
 
+    if (fwc.floatPos.padding !== undefined) {
+        const top = fwc.floatPos.padding.top || "0";
+        const right = fwc.floatPos.padding.right || "0";
+        const bottom = fwc.floatPos.padding.bottom || "0";
+        const left = fwc.floatPos.padding.left || "0";
+        calculatedStyles += `padding: ${top} ${right} ${bottom} ${left};`;
+    }
+
     // change origin point
     const vertical = fwc.floatPos.originPoint?.[0] || "0";
     const horizontal = fwc.floatPos.originPoint?.[1] || "0";

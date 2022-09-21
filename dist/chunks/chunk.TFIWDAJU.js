@@ -1450,6 +1450,13 @@ function getFloatingWidgetPosition(fwc) {
     }
     calculatedStyles += `left: ${left};`;
   }
+  if (fwc.floatPos.padding !== void 0) {
+    const top = fwc.floatPos.padding.top || "0";
+    const right = fwc.floatPos.padding.right || "0";
+    const bottom = fwc.floatPos.padding.bottom || "0";
+    const left = fwc.floatPos.padding.left || "0";
+    calculatedStyles += `padding: ${top} ${right} ${bottom} ${left};`;
+  }
   const vertical = ((_a = fwc.floatPos.originPoint) == null ? void 0 : _a[0]) || "0";
   const horizontal = ((_b = fwc.floatPos.originPoint) == null ? void 0 : _b[1]) || "0";
   calculatedStyles += `translate: ${floatingPosStrToPercent(vertical)} ${floatingPosStrToPercent(horizontal)}`;
