@@ -1,7 +1,7 @@
 import {LitElement} from "lit";
 import {FlzBoardEvent, FlzDesignerEvent} from "../FlzEvent";
 import {FLZ_DESIGNER_EVENT_ACTION, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
-import {LeadResponseV1} from "../../liveboard/ILiveboardTypes";
+import {CategoriesResponseV2, LeadResponseV1} from "../../liveboard/ILiveboardTypes";
 
 export function customEmit(
     el: LitElement,
@@ -13,19 +13,34 @@ export function customEmit(
     el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
 
+// todo: overload all Events_Actions - "get-lead" example, maybe there is a better way?
+type ExcludedAction = Exclude<FLZ_LIVEBOARD_EVENT_ACTION, "get-lead" & "get-all-categories">;
 export function widgetEmit(
     el: LitElement,
-    action: FLZ_LIVEBOARD_EVENT_ACTION,
+    action: ExcludedAction,
     payload?: any,
     onSuccess?: Function,
     onError?: Function,
 ): void;
-// todo: overload all Events_Actions - "get-lead" example, maybe there is a better way?
 export function widgetEmit(
     el: LitElement,
     action: "get-lead",
     payload?: any,
     onSuccess?: (lead: LeadResponseV1) => void,
+    onError?: Function,
+): void;
+export function widgetEmit(
+    el: LitElement,
+    action: "get-all-categories",
+    payload?: any,
+    onSuccess?: (lead: CategoriesResponseV2) => void,
+    onError?: Function,
+): void;
+export function widgetEmit(
+    el: LitElement,
+    action: FLZ_LIVEBOARD_EVENT_ACTION,
+    payload?: any,
+    onSuccess?: Function,
     onError?: Function,
 ): void {
     el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
@@ -51,6 +66,13 @@ export function componentEmit(
     widgetEmit(el, action, payload, onSuccess, onError);
 }
 
+export function widgetEmitPromise(el: LitElement, action: ExcludedAction, payload?: any): Promise<any>;
+export function widgetEmitPromise(el: LitElement, action: "get-lead", payload?: any): Promise<LeadResponseV1>;
+export function widgetEmitPromise(
+    el: LitElement,
+    action: "get-all-categories",
+    payload?: any,
+): Promise<CategoriesResponseV2>;
 export function widgetEmitPromise(el: LitElement, action: FLZ_LIVEBOARD_EVENT_ACTION, payload?: any): Promise<any> {
     return new Promise((resolve, reject) => {
         widgetEmit(el, action, payload, resolve, reject);
