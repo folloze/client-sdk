@@ -1,4 +1,4 @@
-import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./interfaces/IWidget";
+import {WidgetConfig} from "./interfaces/IWidget";
 import {v4 as uuid_v4} from "uuid";
 import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";

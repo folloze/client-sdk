@@ -1,20 +1,53 @@
 import {LitElement} from "lit";
 import {FlzBoardEvent, FlzDesignerEvent} from "../FlzEvent";
 import {FLZ_DESIGNER_EVENT_ACTION, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
+import {LeadResponseV1} from "../../liveboard/ILiveboardTypes";
 
-export function customEmit(el: LitElement, action: string, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
+export function customEmit(
+    el: LitElement,
+    action: string,
+    payload?: any,
+    onSuccess?: Function,
+    onError?: Function,
+): void {
     el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
 
-export function widgetEmit(el: LitElement, action: FLZ_LIVEBOARD_EVENT_ACTION, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
+export function widgetEmit(
+    el: LitElement,
+    action: FLZ_LIVEBOARD_EVENT_ACTION,
+    payload?: any,
+    onSuccess?: Function,
+    onError?: Function,
+): void;
+// todo: overload all Events_Actions - "get-lead" example, maybe there is a better way?
+export function widgetEmit(
+    el: LitElement,
+    action: "get-lead",
+    payload?: any,
+    onSuccess?: (lead: LeadResponseV1) => void,
+    onError?: Function,
+): void {
     el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
 
-export function editorEmit(el: LitElement, action: FLZ_DESIGNER_EVENT_ACTION, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
+export function editorEmit(
+    el: LitElement,
+    action: FLZ_DESIGNER_EVENT_ACTION,
+    payload?: any,
+    onSuccess?: Function,
+    onError?: Function,
+): void {
     el.dispatchEvent(new FlzDesignerEvent(el, action, payload, onSuccess, onError));
 }
 
-export function componentEmit(el: LitElement, action: FLZ_LIVEBOARD_EVENT_ACTION, payload?: any, onSuccess?: CallableFunction, onError?: CallableFunction): void {
+export function componentEmit(
+    el: LitElement,
+    action: FLZ_LIVEBOARD_EVENT_ACTION,
+    payload?: any,
+    onSuccess?: Function,
+    onError?: Function,
+): void {
     widgetEmit(el, action, payload, onSuccess, onError);
 }
 
@@ -41,10 +74,10 @@ export function emit(el: HTMLElement, name: string, options?: CustomEventInit) {
                 bubbles: true,
                 cancelable: false,
                 composed: true,
-                detail: {}
+                detail: {},
             },
-            options
-        )
+            options,
+        ),
     );
     el.dispatchEvent(event);
     return event;
