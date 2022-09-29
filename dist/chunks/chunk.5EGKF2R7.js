@@ -667,9 +667,6 @@ var FlzDesignerEvent = class extends FlzEvent {
 };
 
 // src/common/helpers/eventHelpers.ts
-function customEmit(el, action, payload, onSuccess, onError) {
-  el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
-}
 function widgetEmit(el, action, payload, onSuccess, onError) {
   el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
@@ -3274,7 +3271,6 @@ export {
   FlzEvent,
   FlzBoardEvent,
   FlzDesignerEvent,
-  customEmit,
   widgetEmit,
   editorEmit,
   componentEmit,

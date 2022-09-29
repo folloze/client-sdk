@@ -21,7 +21,6 @@ import {
   LiveWidgetElement,
   Personalizable,
   componentEmit,
-  customEmit,
   editorEmit,
   editorEmitPromise,
   emit,
@@ -31,7 +30,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.TFIWDAJU.js";
+} from "./chunks/chunk.5EGKF2R7.js";
 import {
   ClientSDK,
   FetchService
@@ -97,7 +96,6 @@ export {
   Liveboard,
   Personalizable,
   componentEmit,
-  customEmit,
   editorEmit,
   editorEmitPromise,
   emit,
