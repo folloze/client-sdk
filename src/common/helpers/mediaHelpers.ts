@@ -1,5 +1,5 @@
 import {FlzEditableImageData, GalleryImage} from "../../designer/IDesignerTypes";
-import {crop, limitFit, fit} from "@cloudinary/url-gen/actions/resize";
+import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
@@ -85,7 +85,7 @@ export class CloudinaryHelper {
             }
         }
         if (maxWidth || maxHeight) {
-            const sizeTransformation = limitFit();
+            const sizeTransformation = limitFill();
             maxWidth && sizeTransformation.width(maxWidth);
             maxHeight && sizeTransformation.height(maxHeight);
             cldImage.resize(sizeTransformation);
