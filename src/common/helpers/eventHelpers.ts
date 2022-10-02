@@ -2,6 +2,7 @@ import {LitElement} from "lit";
 import {FlzBoardEvent, FlzDesignerEvent} from "../FlzEvent";
 import {FLZ_DESIGNER_EVENT_ACTION, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
 import {CategoriesResponseV2, LeadResponseV1} from "../../liveboard/ILiveboardTypes";
+import {FloatWidgetElement} from "../interfaces/IBoard";
 
 // todo: overload all Events_Actions - "get-lead" example, maybe there is a better way?
 type ExcludedAction = Exclude<FLZ_LIVEBOARD_EVENT_ACTION, "get-lead" & "get-all-categories">;
@@ -23,6 +24,13 @@ export function widgetEmit(
     el: LitElement,
     action: "get-all-categories",
     payload?: any,
+    onSuccess?: (data: CategoriesResponseV2) => void,
+    onError?: Function,
+): void;
+export function widgetEmit(
+    el: LitElement,
+    action: "floating-widget-manager",
+    payload: {widget: FloatWidgetElement; command: "hide" | "show" | "remove"},
     onSuccess?: (data: CategoriesResponseV2) => void,
     onError?: Function,
 ): void;

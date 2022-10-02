@@ -34,5 +34,21 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
         on: any;
     }>;
     pages: string[];
-    trigger: any;
+    trigger: undefined | {
+        name: "ByWidgetTrigger";
+    } | {
+        name: "TimerTrigger";
+        options: {
+            repeat: number;
+            time: number;
+        };
+    } | {
+        name: "OnEventTrigger";
+        options: {
+            repeat: number;
+            eventName: string;
+        };
+    } | {
+        name: "LeaveTrigger";
+    };
 }
