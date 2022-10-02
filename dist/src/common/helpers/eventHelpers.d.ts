@@ -2,7 +2,7 @@ import { LitElement } from "lit";
 import { FLZ_DESIGNER_EVENT_ACTION, FLZ_LIVEBOARD_EVENT_ACTION } from "../interfaces/IEvent";
 import { CategoriesResponseV2, LeadResponseV1 } from "../../liveboard/ILiveboardTypes";
 import { FloatWidgetElement } from "../interfaces/IBoard";
-declare type ExcludedAction = Exclude<FLZ_LIVEBOARD_EVENT_ACTION, "get-lead" & "get-all-categories">;
+declare type ExcludedAction = Exclude<FLZ_LIVEBOARD_EVENT_ACTION, "get-lead" & "get-all-categories" & "floating-widget-manager">;
 export declare function widgetEmit(el: LitElement, action: ExcludedAction, payload?: any, onSuccess?: Function, onError?: Function): void;
 export declare function widgetEmit(el: LitElement, action: "get-lead", payload?: any, onSuccess?: (lead: LeadResponseV1) => void, onError?: Function): void;
 export declare function widgetEmit(el: LitElement, action: "get-all-categories", payload?: any, onSuccess?: (data: CategoriesResponseV2) => void, onError?: Function): void;

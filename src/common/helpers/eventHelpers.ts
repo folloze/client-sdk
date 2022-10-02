@@ -5,7 +5,10 @@ import {CategoriesResponseV2, LeadResponseV1} from "../../liveboard/ILiveboardTy
 import {FloatWidgetElement} from "../interfaces/IBoard";
 
 // todo: overload all Events_Actions - "get-lead" example, maybe there is a better way?
-type ExcludedAction = Exclude<FLZ_LIVEBOARD_EVENT_ACTION, "get-lead" & "get-all-categories">;
+type ExcludedAction = Exclude<
+    FLZ_LIVEBOARD_EVENT_ACTION,
+    "get-lead" & "get-all-categories" & "floating-widget-manager"
+>;
 export function widgetEmit(
     el: LitElement,
     action: ExcludedAction,
