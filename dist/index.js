@@ -11,8 +11,8 @@ import {
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
-  GatingFormWidget,
   LiveDraggable,
+  LiveFloatingGatingFormWidget,
   LiveFloatingWidget,
   LiveWidget,
   LiveWidgetComponentEdit,
@@ -30,7 +30,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.ILEEVI6U.js";
+} from "./chunks/chunk.3PJQXB6H.js";
 import {
   ClientSDK,
   FetchService
@@ -84,9 +84,9 @@ export {
   FlzBoardEvent,
   FlzDesignerEvent,
   FlzEvent,
-  GatingFormWidget,
   LiveBoardEventTypes,
   LiveDraggable,
+  LiveFloatingGatingFormWidget,
   LiveFloatingWidget,
   LiveWidget,
   LiveWidgetComponentEdit,

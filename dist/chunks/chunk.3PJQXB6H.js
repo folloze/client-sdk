@@ -3276,11 +3276,83 @@ var CookieConsentWidget = class extends LiveWidget {
   }
 };
 
-// src/common/GatingFormWidget.ts
-var GatingFormWidget = class extends LiveWidget {
+// src/common/LiveFloatingGatingFormWidget.ts
+var GATING_FORM_KEY = "gatingFormSubmitted";
+var LiveFloatingGatingFormWidget = class extends LiveFloatingWidget {
   constructor() {
     super(...arguments);
     this.isGatingForm = true;
+  }
+  connectedCallback() {
+    super.connectedCallback();
+    widgetEmit(this, "get-state", void 0, (state) => {
+      var _a, _b;
+      this.boardId = state.board.id;
+      if ((_b = (_a = state.item_viewer) == null ? void 0 : _a.current) == null ? void 0 : _b.is_gated) {
+        this.toggleOnOrOff();
+      }
+    });
+  }
+  incomingEvents(e6) {
+    var _a;
+    super.incomingEvents(e6);
+    const action = e6.action;
+    if (action === "changeItem" || action === "openItemViewer") {
+      if (!((_a = e6.payload) == null ? void 0 : _a.is_gated)) {
+        this.close();
+        return;
+      }
+      this.toggleOnOrOff();
+    } else if (action === "itemViewerClosed") {
+      this.close();
+    }
+  }
+  toggleOnOrOff() {
+    widgetEmit(this, "get-lead", void 0, (lead) => {
+      this.lead = lead;
+    });
+    const isSubmittedAlready = this.isPersistSubmitExists(this.boardId);
+    const isKnownLeadGated = this._data.enableForKnownUsers && !isSubmittedAlready;
+    const showGated = this.lead.anon_guest || isKnownLeadGated;
+    console.debug(`show gated form: ${showGated}`);
+    if (showGated) {
+      this.show();
+      return;
+    }
+    this.close();
+  }
+  show() {
+    var _a, _b;
+    if (((_b = (_a = this._data) == null ? void 0 : _a.ctaFormConfig) == null ? void 0 : _b.form_id) !== 0 && this.classList.contains("hidden")) {
+      widgetEmit(this, "floating-widget-manager", { widget: this, command: "show" });
+    }
+  }
+  close() {
+    if (!this.classList.contains("hidden")) {
+      widgetEmit(this, "floating-widget-manager", { widget: this, command: "hide" });
+    }
+  }
+  persistSubmitToLocalStorage(boardId) {
+    const gatedBoardIds = JSON.parse(localStorage.getItem(GATING_FORM_KEY) || "[]");
+    if (!gatedBoardIds.includes(boardId)) {
+      gatedBoardIds.push(boardId);
+      localStorage.setItem(GATING_FORM_KEY, JSON.stringify(gatedBoardIds));
+    }
+  }
+  isPersistSubmitExists(boardId) {
+    const persistedIdsStr = localStorage.getItem(GATING_FORM_KEY);
+    if (!persistedIdsStr) {
+      return false;
+    }
+    try {
+      const gatedBoardIds = JSON.parse(persistedIdsStr);
+      if (gatedBoardIds.includes(boardId)) {
+        return true;
+      }
+    } catch (e6) {
+      console.error("could not parse gated board ids from local storage");
+    }
+    return false;
   }
 };
 
@@ -3315,7 +3387,7 @@ export {
   CloseOnOutSideClickController,
   CloseOnESCController,
   CookieConsentWidget,
-  GatingFormWidget
+  LiveFloatingGatingFormWidget
 };
 /**
  * @license
