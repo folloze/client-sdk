@@ -372,8 +372,8 @@ export class Designer {
 
     saveConfigTheme(
       boardId: number,
-      themeId?: number
-    ): Promise<{status: number; data: ConfigSavedConflict | ConfigSavedSuccess}> {
+      themeId: number
+    ) {
         return new Promise((resolve, reject) => {
             console.log("saveConfigTheme.. (client_sdk) themeId:", themeId);
             this.fetcher
