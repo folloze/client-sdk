@@ -125,10 +125,8 @@ export declare class Designer {
         status: number;
         data: ConfigSavedConflict | ConfigSavedSuccess;
     }>;
-    saveConfigTheme(
-      boardId: number,
-      themeId: number
-    )
+    saveConfigTheme(boardId: number, themeId: number): Promise<unknown>;
+    getLiveBoardConfig(boardId: number): Promise<PublishedUnpublishedConfig>;
     /**
      * searches board contacts
      *

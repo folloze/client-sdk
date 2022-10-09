@@ -34,8 +34,8 @@ import {
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.ZHAFRJYG.js";
-import "./chunks/chunk.F7UMJQCK.js";
+} from "./chunks/chunk.KH45ORZT.js";
+import "./chunks/chunk.RHFMY5C2.js";
 import {
   Analytics,
   DesignerEventTypes,
@@ -44,7 +44,7 @@ import {
 } from "./chunks/chunk.Y7N5PQ2A.js";
 import {
   Designer
-} from "./chunks/chunk.I44N3SMO.js";
+} from "./chunks/chunk.QYG7RRK2.js";
 import {
   Liveboard
 } from "./chunks/chunk.EQWT44WI.js";
