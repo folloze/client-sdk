@@ -3282,6 +3282,7 @@ var LiveFloatingGatingFormWidget = class extends LiveFloatingWidget {
   constructor() {
     super(...arguments);
     this.isGatingForm = true;
+    this.shouldBeShown = false;
   }
   connectedCallback() {
     super.connectedCallback();
@@ -3297,7 +3298,9 @@ var LiveFloatingGatingFormWidget = class extends LiveFloatingWidget {
     var _a;
     super.incomingEvents(e6);
     const action = e6.action;
-    if (action === "changeItem" || action === "openItemViewer") {
+    if (action === "widgets-scripts-loaded" && this.shouldBeShown) {
+      this.toggleOnOrOff();
+    } else if (action === "changeItem" || action === "openItemViewer") {
       if (!((_a = e6.payload) == null ? void 0 : _a.is_gated)) {
         this.close();
         return;
@@ -3323,11 +3326,13 @@ var LiveFloatingGatingFormWidget = class extends LiveFloatingWidget {
   }
   show() {
     var _a, _b;
+    this.shouldBeShown = true;
     if (((_b = (_a = this._data) == null ? void 0 : _a.ctaFormConfig) == null ? void 0 : _b.form_id) !== 0 && this.classList.contains("hidden")) {
       widgetEmit(this, "floating-widget-manager", { widget: this, command: "show" });
     }
   }
   close() {
+    this.shouldBeShown = false;
     if (!this.classList.contains("hidden")) {
       widgetEmit(this, "floating-widget-manager", { widget: this, command: "hide" });
     }

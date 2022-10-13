@@ -5,6 +5,7 @@ export declare abstract class LiveFloatingGatingFormWidget extends LiveFloatingW
     readonly isGatingForm = true;
     protected lead: LeadResponseV1;
     protected boardId: number;
+    private shouldBeShown;
     connectedCallback(): void;
     incomingEvents(e: FlzEvent): void;
     toggleOnOrOff(): void;

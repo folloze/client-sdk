@@ -11,6 +11,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
 
     protected lead: LeadResponseV1;
     protected boardId: number;
+    private shouldBeShown: boolean = false;
 
     connectedCallback() {
         super.connectedCallback();
@@ -25,7 +26,10 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     incomingEvents(e: FlzEvent) {
         super.incomingEvents(e);
         const action: FLZ_EVENT_ACTION = e.action as FLZ_EVENT_ACTION;
-        if (action === "changeItem" || action === "openItemViewer") {
+        if (action === "widgets-scripts-loaded" && this.shouldBeShown) {
+            // this is for solving a race condition when landing on gated item
+            this.toggleOnOrOff();
+        } else if (action === "changeItem" || action === "openItemViewer") {
             if (!e.payload?.is_gated) {
                 this.close();
                 return;
@@ -53,12 +57,14 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     }
 
     show() {
+        this.shouldBeShown = true;
         if (this._data?.ctaFormConfig?.form_id !== 0 && this.classList.contains("hidden")) {
             widgetEmit(this, "floating-widget-manager", {widget: this, command: "show"});
         }
     }
 
     close() {
+        this.shouldBeShown = false;
         if (!this.classList.contains("hidden")) {
             widgetEmit(this, "floating-widget-manager", {widget: this, command: "hide"});
         }
