@@ -47,20 +47,28 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
         | {name: "LeaveTrigger"; persist?: TriggerPersistence};
 }
 
+type TriggerPersistenceFields = {
+    [key: string]: number | string | boolean;
+    showed?: number; // automatic field
+    closed?: number; // automatic field
+};
+
 export type TriggerPersistence = {
     expiration: "never" | string;
-    counts: {
-        [key: string]: number;
-        triggered?: number; // automatic field
-        closed?: number; // automatic field
-    };
-    allowTriggerConditions?: {
+    // fields to be persisted under persisted.fields
+    fields: TriggerPersistenceFields;
+    showConditions?: {
         rules: TriggerPersistenceRule[];
         satisfy: "ALL" | "ANY";
-        log?: Function; // console.log
         transformValueFn?: Function; // ex: (val) => ref[val],
         previousValueFn?: Function;
+        log?: Function; // console.log
     };
+};
+
+export type TriggerPersistenceData = {
+    updated: string; // should be a datetime last updated string
+    fields: TriggerPersistenceFields;
 };
 
 export type TriggerPersistenceRule = {

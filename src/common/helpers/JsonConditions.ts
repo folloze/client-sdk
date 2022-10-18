@@ -4,7 +4,7 @@ import {TriggerPersistence} from "../interfaces/IWidget";
 
 // copied from https://github.com/raisely/json-conditions
 
-export function checkJsonConditions(settings: TriggerPersistence["allowTriggerConditions"], reference) {
+export function checkJsonConditions(settings: TriggerPersistence["showConditions"], reference) {
     if (!(settings && Array.isArray(settings.rules))) return null;
 
     let debugStr = "";

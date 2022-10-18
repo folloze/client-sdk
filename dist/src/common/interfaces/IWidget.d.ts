@@ -56,20 +56,25 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
         persist?: TriggerPersistence;
     };
 }
+declare type TriggerPersistenceFields = {
+    [key: string]: number | string | boolean;
+    showed?: number;
+    closed?: number;
+};
 export declare type TriggerPersistence = {
     expiration: "never" | string;
-    counts: {
-        [key: string]: number;
-        triggered?: number;
-        closed?: number;
-    };
-    allowTriggerConditions?: {
+    fields: TriggerPersistenceFields;
+    showConditions?: {
         rules: TriggerPersistenceRule[];
         satisfy: "ALL" | "ANY";
-        log?: Function;
         transformValueFn?: Function;
         previousValueFn?: Function;
+        log?: Function;
     };
+};
+export declare type TriggerPersistenceData = {
+    updated: string;
+    fields: TriggerPersistenceFields;
 };
 export declare type TriggerPersistenceRule = {
     property: string;
@@ -77,3 +82,4 @@ export declare type TriggerPersistenceRule = {
     value: number | boolean | string;
     required?: boolean;
 };
+export {};
