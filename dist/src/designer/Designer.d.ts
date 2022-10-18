@@ -121,7 +121,7 @@ export declare class Designer {
      * @returns {PersonalizationV1} Personalization
      */
     savePersonalization(boardId: number, personalization: PersonalizationV1): Promise<PersonalizationV1>;
-    saveLiveBoard(boardId: number, config: BoardConfig, themeId: number): Promise<{
+    saveLiveBoard(boardId: number, config: BoardConfig, themeId?: number): Promise<{
         status: number;
         data: ConfigSavedConflict | ConfigSavedSuccess;
     }>;
