@@ -166,28 +166,10 @@ var Designer = class {
       });
     });
   }
-  saveLiveBoard(boardId, config) {
+  saveLiveBoard(boardId, config, themeId) {
     return new Promise((resolve, reject) => {
       this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
         config,
-        theme_id: null
-      }).then((result) => resolve({ status: result.status, data: result.data })).catch((e) => {
-        var _a, _b, _c;
-        if (((_a = e.response) == null ? void 0 : _a.status) === 409 || ((_b = e.response) == null ? void 0 : _b.status) === 406) {
-          const reason = ((_c = e.response) == null ? void 0 : _c.status) === 409 ? "conflict" : "unacceptable";
-          console.warn(`could not save - ${reason}`);
-          resolve({ status: e.response.status, data: e.response.data });
-        } else {
-          console.error("could not save liveBoard config", e);
-          reject(e);
-        }
-      });
-    });
-  }
-  saveConfigTheme(boardId, themeId) {
-    return new Promise((resolve, reject) => {
-      console.log("saveConfigTheme.. (client_sdk) themeId:", themeId);
-      this.fetcher.put(`/api/v1/boards/${boardId}/config`, {
         theme_id: themeId
       }).then((result) => resolve({ status: result.status, data: result.data })).catch((e) => {
         var _a, _b, _c;
