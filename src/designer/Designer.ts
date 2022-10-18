@@ -349,7 +349,7 @@ export class Designer {
     saveLiveBoard(
         boardId: number,
         config: BoardConfig,
-        themeId: number
+        themeId?: number
     ): Promise<{status: number; data: ConfigSavedConflict | ConfigSavedSuccess}> {
         return new Promise((resolve, reject) => {
             this.fetcher
