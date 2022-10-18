@@ -1,5 +1,6 @@
 import { ruleId } from "./IPersonalization";
 import { FloatPos, GridPos } from "./IPositions";
+import { DotNestedKeys } from "../helpers/helpers";
 export declare type closable = {
     close: () => void;
 };
@@ -62,7 +63,7 @@ declare type TriggerPersistenceFields = {
     closed?: number;
 };
 export declare type TriggerPersistence = {
-    expiration: "never" | string;
+    expiration: "never" | number;
     fields: TriggerPersistenceFields;
     showConditions?: {
         rules: TriggerPersistenceRule[];
@@ -77,7 +78,9 @@ export declare type TriggerPersistenceData = {
     fields: TriggerPersistenceFields;
 };
 export declare type TriggerPersistenceRule = {
-    property: string;
+    property: DotNestedKeys<{
+        persisted: TriggerPersistenceData;
+    } & Omit<FloatingWidgetConfig, "trigger">>;
     op: "eq" | "ne" | "neq" | "gt" | "gte" | "lt" | "lte" | "startsWith" | "endsWith" | "contains" | "present" | "empty" | "absent" | "all" | "some" | "none" | "crosses";
     value: number | boolean | string;
     required?: boolean;
