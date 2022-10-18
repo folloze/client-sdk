@@ -1,6 +1,7 @@
 import {
-  require_get
-} from "./chunk.WXVSHK2H.js";
+  require_get,
+  require_toString
+} from "./chunk.623JEG3N.js";
 import {
   FLZ_WIDGET_EVENT_TYPE
 } from "./chunk.C7O4HBVL.js";
@@ -3214,6 +3215,135 @@ var CloudinaryHelper = class {
   }
 };
 
+// src/common/helpers/JsonConditions.ts
+var import_get2 = __toModule(require_get());
+var import_toString = __toModule(require_toString());
+function checkJsonConditions(settings, reference) {
+  if (!(settings && Array.isArray(settings.rules)))
+    return null;
+  let debugStr = "";
+  let requiredPassed = 0;
+  let normalPassed = 0;
+  const results = settings.rules.map((rule, index) => {
+    let error;
+    if (!rule.property) {
+      error = new Error(`Property not specified for rule ${index}`);
+      error.rule = rule;
+      throw error;
+    }
+    let value = (0, import_get2.default)(reference, rule.property);
+    if (rule.property.includes("[]")) {
+      let [topPath, nestedPath] = rule.property.split("[]");
+      nestedPath = nestedPath.substring(1);
+      value = (0, import_get2.default)(reference, topPath).map((item) => nestedPath ? (0, import_get2.default)(item, nestedPath) : item);
+    }
+    let targetValue = rule.value;
+    if (typeof settings.transformValueFn === "function") {
+      targetValue = settings.transformValueFn(targetValue, reference, rule.property);
+    }
+    let altComparison = null;
+    if (typeof value === "boolean" && (typeof targetValue === "string" || targetValue instanceof String)) {
+      if (targetValue.toLowerCase() === "false")
+        altComparison = false;
+      if (targetValue.toLowerCase() === "true")
+        altComparison = true;
+    }
+    let result;
+    switch (rule.op) {
+      case "eq":
+        result = value == targetValue;
+        if (altComparison !== null)
+          result = result || value == altComparison;
+        break;
+      case "ne":
+      case "neq":
+        result = value != targetValue;
+        if (altComparison !== null)
+          result = result && value != altComparison;
+        break;
+      case "gt":
+        result = value > targetValue;
+        break;
+      case "gte":
+        result = value >= targetValue;
+        break;
+      case "lt":
+        result = value < targetValue;
+        break;
+      case "lte":
+        result = value <= targetValue;
+        break;
+      case "startsWith":
+        result = (0, import_toString.default)(value).startsWith(targetValue);
+        break;
+      case "endsWith":
+        result = (0, import_toString.default)(value).endsWith(targetValue);
+        break;
+      case "contains":
+        result = (0, import_toString.default)(value).includes(targetValue);
+        break;
+      case "present":
+        result = !!value;
+        break;
+      case "empty":
+      case "absent":
+        result = !value;
+        break;
+      case "all":
+        result = Array.isArray(value) && !value.find((v2) => v2 !== targetValue);
+        break;
+      case "some":
+        result = Array.isArray(value) && value.includes(targetValue);
+        break;
+      case "none":
+        result = (Array.isArray(value) || value === null || typeof value === "undefined") && !(value || []).includes(targetValue);
+        break;
+      case "crosses": {
+        console.log(typeof settings.previousValueFn);
+        if (typeof settings.previousValueFn !== "function") {
+          throw new Error('Comparison "crosses" selected, but no function supplied to return previous value');
+        }
+        const lastValue = settings.previousValueFn(reference, rule.property);
+        result = targetValue > lastValue && targetValue <= value;
+        debugStr = `(${index}) ${rule.property} was ${lastValue} and became ${value}. crossed ${targetValue}? ${result}
+`;
+        break;
+      }
+      default:
+        error = new Error(`Unknown comparison for rule (${rule.op})`);
+        error.rule = rule;
+        throw error;
+    }
+    if (result) {
+      if (rule.required)
+        requiredPassed += 1;
+      else
+        normalPassed += 1;
+    }
+    const unary = ["absent", "present"].includes(rule.op);
+    debugStr += `(${index}) ${rule.property} (${value}) ${unary ? "is" : ""} ${rule.op} ${unary ? "" : targetValue}? ${result}
+`;
+    return result;
+  });
+  const requiredTotal = settings.rules.reduce((total, rule) => total + (rule.required ? 1 : 0), 0);
+  const normalTotal = settings.rules.length - requiredTotal;
+  const satisfy = settings.satisfy || "ANY";
+  const requiredSatisfied = !requiredTotal || requiredTotal === requiredPassed;
+  const normalSatisfied = !normalTotal || (satisfy === "ALL" ? normalPassed === normalTotal : normalPassed > 0);
+  const outcome = normalSatisfied && requiredSatisfied;
+  if (normalTotal > 0) {
+    debugStr += `Passed ${normalPassed} / ${normalTotal} (need ${satisfy}, ${normalSatisfied ? "pass" : "fail"})
+`;
+  }
+  if (requiredTotal > 0)
+    debugStr += `Passed ${requiredPassed} / ${requiredTotal} required conditions (${requiredSatisfied ? "pass" : "fail"})
+`;
+  debugStr += `Result: ${outcome ? "PASS" : "FAIL"}`;
+  if (settings.log)
+    settings.log(debugStr, results);
+  return outcome;
+}
+
 // src/common/controllers/CloseOnOutSideClickController.ts
 var CloseOnOutSideClickController = class {
   constructor(host) {
@@ -3389,6 +3519,7 @@ export {
   floatingPosStrToPercent,
   getFloatingWidgetPosition,
   CloudinaryHelper,
+  checkJsonConditions,
   CloseOnOutSideClickController,
   CloseOnESCController,
   CookieConsentWidget,

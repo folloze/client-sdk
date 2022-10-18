@@ -20,6 +20,7 @@ import {
   LiveWidgetEdit,
   LiveWidgetElement,
   Personalizable,
+  checkJsonConditions,
   componentEmit,
   editorEmit,
   editorEmitPromise,
@@ -30,11 +31,11 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.JOBTIE2B.js";
+} from "./chunks/chunk.46DEWZIY.js";
 import {
   ClientSDK,
   FetchService
-} from "./chunks/chunk.ZHAFRJYG.js";
+} from "./chunks/chunk.QIKFZKWQ.js";
 import "./chunks/chunk.F7UMJQCK.js";
 import {
   Analytics,
@@ -44,10 +45,10 @@ import {
 } from "./chunks/chunk.Y7N5PQ2A.js";
 import {
   Designer
-} from "./chunks/chunk.I44N3SMO.js";
+} from "./chunks/chunk.QOUQQ4NK.js";
 import {
   Liveboard
-} from "./chunks/chunk.EQWT44WI.js";
+} from "./chunks/chunk.ZYQDHMRK.js";
 import {
   fileUpload,
   hashObj,
@@ -55,7 +56,7 @@ import {
   keysToSnakeCase,
   simpleDebounce,
   simpleThrottle
-} from "./chunks/chunk.WXVSHK2H.js";
+} from "./chunks/chunk.623JEG3N.js";
 import {
   CampaignElementsTypes
 } from "./chunks/chunk.G52EPVC6.js";
@@ -95,6 +96,7 @@ export {
   LiveWidgetElement,
   Liveboard,
   Personalizable,
+  checkJsonConditions,
   componentEmit,
   editorEmit,
   editorEmitPromise,

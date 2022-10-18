@@ -41,8 +41,48 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     pages: string[];
     trigger:
         | undefined
-        | {name: "ByWidgetTrigger"}
-        | {name: "TimerTrigger"; options: {repeat: number; time: number}}
-        | {name: "OnEventTrigger"; options: {repeat: number; eventName: string}}
-        | {name: "LeaveTrigger"};
+        | {name: "ByWidgetTrigger"; persist?: TriggerPersistence}
+        | {name: "TimerTrigger"; options: {repeat: number; time: number}; persist?: TriggerPersistence}
+        | {name: "OnEventTrigger"; options: {repeat: number; eventName: string}; persist?: TriggerPersistence}
+        | {name: "LeaveTrigger"; persist?: TriggerPersistence};
 }
+
+export type TriggerPersistence = {
+    expiration: "never" | string;
+    counts: {
+        [key: string]: number;
+        triggered?: number; // automatic field
+        closed?: number; // automatic field
+    };
+    allowTriggerConditions?: {
+        rules: TriggerPersistenceRule[];
+        satisfy: "ALL" | "ANY";
+        log?: Function; // console.log
+        transformValueFn?: Function; // ex: (val) => ref[val],
+        previousValueFn?: Function;
+    };
+};
+
+export type TriggerPersistenceRule = {
+    property: string;
+    op:
+        | "eq"
+        | "ne"
+        | "neq"
+        | "gt"
+        | "gte"
+        | "lt"
+        | "lte"
+        | "startsWith"
+        | "endsWith"
+        | "contains"
+        | "present"
+        | "empty"
+        | "absent"
+        | "all"
+        | "some"
+        | "none"
+        | "crosses";
+    value: number | boolean | string;
+    required?: boolean;
+};

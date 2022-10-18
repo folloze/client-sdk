@@ -36,19 +36,44 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     pages: string[];
     trigger: undefined | {
         name: "ByWidgetTrigger";
+        persist?: TriggerPersistence;
     } | {
         name: "TimerTrigger";
         options: {
             repeat: number;
             time: number;
         };
+        persist?: TriggerPersistence;
     } | {
         name: "OnEventTrigger";
         options: {
             repeat: number;
             eventName: string;
         };
+        persist?: TriggerPersistence;
     } | {
         name: "LeaveTrigger";
+        persist?: TriggerPersistence;
     };
 }
+export declare type TriggerPersistence = {
+    expiration: "never" | string;
+    counts: {
+        [key: string]: number;
+        triggered?: number;
+        closed?: number;
+    };
+    allowTriggerConditions?: {
+        rules: TriggerPersistenceRule[];
+        satisfy: "ALL" | "ANY";
+        log?: Function;
+        transformValueFn?: Function;
+        previousValueFn?: Function;
+    };
+};
+export declare type TriggerPersistenceRule = {
+    property: string;
+    op: "eq" | "ne" | "neq" | "gt" | "gte" | "lt" | "lte" | "startsWith" | "endsWith" | "contains" | "present" | "empty" | "absent" | "all" | "some" | "none" | "crosses";
+    value: number | boolean | string;
+    required?: boolean;
+};
