@@ -66,6 +66,6 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
     // change origin point
     const vertical = fwc.floatPos.originPoint?.[0] || "0";
     const horizontal = fwc.floatPos.originPoint?.[1] || "0";
-    calculatedStyles += `translate: ${floatingPosStrToPercent(vertical)} ${floatingPosStrToPercent(horizontal)}`;
+    calculatedStyles += `transform: translate(${floatingPosStrToPercent(vertical)}, ${floatingPosStrToPercent(horizontal)});`;
     return calculatedStyles;
 }
