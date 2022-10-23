@@ -34,6 +34,9 @@ export declare type BoardConfig = {
         currentPageName?: string;
         clearCacheBefore?: string;
     };
+    theme: {
+        id: number;
+    };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
