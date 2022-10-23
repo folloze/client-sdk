@@ -34,7 +34,7 @@ export declare type BoardConfig = {
         currentPageName?: string;
         clearCacheBefore?: string;
     };
-    theme: {
+    theme?: {
         id: number;
     };
     pages: Record<string, PageConfig>;

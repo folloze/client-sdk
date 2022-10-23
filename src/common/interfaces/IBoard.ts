@@ -37,7 +37,7 @@ export type BoardConfig = {
         currentPageName?: string;
         clearCacheBefore?: string; // iso date
     };
-    theme: {
+    theme?: {
         id: number;
     };
     pages: Record<string, PageConfig>;
