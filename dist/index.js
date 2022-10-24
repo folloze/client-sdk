@@ -31,7 +31,7 @@ import {
   waitForEvent,
   widgetEmit,
   widgetEmitPromise
-} from "./chunks/chunk.46DEWZIY.js";
+} from "./chunks/chunk.OFTRAMIX.js";
 import {
   ClientSDK,
   FetchService
