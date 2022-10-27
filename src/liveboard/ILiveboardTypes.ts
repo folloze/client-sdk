@@ -117,6 +117,7 @@ export type ItemResponseV2 = {
     is_gated: boolean | null;
     item_source: number;
     item_type: string;
+    presented_item_type: string;
     likes_count: number;
     link_url?: string;
     name: string;
