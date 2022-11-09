@@ -3119,7 +3119,13 @@ var CloudinaryHelper = class {
     }
     const cldImage = this.getImage(image);
     const isSvg = cldImage.toURL().endsWith(".svg");
-    if ((_a = image.transformation) == null ? void 0 : _a.crop) {
+    if ((_a = image.transformation) == null ? void 0 : _a.flipY) {
+      cldImage.rotate(mode(verticalFlip()));
+    }
+    if ((_b = image.transformation) == null ? void 0 : _b.flipX) {
+      cldImage.rotate(mode(horizontalFlip()));
+    }
+    if ((_c = image.transformation) == null ? void 0 : _c.crop) {
       const { x: x2, y: y2, width, height, aspect, radius } = image.transformation.crop;
       const cropTransformation = crop();
       width && cropTransformation.width(width);
@@ -3142,12 +3148,6 @@ var CloudinaryHelper = class {
       maxWidth && sizeTransformation.width(maxWidth);
       maxHeight && sizeTransformation.height(maxHeight);
       cldImage.resize(sizeTransformation);
-    }
-    if ((_b = image.transformation) == null ? void 0 : _b.flipY) {
-      cldImage.rotate(mode(verticalFlip()));
-    }
-    if ((_c = image.transformation) == null ? void 0 : _c.flipX) {
-      cldImage.rotate(mode(horizontalFlip()));
     }
     if ((_d = image.transformation) == null ? void 0 : _d.artisticFilter) {
       cldImage.effect(artisticFilter(image.transformation.artisticFilter));

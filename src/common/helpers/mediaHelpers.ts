@@ -64,6 +64,14 @@ export class CloudinaryHelper {
 
         const cldImage = this.getImage(image);
         const isSvg = cldImage.toURL().endsWith(".svg");
+
+        if (image.transformation?.flipY) {
+            cldImage.rotate(mode(verticalFlip()));
+        }
+        if (image.transformation?.flipX) {
+            cldImage.rotate(mode(horizontalFlip()));
+        }
+
         if (image.transformation?.crop) {
             const {x, y, width, height, aspect, radius} = image.transformation.crop;
             const cropTransformation = crop();
@@ -89,12 +97,6 @@ export class CloudinaryHelper {
             maxWidth && sizeTransformation.width(maxWidth);
             maxHeight && sizeTransformation.height(maxHeight);
             cldImage.resize(sizeTransformation);
-        }
-        if (image.transformation?.flipY) {
-            cldImage.rotate(mode(verticalFlip()));
-        }
-        if (image.transformation?.flipX) {
-            cldImage.rotate(mode(horizontalFlip()));
         }
         if (image.transformation?.artisticFilter) {
             cldImage.effect(artisticFilter(image.transformation.artisticFilter));
