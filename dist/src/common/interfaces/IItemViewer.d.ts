@@ -8,5 +8,5 @@ export interface IItemViewer extends LitElement {
     changeItem(item: OpenItemViewerPayload): any;
     stateChanged(state: any): any;
     incomingEvents(e: FlzEvent): any;
-    setItemViewerTopPosition(item?: OpenItemViewerPayload, headerElement?: LiveWidget): any;
+    setItemViewerTopPosition(item?: OpenItemViewerPayload, headerElement?: LitElement): any;
 }
