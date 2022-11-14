@@ -1,7 +1,7 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
 
-export type ImageGalleryTypes = "campaign" | "search" | "icon";
+export type ImageGalleryTypes = "campaign" | "search" | "icon" | "bing" | "unsplash";
 
 export enum CampaignElementsTypes {
     footer = 1,
