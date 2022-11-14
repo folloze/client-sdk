@@ -1,6 +1,6 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
-export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
+export declare type ImageGalleryTypes = "campaign" | "search" | "icon" | "bing" | "unsplash";
 export declare enum CampaignElementsTypes {
     footer = 1,
     privacy_message = 2,
