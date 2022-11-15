@@ -4,6 +4,7 @@ import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageGalleryParams,
+    ImageGalleryTypes,
     GalleryImage,
     UploadUrlResponseV1,
     FormV1,
@@ -104,7 +105,7 @@ export class Designer {
      * @param {string} query
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    public searchImageGallery(query: string, count?: number, type: ImageGalleryParams["type"] = "bing"): Promise<GalleryImage[]> {
+    public searchImageGallery(query: string, count?: number, type: ImageGalleryTypes = 'bing'): Promise<GalleryImage[]> {
         return this.getImageGallery({ type, query, count: count || 20 });
     }
 
