@@ -21,6 +21,7 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
+    photo_credit?: object;
 };
 
 export type ImageTransformation = {
