@@ -18,6 +18,7 @@ export declare type GalleryImage = {
     galleryType?: ImageGalleryTypes;
     maxWidth?: number;
     maxHeight?: number;
+    photo_credit?: object;
 };
 export declare type ImageTransformation = {
     crop: {
