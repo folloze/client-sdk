@@ -19,6 +19,7 @@ var rules = (mock) => {
     is_gated: null,
     item_source: 1,
     item_type: "snapshot",
+    presented_item_type: "snapshot",
     likes_count: 0,
     link_url: "https://www.amazon.com/",
     name: "Amazon.com. Spend less. Smile more.",

@@ -21,6 +21,8 @@ export interface GridConfig extends LiveConfig {
 export interface LoadableConfig extends LiveConfig {
     widgetTag: string; // 'folloze-header-hor' | 'header' | 'gallery' | 'banner' ...
     widgetScripts: string; // url to the widget CDN | lib
+
+    // todo: remove this field - we no longer use it
     _widgetScripts?: string; // temporary dynamically calculated field to use with the designer to load the edit scripts for the widget
 }
 
@@ -55,7 +57,7 @@ type TriggerPersistenceFields = {
 };
 
 export type TriggerPersistence = {
-    expiration: "never" | number; // number of milliseconds until it expires
+    expiration: "never" | number; // number of seconds until it expires
     // fields to be persisted under persisted.fields
     fields: TriggerPersistenceFields;
     showConditions?: {
