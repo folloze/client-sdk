@@ -18,7 +18,9 @@ export declare type GalleryImage = {
     galleryType?: ImageGalleryTypes;
     maxWidth?: number;
     maxHeight?: number;
-    photo_credit?: object;
+    photo_attribution?: object;
+    service_used?: "bing" | "unsplash";
+    secured_url?: string;
 };
 export declare type ImageTransformation = {
     crop: {
