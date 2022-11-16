@@ -21,7 +21,9 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
-    photo_credit?: object;
+    photo_attribution?: object;
+    service_used?: "bing" | "unsplash",
+    secured_url?: string
 };
 
 export type ImageTransformation = {
