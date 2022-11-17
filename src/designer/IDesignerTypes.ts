@@ -23,7 +23,7 @@ export type GalleryImage = {
     maxHeight?: number;
     photo_attribution?: object;
     service_used?: "bing" | "unsplash",
-    secured_url?: string
+    origin_url?: string
 };
 
 export type ImageTransformation = {
