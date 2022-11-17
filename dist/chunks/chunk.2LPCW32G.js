@@ -3114,9 +3114,6 @@ var CloudinaryHelper = class {
     if (image.optimized_url && !reOptimize) {
       return image.optimized_url;
     }
-    if (this.isUnsplashImage(image)) {
-      return image.origin_url;
-    }
     if (!this.isCloudinaryImage(image.url)) {
       return image.url;
     }
