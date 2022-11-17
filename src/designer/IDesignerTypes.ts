@@ -71,6 +71,9 @@ export type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    photo_attribution?: object;
+    service_used?: "bing" | "unsplash",
+    origin_url?: string
 };
 
 export type ImageGalleryParams = {
