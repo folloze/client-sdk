@@ -37,6 +37,9 @@ export type BoardConfig = {
         currentPageName?: string;
         clearCacheBefore?: string; // iso date
     };
+    theme?: {
+        id: number;
+    };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
