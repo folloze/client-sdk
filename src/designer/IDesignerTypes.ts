@@ -339,3 +339,10 @@ export type MergeTagValue = {
     id: string;
     name: string;
 }
+
+export type Theme = {
+    id: number;
+    name: string;
+    status?: string;
+    style: string;
+}
