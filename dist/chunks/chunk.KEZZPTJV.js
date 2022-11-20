@@ -3114,7 +3114,7 @@ var CloudinaryHelper = class {
     if (image.optimized_url && !reOptimize) {
       return image.optimized_url;
     }
-    if (this.isUnsplashImage(image)) {
+    if (this.isUnsplashImage(image) && !!image.origin_url) {
       return image.origin_url;
     }
     if (!this.isCloudinaryImage(image.url)) {
@@ -3169,7 +3169,7 @@ var CloudinaryHelper = class {
       try {
         const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
         const urlObj = new URL(originalUrl);
-        queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
+        queryString = this.isUnsplashImage(image) ? urlObj.search : encodeURIComponent(decodeURIComponent(urlObj.search));
       } catch (e6) {
         console.error(e6);
       }
@@ -3217,7 +3217,7 @@ var CloudinaryHelper = class {
     return this.cloudinaryUrlRegex.test(url);
   }
   isUnsplashImage(image) {
-    return image.service_used == "unsplash";
+    return !!image.service_used && image.service_used == "unsplash";
   }
 };
 

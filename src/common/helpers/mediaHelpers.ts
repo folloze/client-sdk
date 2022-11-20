@@ -59,7 +59,7 @@ export class CloudinaryHelper {
             return image.optimized_url;
         }
 
-        if(this.isUnsplashImage(image)) {
+        if(this.isUnsplashImage(image) && !!image.origin_url) {
             return image.origin_url;
         }
 
@@ -127,7 +127,7 @@ export class CloudinaryHelper {
                 // needs to be added after encoding to avoid errors
                 const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
                 const urlObj = new URL(originalUrl);
-                queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
+                queryString = this.isUnsplashImage(image) ? urlObj.search : encodeURIComponent(decodeURIComponent(urlObj.search));
             } catch (e) {
                 console.error(e);
             }
@@ -181,7 +181,7 @@ export class CloudinaryHelper {
         return this.cloudinaryUrlRegex.test(url);
     }
 
-    private isUnsplashImage(image: FlzEditableImageData | GalleryImage) {
-        return image.service_used == "unsplash";
+    isUnsplashImage(image: FlzEditableImageData | GalleryImage) {
+        return !!image.service_used && image.service_used == "unsplash";
     }
 }
