@@ -1,6 +1,6 @@
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { ImageGalleryTypes, GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue } from "./IDesignerTypes";
+import { ImageGalleryParams, ImageGalleryTypes, GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 export declare class Designer {
     private fetcher;
@@ -14,6 +14,7 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     private getImageGallery;
+    private uploadSelectedImage;
     getBannerImageGallery(): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
     getIconsImageGallery(): Promise<GalleryImage[]>;
@@ -25,6 +26,13 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     searchImageGallery(query: string, count?: number, type?: ImageGalleryTypes): Promise<GalleryImage[]>;
+    /**
+     * When uploading image after selecting it
+     *
+     * @param {ImageGalleryParams} params
+     * @returns {GalleryImager} GalleryImage
+     */
+    uploadImage(params: ImageGalleryParams): Promise<GalleryImage>;
     /**
      * Fetches all the parameters required to upload a file
      *

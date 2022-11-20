@@ -23,7 +23,8 @@ export type GalleryImage = {
     maxHeight?: number;
     photo_attribution?: object;
     service_used?: "bing" | "unsplash",
-    origin_url?: string
+    origin_url?: string,
+    error?: string
 };
 
 export type ImageTransformation = {
@@ -82,6 +83,7 @@ export type ImageGalleryParams = {
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;
+    photoId?: string;
 };
 
 export type UploadUrlResponseV1 = {

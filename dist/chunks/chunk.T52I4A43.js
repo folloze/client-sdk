@@ -34,6 +34,16 @@ var Designer = class {
       });
     });
   }
+  uploadSelectedImage(payload) {
+    return new Promise((resolve, reject) => {
+      this.fetcher.post("/api/v1/image_gallery", { params: __spreadValues({}, keysToSnakeCase(payload)) }).then((result) => {
+        resolve(result.data);
+      }).catch((e) => {
+        console.error("could not upload image", e);
+        reject(e);
+      });
+    });
+  }
   getBannerImageGallery() {
     return this.getImageGallery({
       organizationId: this.fetchService.organizationId,
@@ -64,6 +74,9 @@ var Designer = class {
   }
   searchImageGallery(query, count, type = "bing") {
     return this.getImageGallery({ type, query, count: count || 20 });
+  }
+  uploadImage(params) {
+    return this.uploadSelectedImage(params);
   }
   getImageUploadUrl(uploadType) {
     return new Promise((resolve, reject) => {

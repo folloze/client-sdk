@@ -21,6 +21,7 @@ export declare type GalleryImage = {
     photo_attribution?: object;
     service_used?: "bing" | "unsplash";
     origin_url?: string;
+    error?: string;
 };
 export declare type ImageTransformation = {
     crop: {
@@ -65,6 +66,7 @@ export declare type ImageGalleryParams = {
     organizationId?: number;
     bankCategory?: ImageBankCategoryType;
     count?: number;
+    photoId?: string;
 };
 export declare type UploadUrlResponseV1 = {
     file_name: string;

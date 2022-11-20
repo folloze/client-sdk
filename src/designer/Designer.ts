@@ -67,6 +67,20 @@ export class Designer {
         });
     }
 
+    private uploadSelectedImage(payload: ImageGalleryParams): Promise<GalleryImage> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post<GalleryImage>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not upload image", e);
+                    reject(e);
+                });
+        });
+    }
+
     public getBannerImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
@@ -107,6 +121,16 @@ export class Designer {
      */
     public searchImageGallery(query: string, count?: number, type: ImageGalleryTypes = 'bing'): Promise<GalleryImage[]> {
         return this.getImageGallery({ type, query, count: count || 20 });
+    }
+
+    /**
+     * When uploading image after selecting it
+     *
+     * @param {ImageGalleryParams} params
+     * @returns {GalleryImager} GalleryImage
+     */
+    public uploadImage(params: ImageGalleryParams): Promise<GalleryImage> {
+    return this.uploadSelectedImage(params);
     }
 
     /**

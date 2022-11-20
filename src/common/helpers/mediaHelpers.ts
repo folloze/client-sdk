@@ -59,10 +59,6 @@ export class CloudinaryHelper {
             return image.optimized_url;
         }
 
-        if(this.isUnsplashImage(image) && !!image.origin_url) {
-            return image.origin_url;
-        }
-
         if (!this.isCloudinaryImage(image.url)) {
             return image.url;
         }
