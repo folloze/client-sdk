@@ -70,7 +70,7 @@ export class Designer {
     private uploadSelectedImage(payload: ImageGalleryParams): Promise<GalleryImage> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<GalleryImage>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
+                .post<GalleryImage>("/api/v1/image_gallery", {...keysToSnakeCase(payload)})
                 .then(result => {
                     resolve(result.data);
                 })
