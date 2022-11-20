@@ -294,4 +294,10 @@ export declare type MergeTagValue = {
     id: string;
     name: string;
 };
+export declare type Theme = {
+    id: number;
+    name: string;
+    status?: string;
+    style: string;
+};
 export {};
