@@ -22,8 +22,7 @@ export type GalleryImage = {
     maxWidth?: number;
     maxHeight?: number;
     photo_attribution?: object;
-    service_used?: "bing" | "unsplash",
-    origin_url?: string,
+    gallery_service?: "bing" | "unsplash",
     error?: string
 };
 
@@ -73,7 +72,7 @@ export type FlzEditableImageData = {
     maxWidth?: number;
     maxHeight?: number;
     photo_attribution?: object;
-    service_used?: "bing" | "unsplash",
+    gallery_service?: "bing" | "unsplash",
 };
 
 export type ImageGalleryParams = {

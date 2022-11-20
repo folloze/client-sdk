@@ -178,6 +178,6 @@ export class CloudinaryHelper {
     }
 
     isUnsplashImage(image: FlzEditableImageData | GalleryImage) {
-        return !!image.service_used && image.service_used == "unsplash";
+        return !!image.gallery_service && image.gallery_service == "unsplash";
     }
 }

@@ -3214,7 +3214,7 @@ var CloudinaryHelper = class {
     return this.cloudinaryUrlRegex.test(url);
   }
   isUnsplashImage(image) {
-    return !!image.service_used && image.service_used == "unsplash";
+    return !!image.gallery_service && image.gallery_service == "unsplash";
   }
 };
 
