@@ -218,7 +218,7 @@ var rules = (mock) => {
     }
   ]);
   mock.onGet("/api/v1/image_gallery").reply((config) => {
-    if (config.params.type !== "bing" || config.params.type !== "unsplash") {
+    if (config.params.type !== "bing" && config.params.type !== "unsplash") {
       console.log(config.params.type);
       throw new Error("this mock is only for search type bing or unsplash");
     }
