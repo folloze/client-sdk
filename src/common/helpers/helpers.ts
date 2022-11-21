@@ -5,7 +5,7 @@ import {sha1} from "object-hash";
 export async function waitForFollozeScriptsToLoad(): Promise<boolean> {
     return new Promise(resolve => {
         const timeout = setTimeout(() => {
-            throw new Error("can't load folloze scripts for more then a minute!");
+            throw new Error("can't load folloze scripts for more than a minute!");
         }, 60 * 1000);
         const interval = setInterval(() => {
             if (window["follozeScriptsLoaded"]) {
