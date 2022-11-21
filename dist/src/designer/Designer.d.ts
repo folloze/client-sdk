@@ -30,7 +30,7 @@ export declare class Designer {
      * When uploading image after selecting it
      *
      * @param {ImageGalleryParams} params
-     * @returns {GalleryImager} GalleryImage
+     * @returns {GalleryImage} GalleryImage
      */
     uploadImage(params: ImageGalleryParams): Promise<GalleryImage>;
     /**
