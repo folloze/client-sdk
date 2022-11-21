@@ -5,7 +5,6 @@ import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
-import { IFloatingElement } from "../common";
 
 const supportedVideoFormats = ['mov', 'mp4', 'webm'];
 

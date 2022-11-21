@@ -321,6 +321,13 @@ export const rules = (mock: MockAdapter) => {
         ];
     });
 
+    //upload unsplash image to cloudinary upon selection
+    mock.onPost("/api/v1/image_gallery").reply<GalleryImage>(200, {
+        url: "https://images.folloze.com/image/fetch/https://images.unsplash.com/photo-1524509660263-c08bcef5cc83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzODA1NDB8MHwxfHNlYXJjaHwxfHxmZWRlcmVyfGVufDB8fHx8MTY2OTAyMjA5OA&ixlib=rb-4.0.3&q=80&w=200&utm_source=FollozeDEV&utm_medium=referral&utm_campaign=api-credit",
+        error: "",
+        fit: ""
+    }),
+
     mock.onPost("/api/v1/upload_urls").reply<UploadUrlResponseV1>(200, {
         file_name: "file_name",
         method: "post",

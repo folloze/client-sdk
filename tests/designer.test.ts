@@ -154,6 +154,10 @@ describe("testing sdk designer module", () => {
         await sdk.designer.searchImageGallery("test", 20, "unsplash").then(result => expect(result.length).toEqual(14));
     });
 
+    it("checks that upload unsplash image is working as expected", async () => {
+        await sdk.designer.uploadImage({type: "unsplash", photoId: "oKGA3376eGE"}).then(result => expect(result.url).toBeDefined());
+    });
+
     // todo(multi-pages): implement a new test for save liveboard
     it("checks that saveLiveBoard mock working as expected", async () => {
         const boardConfig: BoardConfig = {
