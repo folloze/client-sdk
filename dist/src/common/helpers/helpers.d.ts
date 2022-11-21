@@ -1,3 +1,4 @@
+export declare function waitForFollozeScriptsToLoad(): Promise<boolean>;
 export declare const keysToSnakeCase: (params: any) => any;
 export declare type FileUploadParams = {
     url: string;
