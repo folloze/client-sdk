@@ -119,7 +119,7 @@ export class Designer {
      * @param {string} query
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    public searchImageGallery(query: string, count?: number, type: ImageGalleryTypes = 'bing'): Promise<GalleryImage[]> {
+    public searchImageGallery(query: string, count?: number, type: ImageGalleryTypes = "bing"): Promise<GalleryImage[]> {
         return this.getImageGallery({ type, query, count: count || 20 });
     }
 

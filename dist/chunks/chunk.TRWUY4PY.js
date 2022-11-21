@@ -3166,7 +3166,7 @@ var CloudinaryHelper = class {
       try {
         const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
         const urlObj = new URL(originalUrl);
-        queryString = this.isUnsplashImage(image) ? urlObj.search : encodeURIComponent(decodeURIComponent(urlObj.search));
+        queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
       } catch (e6) {
         console.error(e6);
       }

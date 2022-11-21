@@ -77,7 +77,7 @@ export type FlzEditableImageData = {
 
 export type ImageGalleryParams = {
     type: ImageGalleryTypes;
-    query?: string; // search
+    query?: string; // bing / unsplash
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;

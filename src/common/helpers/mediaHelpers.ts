@@ -123,7 +123,7 @@ export class CloudinaryHelper {
                 // needs to be added after encoding to avoid errors
                 const originalUrl = image.url.split(this.cloudinaryFetchUrlRegex).pop();
                 const urlObj = new URL(originalUrl);
-                queryString = this.isUnsplashImage(image) ? urlObj.search : encodeURIComponent(decodeURIComponent(urlObj.search));
+                queryString = encodeURIComponent(decodeURIComponent(urlObj.search));
             } catch (e) {
                 console.error(e);
             }
