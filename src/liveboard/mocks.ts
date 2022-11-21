@@ -306,7 +306,7 @@ export const rules = (mock: MockAdapter) => {
         guid: "abc",
     });
 
-    mock.onPost("/live_board/v1/boards/1/session_cookies").reply<number>(200, 1);
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/session_cookies/).reply<number>(200, 1);
 
     mock.onGet(/live_board\/v2\/boards\/(\d+)\/forms\/(\d+)/).reply<FormMetadataDataV1>(200, {
         form: {

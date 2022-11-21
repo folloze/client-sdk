@@ -30,7 +30,7 @@ esbuild
         treeShaking: true,
         bundle: true,
         external: [],
-        splitting: false,
+        splitting: true,
         minify: true,
     })
     .catch(() => process.exit(1));
