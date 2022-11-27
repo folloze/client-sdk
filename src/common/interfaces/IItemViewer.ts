@@ -4,7 +4,7 @@ import {LiveWidget} from "../LiveWidget";
 import {FlzEvent} from "../FlzEvent";
 
 export interface IItemViewer extends LitElement {
-    open(item?: OpenItemViewerPayload, headerElement?: LiveWidget, isLanding?: Boolean): void;
+    open(item?: OpenItemViewerPayload, headerElement?: Promise<LiveWidget>, isLanding?: Boolean): void;
     close(): void;
     changeItem(item: OpenItemViewerPayload);
     stateChanged(state: any);
