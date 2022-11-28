@@ -100,12 +100,22 @@ export declare type CloudinaryUploadResult = {
     original_extension: string;
     api_key: string;
 };
-declare type FormField = {
+export declare type FormField = {
     label: string;
     order: number;
     placeholder: string;
     state: string;
     type: string;
+    dependent_field?: DependentField;
+    selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
+};
+declare type DependentField = {
+    name: string;
+    values: string[];
+};
+declare type SelectInputValue = {
+    id: string;
+    label: string;
 };
 export declare type FormV1 = {
     id: number;

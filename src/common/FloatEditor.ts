@@ -30,7 +30,7 @@ export class FloatEditor extends FloatingElement {
                 right: 60px;
                 font-size: 14px;
                 cursor: pointer;
-                color: var(--sys-color-neutral-500);
+                color: var(--edit-fz-color-neutral-0);
                 border: none;
                 background: none;
             }
@@ -68,7 +68,7 @@ export class FloatEditor extends FloatingElement {
 
             #body {
                 padding: var(--edit-fz-spacing-small);
-                background-color: var(--sys-color-neutral-0);
+                background-color: var(--edit-fz-color-neutral-0);
                 border-radius: 0 0 var(--edit-fz-border-radius-small) var(--edit-fz-border-radius-small);
                 max-height: 540px;
                 overflow: auto;
@@ -109,7 +109,7 @@ export class FloatEditor extends FloatingElement {
             select {
                 background: transparent;
                 border: none;
-                color: var(--sys-color-neutral-500);
+                color: var(--edit-fz-color-neutral-0);
                 outline: none;
                 padding: 0.6em;
                 margin: 0.4em;

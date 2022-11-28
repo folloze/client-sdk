@@ -51,8 +51,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-privacy-messages"
     | "get-state"
     | "is-personalization-mod"
-    | "floating-widget-manager"
-    | "header-rendered";
+    | "floating-widget-manager";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"

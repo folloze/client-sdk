@@ -2,6 +2,21 @@ import mapKeys from "lodash/mapKeys";
 import snakeCase from "lodash/snakeCase";
 import {sha1} from "object-hash";
 
+export async function waitForFollozeScriptsToLoad(): Promise<boolean> {
+    return new Promise(resolve => {
+        const timeout = setTimeout(() => {
+            throw new Error("can't load folloze scripts for more than a minute!");
+        }, 60 * 1000);
+        const interval = setInterval(() => {
+            if (window["follozeScriptsLoaded"]) {
+                clearTimeout(timeout);
+                clearInterval(interval);
+                resolve(true);
+            }
+        }, 10);
+    });
+}
+
 export const keysToSnakeCase = params => {
     return mapKeys(params, (value, key) => {
         return snakeCase(key);

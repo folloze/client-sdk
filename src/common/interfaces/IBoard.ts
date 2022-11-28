@@ -37,6 +37,9 @@ export type BoardConfig = {
         currentPageName?: string;
         clearCacheBefore?: string; // iso date
     };
+    theme?: {
+        id: number;
+    };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
@@ -71,8 +74,6 @@ export interface ILiveBoard extends LitElement {
     widgetScriptsLoadMap: Map<string, string>;
 
     getGridStyling(): string;
-    positionToGridArea(p: GridPos): string;
-    getWidgetPos(p: GridPos | FloatPos): string;
     setRows(n: number): void;
     preRender(): void;
     refresh(): void;
