@@ -21,10 +21,16 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
-    photo_attribution?: object;
+    photo_attribution?: PhotoAttribution;
     gallery_service?: "bing" | "unsplash",
     error?: string
 };
+
+declare type PhotoAttribution = {
+    url: string,
+    first_name: string,
+    last_name: string
+}
 
 export type ImageTransformation = {
     crop: {
@@ -71,7 +77,7 @@ export type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
-    photo_attribution?: object;
+    photo_attribution?: PhotoAttribution;
     gallery_service?: "bing" | "unsplash",
 };
 
