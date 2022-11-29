@@ -14,6 +14,7 @@ export * from "./helpers/PositionHelpers";
 export * from "./helpers/eventHelpers";
 export * from "./helpers/mediaHelpers";
 export * from "./helpers/JsonConditions";
+export * from "./helpers/shadowDomHelpers";
 export * from "./FlzEvent";
 export * from "./controllers/CloseOnOutSideClickController";
 export * from "./controllers/CloseOnESCController";
