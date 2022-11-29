@@ -18,9 +18,14 @@ export declare type GalleryImage = {
     galleryType?: ImageGalleryTypes;
     maxWidth?: number;
     maxHeight?: number;
-    photo_attribution?: object;
+    photo_attribution?: PhotoAttribution;
     gallery_service?: "bing" | "unsplash";
     error?: string;
+};
+declare type PhotoAttribution = {
+    url: string;
+    first_name: string;
+    last_name: string;
 };
 export declare type ImageTransformation = {
     crop: {
@@ -55,7 +60,7 @@ export declare type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
-    photo_attribution?: object;
+    photo_attribution?: PhotoAttribution;
     gallery_service?: "bing" | "unsplash";
 };
 export declare type ImageGalleryParams = {
