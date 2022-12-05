@@ -15,8 +15,14 @@ export enum EventSources {
 }
 
 const eventPlatformBySource = {
-    [EventSources.designer]: "App",
-    [EventSources.liveboard]: "Campaign"
+    [EventSources.designer]: {
+        id: 1,
+        name: "App"
+    },
+    [EventSources.liveboard]: {
+        id: 2,
+        name: "Campaign"
+    }
 };
 
 export enum LiveBoardEventTypes {
@@ -124,7 +130,7 @@ export class Analytics {
             event: {
                 id: eventId,
                 data: data,
-                platform: {} //eventPlatformBySource[source]
+                platform: { id: eventPlatformBySource[source].id, name: eventPlatformBySource[source].name }
               }
         })
             .catch(e => {
