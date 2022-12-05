@@ -46,16 +46,16 @@ export declare enum DesignerEventTypes {
     saved_personalization_changes = 290,
     discarded_personalization_changes = 291,
     change_rule_set_priority = 292,
-    add_new_section = 293,
-    add_floating_section = 294,
-    delete_section = 295,
-    delete_floating_section = 296,
-    edit_section = 297,
-    publish_board = 298,
-    enable_personalization = 299,
-    create_personalization_rule = 300,
-    preview_board = 301,
-    archive_board = 302
+    add_new_section = 325,
+    add_floating_section = 326,
+    delete_section = 327,
+    delete_floating_section = 328,
+    edit_section = 329,
+    publish_board = 330,
+    enable_personalization = 331,
+    create_personalization_rule = 332,
+    preview_board = 333,
+    archive_board = 334
 }
 export declare class Analytics {
     private fetchService;

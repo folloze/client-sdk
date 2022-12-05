@@ -124,7 +124,7 @@ export class Analytics {
             event: {
                 id: eventId,
                 data: data,
-                platform: eventPlatformBySource[source]
+                platform: {} //eventPlatformBySource[source]
               }
         })
             .catch(e => {
