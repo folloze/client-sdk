@@ -69,11 +69,7 @@ export enum DesignerEventTypes {
     delete_floating_section = 328,
     edit_section = 329,
     publish_board = 330,
-    enable_personalization = 331,
-    create_personalization_rule = 332,
-    preview_board = 333,
-    archive_board = 334
-
+    preview_board = 331,
 }
 
 export class Analytics {
