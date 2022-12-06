@@ -95,4 +95,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-is-internal-cookie-management"
     | "add-merge-tag-values"
     | "is-personalization-mod"
-    | "refresh-designer";
+    | "refresh-designer"
+    | "designer-event-tracking";
