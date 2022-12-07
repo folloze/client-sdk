@@ -2,7 +2,6 @@ import { SectionConfig } from "./ISection";
 import { FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonConfig, WidgetConfig } from "./IWidget";
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
-import { FloatPos, GridPos } from "./IPositions";
 import { IPersonalizationConfig } from "./IPersonalization";
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
@@ -71,8 +70,6 @@ export interface ILiveBoard extends LitElement {
     boardId: number;
     widgetScriptsLoadMap: Map<string, string>;
     getGridStyling(): string;
-    positionToGridArea(p: GridPos): string;
-    getWidgetPos(p: GridPos | FloatPos): string;
     setRows(n: number): void;
     preRender(): void;
     refresh(): void;

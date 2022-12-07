@@ -1,4 +1,5 @@
 import {FloatingWidgetConfig} from "../interfaces/IWidget";
+import {GridPos} from "../interfaces/IPositions";
 
 export function floatingPosStrToPercent(str) {
     const obj = {
@@ -66,6 +67,36 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
     // change origin point
     const vertical = fwc.floatPos.originPoint?.[0] || "0";
     const horizontal = fwc.floatPos.originPoint?.[1] || "0";
-    calculatedStyles += `transform: translate(${floatingPosStrToPercent(vertical)}, ${floatingPosStrToPercent(horizontal)});`;
+    calculatedStyles += `transform: translate(${floatingPosStrToPercent(vertical)}, ${floatingPosStrToPercent(
+        horizontal,
+    )});`;
     return calculatedStyles;
+}
+
+export function positionToGridArea(p: GridPos): string {
+    return `${p.rowStart} / ${p.colStart} / ${p.rowEnd} / ${p.colEnd}`;
+}
+
+export function getWidgetStyleByPosition(p: GridPos) {
+    let result = "";
+    if (p?.hasOwnProperty("rowStart")) {
+        if ((p as GridPos).hasOwnProperty("layer")) {
+            result += `z-index: ${p.layer};`;
+        }
+        if ((p as GridPos).hasOwnProperty("minHeight")) {
+            result += `min-height: ${p.minHeight};`;
+        }
+        if ((p as GridPos).hasOwnProperty("padding")) {
+            result += `--fz-tmp-padd-top: ${p.padding[0]};
+                --fz-tmp-padd-right: ${p.padding[1]};
+                --fz-tmp-padd-bottom: ${p.padding[2]};
+                --fz-tmp-padd-left: ${p.padding[3]};`;
+            // result += `padding: calc(${p.padding[0]} * var(--fz-section-padding-step))
+            //     calc(${p.padding[1]} * var(--fz-section-padding-step))
+            //     calc(${p.padding[2]} * var(--fz-section-padding-step))
+            //     calc(${p.padding[3]} * var(--fz-section-padding-step));`;
+        }
+        result += "grid-area: " + positionToGridArea(p as GridPos);
+        return result;
+    }
 }

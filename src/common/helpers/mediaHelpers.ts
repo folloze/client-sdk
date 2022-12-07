@@ -6,20 +6,20 @@ import {mode} from "@cloudinary/url-gen/actions/rotate";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 
-const supportedVideoFormats = ['mov', 'mp4', 'webm'];
+const supportedVideoFormats = ["mov", "mp4", "webm"];
 
 export class CloudinaryHelper {
     private cloudinary: Cloudinary;
     private flzImagesDomain: string = "images.folloze.com";
     private cloudinaryImagesDomain: string = "res.cloudinary.com/folloze";
     private cloudinaryUrlRegex: RegExp = new RegExp(
-        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`
+        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch|upload)/`,
     );
     private cloudinaryFetchUrlRegex: RegExp = new RegExp(
-        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`
+        `(?:((http|https):)?)//(${this.flzImagesDomain}|${this.cloudinaryImagesDomain})/(image|video).(fetch)/`,
     );
 
-    public videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.0/dist/cld-video-player.light.min.js";
+    public videoPlayerScriptUrl = "https://cdn.folloze.com/flz/vendors/cld-video-player.light.1.9.0.min.js";
 
     constructor() {
         this.cloudinary = new Cloudinary({
@@ -31,8 +31,8 @@ export class CloudinaryHelper {
                 cname: this.flzImagesDomain,
                 secure: true,
                 privateCdn: true,
-                analytics: false
-            }
+                analytics: false,
+            },
         });
     }
 
@@ -134,18 +134,22 @@ export class CloudinaryHelper {
     getPublicId(url: string) {
         const publicId = url.replace(this.cloudinaryUrlRegex, "");
         // for cases that the image is fetched from a remote url and has a queryString
-        return publicId.split('?')[0];
+        return publicId.split("?")[0];
     }
 
     private loadVideoPlayerScript() {
         return new Promise<void>((resolve, reject) => {
-            if(document.querySelector(`script[src="${this.videoPlayerScriptUrl}"]`)) {
+            if (document.querySelector(`script[src="${this.videoPlayerScriptUrl}"]`)) {
                 resolve();
             } else {
                 const script = document.createElement("script");
                 script.src = this.videoPlayerScriptUrl;
-                script.onload = () => {resolve();};
-                script.onerror = (e) => {reject(e);};
+                script.onload = () => {
+                    resolve();
+                };
+                script.onerror = e => {
+                    reject(e);
+                };
                 document.head.appendChild(script);
             }
         });
@@ -161,15 +165,16 @@ export class CloudinaryHelper {
 
         player.source(videoSource, {
             sourceTypes: supportedVideoFormats,
-            transformation
+            transformation,
         });
 
         return player;
     }
 
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options: object = {}, transformation: object = {}) {
-        return this.loadVideoPlayerScript()
-            .then(() => {return this.createVideoPlayer(url, playerElement, options, transformation);});
+        return this.loadVideoPlayerScript().then(() => {
+            return this.createVideoPlayer(url, playerElement, options, transformation);
+        });
     }
 
     private isCloudinaryImage(url: string) {
