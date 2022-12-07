@@ -15,14 +15,8 @@ export enum EventSources {
 }
 
 const eventPlatformBySource = {
-    [EventSources.designer]: {
-        id: 1,
-        name: "App"
-    },
-    [EventSources.liveboard]: {
-        id: 2,
-        name: "Campaign"
-    }
+    [EventSources.designer]: "app",
+    [EventSources.liveboard]: "campaign"
 };
 
 export enum LiveBoardEventTypes {
@@ -122,11 +116,15 @@ export class Analytics {
         data: any,
         source: EventSources
     ): Promise<AxiosResponse> {
+        const platforms = window["FollozeState"].trackingConfig.platforms;
+        const platformKey = eventPlatformBySource[source];
+        const platform = platforms?.[platformKey] || {};
+
         return this.fetchService.fetcher.post(`/${source}/v1/tracking`, {
             event: {
                 id: eventId,
                 data: data,
-                platform: { id: eventPlatformBySource[source].id, name: eventPlatformBySource[source].name }
+                platform: platform,
               }
         })
             .catch(e => {
