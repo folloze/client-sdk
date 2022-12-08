@@ -56,7 +56,6 @@ export enum DesignerEventTypes {
     saved_personalization_changes = 290,
     discarded_personalization_changes = 291,
     change_rule_set_priority = 292,
-
     add_new_section = 325,
     add_floating_section = 326,
     delete_section = 327,
@@ -66,11 +65,18 @@ export enum DesignerEventTypes {
     preview_board = 331,
 }
 
+type Platform = {
+    id: number;
+    name: "App" | "Campaign";
+}
+
 export class Analytics {
     private fetchService: FetchService;
+    private readonly platforms: Platform[];
 
     constructor(fetch: FetchService) {
         this.fetchService = fetch;
+        this.platforms = window["FollozeState"].trackingConfig.platforms;
     }
 
     /**
@@ -116,9 +122,8 @@ export class Analytics {
         data: any,
         source: EventSources
     ): Promise<AxiosResponse> {
-        const platforms = window["FollozeState"].trackingConfig.platforms;
         const platformKey = eventPlatformBySource[source];
-        const platform = platforms?.[platformKey] || {};
+        const platform = this.platforms?.[platformKey] || {};
 
         return this.fetchService.fetcher.post(`/${source}/v1/tracking`, {
             event: {

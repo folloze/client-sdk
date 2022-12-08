@@ -56,6 +56,7 @@ export declare enum DesignerEventTypes {
 }
 export declare class Analytics {
     private fetchService;
+    private readonly platforms;
     constructor(fetch: FetchService);
     /**
      * Lead viewed board
