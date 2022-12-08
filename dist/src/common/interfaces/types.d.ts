@@ -10,3 +10,4 @@ export * from "./IEvent";
 export * from "../../liveboard/ILiveboardTypes";
 export * from "./IItemViewer";
 export * from "./IPersonalization";
+export * from "./IInitialState";
