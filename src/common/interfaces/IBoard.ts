@@ -151,7 +151,7 @@ export type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    landing_page: "registration";
+    landing_page: "default" | "registration" | string;
     config: BoardConfig;
     config_info: {
         state: "draft" | "published" | "unpublished changes";
