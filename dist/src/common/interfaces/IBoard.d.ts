@@ -58,6 +58,9 @@ export declare type PageConfig = {
             rowHeight: string;
         };
     };
+    pageMeta?: {
+        skipPageIfKnownLead?: boolean;
+    };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
     ribbons: Record<string, RibbonConfig>;

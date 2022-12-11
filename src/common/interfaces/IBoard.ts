@@ -60,6 +60,10 @@ export type PageConfig = {
             rowHeight: string; // this should always be immutable "40px"
         };
     };
+    pageMeta?: {
+        // if true tells the server to skip this page to the default page if the lead is known
+        skipPageIfKnownLead?: boolean;
+    };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
     ribbons: Record<string, RibbonConfig>;
