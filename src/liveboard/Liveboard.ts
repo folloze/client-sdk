@@ -711,6 +711,30 @@ export class Liveboard {
             });
         });
     }
+    /**
+     * submit an "image with a link" click
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveImageLink(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+        return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetchService.fetcher
+                  .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/link_click`, {
+                      ...keysToSnakeCase(options),
+                  })
+                  .then(result => {
+                      resolve(result.data);
+                  })
+                  .catch(e => {
+                      console.error("could not submit cta", e);
+                      reject(e);
+                  });
+            });
+        });
+    }
 
     /**
      * submit a share CTA

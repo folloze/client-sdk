@@ -206,6 +206,14 @@ export declare class Liveboard {
      */
     saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
     /**
+     * submit an "image with a link" click
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    saveImageLink(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    /**
      * submit a share CTA
      *
      * @param {number} boardId
