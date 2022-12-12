@@ -3,6 +3,7 @@ import { DesignerEventTypes } from "../../analytics/Analytics";
 import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
+import { IPersonalizationRule } from "../interfaces/IPersonalization";
 export declare class AbstractTracker {
     payload: unknown;
     action: DesignerEventTypes;
@@ -32,7 +33,7 @@ export declare class TrackedUserPreviewBoard extends AbstractTracker {
     constructor();
 }
 export declare class TrackedUserAddPersonalizationRule extends AbstractTracker {
-    constructor(data: any);
+    constructor(rule: IPersonalizationRule);
 }
-export declare type TrackedUserEvent = TrackedUserAddSection | TrackedUserEditSection | TrackedUserDeleteSection | TrackedUserPreviewBoard | TrackedUserPublishBoard | TrackedUserDeleteFloatingWidget | TrackedUserAddFloatingWidget | TrackedUserAddPersonalizationRule;
+export declare type TrackedUserEvent = TrackedUserAddSection | TrackedUserEditSection | TrackedUserEditComponent | TrackedUserDeleteSection | TrackedUserPreviewBoard | TrackedUserPublishBoard | TrackedUserDeleteFloatingWidget | TrackedUserAddFloatingWidget | TrackedUserAddPersonalizationRule;
 export declare function trackEvent(el: LitElement, trackedUserEvent: TrackedUserEvent): void;

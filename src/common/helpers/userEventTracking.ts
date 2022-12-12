@@ -4,6 +4,7 @@ import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
 import { editorEmit } from "./eventHelpers";
+import { IPersonalizationRule } from "../interfaces/IPersonalization";
 
 export class AbstractTracker {
     public payload: unknown;
@@ -98,13 +99,16 @@ export class TrackedUserPreviewBoard extends AbstractTracker {
     }
 }
 
-export class TrackedUserAddPersonalizationRule extends AbstractTracker { //widgetTag, widgetTitle, sectionName?
-    constructor(data) {
+export class TrackedUserAddPersonalizationRule extends AbstractTracker {
+    constructor(rule: IPersonalizationRule) {
         super();
 
-        this.action = DesignerEventTypes.added_rule;
+        this.action = DesignerEventTypes.add_personalization_rule_from_designer;
         this.payload = {
-            // widgetTag:, widgetTitle, sectionName?
+            rule: {
+                attribute_id: rule.mergeTagId,
+                attribute_values: rule.mergeTagValues,
+            }
         };
     }
 }
@@ -112,6 +116,7 @@ export class TrackedUserAddPersonalizationRule extends AbstractTracker { //widge
 export type TrackedUserEvent =
     TrackedUserAddSection
     | TrackedUserEditSection
+    | TrackedUserEditComponent
     | TrackedUserDeleteSection
     | TrackedUserPreviewBoard
     | TrackedUserPublishBoard
