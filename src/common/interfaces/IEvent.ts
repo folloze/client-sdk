@@ -96,4 +96,4 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "add-merge-tag-values"
     | "is-personalization-mod"
     | "refresh-designer"
-    | "designer-event-tracking";
+    | "track-user-event";

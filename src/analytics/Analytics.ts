@@ -63,6 +63,8 @@ export enum DesignerEventTypes {
     edit_section = 329,
     publish_board = 330,
     preview_board = 331,
+    edit_editable_component = 332,
+    add_personalization_rule_from_designer = 333
 }
 
 type Platform = {

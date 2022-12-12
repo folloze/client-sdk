@@ -52,7 +52,9 @@ export declare enum DesignerEventTypes {
     delete_floating_section = 328,
     edit_section = 329,
     publish_board = 330,
-    preview_board = 331
+    preview_board = 331,
+    edit_editable_component = 332,
+    add_personalization_rule_from_designer = 333
 }
 export declare class Analytics {
     private fetchService;
