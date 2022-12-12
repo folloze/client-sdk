@@ -45,10 +45,20 @@ export declare enum DesignerEventTypes {
     changed_block_title = 286,
     saved_personalization_changes = 290,
     discarded_personalization_changes = 291,
-    change_rule_set_priority = 292
+    change_rule_set_priority = 292,
+    add_new_section = 325,
+    add_floating_section = 326,
+    delete_section = 327,
+    delete_floating_section = 328,
+    edit_section = 329,
+    publish_board = 330,
+    preview_board = 331,
+    edit_editable_component = 332,
+    add_personalization_rule_from_designer = 333
 }
 export declare class Analytics {
     private fetchService;
+    private readonly platforms;
     constructor(fetch: FetchService);
     /**
      * Lead viewed board

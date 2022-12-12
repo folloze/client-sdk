@@ -15,8 +15,8 @@ export enum EventSources {
 }
 
 const eventPlatformBySource = {
-    [EventSources.designer]: "App",
-    [EventSources.liveboard]: "Campaign"
+    [EventSources.designer]: "app",
+    [EventSources.liveboard]: "campaign"
 };
 
 export enum LiveBoardEventTypes {
@@ -56,13 +56,29 @@ export enum DesignerEventTypes {
     saved_personalization_changes = 290,
     discarded_personalization_changes = 291,
     change_rule_set_priority = 292,
+    add_new_section = 325,
+    add_floating_section = 326,
+    delete_section = 327,
+    delete_floating_section = 328,
+    edit_section = 329,
+    publish_board = 330,
+    preview_board = 331,
+    edit_editable_component = 332,
+    add_personalization_rule_from_designer = 333
+}
+
+type Platform = {
+    id: number;
+    name: "App" | "Campaign";
 }
 
 export class Analytics {
     private fetchService: FetchService;
+    private readonly platforms: Platform[];
 
     constructor(fetch: FetchService) {
         this.fetchService = fetch;
+        this.platforms = window["FollozeState"].trackingConfig.platforms;
     }
 
     /**
@@ -108,11 +124,14 @@ export class Analytics {
         data: any,
         source: EventSources
     ): Promise<AxiosResponse> {
+        const platformKey = eventPlatformBySource[source];
+        const platform = this.platforms?.[platformKey] || {};
+
         return this.fetchService.fetcher.post(`/${source}/v1/tracking`, {
             event: {
                 id: eventId,
                 data: data,
-                platform: eventPlatformBySource[source]
+                platform: platform,
               }
         })
             .catch(e => {
