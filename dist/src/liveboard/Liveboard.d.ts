@@ -212,7 +212,7 @@ export declare class Liveboard {
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveImageLink(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
+    trackImageLinkClick(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1>;
     /**
      * submit a share CTA
      *
