@@ -712,13 +712,13 @@ export class Liveboard {
         });
     }
     /**
-     * submit an "image with a link" click
+     * tracks a "a link click" by a lead
      *
      * @param {number} boardId
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    trackImageLinkClick(boardId: number, options: ImageLinkClickParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+    trackLinkClick(boardId: number, options: ImageLinkClickParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
