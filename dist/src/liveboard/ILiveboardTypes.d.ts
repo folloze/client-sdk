@@ -249,6 +249,11 @@ export declare type CtaResponseV1 = {
     company?: string;
     group_user: boolean;
 };
+export declare type ImageLinkClickParams = {
+    url: string;
+    target_type: "inline" | "new_tab";
+    area?: string;
+};
 export declare type GeoLocationResponseV1 = {
     city: string;
     continent: string;

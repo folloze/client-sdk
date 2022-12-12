@@ -280,6 +280,12 @@ export type CtaResponseV1 = {
     group_user: boolean;
 };
 
+export type ImageLinkClickParams = {
+    url: string;
+    target_type: "inline" | "new_tab";
+    area?: string;
+}
+
 export type GeoLocationResponseV1 = {
     city: string;
     continent: string;

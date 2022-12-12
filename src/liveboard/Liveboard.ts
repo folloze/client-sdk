@@ -27,7 +27,7 @@ import {
     CampaignElementDataV2,
     CtaParams,
     CtaResponseV1,
-    EnrichmentBoardConfigV3,
+    EnrichmentBoardConfigV3, ImageLinkClickParams
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 
@@ -718,7 +718,7 @@ export class Liveboard {
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    trackImageLinkClick(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
+    trackImageLinkClick(boardId: number, options: ImageLinkClickParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
