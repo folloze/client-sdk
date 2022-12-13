@@ -60,6 +60,10 @@ export type PageConfig = {
             rowHeight: string; // this should always be immutable "40px"
         };
     };
+    pageMeta?: {
+        // if true tells the server to skip this page to the default page if the lead is known
+        skipPageIfKnownLead?: boolean;
+    };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
     ribbons: Record<string, RibbonConfig>;
@@ -151,7 +155,7 @@ export type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    landing_page: "registration";
+    landing_page: "default" | "registration" | string;
     config: BoardConfig;
     config_info: {
         state: "draft" | "published" | "unpublished changes";

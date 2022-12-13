@@ -3,10 +3,11 @@ import { OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
 import { LiveWidget } from "../LiveWidget";
 import { FlzEvent } from "../FlzEvent";
 export interface IItemViewer extends LitElement {
-    open(item?: OpenItemViewerPayload, headerElement?: LiveWidget, isLanding?: Boolean): void;
+    open(item?: OpenItemViewerPayload): void;
     close(): void;
     changeItem(item: OpenItemViewerPayload): any;
     stateChanged(state: any): any;
     incomingEvents(e: FlzEvent): any;
-    setItemViewerTopPosition(item?: OpenItemViewerPayload, headerElement?: LitElement): any;
+    setItemViewerTopPosition(item?: OpenItemViewerPayload): any;
+    headerLoadedPromise: Promise<LiveWidget>;
 }

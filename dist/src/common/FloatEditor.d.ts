@@ -10,6 +10,7 @@ export declare class FloatEditor extends FloatingElement {
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit);
     disconnectedCallback(): void;
     protected firstUpdated(_changedProperties: any): void;
+    getChildEl(): LiveWidgetEdit | LiveWidgetComponentEdit;
     highlight(): void;
     removeHighlight(): void;
     render(): import("lit-html").TemplateResult<1>;

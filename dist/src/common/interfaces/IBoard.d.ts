@@ -58,6 +58,9 @@ export declare type PageConfig = {
             rowHeight: string;
         };
     };
+    pageMeta?: {
+        skipPageIfKnownLead?: boolean;
+    };
     sections: Record<string, SectionConfig>;
     widgets: Record<string, WidgetConfig>;
     ribbons: Record<string, RibbonConfig>;
@@ -138,7 +141,7 @@ export declare type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    landing_page: "registration";
+    landing_page: "default" | "registration" | string;
     config: BoardConfig;
     config_info: {
         state: "draft" | "published" | "unpublished changes";

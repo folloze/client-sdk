@@ -152,6 +152,10 @@ export class FloatEditor extends FloatingElement {
         super.firstUpdated(_changedProperties);
     }
 
+    public getChildEl(): LiveWidgetEdit | LiveWidgetComponentEdit {
+        return this.childEl;
+    }
+
     highlight() {
         if (this.childEl.widget) {
             this.childEl.widget.classList.add("highlight");
