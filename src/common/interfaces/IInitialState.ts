@@ -15,7 +15,7 @@ export type InitialState = {
     };
     locale: string; // "en-US"
     session_guid: string; // needs to be in all requests to the server in header: "folloze-session-guid"
-    data_service_configuration: DataEnrichmentConfig;
+    data_service_configuration?: DataEnrichmentConfig;
     itemViewerData?: OpenItemViewerPayload; // in case we land on item viewer
 
     // if exists we should replace pii (personal identifiable information) url parameters & add the token to url

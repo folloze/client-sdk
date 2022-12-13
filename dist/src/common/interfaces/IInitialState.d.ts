@@ -13,7 +13,7 @@ export declare type InitialState = {
     };
     locale: string;
     session_guid: string;
-    data_service_configuration: DataEnrichmentConfig;
+    data_service_configuration?: DataEnrichmentConfig;
     itemViewerData?: OpenItemViewerPayload;
     token?: string;
     sections?: Section[];
