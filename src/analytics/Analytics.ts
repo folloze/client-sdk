@@ -9,16 +9,6 @@ export type PingPayload = {
     guid: string;
 }
 
-export enum EventSources {
-    designer = "api",
-    liveboard = "live_board"
-}
-
-const eventPlatformBySource = {
-    [EventSources.designer]: "app",
-    [EventSources.liveboard]: "campaign"
-};
-
 export enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
@@ -67,18 +57,11 @@ export enum DesignerEventTypes {
     add_personalization_rule_from_designer = 333
 }
 
-type Platform = {
-    id: number;
-    name: "App" | "Campaign";
-}
-
 export class Analytics {
     private fetchService: FetchService;
-    private readonly platforms: Platform[];
 
     constructor(fetch: FetchService) {
         this.fetchService = fetch;
-        this.platforms = window["FollozeState"].trackingConfig.platforms;
     }
 
     /**
@@ -113,31 +96,49 @@ export class Analytics {
     }
 
     /**
-     * Tracks an event
+     * Tracks an event - only in designer
      *
-     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that accured
+     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
-     * @param {EventSources} source where the event happened
      */
-    trackEvent(
+    trackUserEvent(
         eventId: LiveBoardEventTypes|DesignerEventTypes,
-        data: any,
-        source: EventSources
+        data: any
     ): Promise<AxiosResponse> {
-        const platformKey = eventPlatformBySource[source];
-        const platform = this.platforms?.[platformKey] || {};
-
-        return this.fetchService.fetcher.post(`/${source}/v1/tracking`, {
+        return this.fetchService.fetcher.post(`/api/v1/tracking`, {
             event: {
                 id: eventId,
                 data: data,
-                platform: platform,
+                platform: { id: 1, name: "App" },
               }
         })
             .catch(e => {
                 console.error("could not track action", e);
                 throw e;
             });
+    }
+
+    /**
+     * Tracks an event - only in liveboard
+     *
+     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
+     * @param {any} data the data to report
+     */
+    trackLeadEvent(
+      eventId: LiveBoardEventTypes|DesignerEventTypes,
+      data: any,
+    ): Promise<AxiosResponse> {
+        return this.fetchService.fetcher.post(`/live_board/v1/tracking`, {
+            event: {
+                id: eventId,
+                data: data,
+                platform: { id: 2, name: "Campaign" },
+            }
+        })
+          .catch(e => {
+              console.error("could not track action", e);
+              throw e;
+          });
     }
 
     sendPing(payload: PingPayload) {

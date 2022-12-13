@@ -1,5 +1,5 @@
 import {describe, expect, beforeAll} from "@jest/globals";
-import {DesignerEventTypes, EventSources, LiveBoardEventTypes} from "../src/analytics/Analytics";
+import {DesignerEventTypes, LiveBoardEventTypes} from "../src/analytics/Analytics";
 import {ClientSDK} from "../src/sdk";
 
 let sdk: ClientSDK;
@@ -23,13 +23,13 @@ describe("testing analytics module", () => {
 
     it("checks that trackEvent mock works as expected for liveboard", async () => {
         await sdk.analytics
-            .trackEvent(LiveBoardEventTypes.changed_category, {}, EventSources.liveboard)
+            .trackLeadEvent(LiveBoardEventTypes.changed_category, {})
             .then(result => expect(result).toBeNull);
     });
 
     it("checks that trackEvent mock works as expected for designer", async () => {
         await sdk.analytics
-            .trackEvent(DesignerEventTypes.clicked_on_search_image, {}, EventSources.designer)
+            .trackUserEvent(DesignerEventTypes.clicked_on_search_image, {})
             .then(result => expect(result).toBeNull);
     });
 

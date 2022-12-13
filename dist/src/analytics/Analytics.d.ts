@@ -6,10 +6,6 @@ export declare type PingPayload = {
     itemId?: number;
     guid: string;
 };
-export declare enum EventSources {
-    designer = "api",
-    liveboard = "live_board"
-}
 export declare enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
@@ -58,7 +54,6 @@ export declare enum DesignerEventTypes {
 }
 export declare class Analytics {
     private fetchService;
-    private readonly platforms;
     constructor(fetch: FetchService);
     /**
      * Lead viewed board
@@ -74,13 +69,19 @@ export declare class Analytics {
      */
     trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
     /**
-     * Tracks an event
+     * Tracks an event - only in designer
      *
-     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that accured
+     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
-     * @param {EventSources} source where the event happened
      */
-    trackEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any, source: EventSources): Promise<AxiosResponse>;
+    trackUserEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
+    /**
+     * Tracks an event - only in liveboard
+     *
+     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
+     * @param {any} data the data to report
+     */
+    trackLeadEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
