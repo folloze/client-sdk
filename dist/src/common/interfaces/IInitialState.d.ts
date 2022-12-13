@@ -13,10 +13,7 @@ export declare type InitialState = {
     };
     locale: string;
     session_guid: string;
-    data_service?: {
-        type: DataProviders;
-        api_key: string;
-    };
+    data_service_configuration: DataEnrichmentConfig;
     itemViewerData?: OpenItemViewerPayload;
     token?: string;
     sections?: Section[];
@@ -43,6 +40,10 @@ export declare type InitialState = {
         items?: Record<string, ItemResponseV2>;
     };
     contact_card_info: ContactCardInfo;
+};
+export declare type DataEnrichmentConfig = {
+    type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+    api_key: string;
 };
 export interface Organization {
     id: number;
