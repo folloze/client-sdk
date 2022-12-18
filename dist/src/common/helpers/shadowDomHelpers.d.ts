@@ -13,4 +13,4 @@ export declare function destroyTunnelToLightDom(host: Element, slotId: string): 
  * @param slotId - the id used to create the slotted tunnel between shadow roots (usually the widgetId)
  */
 export declare function createTunnelToLightDom(host: Element, html: DocumentFragment, slotId: string): void;
-export declare function findAncestorElement(selector: string, base: Element): any;
+export declare function findAncestorElement(selector: string, base: Element): Element | null;

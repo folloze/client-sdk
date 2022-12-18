@@ -1,4 +1,4 @@
-export function appendParamsToUrl(targetUrl) {
+export function appendParamsToUrl(targetUrl): string {
   const currentQueryString = removeQueryParams(window.location.search, "query");
   const params = new URLSearchParams(currentQueryString);
 
@@ -10,7 +10,7 @@ export function appendParamsToUrl(targetUrl) {
   return urlWithQuery.toString();
 }
 
-export function removeQueryParams(url:string, paramToRemove: string) {
+export function removeQueryParams(url:string, paramToRemove: string): string {
   const queryString = url.replace("?", "&");
   const result = queryString.replace(new RegExp(`&${paramToRemove}=[^&]*`), "" );
   return result.replace("&", "?");

@@ -62,7 +62,7 @@ const tunnelToLightDomRecursion = (
     }
 };
 
-export function findAncestorElement(selector: string, base: Element) {
+export function findAncestorElement(selector: string, base: Element): Element | null {
     function findClosest(el) {
         if (!el || el === document || el === window) {
             return null;
