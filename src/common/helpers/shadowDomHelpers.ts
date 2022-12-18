@@ -61,3 +61,21 @@ const tunnelToLightDomRecursion = (
         tunnelToLightDomRecursion(parent.host, html, slotId, shadowElArr);
     }
 };
+
+export function findAncestorElement(selector: string, base: Element) {
+    function findClosest(el) {
+        if (!el || el === document || el === window) {
+            return null;
+        }
+
+        const found = el.closest(selector);
+
+        if (found) {
+            return found;
+        } else {
+            return findClosest(el.getRootNode().host);
+        }
+    }
+
+    return findClosest(base);
+}
