@@ -249,9 +249,10 @@ export declare type CtaResponseV1 = {
     company?: string;
     group_user: boolean;
 };
+export declare type TargetType = "inline" | "new_tab";
 export declare type ImageLinkClickParams = {
     url: string;
-    target_type: "inline" | "new_tab";
+    target_type: TargetType;
     area?: string;
 };
 export declare type GeoLocationResponseV1 = {

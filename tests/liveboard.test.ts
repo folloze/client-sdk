@@ -13,6 +13,11 @@ const ctaParams = {
     type: "message",
 };
 
+// const linkClickParams = {
+//     url: "www.cnn.com",
+//     target_type: TargetType
+// };
+
 describe("test liveboard mocks module", () => {
     beforeAll(async () => {
         sdk = await ClientSDK.create({useMock: true, organizationId: 1});
@@ -202,6 +207,12 @@ describe("testing liveboard module in preview", () => {
         await sdk.liveboard.saveLinkCta(1, ctaParams).then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
+
+    // it("checks that trackLinkCta mock works as expected", async () => {
+    //     const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+    //     await sdk.liveboard.trackLinkClick(1, linkClickParams).then(result => expect(result.status).toEqual(200));
+    //     expect(spy).not.toHaveBeenCalled();
+    // });
 
     it("checks that saveShareCta mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");

@@ -21,13 +21,13 @@ describe("testing analytics module", () => {
         expect(spy).toHaveBeenCalled();
     });
 
-    it("checks that trackEvent mock works as expected for liveboard", async () => {
+    it("checks that trackLeadEvent mock works as expected for liveboard", async () => {
         await sdk.analytics
             .trackLeadEvent(LiveBoardEventTypes.changed_category, {})
             .then(result => expect(result).toBeNull);
     });
 
-    it("checks that trackEvent mock works as expected for designer", async () => {
+    it("checks that trackUserEvent mock works as expected for designer", async () => {
         await sdk.analytics
             .trackUserEvent(DesignerEventTypes.clicked_on_search_image, {})
             .then(result => expect(result).toBeNull);

@@ -280,9 +280,11 @@ export type CtaResponseV1 = {
     group_user: boolean;
 };
 
+export type TargetType = "inline" | "new_tab";
+
 export type ImageLinkClickParams = {
     url: string;
-    target_type: "inline" | "new_tab";
+    target_type: TargetType;
     area?: string;
 }
 
