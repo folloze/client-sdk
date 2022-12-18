@@ -2,6 +2,7 @@ import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
 import {AxiosResponse} from "axios";
 import {EnrichmentBoardConfigV3} from "../src";
+import { TargetType } from "../src";
 
 let sdk: ClientSDK;
 
@@ -13,10 +14,11 @@ const ctaParams = {
     type: "message",
 };
 
-// const linkClickParams = {
-//     url: "www.cnn.com",
-//     target_type: TargetType
-// };
+
+const linkClickParams = {
+    url: "www.cnn.com",
+    target_type: "new_tab" as TargetType
+};
 
 describe("test liveboard mocks module", () => {
     beforeAll(async () => {
@@ -208,11 +210,11 @@ describe("testing liveboard module in preview", () => {
         expect(spy).not.toHaveBeenCalled();
     });
 
-    // it("checks that trackLinkCta mock works as expected", async () => {
-    //     const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-    //     await sdk.liveboard.trackLinkClick(1, linkClickParams).then(result => expect(result.status).toEqual(200));
-    //     expect(spy).not.toHaveBeenCalled();
-    // });
+    it("checks that trackLinkCta mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.liveboard.trackLinkClick(1, linkClickParams).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
 
     it("checks that saveShareCta mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
