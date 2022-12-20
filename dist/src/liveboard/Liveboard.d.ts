@@ -225,9 +225,7 @@ export declare class Liveboard {
     /**
      * get Domain logo
      *
-     * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {DomainLogoResponse} CtaResponse
+     * @returns {DomainLogoResponse}
      */
     getDomainLogo(): Promise<DomainLogoResponse>;
 }
