@@ -789,7 +789,7 @@ export class Liveboard {
     getDomainLogo(): Promise<DomainLogoResponse> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .get(`/live_board/v3/accounts/logo`)
+                .get("/live_board/v1/logos")
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get domain logo", e);
