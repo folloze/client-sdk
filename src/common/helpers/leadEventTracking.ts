@@ -6,12 +6,17 @@ export class AbstractLeadTracker {
 }
 
 export class TrackedLeadLinkClick extends AbstractLeadTracker {
-    constructor(data) {
+    constructor(payload) {
         super();
 
         this.payload = {
-            section_name: data.sectionName,
-            widget_tag: data.widgetTag,
+            url: payload.url,
+            targetType: payload.targetType,
+            details: {
+                sectionName: payload.details.sectionName,
+                widgetTag: payload.details.widgetTag
+            },
+            onResolve: payload.onResolve
         };
     }
 }
