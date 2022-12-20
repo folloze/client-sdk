@@ -334,3 +334,7 @@ export type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+
+export type DomainLogoResponse = {
+    logo: string | null
+}

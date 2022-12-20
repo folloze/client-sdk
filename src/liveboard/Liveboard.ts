@@ -28,6 +28,7 @@ import {
     CtaParams,
     CtaResponseV1,
     EnrichmentBoardConfigV3,
+    DomainLogoResponse
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 
@@ -777,5 +778,25 @@ export class Liveboard {
                 });
         };
         return this.fetchService.withPartialContent(func, 500, 20) as Promise<EnrichmentBoardConfigV3>;
+    }
+
+    /**
+     * get Domain logo
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {DomainLogoResponse} CtaResponse
+     */
+
+    getDomainLogo(): Promise<DomainLogoResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get(`/live_board/v3/accounts/logo`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get domain logo", e);
+                    reject(e);
+                });
+        });
     }
 }
