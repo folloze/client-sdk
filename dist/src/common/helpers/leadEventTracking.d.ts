@@ -2,8 +2,17 @@ import { LitElement } from "lit";
 export declare class AbstractLeadTracker {
     payload: unknown;
 }
+export declare type TrackedLeadLinkClickPayload = {
+    url: string;
+    targetType: string;
+    details: {
+        sectionName: string;
+        widgetTag: string;
+    };
+    onResolve: () => {};
+};
 export declare class TrackedLeadLinkClick extends AbstractLeadTracker {
-    constructor(payload: any);
+    constructor(payload: TrackedLeadLinkClickPayload);
 }
-export declare type TrackedLeadEvent = any;
-export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: any): void;
+export declare type TrackedLeadEvent = TrackedLeadLinkClick;
+export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent): void;

@@ -5,8 +5,18 @@ export class AbstractLeadTracker {
     public payload: unknown;
 }
 
+export type TrackedLeadLinkClickPayload = {
+    url: string;
+    targetType: string;
+    details: {
+        sectionName: string;
+        widgetTag: string;
+    },
+    onResolve: () => {}
+}
+
 export class TrackedLeadLinkClick extends AbstractLeadTracker {
-    constructor(payload) {
+    constructor(payload: TrackedLeadLinkClickPayload) {
         super();
 
         this.payload = {
@@ -21,8 +31,8 @@ export class TrackedLeadLinkClick extends AbstractLeadTracker {
     }
 }
 
-export type TrackedLeadEvent = any;
+export type TrackedLeadEvent = TrackedLeadLinkClick;
 
-export function trackLeadEvent(el: LitElement, trackedLeadEvent: any) {
+export function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent) {
     componentEmit(el, "track-image-link-click", { trackedLeadEvent });
 }
