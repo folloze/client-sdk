@@ -295,4 +295,7 @@ export declare type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+export declare type DomainLogoResponse = {
+    logo: string | null;
+};
 export {};
