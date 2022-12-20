@@ -15,10 +15,7 @@ export type InitialState = {
     };
     locale: string; // "en-US"
     session_guid: string; // needs to be in all requests to the server in header: "folloze-session-guid"
-    data_service?: {
-        type: DataProviders;
-        api_key: string;
-    };
+    data_service_configuration?: DataEnrichmentConfig;
     itemViewerData?: OpenItemViewerPayload; // in case we land on item viewer
 
     // if exists we should replace pii (personal identifiable information) url parameters & add the token to url
@@ -49,6 +46,12 @@ export type InitialState = {
     };
     contact_card_info: ContactCardInfo;
 };
+
+export type DataEnrichmentConfig = {
+  type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+  api_key: string;
+};
+
 
 export interface Organization {
     id: number;
