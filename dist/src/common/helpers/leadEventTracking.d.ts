@@ -9,7 +9,7 @@ export declare type TrackedLeadLinkClickPayload = {
         sectionName: string;
         widgetTag: string;
     };
-    onResolve?: () => {};
+    onResolve?: () => void;
 };
 export declare class TrackedLeadLinkClick extends AbstractLeadTracker {
     constructor(payload: TrackedLeadLinkClickPayload);
