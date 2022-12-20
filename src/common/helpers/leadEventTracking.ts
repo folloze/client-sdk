@@ -11,10 +11,10 @@ export class TrackedLeadLinkClick extends AbstractLeadTracker {
 
         this.payload = {
             url: payload.url,
-            targetType: payload.targetType,
+            target_type: payload.targetType,
             details: {
-                sectionName: payload.details.sectionName,
-                widgetTag: payload.details.widgetTag
+                section_name: payload.details.sectionName,
+                widget_tag: payload.details.widgetTag
             },
             onResolve: payload.onResolve
         };
