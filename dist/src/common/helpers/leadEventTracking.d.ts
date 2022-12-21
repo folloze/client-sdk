@@ -1,6 +1,6 @@
 import { LitElement } from "lit";
 import { TargetType } from "../../liveboard/ILiveboardTypes";
-declare type TrackedLeadActions = "track-lead-link-click";
+declare type TrackedLeadActions = "lead-link-click";
 export declare class AbstractLeadTracker {
     payload: unknown;
     action: TrackedLeadActions;
@@ -12,7 +12,6 @@ export declare type TrackedLeadLinkClickPayload = {
         sectionName: string;
         widgetTag: string;
     };
-    onResolve?: () => void;
 };
 export declare class TrackedLeadLinkClick extends AbstractLeadTracker {
     constructor(payload: TrackedLeadLinkClickPayload);
