@@ -787,14 +787,16 @@ export class Liveboard {
      */
 
     getDomainLogo(): Promise<DomainLogoResponse> {
-        return new Promise((resolve, reject) => {
+        const func = (resolve, reject) => {
             this.fetchService.fetcher
-                .get("/live_board/v1/logos")
-                .then(result => resolve(result.data))
-                .catch(e => {
-                    console.error("could not get domain logo", e);
-                    reject(e);
-                });
-        });
+            .get("/live_board/v1/logos")
+            .then(result => resolve(result.data))
+            .catch(e => {
+                console.error("could not get domain logo", e);
+                reject(e);
+            });
+        };
+
+        return this.fetchService.withDisableOnPreview(func) as Promise<DomainLogoResponse>;
     }
 }
