@@ -4,6 +4,8 @@
  * @param host - the shadow dom elements that initiated the light dom tunnel
  * @param slotId - the id used to connect the tunnel between elements (usually the widgetId)
  */
+import { LiveWidget } from "../LiveWidget";
+
 export function destroyTunnelToLightDom(host: Element, slotId: string) {
     const parent = host.getRootNode() as ShadowRoot | Document;
     parent.querySelector(`slot[name=${slotId}]`)?.remove();
@@ -62,13 +64,13 @@ const tunnelToLightDomRecursion = (
     }
 };
 
-export function findAncestorElement(selector: string, base: Element): Element | null {
+export function findAncestorWidget(base: Element): LiveWidget | undefined {
     function findClosest(el) {
         if (!el || el === document || el === window) {
-            return null;
+            return undefined;
         }
 
-        const found = el.closest(selector);
+        const found = isElementWidget(el);
 
         if (found) {
             return found;
@@ -78,4 +80,12 @@ export function findAncestorElement(selector: string, base: Element): Element | 
     }
 
     return findClosest(base);
+}
+
+export function isElementWidget(el: HTMLElement): boolean {
+    return el.id && el.classList.contains("widget");
+}
+
+export function isElementFollozeWidget(el: HTMLElement): boolean {
+    return el.id && el.tagName?.startsWith("FLZ-") && isElementWidget(el);
 }

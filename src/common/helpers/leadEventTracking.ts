@@ -1,13 +1,18 @@
 import {LitElement} from "lit";
-import { componentEmit, emit } from "./eventHelpers";
+import { componentEmit } from "./eventHelpers";
+import { TargetType } from "../../liveboard/ILiveboardTypes";
+
+type TrackedLeadActions = "track-lead-link-click"
 
 export class AbstractLeadTracker {
     public payload: unknown;
+    public action: TrackedLeadActions;
+
 }
 
 export type TrackedLeadLinkClickPayload = {
     url: string;
-    targetType: string;
+    targetType: TargetType
     details: {
         sectionName: string;
         widgetTag: string;
@@ -34,5 +39,5 @@ export class TrackedLeadLinkClick extends AbstractLeadTracker {
 export type TrackedLeadEvent = TrackedLeadLinkClick;
 
 export function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent) {
-    componentEmit(el, "track-image-link-click", { trackedLeadEvent });
+    componentEmit(el, "track-lead-event", { trackedLeadEvent });
 }
