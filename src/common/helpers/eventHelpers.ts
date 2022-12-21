@@ -7,7 +7,7 @@ import {LiveFloatingWidget} from "../LiveFloatingWidget";
 // todo: overload all Events_Actions - "get-lead" example, maybe there is a better way?
 type ExcludedAction = Exclude<
     FLZ_LIVEBOARD_EVENT_ACTION,
-    "get-lead" & "get-all-categories" & "floating-widget-manager"
+    "get-lead" & "get-all-categories" & "floating-widget-manager" & "get-domain-logo"
 >;
 export function widgetEmit(
     el: LitElement,
