@@ -70,10 +70,8 @@ export function findAncestorWidget(base: Element): LiveWidget | undefined {
             return undefined;
         }
 
-        const found = isElementWidget(el);
-
-        if (found) {
-            return found;
+        if (isElementWidget(el)) {
+            return el;
         } else {
             return findClosest(el.getRootNode().host);
         }
