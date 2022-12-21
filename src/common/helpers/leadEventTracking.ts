@@ -7,7 +7,6 @@ type TrackedLeadActions = "track-lead-link-click"
 export class AbstractLeadTracker {
     public payload: unknown;
     public action: TrackedLeadActions;
-
 }
 
 export type TrackedLeadLinkClickPayload = {
@@ -38,6 +37,6 @@ export class TrackedLeadLinkClick extends AbstractLeadTracker {
 
 export type TrackedLeadEvent = TrackedLeadLinkClick;
 
-export function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent) {
-    componentEmit(el, "track-lead-event", { trackedLeadEvent });
+export function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent, onSuccess?: Function, onError?: Function) {
+    componentEmit(el, "track-lead-event", { trackedLeadEvent }, onSuccess, onError);
 }

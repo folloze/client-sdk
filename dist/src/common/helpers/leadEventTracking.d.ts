@@ -18,5 +18,5 @@ export declare class TrackedLeadLinkClick extends AbstractLeadTracker {
     constructor(payload: TrackedLeadLinkClickPayload);
 }
 export declare type TrackedLeadEvent = TrackedLeadLinkClick;
-export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent): void;
+export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent, onSuccess?: Function, onError?: Function): void;
 export {};
