@@ -2,7 +2,7 @@ import {LitElement} from "lit";
 import { componentEmit } from "./eventHelpers";
 import { TargetType } from "../../liveboard/ILiveboardTypes";
 
-type TrackedLeadActions = "track-lead-link-click"
+type TrackedLeadActions = "lead-link-click"
 
 export class AbstractLeadTracker {
     public payload: unknown;
@@ -15,8 +15,7 @@ export type TrackedLeadLinkClickPayload = {
     details: {
         sectionName: string;
         widgetTag: string;
-    },
-    onResolve?: () => void;
+    }
 }
 
 export class TrackedLeadLinkClick extends AbstractLeadTracker {
@@ -29,9 +28,9 @@ export class TrackedLeadLinkClick extends AbstractLeadTracker {
             details: {
                 section_name: payload.details.sectionName,
                 widget_tag: payload.details.widgetTag
-            },
-            onResolve: payload.onResolve
+            }
         };
+        this.action = "lead-link-click";
     }
 }
 
