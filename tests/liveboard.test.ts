@@ -172,6 +172,10 @@ describe("test liveboard mocks module", () => {
             .getEnrichment(1)
             .then((result: EnrichmentBoardConfigV3) => expect(result.personalization_rules_results).toBeDefined());
     });
+
+    it("checks that getDomainLogo mock works as expected", async () => {
+        await sdk.liveboard.getDomainLogo().then(result => expect(result.logo).toEqual("logo"));
+    });
 });
 
 describe("testing liveboard module in preview", () => {
@@ -213,6 +217,14 @@ describe("testing liveboard module in preview", () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.liveboard
             .saveShareByEmailCta(1, "email@company.com", 1234)
+            .then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
+    it("checks that getDomainLogo mock works as expected", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "get");
+        await sdk.liveboard
+            .getDomainLogo()
             .then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });

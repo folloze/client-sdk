@@ -23,6 +23,7 @@ import {
     FormMetadataDataV1,
     CampaignElementDataV2,
     CtaResponseV1,
+    DomainLogoResponse,
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -506,5 +507,9 @@ export const rules = (mock: MockAdapter) => {
     mock.onGet(/live_board\/v3\/boards\/(\d+)\/board_configuration/).reply<any>(200, {
         board_configuration: undefined,
         personalization_rules_results: {},
+    });
+
+    mock.onGet("/live_board/v1/logos").reply<DomainLogoResponse>(200, {
+        logo: "logo"
     });
 };

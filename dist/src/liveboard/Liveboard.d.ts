@@ -227,5 +227,5 @@ export declare class Liveboard {
      *
      * @returns {DomainLogoResponse}
      */
-    getDomainLogo(): Promise<DomainLogoResponse>;
+    getDomainLogo(): Promise<AxiosResponse> | Promise<DomainLogoResponse>;
 }
