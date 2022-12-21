@@ -51,7 +51,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-privacy-messages"
     | "get-state"
     | "is-personalization-mod"
-    | "floating-widget-manager";
+    | "floating-widget-manager"
+    | "get-domain-logo";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"
@@ -96,4 +97,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "add-merge-tag-values"
     | "is-personalization-mod"
     | "refresh-designer"
-    | "track-user-event";
+    | "track-user-event"
+    | "get-domain-logo";
