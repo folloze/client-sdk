@@ -220,6 +220,13 @@ describe("testing liveboard module in preview", () => {
         expect(spy).not.toHaveBeenCalled();
     });
 
+    /** Un comment this test when liveboard testing in preview work */
+    // it("checks that trackLinkCta mock works as expected", async () => {
+    //     const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+    //     await sdk.liveboard.trackLinkClick(1, {...linkClickParams, targetType: null} ).then(result => expect(result.status).toEqual(200));
+    //     expect(spy).not.toHaveBeenCalled();
+    // });
+
     it("checks that saveShareCta mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.liveboard.saveShareCta(1, ctaParams).then(result => expect(result.status).toEqual(200));

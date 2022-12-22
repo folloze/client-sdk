@@ -265,6 +265,7 @@ export declare type LeadResponseV1 = {
     company: string;
     anon_guest: boolean;
 };
+export declare type LeadLinkClickResponseV1 = {};
 export declare type LiveEventUrlsResponseV2 = {
     meeting_url?: string;
     api_params?: {

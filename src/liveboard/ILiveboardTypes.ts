@@ -299,6 +299,8 @@ export type LeadResponseV1 = {
     anon_guest: boolean;
 };
 
+export type LeadLinkClickResponseV1 = {}
+
 export type LiveEventUrlsResponseV2 = {
     meeting_url?: string; //stream
     //zoom
