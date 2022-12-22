@@ -1,7 +1,7 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
 import {AxiosResponse} from "axios";
-import {EnrichmentBoardConfigV3} from "../src";
+import { EnrichmentBoardConfigV3 } from "../src";
 import { TargetType } from "../src";
 
 let sdk: ClientSDK;
@@ -17,7 +17,11 @@ const ctaParams = {
 
 const linkClickParams = {
     url: "www.cnn.com",
-    target_type: "new_tab" as TargetType
+    targetType: "new_tab" as TargetType,
+    details: {
+        sectionName: 'test section name',
+        widgetTag: 'test widget type'
+    },
 };
 
 describe("test liveboard mocks module", () => {

@@ -22,14 +22,7 @@ export class TrackedLeadLinkClick extends AbstractLeadTracker {
     constructor(payload: TrackedLeadLinkClickPayload) {
         super();
 
-        this.payload = {
-            url: payload.url,
-            target_type: payload.targetType,
-            details: {
-                section_name: payload.details.sectionName,
-                widget_tag: payload.details.widgetTag
-            }
-        };
+        this.payload =  payload;
         this.action = "lead-link-click";
     }
 }

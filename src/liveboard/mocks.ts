@@ -490,6 +490,16 @@ export const rules = (mock: MockAdapter) => {
         group_user: false,
     });
 
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link_click/).reply<CtaResponseV1>(200, {
+        id: 1,
+        email: "email@company.com",
+        name: "name",
+        last_name: "lastname",
+        anon_guest: false,
+        company: null,
+        group_user: false,
+    });
+
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share/).reply<CtaResponseV1>(200, {
         id: 1,
         name: "name",

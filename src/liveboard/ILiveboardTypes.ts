@@ -282,12 +282,6 @@ export type CtaResponseV1 = {
 
 export type TargetType = "inline" | "new_tab";
 
-export type ImageLinkClickParams = {
-    url: string;
-    target_type: TargetType;
-    area?: string;
-}
-
 export type GeoLocationResponseV1 = {
     city: string;
     continent: string;
