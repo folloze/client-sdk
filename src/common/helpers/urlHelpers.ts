@@ -1,4 +1,4 @@
-export function appendParamsToUrl(targetUrl): string {
+export function appendParamsToUrl(targetUrl: string): string {
   const currentQueryString = removeQueryParams(window.location.search, "query");
   const params = new URLSearchParams(currentQueryString);
 
