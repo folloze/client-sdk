@@ -180,4 +180,8 @@ export class CloudinaryHelper {
     private isCloudinaryImage(url: string) {
         return this.cloudinaryUrlRegex.test(url);
     }
+
+    isUnsplashImage(image: FlzEditableImageData | GalleryImage) {
+        return !!image.gallery_service && image.gallery_service == "unsplash";
+    }
 }

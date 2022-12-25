@@ -249,10 +249,11 @@ export const rules = (mock: MockAdapter) => {
         },
     ]);
 
-    // search
+    // search bing/unsplash
     mock.onGet("/api/v1/image_gallery").reply<GalleryImage[]>((config): [number, Object] => {
-        if (config.params.type !== "search") {
-            throw new Error("this mock is only for search type query");
+        if ((config.params.type !== "bing" && config.params.type !== "unsplash")) {
+            console.log(config.params.type);
+            throw new Error("this mock is only for search type bing or unsplash");
         }
         if (!config.params.query) {
             throw new Error("there is no query attached to this request");
@@ -319,6 +320,13 @@ export const rules = (mock: MockAdapter) => {
             ],
         ];
     });
+
+    //upload unsplash image to cloudinary upon selection
+    mock.onPost("/api/v1/image_gallery").reply<GalleryImage>(200, {
+        url: "https://images.folloze.com/image/fetch/https://images.unsplash.com/photo-1524509660263-c08bcef5cc83?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzODA1NDB8MHwxfHNlYXJjaHwxfHxmZWRlcmVyfGVufDB8fHx8MTY2OTAyMjA5OA&ixlib=rb-4.0.3&q=80&w=200&utm_source=FollozeDEV&utm_medium=referral&utm_campaign=api-credit",
+        error: "",
+        fit: ""
+    }),
 
     mock.onPost("/api/v1/upload_urls").reply<UploadUrlResponseV1>(200, {
         file_name: "file_name",

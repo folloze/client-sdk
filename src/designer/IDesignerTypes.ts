@@ -1,7 +1,7 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
 
-export type ImageGalleryTypes = "campaign" | "search" | "icon";
+export type ImageGalleryTypes = "campaign" | "search" | "icon" | "bing" | "unsplash";
 
 export enum CampaignElementsTypes {
     footer = 1,
@@ -21,7 +21,16 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
+    photo_attribution?: PhotoAttribution;
+    gallery_service?: "bing" | "unsplash",
+    error?: string
 };
+
+declare type PhotoAttribution = {
+    url: string,
+    first_name: string,
+    last_name: string
+}
 
 export type ImageTransformation = {
     crop: {
@@ -68,14 +77,17 @@ export type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    photo_attribution?: PhotoAttribution;
+    gallery_service?: "bing" | "unsplash",
 };
 
 export type ImageGalleryParams = {
     type: ImageGalleryTypes;
-    query?: string; // search
+    query?: string; // search in bing / unsplash
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;
+    photoId?: string;
 };
 
 export type UploadUrlResponseV1 = {

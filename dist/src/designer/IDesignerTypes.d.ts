@@ -1,6 +1,6 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
-export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
+export declare type ImageGalleryTypes = "campaign" | "search" | "icon" | "bing" | "unsplash";
 export declare enum CampaignElementsTypes {
     footer = 1,
     privacy_message = 2,
@@ -18,6 +18,14 @@ export declare type GalleryImage = {
     galleryType?: ImageGalleryTypes;
     maxWidth?: number;
     maxHeight?: number;
+    photo_attribution?: PhotoAttribution;
+    gallery_service?: "bing" | "unsplash";
+    error?: string;
+};
+declare type PhotoAttribution = {
+    url: string;
+    first_name: string;
+    last_name: string;
 };
 export declare type ImageTransformation = {
     crop: {
@@ -52,6 +60,8 @@ export declare type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    photo_attribution?: PhotoAttribution;
+    gallery_service?: "bing" | "unsplash";
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
@@ -59,6 +69,7 @@ export declare type ImageGalleryParams = {
     organizationId?: number;
     bankCategory?: ImageBankCategoryType;
     count?: number;
+    photoId?: string;
 };
 export declare type UploadUrlResponseV1 = {
     file_name: string;

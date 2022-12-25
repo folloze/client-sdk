@@ -14,4 +14,5 @@ export declare class CloudinaryHelper {
     private createVideoPlayer;
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
     private isCloudinaryImage;
+    isUnsplashImage(image: FlzEditableImageData | GalleryImage): boolean;
 }
