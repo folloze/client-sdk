@@ -14,7 +14,6 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     private getImageGallery;
-    private uploadSelectedImage;
     getBannerImageGallery(): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
     getIconsImageGallery(): Promise<GalleryImage[]>;
@@ -27,12 +26,12 @@ export declare class Designer {
      */
     searchImageGallery(query: string, count?: number, type?: ImageGalleryTypes): Promise<GalleryImage[]>;
     /**
-     * When uploading image after selecting it
+     * When uploading 3rd party image (unsplash) after selecting it
      *
      * @param {ImageGalleryParams} params
      * @returns {GalleryImage} GalleryImage
      */
-    uploadImage(params: ImageGalleryParams): Promise<GalleryImage>;
+    uploadThirdPartyGalleryImage(params: ImageGalleryParams): Promise<GalleryImage>;
     /**
      * Fetches all the parameters required to upload a file
      *
