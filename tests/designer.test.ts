@@ -155,7 +155,7 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that upload unsplash image is working as expected", async () => {
-        await sdk.designer.uploadImage({type: "unsplash", photoId: "oKGA3376eGE"}).then(result => expect(result.url).toBeDefined());
+        await sdk.designer.uploadThirdPartyGalleryImage({type: "unsplash", photoId: "oKGA3376eGE"}).then(result => expect(result.url).toBeDefined());
     });
 
     // todo(multi-pages): implement a new test for save liveboard
