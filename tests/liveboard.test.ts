@@ -1,7 +1,6 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
-import {AxiosResponse} from "axios";
-import {EnrichmentBoardConfigV3} from "../src";
+import { EnrichmentBoardConfigV3 } from "../src";
 
 let sdk: ClientSDK;
 

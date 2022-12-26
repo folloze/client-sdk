@@ -280,6 +280,8 @@ export type CtaResponseV1 = {
     group_user: boolean;
 };
 
+export type TargetType = "inline" | "new_tab";
+
 export type GeoLocationResponseV1 = {
     city: string;
     continent: string;
@@ -296,6 +298,8 @@ export type LeadResponseV1 = {
     company: string;
     anon_guest: boolean;
 };
+
+export type LeadLinkClickResponseV1 = {}
 
 export type LiveEventUrlsResponseV2 = {
     meeting_url?: string; //stream

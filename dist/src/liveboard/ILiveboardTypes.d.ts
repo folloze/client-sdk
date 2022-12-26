@@ -249,6 +249,7 @@ export declare type CtaResponseV1 = {
     company?: string;
     group_user: boolean;
 };
+export declare type TargetType = "inline" | "new_tab";
 export declare type GeoLocationResponseV1 = {
     city: string;
     continent: string;
@@ -264,6 +265,7 @@ export declare type LeadResponseV1 = {
     company: string;
     anon_guest: boolean;
 };
+export declare type LeadLinkClickResponseV1 = {};
 export declare type LiveEventUrlsResponseV2 = {
     meeting_url?: string;
     api_params?: {

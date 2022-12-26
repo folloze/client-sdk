@@ -22,7 +22,7 @@ import {
     SessionResponseV1,
     FormMetadataDataV1,
     CampaignElementDataV2,
-    CtaResponseV1,
+    CtaResponseV1, LeadLinkClickResponseV1
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -480,6 +480,19 @@ export const rules = (mock: MockAdapter) => {
         group_user: false,
     });
 
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link_click/).reply<LeadLinkClickResponseV1>(request => {
+        let response = {};
+        let status = 200;
+
+        const payload = JSON.parse(request.data);
+
+        if (!payload.target_type || !payload.url) {
+            status = 400;
+        }
+
+        return [status, response];
+    });
+
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link/).reply<CtaResponseV1>(200, {
         id: 1,
         email: "email@company.com",
@@ -489,6 +502,8 @@ export const rules = (mock: MockAdapter) => {
         company: null,
         group_user: false,
     });
+
+
 
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share/).reply<CtaResponseV1>(200, {
         id: 1,

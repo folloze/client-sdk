@@ -27,9 +27,10 @@ import {
     CampaignElementDataV2,
     CtaParams,
     CtaResponseV1,
-    EnrichmentBoardConfigV3,
+    EnrichmentBoardConfigV3, LeadLinkClickResponseV1
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
+import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
 
 export class Liveboard {
     private fetchService: FetchService;
@@ -708,6 +709,30 @@ export class Liveboard {
                         console.error("could not submit cta", e);
                         reject(e);
                     });
+            });
+        });
+    }
+    /**
+     * tracks a "a link click" by a lead
+     *
+     * @param {number} boardId
+     * @param {CtaParams} options
+     * @returns {CtaResponseV1} CtaResponse
+     */
+    trackLinkClick(boardId: number, options: TrackedLeadLinkClickPayload): Promise<AxiosResponse> | Promise<LeadLinkClickResponseV1> {
+        return this.fetchService.withDisableOnPreview((): Promise<LeadLinkClickResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetchService.fetcher
+                  .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/link_click`, {
+                      ...keysToSnakeCase(options),
+                  })
+                  .then(result => {
+                      resolve(result);
+                  })
+                  .catch(e => {
+                      console.error("could not submit cta", e);
+                      reject(e);
+                  });
             });
         });
     }
