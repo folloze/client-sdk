@@ -1,10 +1,8 @@
-import {ItemResponseV2, LeadResponseV1, OpenItemViewerPayload} from "../../liveboard/ILiveboardTypes";
-import {Board, BoardConfig} from "./IBoard";
-import {PredefinedSection} from "./ISection";
-
-export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
-
-export type InitialState = {
+import { ItemResponseV2, LeadResponseV1, OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
+import { Board, BoardConfig } from "./IBoard";
+import { PredefinedSection } from "./ISection";
+export declare type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+export declare type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
     layout: BoardConfig;
@@ -13,14 +11,11 @@ export type InitialState = {
         privacy_warning_provider?: string;
         disable_share_button_on_board?: boolean;
     };
-    locale: string; // "en-US"
-    session_guid: string; // needs to be in all requests to the server in header: "folloze-session-guid"
+    locale: string;
+    session_guid: string;
     data_service_configuration?: DataEnrichmentConfig;
-    itemViewerData?: OpenItemViewerPayload; // in case we land on item viewer
-
-    // if exists we should replace pii (personal identifiable information) url parameters & add the token to url
+    itemViewerData?: OpenItemViewerPayload;
     token?: string;
-
     sections?: Section[];
     org_header_config: {
         logo: {
@@ -46,13 +41,10 @@ export type InitialState = {
     };
     contact_card_info: ContactCardInfo;
 };
-
-export type DataEnrichmentConfig = {
-  type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
-  api_key: string;
+export declare type DataEnrichmentConfig = {
+    type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+    api_key: string;
 };
-
-
 export interface Organization {
     id: number;
     name: string;
@@ -86,7 +78,6 @@ export interface Organization {
     integrations: Integrations;
     privacy: Privacy;
 }
-
 export interface User {
     id: number;
     name: string;
@@ -119,7 +110,6 @@ export interface User {
     organization_system_role: string;
     can_use_u3: boolean;
 }
-
 export interface Section {
     category: string;
     description: string;
@@ -128,7 +118,6 @@ export interface Section {
     config: PredefinedSection;
     type: string;
 }
-
 export interface Footer {
     id: number;
     element_id: number;
@@ -149,7 +138,6 @@ export interface Footer {
     tracking_consent?: any;
     is_disabled?: any;
 }
-
 export interface PrivacyMessage {
     id: number;
     element_id: number;
@@ -162,7 +150,6 @@ export interface PrivacyMessage {
     link: string;
     can_close: boolean;
 }
-
 export interface Lead {
     id: number;
     name: string;
@@ -172,7 +159,6 @@ export interface Lead {
     anon_guest: boolean;
     group_user: boolean;
 }
-
 export interface Integrations {
     ga?: unknown;
     eloqua?: unknown;
@@ -181,21 +167,18 @@ export interface Integrations {
     marketo?: unknown;
     allow_append_params?: unknown;
 }
-
 export interface Privacy {
     cookie_management: string;
     privacy_warning_check: boolean;
     regulated_countries_only: boolean;
     all_boards_external: boolean;
 }
-
 export interface NotFoundPageConfiguration {
     logo: string;
     is_enabled?: any;
     company_url: string;
     organization_name: string;
 }
-
 export interface Permissions {
     change_custom_domain: boolean;
     items_limit: boolean;
@@ -222,7 +205,6 @@ export interface Permissions {
     };
     bot_detection: boolean;
 }
-
 export interface ContactCardInfo {
     id: number;
     name: string;
@@ -255,14 +237,12 @@ export interface ContactCardInfo {
     organization_system_role: string;
     can_use_u3: boolean;
 }
-
 export interface BioSettings {
     email: boolean;
     content: string;
     twitter: boolean;
     linkedin: boolean;
 }
-
 export interface Permissions2 {
     can_edit_sfdc: boolean;
     edit_domain_settings: boolean;
