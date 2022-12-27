@@ -96,7 +96,7 @@ export class CloudinaryHelper {
             }
         }
         if(sharp) {
-            cldImage.effect(sharpen());
+            cldImage.adjust(sharpen());
         }
         if (maxWidth || maxHeight) {
             const sizeTransformation = limitFill();
