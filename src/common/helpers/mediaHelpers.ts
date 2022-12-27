@@ -68,6 +68,10 @@ export class CloudinaryHelper {
         const cldImage = this.getImage(image);
         const isSvg = cldImage.toURL().endsWith(".svg");
 
+        if(sharp) {
+            cldImage.adjust(sharpen());
+        }
+
         if (image.transformation?.flipY) {
             cldImage.rotate(mode(verticalFlip()));
         }
@@ -94,9 +98,6 @@ export class CloudinaryHelper {
                 cldImage.resize(fitTransformation);
                 cldImage.format("auto").quality("auto");
             }
-        }
-        if(sharp) {
-            cldImage.adjust(sharpen());
         }
         if (maxWidth || maxHeight) {
             const sizeTransformation = limitFill();
