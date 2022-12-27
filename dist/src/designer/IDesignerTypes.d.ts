@@ -18,6 +18,7 @@ export declare type GalleryImage = {
     galleryType?: ImageGalleryTypes;
     maxWidth?: number;
     maxHeight?: number;
+    sharp?: boolean;
 };
 export declare type ImageTransformation = {
     crop: {
@@ -52,6 +53,7 @@ export declare type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    sharp?: boolean;
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;

@@ -21,6 +21,7 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
+    sharp?:boolean;
 };
 
 export type ImageTransformation = {
@@ -68,6 +69,7 @@ export type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    sharp?:boolean;
 };
 
 export type ImageGalleryParams = {
