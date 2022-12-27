@@ -3,8 +3,10 @@ import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
+import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
+
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
@@ -46,6 +48,7 @@ export class CloudinaryHelper {
         maxWidth?: number,
         maxHeight?: number,
         reOptimize: boolean = false,
+        sharp?: boolean,
     ): string {
         if (typeof image === "string") {
             image = {
@@ -91,6 +94,9 @@ export class CloudinaryHelper {
                 cldImage.resize(fitTransformation);
                 cldImage.format("auto").quality("auto");
             }
+        }
+        if(sharp) {
+            cldImage.effect(sharpen());
         }
         if (maxWidth || maxHeight) {
             const sizeTransformation = limitFill();
