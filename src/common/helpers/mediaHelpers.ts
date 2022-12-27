@@ -7,7 +7,6 @@ import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 
-
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
 export class CloudinaryHelper {
