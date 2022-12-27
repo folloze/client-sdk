@@ -69,7 +69,7 @@ export class CloudinaryHelper {
         const isSvg = cldImage.toURL().endsWith(".svg");
 
         if(sharp) {
-            cldImage.effect(sharpen());
+            cldImage.adjust(sharpen());
         }
 
         if (image.transformation?.flipY) {
