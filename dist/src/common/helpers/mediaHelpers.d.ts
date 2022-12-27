@@ -8,7 +8,7 @@ export declare class CloudinaryHelper {
     videoPlayerScriptUrl: string;
     constructor();
     getImage(image: FlzEditableImageData | GalleryImage): import("@cloudinary/url-gen/assets/CloudinaryImage").CloudinaryImage;
-    getTransformedUrl(image: FlzEditableImageData | GalleryImage, maxWidth?: number, maxHeight?: number, reOptimize?: boolean): string;
+    getTransformedUrl(image: FlzEditableImageData | GalleryImage, maxWidth?: number, maxHeight?: number, reOptimize?: boolean, sharp?: boolean): string;
     getPublicId(url: string): string;
     private loadVideoPlayerScript;
     private createVideoPlayer;
