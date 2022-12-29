@@ -4,7 +4,14 @@
   "globals": {
     "ts-jest": {
       "useEsm": "true",
-      "compiler": "typescript"
+      "compiler": "typescript",
+      "transformIgnorePatterns": [
+        "node_modules/(?!@cloudinary)"
+      ],
+      "transform": {
+        "^.+\\.(ts|tsx)?$": "ts-jest",
+        "^.+\\.(js|jsx)$": "babel-jest"
+      }
     }
   }
 }
