@@ -9,11 +9,9 @@ import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
-export class cloudinaryUrlBuilder {
+export class CloudinaryUrlBuilder {
     private image: FlzEditableImageData | GalleryImage;
     private isOptimized: boolean;
-    private cldImage: CloudinaryImage;
-    private isSvg: boolean;
     private _maxWidth: number;
     private _maxHeight: number;
     private sharp: boolean;
@@ -22,22 +20,22 @@ export class cloudinaryUrlBuilder {
         this.image = image;
     }
 
-    optimize(): cloudinaryUrlBuilder {
+    optimize(): CloudinaryUrlBuilder {
         this.isOptimized = true;
         return this;
     }
 
-    sharpen(): cloudinaryUrlBuilder {
+    sharpen(): CloudinaryUrlBuilder {
         this.sharp = true;
         return this;
     }
 
-    maxWidth(width: number): cloudinaryUrlBuilder {
+    maxWidth(width: number): CloudinaryUrlBuilder {
         this._maxWidth = width;
         return this;
     }
 
-    maxHeight(height: number): cloudinaryUrlBuilder {
+    maxHeight(height: number): CloudinaryUrlBuilder {
         this._maxHeight = height;
         return this;
     }
@@ -143,13 +141,21 @@ export class CloudinaryHelper {
         return this.cloudinary.image(cldImageId);
     }
 
+    // PLEASE NOTE - from now on use the
+    /**
+     * @deprecated - please use CloudinaryUrlBuilder class instead
+     * @param image
+     * @param maxWidth
+     * @param maxHeight
+     * @param reOptimize
+     */
     getTransformedUrl(
         image: FlzEditableImageData | GalleryImage,
         maxWidth?: number,
         maxHeight?: number,
         reOptimize: boolean = false,
     ): string {
-        const img = new cloudinaryUrlBuilder(image);
+        const img = new CloudinaryUrlBuilder(image);
         if (maxWidth) {
             img.maxWidth(maxWidth);
         }
