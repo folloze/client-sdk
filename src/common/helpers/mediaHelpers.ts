@@ -3,6 +3,7 @@ import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
+import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
@@ -59,6 +60,10 @@ export class CloudinaryUrlBuilder {
 
         const cldImage = CloudinaryHelper.getImage(this.image);
         const isSvg = cldImage.toURL().endsWith(".svg");
+
+        if(this.sharp) {
+            cldImage.adjust(sharpen());
+        }
 
         if (this.image.transformation?.flipY) {
             cldImage.rotate(mode(verticalFlip()));
