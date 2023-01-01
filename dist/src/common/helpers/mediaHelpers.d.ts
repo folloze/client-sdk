@@ -9,8 +9,8 @@ export declare class CloudinaryUrlBuilder {
     constructor(image: FlzEditableImageData | GalleryImage);
     optimize(): CloudinaryUrlBuilder;
     sharpen(): CloudinaryUrlBuilder;
-    maxWidth(width: number): CloudinaryUrlBuilder;
-    maxHeight(height: number): CloudinaryUrlBuilder;
+    maxWidth(width: number | undefined): CloudinaryUrlBuilder;
+    maxHeight(height: number | undefined): CloudinaryUrlBuilder;
     toString(): string;
 }
 export declare class CloudinaryHelper {

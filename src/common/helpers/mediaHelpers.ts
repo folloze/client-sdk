@@ -31,12 +31,12 @@ export class CloudinaryUrlBuilder {
         return this;
     }
 
-    maxWidth(width: number): CloudinaryUrlBuilder {
+    maxWidth(width: number | undefined): CloudinaryUrlBuilder {
         this._maxWidth = width;
         return this;
     }
 
-    maxHeight(height: number): CloudinaryUrlBuilder {
+    maxHeight(height: number | undefined): CloudinaryUrlBuilder {
         this._maxHeight = height;
         return this;
     }

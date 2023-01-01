@@ -75,8 +75,8 @@ describe("cloudinary helpers tests", () => {
 type TestData = {
     result: string;
     params: {
-        maxWidth?: number;
-        maxHeight?: number;
+        maxWidth?: number | undefined;
+        maxHeight?: number | undefined;
         optimize?: boolean;
         sharpen?: boolean;
     };
