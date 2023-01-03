@@ -481,7 +481,7 @@ export const rules = (mock: MockAdapter) => {
     });
 
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/link_click/).reply<LeadLinkClickResponseV1>(request => {
-        let response = {};
+        const response = {};
         let status = 200;
 
         const payload = JSON.parse(request.data);
