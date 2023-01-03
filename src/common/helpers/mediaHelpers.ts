@@ -1,4 +1,10 @@
-import { DirectionPosition, FlzEditableImageData, GalleryImage, PercentPosition } from "../../designer/IDesignerTypes";
+import {
+    BackgroundVideo,
+    DirectionPosition,
+    FlzEditableImageData,
+    GalleryImage,
+    PercentPosition
+} from "../../designer/IDesignerTypes";
 import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
@@ -7,6 +13,8 @@ import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
+import { BackgroundColor } from "@cloudinary/url-gen/actions/background/actions/BackgroundColor";
+import { BackgroundImage } from "../interfaces/ISection";
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
@@ -272,6 +280,18 @@ export class CloudinaryHelper {
 
     getVideoThumbnail(url: string): string {
         return url.substr(0,url.lastIndexOf(".")) + ".jpg";
+    }
+
+    isBackgroundColor(background: any): background is BackgroundColor {
+        return !!(background && typeof background === "string");
+    }
+
+    isBackgroundImage(background: any): background is BackgroundImage {
+        return !!(background && typeof background === "object" && background?.image);
+    }
+
+    isBackgroundVideo(background: any): background is BackgroundVideo {
+        return !!(background && typeof background === "object" && background?.video);
     }
 
     public static isCloudinaryImage(url: string) {

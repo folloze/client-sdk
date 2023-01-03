@@ -88,7 +88,8 @@ export declare type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
-export declare type BackgroundColor = string;
+export declare type BackgroundString = string;
+export declare type BackgroundLayer = "color" | "image" | "video";
 export declare type VideoBankCategoryType = "videos";
 export declare type UploadUrlResponseV1 = {
     file_name: string;

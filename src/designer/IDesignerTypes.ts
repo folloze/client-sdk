@@ -130,10 +130,9 @@ export type BackgroundVideo = {
     position: string;
 };
 
-export type BackgroundColor = string;
-
+export type BackgroundString = string;
+export type BackgroundLayer = "color" | "image" | "video";
 export type VideoBankCategoryType = "videos";
-
 
 export type UploadUrlResponseV1 = {
     file_name: string;
