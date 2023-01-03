@@ -1,6 +1,7 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
 export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
+export declare type VideoGalleryTypes = "video";
 export declare enum CampaignElementsTypes {
     footer = 1,
     privacy_message = 2,
@@ -18,6 +19,15 @@ export declare type GalleryImage = {
     galleryType?: ImageGalleryTypes;
     maxWidth?: number;
     maxHeight?: number;
+};
+export declare type GalleryVideo = {
+    url: string;
+    fit: string;
+    optimized_url?: string;
+    id?: number;
+    displayable_section?: string;
+    transformation?: VideoTransformation;
+    viewed?: boolean;
 };
 export declare type ImageTransformation = {
     crop: {
@@ -40,6 +50,8 @@ export declare type ImageTransformation = {
     };
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
+export declare type DirectionPosition = "north" | "north_west" | "north_east" | "west" | "center" | "east" | "south" | "south_west" | "south_east";
+export declare type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 export declare type FlzEditableImageData = {
     url: string;
@@ -60,6 +72,24 @@ export declare type ImageGalleryParams = {
     bankCategory?: ImageBankCategoryType;
     count?: number;
 };
+export declare type VideoGalleryParams = {
+    type: VideoGalleryTypes;
+    query?: string;
+    organizationId?: number;
+    bankCategory?: VideoBankCategoryType;
+    count?: number;
+};
+export declare type FlzEditableVideoData = {
+    url: string;
+    optimized_url?: string;
+    transformation?: VideoTransformation;
+};
+export declare type BackgroundVideo = {
+    video: FlzEditableVideoData;
+    position: string;
+};
+export declare type BackgroundColor = string;
+export declare type VideoBankCategoryType = "videos";
 export declare type UploadUrlResponseV1 = {
     file_name: string;
     method: string;
@@ -70,6 +100,12 @@ export declare type UploadUrlResponseV1 = {
     };
     get_url: string;
     put_url: string;
+};
+export declare type VideoTransformation = {
+    tint?: {
+        color: string;
+        alpha: number;
+    };
 };
 export declare type CloudinaryUploadResult = {
     asset_id: string;

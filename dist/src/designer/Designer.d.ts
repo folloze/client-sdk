@@ -1,6 +1,6 @@
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue } from "./IDesignerTypes";
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 export declare class Designer {
     private fetcher;
@@ -14,6 +14,7 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     private getImageGallery;
+    getVideosGallery(): Promise<GalleryVideo[]>;
     getBannerImageGallery(): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
     getIconsImageGallery(): Promise<GalleryImage[]>;

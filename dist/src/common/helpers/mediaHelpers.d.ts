@@ -13,5 +13,7 @@ export declare class CloudinaryHelper {
     private loadVideoPlayerScript;
     private createVideoPlayer;
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
+    getOptimizedVideoUrl(url: string, _position: string): string;
+    getVideoThumbnail(url: string): string;
     private isCloudinaryImage;
 }

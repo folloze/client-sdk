@@ -19,7 +19,7 @@ import {
     ConfigSavedConflict,
     ConfigSavedSuccess,
     MergeTagAttribute,
-    MergeTagValue
+    MergeTagValue, VideoGalleryParams, GalleryVideo
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 
@@ -52,7 +52,7 @@ export class Designer {
      * @param {ImageGalleryParams} payload
      * @returns {GalleryImage[]} an array of GalleryImage
      */
-    private getImageGallery(payload: ImageGalleryParams): Promise<GalleryImage[]> {
+    private getImageGallery(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get<GalleryImage[]>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
@@ -63,6 +63,14 @@ export class Designer {
                     console.error("could not get image gallery", e);
                     reject(e);
                 });
+        });
+    }
+
+    public getVideosGallery(): Promise<GalleryVideo[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "videos",
+            type: "video",
         });
     }
 

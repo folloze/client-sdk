@@ -1,4 +1,9 @@
-import {FlzEditableImageData, GalleryImage} from "../../designer/IDesignerTypes";
+import {
+    DirectionPosition,
+    FlzEditableImageData,
+    GalleryImage,
+    PercentPosition,
+} from "../../designer/IDesignerTypes";
 import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
@@ -175,6 +180,33 @@ export class CloudinaryHelper {
         return this.loadVideoPlayerScript().then(() => {
             return this.createVideoPlayer(url, playerElement, options, transformation);
         });
+    }
+
+    getOptimizedVideoUrl(url: string, _position: string): string {
+        const lookupMap: Record<PercentPosition, DirectionPosition> = {
+            "0% 0%": "north_west",
+            "50% 0%": "north",
+            "100% 0%": "north_east",
+            "0% 50%": "west",
+            "50% 50%": "center",
+            "100% 50%": "east",
+            "0% 100%": "south_west",
+            "50% 100%": "south",
+            "100% 100%": "south_east"
+        };
+
+        const positionAsDirection = lookupMap[_position];
+
+        const parts = url.split("/upload/");
+        const DEVICE_OPTIMIZATION = "q_auto";
+        const position = `c_fill,g_${positionAsDirection},h_688,w_1432`;
+        const optimizedUrl = parts[0] + `/upload/${DEVICE_OPTIMIZATION}/${position}/` + parts[1];
+
+        return optimizedUrl;
+    }
+
+    getVideoThumbnail(url: string): string {
+        return url.substr(0,url.lastIndexOf(".")) + ".jpg";
     }
 
     private isCloudinaryImage(url: string) {
