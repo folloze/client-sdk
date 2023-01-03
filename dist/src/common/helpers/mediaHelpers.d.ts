@@ -1,6 +1,5 @@
-import { BackgroundVideo, FlzEditableImageData, GalleryImage } from "../../designer/IDesignerTypes";
+import { BackgroundString, BackgroundVideo, FlzEditableImageData, GalleryImage } from "../../designer/IDesignerTypes";
 import { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
-import { BackgroundColor } from "@cloudinary/url-gen/actions/background/actions/BackgroundColor";
 import { BackgroundImage } from "../interfaces/ISection";
 export declare class CloudinaryUrlBuilder {
     private image;
@@ -44,8 +43,8 @@ export declare class CloudinaryHelper {
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
     getOptimizedVideoUrl(url: string, _position: string): string;
     getVideoThumbnail(url: string): string;
-    isBackgroundColor(background: any): background is BackgroundColor;
-    isBackgroundImage(background: any): background is BackgroundImage;
-    isBackgroundVideo(background: any): background is BackgroundVideo;
+    static isBackgroundString(background: any): background is BackgroundString;
+    static isBackgroundImage(background: any): background is BackgroundImage;
+    static isBackgroundVideo(background: any): background is BackgroundVideo;
     static isCloudinaryImage(url: string): boolean;
 }

@@ -1,4 +1,5 @@
 import {
+    BackgroundString,
     BackgroundVideo,
     DirectionPosition,
     FlzEditableImageData,
@@ -282,15 +283,15 @@ export class CloudinaryHelper {
         return url.substr(0,url.lastIndexOf(".")) + ".jpg";
     }
 
-    isBackgroundColor(background: any): background is BackgroundColor {
+    public static isBackgroundString(background: any): background is BackgroundString {
         return !!(background && typeof background === "string");
     }
 
-    isBackgroundImage(background: any): background is BackgroundImage {
+    public static isBackgroundImage(background: any): background is BackgroundImage {
         return !!(background && typeof background === "object" && background?.image);
     }
 
-    isBackgroundVideo(background: any): background is BackgroundVideo {
+    public static isBackgroundVideo(background: any): background is BackgroundVideo {
         return !!(background && typeof background === "object" && background?.video);
     }
 
