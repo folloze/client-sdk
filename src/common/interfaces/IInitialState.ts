@@ -45,6 +45,8 @@ export type InitialState = {
         items?: Record<string, ItemResponseV2>;
     };
     contact_card_info: ContactCardInfo;
+
+    custom_attributes: Record<string, string>;
 };
 
 export type DataEnrichmentConfig = {

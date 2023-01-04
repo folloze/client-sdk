@@ -40,6 +40,7 @@ export declare type InitialState = {
         items?: Record<string, ItemResponseV2>;
     };
     contact_card_info: ContactCardInfo;
+    custom_attributes: Record<string, string>;
 };
 export declare type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
