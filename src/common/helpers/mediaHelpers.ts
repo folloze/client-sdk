@@ -283,6 +283,12 @@ export class CloudinaryHelper {
         return url.substr(0,url.lastIndexOf(".")) + ".jpg";
     }
 
+    public static isCloudinaryImage(url: string) {
+        return CloudinaryHelper.cloudinaryUrlRegex.test(url);
+    }
+}
+
+export class MediaBackgroundHelper {
     public static isBackgroundString(background: any): background is BackgroundString {
         return !!(background && typeof background === "string");
     }
@@ -293,9 +299,5 @@ export class CloudinaryHelper {
 
     public static isBackgroundVideo(background: any): background is BackgroundVideo {
         return !!(background && typeof background === "object" && background?.video);
-    }
-
-    public static isCloudinaryImage(url: string) {
-        return CloudinaryHelper.cloudinaryUrlRegex.test(url);
     }
 }

@@ -43,8 +43,10 @@ export declare class CloudinaryHelper {
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
     getOptimizedVideoUrl(url: string, _position: string): string;
     getVideoThumbnail(url: string): string;
+    static isCloudinaryImage(url: string): boolean;
+}
+export declare class MediaBackgroundHelper {
     static isBackgroundString(background: any): background is BackgroundString;
     static isBackgroundImage(background: any): background is BackgroundImage;
     static isBackgroundVideo(background: any): background is BackgroundVideo;
-    static isCloudinaryImage(url: string): boolean;
 }
