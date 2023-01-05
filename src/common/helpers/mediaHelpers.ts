@@ -14,10 +14,8 @@ import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
-import { BackgroundColor } from "@cloudinary/url-gen/actions/background/actions/BackgroundColor";
-import {Position} from "@cloudinary/url-gen/qualifiers/position";
 import { BackgroundImage } from "../interfaces/ISection";
-import { compass } from "@cloudinary/url-gen/qualifiers/gravity";
+import { ICompassGravity } from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
@@ -157,7 +155,7 @@ export class CloudinaryHelper {
         return this.cloudinary.image(cldImageId);
     }
 
-    static getVideo(video: FlzEditableVideoData | GalleryVideo): any {
+    static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo {
         const cldVideoId = CloudinaryHelper.getPublicId(video.url);
         return this.cloudinary.video(cldVideoId);
     }
@@ -268,7 +266,7 @@ export class CloudinaryHelper {
     }
 
     getOptimizedVideoUrl(url: string, _position: string): string {
-        const lookupMap: Record<PercentPosition, DirectionPosition> = {
+        const lookupMap: Record<PercentPosition, ICompassGravity> = {
             "0% 0%": "north_west",
             "50% 0%": "north",
             "100% 0%": "north_east",
@@ -288,30 +286,6 @@ export class CloudinaryHelper {
         const optimizedUrl = parts[0] + `/upload/${DEVICE_OPTIMIZATION}/${position}/` + parts[1];
 
         return optimizedUrl;
-    }
-
-    getTransformedVideoUrl(_video, position) {
-        const lookupMap: Record<PercentPosition, DirectionPosition> = {
-            "0% 0%": "north_west",
-            "50% 0%": "north",
-            "100% 0%": "north_east",
-            "0% 50%": "west",
-            "50% 50%": "center",
-            "100% 50%": "east",
-            "0% 100%": "south_west",
-            "50% 100%": "south",
-            "100% 100%": "south_east"
-        };
-
-        const positionAsDirection = lookupMap[position];
-
-        const cldVideoId = CloudinaryHelper.getPublicId(_video.url);
-        const transformation = [{ gravity: positionAsDirection }];
-        // @ts-ignore
-        const url = CloudinaryHelper.cloudinary.video_url(cldVideoId, transformation);
-        const cld = CloudinaryHelper.cloudinary;
-
-        return {url, cld};
     }
 
     getVideoThumbnail(url: string): string {

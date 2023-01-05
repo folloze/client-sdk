@@ -1,5 +1,5 @@
 import { BackgroundString, BackgroundVideo, FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo } from "../../designer/IDesignerTypes";
-import { Cloudinary } from "@cloudinary/url-gen";
+import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen";
 import { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
 import { BackgroundImage } from "../interfaces/ISection";
 export declare class CloudinaryUrlBuilder {
@@ -23,7 +23,7 @@ export declare class CloudinaryHelper {
     private static cloudinary;
     static videoPlayerScriptUrl: string;
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage;
-    static getVideo(video: FlzEditableVideoData | GalleryVideo): any;
+    static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo;
     getCloudinaryInstance(): Cloudinary;
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
@@ -45,10 +45,6 @@ export declare class CloudinaryHelper {
     private createVideoPlayer;
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
     getOptimizedVideoUrl(url: string, _position: string): string;
-    getTransformedVideoUrl(_video: any, position: any): {
-        url: any;
-        cld: Cloudinary;
-    };
     getVideoThumbnail(url: string): string;
     static isCloudinaryImage(url: string): boolean;
 }
