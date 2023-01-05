@@ -162,6 +162,10 @@ export class CloudinaryHelper {
         return this.cloudinary.video(cldVideoId);
     }
 
+    getCloudinaryInstance() {
+        return CloudinaryHelper.cloudinary;
+    }
+
     // PLEASE NOTE - from now on use the
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
@@ -301,11 +305,13 @@ export class CloudinaryHelper {
 
         const positionAsDirection = lookupMap[position];
 
-        const video = CloudinaryHelper.getVideo(_video);
-        const transformedVideo = video.position(new Position().gravity(compass(positionAsDirection)));
-        const url = transformedVideo.toURL();
+        const cldVideoId = CloudinaryHelper.getPublicId(_video.url);
+        const transformation = [{ gravity: positionAsDirection }];
+        // @ts-ignore
+        const url = CloudinaryHelper.cloudinary.video_url(cldVideoId, transformation);
+        const cld = CloudinaryHelper.cloudinary;
 
-        return {video, url};
+        return {url, cld};
     }
 
     getVideoThumbnail(url: string): string {
