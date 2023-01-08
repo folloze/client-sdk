@@ -1,7 +1,7 @@
-import { BackgroundString, BackgroundVideo, FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo } from "../../designer/IDesignerTypes";
+import { BackgroundString, FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo } from "../../designer/IDesignerTypes";
 import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen";
 import { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
-import { BackgroundImage } from "../interfaces/ISection";
+import { BackgroundImage, BackgroundVideo } from "../interfaces/ISection";
 export declare class CloudinaryUrlBuilder {
     private image;
     private isOptimized;

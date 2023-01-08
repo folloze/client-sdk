@@ -1,7 +1,5 @@
 import {
     BackgroundString,
-    BackgroundVideo,
-    DirectionPosition,
     FlzEditableImageData, FlzEditableVideoData,
     GalleryImage, GalleryVideo,
     PercentPosition
@@ -14,7 +12,7 @@ import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
-import { BackgroundImage } from "../interfaces/ISection";
+import { BackgroundImage, BackgroundVideo } from "../interfaces/ISection";
 import { ICompassGravity } from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];

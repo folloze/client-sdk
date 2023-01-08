@@ -1,5 +1,6 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
+import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
 export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
 export declare type VideoGalleryTypes = "video";
 export declare enum CampaignElementsTypes {
@@ -50,7 +51,6 @@ export declare type ImageTransformation = {
     };
 };
 export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
-export declare type DirectionPosition = "north" | "north_west" | "north_east" | "west" | "center" | "east" | "south" | "south_west" | "south_east";
 export declare type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";
 export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 export declare type FlzEditableImageData = {
@@ -84,11 +84,9 @@ export declare type FlzEditableVideoData = {
     optimized_url?: string;
     transformation?: VideoTransformation;
 };
-export declare type BackgroundVideo = {
-    video: FlzEditableVideoData;
-    position: string;
-};
 export declare type BackgroundString = string;
+export declare type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
+export declare type BackgroundMedia = BackgroundImageOrVideo | BackgroundString;
 export declare type BackgroundLayer = "color" | "image" | "video";
 export declare type VideoBankCategoryType = "videos";
 export declare type UploadUrlResponseV1 = {

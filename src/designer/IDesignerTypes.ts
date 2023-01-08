@@ -1,5 +1,6 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
+import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
 
 export type ImageGalleryTypes = "campaign" | "search" | "icon";
 export type VideoGalleryTypes = "video";
@@ -66,17 +67,6 @@ export type StringPosition =
   | "bottom-center"
   | "bottom-right";
 
-export type DirectionPosition =
-  | "north"
-  | "north_west"
-  | "north_east"
-  | "west"
-  | "center"
-  | "east"
-  | "south"
-  | "south_west"
-  | "south_east";
-
 export type PercentPosition =
   | "0% 0%"
   | "50% 0%"
@@ -125,12 +115,9 @@ export type FlzEditableVideoData = {
     transformation?: VideoTransformation;
 };
 
-export type BackgroundVideo = {
-    video: FlzEditableVideoData;
-    position: string;
-};
-
 export type BackgroundString = string;
+export type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
+export type BackgroundMedia = BackgroundImageOrVideo | BackgroundString;
 export type BackgroundLayer = "color" | "image" | "video";
 export type VideoBankCategoryType = "videos";
 

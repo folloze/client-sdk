@@ -362,7 +362,6 @@ export class Designer {
             this.fetcher
                 .put(`/api/v1/boards/${boardId}/config`, {
                     config: config,
-                    theme_id: null,
                 })
                 .then(result => resolve({status: result.status, data: result.data}))
                 .catch(e => {
