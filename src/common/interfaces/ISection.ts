@@ -1,4 +1,4 @@
-import {FlzEditableImageData} from "../../designer/IDesignerTypes";
+import { FlzEditableImageData, FlzEditableVideoData } from "../../designer/IDesignerTypes";
 import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./IWidget";
 
 export type AddListItem = {
@@ -40,4 +40,9 @@ export type BackgroundImage = {
     position: string;
     size: "cover" | "contain" | string;
     repeat: string;
+};
+
+export type BackgroundVideo = {
+    video: FlzEditableVideoData;
+    position: string;
 };

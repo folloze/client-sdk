@@ -1,12 +1,19 @@
-import {FlzEditableImageData, GalleryImage} from "../../designer/IDesignerTypes";
+import {
+    BackgroundString,
+    FlzEditableImageData, FlzEditableVideoData,
+    GalleryImage, GalleryVideo,
+    PercentPosition
+} from "../../designer/IDesignerTypes";
 import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
-import {Cloudinary} from "@cloudinary/url-gen";
+import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
 import { sharpen } from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
+import { BackgroundImage, BackgroundVideo } from "../interfaces/ISection";
+import { ICompassGravity } from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
@@ -146,6 +153,11 @@ export class CloudinaryHelper {
         return this.cloudinary.image(cldImageId);
     }
 
+    static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo {
+        const cldVideoId = CloudinaryHelper.getPublicId(video.url);
+        return this.cloudinary.video(cldVideoId);
+    }
+
     // PLEASE NOTE - from now on use the
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
@@ -247,7 +259,48 @@ export class CloudinaryHelper {
         });
     }
 
+    getOptimizedVideoUrl(url: string, _position: string): string {
+        const lookupMap: Record<PercentPosition, ICompassGravity> = {
+            "0% 0%": "north_west",
+            "50% 0%": "north",
+            "100% 0%": "north_east",
+            "0% 50%": "west",
+            "50% 50%": "center",
+            "100% 50%": "east",
+            "0% 100%": "south_west",
+            "50% 100%": "south",
+            "100% 100%": "south_east"
+        };
+
+        const positionAsDirection = lookupMap[_position];
+
+        const parts = url.split("/upload/");
+        const DEVICE_OPTIMIZATION = "q_auto";
+        const position = `c_fill,g_${positionAsDirection},h_688,w_1432`;
+        const optimizedUrl = parts[0] + `/upload/${DEVICE_OPTIMIZATION}/${position}/` + parts[1];
+
+        return optimizedUrl;
+    }
+
+    getVideoThumbnail(url: string): string {
+        return url.substr(0,url.lastIndexOf(".")) + ".jpg";
+    }
+
     public static isCloudinaryImage(url: string) {
         return CloudinaryHelper.cloudinaryUrlRegex.test(url);
+    }
+}
+
+export class MediaBackgroundHelper {
+    public static isBackgroundString(background: any): background is BackgroundString {
+        return !!(background && typeof background === "string");
+    }
+
+    public static isBackgroundImage(background: any): background is BackgroundImage {
+        return !!(background && typeof background === "object" && background?.image);
+    }
+
+    public static isBackgroundVideo(background: any): background is BackgroundVideo {
+        return !!(background && typeof background === "object" && background?.video);
     }
 }

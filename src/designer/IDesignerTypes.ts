@@ -1,7 +1,9 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
+import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
 
 export type ImageGalleryTypes = "campaign" | "search" | "icon";
+export type VideoGalleryTypes = "video";
 
 export enum CampaignElementsTypes {
     footer = 1,
@@ -21,6 +23,16 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
+};
+
+export type GalleryVideo = {
+    url: string;
+    fit: string;
+    optimized_url?: string;
+    id?: number;
+    displayable_section?: string;
+    transformation?: VideoTransformation;
+    viewed?: boolean;
 };
 
 export type ImageTransformation = {
@@ -45,15 +57,26 @@ export type ImageTransformation = {
 };
 
 export type StringPosition =
-    | "top-left"
-    | "top-center"
-    | "top-right"
-    | "middle-left"
-    | "middle-center"
-    | "middle-right"
-    | "bottom-left"
-    | "bottom-center"
-    | "bottom-right";
+  | "top-left"
+  | "top-center"
+  | "top-right"
+  | "middle-left"
+  | "middle-center"
+  | "middle-right"
+  | "bottom-left"
+  | "bottom-center"
+  | "bottom-right";
+
+export type PercentPosition =
+  | "0% 0%"
+  | "50% 0%"
+  | "100% 0%"
+  | "0% 50%"
+  | "50% 50%"
+  | "100% 50%"
+  | "0% 100%"
+  | "50% 100%"
+  | "100% 100%";
 
 export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 
@@ -78,6 +101,26 @@ export type ImageGalleryParams = {
     count?: number;
 };
 
+export type VideoGalleryParams = {
+    type: VideoGalleryTypes;
+    query?: string;
+    organizationId?: number;
+    bankCategory?: VideoBankCategoryType;
+    count?: number;
+};
+
+export type FlzEditableVideoData = {
+    url: string;
+    optimized_url?: string;
+    transformation?: VideoTransformation;
+};
+
+export type BackgroundString = string;
+export type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
+export type BackgroundMedia = BackgroundImageOrVideo | BackgroundString;
+export type BackgroundLayer = "color" | "image" | "video";
+export type VideoBankCategoryType = "videos";
+
 export type UploadUrlResponseV1 = {
     file_name: string;
     method: string;
@@ -88,6 +131,13 @@ export type UploadUrlResponseV1 = {
     };
     get_url: string;
     put_url: string;
+};
+
+export type VideoTransformation = {
+    tint?: {
+        color: string;
+        alpha: number;
+    };
 };
 
 export declare type CloudinaryUploadResult = {
