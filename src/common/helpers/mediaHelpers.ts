@@ -158,10 +158,6 @@ export class CloudinaryHelper {
         return this.cloudinary.video(cldVideoId);
     }
 
-    getCloudinaryInstance() {
-        return CloudinaryHelper.cloudinary;
-    }
-
     // PLEASE NOTE - from now on use the
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead

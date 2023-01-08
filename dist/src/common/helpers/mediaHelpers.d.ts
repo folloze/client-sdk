@@ -1,5 +1,5 @@
 import { BackgroundString, FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo } from "../../designer/IDesignerTypes";
-import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen";
+import { CloudinaryVideo } from "@cloudinary/url-gen";
 import { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
 import { BackgroundImage, BackgroundVideo } from "../interfaces/ISection";
 export declare class CloudinaryUrlBuilder {
@@ -24,7 +24,6 @@ export declare class CloudinaryHelper {
     static videoPlayerScriptUrl: string;
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage;
     static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo;
-    getCloudinaryInstance(): Cloudinary;
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
      * @param image
