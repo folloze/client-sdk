@@ -2,13 +2,16 @@ import {SectionConfig} from "./ISection";
 import {FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonConfig, WidgetConfig} from "./IWidget";
 import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
-import {FloatPos, GridPos} from "./IPositions";
 import {IPersonalizationConfig} from "./IPersonalization";
+import { FlzEvent } from "../FlzEvent";
 
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
     data: RibbonConfig["data"];
+
+    incomingEvents(e: FlzEvent);
 }
+
 export interface FloatWidgetElement extends LitElement {
     config: FloatingWidgetConfig;
     data: FloatingWidgetConfig["data"];

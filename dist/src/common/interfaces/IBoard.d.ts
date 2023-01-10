@@ -3,9 +3,11 @@ import { FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonCon
 import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { IPersonalizationConfig } from "./IPersonalization";
+import { FlzEvent } from "../FlzEvent";
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
     data: RibbonConfig["data"];
+    incomingEvents(e: FlzEvent): any;
 }
 export interface FloatWidgetElement extends LitElement {
     config: FloatingWidgetConfig;
