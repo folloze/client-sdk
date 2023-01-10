@@ -172,6 +172,7 @@ export class Liveboard {
      * @returns {ItemResponseV2} ItemResponse
      */
     getItem(itemId: number | string, boardId: number, bySlug: boolean, withMetadata?: boolean): Promise<ItemResponseV2> {
+        console.log("<<< getItem");
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v2/items/${itemId}`, {
@@ -194,6 +195,8 @@ export class Liveboard {
      * @returns {ItemsResponseV2} ItemsResponse
      */
     getItems(params: ItemsParams): Promise<ItemsResponseV2> {
+        console.log("<<<<<<< getItemsss");
+
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .post(`/live_board/v2/boards/${params.boardId}/items`, keysToSnakeCase(params))
