@@ -22,4 +22,8 @@ export interface FlzVItemViewerSettings {
     design: "classic" | "lightbox";
     allow_download: boolean;
     allow_likes?: boolean;
+    lead_journey: {
+        type: "curated" | "ai",
+        layout: "arrow" | "bottom"
+    }
 }
