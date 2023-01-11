@@ -1,5 +1,6 @@
+/// <reference types="lodash" />
 export declare function waitForFollozeScriptsToLoad(): Promise<boolean>;
-export declare const keysToSnakeCase: (params: any) => any;
+export declare const keysToSnakeCase: (params: any) => import("lodash").Dictionary<any>;
 export declare type FileUploadParams = {
     url: string;
     headers?: Record<string, string>;
