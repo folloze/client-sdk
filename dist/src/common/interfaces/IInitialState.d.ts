@@ -14,6 +14,7 @@ export declare type InitialState = {
     locale: string;
     session_guid: string;
     data_service_configuration?: DataEnrichmentConfig;
+    cookie_matching?: CookieMatchingConfig;
     itemViewerData?: OpenItemViewerPayload;
     token?: string;
     sections?: Section[];
@@ -45,6 +46,12 @@ export declare type InitialState = {
 export declare type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
     api_key: string;
+};
+export declare type CookieMatchingConfig = {
+    type: "default" | "eloqua" | "marketo";
+    api_key: string;
+    run_cookie_matching: boolean;
+    load_local_script: boolean;
 };
 export interface Organization {
     id: number;
