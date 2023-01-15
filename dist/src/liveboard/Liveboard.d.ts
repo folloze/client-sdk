@@ -126,6 +126,14 @@ export declare class Liveboard {
      */
     updateEnrichment(type: string, enrichmentData: object): Promise<void>;
     /**
+     * Update cookie match value for lead data enrichment
+     *
+     * @param {string} type
+     * @param {object} value
+     * @param {boolean} success
+     */
+    updateCookieMatching(type: string, value: object, success: boolean): Promise<void>;
+    /**
      * Gets the geo location of the current lead
      *
      * @returns {GeoLocationResponseV1} GeoLocationResponse
