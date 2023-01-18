@@ -24,6 +24,7 @@ export interface FlzVItemViewerSettings {
     allow_likes?: boolean;
     lead_journey?: {
         type: "curated" | "ai",
-        layout: "arrow" | "bottom"
+        layout: "arrow" | "bottom",
+        disableScrollingAnimation: boolean
     }
 }

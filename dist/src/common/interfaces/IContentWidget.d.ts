@@ -23,5 +23,6 @@ export interface FlzVItemViewerSettings {
     lead_journey?: {
         type: "curated" | "ai";
         layout: "arrow" | "bottom";
+        disableScrollingAnimation: boolean;
     };
 }
