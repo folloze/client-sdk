@@ -16,6 +16,7 @@ export type InitialState = {
     locale: string; // "en-US"
     session_guid: string; // needs to be in all requests to the server in header: "folloze-session-guid"
     data_service_configuration?: DataEnrichmentConfig;
+    cookie_matching?: CookieMatchingConfig;
     itemViewerData?: OpenItemViewerPayload; // in case we land on item viewer
 
     // if exists we should replace pii (personal identifiable information) url parameters & add the token to url
@@ -54,6 +55,12 @@ export type DataEnrichmentConfig = {
   api_key: string;
 };
 
+export type CookieMatchingConfig = {
+    type: "default" | "eloqua" | "marketo";
+    api_key: string;
+    run_cookie_matching: boolean;
+    load_local_script: boolean;
+};
 
 export interface Organization {
     id: number;
