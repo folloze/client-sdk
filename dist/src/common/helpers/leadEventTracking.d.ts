@@ -1,6 +1,7 @@
 import { LitElement } from "lit";
 import { TargetType } from "../../liveboard/ILiveboardTypes";
 declare type TrackedLeadActions = "lead-link-click" | "lead-video-analytics";
+declare type LeadVideoActivities = "play" | "pause" | "ended";
 export declare class AbstractLeadTracker {
     payload: unknown;
     action: TrackedLeadActions;
@@ -14,9 +15,8 @@ export declare type TrackedLeadLinkClickPayload = {
     };
 };
 export declare type TrackedLeadItemEngagementPayload = {
-    url: string;
-    targetType: TargetType;
     details: {
+        leadActivity: LeadVideoActivities;
         sectionName: string;
         widgetTag: string;
     };

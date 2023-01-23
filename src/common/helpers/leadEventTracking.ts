@@ -3,6 +3,7 @@ import { componentEmit } from "./eventHelpers";
 import { TargetType } from "../../liveboard/ILiveboardTypes";
 
 type TrackedLeadActions = "lead-link-click" | "lead-video-analytics";
+type LeadVideoActivities = "play" | "pause" | "ended";
 
 export class AbstractLeadTracker {
     public payload: unknown;
@@ -19,9 +20,8 @@ export type TrackedLeadLinkClickPayload = {
 }
 
 export type TrackedLeadItemEngagementPayload = {
-    url: string;
-    targetType: TargetType
     details: {
+        leadActivity: LeadVideoActivities,
         sectionName: string;
         widgetTag: string;
     }
