@@ -8,6 +8,7 @@ export declare type FetcherOptions = {
     sessionGuid?: string;
     csrfToken?: string;
     pingEndpoint?: string;
+    analyticsServiceEndpoint?: string;
 };
 export declare class FetchService {
     private readonly useMock;

@@ -247,7 +247,7 @@ export class Liveboard {
     likeItem(itemId: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`/live_board/v2/items/${itemId}/likes`)
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/items/${itemId}/likes`)
                 .then(() => {
                     resolve();
                 })
@@ -653,7 +653,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview(() => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/message`, {
+                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/message`, {
                         ...keysToSnakeCase(options),
                     })
                     .then(result => {
@@ -678,7 +678,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/contact`, {
+                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/contact`, {
                         ...keysToSnakeCase(options),
                     })
                     .then(result => {
@@ -703,7 +703,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
+                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
                     .then(result => resolve(result.data))
                     .catch(e => {
                         console.error("could not submit cta", e);
@@ -724,7 +724,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/link`, {
+                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/link`, {
                         ...keysToSnakeCase(options),
                     })
                     .then(result => {
@@ -748,7 +748,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<LeadLinkClickResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                  .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/link_click`, {
+                  .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/link_click`, {
                       ...keysToSnakeCase(options),
                   })
                   .then(result => {
@@ -773,7 +773,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<CtaResponseV1>(`/live_board/v1/boards/${boardId}/campaign/share`, {
+                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/share`, {
                         ...keysToSnakeCase(options),
                     })
                     .then(result => {
@@ -798,7 +798,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<void> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<void>(`/live_board/v1/boards/${boardId}/shares`, {
+                    .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/shares`, {
                         email,
                         invitation_id: invitationId,
                     })

@@ -14,6 +14,7 @@ export type FetcherOptions = {
     sessionGuid?: string;
     csrfToken?: string;
     pingEndpoint?: string;
+    analyticsServiceEndpoint?: string;
 };
 
 const defaultFetcherOptions: FetcherOptions = {
