@@ -413,6 +413,31 @@ export class Liveboard {
     }
 
     /**
+     * Update cookie match value for lead data enrichment
+     *
+     * @param {string} type
+     * @param {object} value
+     * @param {boolean} success
+     */
+     updateCookieMatching(type: string, value: object, success: boolean): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<void>("/live_board/v2/cookie_matchings", {
+                    type: type,
+                    value: value,
+                    success: success
+                })
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not update cookie matching", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
      * Gets the geo location of the current lead
      *
      * @returns {GeoLocationResponseV1} GeoLocationResponse
