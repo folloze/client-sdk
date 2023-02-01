@@ -1,1 +1,1 @@
-import{a}from"../chunks/chunk.Q67NXYE2.js";import"../chunks/chunk.DUABR7O6.js";import"../chunks/chunk.TWUQ6LLZ.js";import"../chunks/chunk.KVVA2TM3.js";export{a as Liveboard};
+import{a}from"../chunks/chunk.SY6TO5SY.js";import"../chunks/chunk.DUABR7O6.js";import"../chunks/chunk.TWUQ6LLZ.js";import"../chunks/chunk.KVVA2TM3.js";export{a as Liveboard};
