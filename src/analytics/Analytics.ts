@@ -94,7 +94,6 @@ export class Analytics {
                 });
         });
     }
-
     /**
      * Tracks an event - only in designer
      *
@@ -125,14 +124,16 @@ export class Analytics {
      * @param {any} data the data to report
      */
     trackLeadEvent(
-      eventId: LiveBoardEventTypes|DesignerEventTypes,
+      eventName,
+      eventId,
+      boardId,
       data: any,
     ): Promise<AxiosResponse> {
-        return this.fetchService.fetcher.post(`/live_board/v1/tracking`, {
+        return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_events`, {
             event: {
-                id: eventId,
+                event_name: eventName,
+                event_id: eventId,
                 data: data,
-                platform: { id: 2, name: "Campaign" },
             }
         })
           .catch(e => {
