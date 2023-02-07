@@ -143,8 +143,8 @@ export class Analytics {
     }
 
     sendPing(payload: PingPayload) {
+        console.log("//////PingPayload: ", payload);
         return this.fetchService.withDisableOnPreview(() => {
-            console.log("//////PingPayload: ", payload);
             return this.fetchService.fetcher.post(`${this.fetchService.options.pingEndpoint}/pings`, {
                 lead_id: payload.leadId,
                 board_id: payload.boardId,
