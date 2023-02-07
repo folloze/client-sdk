@@ -19,6 +19,8 @@ export declare type TrackedLeadItemEngagementPayload = {
         leadActivity: LeadVideoActivities;
         sectionName: string;
         widgetTag: string;
+        eventId: number;
+        guid: string;
     };
 };
 export declare class TrackedLeadLinkClick extends AbstractLeadTracker {

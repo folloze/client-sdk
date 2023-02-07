@@ -24,6 +24,8 @@ export type TrackedLeadItemEngagementPayload = {
         leadActivity: LeadVideoActivities,
         sectionName: string;
         widgetTag: string;
+        eventId: number;
+        guid: string;
     }
 }
 
