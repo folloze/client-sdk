@@ -94,6 +94,7 @@ export class Analytics {
                 });
         });
     }
+
     /**
      * Tracks an event - only in designer
      *
@@ -130,11 +131,9 @@ export class Analytics {
       data: any,
     ): Promise<AxiosResponse> {
         return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_events`, {
-            event: {
-                event_name: eventName,
-                event_id: eventId,
-                data: data,
-            }
+            event_name: eventName,
+            event_id: eventId,
+            data: data,
         })
           .catch(e => {
               console.error("could not track action", e);
