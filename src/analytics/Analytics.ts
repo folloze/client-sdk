@@ -129,10 +129,12 @@ export class Analytics {
       eventId,
       boardId,
       data: any,
+      guid?: string,
     ): Promise<AxiosResponse> {
         return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_events`, {
             event_name: eventName,
             event_id: eventId,
+            guid: guid,
             data: data,
         })
           .catch(e => {
