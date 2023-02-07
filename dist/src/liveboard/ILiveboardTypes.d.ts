@@ -143,7 +143,6 @@ declare type User = {
 };
 declare type ArticleItem = {
     article_id: number;
-    content_item_id: number;
     status: number;
     has_unpublished_changes: boolean;
     content_item_id: number;
@@ -173,7 +172,6 @@ declare type ArticleItem = {
 };
 export declare type JourneyItem = {
     journey_index: number;
-    content_item_id: number;
     category_id: number;
     category_slug: string;
     category_name: string;
