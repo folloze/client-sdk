@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
+import { keysToSnakeCase } from "../common/helpers/helpers";
 
 export type PingPayload = {
     leadId: number;
@@ -135,7 +136,7 @@ export class Analytics {
             event_name: eventName,
             event_id: eventId,
             guid: guid,
-            data: data,
+            data: keysToSnakeCase(data),
         })
           .catch(e => {
               console.error("could not track action", e);
