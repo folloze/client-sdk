@@ -14,7 +14,7 @@ const ctaParams = {
 
 describe("test liveboard mocks module", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, organizationId: 1});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ''});
     });
 
     it("checks that getBoard mock works as expected", async () => {
@@ -175,7 +175,7 @@ describe("test liveboard mocks module", () => {
 
 describe("testing liveboard module in preview", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true, analyticsServiceEndpoint: ''});
     });
 
     it("checks that saveMessageCta mock works as expected", async () => {

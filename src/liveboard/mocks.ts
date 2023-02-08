@@ -515,7 +515,7 @@ export const rules = (mock: MockAdapter) => {
         group_user: false,
     });
 
-    mock.onPost(/live_board\/v1\/boards\/(\d+)\/shares/).reply<void>(200);
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share_by_email/).reply<void>(200);
     // END -CTA
 
     mock.onGet(/live_board\/v3\/boards\/(\d+)\/board_configuration/).reply<any>(200, {

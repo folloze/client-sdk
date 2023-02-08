@@ -15,7 +15,7 @@ const linkClickParams = {
 
 describe("test liveboard mocks module", () => {
   beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true, organizationId: 1});
+    sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ''});
   });
 
   it("trackLinkClick with valid payload", async () => {
@@ -41,7 +41,7 @@ describe("test liveboard mocks module", () => {
 
 describe("testing liveboard module in preview", () => {
   beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true});
+    sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true, analyticsServiceEndpoint: ''});
   });
 
   it("checks that trackLinkCta mock works as expected", async () => {
