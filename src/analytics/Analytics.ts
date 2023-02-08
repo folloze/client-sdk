@@ -125,14 +125,14 @@ export class Analytics {
      * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
-    trackLeadEvent(
+    trackLeadVideoEvent(
       eventName,
       eventId,
       boardId,
       data: any,
       guid?: string,
     ): Promise<AxiosResponse> {
-        return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_events`, {
+        return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_video_events`, {
             event_name: eventName,
             event_id: eventId,
             guid: guid,
