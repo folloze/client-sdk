@@ -79,10 +79,14 @@ export declare type VideoGalleryParams = {
     bankCategory?: VideoBankCategoryType;
     count?: number;
 };
+export declare type VideoPlaybackOptions = {
+    playOnce: boolean;
+};
 export declare type FlzEditableVideoData = {
     url: string;
     optimized_url?: string;
     transformation?: VideoTransformation;
+    playback?: VideoPlaybackOptions;
 };
 export declare type BackgroundString = string;
 export declare type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
