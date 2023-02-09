@@ -109,10 +109,15 @@ export type VideoGalleryParams = {
     count?: number;
 };
 
+export type VideoPlaybackOptions = {
+    playOnce: boolean;
+}
+
 export type FlzEditableVideoData = {
     url: string;
     optimized_url?: string;
     transformation?: VideoTransformation;
+    playback?: VideoPlaybackOptions;
 };
 
 export type BackgroundString = string;
