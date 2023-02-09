@@ -82,6 +82,7 @@ export declare class Analytics {
      * @param {any} data the data to report
      */
     trackLeadVideoEvent(eventName: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
+    trackLeadEvent(eventName: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
