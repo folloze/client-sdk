@@ -81,8 +81,8 @@ export declare class Analytics {
      * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
-    trackLeadVideoEvent(eventName: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
-    trackLeadEvent(eventName: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
+    trackLeadVideoEvent(eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
+    trackLeadEvent(eventContext: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;

@@ -126,7 +126,6 @@ export class Analytics {
      * @param {any} data the data to report
      */
     trackLeadVideoEvent(
-      eventName,
       eventId,
       boardId,
       data: any,
@@ -144,14 +143,14 @@ export class Analytics {
     }
 
     trackLeadEvent(
-      eventName,
+      eventContext,
       eventId,
       boardId,
       data: any,
       guid?: string,
     ): Promise<AxiosResponse> {
         return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_events`, {
-            event_context: "video",
+            event_context: eventContext,
             event_id: eventId,
             guid: guid,
             data: keysToSnakeCase(data),
