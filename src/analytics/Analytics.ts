@@ -125,6 +125,25 @@ export class Analytics {
      * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
+    // trackLeadVideoEvent(
+    //   eventName,
+    //   eventId,
+    //   boardId,
+    //   data: any,
+    //   guid?: string,
+    // ): Promise<AxiosResponse> {
+    //     return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_video_events`, {
+    //         event_name: eventName,
+    //         event_id: eventId,
+    //         guid: guid,
+    //         data: keysToSnakeCase(data),
+    //     })
+    //       .catch(e => {
+    //           console.error("could not track action", e);
+    //           throw e;
+    //       });
+    // }
+
     trackLeadVideoEvent(
       eventName,
       eventId,
@@ -132,8 +151,8 @@ export class Analytics {
       data: any,
       guid?: string,
     ): Promise<AxiosResponse> {
-        return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_video_events`, {
-            event_name: eventName,
+        return this.fetchService.fetcher.post(`live_board/v2/boards/${boardId}/lead_events`, {
+            event_context: "video",
             event_id: eventId,
             guid: guid,
             data: keysToSnakeCase(data),
