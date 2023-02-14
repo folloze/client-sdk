@@ -149,7 +149,7 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onGet("/live_board/v2/boards/1/items_presence").reply<HasItemResponseV2>(200, {has_items: true});
 
-    mock.onPost(/\/live_board\/v1\/items\/1\/likes/).reply<void>(200);
+    mock.onPost(/\/live_board\/v2\/items\/1\/likes/).reply<void>(200);
 
     mock.onPost("/live_board/v2/journeys/1").reply<JourneyItemsResponseV2>(200, {
         items: {
@@ -515,7 +515,7 @@ export const rules = (mock: MockAdapter) => {
         group_user: false,
     });
 
-    mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share_by_email/).reply<void>(200);
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/shares/).reply<void>(200);
     // END -CTA
 
     mock.onGet(/live_board\/v3\/boards\/(\d+)\/board_configuration/).reply<any>(200, {

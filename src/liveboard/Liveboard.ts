@@ -247,7 +247,7 @@ export class Liveboard {
     likeItem(itemId: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/items/${itemId}/likes`)
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/likes`)
                 .then(() => {
                     resolve();
                 })
@@ -652,17 +652,19 @@ export class Liveboard {
     saveMessageCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview(() => {
             return new Promise((resolve, reject) => {
-                this.fetchService.fetcher
-                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/message`, {
-                        ...keysToSnakeCase(options),
-                    })
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
+                return this.notifyIdentity(boardId, options).then(_ => {
+                    this.fetchService.fetcher
+                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/message`, {
+                            ...keysToSnakeCase(options),
+                        })
+                        .then(result => {
+                            resolve(result.data);
+                        })
+                        .catch(e => {
+                            console.error("could not submit cta", e);
+                            reject(e);
+                        });
+                });
             });
         });
     }
@@ -677,17 +679,19 @@ export class Liveboard {
     saveContactCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetchService.fetcher
-                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/contact`, {
-                        ...keysToSnakeCase(options),
-                    })
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
+                return this.notifyIdentity(boardId, options).then(_ => {
+                    this.fetchService.fetcher
+                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/contact`, {
+                            ...keysToSnakeCase(options),
+                        })
+                        .then(result => {
+                            resolve(result.data);
+                        })
+                        .catch(e => {
+                            console.error("could not submit cta", e);
+                            reject(e);
+                        });
+                  });
             });
         });
     }
@@ -702,13 +706,15 @@ export class Liveboard {
     saveFormCta(boardId: number, options: any): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetchService.fetcher
-                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
-                    .then(result => resolve(result.data))
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
+                return this.notifyIdentity(boardId, options).then(_ => {
+                    this.fetchService.fetcher
+                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
+                        .then(result => resolve(result.data))
+                        .catch(e => {
+                            console.error("could not submit cta", e);
+                            reject(e);
+                        });
+                });
             });
         });
     }
@@ -723,17 +729,19 @@ export class Liveboard {
     saveLinkCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetchService.fetcher
-                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/link`, {
-                        ...keysToSnakeCase(options),
-                    })
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
+                return this.notifyIdentity(boardId, options).then(_ => {
+                    this.fetchService.fetcher
+                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/link`, {
+                            ...keysToSnakeCase(options),
+                        })
+                        .then(result => {
+                            resolve(result.data);
+                        })
+                        .catch(e => {
+                            console.error("could not submit cta", e);
+                            reject(e);
+                        });
+                });
             });
         });
     }
@@ -772,17 +780,19 @@ export class Liveboard {
     saveShareCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<CtaResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
-                this.fetchService.fetcher
-                    .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/share`, {
-                        ...keysToSnakeCase(options),
-                    })
-                    .then(result => {
-                        resolve(result.data);
-                    })
-                    .catch(e => {
-                        console.error("could not submit cta", e);
-                        reject(e);
-                    });
+                return this.notifyIdentity(boardId, options).then(_ => {
+                    this.fetchService.fetcher
+                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/share`, {
+                            ...keysToSnakeCase(options),
+                        })
+                        .then(result => {
+                            resolve(result.data);
+                        })
+                        .catch(e => {
+                            console.error("could not submit cta", e);
+                            reject(e);
+                        });
+                });
             });
         });
     }
@@ -798,7 +808,7 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<void> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                    .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/share_by_email`, {
+                    .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/shares`, {
                         email,
                         invitation_id: invitationId,
                     })
@@ -827,5 +837,16 @@ export class Liveboard {
                 });
         };
         return this.fetchService.withPartialContent(func, 500, 20) as Promise<EnrichmentBoardConfigV3>;
+    }
+
+    public notifyIdentity(boardId: number, values: CtaParams): Promise<any> {
+        if (this.fetchService.options.analyticsServiceEndpoint) {
+            return this.fetchService.fetcher.put(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/leads/identity`, {
+                ...values,
+                board_id: boardId
+            });
+        } else {
+            return new Promise(resolve => resolve({status: 200}));
+        }
     }
 }

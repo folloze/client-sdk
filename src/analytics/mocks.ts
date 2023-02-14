@@ -3,10 +3,10 @@ import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
 
-    mock.onPost(/live_board\/v1\/boards\/(\d+)\/lead_views/)
+    mock.onPost(/live_board\/v2\/boards\/(\d+)\/lead_views/)
         .reply<void>(200);
 
-    mock.onPost(/live_board\/v1\/items\/(\d+)\/lead_views/)
+    mock.onPost(/live_board\/v2\/items\/(\d+)\/lead_views/)
         .reply<void>(200);
 
     mock.onPost("/api/v1/tracking")
