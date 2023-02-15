@@ -161,6 +161,27 @@ export class Analytics {
           });
     }
 
+    trackLeadEvent2(
+      eventContext,
+      eventId,
+      boardId,
+      data: any,
+      guid?: string,
+    ): Promise<AxiosResponse> {
+        return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_events`, {
+            event_context: eventContext,
+            event_id: eventId,
+            guid: guid,
+            data: keysToSnakeCase(data),
+        })
+          .catch(e => {
+              console.error("could not track action", e);
+              throw e;
+          });
+    }
+
+
+
     sendPing(payload: PingPayload) {
         return this.fetchService.withDisableOnPreview(() => {
             return this.fetchService.fetcher.post(`${this.fetchService.options.pingEndpoint}/pings`, {
