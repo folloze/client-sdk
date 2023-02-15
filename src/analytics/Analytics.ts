@@ -72,7 +72,7 @@ export class Analytics {
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post(`/live_board/v2/boards/${boardId}/lead_views`)
+            return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/lead_views`)
                 .catch(e => {
                     console.error("could not track lead board view", e);
                     throw e;
@@ -88,7 +88,7 @@ export class Analytics {
      */
     trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post(`/live_board/v2/items/${itemId}/lead_views`, {guid})
+            return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/items/${itemId}/lead_views`, {guid})
                 .catch(e => {
                     console.error("could not track lead item view", e);
                     throw e;
