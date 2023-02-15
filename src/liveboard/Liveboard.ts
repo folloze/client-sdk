@@ -841,7 +841,7 @@ export class Liveboard {
 
     public notifyIdentity(boardId: number, values: CtaParams): Promise<any> {
         if (this.fetchService.options.analyticsServiceEndpoint) {
-            return this.fetchService.fetcher.put(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/leads/identity`, {
+            return this.fetchService.fetcher.put("/live_board/v2/leads/identity", {
                 ...values,
                 board_id: boardId
             });
