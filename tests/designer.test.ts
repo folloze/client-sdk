@@ -7,7 +7,7 @@ import {ConfigSavedConflict, ConfigSavedSuccess} from "../src";
 let sdk: ClientSDK;
 
 beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true, organizationId: 1});
+    sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ''});
 });
 
 describe("testing sdk designer module", () => {
