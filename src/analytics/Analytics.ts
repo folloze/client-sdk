@@ -26,7 +26,7 @@ export enum LiveBoardEventTypes {
     video_played = 13,
     video_paused = 14,
     view_start = 15,
-    view_end
+    view_end = 16
 }
 
 export enum DesignerEventTypes {
