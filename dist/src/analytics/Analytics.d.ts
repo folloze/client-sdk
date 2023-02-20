@@ -18,7 +18,9 @@ export declare enum LiveBoardEventTypes {
     clicked_on_cta = 9,
     downloaded_an_item = 10,
     changed_category = 11,
-    searched_items = 12
+    searched_items = 12,
+    video_played = 13,
+    video_paused = 14
 }
 export declare enum DesignerEventTypes {
     clicked_on_logo = 17,
@@ -75,13 +77,7 @@ export declare class Analytics {
      * @param {any} data the data to report
      */
     trackUserEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
-    /**
-     * Tracks an event - only in liveboard
-     *
-     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
-     * @param {any} data the data to report
-     */
-    trackLeadEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
+    trackLeadEvent(eventContext: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;

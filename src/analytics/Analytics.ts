@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
+import { keysToSnakeCase } from "../common/helpers/helpers";
 
 export type PingPayload = {
     leadId: number;
@@ -21,7 +22,9 @@ export enum LiveBoardEventTypes {
     clicked_on_cta = 9,
     downloaded_an_item = 10,
     changed_category = 11,
-    searched_items = 12
+    searched_items = 12,
+    video_played = 13,
+    video_paused = 14
 }
 
 export enum DesignerEventTypes {
@@ -118,22 +121,18 @@ export class Analytics {
             });
     }
 
-    /**
-     * Tracks an event - only in liveboard
-     *
-     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
-     * @param {any} data the data to report
-     */
     trackLeadEvent(
-      eventId: LiveBoardEventTypes|DesignerEventTypes,
+      eventContext,
+      eventId,
+      boardId,
       data: any,
+      guid?: string,
     ): Promise<AxiosResponse> {
-        return this.fetchService.fetcher.post(`/live_board/v1/tracking`, {
-            event: {
-                id: eventId,
-                data: data,
-                platform: { id: 2, name: "Campaign" },
-            }
+        return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_events`, {
+            event_context: eventContext,
+            event_id: eventId,
+            guid: guid,
+            data: keysToSnakeCase(data),
         })
           .catch(e => {
               console.error("could not track action", e);
