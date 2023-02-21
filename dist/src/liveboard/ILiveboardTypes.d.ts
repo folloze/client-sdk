@@ -239,6 +239,7 @@ export declare type CtaParams = {
     lastName?: string;
     link?: string;
     invitee?: string;
+    subject?: string;
 };
 export declare type CtaResponseV1 = {
     id: number;

@@ -753,7 +753,7 @@ export class Liveboard {
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    trackLinkClick(boardId: number, options: TrackedLeadLinkClickPayload): Promise<AxiosResponse> | Promise<LeadLinkClickResponseV1> {
+    trackLinkClick(boardId: number, options: {email: string, subject: string}): Promise<AxiosResponse> | Promise<LeadLinkClickResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<LeadLinkClickResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
@@ -778,7 +778,7 @@ export class Liveboard {
      * @param {CtaParams} options
      * @returns {CtaResponseV1} CtaResponse
      */
-    saveSendAnEmailCta(boardId: number, options: TrackedLeadLinkClickPayload): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1> {
+    saveSendAnEmailCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<LeadSendAnEmailResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
