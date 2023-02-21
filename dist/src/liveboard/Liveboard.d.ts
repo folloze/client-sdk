@@ -52,7 +52,7 @@ export declare class Liveboard {
      * @param {boolean} bySlug
      * @returns {ItemResponseV2} ItemResponse
      */
-    getItem(itemId: number | string, boardId: number, bySlug: boolean, withMetadata?: boolean): Promise<ItemResponseV2>;
+    getItem(itemId: number | string, boardId: number, bySlug: boolean, withPreviewMetadata?: boolean): Promise<ItemResponseV2>;
     /**
      * Gets all items by params
      *
