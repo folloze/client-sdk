@@ -79,7 +79,7 @@ export declare class Analytics {
      * @param {any} data the data to report
      */
     trackUserEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
-    trackLeadEvent(eventContext: any, eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
+    trackLeadEvent(eventId: any, boardId: any, data: any, guid?: string): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;

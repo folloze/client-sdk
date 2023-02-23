@@ -124,14 +124,12 @@ export class Analytics {
     }
 
     trackLeadEvent(
-      eventContext,
       eventId,
       boardId,
       data: any,
       guid?: string,
     ): Promise<AxiosResponse> {
         return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_events`, {
-            event_context: eventContext,
             event_id: eventId,
             guid: guid,
             data: keysToSnakeCase(data),
