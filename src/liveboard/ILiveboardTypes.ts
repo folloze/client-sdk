@@ -268,7 +268,6 @@ export type CtaParams = {
     lastName?: string; // form/share cta
     link?: string; // link cta
     invitee?: string; // share cta
-    subject?: string //send an email cta
 };
 
 export type CtaResponseV1 = {
