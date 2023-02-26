@@ -27,7 +27,8 @@ import {
     CampaignElementDataV2,
     CtaParams,
     CtaResponseV1,
-    EnrichmentBoardConfigV3, LeadLinkClickResponseV1
+    EnrichmentBoardConfigV3, LeadLinkClickResponseV1,
+    LeadSendAnEmailResponseV1
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -766,6 +767,31 @@ export class Liveboard {
                       console.error("could not submit cta", e);
                       reject(e);
                   });
+            });
+        });
+    }
+
+    /**
+     * submit a "send an email" cta
+     *
+     * @param {number} boardId
+     * @param {{email: string, subject: string}} options
+     * @returns {LeadSendAnEmailResponseV1} LeadSendAnEmailResponseV1
+     */
+    saveSendAnEmailCta(boardId: number, options: {email: string, subject: string}): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1> {
+        return this.fetchService.withDisableOnPreview((): Promise<LeadSendAnEmailResponseV1> => {
+            return new Promise((resolve, reject) => {
+                this.fetchService.fetcher
+                .post<LeadSendAnEmailResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/send_email`, {
+                    ...keysToSnakeCase(options),
+                })
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
             });
         });
     }
