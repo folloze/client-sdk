@@ -223,13 +223,16 @@ export declare class Liveboard {
      */
     trackLinkClick(boardId: number, options: TrackedLeadLinkClickPayload): Promise<AxiosResponse> | Promise<LeadLinkClickResponseV1>;
     /**
-         * submit a "send an email" cta
-         *
-         * @param {number} boardId
-         * @param {CtaParams} options
-         * @returns {CtaResponseV1} CtaResponse
-         */
-    saveSendAnEmailCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1>;
+     * submit a "send an email" cta
+     *
+     * @param {number} boardId
+     * @param {{email: string, subject: string}} options
+     * @returns {LeadSendAnEmailResponseV1} LeadSendAnEmailResponseV1
+     */
+    saveSendAnEmailCta(boardId: number, options: {
+        email: string;
+        subject: string;
+    }): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1>;
     /**
      * submit a share CTA
      *

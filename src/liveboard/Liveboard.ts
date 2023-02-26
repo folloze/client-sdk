@@ -771,27 +771,27 @@ export class Liveboard {
         });
     }
 
-/**
+    /**
      * submit a "send an email" cta
      *
      * @param {number} boardId
-     * @param {CtaParams} options
-     * @returns {CtaResponseV1} CtaResponse
+     * @param {{email: string, subject: string}} options
+     * @returns {LeadSendAnEmailResponseV1} LeadSendAnEmailResponseV1
      */
-    saveSendAnEmailCta(boardId: number, options: CtaParams): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1> {
+    saveSendAnEmailCta(boardId: number, options: {email: string, subject: string}): Promise<AxiosResponse> | Promise<LeadSendAnEmailResponseV1> {
         return this.fetchService.withDisableOnPreview((): Promise<LeadSendAnEmailResponseV1> => {
             return new Promise((resolve, reject) => {
                 this.fetchService.fetcher
-                  .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/send_email`, {
-                      ...keysToSnakeCase(options),
-                  })
-                  .then(result => {
-                      resolve(result);
-                  })
-                  .catch(e => {
-                      console.error("could not submit cta", e);
-                      reject(e);
-                  });
+                .post<LeadSendAnEmailResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/send_email`, {
+                    ...keysToSnakeCase(options),
+                })
+                .then(result => {
+                    resolve(result);
+                })
+                .catch(e => {
+                    console.error("could not submit cta", e);
+                    reject(e);
+                });
             });
         });
     }
