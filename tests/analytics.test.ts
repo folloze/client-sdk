@@ -39,6 +39,8 @@ describe("testing analytics module", () => {
                 boardId: 0,
                 guid: "",
                 leadId: 0,
+                itemId: 0,
+                contentItemId: 0
             })
             .then(result => {
                 expect(result.status).toEqual(200);
