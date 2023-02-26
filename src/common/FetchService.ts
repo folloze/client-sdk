@@ -2,7 +2,7 @@ import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios";
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
-import merge from "lodash/merge";
+import mergeWith from "lodash/mergeWith";
 import get from "lodash/get";
 
 export type FetcherOptions = {
@@ -14,6 +14,7 @@ export type FetcherOptions = {
     sessionGuid?: string;
     csrfToken?: string;
     pingEndpoint?: string;
+    analyticsServiceEndpoint: string;
 };
 
 const defaultFetcherOptions: FetcherOptions = {
@@ -24,6 +25,7 @@ const defaultFetcherOptions: FetcherOptions = {
         baseURL: "/",
         headers: {},
     },
+    analyticsServiceEndpoint: ''
 };
 
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
@@ -68,7 +70,7 @@ export class FetchService {
     }
 
     public static async create(options: FetcherOptions): Promise<FetchService> {
-        options = merge(defaultFetcherOptions, options);
+        options = mergeWith(defaultFetcherOptions, options, (a, b) => b === null ? a : undefined);
         const instance = new FetchService(options);
         if (options.useMock) {
             await instance.createMockFetcher(options);

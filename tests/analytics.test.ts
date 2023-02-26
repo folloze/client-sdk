@@ -6,7 +6,7 @@ let sdk: ClientSDK;
 
 describe("testing analytics module", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, organizationId: 1, pingEndpoint: "url-for-ping"});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, pingEndpoint: "url-for-ping", analyticsServiceEndpoint: ''});
     });
 
     it("checks that trackLeadBoardView mock works as expected", async () => {
@@ -65,7 +65,7 @@ describe("testing analytics module", () => {
 
 describe("testing analytics module in preview", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, organizationId: 1, pingEndpoint: "url-for-ping", isPreview: true});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, pingEndpoint: "url-for-ping", isPreview: true, analyticsServiceEndpoint: ''});
     });
 
     it("checks that trackLeadBoardView isn't triggering an api call", async () => {
