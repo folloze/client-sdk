@@ -1,11 +1,11 @@
 import { LitElement } from "lit";
 import { TargetType } from "../../liveboard/ILiveboardTypes";
-declare type TrackedLeadActions = "lead-link-click";
+type TrackedLeadActions = "lead-link-click";
 export declare class AbstractLeadTracker {
     payload: unknown;
     action: TrackedLeadActions;
 }
-export declare type TrackedLeadLinkClickPayload = {
+export type TrackedLeadLinkClickPayload = {
     url: string;
     targetType: TargetType;
     details: {
@@ -16,6 +16,6 @@ export declare type TrackedLeadLinkClickPayload = {
 export declare class TrackedLeadLinkClick extends AbstractLeadTracker {
     constructor(payload: TrackedLeadLinkClickPayload);
 }
-export declare type TrackedLeadEvent = TrackedLeadLinkClick;
+export type TrackedLeadEvent = TrackedLeadLinkClick;
 export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent, onSuccess?: Function, onError?: Function): void;
 export {};

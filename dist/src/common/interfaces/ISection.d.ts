@@ -1,6 +1,6 @@
 import { FlzEditableImageData, FlzEditableVideoData } from "../../designer/IDesignerTypes";
 import { FloatingWidgetConfig, RibbonConfig, WidgetConfig } from "./IWidget";
-export declare type AddListItem = {
+export type AddListItem = {
     category: string;
     type: string;
     config: any;
@@ -16,25 +16,25 @@ export interface WidgetListItem extends AddListItem {
     type: WidgetType;
     config: WidgetConfig | FloatingWidgetConfig;
 }
-export declare type SectionType = "header" | "footer" | "body";
-export declare type WidgetType = "contact-card" | string;
-export declare type PredefinedSection = {
+export type SectionType = "header" | "footer" | "body";
+export type WidgetType = "contact-card" | string;
+export type PredefinedSection = {
     sections: Record<string, SectionConfig>;
     widgets?: Record<string, WidgetConfig>;
     ribbons?: Record<string, RibbonConfig>;
 };
-export declare type SectionConfig = {
+export type SectionConfig = {
     id: string;
     name?: string;
     type?: SectionType;
 };
-export declare type BackgroundImage = {
+export type BackgroundImage = {
     image: FlzEditableImageData;
     position: string;
     size: "cover" | "contain" | string;
     repeat: string;
 };
-export declare type BackgroundVideo = {
+export type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };

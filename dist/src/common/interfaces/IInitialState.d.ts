@@ -1,8 +1,8 @@
 import { ItemResponseV2, LeadResponseV1, OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
 import { Board, BoardConfig } from "./IBoard";
 import { PredefinedSection } from "./ISection";
-export declare type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
-export declare type InitialState = {
+export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+export type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
     layout: BoardConfig;
@@ -43,11 +43,11 @@ export declare type InitialState = {
     contact_card_info: ContactCardInfo;
     custom_attributes: Record<string, string>;
 };
-export declare type DataEnrichmentConfig = {
+export type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
     api_key: string;
 };
-export declare type CookieMatchingConfig = {
+export type CookieMatchingConfig = {
     type: "default" | "eloqua" | "marketo";
     api_key: string;
     run_cookie_matching: boolean;

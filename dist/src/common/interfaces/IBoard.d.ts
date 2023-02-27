@@ -25,7 +25,7 @@ export interface LoadableElement extends LitElement {
     config: LoadableConfig;
     data: LoadableConfig["data"];
 }
-export declare type BoardConfig = {
+export type BoardConfig = {
     id: number;
     meta: null | {
         savedTime?: Date;
@@ -42,7 +42,7 @@ export declare type BoardConfig = {
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
 };
-export declare type PageConfig = {
+export type PageConfig = {
     name: "default" | string;
     displayName?: string;
     grid: {
@@ -119,7 +119,7 @@ export interface ILiveBoard extends LitElement {
     getSection(id: string): SectionConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
 }
-export declare type Board = {
+export type Board = {
     allow_embedding?: boolean;
     id: number;
     auto_upgrade_widgets?: boolean;

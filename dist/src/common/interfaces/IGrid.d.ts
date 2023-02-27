@@ -1,4 +1,4 @@
-export declare type GridArea = {
+export type GridArea = {
     rowStart: number;
     colStart: number;
     rowEnd: number;

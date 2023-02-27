@@ -1,14 +1,14 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
 import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
-export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
-export declare type VideoGalleryTypes = "video";
+export type ImageGalleryTypes = "campaign" | "search" | "icon";
+export type VideoGalleryTypes = "video";
 export declare enum CampaignElementsTypes {
     footer = 1,
     privacy_message = 2,
     form_privacy_message = 3
 }
-export declare type GalleryImage = {
+export type GalleryImage = {
     url: string;
     fit: string;
     optimized_url?: string;
@@ -21,7 +21,7 @@ export declare type GalleryImage = {
     maxWidth?: number;
     maxHeight?: number;
 };
-export declare type GalleryVideo = {
+export type GalleryVideo = {
     url: string;
     fit: string;
     optimized_url?: string;
@@ -30,7 +30,7 @@ export declare type GalleryVideo = {
     transformation?: VideoTransformation;
     viewed?: boolean;
 };
-export declare type ImageTransformation = {
+export type ImageTransformation = {
     crop: {
         x: number;
         y: number;
@@ -50,10 +50,10 @@ export declare type ImageTransformation = {
         alpha: number;
     };
 };
-export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
-export declare type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";
-export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
-export declare type FlzEditableImageData = {
+export type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
+export type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";
+export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
+export type FlzEditableImageData = {
     url: string;
     bankCategory: ImageBankCategoryType;
     optimized_url?: string;
@@ -65,35 +65,35 @@ export declare type FlzEditableImageData = {
     maxWidth?: number;
     maxHeight?: number;
 };
-export declare type ImageGalleryParams = {
+export type ImageGalleryParams = {
     type: ImageGalleryTypes;
     query?: string;
     organizationId?: number;
     bankCategory?: ImageBankCategoryType;
     count?: number;
 };
-export declare type VideoGalleryParams = {
+export type VideoGalleryParams = {
     type: VideoGalleryTypes;
     query?: string;
     organizationId?: number;
     bankCategory?: VideoBankCategoryType;
     count?: number;
 };
-export declare type VideoPlaybackOptions = {
+export type VideoPlaybackOptions = {
     playOnce: boolean;
 };
-export declare type FlzEditableVideoData = {
+export type FlzEditableVideoData = {
     url: string;
     optimized_url?: string;
     transformation?: VideoTransformation;
     playback?: VideoPlaybackOptions;
 };
-export declare type BackgroundString = string;
-export declare type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
-export declare type BackgroundMedia = BackgroundImageOrVideo | BackgroundString;
-export declare type BackgroundLayer = "color" | "image" | "video";
-export declare type VideoBankCategoryType = "videos";
-export declare type UploadUrlResponseV1 = {
+export type BackgroundString = string;
+export type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
+export type BackgroundMedia = BackgroundImageOrVideo | BackgroundString;
+export type BackgroundLayer = "color" | "image" | "video";
+export type VideoBankCategoryType = "videos";
+export type UploadUrlResponseV1 = {
     file_name: string;
     method: string;
     params: {
@@ -104,7 +104,7 @@ export declare type UploadUrlResponseV1 = {
     get_url: string;
     put_url: string;
 };
-export declare type VideoTransformation = {
+export type VideoTransformation = {
     tint?: {
         color: string;
         alpha: number;
@@ -133,7 +133,7 @@ export declare type CloudinaryUploadResult = {
     original_extension: string;
     api_key: string;
 };
-export declare type FormField = {
+export type FormField = {
     label: string;
     order: number;
     placeholder: string;
@@ -142,15 +142,15 @@ export declare type FormField = {
     dependent_field?: DependentField;
     selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
 };
-declare type DependentField = {
+type DependentField = {
     name: string;
     values: string[];
 };
-declare type SelectInputValue = {
+type SelectInputValue = {
     id: string;
     label: string;
 };
-export declare type FormV1 = {
+export type FormV1 = {
     id: number;
     name: string;
     board_id: number;
@@ -159,7 +159,7 @@ export declare type FormV1 = {
     form_type: number;
     data: FormDataV1;
 };
-export declare type FormDataV1 = {
+export type FormDataV1 = {
     form_type?: number;
     name?: string;
     form_title?: string;
@@ -174,16 +174,16 @@ export declare type FormDataV1 = {
     base_url?: string;
     custom_script?: string;
 };
-declare type Label = {
+type Label = {
     text: string;
     url: string;
 };
-declare type Checkbox = {
+type Checkbox = {
     label: string;
     name: string;
     is_required: boolean;
 };
-export declare type FootersResponseV1 = {
+export type FootersResponseV1 = {
     id: number;
     element_id: number;
     name: string;
@@ -209,7 +209,7 @@ export declare type FootersResponseV1 = {
         dialog_text?: string;
     };
 };
-export declare type PrivacyMessageResponseV1 = {
+export type PrivacyMessageResponseV1 = {
     id: number;
     element_id: number;
     name: string;
@@ -221,7 +221,7 @@ export declare type PrivacyMessageResponseV1 = {
     link: string;
     can_close: boolean;
 };
-export declare type FormPrivacyMessageDataV1 = {
+export type FormPrivacyMessageDataV1 = {
     is_standard: boolean;
     message: {
         html: string;
@@ -235,7 +235,7 @@ export declare type FormPrivacyMessageDataV1 = {
         checkboxes: Checkbox[];
     };
 };
-export declare type FormPrivacyMessageResponseV1 = {
+export type FormPrivacyMessageResponseV1 = {
     id: number;
     element_id: number;
     name: string;
@@ -245,15 +245,15 @@ export declare type FormPrivacyMessageResponseV1 = {
     text_area: FormPrivacyMessageDataV1["text_area"];
     checkbox_area: FormPrivacyMessageDataV1["checkbox_area"];
 };
-export declare type CampaignElementResponseV1 = {
+export type CampaignElementResponseV1 = {
     data: Record<string, FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1>;
     default_id: number;
 };
-export declare type PrivacySettingsResponseV1 = PrivacySettings;
-export declare type BoardHasPersonalizationResponseV1 = {
+export type PrivacySettingsResponseV1 = PrivacySettings;
+export type BoardHasPersonalizationResponseV1 = {
     personalization: boolean;
 };
-export declare type FeatureSettingsResponseV1 = {
+export type FeatureSettingsResponseV1 = {
     accounts_dashboard: boolean;
     advanced_reports: boolean;
     analytics_dashboards: boolean;
@@ -270,10 +270,10 @@ export declare type FeatureSettingsResponseV1 = {
     personalization: boolean;
     set_group_board: boolean;
 };
-export declare type BoardHasItemsResponseV1 = {
+export type BoardHasItemsResponseV1 = {
     has_items: boolean;
 };
-export declare type PersonalizationV1 = {
+export type PersonalizationV1 = {
     auto_assign_inviter: object;
     campaign: {
         banner: object;
@@ -286,7 +286,7 @@ export declare type PersonalizationV1 = {
     };
     is_enabled: boolean;
 };
-export declare type EmailTemplateV1 = {
+export type EmailTemplateV1 = {
     id: number;
     name: string;
     board_id: number;
@@ -303,7 +303,7 @@ export declare type EmailTemplateV1 = {
     logo: string;
     template: boolean;
 };
-export declare type UserV1 = {
+export type UserV1 = {
     id: number;
     name: string;
     email: string;
@@ -312,25 +312,25 @@ export declare type UserV1 = {
     twitter: object;
     image: string;
 };
-export declare type ConfigSavedConflict = {
+export type ConfigSavedConflict = {
     msg: string;
     config: BoardConfig;
     published_hash: string;
     is_board_online: boolean;
     user: UserV1;
 };
-export declare type ConfigSavedSuccess = {
+export type ConfigSavedSuccess = {
     config: BoardConfig;
     published_hash: string;
     is_board_online: boolean;
 };
-export declare type PublishedUnpublishedConfig = {
+export type PublishedUnpublishedConfig = {
     published_config: BoardConfig;
     unpublished_config: BoardConfig;
     published_hash: string;
     is_board_online: boolean;
 };
-export declare type MergeTagAttribute = {
+export type MergeTagAttribute = {
     id: number;
     is_enabled: boolean;
     label: string;
@@ -339,7 +339,7 @@ export declare type MergeTagAttribute = {
     allow_text_replacement: boolean;
     allow_user_input: boolean;
 };
-export declare type MergeTagValue = {
+export type MergeTagValue = {
     id: string;
     name: string;
 };

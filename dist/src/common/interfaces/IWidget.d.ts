@@ -1,7 +1,7 @@
 import { ruleId } from "./IPersonalization";
 import { FloatPos, GridPos } from "./IPositions";
 import { DotNestedKeys } from "../helpers/helpers";
-export declare type closable = {
+export type closable = {
     close: () => void;
 };
 export interface LiveConfig {
@@ -57,12 +57,12 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
         persist?: TriggerPersistence;
     };
 }
-declare type TriggerPersistenceFields = {
+type TriggerPersistenceFields = {
     [key: string]: number | string | boolean;
     showed?: number;
     closed?: number;
 };
-export declare type TriggerPersistence = {
+export type TriggerPersistence = {
     expiration: "never" | number;
     fields: TriggerPersistenceFields;
     showConditions?: {
@@ -73,11 +73,11 @@ export declare type TriggerPersistence = {
         log?: Function;
     };
 };
-export declare type TriggerPersistenceData = {
+export type TriggerPersistenceData = {
     updated: string;
     fields: TriggerPersistenceFields;
 };
-export declare type TriggerPersistenceRule = {
+export type TriggerPersistenceRule = {
     property: DotNestedKeys<{
         persisted: TriggerPersistenceData;
     } & Omit<FloatingWidgetConfig, "trigger">>;
