@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
+import {AnalyticEventPrepared} from "../common/helpers/analyticEventTracking";
 
 export type PingPayload = {
     leadId: number;
@@ -179,6 +180,17 @@ export class Analytics {
                 console.error("could not update invitation wrapper", e);
                 throw e;
             });
+        });
+    }
+
+    sendBeacon(data: AnalyticEventPrepared[]): Promise<AxiosResponse> {
+        return this.fetchService.withDisableOnPreview(() => {
+            try {
+                const url = `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/lead_events`;
+                navigator.sendBeacon(url, JSON.stringify(data));
+            } catch (e) {
+                console.error("could not send beacon");
+            }
         });
     }
 }

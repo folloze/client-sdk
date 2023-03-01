@@ -2,21 +2,32 @@ import {type LitElement} from "lit";
 import {componentEmit} from "./eventHelpers";
 
 type AnalyticTypeToPayload = {
-    video_start: {
-        contentId: number;
+    video_started: {
+        content_id: number;
         guid: string;
     };
-    video_end: {
-        contentId: number;
+    video_ended: {
+        content_id: number;
         guid: string;
         duration: number; // the time in seconds
     };
-    scroll_end: undefined;
 };
 
 type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
 }[K];
+
+export type AnalyticEventPrepared = {
+    type: string; // or string when its custom
+    timezone_offset: number;
+    timezone: string; // 'Asia/Jerusalem'
+    timestamp_delta: number; // (-5) delta seconds from timestamp to now
+    session_id: string;
+    is_custom: boolean; // is it a user defined event
+    metadata: unknown;
+
+    _timestamp?: number; // for client use only - wont be sent to server
+};
 
 /**
  *

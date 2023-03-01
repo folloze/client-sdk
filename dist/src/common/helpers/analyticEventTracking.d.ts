@@ -1,18 +1,27 @@
 declare type AnalyticTypeToPayload = {
-    video_start: {
-        contentId: number;
+    video_started: {
+        content_id: number;
         guid: string;
     };
-    video_end: {
-        contentId: number;
+    video_ended: {
+        content_id: number;
         guid: string;
         duration: number;
     };
-    scroll_end: undefined;
 };
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
 }[K];
+export declare type AnalyticEventPrepared = {
+    type: string;
+    timezone_offset: number;
+    timezone: string;
+    timestamp_delta: number;
+    session_id: string;
+    is_custom: boolean;
+    metadata: unknown;
+    _timestamp?: number;
+};
 /**
  *
  * @param el - the dispatching dom element

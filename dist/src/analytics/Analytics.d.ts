@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
+import { AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
 export declare type PingPayload = {
     leadId: number;
     boardId: number;
@@ -86,4 +87,5 @@ export declare class Analytics {
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
     updateInvitationUsed(token: string): Promise<AxiosResponse>;
+    sendBeacon(data: AnalyticEventPrepared[]): Promise<AxiosResponse>;
 }
