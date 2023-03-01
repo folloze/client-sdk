@@ -183,14 +183,17 @@ export class Analytics {
         });
     }
 
-    sendBeacon(data: AnalyticEventPrepared[]): Promise<AxiosResponse> {
-        return this.fetchService.withDisableOnPreview(() => {
-            try {
-                const url = `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/lead_events`;
-                navigator.sendBeacon(url, JSON.stringify(data));
-            } catch (e) {
-                console.error("could not send beacon");
-            }
-        });
+    sendBeacon(data: AnalyticEventPrepared[]): boolean {
+        if (this.fetchService.options?.isPreview) {
+            return true;
+        }
+
+        try {
+            const url = `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/lead_events`;
+            const payload = JSON.stringify({events: data});
+            return navigator.sendBeacon(url, payload);
+        } catch (e) {
+            console.error("could not send beacon", e);
+        }
     }
 }

@@ -87,5 +87,5 @@ export declare class Analytics {
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
     updateInvitationUsed(token: string): Promise<AxiosResponse>;
-    sendBeacon(data: AnalyticEventPrepared[]): Promise<AxiosResponse>;
+    sendBeacon(data: AnalyticEventPrepared[]): boolean;
 }
