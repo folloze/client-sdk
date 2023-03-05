@@ -52,7 +52,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-state"
     | "is-personalization-mod"
     | "floating-widget-manager"
-    | "track-lead-event";
+    | "track-lead-event"
+    | "analytic-event";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-modal-element"
