@@ -5,6 +5,7 @@ export declare type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
+    contentItemId?: number;
     guid: string;
 };
 export declare enum LiveBoardEventTypes {
