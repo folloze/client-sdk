@@ -1,58 +1,102 @@
-import {type LitElement} from "lit";
-import {componentEmit} from "./eventHelpers";
+export type PUBLIC_OUTGOING_EVENT_ACTION =
+    | "Folloze.ctaClick"
+    | "Folloze.ctaSubmit"
+    | "Folloze.pageview"
+    | "Folloze.onConsent";
+export type PUBLIC_INCOMING_EVENT_ACTION = "Folloze.consentGiven" | "Folloze.stopTrackingForVisit";
 
-type AnalyticTypeToPayload = {
-    video_started: {
-        content_id: number;
-        guid: string;
-    };
-    video_ended: {
-        content_id: number;
-        guid: string;
-        duration: number; // the time in seconds
-    };
-};
+export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
 
-type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
-    [P in K]: AnalyticTypeToPayload[P];
-}[K];
+export type FLZ_LIVEBOARD_EVENT_ACTION =
+    | "append-to-liveboard"
+    | "append-to-liveboard-light-dom"
+    | "widget-connected"
+    | "widget-update"
+    | "widget-updated"
+    | "widget-first-updated"
+    | "widgets-scripts-loaded"
+    | "resize"
+    | "change-category"
+    | "changeItem"
+    | "close-modal"
+    | "closeItemViewerRequest"
+    | "ctaClick"
+    | "ctaSubmit"
+    | "consent-given"
+    | "get-current-item"
+    | "get-initial-journey-item"
+    | "get-category-slug"
+    | "get-all-categories"
+    | "get-modal-element"
+    | "get-item"
+    | "get-items"
+    | "get-lead"
+    | "get-journey"
+    | "getFormData"
+    | "get-form-privacy-message"
+    | "get-contact-card-info"
+    | "get-file-metadata"
+    | "get-file-download-url"
+    | "get-footers"
+    | "get-org-header-config"
+    | "stop-tracking-for-visit"
+    | "like-item"
+    | "open-link-by-target-type"
+    | "openItemViewer"
+    | "itemViewerClosed"
+    | "open-modal"
+    | "register-floating-widgets-triggers"
+    | "get-form-privacy-messages"
+    | "share-by-email"
+    | "get-privacy-messages"
+    | "get-state"
+    | "is-personalization-mod"
+    | "floating-widget-manager"
+    | "track-lead-event"
+    | "analytic-event";
 
-export type AnalyticEventPrepared = {
-    type: string; // or string when its custom
-    timezone_offset: number;
-    timezone: string; // 'Asia/Jerusalem'
-    timestamp_delta: number; // (-5) delta seconds from timestamp to now
-    session_id: string;
-    is_custom: boolean; // is it a user defined event
-    metadata: unknown;
-
-    _timestamp?: number; // for client use only - wont be sent to server
-};
-
-/**
- *
- * @param el - the dispatching dom element
- * @param type - string for the event name / type
- * @param payload - any data that can convert to json
- */
-export function analyticEvent(el: HTMLElement, type: string, payload?: unknown) {
-    analyticEventDispatch(el, type, true, payload);
-}
-
-/**
- *
- * @param el - the dispatching dom element
- * @param type - (string) any key name from AnalyticTypeToPayload
- * @param payload - data structure per type
- */
-export function analyticInternalEvent<K extends keyof AnalyticTypeToPayload>(
-    el: HTMLElement,
-    type: K,
-    payload?: TypeMapAsGeneric<K>,
-) {
-    analyticEventDispatch(el, type, false, payload);
-}
-
-function analyticEventDispatch(el: HTMLElement, type: string, isCustom: boolean = false, payload?: unknown) {
-    componentEmit(el as LitElement, "analytic-event", {type, payload, isCustom});
-}
+export type FLZ_DESIGNER_EVENT_ACTION =
+    | "get-modal-element"
+    | "getFormData"
+    | "get-form-privacy-message"
+    | "get-contact-card-info"
+    | "get-footers"
+    | "get-org-header-config"
+    | "get-item"
+    | "get-items"
+    | "get-all-categories"
+    | "open-modal"
+    | "register-floating-widgets-triggers"
+    | "searchBoardContacts"
+    | "update-form"
+    | "create-form"
+    | "get-email-templates"
+    | "get-forms"
+    | "get-form-privacy-messages"
+    | "get-merge-tag-values"
+    | "get-board-merge-tags"
+    | "saveFormCta"
+    | "saveLinkCta"
+    | "saveShareCta"
+    | "saveContactCta"
+    | "saveMessageCta"
+    | "edit-floating-widget"
+    | "edit-floating-widget-perso"
+    | "save-section-config"
+    | "delete-widget"
+    | "close-all-editors"
+    | "resize"
+    | "widget-connected"
+    | "widget-first-updated"
+    | "widgets-scripts-loaded"
+    | "widget-update"
+    | "widget-updated"
+    | "append-to-designer"
+    | "get-user"
+    | "get-privacy-messages"
+    | "get-is-internal-cookie-management"
+    | "add-merge-tag-values"
+    | "is-personalization-mod"
+    | "refresh-designer"
+    | "track-user-event"
+    | "save-config-lazy";
