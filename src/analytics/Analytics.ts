@@ -7,6 +7,7 @@ export type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
+    contentItemId?: number;
     guid: string;
 };
 
@@ -151,6 +152,7 @@ export class Analytics {
                 lead_id: payload.leadId,
                 board_id: payload.boardId,
                 item_id: payload.itemId,
+                content_item_id: payload.contentItemId,
                 client_guid: payload.guid,
             });
         });

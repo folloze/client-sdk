@@ -28,6 +28,7 @@ import {
 export const rules = (mock: MockAdapter) => {
     const item = {
         id: 1,
+        content_item_id: 1,
         category_ids: [1],
         category_item_data: [{id: 1, position: 65536, route: "foo.bar.com/baz/boo/amazoncom-spend-less-smile-more"}],
         description: "item description",
