@@ -1,6 +1,7 @@
 import {AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
+import {AnalyticEventPrepared} from "../common/helpers/analyticEventTracking";
 
 export type PingPayload = {
     leadId: number;
@@ -8,7 +9,7 @@ export type PingPayload = {
     itemId?: number;
     contentItemId?: number;
     guid: string;
-}
+};
 
 export enum LiveBoardEventTypes {
     viewed_board = 1,
@@ -22,7 +23,7 @@ export enum LiveBoardEventTypes {
     clicked_on_cta = 9,
     downloaded_an_item = 10,
     changed_category = 11,
-    searched_items = 12
+    searched_items = 12,
 }
 
 export enum DesignerEventTypes {
@@ -55,7 +56,7 @@ export enum DesignerEventTypes {
     publish_board = 330,
     preview_board = 331,
     edit_editable_component = 332,
-    add_personalization_rule_from_designer = 333
+    add_personalization_rule_from_designer = 333,
 }
 
 export class Analytics {
@@ -72,7 +73,10 @@ export class Analytics {
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_views`)
+            return this.fetchService.fetcher
+                .post(
+                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_views`,
+                )
                 .catch(e => {
                     console.error("could not track lead board view", e);
                     throw e;
@@ -88,7 +92,11 @@ export class Analytics {
      */
     trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/lead_views`, {guid})
+            return this.fetchService.fetcher
+                .post(
+                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/lead_views`,
+                    {guid},
+                )
                 .catch(e => {
                     console.error("could not track lead item view", e);
                     throw e;
@@ -102,17 +110,15 @@ export class Analytics {
      * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
-    trackUserEvent(
-        eventId: LiveBoardEventTypes|DesignerEventTypes,
-        data: any
-    ): Promise<AxiosResponse> {
-        return this.fetchService.fetcher.post(`/api/v1/tracking`, {
-            event: {
-                id: eventId,
-                data: data,
-                platform: { id: 1, name: "App" },
-              }
-        })
+    trackUserEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse> {
+        return this.fetchService.fetcher
+            .post(`/api/v1/tracking`, {
+                event: {
+                    id: eventId,
+                    data: data,
+                    platform: {id: 1, name: "App"},
+                },
+            })
             .catch(e => {
                 console.error("could not track action", e);
                 throw e;
@@ -125,21 +131,19 @@ export class Analytics {
      * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
-    trackLeadEvent(
-      eventId: LiveBoardEventTypes|DesignerEventTypes,
-      data: any,
-    ): Promise<AxiosResponse> {
-        return this.fetchService.fetcher.post(`/live_board/v1/tracking`, {
-            event: {
-                id: eventId,
-                data: data,
-                platform: { id: 2, name: "Campaign" },
-            }
-        })
-          .catch(e => {
-              console.error("could not track action", e);
-              throw e;
-          });
+    trackLeadEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse> {
+        return this.fetchService.fetcher
+            .post(`/live_board/v1/tracking`, {
+                event: {
+                    id: eventId,
+                    data: data,
+                    platform: {id: 2, name: "Campaign"},
+                },
+            })
+            .catch(e => {
+                console.error("could not track action", e);
+                throw e;
+            });
     }
 
     sendPing(payload: PingPayload) {
@@ -149,38 +153,49 @@ export class Analytics {
                 board_id: payload.boardId,
                 item_id: payload.itemId,
                 content_item_id: payload.contentItemId,
-                client_guid: payload.guid
+                client_guid: payload.guid,
             });
         });
     }
 
     validateSession(): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post("/live_board/v1/session_validations")
-                .catch(e => {
-                    console.error("could not validate session", e);
-                    throw e;
-                });
+            return this.fetchService.fetcher.post("/live_board/v1/session_validations").catch(e => {
+                console.error("could not validate session", e);
+                throw e;
+            });
         });
     }
 
     createSession(): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post<SessionResponseV1>("/live_board/v1/sessions")
-                .catch(e => {
-                    console.error("could not create session", e);
-                    throw e;
-                });
+            return this.fetchService.fetcher.post<SessionResponseV1>("/live_board/v1/sessions").catch(e => {
+                console.error("could not create session", e);
+                throw e;
+            });
         });
     }
 
     updateInvitationUsed(token: string): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.put(`/live_board/v2/invitation_wrappers/${token}`)
-                .catch(e => {
-                    console.error("could not update invitation wrapper", e);
-                    throw e;
-                });
+            return this.fetchService.fetcher.put(`/live_board/v2/invitation_wrappers/${token}`).catch(e => {
+                console.error("could not update invitation wrapper", e);
+                throw e;
+            });
         });
+    }
+
+    sendBeacon(data: AnalyticEventPrepared[]): boolean {
+        if (this.fetchService.options?.isPreview) {
+            return true;
+        }
+
+        try {
+            const url = `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/lead_events`;
+            const payload = JSON.stringify({events: data});
+            return navigator.sendBeacon(url, payload);
+        } catch (e) {
+            console.error("could not send beacon", e);
+        }
     }
 }
