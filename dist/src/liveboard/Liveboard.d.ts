@@ -124,7 +124,7 @@ export declare class Liveboard {
      * @param {string} type
      * @param {object} enrichmentData
      */
-    updateEnrichment(type: string, enrichmentData: object): Promise<void>;
+    updateEnrichment(type: string, enrichmentData: object, requestTime: number): Promise<void>;
     /**
      * Update cookie match value for lead data enrichment
      *

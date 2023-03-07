@@ -395,11 +395,12 @@ export class Liveboard {
      * @param {string} type
      * @param {object} enrichmentData
      */
-    updateEnrichment(type: string, enrichmentData: object): Promise<void> {
+    updateEnrichment(type: string, enrichmentData: object, requestTime: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .post<void>("/live_board/v2/enrichments", {
                     type,
+                    request_time: requestTime,
                     enrichment_data: enrichmentData,
                 })
                 .then(() => {
