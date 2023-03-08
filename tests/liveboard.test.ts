@@ -89,7 +89,7 @@ describe("test liveboard mocks module", () => {
     });
 
     it("checks that updateEnrichment mock works as expected", async () => {
-        await sdk.liveboard.updateEnrichment("dnb", {name: "company"}).then(result => expect(result).toBeNull);
+        await sdk.liveboard.updateEnrichment("dnb", {name: "company"}, 100).then(result => expect(result).toBeNull);
     });
 
     it("checks that getGeoLocation mock works as expected", async () => {
