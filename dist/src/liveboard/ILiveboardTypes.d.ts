@@ -70,6 +70,7 @@ export declare type ItemsParams = ItemNavigationParams & {
 };
 export declare type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
+    content_item_id: number;
     slug: string;
     name: string;
     description: string;
@@ -92,6 +93,7 @@ export declare type JourneyItemParams = ItemNavigationParams & {
 };
 export declare type ItemResponseV2 = {
     id: number;
+    content_item_id: number;
     category_ids: number[];
     category_item_data: {
         id: number;

@@ -86,6 +86,7 @@ export type ItemsParams = ItemNavigationParams & {
 // minimixed data for the item relevant for the item viewer
 export type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
+    content_item_id: number;
     slug: string;
     name: string;
     description: string;
@@ -110,6 +111,7 @@ export type JourneyItemParams = ItemNavigationParams & {
 
 export type ItemResponseV2 = {
     id: number;
+    content_item_id: number;
     category_ids: number[];
     category_item_data: {id: number; position: number; route: string}[];
     description: string;
