@@ -6,10 +6,16 @@ type AnalyticTypeToPayload = {
         content_id: number;
         guid: string;
     };
+
     video_ended: {
         content_id: number;
         guid: string;
         duration: number; // the time in seconds
+    };
+
+    lead_send_email_clicked: {
+        email: string;
+        subject: string;
     };
 };
 
@@ -22,7 +28,7 @@ export type AnalyticEventPrepared = {
     timezone_offset: number;
     timezone: string; // 'Asia/Jerusalem'
     timestamp_delta: number; // (-5) delta seconds from timestamp to now
-    session_id: string;
+    session_guid: string;
     is_custom: boolean; // is it a user defined event
     metadata: unknown;
 

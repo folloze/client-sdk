@@ -8,6 +8,10 @@ declare type AnalyticTypeToPayload = {
         guid: string;
         duration: number;
     };
+    lead_send_email_clicked: {
+        email: string;
+        subject: string;
+    };
 };
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
@@ -17,7 +21,7 @@ export declare type AnalyticEventPrepared = {
     timezone_offset: number;
     timezone: string;
     timestamp_delta: number;
-    session_id: string;
+    session_guid: string;
     is_custom: boolean;
     metadata: unknown;
     _timestamp?: number;
