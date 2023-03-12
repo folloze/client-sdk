@@ -171,11 +171,11 @@ export class Liveboard {
      * @param {boolean} bySlug
      * @returns {ItemResponseV2} ItemResponse
      */
-    getItem(itemId: number | string, boardId: number, bySlug: boolean): Promise<ItemResponseV2> {
+    getItem(itemId: number | string, boardId: number, bySlug: boolean, withPreviewMetadata?: boolean): Promise<ItemResponseV2> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v2/items/${itemId}`, {
-                    params: {by_slug: bySlug, board_id: boardId},
+                    params: {by_slug: bySlug, board_id: boardId, with_preview_metadata: withPreviewMetadata},
                 })
                 .then(result => {
                     resolve(result.data);
