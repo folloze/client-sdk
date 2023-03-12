@@ -172,6 +172,7 @@ export class Liveboard {
      * @returns {ItemResponseV2} ItemResponse
      */
     getItem(itemId: number | string, boardId: number, bySlug: boolean, withPreviewMetadata?: boolean): Promise<ItemResponseV2> {
+        console.log("client_sdk... withPreviewMetadata:", withPreviewMetadata);
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v2/items/${itemId}`, {
