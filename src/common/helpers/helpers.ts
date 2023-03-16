@@ -154,3 +154,11 @@ export type DotNestedKeys<T> = (
 ) extends infer D
     ? Extract<D, string>
     : never;
+
+export function isInDesigner(): boolean {
+    return window["board"]?.classList.contains("designer");
+}
+
+export function isInPreview(): boolean {
+    return window["board"]?.classList.contains("preview");
+}
