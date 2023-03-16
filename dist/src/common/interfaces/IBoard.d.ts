@@ -118,6 +118,7 @@ export interface ILiveBoard extends LitElement {
     getAllWidgetsElements(): LiveWidget[];
     getSection(id: string): SectionConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
+    notifyWidgets(event: FlzEvent): void;
 }
 export declare type Board = {
     allow_embedding?: boolean;
