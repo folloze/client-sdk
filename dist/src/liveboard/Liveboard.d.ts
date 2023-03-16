@@ -87,7 +87,7 @@ export declare class Liveboard {
      * @param {number} itemId
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
-    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
+    getItemDownloadUrl(sourceType: string, boardId: number, contentItemId: number, itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
     /**
      *
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
