@@ -112,6 +112,8 @@ export type JourneyItemParams = ItemNavigationParams & {
 export type ItemResponseV2 = {
     id: number;
     content_item_id: number;
+    preview_metadata?: string;
+    file_viewer_type?: string;
     category_ids: number[];
     category_item_data: {id: number; position: number; route: string}[];
     description: string;
