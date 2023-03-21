@@ -61,6 +61,8 @@ declare type ItemNavigationParams = {
     virtual_category?: {
         flz_item_ids: number[];
     };
+    journey_type?: "nextPrev" | "list";
+    amount?: number;
 };
 export declare type ItemsParams = ItemNavigationParams & {
     boardId: number;
