@@ -10,4 +10,5 @@ export * from "./IEvent";
 export * from "../../liveboard/ILiveboardTypes";
 export * from "./IItemViewer";
 export * from "./IPersonalization";
+export * from "./IFollozeState";
 export * from "./IInitialState";
