@@ -236,12 +236,14 @@ export type ItemAnalysisResponseV1 = {
     secured: boolean;
 };
 
+export type PreviewMetadata = {
+    url?: string; // every provider but box
+    file_id?: number; // box
+    access_token?: string; // box
+};
+
 export type ItemFileMetadataResponseV1 = {
-    preview_metadata: {
-        url?: string; // every provider but box
-        file_id?: number; // box
-        access_token?: string; // box
-    };
+    preview_metadata: PreviewMetadata
 };
 
 export type ItemDownloadUrlSuccessResponseV2 = {

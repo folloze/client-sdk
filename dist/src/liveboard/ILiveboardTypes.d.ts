@@ -211,12 +211,13 @@ export declare type SnapshotUrlResponseV1 = {
 export declare type ItemAnalysisResponseV1 = {
     secured: boolean;
 };
+export declare type PreviewMetadata = {
+    url?: string;
+    file_id?: number;
+    access_token?: string;
+};
 export declare type ItemFileMetadataResponseV1 = {
-    preview_metadata: {
-        url?: string;
-        file_id?: number;
-        access_token?: string;
-    };
+    preview_metadata: PreviewMetadata;
 };
 export declare type ItemDownloadUrlSuccessResponseV2 = {
     download_url: string;
