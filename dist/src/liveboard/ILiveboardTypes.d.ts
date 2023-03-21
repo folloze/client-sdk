@@ -94,7 +94,7 @@ export declare type JourneyItemParams = ItemNavigationParams & {
 export declare type ItemResponseV2 = {
     id: number;
     content_item_id: number;
-    preview_metadata?: string;
+    preview_metadata?: ItemFileMetadataResponseV1;
     file_viewer_type?: string;
     category_ids: number[];
     category_item_data: {

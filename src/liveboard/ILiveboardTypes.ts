@@ -112,7 +112,7 @@ export type JourneyItemParams = ItemNavigationParams & {
 export type ItemResponseV2 = {
     id: number;
     content_item_id: number;
-    preview_metadata?: string;
+    preview_metadata?: ItemFileMetadataResponseV1;
     file_viewer_type?: string;
     category_ids: number[];
     category_item_data: {id: number; position: number; route: string}[];
@@ -238,9 +238,9 @@ export type ItemAnalysisResponseV1 = {
 
 export type ItemFileMetadataResponseV1 = {
     preview_metadata: {
-        url?: string; //every provider but box
-        file_id?: number; //box
-        access_token?: string; //box
+        url?: string; // every provider but box
+        file_id?: number; // box
+        access_token?: string; // box
     };
 };
 
