@@ -36,7 +36,6 @@ export type InitialState = {
     footers: Record<string, Footer>;
     features: {
         personalization: boolean;
-        multiPages?: boolean;
     };
     user?: User;
     privacy_messages: PrivacyMessage[];
