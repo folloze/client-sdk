@@ -343,4 +343,11 @@ export declare type MergeTagValue = {
     id: string;
     name: string;
 };
+export declare type Theme = {
+    id: number;
+    name: string | "system theme";
+    status: "archived" | "published";
+    style: string;
+    type: "basic" | "migration" | "system";
+};
 export {};
