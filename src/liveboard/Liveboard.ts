@@ -244,10 +244,15 @@ export class Liveboard {
      *
      * @param {number} itemId
      */
-    likeItem(itemId: number): Promise<void> {
+    likeItem(itemId: number, contentItemId: number, boardId: number, sourceType: string): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/likes`)
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/likes`, {
+                    itemId,
+                    contentItemId,
+                    sourceType,
+                    boardId
+                })
                 .then(() => {
                     resolve();
                 })
