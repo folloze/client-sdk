@@ -193,6 +193,7 @@ export class Analytics {
         try {
             const url = `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/lead_events`;
             const payload = JSON.stringify({events: data});
+            // const blob = new Blob([payload], {type: "application/json"});
             return navigator.sendBeacon(url, payload);
         } catch (e) {
             console.error("could not send beacon", e);

@@ -3,7 +3,7 @@ import {FloatingWidgetConfig, GridConfig, LiveConfig, LoadableConfig, RibbonConf
 import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
 import {IPersonalizationConfig} from "./IPersonalization";
-import { FlzEvent } from "../FlzEvent";
+import {FlzEvent} from "../FlzEvent";
 
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
@@ -132,6 +132,8 @@ export interface ILiveBoard extends LitElement {
 
     getSection(id: string): SectionConfig;
     getRibbonBySection(sectionId: string): RibbonConfig;
+
+    notifyWidgets(event: FlzEvent): void;
 }
 
 export type Board = {
