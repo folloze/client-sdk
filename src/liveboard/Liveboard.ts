@@ -286,17 +286,15 @@ export class Liveboard {
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(
-        sourceType: string,
-        boardId: number,
+        sourceType: "item" | "ai",
         contentItemId: number,
-        itemId: number
+        itemId?: number
     ): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v2/downloads`, {
                     params: {
                         source_type: sourceType,
-                        board_id: boardId,
                         content_item_id: contentItemId,
                         item_id: itemId
                     }
