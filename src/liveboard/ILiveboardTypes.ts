@@ -286,6 +286,8 @@ export type CtaResponseV1 = {
 
 export type TargetType = "inline" | "new_tab";
 
+export type SourceType = "item" | "ai"
+
 export type GeoLocationResponseV1 = {
     city: string;
     continent: string;

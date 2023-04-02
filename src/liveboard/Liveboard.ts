@@ -27,7 +27,9 @@ import {
     CampaignElementDataV2,
     CtaParams,
     CtaResponseV1,
-    EnrichmentBoardConfigV3, LeadLinkClickResponseV1
+    EnrichmentBoardConfigV3,
+    LeadLinkClickResponseV1,
+    SourceType
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -286,7 +288,7 @@ export class Liveboard {
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(
-        sourceType: "item" | "ai",
+        sourceType: SourceType,
         contentItemId: number,
         itemId?: number
     ): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
