@@ -254,6 +254,7 @@ export declare type CtaResponseV1 = {
     group_user: boolean;
 };
 export declare type TargetType = "inline" | "new_tab";
+export declare type SourceType = "item" | "ai";
 export declare type GeoLocationResponseV1 = {
     city: string;
     continent: string;
