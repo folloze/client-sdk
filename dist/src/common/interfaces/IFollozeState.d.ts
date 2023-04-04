@@ -7,5 +7,5 @@ export declare type IFollozeState = {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
     };
-    platform: "desktop" | string;
+    platform: "desktop" | "mobile";
 };
