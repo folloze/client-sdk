@@ -473,7 +473,7 @@ export class Designer {
     ): Promise<Record<number, Theme>> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<Record<number, Theme>>(`/api/v1/board/${boardId}/designer_themes`)
+                .get<Record<number, Theme>>(`/api/v1/boards/${boardId}/designer_themes`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get designer themes", e);
