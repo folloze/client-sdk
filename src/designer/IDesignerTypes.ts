@@ -406,3 +406,11 @@ export type MergeTagValue = {
     id: string;
     name: string;
 }
+
+export type Theme = {
+  id: number;
+  name: string | "system theme";
+  status: "archived" | "published";
+  style: string;
+  type: "basic" | "migration" | "system";
+}

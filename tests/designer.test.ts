@@ -216,4 +216,9 @@ describe("testing sdk designer module", () => {
     it("checks that merge tag values are fetched", async () => {
         await sdk.designer.getMergeTagValues(1, 1).then(result => expect(result[1][0].id).toEqual("any value"));
     });
+
+    it("checks that designer themes are fetched", async () => {
+      await sdk.designer.getDesignerThemes(1).then(result => expect(result[1].id).toEqual(1));
+      await sdk.designer.getDesignerThemes(1).then(result => expect(result[2].id).toEqual(2));
+  });
 });

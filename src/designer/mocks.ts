@@ -17,6 +17,7 @@ import {
     ConfigSavedSuccess,
     MergeTagAttribute,
     MergeTagValue,
+    Theme
 } from "./IDesignerTypes";
 import {Board} from "../common/interfaces/IBoard";
 
@@ -781,5 +782,22 @@ export const rules = (mock: MockAdapter) => {
                 name: "First Value",
             },
         ],
+    });
+
+    mock.onGet(/api\/v1\/board\/(\d+)\/designer_themes/).reply<Record<number, Theme>>(200, {
+        1: {
+            id: 1,
+            name: "system theme",
+            status: "archived",
+            style: "style css",
+            type: "system"
+        },
+        2: {
+            id: 2,
+            name: "theme name",
+            status: "published",
+            style: "another style css",
+            type: "basic"
+        }
     });
 };
