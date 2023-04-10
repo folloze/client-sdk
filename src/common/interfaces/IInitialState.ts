@@ -143,7 +143,7 @@ export interface Footer {
     element_id: number;
     name: string;
     description: string;
-    state: number;
+    state: "default" | "not_default";
     is_standard: boolean;
     logo: {
         show: boolean;
