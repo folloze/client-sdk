@@ -784,7 +784,7 @@ export const rules = (mock: MockAdapter) => {
         ],
     });
 
-    mock.onGet(/api\/v1\/board\/(\d+)\/designer_themes/).reply<Record<number, Theme>>(200, {
+    mock.onGet(/api\/v1\/boards\/(\d+)\/designer_themes/).reply<Record<number, Theme>>(200, {
         1: {
             id: 1,
             name: "system theme",
