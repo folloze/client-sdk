@@ -15,7 +15,8 @@ export interface SourcesConfig {
     },
     virtual_category?: {
         flz_item_ids: number[];
-    }
+    },
+    type?: "curated" | "ai"
 }
 
 export interface FlzVItemViewerSettings {
