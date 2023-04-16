@@ -285,28 +285,65 @@ export class Liveboard {
      * Gets the url to download the item
      *
      * @param {number} itemId
-     * @deprecated Use `getItemDownloadUrlV2 instead
+     * @deprecated Use `getContentDownloadUrl instead
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
-    getItemDownloadUrl(
-        sourceType: SourceType,
-        contentItemId: number,
-        itemId?: number
-    ): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
+    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get(`/live_board/v2/items/${itemId}/downloads`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get download url", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Gets the url to download the content
+     *
+     * @param {number} contentItemId
+     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failure message
+     */
+    getContentDownloadUrl(contentItemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v2/downloads`, {
-                    params: {
-                        source_type: sourceType,
-                        content_item_id: contentItemId,
-                        item_id: itemId
-                    }
+                    params: { content_item_id: contentItemId }
                 })
                 .then(result => {
                     resolve(result.data);
                 })
                 .catch(e => {
                     console.error("could not get download url", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Tracking for download content action
+     *
+     * @param {SourceType} sourceType
+     * @param {number} contentItemId
+     * @param {number} itemId
+     */
+    downloadContent(
+        sourceType: SourceType,
+        contentItemId: number,
+        itemId?: number
+    ): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/downloads`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not track download content", e);
                     reject(e);
                 });
         });
