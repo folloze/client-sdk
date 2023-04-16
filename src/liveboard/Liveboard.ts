@@ -285,6 +285,7 @@ export class Liveboard {
      * Gets the url to download the item
      *
      * @param {number} itemId
+     * @deprecated Use `getItemDownloadUrlV2 instead
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(
