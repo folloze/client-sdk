@@ -81,4 +81,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "refresh-designer"
     | "track-user-event"
     | "save-config-lazy"
-    | "designer-open-preview";
+    | "designer-open-preview"
+    | "get-designer-themes";
