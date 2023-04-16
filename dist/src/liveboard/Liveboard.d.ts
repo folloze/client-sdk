@@ -85,9 +85,25 @@ export declare class Liveboard {
      * Gets the url to download the item
      *
      * @param {number} itemId
+     * @deprecated Use `getContentDownloadUrl instead
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
-    getItemDownloadUrl(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
+    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
+    /**
+     * Gets the url to download the content
+     *
+     * @param {number} contentItemId
+     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failure message
+     */
+    getContentDownloadUrl(contentItemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
+    /**
+     * Tracking for download content action
+     *
+     * @param {SourceType} sourceType
+     * @param {number} contentItemId
+     * @param {number} itemId
+     */
+    downloadContent(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
     /**
      *
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
