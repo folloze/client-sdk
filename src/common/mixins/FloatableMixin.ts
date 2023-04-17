@@ -119,6 +119,27 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                 newY = this.getYWithOverflow(height);
             }
 
+            // if its going to be out of the top of the viewport then move it inside
+            const viewPortScrollYPos = window.scrollY + 60; // 60 is the height of the top-bar
+            if (newY <= viewPortScrollYPos) {
+                newY += viewPortScrollYPos - newY + 3; // 3 is for nice space above
+
+                const x1 = newX;
+                const x2 = newX + rect.width;
+                const y1 = newY - window.scrollY;
+                const y2 = y1 + rect.height;
+
+                // check if its under the mouse and move to the side
+                if (x1 < this.x && this.x < x2 && y1 < this.y && this.y < y2) {
+                    const centerXofViewPort = viewPortWidth / 2;
+                    if (this.x < centerXofViewPort) {
+                        newX += x2 - this.x + 30;
+                    } else {
+                        newX -= x2 - this.x + 30;
+                    }
+                }
+            }
+
             this.style.top = `${newY}px`;
             this.style.left = `${newX}px`;
         }
