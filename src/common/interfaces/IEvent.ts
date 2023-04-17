@@ -37,7 +37,6 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-contact-card-info"
     | "get-file-metadata"
     | "get-file-download-url"
-    | "get-file-download-url-v2"
     | "get-footers"
     | "get-org-header-config"
     | "stop-tracking-for-visit"
@@ -55,7 +54,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "floating-widget-manager"
     | "track-lead-event"
     | "analytic-event"
-    | "download-content";
+    | "track-download-file";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
