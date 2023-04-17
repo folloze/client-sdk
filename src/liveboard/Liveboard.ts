@@ -338,7 +338,11 @@ export class Liveboard {
     ): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/downloads`)
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/downloads`, {
+                    source_type: sourceType,
+                    content_item_id: contentItemId,
+                    item_id: itemId
+                })
                 .then(() => {
                     resolve();
                 })
