@@ -78,10 +78,6 @@ describe("test liveboard mocks module", () => {
         await sdk.liveboard.getContentDownloadUrl(1).catch(error => expect(error.response.data).toHaveProperty("text"));
     });
 
-    it("checks that downloadContent mock works as expected for success", async () => {
-        await sdk.liveboard.downloadContent('item', 1, 1).then(result => expect(result).toBeNull);
-    });
-
     it("checks that createSnapshotUrl mock works as expected", async () => {
         await sdk.liveboard.createSnapshotUrl(1).then(result => expect(result.link_url).toEqual("abc.website.com"));
     });

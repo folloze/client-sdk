@@ -32,4 +32,11 @@ export const rules = (mock: MockAdapter) => {
 
     mock.onPut("/live_board/v2/invitation_wrappers/1")
         .reply<void>(200);
+
+    mock.onPost("/live_board/v2/downloads", {
+        source_type: 'item',
+        content_item_id: 1,
+        item_id: 1
+    })
+        .reply<void>(200);
 };

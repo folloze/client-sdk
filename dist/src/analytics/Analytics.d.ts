@@ -8,6 +8,7 @@ export declare type PingPayload = {
     contentItemId?: number;
     guid: string;
 };
+export declare type SourceType = "item" | "ai";
 export declare enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
@@ -89,4 +90,12 @@ export declare class Analytics {
     createSession(): Promise<AxiosResponse>;
     updateInvitationUsed(token: string): Promise<AxiosResponse>;
     sendBeacon(data: AnalyticEventPrepared[]): boolean;
+    /**
+     * Tracking for download file action
+     *
+     * @param {SourceType} sourceType
+     * @param {number} contentItemId
+     * @param {number} itemId
+     */
+    trackDownloadFile(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
 }

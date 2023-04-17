@@ -28,8 +28,7 @@ import {
     CtaParams,
     CtaResponseV1,
     EnrichmentBoardConfigV3,
-    LeadLinkClickResponseV1,
-    SourceType
+    LeadLinkClickResponseV1
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -319,35 +318,6 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get download url", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * Tracking for download content action
-     *
-     * @param {SourceType} sourceType
-     * @param {number} contentItemId
-     * @param {number} itemId
-     */
-    downloadContent(
-        sourceType: SourceType,
-        contentItemId: number,
-        itemId?: number
-    ): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/downloads`, {
-                    source_type: sourceType,
-                    content_item_id: contentItemId,
-                    item_id: itemId
-                })
-                .then(() => {
-                    resolve();
-                })
-                .catch(e => {
-                    console.error("could not track download content", e);
                     reject(e);
                 });
         });
