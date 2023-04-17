@@ -8,7 +8,7 @@ declare type AnalyticTypeToPayload = {
         guid: string;
         duration: number;
     };
-    lead_send_email_clicked: {
+    send_email_clicked: {
         email: string;
         subject: string;
     };
