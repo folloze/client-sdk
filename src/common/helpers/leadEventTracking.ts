@@ -3,7 +3,7 @@ import { componentEmit } from "./eventHelpers";
 import { TargetType } from "../../liveboard/ILiveboardTypes";
 import { SourceType } from "../../analytics/Analytics";
 
-type TrackedLeadActions = "lead-link-click" | "track-download-file"
+type TrackedLeadActions = "lead-link-click" | "track-download-file" | "track-lead-like-content"
 
 export class AbstractLeadTracker {
     public payload: unknown;
@@ -38,6 +38,19 @@ export class TrackedLeadDownloadFile extends AbstractLeadTracker {
 
         this.payload =  payload;
         this.action = "track-download-file";
+    }
+}
+
+export class TrackedLeadLikeContent extends AbstractLeadTracker {
+    constructor(payload: {
+        sourceType: SourceType,
+        contentItemId: number,
+        itemId?: number
+    }) {
+        super();
+
+        this.payload =  payload;
+        this.action = "track-lead-like-content";
     }
 }
 

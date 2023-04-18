@@ -101,4 +101,8 @@ describe("testing analytics module in preview", () => {
     it("checks that trackDownloadFile mock works as expected for success", async () => {
         await sdk.analytics.trackDownloadFile('item', 1, 1).then(result => expect(result).toBeNull);
     });
+
+    it("checks that trackLeadLikeContent mock works as expected", async () => {
+        await sdk.analytics.trackLeadLikeContent('item', 1, 1).then(result => expect(result).toBeNull);
+    });
 });

@@ -230,4 +230,33 @@ export class Analytics {
                 });
         });
     }
+
+    /**
+     * Tracking for lead like content action
+     *
+     * @param {number} contentItemId
+     * @param {number} itemId
+     * @param {SourceType} sourceType
+     */
+    trackLeadLikeContent(
+        sourceType: SourceType,
+        contentItemId: number,
+        itemId?: number
+    ): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/likes`, {
+                    sourceType,
+                    contentItemId,
+                    itemId
+                })
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not track like content", e);
+                    reject(e);
+                });
+        });
+    }
 }

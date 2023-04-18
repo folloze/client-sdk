@@ -39,4 +39,10 @@ export const rules = (mock: MockAdapter) => {
         item_id: 1
     })
         .reply<void>(200);
+
+    mock.onPost("/live_board/v2/likes", {
+        source_type: 'item',
+        content_item_id: 1,
+        item_id: 1
+    }).reply<void>(200);
 };
