@@ -53,8 +53,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "is-personalization-mod"
     | "floating-widget-manager"
     | "track-lead-event"
-    | "analytic-event"
-    | "track-download-file";
+    | "analytic-event";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
