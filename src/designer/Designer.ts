@@ -19,7 +19,10 @@ import {
     ConfigSavedConflict,
     ConfigSavedSuccess,
     MergeTagAttribute,
-    MergeTagValue, VideoGalleryParams, GalleryVideo
+    MergeTagValue,
+    VideoGalleryParams,
+    GalleryVideo,
+    Theme
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 
@@ -460,6 +463,20 @@ export class Designer {
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get merge tag values", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public getDesignerThemes(
+        boardId: number
+    ): Promise<Record<number, Theme>> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<Record<number, Theme>>(`/api/v1/boards/${boardId}/designer_themes`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get designer themes", e);
                     reject(e);
                 });
         });

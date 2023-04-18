@@ -27,7 +27,8 @@ import {
     CampaignElementDataV2,
     CtaParams,
     CtaResponseV1,
-    EnrichmentBoardConfigV3, LeadLinkClickResponseV1
+    EnrichmentBoardConfigV3,
+    LeadLinkClickResponseV1
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -287,12 +288,35 @@ export class Liveboard {
      * Gets the url to download the item
      *
      * @param {number} itemId
+     * @deprecated Use getContentDownloadUrl instead
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .get(`/live_board/v2/items/${itemId}/downloads`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get download url", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Gets the url to download the content
+     *
+     * @param {number} contentItemId
+     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failure message
+     */
+    getContentDownloadUrl(contentItemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get(`/live_board/v2/downloads`, {
+                    params: { content_item_id: contentItemId }
+                })
                 .then(result => {
                     resolve(result.data);
                 })

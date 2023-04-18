@@ -1,14 +1,7 @@
-import {
-    FormDataV1,
-    FormPrivacyMessageDataV1,
-    FootersResponseV1,
-    PrivacyMessageResponseV1,
-    FormPrivacyMessageResponseV1,
-} from "./../designer/IDesignerTypes";
-import {PrivacySettings} from "../common/ISharedTypes";
-import {FlzVItemViewerSettings} from "../common/interfaces/IContentWidget";
-
-export type BoardResponseV1 = {
+import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
+import { PrivacySettings } from "../common/ISharedTypes";
+import { FlzVItemViewerSettings } from "../common/interfaces/IContentWidget";
+export declare type BoardResponseV1 = {
     id: number;
     slug: string;
     online_items_count: number;
@@ -16,8 +9,7 @@ export type BoardResponseV1 = {
     name: string;
     is_ssl: boolean;
 };
-
-export type BoardSellerResponseV1 = {
+export declare type BoardSellerResponseV1 = {
     name: string;
     last_name: string;
     email: string;
@@ -28,8 +20,7 @@ export type BoardSellerResponseV1 = {
     twitter: string;
     linkedin: string;
 };
-
-export type CategoryResponseV2 = {
+export declare type CategoryResponseV2 = {
     id: number;
     slug: string;
     name: string;
@@ -40,31 +31,27 @@ export type CategoryResponseV2 = {
     items_count: number;
     subcategories_ids: number[];
     description: string;
-    images: object[]; //TODO: what is the structure of images
+    images: object[];
     route: string;
 };
-
-export type CategoriesResponseV2 = {
+export declare type CategoriesResponseV2 = {
     categories_ids: number[];
     data: Record<string, CategoryResponseV2>;
 };
-
-export type UserChatResponseV1 = {
+export declare type UserChatResponseV1 = {
     token: string;
     chat_id: number;
 };
-
-export type Image = {
+export declare type Image = {
     id: number;
     url: string;
     fit: string;
-    transformation: object; // TODO
+    transformation: object;
     displayable_section?: string;
 };
-
-type ItemNavigationParams = {
-    multiCategories?: number[][]; // [[1,2], [3,4]] - returns all items that are in (1 or 2) and in (3 or 4)
-    categoriesScope?: number[]; // if specified will limit the result to include only items from those categories
+declare type ItemNavigationParams = {
+    multiCategories?: number[][];
+    categoriesScope?: number[];
     search?: string;
     sorter?: string;
     filter?: {
@@ -77,16 +64,13 @@ type ItemNavigationParams = {
     journey_type?: "nextPrev" | "list";
     amount?: number;
 };
-
-export type ItemsParams = ItemNavigationParams & {
+export declare type ItemsParams = ItemNavigationParams & {
     boardId: number;
     category?: number;
     page?: number;
     perPage?: number;
 };
-
-// minimixed data for the item relevant for the item viewer
-export type OpenItemViewerPayload = ItemNavigationParams & {
+export declare type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
     content_item_id: number;
     slug: string;
@@ -105,19 +89,21 @@ export type OpenItemViewerPayload = ItemNavigationParams & {
     link_url?: string;
     is_landing?: boolean;
 };
-
-export type JourneyItemParams = ItemNavigationParams & {
+export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
     boardId?: number;
 };
-
-export type ItemResponseV2 = {
+export declare type ItemResponseV2 = {
     id: number;
     content_item_id: number;
     category_ids: number[];
-    category_item_data: {id: number; position: number; route: string}[];
+    category_item_data: {
+        id: number;
+        position: number;
+        route: string;
+    }[];
     description: string;
-    image: any; //TODO - Rotem fill the gap
+    image: any;
     is_gated: boolean | null;
     item_source: number;
     item_type: string;
@@ -131,8 +117,7 @@ export type ItemResponseV2 = {
     open_in_new_tab?: boolean;
     route: string;
 };
-
-export type ItemsResponseV2 = {
+export declare type ItemsResponseV2 = {
     item_ids: number[];
     data: Record<string, ItemResponseV2>;
     most_viewed_item_id: number;
@@ -141,12 +126,10 @@ export type ItemsResponseV2 = {
     current_page?: number;
     per_page?: number;
 };
-
-export type HasItemResponseV2 = {
+export declare type HasItemResponseV2 = {
     has_items: boolean;
 };
-
-type User = {
+declare type User = {
     user_id: number;
     name: string;
     email: string;
@@ -160,8 +143,7 @@ type User = {
     twitter: string;
     image: string;
 };
-
-type ArticleItem = {
+declare type ArticleItem = {
     article_id: number;
     status: number;
     has_unpublished_changes: boolean;
@@ -188,10 +170,9 @@ type ArticleItem = {
         should_display: boolean;
     };
     body: string;
-    published_data?: object; // todo
+    published_data?: object;
 };
-
-export type JourneyItem = {
+export declare type JourneyItem = {
     journey_index: number;
     category_id: number;
     category_slug: string;
@@ -209,56 +190,46 @@ export type JourneyItem = {
     };
     item_type: string;
     item_source: number;
-    file_viewer_type?: string; //for file or box
-    //link item
+    file_viewer_type?: string;
     link_url?: string;
     snapshot_url?: string;
     secured?: boolean;
     open_in_new_tab?: boolean;
-    //article
     article?: ArticleItem;
 };
-
-export type JourneyItemsResponseV2 = {
-    items: Record<string, JourneyItem>; // current, previous and next items
+export declare type JourneyItemsResponseV2 = {
+    items: Record<string, JourneyItem>;
     items_count: number;
     journey_index: number;
     next_item_index: number;
     prev_item_index: number;
 };
-
-export type SnapshotUrlResponseV1 = {
+export declare type SnapshotUrlResponseV1 = {
     link_url: string;
     snapshot_url: string;
 };
-
-export type ItemAnalysisResponseV1 = {
+export declare type ItemAnalysisResponseV1 = {
     secured: boolean;
 };
-
-export type ItemFileMetadataResponseV1 = {
+export declare type ItemFileMetadataResponseV1 = {
     preview_metadata: {
-        url?: string; //every provider but box
-        file_id?: number; //box
-        access_token?: string; //box
+        url?: string;
+        file_id?: number;
+        access_token?: string;
     };
 };
-
-export type ItemDownloadUrlSuccessResponseV2 = {
+export declare type ItemDownloadUrlSuccessResponseV2 = {
     download_url: string;
 };
-
-export type ItemDownloadUrlFailedResponseV2 = {
+export declare type ItemDownloadUrlFailedResponseV2 = {
     text: string;
 };
-
-export type CookieConsentParams = {
+export declare type CookieConsentParams = {
     leadId: number;
     constentOrigin: string;
     isoCode: string;
 };
-
-export type CtaParams = {
+export declare type CtaParams = {
     cta: {
         area: string;
         label?: string;
@@ -266,15 +237,14 @@ export type CtaParams = {
     email: string;
     formId: number;
     type: string;
-    message?: string; // message cta
-    formFields?: string[]; // array of the names of fields (only keys)
-    name?: string; // form/share cta
-    lastName?: string; // form/share cta
-    link?: string; // link cta
-    invitee?: string; // share cta
+    message?: string;
+    formFields?: string[];
+    name?: string;
+    lastName?: string;
+    link?: string;
+    invitee?: string;
 };
-
-export type CtaResponseV1 = {
+export declare type CtaResponseV1 = {
     id: number;
     email: string;
     name: string;
@@ -283,18 +253,15 @@ export type CtaResponseV1 = {
     company?: string;
     group_user: boolean;
 };
-
-export type TargetType = "inline" | "new_tab";
-
-export type GeoLocationResponseV1 = {
+export declare type TargetType = "inline" | "new_tab";
+export declare type GeoLocationResponseV1 = {
     city: string;
     continent: string;
     country: string;
     country_code: string;
     state: string;
 };
-
-export type LeadResponseV1 = {
+export declare type LeadResponseV1 = {
     id: number;
     name: string;
     email: string;
@@ -302,12 +269,9 @@ export type LeadResponseV1 = {
     company: string;
     anon_guest: boolean;
 };
-
-export type LeadLinkClickResponseV1 = {}
-
-export type LiveEventUrlsResponseV2 = {
-    meeting_url?: string; //stream
-    //zoom
+export declare type LeadLinkClickResponseV1 = {};
+export declare type LiveEventUrlsResponseV2 = {
+    meeting_url?: string;
     api_params?: {
         name: string;
         mn: string;
@@ -322,23 +286,19 @@ export type LiveEventUrlsResponseV2 = {
     rich_client_desktop_url?: string;
     rich_client_mobile_url?: string;
 };
-
-export type OrganizationSettingsResponseV1 = {
+export declare type OrganizationSettingsResponseV1 = {
     privacy: PrivacySettings;
 };
-
-export type SessionResponseV1 = {
+export declare type SessionResponseV1 = {
     guid: string;
 };
-
-export type FormMetadataDataV1 = {
+export declare type FormMetadataDataV1 = {
     form: FormDataV1;
     privacy_message: FormPrivacyMessageDataV1;
 };
-
-export type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
-
-export type EnrichmentBoardConfigV3 = {
+export declare type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
+export declare type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+export {};

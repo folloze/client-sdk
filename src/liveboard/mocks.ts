@@ -234,6 +234,10 @@ export const rules = (mock: MockAdapter) => {
         download_url: "https://url-for-download.com",
     });
 
+    mock.onGet("/live_board/v2/downloads",{content_item_id: 1}).reply<ItemDownloadUrlSuccessResponseV2>(200, {
+        download_url: "https://url-for-download.com",
+    });
+
     mock.onGet("/live_board/v2/items/0/downloads").reply<ItemDownloadUrlFailedResponseV2>(400, {
         text: "This file is currently not available for download. Please try again later.",
     });
