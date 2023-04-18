@@ -85,7 +85,7 @@ export declare class Liveboard {
      * Gets the url to download the item
      *
      * @param {number} itemId
-     * @deprecated Use `getContentDownloadUrl instead
+     * @deprecated Use getContentDownloadUrl instead
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
