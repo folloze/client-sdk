@@ -246,14 +246,10 @@ export class Liveboard {
      * @param {number} itemId
      * @deprecated use trackLeadLikeContent instead
      */
-    likeItem(contentItemId: number, sourceType: string, itemId?: number): Promise<void> {
+    likeItem(itemId: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/likes`, {
-                    itemId,
-                    contentItemId,
-                    sourceType
-                })
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/likes`)
                 .then(() => {
                     resolve();
                 })
