@@ -67,7 +67,15 @@ describe("test liveboard mocks module", () => {
     });
 
     it("checks that getItemDownloadUrl mock works as expected for failure", async () => {
-        await sdk.liveboard.getItemDownloadUrl(0).catch(error => expect(error.response.data).toHaveProperty("text"));
+        await sdk.liveboard.getItemDownloadUrl(1).catch(error => expect(error.response.data).toHaveProperty("text"));
+    });
+
+    it("checks that getContentDownloadUrl mock works as expected for success", async () => {
+        await sdk.liveboard.getContentDownloadUrl(1).then(result => expect(result).toHaveProperty("download_url"));
+    });
+
+    it("checks that getContentDownloadUrl mock works as expected for failure", async () => {
+        await sdk.liveboard.getContentDownloadUrl(1).catch(error => expect(error.response.data).toHaveProperty("text"));
     });
 
     it("checks that createSnapshotUrl mock works as expected", async () => {
