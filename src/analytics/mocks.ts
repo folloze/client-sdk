@@ -44,5 +44,6 @@ export const rules = (mock: MockAdapter) => {
         source_type: 'item',
         content_item_id: 1,
         item_id: 1
-    }).reply<void>(200);
+    })
+        .reply<void>(200);
 };

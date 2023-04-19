@@ -73,7 +73,7 @@ export declare class Liveboard {
      * @param {number} itemId
      * @deprecated use trackLeadLikeContent instead
      */
-    likeItem(contentItemId: number, sourceType: string, itemId?: number): Promise<void>;
+    likeItem(itemId: number): Promise<void>;
     /**
      * Gets the item journey
      *
