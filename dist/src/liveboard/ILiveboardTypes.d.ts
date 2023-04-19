@@ -69,6 +69,8 @@ export declare type ItemsParams = ItemNavigationParams & {
     category?: number;
     page?: number;
     perPage?: number;
+    source: "curated" | "recommendations";
+    amount?: number;
 };
 export declare type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
