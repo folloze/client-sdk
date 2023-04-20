@@ -248,7 +248,7 @@ export interface ContactCardInfo {
     is_registered: boolean;
     custom_attributes: unknown;
     errors: unknown;
-    permissions: Permissions2;
+    permissions: Partial<Permissions2>;
     company: string;
     twitter: string;
     linkedin: string;
@@ -273,10 +273,20 @@ export interface BioSettings {
 }
 
 export interface Permissions2 {
-    can_edit_sfdc: boolean;
+    super_admin: boolean;
+    approve_board: boolean;
     edit_domain_settings: boolean;
-    can_approve_board: boolean;
-    can_add_content_items: boolean;
-    can_manage_u3_board_templates: boolean;
-    can_create_campaigns: boolean;
+    create_content_item: boolean;
+    create_campaign: boolean;
+    edit_sfdc: boolean;
+    manage_board: boolean;
+    org_admin: boolean;
+    org_editor: boolean;
+    create_board: boolean;
+    update_board: boolean;
+    view_board: boolean;
+    delete_board: boolean;
+    sfdc_admin: boolean;
+    dev: boolean;
+    manage_u3_board_template: boolean;
 }
