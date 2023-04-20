@@ -14,22 +14,19 @@ export declare type TrackedLeadLinkClickPayload = {
         widgetTag: string;
     };
 };
+export declare type TrackedContentActionPayload = {
+    sourceType: SourceType;
+    contentItemId: number;
+    itemId?: number;
+};
 export declare class TrackedLeadLinkClick extends AbstractLeadTracker {
     constructor(payload: TrackedLeadLinkClickPayload);
 }
 export declare class TrackedLeadDownloadFile extends AbstractLeadTracker {
-    constructor(payload: {
-        sourceType: SourceType;
-        contentItemId: number;
-        itemId?: number;
-    });
+    constructor(payload: TrackedContentActionPayload);
 }
 export declare class TrackedLeadLikeContent extends AbstractLeadTracker {
-    constructor(payload: {
-        sourceType: SourceType;
-        contentItemId: number;
-        itemId?: number;
-    });
+    constructor(payload: TrackedContentActionPayload);
 }
 export declare type TrackedLeadEvent = TrackedLeadLinkClick | TrackedLeadDownloadFile;
 export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent, onSuccess?: Function, onError?: Function): void;
