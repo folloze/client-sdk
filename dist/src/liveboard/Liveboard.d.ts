@@ -71,6 +71,7 @@ export declare class Liveboard {
      * Like an item
      *
      * @param {number} itemId
+     * @deprecated use trackLeadLikeContent instead
      */
     likeItem(itemId: number): Promise<void>;
     /**
@@ -85,9 +86,17 @@ export declare class Liveboard {
      * Gets the url to download the item
      *
      * @param {number} itemId
+     * @deprecated Use getContentDownloadUrl instead
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
      */
     getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
+    /**
+     * Gets the url to download the content
+     *
+     * @param {number} contentItemId
+     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failure message
+     */
+    getContentDownloadUrl(contentItemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
     /**
      *
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image

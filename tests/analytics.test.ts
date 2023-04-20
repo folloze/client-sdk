@@ -97,4 +97,12 @@ describe("testing analytics module in preview", () => {
         await sdk.analytics.updateInvitationUsed("1").then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
+
+    it("checks that trackDownloadFile mock works as expected for success", async () => {
+        await sdk.analytics.trackDownloadFile('item', 1, 1).then(result => expect(result).toBeNull);
+    });
+
+    it("checks that trackLeadLikeContent mock works as expected", async () => {
+        await sdk.analytics.trackLeadLikeContent('item', 1, 1).then(result => expect(result).toBeNull);
+    });
 });

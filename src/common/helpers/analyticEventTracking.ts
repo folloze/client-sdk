@@ -13,7 +13,7 @@ type AnalyticTypeToPayload = {
         duration: number; // the time in seconds
     };
 
-    lead_send_email_clicked: {
+    send_email_clicked: {
         email: string;
         subject: string;
     };

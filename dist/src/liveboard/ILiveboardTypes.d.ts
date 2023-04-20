@@ -59,7 +59,7 @@ declare type ItemNavigationParams = {
         num_items: number;
     };
     virtual_category?: {
-        flz_item_ids: number[];
+        items_ids: number[];
     };
     journey_type?: "nextPrev" | "list";
     amount?: number;
