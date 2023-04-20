@@ -98,4 +98,12 @@ export declare class Analytics {
      * @param {number} itemId
      */
     trackDownloadFile(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
+    /**
+     * Tracking for lead like content action
+     *
+     * @param {number} contentItemId
+     * @param {number} itemId
+     * @param {SourceType} sourceType
+     */
+    trackLeadLikeContent(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
 }

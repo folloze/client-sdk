@@ -71,6 +71,7 @@ export declare class Liveboard {
      * Like an item
      *
      * @param {number} itemId
+     * @deprecated use trackLeadLikeContent instead
      */
     likeItem(itemId: number): Promise<void>;
     /**
