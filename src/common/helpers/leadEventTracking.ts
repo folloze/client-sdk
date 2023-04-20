@@ -52,7 +52,7 @@ export class TrackedLeadLikeContent extends AbstractLeadTracker {
     }
 }
 
-export type TrackedLeadEvent = TrackedLeadLinkClick | TrackedLeadDownloadFile;
+export type TrackedLeadEvent = TrackedLeadLinkClick | TrackedLeadDownloadFile | TrackedLeadLikeContent;
 
 export function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent, onSuccess?: Function, onError?: Function) {
     componentEmit(el, "track-lead-event", { trackedLeadEvent }, onSuccess, onError);

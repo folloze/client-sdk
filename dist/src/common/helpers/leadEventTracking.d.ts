@@ -28,6 +28,6 @@ export declare class TrackedLeadDownloadFile extends AbstractLeadTracker {
 export declare class TrackedLeadLikeContent extends AbstractLeadTracker {
     constructor(payload: TrackedContentActionPayload);
 }
-export declare type TrackedLeadEvent = TrackedLeadLinkClick | TrackedLeadDownloadFile;
+export declare type TrackedLeadEvent = TrackedLeadLinkClick | TrackedLeadDownloadFile | TrackedLeadLikeContent;
 export declare function trackLeadEvent(el: LitElement, trackedLeadEvent: TrackedLeadEvent, onSuccess?: Function, onError?: Function): void;
 export {};
