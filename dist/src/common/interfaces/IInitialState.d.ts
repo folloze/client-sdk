@@ -166,6 +166,7 @@ export interface Lead {
     company: string;
     anon_guest: boolean;
     group_user: boolean;
+    account_domain?: string;
 }
 export interface Integrations {
     ga?: unknown;
