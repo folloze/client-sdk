@@ -9,6 +9,13 @@ export const rules = (mock: MockAdapter) => {
     mock.onPost(/live_board\/v2\/items\/(\d+)\/lead_views/)
         .reply<void>(200);
 
+    mock.onPost(/live_board\/v2\/content_items\/(\d+)\/lead_views/,{
+        source_type: 'item',
+        item_id: 1,
+        guid: 'abc'
+    })
+        .reply<void>(200);
+
     mock.onPost("/api/v1/tracking")
         .reply<void>(200);
 
@@ -40,9 +47,21 @@ export const rules = (mock: MockAdapter) => {
     })
         .reply<void>(200);
 
+    mock.onPost(/live_board\/v2\/content_items\/(\d+)\/downloads/, {
+        source_type: 'item',
+        item_id: 1
+    })
+        .reply<void>(200);
+
     mock.onPost("/live_board/v2/likes", {
         source_type: 'item',
         content_item_id: 1,
+        item_id: 1
+    })
+        .reply<void>(200);
+
+    mock.onPost(/live_board\/v2\/content_items\/(\d+)\/likes/, {
+        source_type: 'item',
         item_id: 1
     })
         .reply<void>(200);

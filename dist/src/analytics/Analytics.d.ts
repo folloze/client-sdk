@@ -69,8 +69,18 @@ export declare class Analytics {
      *
      * @param {number} itemId
      * @param {string} guid
+     * @deprecated Use trackLeadContentView instead
      */
     trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
+    /**
+     * Lead viewed content
+     *
+     * @param {number} itemId
+     * @param {number} contentItemId
+     * @param {SourceType} sourceType
+     * @param {string} guid
+     */
+    trackLeadContentView(contentItemId: number, sourceType: SourceType, guid: string, itemId?: number): Promise<AxiosResponse>;
     /**
      * Tracks an event - only in designer
      *
@@ -96,14 +106,32 @@ export declare class Analytics {
      * @param {SourceType} sourceType
      * @param {number} contentItemId
      * @param {number} itemId
+     * deprecated Use trackDownloadFileV2 instead
      */
     trackDownloadFile(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
+    /**
+     * Tracking for download file action V2
+     *
+     * @param {SourceType} sourceType
+     * @param {number} contentItemId
+     * @param {number} itemId
+     */
+    trackDownloadFileV2(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
     /**
      * Tracking for lead like content action
      *
      * @param {number} contentItemId
      * @param {number} itemId
      * @param {SourceType} sourceType
+     * deprecated Use trackLeadLikeContentV2 instead
      */
     trackLeadLikeContent(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
+    /**
+     * Tracking for lead like content action V2
+     *
+     * @param {number} contentItemId
+     * @param {number} itemId
+     * @param {SourceType} sourceType
+     */
+    trackLeadLikeContentV2(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
 }

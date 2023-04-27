@@ -241,26 +241,6 @@ export class Liveboard {
     }
 
     /**
-     * Like an item
-     *
-     * @param {number} itemId
-     * @deprecated use trackLeadLikeContent instead
-     */
-    likeItem(itemId: number): Promise<void> {
-        return new Promise((resolve, reject) => {
-            this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/likes`)
-                .then(() => {
-                    resolve();
-                })
-                .catch(e => {
-                    console.error("could not like item", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
      * Gets the item journey
      *
      * @param {number} itemId
@@ -276,27 +256,6 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get journey items", e);
-                    reject(e);
-                });
-        });
-    }
-
-    /**
-     * Gets the url to download the item
-     *
-     * @param {number} itemId
-     * @deprecated Use getContentDownloadUrl instead
-     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
-     */
-    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2> {
-        return new Promise((resolve, reject) => {
-            this.fetchService.fetcher
-                .get(`/live_board/v2/items/${itemId}/downloads`)
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error("could not get download url", e);
                     reject(e);
                 });
         });
