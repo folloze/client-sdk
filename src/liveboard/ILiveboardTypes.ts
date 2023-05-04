@@ -303,6 +303,7 @@ export type LeadResponseV1 = {
     last_name: string;
     company: string;
     anon_guest: boolean;
+    account_domain?: string;
 };
 
 export type LeadLinkClickResponseV1 = {}
