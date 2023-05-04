@@ -270,6 +270,7 @@ export declare type LeadResponseV1 = {
     last_name: string;
     company: string;
     anon_guest: boolean;
+    account_domain?: string;
 };
 export declare type LeadLinkClickResponseV1 = {};
 export declare type LiveEventUrlsResponseV2 = {
