@@ -68,13 +68,6 @@ export declare class Liveboard {
      */
     getHasItems(boardId: number): Promise<HasItemResponseV2>;
     /**
-     * Like an item
-     *
-     * @param {number} itemId
-     * @deprecated use trackLeadLikeContent instead
-     */
-    likeItem(itemId: number): Promise<void>;
-    /**
      * Gets the item journey
      *
      * @param {number} itemId
@@ -82,14 +75,6 @@ export declare class Liveboard {
      * @returns {JourneyItemsResponseV2} JourneyItemsResponse
      */
     getJourneyItems(itemId: number, options: JourneyItemParams): Promise<JourneyItemsResponseV2>;
-    /**
-     * Gets the url to download the item
-     *
-     * @param {number} itemId
-     * @deprecated Use getContentDownloadUrl instead
-     * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failiure message
-     */
-    getItemDownloadUrl(itemId: number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
     /**
      * Gets the url to download the content
      *
