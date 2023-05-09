@@ -36,6 +36,8 @@ export type InitialState = {
     footers: Record<string, Footer>;
     features: {
         personalization: boolean;
+        multiPages?: boolean;
+        recommendationsAi: boolean;
     };
     user?: User;
     privacy_messages: PrivacyMessage[];
@@ -179,6 +181,7 @@ export interface Lead {
     company: string;
     anon_guest: boolean;
     group_user: boolean;
+    account_domain?: string;
 }
 
 export interface Integrations {

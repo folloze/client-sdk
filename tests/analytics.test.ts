@@ -80,6 +80,12 @@ describe("testing analytics module in preview", () => {
         expect(spy).not.toHaveBeenCalled();
     });
 
+    it("checks that trackLeadContentView isn't triggering an api call", async () => {
+        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
+        await sdk.analytics.trackLeadContentView(1, "item", "abc", 1).then(result => expect(result.status).toEqual(200));
+        expect(spy).not.toHaveBeenCalled();
+    });
+
     it("checks that createSession mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.analytics.createSession().then(result => expect(result.status).toEqual(200));

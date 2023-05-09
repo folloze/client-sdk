@@ -15,7 +15,8 @@ export interface SourcesConfig {
     },
     virtual_category?: {
         flz_item_ids: number[];
-    }
+    },
+    type?: "curated" | "recommendations"
 }
 
 export interface FlzVItemViewerSettings {
@@ -23,7 +24,7 @@ export interface FlzVItemViewerSettings {
     allow_download: boolean;
     allow_likes?: boolean;
     lead_journey?: {
-        type: "curated" | "ai",
+        type: "curated" | "recommendations",
         layout: "arrow" | "bottom",
         disableScrollingAnimation: boolean
     }

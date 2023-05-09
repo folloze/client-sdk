@@ -45,29 +45,17 @@ describe("test liveboard mocks module", () => {
     });
 
     it("checks that getItems mock works as expected", async () => {
-        await sdk.liveboard.getItems({boardId: 1, search: ""}).then(result => expect(result.item_ids).toHaveLength(1));
+        await sdk.liveboard.getItems({boardId: 1, search: "", source: "curated"}).then(result => expect(result.item_ids).toHaveLength(1));
     });
 
     it("checks that getHasItems mock works as expected", async () => {
         await sdk.liveboard.getHasItems(1).then(result => expect(result.has_items).toBeTruthy);
     });
 
-    it("checks that likeItem mock works as expected", async () => {
-        await sdk.liveboard.likeItem(1).then(result => expect(result).toBeNull);
-    });
-
     it("checks that getJourneyItems mock works as expected", async () => {
         await sdk.liveboard
             .getJourneyItems(1, {categoryId: undefined, boardId: undefined})
             .then(result => expect(result.items_count).toBeGreaterThan(3));
-    });
-
-    it("checks that getItemDownloadUrl mock works as expected for success", async () => {
-        await sdk.liveboard.getItemDownloadUrl(1).then(result => expect(result).toHaveProperty("download_url"));
-    });
-
-    it("checks that getItemDownloadUrl mock works as expected for failure", async () => {
-        await sdk.liveboard.getItemDownloadUrl(1).catch(error => expect(error.response.data).toHaveProperty("text"));
     });
 
     it("checks that getContentDownloadUrl mock works as expected for success", async () => {

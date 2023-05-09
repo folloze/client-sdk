@@ -69,6 +69,8 @@ export declare type ItemsParams = ItemNavigationParams & {
     category?: number;
     page?: number;
     perPage?: number;
+    source: "curated" | "recommendations";
+    amount?: number;
 };
 export declare type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
@@ -268,6 +270,7 @@ export declare type LeadResponseV1 = {
     last_name: string;
     company: string;
     anon_guest: boolean;
+    account_domain?: string;
 };
 export declare type LeadLinkClickResponseV1 = {};
 export declare type LiveEventUrlsResponseV2 = {

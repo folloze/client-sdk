@@ -91,6 +91,7 @@ export class Analytics {
      *
      * @param {number} itemId
      * @param {string} guid
+     * @deprecated Use trackLeadContentView instead
      */
     trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
@@ -98,6 +99,32 @@ export class Analytics {
                 .post(
                     `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/lead_views`,
                     {guid},
+                )
+                .catch(e => {
+                    console.error("could not track lead item view", e);
+                    throw e;
+                });
+        });
+    }
+
+    /**
+     * Lead viewed content
+     *
+     * @param {number} itemId
+     * @param {number} contentItemId
+     * @param {SourceType} sourceType
+     * @param {string} guid
+     */
+    trackLeadContentView(contentItemId: number, sourceType: SourceType, guid: string, itemId?: number): Promise<AxiosResponse> {
+        return this.fetchService.withDisableOnPreview(() => {
+            return this.fetchService.fetcher
+                .post(
+                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/lead_views`,
+                    {
+                            guid,
+                            item_id: itemId,
+                            source_type: sourceType
+                        },
                 )
                 .catch(e => {
                     console.error("could not track lead item view", e);
@@ -208,6 +235,7 @@ export class Analytics {
      * @param {SourceType} sourceType
      * @param {number} contentItemId
      * @param {number} itemId
+     * deprecated Use trackDownloadFileV2 instead
      */
     trackDownloadFile(
         sourceType: SourceType,
@@ -232,11 +260,40 @@ export class Analytics {
     }
 
     /**
+     * Tracking for download file action V2
+     *
+     * @param {SourceType} sourceType
+     * @param {number} contentItemId
+     * @param {number} itemId
+     */
+    trackDownloadFileV2(
+        sourceType: SourceType,
+        contentItemId: number,
+        itemId?: number
+    ): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/downloads`, {
+                    source_type: sourceType,
+                    item_id: itemId
+                })
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not track download content", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
      * Tracking for lead like content action
      *
      * @param {number} contentItemId
      * @param {number} itemId
      * @param {SourceType} sourceType
+     * deprecated Use trackLeadLikeContentV2 instead
      */
     trackLeadLikeContent(
         sourceType: SourceType,
@@ -248,6 +305,34 @@ export class Analytics {
                 .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/likes`, {
                     source_type: sourceType,
                     content_item_id: contentItemId,
+                    item_id: itemId
+                })
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not track like content", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Tracking for lead like content action V2
+     *
+     * @param {number} contentItemId
+     * @param {number} itemId
+     * @param {SourceType} sourceType
+     */
+    trackLeadLikeContentV2(
+        sourceType: SourceType,
+        contentItemId: number,
+        itemId?: number
+    ): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/likes`, {
+                    source_type: sourceType,
                     item_id: itemId
                 })
                 .then(() => {

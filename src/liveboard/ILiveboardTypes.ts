@@ -83,6 +83,8 @@ export type ItemsParams = ItemNavigationParams & {
     category?: number;
     page?: number;
     perPage?: number;
+    source: "curated" | "recommendations";
+    amount?: number;
 };
 
 // minimixed data for the item relevant for the item viewer
@@ -301,6 +303,7 @@ export type LeadResponseV1 = {
     last_name: string;
     company: string;
     anon_guest: boolean;
+    account_domain?: string;
 };
 
 export type LeadLinkClickResponseV1 = {}
