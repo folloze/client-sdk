@@ -344,4 +344,28 @@ export class Analytics {
                 });
         });
     }
+
+    /**
+     * Publish lead event externally
+     * 
+     * @param {number} contentItemId 
+     * @param {Date} timestamp 
+     * @param {string} eventName 
+     */
+     publishLeadEvents(contentItemId: number, timestamp: number, eventName: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<void>("/live_board/v2/sphere/publish_lead_events", {
+                    content_item_id: contentItemId,
+                    timestamp,
+                    event_name: eventName
+                }).then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not publish event", e);
+                    reject(e);
+                });
+        });
+    }
 }

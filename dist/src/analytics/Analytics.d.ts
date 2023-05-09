@@ -134,4 +134,12 @@ export declare class Analytics {
      * @param {SourceType} sourceType
      */
     trackLeadLikeContentV2(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
+    /**
+     * Publish lead event externally
+     *
+     * @param {number} contentItemId
+     * @param {Date} timestamp
+     * @param {string} eventName
+     */
+    publishLeadEvents(contentItemId: number, timestamp: number, eventName: string): Promise<void>;
 }
