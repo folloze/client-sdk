@@ -19,7 +19,9 @@ describe("cloudinary helpers tests", () => {
     });
 
     it("checks getTransformedUrl for image without transformation - maxHeight", async () => {
-        expect(cloudinaryHelper.getTransformedUrl(testData2.img, undefined, testData2.params.maxHeight)).toEqual(testData2.result);
+        expect(cloudinaryHelper.getTransformedUrl(testData2.img, undefined, testData2.params.maxHeight)).toEqual(
+            testData2.result,
+        );
     });
 
     it("checks buildTransform for image without transformation - maxHeight", async () => {
@@ -29,17 +31,24 @@ describe("cloudinary helpers tests", () => {
     });
 
     it("checks getTransformedUrl for image without transformation - maxHeight and maxWidth", async () => {
-        expect(cloudinaryHelper.getTransformedUrl(testData3.img, testData3.params.maxWidth, testData3.params.maxHeight)).toEqual(testData3.result);
+        expect(
+            cloudinaryHelper.getTransformedUrl(testData3.img, testData3.params.maxWidth, testData3.params.maxHeight),
+        ).toEqual(testData3.result);
     });
 
     it("checks buildTransform for image without transformation - maxHeight and maxWidth", async () => {
-        expect(new CloudinaryUrlBuilder(testData3.img).maxWidth(testData3.params.maxWidth).maxHeight(testData3.params.maxHeight).toString()).toEqual(
-            testData3.result,
-        );
+        expect(
+            new CloudinaryUrlBuilder(testData3.img)
+                .maxWidth(testData3.params.maxWidth)
+                .maxHeight(testData3.params.maxHeight)
+                .toString(),
+        ).toEqual(testData3.result);
     });
 
     it("checks getTransformedUrl for image with transformation and should return the optimized_url", async () => {
-        expect(cloudinaryHelper.getTransformedUrl(testData4.img, undefined, undefined)).toEqual(testData4.img.optimized_url);
+        expect(cloudinaryHelper.getTransformedUrl(testData4.img, undefined, undefined)).toEqual(
+            testData4.img.optimized_url,
+        );
     });
 
     it("checks buildTransform for image with transformation and should return the optimized_url", async () => {
@@ -67,8 +76,13 @@ describe("cloudinary helpers tests", () => {
     });
 
     it("checks buildTransform for image with sharpen", async () => {
-        expect(new CloudinaryUrlBuilder(testData7.img).maxHeight(testData7.params.maxHeight).maxWidth(testData7.params.maxWidth).sharpen().toString())
-        .toEqual(testData7.result);
+        expect(
+            new CloudinaryUrlBuilder(testData7.img)
+                .maxHeight(testData7.params.maxHeight)
+                .maxWidth(testData7.params.maxWidth)
+                .sharpen()
+                .toString(),
+        ).toEqual(testData7.result);
     });
 });
 
@@ -113,7 +127,7 @@ const testData3: TestData = {
     result: "https://images.folloze.com/image/upload/c_lfill,h_500,w_210/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         maxHeight: 500,
-        maxWidth: 210
+        maxWidth: 210,
     },
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
@@ -126,13 +140,14 @@ const testData3: TestData = {
 const testData4: TestData = {
     result: "https://images.folloze.com/image/upload/a_vflip/a_hflip/c_crop,h_220,w_322,x_64/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
-        optimize: false
+        optimize: false,
     },
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
         bankCategory: "banners",
-        optimized_url: "https://images.folloze.com/image/upload/a_vflip/a_hflip/c_crop,h_220,w_322,x_64/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+        optimized_url:
+            "https://images.folloze.com/image/upload/a_vflip/a_hflip/c_crop,h_220,w_322,x_64/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         transformation: {
             crop: {
                 x: 64,
@@ -140,12 +155,12 @@ const testData4: TestData = {
                 aspect: null,
                 width: 322,
                 height: 220,
-                radius: 0
+                radius: 0,
             },
             shape: "none",
             flipY: true,
-            flipX: true
-        }
+            flipX: true,
+        },
     },
 };
 
@@ -156,7 +171,7 @@ const testData5: TestData = {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
         bankCategory: "banners",
-        optimized_url:  null,
+        optimized_url: null,
         transformation: {
             artisticFilter: "peacock",
             crop: {
@@ -165,55 +180,56 @@ const testData5: TestData = {
                 radius: 0,
                 width: 387,
                 x: 0,
-                y: 0
+                y: 0,
             },
             flipX: false,
             flipY: true,
-            shape: "none"
-        }
+            shape: "none",
+        },
     },
 };
 
 const testData6: TestData = {
-    result: "https://images.folloze.com/image/upload/e_sharpen/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/f_auto/q_auto/e_sharpen/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
-        sharpen: true
+        sharpen: true,
     },
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
         bankCategory: "banners",
-        optimized_url:  null,
-        transformation: {}
+        optimized_url: null,
+        transformation: {},
     },
 };
 
 const testData7: TestData = {
-    result: "https://images.folloze.com/image/upload/e_sharpen/c_lfill,h_500,w_210/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/c_lfill,h_500,w_210/f_auto/q_auto/e_sharpen/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         maxHeight: 500,
         maxWidth: 210,
-        sharpen: true
+        sharpen: true,
     },
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
         bankCategory: "banners",
-        optimized_url:  null,
-        transformation: {}
+        optimized_url: null,
+        transformation: {},
     },
 };
 
 const testData8: TestData = {
     result: "https://images.folloze.com/image/upload/a_hflip/c_crop,h_258,w_387/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
-        optimize: true
+        optimize: true,
     },
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
         bankCategory: "banners",
-        optimized_url: "https://images.folloze.com/image/upload/a_hflip/c_crop,h_258,w_387/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+        optimized_url:
+            "https://images.folloze.com/image/upload/a_hflip/c_crop,h_258,w_387/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         transformation: {
             crop: {
                 x: 0,
@@ -221,13 +237,11 @@ const testData8: TestData = {
                 aspect: null,
                 width: 387,
                 height: 258,
-                radius: 0
+                radius: 0,
             },
             shape: "none",
             flipY: false,
-            flipX: true
-        }
+            flipX: true,
+        },
     },
 };
-
-
