@@ -133,6 +133,7 @@ export type ItemResponseV2 = {
     views_count: number;
     open_in_new_tab?: boolean;
     route: string;
+    is_content_item: boolean;
 };
 
 export type ItemsResponseV2 = {
