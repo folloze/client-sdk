@@ -1,5 +1,5 @@
 import {OpenItemViewerPayload} from "../../liveboard/ILiveboardTypes";
 
-export function getJourneyType(item: OpenItemViewerPayload) {
-   return item.viewer_settings?.lead_journey?.type === "recommendations" ? "ai" : "item";
+export function getItemContentType(item: OpenItemViewerPayload) {
+   return item.is_content_item === true ? "ai" : "item";
 }
