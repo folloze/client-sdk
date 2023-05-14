@@ -1,19 +1,21 @@
 import {
     BackgroundString,
-    FlzEditableImageData, FlzEditableVideoData,
-    GalleryImage, GalleryVideo,
-    PercentPosition
+    FlzEditableImageData,
+    FlzEditableVideoData,
+    GalleryImage,
+    GalleryVideo,
+    PercentPosition,
 } from "../../designer/IDesignerTypes";
 import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
-import { Cloudinary, CloudinaryVideo } from "@cloudinary/url-gen";
+import {Cloudinary, CloudinaryVideo} from "@cloudinary/url-gen";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
-import { sharpen } from "@cloudinary/url-gen/actions/adjust";
+import {sharpen} from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
-import { BackgroundImage, BackgroundVideo } from "../interfaces/ISection";
-import { ICompassGravity } from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
+import {BackgroundImage, BackgroundVideo} from "../interfaces/ISection";
+import {ICompassGravity} from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
@@ -68,10 +70,6 @@ export class CloudinaryUrlBuilder {
         const cldImage = CloudinaryHelper.getImage(this.image);
         const isSvg = cldImage.toURL().endsWith(".svg");
 
-        if(this.sharp) {
-            cldImage.adjust(sharpen());
-        }
-
         if (this.image.transformation?.flipY) {
             cldImage.rotate(mode(verticalFlip()));
         }
@@ -116,6 +114,10 @@ export class CloudinaryUrlBuilder {
         // do not add f_auto & q_auto on SVG images unless needed (when cropped - handled above)
         if (!isSvg) {
             cldImage.format("auto").quality("auto");
+        }
+
+        if (this.sharp) {
+            cldImage.adjust(sharpen());
         }
 
         let imageUrl = cldImage.toURL();
@@ -269,7 +271,7 @@ export class CloudinaryHelper {
             "100% 50%": "east",
             "0% 100%": "south_west",
             "50% 100%": "south",
-            "100% 100%": "south_east"
+            "100% 100%": "south_east",
         };
 
         const positionAsDirection = lookupMap[_position];
@@ -283,7 +285,7 @@ export class CloudinaryHelper {
     }
 
     getVideoThumbnail(url: string): string {
-        return url.substr(0,url.lastIndexOf(".")) + ".jpg";
+        return url.substr(0, url.lastIndexOf(".")) + ".jpg";
     }
 
     public static isCloudinaryImage(url: string) {
