@@ -8,7 +8,7 @@ export declare type PingPayload = {
     contentItemId?: number;
     guid: string;
 };
-export declare type SourceType = "item" | "ai";
+export declare type SourceType = "item" | "ai" | "recommendations";
 export declare enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
