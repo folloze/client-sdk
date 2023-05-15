@@ -51,6 +51,7 @@ export const rules = (mock: MockAdapter) => {
         status: 1,
         views_count: 17,
         route: "foo.bar.com/baz/items/amazoncom-spend-less-smile-more",
+        is_content_item: false
     };
 
     mock.onGet("/live_board/v1/boards/board_slug/").reply<BoardResponseV1>(200, {
