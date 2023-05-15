@@ -11,7 +11,7 @@ export type PingPayload = {
     guid: string;
 };
 
-export type SourceType = "item" | "ai"
+export type SourceType = "item" | "ai" | "recommendations"
 
 export enum LiveBoardEventTypes {
     viewed_board = 1,
