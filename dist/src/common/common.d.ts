@@ -20,6 +20,7 @@ export * from "./helpers/leadEventTracking";
 export * from "./helpers/analyticEventTracking";
 export * from "./helpers/urlHelpers";
 export * from "./helpers/leadJourneyHelper";
+export * from "./helpers/analyticsHelper";
 export * from "./FlzEvent";
 export * from "./controllers/CloseOnOutSideClickController";
 export * from "./controllers/CloseOnESCController";
