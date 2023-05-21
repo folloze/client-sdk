@@ -354,14 +354,15 @@ export class Analytics {
      */
     publishLeadEvents(contentItemId: number, timestamp: number, eventName: string): Promise<void> {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post<void>("/live_board/v2/sphere/publish_lead_events", {
-                content_item_id: contentItemId,
-                timestamp,
-                event_name: eventName
-            }).catch(e => {
-                console.error("could not update invitation wrapper", e);
-                throw e;
-            });
+            return this.fetchService.fetcher
+                .post<void>("/live_board/v2/sphere/publish_lead_events", {
+                    content_item_id: contentItemId,
+                    timestamp,
+                    event_name: eventName
+                }).catch(e => {
+                    console.error("could not update invitation wrapper", e);
+                    throw e;
+                });
         });
     }
 }
