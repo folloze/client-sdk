@@ -2,7 +2,8 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaClick"
     | "Folloze.ctaSubmit"
     | "Folloze.pageview"
-    | "Folloze.onConsent";
+    | "Folloze.onConsent"
+    | "Folloze.linkClick";
 export type PUBLIC_INCOMING_EVENT_ACTION = "Folloze.consentGiven" | "Folloze.stopTrackingForVisit";
 
 export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
