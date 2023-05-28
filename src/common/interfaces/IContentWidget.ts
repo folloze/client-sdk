@@ -26,6 +26,7 @@ export interface FlzVItemViewerSettings {
     lead_journey?: {
         type: "curated" | "recommendations",
         layout: "arrow" | "bottom",
-        disableScrollingAnimation: boolean
+        disableScrollingAnimation: boolean,
+        itemsAmount?: number
     }
 }

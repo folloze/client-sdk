@@ -25,5 +25,6 @@ export interface FlzVItemViewerSettings {
         type: "curated" | "recommendations";
         layout: "arrow" | "bottom";
         disableScrollingAnimation: boolean;
+        itemsAmount?: number;
     };
 }

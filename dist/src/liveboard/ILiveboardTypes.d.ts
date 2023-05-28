@@ -91,6 +91,7 @@ export declare type OpenItemViewerPayload = ItemNavigationParams & {
     link_url?: string;
     is_landing?: boolean;
     is_content_item: boolean;
+    journeyItemsAmount?: number;
 };
 export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
