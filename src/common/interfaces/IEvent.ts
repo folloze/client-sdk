@@ -2,7 +2,8 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaClick"
     | "Folloze.ctaSubmit"
     | "Folloze.pageview"
-    | "Folloze.onConsent";
+    | "Folloze.onConsent"
+    | "Folloze.linkClick";
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.stopTrackingForVisit"
@@ -56,7 +57,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "is-personalization-mod"
     | "floating-widget-manager"
     | "track-lead-event"
-    | "analytic-event";
+    | "analytic-event"
+    | "link-click";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
