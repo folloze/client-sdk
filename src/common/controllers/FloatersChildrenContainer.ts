@@ -18,6 +18,11 @@ export class FloatChildrenContainer implements ReactiveController {
     };
 
     _getHostContainer = () => {
+        console.log('lalalala');
+
+        console.log(this);
+        console.log(this.host);
+
         return this.host;
     };
 
