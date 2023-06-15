@@ -12,8 +12,11 @@ export abstract class LiveWidgetEdit extends LitElement implements hasFloatingCh
 
     constructor() {
         super();
-
+        console.log('lkalalalala');
+        
         this.addEventListener("get-host-container", (e: CustomEvent) => {
+            console.log('eventt');
+            
             e.detail.hostContainer.container = this;
         });
     }
