@@ -22,6 +22,17 @@ export abstract class LiveWidgetElement extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         widgetEmit(this, "widget-connected");
+        this.addEventListener("get-host-container", () => {
+            console.log('lalalalal');
+            return this;
+        });
+    }
+
+    disconnectedCallback(): void {
+        super.disconnectedCallback();
+        this.removeEventListener("get-host-container", () => {
+            return this;
+        });
     }
 
     willUpdate(_changedProperties: PropertyValues) {
