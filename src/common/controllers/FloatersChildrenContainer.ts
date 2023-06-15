@@ -39,6 +39,7 @@ export class FloatChildrenContainer implements ReactiveController {
     hostDisconnected() {
         this.host.removeEventListener("add-float-child", this._addFloatChild);
         this.host.removeEventListener("get-host-container", this._getHostContainer);
+
         this.closeAllChildFloaters();
     }
 
