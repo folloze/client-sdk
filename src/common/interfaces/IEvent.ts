@@ -88,4 +88,4 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "save-config-lazy"
     | "designer-open-preview"
     | "get-designer-themes"
-    | "get-host-container";
+    | "get-editor-container";
