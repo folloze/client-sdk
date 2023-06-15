@@ -17,15 +17,6 @@ export class FloatChildrenContainer implements ReactiveController {
         this.add(e.detail.child);
     };
 
-    _getHostContainer = () => {
-        console.log('lalalala');
-
-        console.log(this);
-        console.log(this.host);
-
-        return this.host;
-    };
-
     constructor(host: LitElement) {
         this.host = host;
         host.addController(this);
@@ -33,13 +24,10 @@ export class FloatChildrenContainer implements ReactiveController {
 
     hostConnected() {
         this.host.addEventListener("add-float-child", this._addFloatChild);
-        this.host.addEventListener("get-host-container", this._getHostContainer);
     }
 
     hostDisconnected() {
         this.host.removeEventListener("add-float-child", this._addFloatChild);
-        this.host.removeEventListener("get-host-container", this._getHostContainer);
-
         this.closeAllChildFloaters();
     }
 
