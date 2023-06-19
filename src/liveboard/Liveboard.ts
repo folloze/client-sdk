@@ -128,7 +128,13 @@ export class Liveboard {
             this.fetchService.fetcher
                 .get<CategoriesResponseV2>(`/live_board/v2/boards/${boardId}/categories`)
                 .then(result => {
-                    resolve(result.data);
+                    if (result.status == 206) {
+                        setTimeout(() => {
+                            this.getCategories(boardId).then(resolve).catch(reject);
+                        }, 2000);
+                    } else {
+                        resolve(result.data);
+                    }
                 })
                 .catch(e => {
                     console.error("could not get categories", e);
