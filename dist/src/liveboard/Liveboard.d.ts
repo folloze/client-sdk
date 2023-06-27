@@ -87,10 +87,9 @@ export declare class Liveboard {
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
      *
      * @param {number} contentItemId
-     * @param {number=} guid
      * @returns {SnapshotUrlResponseV1} SnapshotUrlResponse
      */
-    createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1>;
+    createSnapshotUrl(contentItemId: number): Promise<SnapshotUrlResponseV1>;
     /**
      * Analyses whether the item is secure or not
      *

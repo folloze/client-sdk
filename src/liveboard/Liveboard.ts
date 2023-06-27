@@ -288,13 +288,12 @@ export class Liveboard {
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
      *
      * @param {number} contentItemId
-     * @param {number=} guid
      * @returns {SnapshotUrlResponseV1} SnapshotUrlResponse
      */
-    createSnapshotUrl(contentItemId: number, guid?: number): Promise<SnapshotUrlResponseV1> {
-        return new Promise((resolve, reject) => {
+    createSnapshotUrl(contentItemId: number): Promise<SnapshotUrlResponseV1> {
+        const func = (resolve, reject) => {
             this.fetchService.fetcher
-                .post<SnapshotUrlResponseV1>(`/live_board/v1/content_items/${contentItemId}/snapshots`, {guid})
+                .post<SnapshotUrlResponseV1>(`/live_board/v1/content_items/${contentItemId}/snapshots`)
                 .then(result => {
                     resolve(result.data);
                 })
@@ -302,7 +301,9 @@ export class Liveboard {
                     console.error("could not create snapshot", e);
                     reject(e);
                 });
-        });
+        };
+
+        return this.fetchService.withPartialContent(func, 500, 20) as Promise<SnapshotUrlResponseV1>;
     }
 
     /**
