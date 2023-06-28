@@ -7,6 +7,7 @@ export declare abstract class LiveWidgetEdit extends LitElement implements hasFl
     protected _propPath: string;
     readonly _handleStyle: string | undefined;
     floatChildrenContainer: FloatChildrenContainer;
+    constructor();
     set widget(w: LiveWidget);
     get widget(): LiveWidget;
     set propertyPath(path: string);

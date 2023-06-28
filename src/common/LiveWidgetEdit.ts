@@ -10,6 +10,14 @@ export abstract class LiveWidgetEdit extends LitElement implements hasFloatingCh
     readonly _handleStyle: string | undefined;
     public floatChildrenContainer = new FloatChildrenContainer(this);
 
+    constructor() {
+        super();
+
+        this.addEventListener("get-editor-container", (e: CustomEvent) => {
+            e.detail.editorContainer.container = this.parentElement;
+        });
+    }
+
     set widget(w: LiveWidget) {
         this._widget = w;
         this.data = w.data;
