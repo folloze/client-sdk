@@ -226,6 +226,7 @@ export type JourneyItem = {
 export type JourneyItemsResponseV2 = {
     items: Record<string, JourneyItem>; // current, previous and next items
     items_count: number;
+    current_item: JourneyItem;
     journey_index: number;
     next_item_index: number;
     prev_item_index: number;
