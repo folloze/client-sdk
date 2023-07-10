@@ -148,7 +148,8 @@ export class CloudinaryHelper {
             analytics: false,
         },
     });
-    public static videoPlayerScriptUrl = "https://cdn.folloze.com/flz/vendors/cld-video-player.light.1.9.0.min.js";
+    // public static videoPlayerScriptUrl = "https://cdn.folloze.com/flz/vendors/cld-video-player.light.1.9.0.min.js";
+    public static videoPlayerScriptUrl = "https://engage.folloze.com/3rd-party/cld-video-player-1.5.1.min.js";
 
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage {
         const cldImageId = CloudinaryHelper.getPublicId(image.url);
@@ -241,6 +242,7 @@ export class CloudinaryHelper {
 
     // This is the basic player needed for the cloudinary player, will need to add more functionality for simulive
     private createVideoPlayer(url: string, playerElement: HTMLVideoElement, options: object, transformation: object) {
+        console.log("createVideoPlayer", url, playerElement, options, transformation);
         // @ts-ignore
         const player = cloudinary.videoPlayer(playerElement, {...options, showLogo: false});
 
