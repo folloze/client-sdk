@@ -22,7 +22,8 @@ import {
     SessionResponseV1,
     FormMetadataDataV1,
     CampaignElementDataV2,
-    CtaResponseV1, LeadLinkClickResponseV1
+    CtaResponseV1,
+    LeadLinkClickResponseV1,
 } from "./ILiveboardTypes";
 
 export const rules = (mock: MockAdapter) => {
@@ -51,7 +52,7 @@ export const rules = (mock: MockAdapter) => {
         status: 1,
         views_count: 17,
         route: "foo.bar.com/baz/items/amazoncom-spend-less-smile-more",
-        is_content_item: false
+        is_content_item: false,
     };
 
     mock.onGet("/live_board/v1/boards/board_slug/").reply<BoardResponseV1>(200, {
@@ -229,13 +230,15 @@ export const rules = (mock: MockAdapter) => {
         journey_index: 2,
         next_item_index: 3,
         prev_item_index: 1,
+        // @ts-ignore
+        current_item: {},
     });
 
     mock.onGet("/live_board/v2/items/1/downloads").reply<ItemDownloadUrlSuccessResponseV2>(200, {
         download_url: "https://url-for-download.com",
     });
 
-    mock.onGet("/live_board/v2/downloads",{content_item_id: 1}).reply<ItemDownloadUrlSuccessResponseV2>(200, {
+    mock.onGet("/live_board/v2/downloads", {content_item_id: 1}).reply<ItemDownloadUrlSuccessResponseV2>(200, {
         download_url: "https://url-for-download.com",
     });
 
@@ -508,8 +511,6 @@ export const rules = (mock: MockAdapter) => {
         company: null,
         group_user: false,
     });
-
-
 
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/campaign\/share/).reply<CtaResponseV1>(200, {
         id: 1,
