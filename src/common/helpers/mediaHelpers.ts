@@ -150,7 +150,8 @@ export class CloudinaryHelper {
     });
 
     // public static videoPlayerScriptUrl = "https://cdn.folloze.com/flz/vendors/cld-video-player.light.1.9.0.min.js";
-    public static videoPlayerScriptUrl = "https://engage.folloze.com/3rd-party/cld-video-player-1.5.1.min.js";
+    // public static videoPlayerScriptUrl = "https://engage.folloze.com/3rd-party/cld-video-player-1.5.1.min.js";
+    public static videoPlayerScriptUrl = "https://unpkg.com/cloudinary-video-player@1.9.9/dist/cld-video-player.min.js";
 
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage {
         const cldImageId = CloudinaryHelper.getPublicId(image.url);
