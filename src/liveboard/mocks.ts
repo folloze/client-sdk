@@ -229,6 +229,29 @@ export const rules = (mock: MockAdapter) => {
         journey_index: 2,
         next_item_index: 3,
         prev_item_index: 1,
+        current_item: {
+            category_id: null,
+            category_name: null,
+            category_slug: null,
+            content_item_id: 1720,
+            description: "current item description",
+            id: 1720,
+            image: {
+                fit: "cover",
+                url: "https://images.folloze.com/image/fetch/https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png",
+            },
+            is_gated: null,
+            item_source: 1,
+            item_type: "link",
+            journey_index: 2,
+            liked_by_user: false,
+            link_url: "https://www.wikipedia.org/",
+            name: "Wikipedia The Free Encyclopedia",
+            open_in_new_tab: null,
+            secured: true,
+            slug: "wikipedia-the-free-encyclopedia",
+            snapshot_url: null,
+        },
     });
 
     mock.onGet("/live_board/v2/items/1/downloads").reply<ItemDownloadUrlSuccessResponseV2>(200, {
