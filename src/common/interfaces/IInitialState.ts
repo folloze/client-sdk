@@ -38,6 +38,7 @@ export type InitialState = {
         personalization: boolean;
         multiPages?: boolean;
         recommendationsAi: boolean;
+        customTheme: boolean;
     };
     user?: User;
     privacy_messages: PrivacyMessage[];

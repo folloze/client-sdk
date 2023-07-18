@@ -204,6 +204,7 @@ export declare type JourneyItem = {
 export declare type JourneyItemsResponseV2 = {
     items: Record<string, JourneyItem>;
     items_count: number;
+    current_item: JourneyItem;
     journey_index: number;
     next_item_index: number;
     prev_item_index: number;
