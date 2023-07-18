@@ -51,6 +51,8 @@ export class CloudinaryUrlBuilder {
     }
 
     toString(): string {
+        console.log("this.image", this.image);
+
         // todo: this should be removed? why string ?
         if (typeof this.image === "string") {
             this.image = {
