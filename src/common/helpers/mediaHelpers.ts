@@ -84,6 +84,7 @@ export class CloudinaryUrlBuilder {
             height && cropTransformation.height(height);
             cropTransformation.x(x || 0);
             cropTransformation.y(y || 0);
+            console.log("this.image.transformation?.crop", this.image.transformation?.crop, x, y, width, height);
             aspect && cropTransformation.aspectRatio(aspect);
             cldImage.resize(cropTransformation);
             radius == "max" && cldImage.roundCorners(max());
