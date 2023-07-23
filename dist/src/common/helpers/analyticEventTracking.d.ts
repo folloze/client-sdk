@@ -1,10 +1,12 @@
 declare type AnalyticTypeToPayload = {
     video_started: {
         content_id: number;
+        content_item_id: number;
         guid: string;
     };
     video_ended: {
         content_id: number;
+        content_item_id: number;
         guid: string;
         duration: number;
     };
