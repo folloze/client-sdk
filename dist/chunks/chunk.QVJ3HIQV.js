@@ -41,13 +41,13 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as fr,w as Oe}from"./chunk.TGN3
                     ${((e=this.childEl.widget)==null?void 0:e.documentationUrl)?wt`
                             <div class="documentation-url" @click=${this.goToDocumentation}>
                                 <svg
-                                    width="24px"
-                                    height="24px"
+                                    width="24"
+                                    height="24"
                                     viewBox="0 0 24 24"
                                     fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.25 5.96118H9.75V7.46118H8.25V5.96118ZM8.25 8.96118H9.75V13.4612H8.25V8.96118ZM9 2.21118C4.86 2.21118 1.5 5.57118 1.5 9.71118C1.5 13.8512 4.86 17.2112 9 17.2112C13.14 17.2112 16.5 13.8512 16.5 9.71118C16.5 5.57118 13.14 2.21118 9 2.21118ZM9 15.7112C5.6925 15.7112 3 13.0187 3 9.71118C3 6.40368 5.6925 3.71118 9 3.71118C12.3075 3.71118 15 6.40368 15 9.71118C15 13.0187 12.3075 15.7112 9 15.7112Z"
-                                    fill="currentColor" />
+                                    fill="#ffffff" />
                                 </svg>
                             </div>`:""}
                     <div class="close" @click=${this.close}>
@@ -69,7 +69,12 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as fr,w as Oe}from"./chunk.TGN3
             :host {
             }
 
-            .close {
+            .floating-editor-actions {
+                display: flex;
+                align-items: center;
+            }
+
+            .close, .documentation-url {
                 cursor: pointer;
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
