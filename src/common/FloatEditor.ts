@@ -22,8 +22,6 @@ export class FloatEditor extends FloatingElement {
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
                 background: none;
-                display: flex;
-                align-items: center;
 
                 &:hover {
                     color: black;

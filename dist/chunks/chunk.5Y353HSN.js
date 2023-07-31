@@ -79,8 +79,6 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as fr,w as Oe}from"./chunk.TGN3
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
                 background: none;
-                display: flex;
-                align-items: center;
 
                 &:hover {
                     color: black;
