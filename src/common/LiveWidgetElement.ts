@@ -8,6 +8,7 @@ export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly customEditWidgets: string[];
     public abstract readonly editComponents: string[];
     public abstract readonly widgetTitle: string;
+    public readonly documentationUrl: string;
     public setConfigOnlyOnce: boolean = false;
 
     protected _data: any;
