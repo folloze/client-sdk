@@ -73,6 +73,7 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as fr,w as Oe}from"./chunk.TGN3
             .floating-editor-actions {
                 display: flex;
                 align-items: center;
+                align-self: self-end;
             }
 
             .close, .documentation-url {

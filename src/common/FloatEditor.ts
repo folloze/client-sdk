@@ -15,6 +15,7 @@ export class FloatEditor extends FloatingElement {
             .floating-editor-actions {
                 display: flex;
                 align-items: center;
+                align-self: self-end;
             }
 
             .close, .documentation-url {
