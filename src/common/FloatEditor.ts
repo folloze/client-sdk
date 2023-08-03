@@ -194,7 +194,9 @@ export class FloatEditor extends FloatingElement {
                 <span class="conf-name"> ${this.title || this.childEl.widget?.widgetTitle || ""} </span>
                 <div class="floating-editor-actions">
                     ${this.getDocumentationUrl() ?
-                        html`${infoIcon}` : ""
+                        `<div class="documentation-url" style="display: flex" @click=${this.goToDocumentation}>
+                            ${infoIcon}
+                        </div>` : ""
                     }
                     <div class="close" @click=${this.close}>
                         ${closeIcon}
