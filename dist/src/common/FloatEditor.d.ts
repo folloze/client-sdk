@@ -13,7 +13,8 @@ export declare class FloatEditor extends FloatingElement {
     getChildEl(): LiveWidgetEdit | LiveWidgetComponentEdit;
     highlight(): void;
     removeHighlight(): void;
-    goToDocumentation(): void;
+    goToDocumentation(): any;
+    getDocumentationUrl(): any;
     render(): import("lit-html").TemplateResult<1>;
 }
 export {};
