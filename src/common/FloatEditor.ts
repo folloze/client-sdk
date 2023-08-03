@@ -174,12 +174,12 @@ export class FloatEditor extends FloatingElement {
     }
 
     // this method is being overide from EditorContainer in the designer.
-    goToDocumentation() {
-        return undefined;
+    goToDocumentation(): void {
+        return;
     }
 
     // this method is being overide from EditorContainer in the designer.
-    getDocumentationUrl() {
+    getDocumentationUrl(): string | undefined {
         return undefined;
     }
 
