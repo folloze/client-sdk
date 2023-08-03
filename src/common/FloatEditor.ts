@@ -132,7 +132,7 @@ export class FloatEditor extends FloatingElement {
 
     @property()
     private isLoading: boolean = true;
-    private readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
+    readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
 
     @property()
     public title: string;

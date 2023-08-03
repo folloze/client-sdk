@@ -5,7 +5,7 @@ export declare class FloatEditor extends FloatingElement {
     static styles: CSSResultGroup;
     body: HTMLElement;
     private isLoading;
-    private readonly childEl;
+    readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
     title: string;
     constructor(el: LiveWidgetEdit | LiveWidgetComponentEdit);
     disconnectedCallback(): void;
