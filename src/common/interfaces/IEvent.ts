@@ -87,4 +87,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "track-user-event"
     | "save-config-lazy"
     | "designer-open-preview"
-    | "get-designer-themes";
+    | "get-designer-themes"
+    | "navigate-to-documenation";
