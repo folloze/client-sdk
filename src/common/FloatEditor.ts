@@ -2,6 +2,7 @@ import {css, CSSResultGroup, html, LitElement} from "lit";
 import {property, query} from "lit/decorators.js";
 import {LiveWidgetEdit, LiveWidgetComponentEdit, makeDragElement} from "../index";
 import {Floatable} from "./mixins/FloatableMixin";
+import { infoIcon, closeIcon } from "./icons";
 
 const FloatingElement = Floatable(LitElement);
 
@@ -12,13 +13,17 @@ export class FloatEditor extends FloatingElement {
             :host {
             }
 
-            .close {
+            .floating-editor-actions {
+                display: flex;
+                align-items: center;
+                align-self: self-end;
+            }
+
+            .close, .documentation-url {
                 cursor: pointer;
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
                 background: none;
-                display: flex;
-                align-items: center;
 
                 &:hover {
                     color: black;
@@ -127,7 +132,7 @@ export class FloatEditor extends FloatingElement {
 
     @property()
     private isLoading: boolean = true;
-    private readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
+    readonly childEl: LiveWidgetEdit | LiveWidgetComponentEdit;
 
     @property()
     public title: string;
@@ -168,6 +173,16 @@ export class FloatEditor extends FloatingElement {
         }
     }
 
+    // this method is being overide from EditorContainer in the designer.
+    goToDocumentation(): void {
+        return;
+    }
+
+    // this method is being overide from EditorContainer in the designer.
+    getDocumentationUrl(): string | undefined {
+        return undefined;
+    }
+
     render() {
         return html`
             ${this.isLoading ? html`<div class="loading"></div>` : ""}
@@ -177,17 +192,15 @@ export class FloatEditor extends FloatingElement {
                 @mouseover="${this.highlight}"
                 @mouseleave="${this.removeHighlight}">
                 <span class="conf-name"> ${this.title || this.childEl.widget?.widgetTitle || ""} </span>
-                <div class="close" @click=${this.close}>
-                    <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="24px"
-                        viewBox="0 0 24 24"
-                        width="24px"
-                        fill="#ffffff">
-                        <path d="M0 0h24v24H0V0z" fill="none" />
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
-                    </svg>
+                <div class="floating-editor-actions">
+                    ${this.getDocumentationUrl() ?
+                        html `<div class="documentation-url" style="display: flex" @click=${this.goToDocumentation}>
+                            ${infoIcon}
+                        </div>` : ""
+                    }
+                    <div class="close" @click=${this.close}>
+                        ${closeIcon}
+                    </div>
                 </div>
             </div>
             <div id="body"></div>
