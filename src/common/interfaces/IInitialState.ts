@@ -50,6 +50,9 @@ export type InitialState = {
     contact_card_info: ContactCardInfo;
 
     custom_attributes: Record<string, string>;
+    designer?: {
+        preview_only: boolean;
+    };
 };
 
 export type DataEnrichmentConfig = {
