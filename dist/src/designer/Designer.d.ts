@@ -152,4 +152,5 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
+    getCustomSavedSections(): Promise<any>;
 }

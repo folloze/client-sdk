@@ -25,6 +25,7 @@ import {
     Theme
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
+import { AddListItem } from "../common/interfaces/ISection";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -481,4 +482,18 @@ export class Designer {
                 });
         });
     }
+
+    getCustomSavedSections(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get saved sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+
 }
