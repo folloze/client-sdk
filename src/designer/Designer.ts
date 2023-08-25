@@ -507,5 +507,17 @@ export class Designer {
         });
     }
 
+    deleteCustomSection(sectionId: number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/custom_sections/${sectionId}`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not delete section", e);
+                    reject(e);
+                }
+            );
+        });
+    }
 
 }

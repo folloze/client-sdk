@@ -90,4 +90,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-designer-themes"
     | "navigate-to-documentation"
     | "get-saved-custom-sections"
-    | "save-custom-section";
+    | "save-custom-section"
+    | "delete-custom-section";
