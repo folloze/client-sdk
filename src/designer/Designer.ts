@@ -495,5 +495,17 @@ export class Designer {
         });
     }
 
+    saveCustomSection(section: AddListItem): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post(`/api/v1/custom_sections`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save section", e);
+                    reject(e);
+                });
+        });
+    }
+
 
 }
