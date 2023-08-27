@@ -1,6 +1,6 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
-import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
+import { BackgroundImage, BackgroundVideo, SectionListItem } from "../common/interfaces/ISection";
 export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
 export declare type VideoGalleryTypes = "video";
 export declare enum CampaignElementsTypes {
@@ -349,5 +349,9 @@ export declare type Theme = {
     status: "archived" | "published";
     style: string;
     type: "basic" | "migration" | "system";
+};
+export declare type CustomSectionsResponseV1 = {
+    "saved": Record<string, SectionListItem[]>;
+    "shared": Record<string, SectionListItem[]>;
 };
 export {};

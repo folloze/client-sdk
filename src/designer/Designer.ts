@@ -22,10 +22,11 @@ import {
     MergeTagValue,
     VideoGalleryParams,
     GalleryVideo,
-    Theme
+    Theme,
+    CustomSectionsResponseV1
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
-import { AddListItem } from "../common/interfaces/ISection";
+import {AddListItem, SectionListItem} from "../common/interfaces/ISection";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -483,7 +484,7 @@ export class Designer {
         });
     }
 
-    getCustomSavedSections(): Promise<any> {
+    getCustomSavedSections(): Promise<CustomSectionsResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get(`/api/v1/custom_sections`)
@@ -495,7 +496,7 @@ export class Designer {
         });
     }
 
-    saveCustomSection(section: AddListItem): Promise<any> {
+    saveCustomSection(section: AddListItem): Promise<SectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .post(`/api/v1/custom_sections`, section)
@@ -507,13 +508,26 @@ export class Designer {
         });
     }
 
-    deleteCustomSection(sectionId: number): Promise<any> {
+    deleteCustomSection(customSectionId: number): Promise<SectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .delete(`/api/v1/custom_sections/${sectionId}`)
+                .delete(`/api/v1/custom_sections/${customSectionId}`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not delete section", e);
+                    reject(e);
+                }
+            );
+        });
+    }
+
+    updateCustomSection(customSectionId: number, section: SectionListItem): Promise<SectionListItem>  {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .put(`/api/v1/custom_sections/${customSectionId}`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not update section", e);
                     reject(e);
                 }
             );
