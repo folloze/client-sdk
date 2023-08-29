@@ -44,6 +44,9 @@ export declare type InitialState = {
     };
     contact_card_info: ContactCardInfo;
     custom_attributes: Record<string, string>;
+    designer?: {
+        preview_only: boolean;
+    };
 };
 export declare type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";

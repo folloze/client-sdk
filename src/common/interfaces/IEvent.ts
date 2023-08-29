@@ -88,4 +88,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "save-config-lazy"
     | "designer-open-preview"
     | "get-designer-themes"
-    | "navigate-to-documentation";
+    | "navigate-to-documentation"
+    | "open-generic-dialog";
