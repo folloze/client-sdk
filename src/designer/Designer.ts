@@ -508,7 +508,7 @@ export class Designer {
         });
     }
 
-    deleteCustomSection(payload: {id: string, boardId: number}): Promise<SectionListItem> {
+    deleteCustomSection(payload: {id: number, boardId: number}): Promise<SectionListItem> {
         const params = {
             board_id: payload.boardId
         };
