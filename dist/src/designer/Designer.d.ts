@@ -155,6 +155,9 @@ export declare class Designer {
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
     getCustomSavedSections(): Promise<CustomSectionsResponseV1>;
     saveCustomSection(section: AddListItem): Promise<SectionListItem>;
-    deleteCustomSection(customSectionId: number): Promise<SectionListItem>;
+    deleteCustomSection(payload: {
+        id: string;
+        boardId: number;
+    }): Promise<SectionListItem>;
     updateCustomSection(customSectionId: number, section: SectionListItem): Promise<SectionListItem>;
 }
