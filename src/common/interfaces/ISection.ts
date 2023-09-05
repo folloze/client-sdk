@@ -1,4 +1,4 @@
-import { FlzEditableImageData, FlzEditableVideoData } from "../../designer/IDesignerTypes";
+import {FlzEditableImageData, FlzEditableVideoData} from "../../designer/IDesignerTypes";
 import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./IWidget";
 
 export type AddListItem = {
@@ -33,6 +33,7 @@ export type SectionConfig = {
     id: string;
     name?: string;
     type?: SectionType;
+    anchor?: string;
 };
 
 export type BackgroundImage = {
