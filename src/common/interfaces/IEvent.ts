@@ -92,4 +92,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-saved-custom-sections"
     | "save-custom-section"
     | "delete-custom-section"
-    | "update-custom-section";
+    | "update-custom-section"
+    | "open-generic-dialog";

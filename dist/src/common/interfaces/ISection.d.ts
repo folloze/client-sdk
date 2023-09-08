@@ -27,6 +27,7 @@ export declare type SectionConfig = {
     id: string;
     name?: string;
     type?: SectionType;
+    anchor?: string;
 };
 export declare type BackgroundImage = {
     image: FlzEditableImageData;
