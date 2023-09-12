@@ -12,6 +12,7 @@ export type PUBLIC_INCOMING_EVENT_ACTION =
 export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
 
 export type FLZ_LIVEBOARD_EVENT_ACTION =
+    | "board-ready"
     | "append-to-liveboard"
     | "append-to-liveboard-light-dom"
     | "widget-connected"

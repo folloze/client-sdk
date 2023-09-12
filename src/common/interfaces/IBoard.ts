@@ -97,6 +97,9 @@ export interface ILiveBoard extends LitElement {
     turnOnPersonalization(): void;
     turnOffPersonalization(): void;
 
+    set isWidgetsLoaded(value: boolean);
+    get isWidgetsLoaded(): boolean;
+
     set personalizationResolved(result: {[key: string]: boolean});
     get personalizationResolved(): {[key: string]: boolean};
 
@@ -134,6 +137,10 @@ export interface ILiveBoard extends LitElement {
     getRibbonBySection(sectionId: string): RibbonConfig;
 
     notifyWidgets(event: FlzEvent): void;
+
+    themeOverrideReload(): void;
+
+    isBoardReady(): boolean;
 }
 
 export type Board = {
