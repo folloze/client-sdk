@@ -50,6 +50,16 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
         private y: number;
         private layer: number;
 
+        connectedCallback(): void {
+            super.connectedCallback();
+            this.addEventListener('close-floating-element', this.close.bind(this));
+        }
+
+        disconnectedCallback(): void {
+            super.disconnectedCallback();
+            this.removeEventListener('close-floating-element', this.close.bind(this));
+        }
+
         protected firstUpdated(_changedProperties) {
             super.firstUpdated(_changedProperties);
             setTimeout(() => {
