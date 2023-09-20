@@ -22,11 +22,10 @@ import {
     MergeTagValue,
     VideoGalleryParams,
     GalleryVideo,
-    Theme,
-    CustomSectionsResponseV1
+    Theme
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
-import {AddListItem, SectionListItem} from "../common/interfaces/ISection";
+import {SectionListItem} from "../common/interfaces/ISection";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -484,7 +483,7 @@ export class Designer {
         });
     }
 
-    getCustomSavedSections(): Promise<CustomSectionsResponseV1> {
+    getCustomSavedSections(): Promise<SectionListItem[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get(`/api/v1/custom_sections`)
@@ -496,7 +495,7 @@ export class Designer {
         });
     }
 
-    saveCustomSection(section: AddListItem): Promise<SectionListItem> {
+    saveCustomSection(section: SectionListItem): Promise<SectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .post(`/api/v1/custom_sections`, section)

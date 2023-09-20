@@ -1,6 +1,6 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
-import { BackgroundImage, BackgroundVideo, SectionListItem } from "../common/interfaces/ISection";
+import {BackgroundImage, BackgroundVideo} from "../common/interfaces/ISection";
 
 export type ImageGalleryTypes = "campaign" | "search" | "icon";
 export type VideoGalleryTypes = "video";
@@ -413,9 +413,4 @@ export type Theme = {
   status: "archived" | "published";
   style: string;
   type: "basic" | "migration" | "system";
-}
-
-export type CustomSectionsResponseV1 = {
-    "saved": Record<string, SectionListItem[]>,
-    "shared": Record<string, SectionListItem[]>,
 }
