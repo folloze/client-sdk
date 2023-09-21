@@ -52,12 +52,12 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
 
         connectedCallback(): void {
             super.connectedCallback();
-            this.addEventListener('close-floating-element', this.close.bind(this));
+            this.addEventListener('close', this.close.bind(this));
         }
 
         disconnectedCallback(): void {
+            this.removeEventListener('close', this.close.bind(this));
             super.disconnectedCallback();
-            this.removeEventListener('close-floating-element', this.close.bind(this));
         }
 
         protected firstUpdated(_changedProperties) {

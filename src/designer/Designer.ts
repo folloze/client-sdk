@@ -507,14 +507,10 @@ export class Designer {
         });
     }
 
-    deleteCustomSection(payload: {id: number, boardId: number}): Promise<SectionListItem> {
-        const params = {
-            board_id: payload.boardId
-        };
-
+    deleteCustomSection(customSectionId: number): Promise<SectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .delete(`/api/v1/custom_sections/${payload.id}`, {params})
+                .delete(`/api/v1/custom_sections/${customSectionId}`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not delete section", e);

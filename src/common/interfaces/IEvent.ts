@@ -89,8 +89,4 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "designer-open-preview"
     | "get-designer-themes"
     | "navigate-to-documentation"
-    | "get-saved-custom-sections"
-    | "save-custom-section"
-    | "delete-custom-section"
-    | "update-custom-section"
-    | "open-generic-dialog";
+    | "custom-sections-action";
