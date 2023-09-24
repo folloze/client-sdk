@@ -12,6 +12,9 @@ export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
 }
+export interface CustomSectionListItem extends SectionListItem {
+    id: number;
+}
 export interface WidgetListItem extends AddListItem {
     type: WidgetType;
     config: WidgetConfig | FloatingWidgetConfig;

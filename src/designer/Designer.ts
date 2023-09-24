@@ -25,7 +25,7 @@ import {
     Theme
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
-import {SectionListItem} from "../common/interfaces/ISection";
+import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -483,7 +483,7 @@ export class Designer {
         });
     }
 
-    getCustomSavedSections(): Promise<SectionListItem[]> {
+    getCustomSavedSections(): Promise<CustomSectionListItem[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get(`/api/v1/custom_sections`)
@@ -495,7 +495,7 @@ export class Designer {
         });
     }
 
-    saveCustomSection(section: SectionListItem): Promise<SectionListItem> {
+    createCustomSection(section: SectionListItem): Promise<CustomSectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .post(`/api/v1/custom_sections`, section)
@@ -507,7 +507,7 @@ export class Designer {
         });
     }
 
-    deleteCustomSection(customSectionId: number): Promise<SectionListItem> {
+    deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .delete(`/api/v1/custom_sections/${customSectionId}`)
@@ -520,7 +520,7 @@ export class Designer {
         });
     }
 
-    updateCustomSection(customSectionId: number, section: SectionListItem): Promise<SectionListItem>  {
+    updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>  {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .put(`/api/v1/custom_sections/${customSectionId}`, section)
