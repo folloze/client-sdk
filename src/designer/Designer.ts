@@ -483,7 +483,7 @@ export class Designer {
         });
     }
 
-    getCustomSavedSections(): Promise<CustomSectionListItem[]> {
+    getCustomSections(): Promise<CustomSectionListItem[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get(`/api/v1/custom_sections`)
