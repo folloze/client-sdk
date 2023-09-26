@@ -2,7 +2,7 @@ import {css, CSSResultGroup, html, LitElement} from "lit";
 import {property, query} from "lit/decorators.js";
 import {LiveWidgetEdit, LiveWidgetComponentEdit, makeDragElement} from "../index";
 import {Floatable} from "./mixins/FloatableMixin";
-import { infoIcon, closeIcon } from "./icons";
+import {infoIcon, closeIcon} from "./icons";
 
 const FloatingElement = Floatable(LitElement);
 
@@ -19,7 +19,8 @@ export class FloatEditor extends FloatingElement {
                 align-self: self-end;
             }
 
-            .close, .documentation-url {
+            .close,
+            .documentation-url {
                 cursor: pointer;
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
@@ -141,8 +142,10 @@ export class FloatEditor extends FloatingElement {
         super();
         this.childEl = el;
 
-        // @ts-ignore hack to get the floating editor inside the editor so it will be controlled by the editor
-        this.childEl._floatingEditor = this;
+        if (el) {
+            // @ts-ignore hack to get the floating editor inside the editor so it will be controlled by the editor
+            this.childEl._floatingEditor = this;
+        }
     }
 
     disconnectedCallback() {
@@ -193,14 +196,12 @@ export class FloatEditor extends FloatingElement {
                 @mouseleave="${this.removeHighlight}">
                 <span class="conf-name"> ${this.title || this.childEl.widget?.widgetTitle || ""} </span>
                 <div class="floating-editor-actions">
-                    ${this.getDocumentationUrl() ?
-                        html `<div class="documentation-url" style="display: flex" @click=${this.goToDocumentation}>
-                            ${infoIcon}
-                        </div>` : ""
-                    }
-                    <div class="close" @click=${this.close}>
-                        ${closeIcon}
-                    </div>
+                    ${this.getDocumentationUrl()
+                        ? html`<div class="documentation-url" style="display: flex" @click=${this.goToDocumentation}>
+                              ${infoIcon}
+                          </div>`
+                        : ""}
+                    <div class="close" @click=${this.close}> ${closeIcon} </div>
                 </div>
             </div>
             <div id="body"></div>

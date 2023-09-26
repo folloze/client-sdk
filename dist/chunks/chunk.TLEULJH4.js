@@ -39,7 +39,7 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as mr,w as Oe}from"./chunk.OI2N
     <path d="M0 0h24v24H0V0z" fill="none" />
     <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" />
   </svg>
-`;var pi=ui(A),nt=class extends pi{constructor(t){super();this.isLoading=!0;this.childEl=t,this.childEl._floatingEditor=this}disconnectedCallback(){this.removeHighlight(),super.disconnectedCallback()}firstUpdated(t){this.isLoading=!1,this.body.appendChild(this.childEl),li(this.shadowRoot,this,"#handle",void 0,this.childEl.floatChildrenContainer),super.firstUpdated(t)}getChildEl(){return this.childEl}highlight(){this.childEl.widget&&this.childEl.widget.classList.add("highlight")}removeHighlight(){this.childEl.widget&&this.childEl.widget.classList.remove("highlight")}goToDocumentation(){}getDocumentationUrl(){}render(){var t;return D`
+`;var pi=ui(A),nt=class extends pi{constructor(t){super();this.isLoading=!0;this.childEl=t,t&&(this.childEl._floatingEditor=this)}disconnectedCallback(){this.removeHighlight(),super.disconnectedCallback()}firstUpdated(t){this.isLoading=!1,this.body.appendChild(this.childEl),li(this.shadowRoot,this,"#handle",void 0,this.childEl.floatChildrenContainer),super.firstUpdated(t)}getChildEl(){return this.childEl}highlight(){this.childEl.widget&&this.childEl.widget.classList.add("highlight")}removeHighlight(){this.childEl.widget&&this.childEl.widget.classList.remove("highlight")}goToDocumentation(){}getDocumentationUrl(){}render(){var t;return D`
             ${this.isLoading?D`<div class="loading"></div>`:""}
             <div
                 id="handle"
@@ -49,11 +49,9 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as mr,w as Oe}from"./chunk.OI2N
                 <span class="conf-name"> ${this.title||((t=this.childEl.widget)==null?void 0:t.widgetTitle)||""} </span>
                 <div class="floating-editor-actions">
                     ${this.getDocumentationUrl()?D`<div class="documentation-url" style="display: flex" @click=${this.goToDocumentation}>
-                            ${di}
-                        </div>`:""}
-                    <div class="close" @click=${this.close}>
-                        ${fi}
-                    </div>
+                              ${di}
+                          </div>`:""}
+                    <div class="close" @click=${this.close}> ${fi} </div>
                 </div>
             </div>
             <div id="body"></div>
@@ -67,7 +65,8 @@ import{b as $}from"./chunk.D33KHSEJ.js";import{v as mr,w as Oe}from"./chunk.OI2N
                 align-self: self-end;
             }
 
-            .close, .documentation-url {
+            .close,
+            .documentation-url {
                 cursor: pointer;
                 color: var(--edit-fz-color-neutral-0);
                 border: none;
