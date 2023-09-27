@@ -162,3 +162,7 @@ export function isInDesigner(): boolean {
 export function isInPreview(): boolean {
     return window["board"]?.classList.contains("preview");
 }
+
+export function getBoardId(): number | undefined {
+    return window["FollozeState"].initialState?.board?.id ||  undefined;
+}

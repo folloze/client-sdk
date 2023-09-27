@@ -1,6 +1,6 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
-import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
+import {BackgroundImage, BackgroundVideo} from "../common/interfaces/ISection";
 
 export type ImageGalleryTypes = "campaign" | "search" | "icon";
 export type VideoGalleryTypes = "video";

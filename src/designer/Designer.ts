@@ -25,6 +25,7 @@ import {
     Theme
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
+import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
 
 export class Designer {
     private fetcher: AxiosInstance;
@@ -481,4 +482,55 @@ export class Designer {
                 });
         });
     }
+
+    getCustomSections(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get saved sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+    createCustomSection(section: SectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post(`/api/v1/custom_sections`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/custom_sections/${customSectionId}`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not delete section", e);
+                    reject(e);
+                }
+            );
+        });
+    }
+
+    updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>  {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .put(`/api/v1/custom_sections/${customSectionId}`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not update section", e);
+                    reject(e);
+                }
+            );
+        });
+    }
+
 }

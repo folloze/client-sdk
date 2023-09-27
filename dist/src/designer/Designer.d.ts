@@ -2,6 +2,7 @@ export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
 import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
+import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
     private fetcher;
     private fetchService;
@@ -152,4 +153,8 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
+    getCustomSections(): Promise<CustomSectionListItem[]>;
+    createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
+    deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
+    updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
 }
