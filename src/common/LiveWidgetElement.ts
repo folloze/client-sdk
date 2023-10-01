@@ -21,12 +21,18 @@ export abstract class LiveWidgetElement extends LitElement {
 
     connectedCallback() {
         super.connectedCallback();
+        this.addEventListener("get-widget", this.handleGetWidget);
         widgetEmit(this, "widget-connected");
     }
 
     willUpdate(_changedProperties: PropertyValues) {
         super.willUpdate(_changedProperties);
         widgetEmit(this, "widget-update");
+    }
+
+    disconnectedCallback() {
+        super.disconnectedCallback();
+        this.removeEventListener("get-widget", this.handleGetWidget);
     }
 
     protected firstUpdated(_changedProperties: PropertyValues) {
@@ -100,6 +106,11 @@ export abstract class LiveWidgetElement extends LitElement {
      */
     public stateChanged(state: any) {
         return;
+    }
+
+    private handleGetWidget (e: FlzEvent) {
+        e.stopPropagation();
+        e.onSuccess(this);
     }
 
     abstract render();

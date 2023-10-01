@@ -21,6 +21,7 @@ type AnalyticTypeToPayload = {
     };
     anchor_clicked: {
         hash: string;
+        buttonText: string;
         origin_widget?: string;
         target_widget?: string;
     };
