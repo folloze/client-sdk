@@ -60,7 +60,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "track-lead-event"
     | "analytic-event"
     | "link-click"
-    | "get-widget";
+    | "get-widget"
+    | "get-section-by-anchor";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
