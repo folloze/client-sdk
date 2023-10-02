@@ -109,9 +109,9 @@ export abstract class LiveWidgetElement extends LitElement {
     }
 
 
-    private handleGetWidget = (e: FlzEvent) => {
+    private handleGetWidget = (e: CustomEvent) => {
         e.stopPropagation();
-        e.onSuccess(this);
+        e.detail.result.widget = this;
     };
 
     abstract render();
