@@ -17,8 +17,16 @@ declare type AnalyticTypeToPayload = {
     anchor_clicked: {
         hash: string;
         buttonText: string;
-        origin_widget?: string;
-        target_widget?: string;
+        origin_section: {
+            name: string;
+            id: string;
+            anchor?: string;
+        };
+        target_section?: {
+            name: string;
+            id: string;
+            anchor?: string;
+        };
     };
 };
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
