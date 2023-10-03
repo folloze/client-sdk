@@ -59,8 +59,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "floating-widget-manager"
     | "track-lead-event"
     | "analytic-event"
-    | "link-click"
-    | "get-widget";
+    | "link-click";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION

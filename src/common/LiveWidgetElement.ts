@@ -31,8 +31,8 @@ export abstract class LiveWidgetElement extends LitElement {
     }
 
     disconnectedCallback() {
-        super.disconnectedCallback();
         this.removeEventListener("get-widget", this.handleGetWidget);
+        super.disconnectedCallback();
     }
 
     protected firstUpdated(_changedProperties: PropertyValues) {
