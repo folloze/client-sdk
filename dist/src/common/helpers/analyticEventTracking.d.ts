@@ -14,6 +14,20 @@ declare type AnalyticTypeToPayload = {
         email: string;
         subject: string;
     };
+    anchor_clicked: {
+        hash: string;
+        button_text: string;
+        origin_section: {
+            name: string | null;
+            id: string | null;
+            anchor: string | null;
+        };
+        target_section: {
+            name: string | null;
+            id: string | null;
+            anchor: string | null;
+        };
+    };
 };
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];

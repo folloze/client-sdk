@@ -12,6 +12,7 @@ export declare abstract class LiveWidgetElement extends LitElement {
     constructor();
     connectedCallback(): void;
     willUpdate(_changedProperties: PropertyValues): void;
+    disconnectedCallback(): void;
     protected firstUpdated(_changedProperties: PropertyValues): void;
     updated(_changedProperties: PropertyValues): void;
     set config(data: WidgetConfig);
@@ -41,5 +42,6 @@ export declare abstract class LiveWidgetElement extends LitElement {
      * you should override this method to listen to state changes
      */
     stateChanged(state: any): void;
+    private handleGetWidget;
     abstract render(): any;
 }
