@@ -18,14 +18,14 @@ declare type AnalyticTypeToPayload = {
         hash: string;
         buttonText: string;
         origin_section: {
-            name: string | undefined;
-            id: string | undefined;
-            anchor?: string;
+            name: string | null;
+            id: string | null;
+            anchor: string | null;
         };
-        target_section?: {
-            name: string;
-            id: string;
-            anchor?: string;
+        target_section: {
+            name: string | null;
+            id: string | null;
+            anchor: string | null;
         };
     };
 };

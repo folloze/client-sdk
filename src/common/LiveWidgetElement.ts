@@ -108,7 +108,6 @@ export abstract class LiveWidgetElement extends LitElement {
         return;
     }
 
-
     private handleGetWidget = (e: CustomEvent) => {
         e.stopPropagation();
         e.detail.result.widget = this;
