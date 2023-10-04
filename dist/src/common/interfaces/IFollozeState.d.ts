@@ -6,6 +6,7 @@ export declare type IFollozeState = {
     envConfig: {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
+        cookiePostfix?: string;
     };
     platform: "desktop" | "mobile";
 };

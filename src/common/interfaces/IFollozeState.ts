@@ -8,6 +8,7 @@ export type IFollozeState = {
     envConfig: {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
+        cookiePostfix?: string;
     };
 
     // not really using this but nice to keep
