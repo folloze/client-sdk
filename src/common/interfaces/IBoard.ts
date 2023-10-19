@@ -100,8 +100,8 @@ export interface ILiveBoard extends LitElement {
     set isWidgetsLoaded(value: boolean);
     get isWidgetsLoaded(): boolean;
 
-    set personalizationResolved(result: {[key: string]: boolean});
-    get personalizationResolved(): {[key: string]: boolean};
+    set personalizationResolved(result: {[key: string]: boolean} | undefined);
+    get personalizationResolved(): {[key: string]: boolean} | undefined;
 
     get pages(): PageConfig[];
     get sections(): SectionConfig[];
@@ -134,7 +134,7 @@ export interface ILiveBoard extends LitElement {
     getAllWidgetsElements(): LiveWidget[];
 
     getSection(id: string): SectionConfig;
-    getRibbonBySection(sectionId: string): RibbonConfig;
+    getRibbonBySection(sectionId: string): RibbonConfig | undefined;
 
     notifyWidgets(event: FlzEvent): void;
 

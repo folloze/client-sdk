@@ -92,10 +92,10 @@ export interface ILiveBoard extends LitElement {
     get isWidgetsLoaded(): boolean;
     set personalizationResolved(result: {
         [key: string]: boolean;
-    });
+    } | undefined);
     get personalizationResolved(): {
         [key: string]: boolean;
-    };
+    } | undefined;
     get pages(): PageConfig[];
     get sections(): SectionConfig[];
     get widgets(): WidgetConfig[];
@@ -119,7 +119,7 @@ export interface ILiveBoard extends LitElement {
     getAllGridElements(): GridElement[];
     getAllWidgetsElements(): LiveWidget[];
     getSection(id: string): SectionConfig;
-    getRibbonBySection(sectionId: string): RibbonConfig;
+    getRibbonBySection(sectionId: string): RibbonConfig | undefined;
     notifyWidgets(event: FlzEvent): void;
     themeOverrideReload(): void;
     isBoardReady(): boolean;
