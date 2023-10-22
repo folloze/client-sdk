@@ -483,6 +483,18 @@ export class Designer {
         });
     }
 
+    public generateSectionText(boardId: Number): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/generate/section_texts`, {})
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not generate section text", e);
+                    reject(e);
+                });
+        });
+    }
+
     getCustomSections(): Promise<CustomSectionListItem[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
@@ -532,5 +544,4 @@ export class Designer {
             );
         });
     }
-
 }
