@@ -1,8 +1,10 @@
 import {css, CSSResultGroup, html, LitElement} from "lit";
 import {property, query} from "lit/decorators.js";
-import {LiveWidgetEdit, LiveWidgetComponentEdit, makeDragElement} from "../index";
 import {Floatable} from "./mixins/FloatableMixin";
 import {infoIcon, closeIcon} from "./icons";
+import {type LiveWidgetEdit} from "./LiveWidgetEdit";
+import {type LiveWidgetComponentEdit} from "./LiveWidgetComponentEdit";
+import {makeDragElement} from "./makeDraggable";
 
 const FloatingElement = Floatable(LitElement);
 

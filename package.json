@@ -1,10 +1,6 @@
 {
   "name": "client-sdk",
   "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "dist/src/index.d.js",
-  "typings": "dist/src/index.d.ts",
-  "module": "dist/index.js",
   "type": "module",
   "description": "",
   "scripts": {

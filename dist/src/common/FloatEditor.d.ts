@@ -1,5 +1,6 @@
 import { CSSResultGroup, LitElement } from "lit";
-import { LiveWidgetEdit, LiveWidgetComponentEdit } from "../index";
+import { type LiveWidgetEdit } from "./LiveWidgetEdit";
+import { type LiveWidgetComponentEdit } from "./LiveWidgetComponentEdit";
 declare const FloatingElement: (new (...args: any[]) => import("./mixins/FloatableMixin").IFloatingElement) & typeof LitElement;
 export declare class FloatEditor extends FloatingElement {
     static styles: CSSResultGroup;

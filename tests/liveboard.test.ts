@@ -1,6 +1,6 @@
 import {describe, expect, beforeAll} from "@jest/globals";
 import {ClientSDK} from "../src/sdk";
-import { EnrichmentBoardConfigV3 } from "../src";
+import {type EnrichmentBoardConfigV3} from "../src/liveboard/ILiveboardTypes";
 
 let sdk: ClientSDK;
 
@@ -14,7 +14,7 @@ const ctaParams = {
 
 describe("test liveboard mocks module", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ''});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ""});
     });
 
     it("checks that getBoard mock works as expected", async () => {
@@ -45,7 +45,9 @@ describe("test liveboard mocks module", () => {
     });
 
     it("checks that getItems mock works as expected", async () => {
-        await sdk.liveboard.getItems({boardId: 1, search: "", source: "curated"}).then(result => expect(result.item_ids).toHaveLength(1));
+        await sdk.liveboard
+            .getItems({boardId: 1, search: "", source: "curated"})
+            .then(result => expect(result.item_ids).toHaveLength(1));
     });
 
     it("checks that getHasItems mock works as expected", async () => {
@@ -171,7 +173,7 @@ describe("test liveboard mocks module", () => {
 
 describe("testing liveboard module in preview", () => {
     beforeAll(async () => {
-        sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true, analyticsServiceEndpoint: ''});
+        sdk = await ClientSDK.create({useMock: true, organizationId: 1, isPreview: true, analyticsServiceEndpoint: ""});
     });
 
     it("checks that saveMessageCta mock works as expected", async () => {

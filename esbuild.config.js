@@ -12,7 +12,7 @@ esbuild
         target: "es2017",
         entryPoints: [
             // The whole shebang
-            "./src/index.ts",
+            // "./src/index.ts",
             "./src/sdk.ts",
             "./src/analytics/Analytics.ts",
             "./src/designer/Designer.ts",

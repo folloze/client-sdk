@@ -2,12 +2,12 @@ import {describe, expect, beforeAll} from "@jest/globals";
 import {Board, BoardConfig} from "../src/common/interfaces/IBoard";
 import {ClientSDK} from "../src/sdk";
 import {AxiosResponse} from "axios";
-import {ConfigSavedConflict, ConfigSavedSuccess} from "../src";
+import {type ConfigSavedSuccess} from "../src/designer/IDesignerTypes";
 
 let sdk: ClientSDK;
 
 beforeAll(async () => {
-    sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ''});
+    sdk = await ClientSDK.create({useMock: true, organizationId: 1, analyticsServiceEndpoint: ""});
 });
 
 describe("testing sdk designer module", () => {
@@ -218,7 +218,7 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that designer themes are fetched", async () => {
-      await sdk.designer.getDesignerThemes(1).then(result => expect(result[1].id).toEqual(1));
-      await sdk.designer.getDesignerThemes(1).then(result => expect(result[2].id).toEqual(2));
-  });
+        await sdk.designer.getDesignerThemes(1).then(result => expect(result[1].id).toEqual(1));
+        await sdk.designer.getDesignerThemes(1).then(result => expect(result[2].id).toEqual(2));
+    });
 });
