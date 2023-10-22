@@ -28,7 +28,7 @@ esbuild
         },
         //watch: true,
         treeShaking: true,
-        bundle: true,
+        bundle: false,
         external: [],
         splitting: true,
         minify: true,
