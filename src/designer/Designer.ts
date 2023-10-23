@@ -487,7 +487,7 @@ export class Designer {
         const apiCallFunc = (resolve, reject) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/${boardId}/section_texts`, {})
-                .then(result => resolve(result.data))
+                .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate section text", e);
                     reject(e);
