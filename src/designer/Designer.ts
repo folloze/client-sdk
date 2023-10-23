@@ -484,9 +484,9 @@ export class Designer {
     }
 
     public generateSectionText(boardId: Number): Promise<any> {
-        const apiCallFunc = (resolve, reject) => {
+        const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/section_texts`, {})
+                .post<any>(`/api/v1/boards/${boardId}/section_texts`, { guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate section text", e);

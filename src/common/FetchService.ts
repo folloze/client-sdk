@@ -96,21 +96,21 @@ export class FetchService {
     }
 
     // todo: this method will need backoff implementation
-    withPartialContent(promiseFunc: (resolve, reject) => any, timeout: number = 2000, retry: number = 1): Promise<any> {
+    withPartialContent(promiseFunc: (resolve, reject, guid) => any, timeout: number = 2000, retry: number = 1, guid?: string): Promise<any> {
         return new Promise((resolve, reject) => {
             if (retry <= 0) {
                 console.warn("stop retrying partial content");
                 reject("stop retrying");
                 return;
             }
-            const innerPromise = new Promise(promiseFunc);
+            const innerPromise = new Promise((resolve, reject) => promiseFunc(resolve, reject, guid));
             innerPromise
                 .then((result: any) => {
                     if (result.status == 206) {
                         console.debug(`retry partial content ${retry}`);
                         retry = retry - 1;
                         setTimeout(() => {
-                            resolve(this.withPartialContent(promiseFunc, timeout, retry));
+                            resolve(this.withPartialContent(promiseFunc, timeout, retry, result.guid));
                         }, timeout);
                     } else {
                         console.debug(`partial content resolved`, result.data);
