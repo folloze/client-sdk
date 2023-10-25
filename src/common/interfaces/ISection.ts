@@ -51,3 +51,9 @@ export type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
+
+export type SectionDescription = {
+    description: string;
+    purposes: string[];
+    injectables: any[];
+}
