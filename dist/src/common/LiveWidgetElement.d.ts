@@ -6,6 +6,7 @@ export declare abstract class LiveWidgetElement extends LitElement {
     abstract readonly editComponents: string[];
     abstract readonly widgetTitle: string;
     setConfigOnlyOnce: boolean;
+    readonly sectionDescription: any;
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;
