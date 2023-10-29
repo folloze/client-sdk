@@ -54,6 +54,6 @@ export type BackgroundVideo = {
 
 export type SectionDescription = {
     description: string;
-    purposes: string[];
+    purposes: { [key:string]: string };
     injectables: any[];
 }
