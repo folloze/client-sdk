@@ -1,12 +1,13 @@
 import { WidgetConfig } from "./interfaces/IWidget";
 import { LitElement, PropertyValues } from "lit";
 import { FlzEvent } from "./FlzEvent";
+import { SectionDescription } from "./interfaces/ISection";
 export declare abstract class LiveWidgetElement extends LitElement {
     abstract readonly customEditWidgets: string[];
     abstract readonly editComponents: string[];
     abstract readonly widgetTitle: string;
     setConfigOnlyOnce: boolean;
-    readonly sectionDescription: any;
+    readonly sectionDescription: SectionDescription;
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;

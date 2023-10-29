@@ -173,6 +173,18 @@ export type Board = {
         state: "draft" | "published" | "unpublished changes";
         published_hash: string;
     };
+    generation_config: {
+      board?: {
+          goal?: string;
+          productName?: string;
+      },
+      widgets?: {
+          [key:string]: {
+              purpose?: string;
+              elaboratedPurpose?: string;
+          }
+      },
+    }
     activation_state: {
         online: boolean;
     };

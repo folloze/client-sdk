@@ -68,6 +68,7 @@ export const rules = (mock: MockAdapter) => {
             auto_upgrade_widgets: false,
             config: undefined,
             config_info: {published_hash: "", state: undefined},
+            generation_config: {},
             id: 0,
             integrations: {},
             is_ssl: false,

@@ -3,13 +3,14 @@ import {v4 as uuid_v4} from "uuid";
 import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
 import {widgetEmit} from "./helpers/eventHelpers";
+import {SectionDescription} from "./interfaces/ISection";
 
 export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly customEditWidgets: string[];
     public abstract readonly editComponents: string[];
     public abstract readonly widgetTitle: string;
     public setConfigOnlyOnce: boolean = false;
-    public readonly sectionDescription: any = undefined;
+    public readonly sectionDescription: SectionDescription = undefined;
 
     protected _data: any;
     protected _widgetId: string;
