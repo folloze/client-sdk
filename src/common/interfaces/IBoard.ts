@@ -143,6 +143,19 @@ export interface ILiveBoard extends LitElement {
     isBoardReady(): boolean;
 }
 
+export type GenerationConfig = {
+    board?: {
+        goal?: string;
+        productName?: string;
+    },
+    widgets?: {
+        [key:string]: {
+            purpose?: string;
+            elaboratedPurpose?: string;
+        }
+    }
+};
+
 export type Board = {
     allow_embedding?: boolean;
     id: number;
@@ -173,18 +186,7 @@ export type Board = {
         state: "draft" | "published" | "unpublished changes";
         published_hash: string;
     };
-    generation_config: {
-      board?: {
-          goal?: string;
-          productName?: string;
-      },
-      widgets?: {
-          [key:string]: {
-              purpose?: string;
-              elaboratedPurpose?: string;
-          }
-      },
-    }
+    generation_config: GenerationConfig,
     activation_state: {
         online: boolean;
     };

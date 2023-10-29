@@ -124,6 +124,18 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
+export declare type GenerationConfig = {
+    board?: {
+        goal?: string;
+        productName?: string;
+    };
+    widgets?: {
+        [key: string]: {
+            purpose?: string;
+            elaboratedPurpose?: string;
+        };
+    };
+};
 export declare type Board = {
     allow_embedding?: boolean;
     id: number;
@@ -154,18 +166,7 @@ export declare type Board = {
         state: "draft" | "published" | "unpublished changes";
         published_hash: string;
     };
-    generation_config: {
-        board?: {
-            goal?: string;
-            productName?: string;
-        };
-        widgets?: {
-            [key: string]: {
-                purpose?: string;
-                elaboratedPurpose?: string;
-            };
-        };
-    };
+    generation_config: GenerationConfig;
     activation_state: {
         online: boolean;
     };
