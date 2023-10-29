@@ -4,6 +4,7 @@ import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
 import {widgetEmit} from "./helpers/eventHelpers";
 import {SectionDescription} from "./interfaces/ISection";
+import {GenerationConfig} from "./interfaces/IBoard";
 
 export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly customEditWidgets: string[];
@@ -108,6 +109,19 @@ export abstract class LiveWidgetElement extends LitElement {
      */
     public stateChanged(state: any) {
         return;
+    }
+
+    public canGenerateText(generateConfig: GenerationConfig) {
+        if (!this.sectionDescription) {
+          return false;
+        }
+
+        return (
+            generateConfig.board?.goal &&
+            generateConfig.board?.productName &&
+            generateConfig.widgets?.[this.widgetId]?.purpose &&
+            generateConfig.widgets?.[this.widgetId]?.elaboratedPurpose
+        );
     }
 
     private handleGetWidget = (e: CustomEvent) => {
