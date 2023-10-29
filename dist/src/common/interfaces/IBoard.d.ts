@@ -41,7 +41,7 @@ export declare type BoardConfig = {
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
-    generation_config?: GenerationConfig;
+    generationConfig?: GenerationConfig;
 };
 export declare type PageConfig = {
     name: "default" | string;
