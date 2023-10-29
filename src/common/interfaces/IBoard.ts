@@ -46,7 +46,7 @@ export type BoardConfig = {
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
-    generation_config?: GenerationConfig;
+    generationConfig?: GenerationConfig;
 };
 
 export type PageConfig = {
