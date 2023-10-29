@@ -414,3 +414,17 @@ export type Theme = {
   style: string;
   type: "basic" | "migration" | "system";
 }
+
+export type GenerateSectionTextsRequest = {
+    board: {
+        goal: string;
+        productName: string;
+        details?: string;
+    },
+    widget: {
+        description: string;
+        purpose: string;
+        elaboratedPurpose: string;
+        injectables: any[];
+    }
+}

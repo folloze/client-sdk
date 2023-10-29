@@ -129,6 +129,7 @@ export declare type GenerationConfig = {
     board?: {
         goal?: string;
         productName?: string;
+        details?: string;
     };
     widgets?: {
         [key: string]: {

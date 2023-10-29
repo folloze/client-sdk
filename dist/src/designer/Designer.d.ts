@@ -1,6 +1,6 @@
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme } from "./IDesignerTypes";
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, GenerateSectionTextsRequest } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
@@ -153,7 +153,7 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
-    generateSectionText(boardId: Number): Promise<any>;
+    generateSectionText(boardId: Number, generateParams: GenerateSectionTextsRequest): Promise<any>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
