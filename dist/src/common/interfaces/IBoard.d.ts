@@ -41,6 +41,7 @@ export declare type BoardConfig = {
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
+    generation_config?: GenerationConfig;
 };
 export declare type PageConfig = {
     name: "default" | string;
@@ -166,7 +167,6 @@ export declare type Board = {
         state: "draft" | "published" | "unpublished changes";
         published_hash: string;
     };
-    generation_config: GenerationConfig;
     activation_state: {
         online: boolean;
     };
