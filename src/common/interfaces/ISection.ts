@@ -59,7 +59,7 @@ export type SectionDescription = {
     dynamicArrayInjectables?: DynamicArrayInjectable[];
 }
 
-type DynamicArrayInjectable = {
+export type DynamicArrayInjectable = {
     array_path: string;
     injectables: any[];
 }
