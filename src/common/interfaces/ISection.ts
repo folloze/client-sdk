@@ -61,7 +61,7 @@ export type SectionDescription = {
 
 export type SectionInjectable = {
     name: string;
-    dataPath: string;
+    path: string;
     description: string;
 }
 

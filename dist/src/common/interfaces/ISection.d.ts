@@ -52,7 +52,7 @@ export declare type SectionDescription = {
 };
 export declare type SectionInjectable = {
     name: string;
-    dataPath: string;
+    path: string;
     description: string;
 };
 export declare type DynamicArrayInjectable = {
