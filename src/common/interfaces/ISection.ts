@@ -60,6 +60,6 @@ export type SectionDescription = {
 }
 
 export type DynamicArrayInjectable = {
-    array_path: string;
+    arrayPath: string;
     injectables: any[];
 }
