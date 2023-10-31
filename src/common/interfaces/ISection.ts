@@ -55,11 +55,17 @@ export type BackgroundVideo = {
 export type SectionDescription = {
     description: string;
     purposes: { [key:string]: string };
-    injectables: any[];
+    injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
+}
+
+export type SectionInjectable = {
+    name: string;
+    dataPath: string;
+    description: string;
 }
 
 export type DynamicArrayInjectable = {
     arrayPath: string;
-    injectables: any[];
+    injectables: SectionInjectable[];
 }

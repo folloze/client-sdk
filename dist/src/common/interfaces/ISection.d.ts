@@ -47,10 +47,15 @@ export declare type SectionDescription = {
     purposes: {
         [key: string]: string;
     };
-    injectables: any[];
+    injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
+};
+export declare type SectionInjectable = {
+    name: string;
+    dataPath: string;
+    description: string;
 };
 export declare type DynamicArrayInjectable = {
     arrayPath: string;
-    injectables: any[];
+    injectables: SectionInjectable[];
 };
