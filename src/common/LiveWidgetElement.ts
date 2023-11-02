@@ -11,7 +11,7 @@ export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly editComponents: string[];
     public abstract readonly widgetTitle: string;
     public setConfigOnlyOnce: boolean = false;
-    public readonly sectionDescription: SectionDescription = undefined;
+    public readonly sectionDescription: SectionDescription | undefined = undefined;
 
     protected _data: any;
     protected _widgetId: string;
@@ -111,12 +111,12 @@ export abstract class LiveWidgetElement extends LitElement {
         return;
     }
 
-    public canGenerateText(generateConfig: GenerationConfig) {
+    public canGenerateText(generateConfig: GenerationConfig): boolean {
         if (!this.sectionDescription) {
           return false;
         }
 
-        return (
+        return !!(
             generateConfig.board?.goal &&
             generateConfig.board?.productName &&
             generateConfig.widgets?.[this.widgetId]?.purpose &&

@@ -8,7 +8,7 @@ export declare abstract class LiveWidgetElement extends LitElement {
     abstract readonly editComponents: string[];
     abstract readonly widgetTitle: string;
     setConfigOnlyOnce: boolean;
-    readonly sectionDescription: SectionDescription;
+    readonly sectionDescription: SectionDescription | undefined;
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;
@@ -45,7 +45,7 @@ export declare abstract class LiveWidgetElement extends LitElement {
      * you should override this method to listen to state changes
      */
     stateChanged(state: any): void;
-    canGenerateText(generateConfig: GenerationConfig): string | false;
+    canGenerateText(generateConfig: GenerationConfig): boolean;
     private handleGetWidget;
     abstract render(): any;
 }
