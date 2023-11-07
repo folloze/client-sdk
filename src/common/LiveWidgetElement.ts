@@ -117,6 +117,7 @@ export abstract class LiveWidgetElement extends LitElement {
         }
 
         return !!(
+            generateConfig &&
             generateConfig.board?.goal &&
             generateConfig.board?.productName &&
             generateConfig.widgets?.[this.widgetId]?.purpose &&
