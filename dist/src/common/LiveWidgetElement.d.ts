@@ -1,14 +1,13 @@
 import { WidgetConfig } from "./interfaces/IWidget";
 import { LitElement, PropertyValues } from "lit";
 import { FlzEvent } from "./FlzEvent";
-import { SectionDescription } from "./interfaces/ISection";
 import { GenerationConfig } from "./interfaces/IBoard";
 export declare abstract class LiveWidgetElement extends LitElement {
     abstract readonly customEditWidgets: string[];
     abstract readonly editComponents: string[];
     abstract readonly widgetTitle: string;
     setConfigOnlyOnce: boolean;
-    readonly sectionDescription: SectionDescription | undefined;
+    readonly sectionDescriptionConfig: string | undefined;
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;

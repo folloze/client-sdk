@@ -3,7 +3,6 @@ import {v4 as uuid_v4} from "uuid";
 import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
 import {widgetEmit} from "./helpers/eventHelpers";
-import {SectionDescription} from "./interfaces/ISection";
 import {GenerationConfig} from "./interfaces/IBoard";
 
 export abstract class LiveWidgetElement extends LitElement {
@@ -11,7 +10,7 @@ export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly editComponents: string[];
     public abstract readonly widgetTitle: string;
     public setConfigOnlyOnce: boolean = false;
-    public readonly sectionDescription: SectionDescription | undefined = undefined;
+    public readonly sectionDescriptionConfig: string | undefined = undefined;
 
     protected _data: any;
     protected _widgetId: string;
@@ -112,8 +111,8 @@ export abstract class LiveWidgetElement extends LitElement {
     }
 
     public canGenerateText(generateConfig: GenerationConfig): boolean {
-        if (!this.sectionDescription) {
-          return false;
+        if (!this.sectionDescriptionConfig) {
+            return false;
         }
 
         return !!(
