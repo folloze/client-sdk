@@ -1,0 +1,366 @@
+import { PrivacySettings } from "../common/ISharedTypes";
+import { BoardConfig } from "../common/interfaces/IBoard";
+import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
+export declare type ImageGalleryTypes = "campaign" | "search" | "icon";
+export declare type VideoGalleryTypes = "video";
+export declare enum CampaignElementsTypes {
+    footer = 1,
+    privacy_message = 2,
+    form_privacy_message = 3
+}
+export declare type GalleryImage = {
+    url: string;
+    fit: string;
+    optimized_url?: string;
+    id?: number;
+    displayable_section?: string;
+    transformation?: ImageTransformation;
+    viewed?: boolean;
+    bankCategory?: ImageBankCategoryType;
+    galleryType?: ImageGalleryTypes;
+    maxWidth?: number;
+    maxHeight?: number;
+};
+export declare type GalleryVideo = {
+    url: string;
+    fit: string;
+    optimized_url?: string;
+    id?: number;
+    displayable_section?: string;
+    transformation?: VideoTransformation;
+    viewed?: boolean;
+};
+export declare type ImageTransformation = {
+    crop: {
+        x: number;
+        y: number;
+        crop?: string;
+        unit?: string;
+        width: number;
+        aspect?: number;
+        height: number;
+        radius: string | number;
+    };
+    shape?: "square" | "rectangle" | "circle" | "none";
+    artisticFilter?: string;
+    flipY?: boolean;
+    flipX?: boolean;
+    tint?: {
+        color: string;
+        alpha: number;
+    };
+};
+export declare type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
+export declare type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";
+export declare type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
+export declare type FlzEditableImageData = {
+    url: string;
+    bankCategory: ImageBankCategoryType;
+    optimized_url?: string;
+    transformation?: ImageTransformation;
+    position?: StringPosition;
+    link?: string;
+    open_in_new_window?: boolean;
+    alt?: string;
+    maxWidth?: number;
+    maxHeight?: number;
+};
+export declare type ImageGalleryParams = {
+    type: ImageGalleryTypes;
+    query?: string;
+    organizationId?: number;
+    bankCategory?: ImageBankCategoryType;
+    count?: number;
+};
+export declare type VideoGalleryParams = {
+    type: VideoGalleryTypes;
+    query?: string;
+    organizationId?: number;
+    bankCategory?: VideoBankCategoryType;
+    count?: number;
+};
+export declare type VideoPlaybackOptions = {
+    playOnce: boolean;
+};
+export declare type FlzEditableVideoData = {
+    url: string;
+    optimized_url?: string;
+    transformation?: VideoTransformation;
+    playback?: VideoPlaybackOptions;
+};
+export declare type BackgroundString = string;
+export declare type BackgroundImageOrVideo = BackgroundImage | BackgroundVideo;
+export declare type BackgroundMedia = BackgroundImageOrVideo | BackgroundString;
+export declare type BackgroundLayer = "color" | "image" | "video";
+export declare type VideoBankCategoryType = "videos";
+export declare type UploadUrlResponseV1 = {
+    file_name: string;
+    method: string;
+    params: {
+        api_key: string;
+        signature: string;
+        timestamp: number;
+    };
+    get_url: string;
+    put_url: string;
+};
+export declare type VideoTransformation = {
+    tint?: {
+        color: string;
+        alpha: number;
+    };
+};
+export declare type CloudinaryUploadResult = {
+    asset_id: string;
+    public_id: string;
+    version: number;
+    version_id: string;
+    signature: string;
+    width: number;
+    height: number;
+    format: string;
+    resource_type: string;
+    created_at: Date;
+    tags: any[];
+    bytes: number;
+    type: string;
+    etag: string;
+    placeholder: boolean;
+    url: string;
+    secure_url: string;
+    access_mode: string;
+    original_filename: string;
+    original_extension: string;
+    api_key: string;
+};
+export declare type FormField = {
+    label: string;
+    order: number;
+    placeholder: string;
+    state: string;
+    type: string;
+    dependent_field?: DependentField;
+    selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
+};
+declare type DependentField = {
+    name: string;
+    values: string[];
+};
+declare type SelectInputValue = {
+    id: string;
+    label: string;
+};
+export declare type FormV1 = {
+    id: number;
+    name: string;
+    board_id: number;
+    organization_id: number;
+    state: number;
+    form_type: number;
+    data: FormDataV1;
+};
+export declare type FormDataV1 = {
+    form_type?: number;
+    name?: string;
+    form_title?: string;
+    submit_label?: string;
+    success_message?: string;
+    submit_redirect_url?: string;
+    fields?: Record<string, FormField>;
+    script?: string;
+    auto_fill?: boolean;
+    munchkin_id?: string;
+    form_id?: string;
+    base_url?: string;
+    custom_script?: string;
+};
+declare type Label = {
+    text: string;
+    url: string;
+};
+declare type Checkbox = {
+    label: string;
+    name: string;
+    is_required: boolean;
+};
+export declare type FootersResponseV1 = {
+    id: number;
+    element_id: number;
+    name: string;
+    description: string;
+    state: number;
+    is_standard: boolean;
+    logo: {
+        show: boolean;
+        url?: string;
+    };
+    text: string;
+    labels: Label[];
+    background_color: string;
+    show_in_item_view: boolean;
+    text_color: {
+        type: number;
+        color: string;
+    };
+    tracking_consent: {
+        show: boolean;
+        button_label?: string;
+        dialog_button_label?: string;
+        dialog_text?: string;
+    };
+};
+export declare type PrivacyMessageResponseV1 = {
+    id: number;
+    element_id: number;
+    name: string;
+    description: string;
+    state: number;
+    is_standard: boolean;
+    is_top: boolean;
+    message: string;
+    link: string;
+    can_close: boolean;
+};
+export declare type FormPrivacyMessageDataV1 = {
+    is_standard: boolean;
+    message: {
+        html: string;
+    };
+    text_area: {
+        html: string;
+    };
+    checkbox_area: {
+        threshold: number;
+        label: string;
+        checkboxes: Checkbox[];
+    };
+};
+export declare type FormPrivacyMessageResponseV1 = {
+    id: number;
+    element_id: number;
+    name: string;
+    state: number;
+    is_standard: FormPrivacyMessageDataV1["is_standard"];
+    message: FormPrivacyMessageDataV1["message"];
+    text_area: FormPrivacyMessageDataV1["text_area"];
+    checkbox_area: FormPrivacyMessageDataV1["checkbox_area"];
+};
+export declare type CampaignElementResponseV1 = {
+    data: Record<string, FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1>;
+    default_id: number;
+};
+export declare type PrivacySettingsResponseV1 = PrivacySettings;
+export declare type BoardHasPersonalizationResponseV1 = {
+    personalization: boolean;
+};
+export declare type FeatureSettingsResponseV1 = {
+    accounts_dashboard: boolean;
+    advanced_reports: boolean;
+    analytics_dashboards: boolean;
+    app_sso_login: boolean;
+    articles: boolean;
+    board_embedding: boolean;
+    change_custom_domain: boolean;
+    chat: boolean;
+    email_callbacks_subscription: boolean;
+    enable_seo: boolean;
+    items_limit: boolean;
+    live_event: boolean;
+    ms_crm_integration: boolean;
+    personalization: boolean;
+    set_group_board: boolean;
+};
+export declare type BoardHasItemsResponseV1 = {
+    has_items: boolean;
+};
+export declare type PersonalizationV1 = {
+    auto_assign_inviter: object;
+    campaign: {
+        banner: object;
+        contact_card: object;
+        footer: object;
+        general: object;
+        header: object;
+        items: object;
+        promotion: object;
+    };
+    is_enabled: boolean;
+};
+export declare type EmailTemplateV1 = {
+    id: number;
+    name: string;
+    board_id: number;
+    created_by: {
+        id: number;
+        full_name: string;
+    };
+    created_at: Date;
+    updated_at: Date;
+    is_default: boolean;
+    invitation_type: number;
+    subject: string;
+    text: string;
+    logo: string;
+    template: boolean;
+};
+export declare type UserV1 = {
+    id: number;
+    name: string;
+    email: string;
+    bio_settings: object;
+    linkedin: object;
+    twitter: object;
+    image: string;
+};
+export declare type ConfigSavedConflict = {
+    msg: string;
+    config: BoardConfig;
+    published_hash: string;
+    is_board_online: boolean;
+    user: UserV1;
+};
+export declare type ConfigSavedSuccess = {
+    config: BoardConfig;
+    published_hash: string;
+    is_board_online: boolean;
+};
+export declare type PublishedUnpublishedConfig = {
+    published_config: BoardConfig;
+    unpublished_config: BoardConfig;
+    published_hash: string;
+    is_board_online: boolean;
+};
+export declare type MergeTagAttribute = {
+    id: number;
+    is_enabled: boolean;
+    label: string;
+    name: string;
+    provider: string;
+    allow_text_replacement: boolean;
+    allow_user_input: boolean;
+};
+export declare type MergeTagValue = {
+    id: string;
+    name: string;
+};
+export declare type Theme = {
+    id: number;
+    name: string | "system theme";
+    status: "archived" | "published";
+    style: string;
+    type: "basic" | "migration" | "system";
+};
+export declare type GenerateSectionTextsRequest = {
+    board: {
+        goal: string;
+        productName: string;
+        details?: string;
+    };
+    widget: {
+        description: string;
+        purpose: string;
+        elaboratedPurpose: string;
+        injectables: any[];
+    };
+};
+export {};
