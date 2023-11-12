@@ -62,8 +62,13 @@ export type SectionDescription = {
 export type SectionInjectable = {
     name: string;
     path: string;
-    visibilityPaths: string[];
+    visibilityPaths: (string|VisibilityConfig)[];
     description: string;
+}
+
+export type VisibilityConfig = {
+    path: string;
+    value: string;
 }
 
 export type DynamicArrayInjectable = {
