@@ -10,7 +10,6 @@ export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly editComponents: string[];
     public abstract readonly widgetTitle: string;
     public setConfigOnlyOnce: boolean = false;
-    public readonly sectionDescriptionConfig: string | undefined = undefined;
 
     protected _data: any;
     protected _widgetId: string;
@@ -111,7 +110,7 @@ export abstract class LiveWidgetElement extends LitElement {
     }
 
     public canGenerateText(generateConfig: GenerationConfig): boolean {
-        if (!this.sectionDescriptionConfig) {
+        if (!window["follozeSectionDescriptions"][this.tagName.toLowerCase()]) {
             return false;
         }
 
