@@ -69,3 +69,7 @@ export type DynamicArrayInjectable = {
     arrayPath: string;
     injectables: SectionInjectable[];
 }
+
+export type tanya = {
+    yay: string;
+}
