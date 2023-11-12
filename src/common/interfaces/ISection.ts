@@ -51,3 +51,21 @@ export type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
+
+export type SectionDescription = {
+    description: string;
+    purposes: { [key:string]: string };
+    injectables: SectionInjectable[];
+    dynamicArrayInjectables?: DynamicArrayInjectable[];
+}
+
+export type SectionInjectable = {
+    name: string;
+    path: string;
+    description: string;
+}
+
+export type DynamicArrayInjectable = {
+    arrayPath: string;
+    injectables: SectionInjectable[];
+}

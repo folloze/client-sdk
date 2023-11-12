@@ -350,4 +350,21 @@ export declare type Theme = {
     style: string;
     type: "basic" | "migration" | "system";
 };
+export declare type GenerateSectionTextsRequest = {
+    board: {
+        goal: string;
+        productName: string;
+        details?: string;
+    };
+    widget: {
+        description: string;
+        purpose: string;
+        elaboratedPurpose: string;
+        injectables: any[];
+    };
+};
+export declare type GeneratedText = {
+    text: string;
+    path: string;
+};
 export {};

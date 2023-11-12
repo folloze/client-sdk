@@ -46,6 +46,7 @@ export type BoardConfig = {
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
+    generationConfig?: GenerationConfig;
 };
 
 export type PageConfig = {
@@ -142,6 +143,20 @@ export interface ILiveBoard extends LitElement {
 
     isBoardReady(): boolean;
 }
+
+export type GenerationConfig = {
+    board?: {
+        goal?: string;
+        productName?: string;
+        details?: string;
+    },
+    widgets?: {
+        [key:string]: {
+            purpose?: string;
+            elaboratedPurpose?: string;
+        }
+    }
+};
 
 export type Board = {
     allow_embedding?: boolean;
