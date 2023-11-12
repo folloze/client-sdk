@@ -1,6 +1,7 @@
 import { WidgetConfig } from "./interfaces/IWidget";
 import { LitElement, PropertyValues } from "lit";
 import { FlzEvent } from "./FlzEvent";
+import { GenerationConfig } from "./interfaces/IBoard";
 export declare abstract class LiveWidgetElement extends LitElement {
     abstract readonly customEditWidgets: string[];
     abstract readonly editComponents: string[];
@@ -42,6 +43,7 @@ export declare abstract class LiveWidgetElement extends LitElement {
      * you should override this method to listen to state changes
      */
     stateChanged(state: any): void;
+    canGenerateText(generateConfig: GenerationConfig): boolean;
     private handleGetWidget;
     abstract render(): any;
 }

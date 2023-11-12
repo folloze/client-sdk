@@ -42,3 +42,20 @@ export declare type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
+export declare type SectionDescription = {
+    description: string;
+    purposes: {
+        [key: string]: string;
+    };
+    injectables: SectionInjectable[];
+    dynamicArrayInjectables?: DynamicArrayInjectable[];
+};
+export declare type SectionInjectable = {
+    name: string;
+    path: string;
+    description: string;
+};
+export declare type DynamicArrayInjectable = {
+    arrayPath: string;
+    injectables: SectionInjectable[];
+};

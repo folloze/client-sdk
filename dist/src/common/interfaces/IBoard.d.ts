@@ -41,6 +41,7 @@ export declare type BoardConfig = {
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
+    generationConfig?: GenerationConfig;
 };
 export declare type PageConfig = {
     name: "default" | string;
@@ -124,6 +125,19 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
+export declare type GenerationConfig = {
+    board?: {
+        goal?: string;
+        productName?: string;
+        details?: string;
+    };
+    widgets?: {
+        [key: string]: {
+            purpose?: string;
+            elaboratedPurpose?: string;
+        };
+    };
+};
 export declare type Board = {
     allow_embedding?: boolean;
     id: number;
