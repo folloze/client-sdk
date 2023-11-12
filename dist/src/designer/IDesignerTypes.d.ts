@@ -363,4 +363,8 @@ export declare type GenerateSectionTextsRequest = {
         injectables: any[];
     };
 };
+export declare type GeneratedText = {
+    text: string;
+    path: string;
+};
 export {};
