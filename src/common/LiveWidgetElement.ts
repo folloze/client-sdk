@@ -3,7 +3,7 @@ import {v4 as uuid_v4} from "uuid";
 import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
 import {widgetEmit} from "./helpers/eventHelpers";
-import {GenerationConfig} from "./interfaces/IBoard";
+
 
 export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly customEditWidgets: string[];
@@ -107,20 +107,6 @@ export abstract class LiveWidgetElement extends LitElement {
      */
     public stateChanged(state: any) {
         return;
-    }
-
-    public canGenerateText(generateConfig: GenerationConfig): boolean {
-        if (!window["follozeSectionDescriptions"][this.tagName.toLowerCase()]) {
-            return false;
-        }
-
-        return !!(
-            generateConfig &&
-            generateConfig.board?.goal &&
-            generateConfig.board?.productName &&
-            generateConfig.widgets?.[this.widgetId]?.purpose &&
-            generateConfig.widgets?.[this.widgetId]?.elaboratedPurpose
-        );
     }
 
     private handleGetWidget = (e: CustomEvent) => {
