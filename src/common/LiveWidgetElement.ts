@@ -4,7 +4,6 @@ import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
 import {widgetEmit} from "./helpers/eventHelpers";
 
-
 export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly customEditWidgets: string[];
     public abstract readonly editComponents: string[];
