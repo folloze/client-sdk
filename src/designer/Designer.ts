@@ -496,7 +496,7 @@ export class Designer {
                 });
         };
 
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 20) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 
     getCustomSections(): Promise<CustomSectionListItem[]> {
