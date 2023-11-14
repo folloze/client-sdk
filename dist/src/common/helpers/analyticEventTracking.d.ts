@@ -28,6 +28,11 @@ declare type AnalyticTypeToPayload = {
             anchor: string | null;
         };
     };
+    cta_clicked: {
+        cta_text: string;
+        cta_type: string;
+        data: Record<string, unknown>;
+    };
 };
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
