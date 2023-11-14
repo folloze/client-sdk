@@ -433,3 +433,8 @@ export type GeneratedText = {
     text: string;
     path: string;
 }
+
+export type GenerateSectionTextsResponse = {
+    text: GeneratedText[];
+    prompt: string;
+}

@@ -23,8 +23,8 @@ import {
     VideoGalleryParams,
     GalleryVideo,
     Theme,
-    GenerateSectionTextsRequest,
-    GeneratedText
+    type GenerateSectionTextsRequest,
+    type GenerateSectionTextsResponse
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -485,7 +485,7 @@ export class Designer {
         });
     }
 
-    public generateSectionText(boardId: Number, generateParams: GenerateSectionTextsRequest): Promise<GeneratedText[]> {
+    public generateSectionText(boardId: Number, generateParams: GenerateSectionTextsRequest): Promise<GenerateSectionTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/${boardId}/section_texts`, { ...generateParams, guid })
