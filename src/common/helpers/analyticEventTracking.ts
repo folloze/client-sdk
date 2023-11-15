@@ -35,10 +35,17 @@ type AnalyticTypeToPayload = {
     };
     cta_clicked: {
         cta_text: string;
-        cta_type: string;
-        data: Record<string, unknown>;
+        cta_type: CtaType;
+        data: {
+            form_id?: string;
+            url?: string;
+            item_id?: number;
+        };
     };
 };
+
+// TODO: Move Cta types to designated types file? Both here and in widgets repo
+type CtaType = "contact" | "open_url" | "form" | "message" | "share" | "registration" | "send_email_clicked" | "open_content_item";
 
 type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];

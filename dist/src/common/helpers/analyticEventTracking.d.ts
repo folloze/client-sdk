@@ -30,10 +30,15 @@ declare type AnalyticTypeToPayload = {
     };
     cta_clicked: {
         cta_text: string;
-        cta_type: string;
-        data: Record<string, unknown>;
+        cta_type: CtaType;
+        data: {
+            form_id?: string;
+            url?: string;
+            item_id?: number;
+        };
     };
 };
+declare type CtaType = "contact" | "open_url" | "form" | "message" | "share" | "registration" | "send_email_clicked" | "open_content_item";
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
 }[K];
