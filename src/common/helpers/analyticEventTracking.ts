@@ -35,10 +35,7 @@ type AnalyticTypeToPayload = {
     };
     open_content_item_clicked: {
         button_text: string;
-        item: {
-            id: number;
-            name: string;
-        };
+        content_id: number;
     };
 };
 

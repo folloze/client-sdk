@@ -30,10 +30,7 @@ declare type AnalyticTypeToPayload = {
     };
     open_content_item_clicked: {
         button_text: string;
-        item: {
-            id: number;
-            name: string;
-        };
+        content_id: number;
     };
 };
 declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
