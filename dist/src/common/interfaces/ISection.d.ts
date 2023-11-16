@@ -44,9 +44,7 @@ export declare type BackgroundVideo = {
 };
 export declare type SectionDescription = {
     description: string;
-    purposes: {
-        [key: string]: string;
-    };
+    purposes: string[];
     injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
 };
