@@ -51,7 +51,7 @@ export declare type SectionDescription = {
 export declare type SectionInjectable = {
     name: string;
     path: string;
-    visibilityPaths: (string | VisibilityConfig)[];
+    visibilityPath?: string;
     description: string;
 };
 export declare type VisibilityConfig = {
