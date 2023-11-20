@@ -44,16 +44,19 @@ export declare type BackgroundVideo = {
 };
 export declare type SectionDescription = {
     description: string;
-    purposes: {
-        [key: string]: string;
-    };
+    purposes: string[];
     injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
 };
 export declare type SectionInjectable = {
     name: string;
     path: string;
+    visibilityPath?: string;
     description: string;
+};
+export declare type VisibilityConfig = {
+    path: string;
+    value: string;
 };
 export declare type DynamicArrayInjectable = {
     arrayPath: string;

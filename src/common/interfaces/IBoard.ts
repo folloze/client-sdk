@@ -151,12 +151,14 @@ export type GenerationConfig = {
         details?: string;
     },
     widgets?: {
-        [key:string]: {
-            purpose?: string;
-            elaboratedPurpose?: string;
-        }
+        [key:string]: WidgetGenerationConfig
     }
 };
+
+export type WidgetGenerationConfig = {
+    purpose?: string;
+    elaboratedPurpose?: string;
+}
 
 export type Board = {
     allow_embedding?: boolean;

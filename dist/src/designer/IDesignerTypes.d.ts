@@ -367,4 +367,8 @@ export declare type GeneratedText = {
     text: string;
     path: string;
 };
+export declare type GenerateSectionTextsResponse = {
+    text: GeneratedText[];
+    prompt: string;
+};
 export {};

@@ -132,11 +132,12 @@ export declare type GenerationConfig = {
         details?: string;
     };
     widgets?: {
-        [key: string]: {
-            purpose?: string;
-            elaboratedPurpose?: string;
-        };
+        [key: string]: WidgetGenerationConfig;
     };
+};
+export declare type WidgetGenerationConfig = {
+    purpose?: string;
+    elaboratedPurpose?: string;
 };
 export declare type Board = {
     allow_embedding?: boolean;
