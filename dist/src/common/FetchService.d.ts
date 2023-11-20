@@ -9,6 +9,7 @@ export declare type FetcherOptions = {
     csrfToken?: string;
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
+    flzClientFeature?: "embedded";
 };
 export declare class FetchService {
     private readonly useMock;
@@ -19,6 +20,7 @@ export declare class FetchService {
     private jwt;
     organizationId: number;
     urlToken: string;
+    private isEmbeddedRequest;
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
