@@ -13,3 +13,11 @@ export function canWidgetGenerateText(widgetId: string, widgetTagName: string, g
       generateConfig.widgets?.[widgetId]?.elaboratedPurpose
   );
 }
+
+export const BOARD_GOALS = [
+    "Product/Solution Overview",
+    "Content Nurturing",
+    "Account Based Page",
+    "Landing Page",
+    "Event Registration"
+];
