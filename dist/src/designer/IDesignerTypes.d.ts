@@ -375,7 +375,7 @@ export declare type GeneratedWidgetText = {
     widgetId: string;
 };
 export declare type GenerateWidgetsTextsResponse = {
-    widgets: GeneratedWidgetText;
+    widgets: GeneratedWidgetText[];
 };
 export declare type GenAIAction = "generate-widget" | "generate-board";
 export {};

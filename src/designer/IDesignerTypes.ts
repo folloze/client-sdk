@@ -444,7 +444,7 @@ export type GeneratedWidgetText = {
 }
 
 export type GenerateWidgetsTextsResponse = {
-    widgets: GeneratedWidgetText
+    widgets: GeneratedWidgetText[]
 }
 
 export type GenAIAction = "generate-widget" | "generate-board";
