@@ -42,7 +42,7 @@ export declare type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
-export declare type SectionDescription = {
+export declare type WidgetDescription = {
     description: string;
     purposes: string[];
     defaultPurpose: string;

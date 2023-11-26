@@ -52,7 +52,7 @@ export type BackgroundVideo = {
     position: string;
 };
 
-export type SectionDescription = {
+export type WidgetDescription = {
     description: string;
     purposes: string[];
     defaultPurpose: string;
