@@ -135,6 +135,7 @@ export declare type GenerationConfig = {
         [key: string]: WidgetGenerationConfig;
     };
 };
+export declare const BOARD_GOALS: string[];
 export declare type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;

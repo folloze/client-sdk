@@ -155,6 +155,14 @@ export type GenerationConfig = {
     }
 };
 
+export const BOARD_GOALS = [
+    "Product/Solution Overview",
+    "Content Nurturing",
+    "Account Based Page",
+    "Landing Page",
+    "Event Registration"
+];
+
 export type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;

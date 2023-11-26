@@ -438,3 +438,5 @@ export type GenerateSectionTextsResponse = {
     text: GeneratedText[];
     prompt: string;
 }
+
+export type GenAIAction = "generate-section" | "generate-board";
