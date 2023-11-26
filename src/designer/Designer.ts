@@ -485,7 +485,7 @@ export class Designer {
         });
     }
 
-    public generateSectionText(boardId: Number, generateParams: GenerateSectionsTextsRequest): Promise<GenerateSectionTextsResponse> {
+    public generateSectionsText(boardId: Number, generateParams: GenerateSectionsTextsRequest): Promise<GenerateSectionTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/${boardId}/section_texts`, { ...generateParams, guid })

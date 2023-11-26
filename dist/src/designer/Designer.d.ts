@@ -153,7 +153,7 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
-    generateSectionText(boardId: Number, generateParams: GenerateSectionsTextsRequest): Promise<GenerateSectionTextsResponse>;
+    generateSectionsText(boardId: Number, generateParams: GenerateSectionsTextsRequest): Promise<GenerateSectionTextsResponse>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
