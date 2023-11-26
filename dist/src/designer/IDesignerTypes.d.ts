@@ -368,9 +368,13 @@ export declare type GeneratedText = {
     text: string;
     path: string;
 };
-export declare type GenerateSectionTextsResponse = {
+export declare type GeneratedSectionText = {
     text: GeneratedText[];
     prompt: string;
+    widgetId: string;
+};
+export declare type GenerateSectionTextsResponse = {
+    widgets: GeneratedSectionText;
 };
 export declare type GenAIAction = "generate-section" | "generate-board";
 export {};

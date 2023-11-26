@@ -436,9 +436,14 @@ export type GeneratedText = {
     path: string;
 }
 
-export type GenerateSectionTextsResponse = {
+export type GeneratedSectionText = {
     text: GeneratedText[];
     prompt: string;
+    widgetId: string;
+}
+
+export type GenerateSectionTextsResponse = {
+    widgets: GeneratedSectionText
 }
 
 export type GenAIAction = "generate-section" | "generate-board";
