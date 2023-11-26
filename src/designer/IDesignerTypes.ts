@@ -429,6 +429,7 @@ export type GenerateTextWidgetData = {
     purpose: string;
     elaboratedPurpose: string;
     injectables: any[];
+    widgetId: string;
 }
 
 export type GeneratedText = {

@@ -363,6 +363,7 @@ export declare type GenerateTextWidgetData = {
     purpose: string;
     elaboratedPurpose: string;
     injectables: any[];
+    widgetId: string;
 };
 export declare type GeneratedText = {
     text: string;
