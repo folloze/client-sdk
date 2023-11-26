@@ -415,16 +415,16 @@ export type Theme = {
   type: "basic" | "migration" | "system";
 }
 
-export type GenerateSectionsTextsRequest = {
+export type GenerateWidgetsTextsRequest = {
     board: {
         goal: string;
         productName: string;
         details?: string;
     },
-    widgets: GenerateSectionTextWidgetData[];
+    widgets: GenerateTextWidgetData[];
 }
 
-export type GenerateSectionTextWidgetData = {
+export type GenerateTextWidgetData = {
     description: string;
     purpose: string;
     elaboratedPurpose: string;
@@ -436,14 +436,14 @@ export type GeneratedText = {
     path: string;
 }
 
-export type GeneratedSectionText = {
+export type GeneratedWidgetText = {
     text: GeneratedText[];
     prompt: string;
     widgetId: string;
 }
 
-export type GenerateSectionTextsResponse = {
-    widgets: GeneratedSectionText
+export type GenerateWidgetsTextsResponse = {
+    widgets: GeneratedWidgetText
 }
 
-export type GenAIAction = "generate-section" | "generate-board";
+export type GenAIAction = "generate-widget" | "generate-board";
