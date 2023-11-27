@@ -491,7 +491,7 @@ export class Designer {
                 .post<any>(`/api/v1/boards/${boardId}/section_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
-                    console.error("could not generate section text", e);
+                    console.error("could not generate widgets texts", e);
                     reject(e);
                 });
         };
