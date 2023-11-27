@@ -427,7 +427,7 @@ export type GenerateWidgetsTextsRequest = {
 export type GenerateTextWidgetData = {
     description: string;
     purpose: string;
-    elaboratedPurpose: string;
+    elaboratedPurpose?: string;
     injectables: any[];
     widgetId: string;
 }

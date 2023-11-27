@@ -361,7 +361,7 @@ export declare type GenerateWidgetsTextsRequest = {
 export declare type GenerateTextWidgetData = {
     description: string;
     purpose: string;
-    elaboratedPurpose: string;
+    elaboratedPurpose?: string;
     injectables: any[];
     widgetId: string;
 };
