@@ -63,6 +63,7 @@ export type SectionInjectable = {
     name: string;
     path: string;
     description: string;
+    visibilityPath: string;
 }
 
 export type DynamicArrayInjectable = {
