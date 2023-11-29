@@ -163,6 +163,13 @@ export const BOARD_GOALS = [
     "Event Registration"
 ];
 
+export const DEFAULT_GENERATION_CONFIG: GenerationConfig = {
+    board: {
+        goal: BOARD_GOALS[0]
+    },
+    widgets: {}
+};
+
 export type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;
