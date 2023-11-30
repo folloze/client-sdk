@@ -15,6 +15,7 @@ export type FetcherOptions = {
     csrfToken?: string;
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
+    flzClientFeature?: "embedded";
 };
 
 const defaultFetcherOptions: FetcherOptions = {
@@ -25,7 +26,7 @@ const defaultFetcherOptions: FetcherOptions = {
         baseURL: "/",
         headers: {},
     },
-    analyticsServiceEndpoint: ''
+    analyticsServiceEndpoint: "",
 };
 
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
@@ -48,6 +49,7 @@ export class FetchService {
     private jwt: String;
     public organizationId: number;
     public urlToken: string;
+    private isEmbeddedRequest: boolean;
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
@@ -58,6 +60,9 @@ export class FetchService {
         }
         if (options.jwt) {
             this.jwt = options.jwt;
+        }
+        if (options.flzClientFeature === "embedded") {
+            this.isEmbeddedRequest = true;
         }
 
         const token =
@@ -183,6 +188,9 @@ export class FetchService {
             }
             if (this.jwt) {
                 config.headers["Authorization"] = `Bearer ${this.jwt}`;
+            }
+            if (this.isEmbeddedRequest) {
+                config.headers["flz-client-feature"] = `embedded`;
             }
             return config;
         });
