@@ -9,7 +9,6 @@ export function canWidgetGenerateText(widgetId: string, widgetTagName: string, g
       generateConfig &&
       generateConfig.board?.goal &&
       generateConfig.board?.productName &&
-      generateConfig.widgets?.[widgetId]?.purpose &&
-      generateConfig.widgets?.[widgetId]?.elaboratedPurpose
+      generateConfig.widgets?.[widgetId]?.purpose
   );
 }
