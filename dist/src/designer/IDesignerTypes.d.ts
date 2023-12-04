@@ -350,4 +350,32 @@ export declare type Theme = {
     style: string;
     type: "basic" | "migration" | "system";
 };
+export declare type GenerateWidgetsTextsRequest = {
+    board: {
+        goal: string;
+        productName: string;
+        details?: string;
+    };
+    widgets: GenerateTextWidgetData[];
+};
+export declare type GenerateTextWidgetData = {
+    description: string;
+    purpose: string;
+    elaboratedPurpose?: string;
+    injectables: any[];
+    widgetId: string;
+};
+export declare type GeneratedText = {
+    text: string;
+    path: string;
+};
+export declare type GeneratedWidgetText = {
+    text: GeneratedText[];
+    prompt: string;
+    widgetId: string;
+};
+export declare type GenerateWidgetsTextsResponse = {
+    widgets: GeneratedWidgetText[];
+};
+export declare type GenAIAction = "generate-widget" | "generate-board";
 export {};

@@ -46,6 +46,7 @@ export type BoardConfig = {
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
+    generationConfig?: GenerationConfig;
 };
 
 export type PageConfig = {
@@ -141,6 +142,37 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
 
     isBoardReady(): boolean;
+}
+
+export type GenerationConfig = {
+    board?: {
+        goal?: string;
+        productName?: string;
+        details?: string;
+    },
+    widgets?: {
+        [key:string]: WidgetGenerationConfig
+    }
+};
+
+export const BOARD_GOALS = [
+    "Product/Solution Overview",
+    "Content Nurturing",
+    "Account Based Page",
+    "Landing Page",
+    "Event Registration"
+];
+
+export const DEFAULT_GENERATION_CONFIG: GenerationConfig = {
+    board: {
+        goal: BOARD_GOALS[0]
+    },
+    widgets: {}
+};
+
+export type WidgetGenerationConfig = {
+    purpose?: string;
+    elaboratedPurpose?: string;
 }
 
 export type Board = {

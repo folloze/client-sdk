@@ -92,4 +92,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-designer-themes"
     | "navigate-to-documentation"
     | "open-generic-dialog"
-    | "custom-sections-action";
+    | "custom-sections-action"
+    | "generate-ai-action";

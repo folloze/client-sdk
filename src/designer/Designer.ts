@@ -22,7 +22,9 @@ import {
     MergeTagValue,
     VideoGalleryParams,
     GalleryVideo,
-    Theme
+    Theme,
+    type GenerateWidgetsTextsRequest,
+    type GenerateWidgetsTextsResponse
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -483,6 +485,20 @@ export class Designer {
         });
     }
 
+    public generateWidgetsText(boardId: Number, generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/section_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate widgets texts", e);
+                    reject(e);
+                });
+        };
+
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
+
     getCustomSections(): Promise<CustomSectionListItem[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
@@ -532,5 +548,4 @@ export class Designer {
             );
         });
     }
-
 }
