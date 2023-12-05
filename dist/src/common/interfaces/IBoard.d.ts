@@ -4,6 +4,7 @@ import { LitElement } from "lit";
 import { LiveWidget } from "../LiveWidget";
 import { IPersonalizationConfig } from "./IPersonalization";
 import { FlzEvent } from "../FlzEvent";
+import { ThemeOverride, ThemeOverrideRules } from "./IThemeBuilder";
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
     data: RibbonConfig["data"];
@@ -37,6 +38,8 @@ export declare type BoardConfig = {
     };
     theme?: {
         id: number;
+        override?: ThemeOverride;
+        overrideRules?: ThemeOverrideRules;
     };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
