@@ -121,6 +121,7 @@ export interface User {
     is_organization_editor: boolean;
     is_sfdc_admin: boolean;
     is_super_admin: boolean;
+    is_internal?: boolean;
     team_name: string;
     organization_system_role: string;
     can_use_u3: boolean;
