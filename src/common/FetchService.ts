@@ -15,6 +15,7 @@ export type FetcherOptions = {
     csrfToken?: string;
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
+    flzClientFeature?: "embedded";
 };
 
 const defaultFetcherOptions: FetcherOptions = {
@@ -25,7 +26,7 @@ const defaultFetcherOptions: FetcherOptions = {
         baseURL: "/",
         headers: {},
     },
-    analyticsServiceEndpoint: ''
+    analyticsServiceEndpoint: "",
 };
 
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
@@ -48,6 +49,7 @@ export class FetchService {
     private jwt: String;
     public organizationId: number;
     public urlToken: string;
+    private isEmbeddedRequest: boolean;
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
@@ -58,6 +60,9 @@ export class FetchService {
         }
         if (options.jwt) {
             this.jwt = options.jwt;
+        }
+        if (options.flzClientFeature === "embedded") {
+            this.isEmbeddedRequest = true;
         }
 
         const token =
@@ -96,21 +101,21 @@ export class FetchService {
     }
 
     // todo: this method will need backoff implementation
-    withPartialContent(promiseFunc: (resolve, reject) => any, timeout: number = 2000, retry: number = 1): Promise<any> {
+    withPartialContent(promiseFunc: (resolve, reject, guid) => any, timeout: number = 2000, retry: number = 1, guid?: string): Promise<any> {
         return new Promise((resolve, reject) => {
             if (retry <= 0) {
                 console.warn("stop retrying partial content");
                 reject("stop retrying");
                 return;
             }
-            const innerPromise = new Promise(promiseFunc);
+            const innerPromise = new Promise((resolve, reject) => promiseFunc(resolve, reject, guid));
             innerPromise
                 .then((result: any) => {
                     if (result.status == 206) {
                         console.debug(`retry partial content ${retry}`);
                         retry = retry - 1;
                         setTimeout(() => {
-                            resolve(this.withPartialContent(promiseFunc, timeout, retry));
+                            resolve(this.withPartialContent(promiseFunc, timeout, retry, result.data.guid));
                         }, timeout);
                     } else {
                         console.debug(`partial content resolved`, result.data);
@@ -183,6 +188,9 @@ export class FetchService {
             }
             if (this.jwt) {
                 config.headers["Authorization"] = `Bearer ${this.jwt}`;
+            }
+            if (this.isEmbeddedRequest) {
+                config.headers["flz-client-feature"] = `embedded`;
             }
             return config;
         });

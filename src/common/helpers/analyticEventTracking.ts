@@ -33,6 +33,10 @@ type AnalyticTypeToPayload = {
             anchor: string | null;
         };
     };
+    open_content_item_clicked: {
+        button_text: string;
+        content_id: number;
+    };
 };
 
 type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {

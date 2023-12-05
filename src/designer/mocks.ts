@@ -677,7 +677,7 @@ export const rules = (mock: MockAdapter) => {
                             widgets: {},
                             ribbons: {},
                         },
-                    },
+                    }
                 },
                 unpublished_config: {
                     id: 66,

@@ -11,6 +11,7 @@ export declare type InitialState = {
         privacy_warning_provider?: string;
         disable_share_button_on_board?: boolean;
     };
+    is_regulated_country?: boolean;
     locale: string;
     session_guid: string;
     data_service_configuration?: DataEnrichmentConfig;
@@ -34,6 +35,7 @@ export declare type InitialState = {
         multiPages?: boolean;
         recommendationsAi: boolean;
         customTheme: boolean;
+        genAi: boolean;
     };
     user?: User;
     privacy_messages: PrivacyMessage[];

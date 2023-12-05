@@ -59,7 +59,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "floating-widget-manager"
     | "track-lead-event"
     | "analytic-event"
-    | "link-click";
+    | "link-click"
+    | "get-is-regulated-country";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
@@ -91,4 +92,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "get-designer-themes"
     | "navigate-to-documentation"
     | "open-generic-dialog"
-    | "custom-sections-action";
+    | "custom-sections-action"
+    | "generate-ai-action";

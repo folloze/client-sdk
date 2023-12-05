@@ -13,6 +13,7 @@ export type InitialState = {
         privacy_warning_provider?: string;
         disable_share_button_on_board?: boolean;
     };
+    is_regulated_country?: boolean; // true if current coutry is regulated. exists only on liveboard.
     locale: string; // "en-US"
     session_guid: string; // needs to be in all requests to the server in header: "folloze-session-guid"
     data_service_configuration?: DataEnrichmentConfig;
@@ -39,6 +40,7 @@ export type InitialState = {
         multiPages?: boolean;
         recommendationsAi: boolean;
         customTheme: boolean;
+        genAi: boolean;
     };
     user?: User;
     privacy_messages: PrivacyMessage[];
