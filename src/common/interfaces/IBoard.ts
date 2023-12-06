@@ -212,4 +212,8 @@ export type Board = {
         online: boolean;
     };
     is_v3_live: boolean;
+    // only in designer
+    review_status?: {
+        approved: boolean;
+    };
 };
