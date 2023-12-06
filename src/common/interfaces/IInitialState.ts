@@ -1,6 +1,6 @@
 import {ItemResponseV2, LeadResponseV1, OpenItemViewerPayload} from "../../liveboard/ILiveboardTypes";
 import {Board, BoardConfig} from "./IBoard";
-import {PredefinedSection} from "./ISection";
+import {PredefinedSection, WidgetListItem} from "./ISection";
 
 export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
 
@@ -24,6 +24,7 @@ export type InitialState = {
     token?: string;
 
     sections?: Section[];
+    floatingWidgetsList?: WidgetListItem[];
     org_header_config: {
         logo: {
             url: string;
