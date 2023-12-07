@@ -180,6 +180,10 @@ export class FetchService {
             options.config.headers["X-CSRF-Token"] = options.csrfToken;
         }
 
+        if (this.isEmbeddedRequest) {
+            options.config.withCredentials = true;
+        }
+
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
