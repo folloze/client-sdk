@@ -174,17 +174,22 @@ export class FetchService {
         return Promise.reject(error);
     }
 
+    private withCredentials = (request: AxiosRequestConfig): AxiosRequestConfig => {
+        if (this.isEmbeddedRequest && request.url?.includes(this.options.analyticsServiceEndpoint)) {
+            request.withCredentials = true;
+        }
+
+        return request;
+    };
+
     private createAxiosFetcher(options: FetcherOptions) {
         options.config.headers["X-Requested-With"] = "XMLHttpRequest";
         if (options.csrfToken) {
             options.config.headers["X-CSRF-Token"] = options.csrfToken;
         }
 
-        if (this.isEmbeddedRequest && !options.config.url.includes(this.options.analyticsServiceEndpoint)) {
-            options.config.withCredentials = true;
-        }
-
         this.fetcher = axios.create(options.config);
+        this.fetcher.interceptors.request.use(this.withCredentials, this.handleError);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
