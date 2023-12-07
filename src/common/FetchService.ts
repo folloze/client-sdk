@@ -180,7 +180,7 @@ export class FetchService {
             options.config.headers["X-CSRF-Token"] = options.csrfToken;
         }
 
-        if (this.isEmbeddedRequest) {
+        if (this.isEmbeddedRequest && !options.config.url.includes(this.options.analyticsServiceEndpoint)) {
             options.config.withCredentials = true;
         }
 
