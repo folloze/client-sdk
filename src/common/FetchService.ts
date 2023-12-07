@@ -175,7 +175,7 @@ export class FetchService {
     }
 
     private withCredentials = (request: AxiosRequestConfig): AxiosRequestConfig => {
-        if (this.isEmbeddedRequest && request.url?.includes(this.options.analyticsServiceEndpoint)) {
+        if (this.isEmbeddedRequest && !request.url?.includes(this.options.analyticsServiceEndpoint)) {
             request.withCredentials = true;
         }
 
