@@ -191,6 +191,12 @@ export class FetchService {
             }
             if (this.isEmbeddedRequest) {
                 config.headers["flz-client-feature"] = `embedded`;
+
+                // When the credentials flag is set to true on the client-side,
+                // browsers do not allow the use of wildcards ( * ) for Access-Control-Allow-Origin.
+                if (!config.url?.includes(this.options.analyticsServiceEndpoint)) {
+                    config.withCredentials = true;
+                }
             }
             return config;
         });
