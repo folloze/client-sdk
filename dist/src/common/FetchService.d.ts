@@ -29,6 +29,5 @@ export declare class FetchService {
     private handleSuccess;
     private handleError;
     private MockHandleError;
-    private withCredentials;
     private createAxiosFetcher;
 }
