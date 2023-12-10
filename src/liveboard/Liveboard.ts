@@ -698,7 +698,6 @@ export class Liveboard {
         return this.fetchService.withDisableOnPreview((): Promise<CtaResponseV1> => {
             return new Promise((resolve, reject) => {
                 return this.notifyIdentity(boardId, options).then(_ => {
-                    console.log("blabla", _);
                     this.fetchService.fetcher
                         .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
                         .then(result => resolve(result.data))
