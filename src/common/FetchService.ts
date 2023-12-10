@@ -174,14 +174,6 @@ export class FetchService {
         return Promise.reject(error);
     }
 
-    private withCredentials = (request: AxiosRequestConfig): AxiosRequestConfig => {
-        if (this.isEmbeddedRequest && !request.url?.includes(this.options.analyticsServiceEndpoint)) {
-            request.withCredentials = true;
-        }
-
-        return request;
-    };
-
     private createAxiosFetcher(options: FetcherOptions) {
         options.config.headers["X-Requested-With"] = "XMLHttpRequest";
         if (options.csrfToken) {
@@ -189,7 +181,6 @@ export class FetchService {
         }
 
         this.fetcher = axios.create(options.config);
-        this.fetcher.interceptors.request.use(this.withCredentials, this.handleError);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
@@ -200,6 +191,12 @@ export class FetchService {
             }
             if (this.isEmbeddedRequest) {
                 config.headers["flz-client-feature"] = `embedded`;
+
+                // When the credentials flag is set to true on the client-side,
+                // browsers do not allow the use of wildcards ( * ) for Access-Control-Allow-Origin.
+                if (!config.url?.includes(this.options.analyticsServiceEndpoint)) {
+                    config.withCredentials = true;
+                }
             }
             return config;
         });
