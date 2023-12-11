@@ -194,7 +194,7 @@ export class FetchService {
 
                 // When the credentials flag is set to true on the client-side,
                 // browsers do not allow the use of wildcards ( * ) for Access-Control-Allow-Origin.
-                if (!config.url?.includes(this.options.analyticsServiceEndpoint)) {
+                if (!(config.url?.includes(this.options.analyticsServiceEndpoint) || config.url?.includes(this.options.pingEndpoint))) {
                     config.withCredentials = true;
                 }
             }
