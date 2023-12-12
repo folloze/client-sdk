@@ -185,7 +185,7 @@ export type WidgetGenerationConfig = {
     elaboratedPurpose?: string;
 }
 
-export type PageType = "default" | "registration" | string;
+export type PageName = "default" | "registration" | string;
 
 export type Board = {
     allow_embedding?: boolean;
@@ -211,7 +211,7 @@ export type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    landing_page: PageType;
+    landing_page: PageName;
     config: BoardConfig;
     config_info: {
         state: "draft" | "published" | "unpublished changes";
