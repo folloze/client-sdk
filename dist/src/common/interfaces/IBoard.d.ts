@@ -125,7 +125,7 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
-export declare type GenerationConfig = {
+export declare type PageGenerationConfig = {
     board?: {
         goal?: string;
         productName?: string;
@@ -133,6 +133,11 @@ export declare type GenerationConfig = {
     };
     widgets?: {
         [key: string]: WidgetGenerationConfig;
+    };
+};
+export declare type GenerationConfig = {
+    pages: {
+        [key: string]: PageGenerationConfig;
     };
 };
 export declare const BOARD_GOALS: string[];

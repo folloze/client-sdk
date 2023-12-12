@@ -144,7 +144,7 @@ export interface ILiveBoard extends LitElement {
     isBoardReady(): boolean;
 }
 
-export type GenerationConfig = {
+export type PageGenerationConfig = {
     board?: {
         goal?: string;
         productName?: string;
@@ -152,6 +152,12 @@ export type GenerationConfig = {
     },
     widgets?: {
         [key:string]: WidgetGenerationConfig
+    }
+}
+
+export type GenerationConfig = {
+    pages: {
+        [key:string]: PageGenerationConfig
     }
 };
 
@@ -164,10 +170,14 @@ export const BOARD_GOALS = [
 ];
 
 export const DEFAULT_GENERATION_CONFIG: GenerationConfig = {
-    board: {
-        goal: BOARD_GOALS[0]
-    },
-    widgets: {}
+    pages: {
+        "default": {
+            board: {
+                goal: BOARD_GOALS[0]
+            },
+            widgets: {}
+        }
+    }
 };
 
 export type WidgetGenerationConfig = {
