@@ -144,7 +144,7 @@ export declare type GenerationConfig = {
     };
 };
 export declare const BOARD_GOALS: string[];
-export declare const DEFAULT_GENERATION_CONFIG: GenerationConfig;
+export declare const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig;
 export declare type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;
