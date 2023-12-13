@@ -4,6 +4,7 @@ import {LitElement} from "lit";
 import {LiveWidget} from "../LiveWidget";
 import {IPersonalizationConfig} from "./IPersonalization";
 import {FlzEvent} from "../FlzEvent";
+import {ThemeOverride, ThemeOverrideRules} from "./IThemeBuilder";
 
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
@@ -42,6 +43,8 @@ export type BoardConfig = {
     };
     theme?: {
         id: number;
+        override?: ThemeOverride;
+        overrideRules?: ThemeOverrideRules;
     };
     pages: Record<string, PageConfig>;
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
@@ -101,8 +104,8 @@ export interface ILiveBoard extends LitElement {
     set isWidgetsLoaded(value: boolean);
     get isWidgetsLoaded(): boolean;
 
-    set personalizationResolved(result: {[key: string]: boolean});
-    get personalizationResolved(): {[key: string]: boolean};
+    set personalizationResolved(result: {[key: string]: boolean} | undefined);
+    get personalizationResolved(): {[key: string]: boolean} | undefined;
 
     get pages(): PageConfig[];
     get sections(): SectionConfig[];
@@ -135,7 +138,7 @@ export interface ILiveBoard extends LitElement {
     getAllWidgetsElements(): LiveWidget[];
 
     getSection(id: string): SectionConfig;
-    getRibbonBySection(sectionId: string): RibbonConfig;
+    getRibbonBySection(sectionId: string): RibbonConfig | undefined;
 
     notifyWidgets(event: FlzEvent): void;
 
@@ -149,10 +152,10 @@ export type GenerationConfig = {
         goal?: string;
         productName?: string;
         details?: string;
-    },
+    };
     widgets?: {
-        [key:string]: WidgetGenerationConfig
-    }
+        [key: string]: WidgetGenerationConfig;
+    };
 };
 
 export const BOARD_GOALS = [
@@ -160,20 +163,20 @@ export const BOARD_GOALS = [
     "Content Nurturing",
     "Account Based Page",
     "Landing Page",
-    "Event Registration"
+    "Event Registration",
 ];
 
 export const DEFAULT_GENERATION_CONFIG: GenerationConfig = {
     board: {
-        goal: BOARD_GOALS[0]
+        goal: BOARD_GOALS[0],
     },
-    widgets: {}
+    widgets: {},
 };
 
 export type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;
-}
+};
 
 export type Board = {
     allow_embedding?: boolean;
@@ -209,4 +212,8 @@ export type Board = {
         online: boolean;
     };
     is_v3_live: boolean;
+    // only in designer
+    review_status?: {
+        approved: boolean;
+    };
 };
