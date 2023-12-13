@@ -351,11 +351,6 @@ export declare type Theme = {
     type: "basic" | "migration" | "system";
 };
 export declare type GenerateWidgetsTextsRequest = {
-    pages: {
-        [key: string]: GeneratePageWidgetsTextsRequest;
-    };
-};
-export declare type GeneratePageWidgetsTextsRequest = {
     board: {
         goal: string;
         productName: string;
@@ -380,11 +375,7 @@ export declare type GeneratedWidgetText = {
     widgetId: string;
 };
 export declare type GenerateWidgetsTextsResponse = {
-    pages: {
-        [key: string]: {
-            widgets: GeneratedWidgetText[];
-        };
-    };
+    widgets: GeneratedWidgetText[];
 };
 export declare type GenAIAction = "generate-widget" | "generate-board";
 export {};
