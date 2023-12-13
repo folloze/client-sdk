@@ -18,7 +18,7 @@ export abstract class LiveWidgetComponentEdit extends LiveWidgetEdit {
         this._editableComponent = value;
     }
 
-    get editableComponent(): HTMLElement {
+    get editableComponent(): HTMLElement|undefined {
         return this._editableComponent;
     }
 

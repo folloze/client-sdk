@@ -5,6 +5,6 @@ export declare abstract class LiveWidgetComponentEdit extends LiveWidgetEdit {
     set propertyPath(path: string);
     get propertyPath(): string;
     set editableComponent(value: HTMLElement);
-    get editableComponent(): HTMLElement;
+    get editableComponent(): HTMLElement | undefined;
     protected firstUpdated(): void;
 }
