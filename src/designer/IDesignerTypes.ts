@@ -416,12 +416,18 @@ export type Theme = {
 }
 
 export type GenerateWidgetsTextsRequest = {
-    board: {
-        goal: string;
-        productName: string;
-        details?: string;
-    },
-    widgets: GenerateTextWidgetData[];
+    pages: {
+        [key:string]: GeneratePageWidgetsTextsRequest
+    }
+}
+
+export type GeneratePageWidgetsTextsRequest = {
+  board: {
+      goal: string;
+      productName: string;
+      details?: string;
+  },
+  widgets: GenerateTextWidgetData[];
 }
 
 export type GenerateTextWidgetData = {
@@ -444,7 +450,11 @@ export type GeneratedWidgetText = {
 }
 
 export type GenerateWidgetsTextsResponse = {
-    widgets: GeneratedWidgetText[]
+    pages: {
+        [key:string]: {
+            widgets: GeneratedWidgetText[]
+        }
+    }
 }
 
 export type GenAIAction = "generate-widget" | "generate-board";
