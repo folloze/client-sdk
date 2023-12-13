@@ -163,6 +163,10 @@ export function isInPreview(): boolean {
     return window["board"]?.classList.contains("preview");
 }
 
-export function getBoardId(): number | undefined {
-    return window["FollozeState"].initialState?.board?.id ||  undefined;
+export function getBoardId(): number {
+    const id = window["FollozeState"].initialState?.board?.id;
+    if (!id) {
+        throw new Error("board id not found");
+    }
+    return id;
 }
