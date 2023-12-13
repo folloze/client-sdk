@@ -93,4 +93,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "navigate-to-documentation"
     | "open-generic-dialog"
     | "custom-sections-action"
-    | "generate-ai-action";
+    | "generate-ai-action"
+    | "upload-file";
