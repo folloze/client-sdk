@@ -128,7 +128,7 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
-export declare type GenerationConfig = {
+export declare type PageGenerationConfig = {
     board?: {
         goal?: string;
         productName?: string;
@@ -138,12 +138,18 @@ export declare type GenerationConfig = {
         [key: string]: WidgetGenerationConfig;
     };
 };
+export declare type GenerationConfig = {
+    pages: {
+        [key: string]: PageGenerationConfig;
+    };
+};
 export declare const BOARD_GOALS: string[];
-export declare const DEFAULT_GENERATION_CONFIG: GenerationConfig;
+export declare const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig;
 export declare type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;
 };
+export declare type PageName = "default" | "registration" | string;
 export declare type Board = {
     allow_embedding?: boolean;
     id: number;
@@ -168,7 +174,7 @@ export declare type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    landing_page: "default" | "registration" | string;
+    landing_page: PageName;
     config: BoardConfig;
     config_info: {
         state: "draft" | "published" | "unpublished changes";

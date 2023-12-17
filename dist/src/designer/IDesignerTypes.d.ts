@@ -377,5 +377,5 @@ export declare type GeneratedWidgetText = {
 export declare type GenerateWidgetsTextsResponse = {
     widgets: GeneratedWidgetText[];
 };
-export declare type GenAIAction = "generate-widget" | "generate-board";
+export declare type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
 export {};

@@ -147,15 +147,21 @@ export interface ILiveBoard extends LitElement {
     isBoardReady(): boolean;
 }
 
-export type GenerationConfig = {
+export type PageGenerationConfig = {
     board?: {
         goal?: string;
         productName?: string;
         details?: string;
     };
     widgets?: {
-        [key: string]: WidgetGenerationConfig;
-    };
+        [key:string]: WidgetGenerationConfig
+    }
+}
+
+export type GenerationConfig = {
+    pages: {
+        [key:string]: PageGenerationConfig
+    }
 };
 
 export const BOARD_GOALS = [
@@ -166,17 +172,19 @@ export const BOARD_GOALS = [
     "Event Registration",
 ];
 
-export const DEFAULT_GENERATION_CONFIG: GenerationConfig = {
+export const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig = {
     board: {
-        goal: BOARD_GOALS[0],
+        goal: BOARD_GOALS[0]
     },
-    widgets: {},
+    widgets: {}
 };
 
 export type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;
 };
+
+export type PageName = "default" | "registration" | string;
 
 export type Board = {
     allow_embedding?: boolean;
@@ -202,7 +210,7 @@ export type Board = {
         regulated_countries_only: boolean;
     };
     slug: string;
-    landing_page: "default" | "registration" | string;
+    landing_page: PageName;
     config: BoardConfig;
     config_info: {
         state: "draft" | "published" | "unpublished changes";
