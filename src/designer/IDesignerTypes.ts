@@ -447,4 +447,4 @@ export type GenerateWidgetsTextsResponse = {
     widgets: GeneratedWidgetText[]
 }
 
-export type GenAIAction = "generate-widget" | "generate-board";
+export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";

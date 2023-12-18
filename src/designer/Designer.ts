@@ -485,10 +485,10 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(boardId: Number, generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/section_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
