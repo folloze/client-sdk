@@ -17,4 +17,4 @@ export declare type DotNestedKeys<T> = (T extends Array<infer E> ? "" | `${numbe
 }[Exclude<keyof T, symbol>] : "") extends infer D ? Extract<D, string> : never;
 export declare function isInDesigner(): boolean;
 export declare function isInPreview(): boolean;
-export declare function getBoardId(): number | undefined;
+export declare function getBoardId(): number;

@@ -1,5 +1,5 @@
 import {LitElement} from "lit";
-import {FlzBoardEvent, FlzDesignerEvent} from "../FlzEvent";
+import {FlzBoardEvent, FlzDesignerEvent, type FlzEvent} from "../FlzEvent";
 import {FLZ_DESIGNER_EVENT_ACTION, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
 import {CategoriesResponseV2, LeadResponseV1} from "../../liveboard/ILiveboardTypes";
 import {LiveFloatingWidget} from "../LiveFloatingWidget";
@@ -127,4 +127,20 @@ export function waitForEvent(el: HTMLElement, eventName: string) {
 
         el.addEventListener(eventName, done);
     });
+}
+
+export function onSuccessIfExists<T>(e: FlzEvent, result?: T) {
+    if (e.onSuccess) {
+        result ? e.onSuccess(result) : e.onSuccess();
+    } else {
+        console.warn("onSuccess is not defined for event", e.action);
+    }
+}
+
+export function onErrorIfExists<T>(e: FlzEvent, err: T) {
+    if (e.onError) {
+        e.onError(err);
+    } else {
+        console.error(`onError is not defined for event ${e.action}`, err);
+    }
 }

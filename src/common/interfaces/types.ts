@@ -12,3 +12,4 @@ export * from "./IItemViewer";
 export * from "./IPersonalization";
 export * from "./IFollozeState";
 export * from "./IInitialState";
+export * from "./IThemeBuilder";

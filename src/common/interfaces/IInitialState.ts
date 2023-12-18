@@ -1,6 +1,6 @@
 import {ItemResponseV2, LeadResponseV1, OpenItemViewerPayload} from "../../liveboard/ILiveboardTypes";
 import {Board, BoardConfig} from "./IBoard";
-import {PredefinedSection} from "./ISection";
+import {PredefinedSection, WidgetListItem} from "./ISection";
 
 export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
 
@@ -24,6 +24,7 @@ export type InitialState = {
     token?: string;
 
     sections?: Section[];
+    floatingWidgetsList?: WidgetListItem[];
     org_header_config: {
         logo: {
             url: string;
@@ -58,8 +59,8 @@ export type InitialState = {
 };
 
 export type DataEnrichmentConfig = {
-  type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
-  api_key: string;
+    type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+    api_key: string;
 };
 
 export type CookieMatchingConfig = {
@@ -131,6 +132,7 @@ export interface User {
     is_organization_editor: boolean;
     is_sfdc_admin: boolean;
     is_super_admin: boolean;
+    is_internal?: boolean;
     team_name: string;
     organization_system_role: string;
     can_use_u3: boolean;
