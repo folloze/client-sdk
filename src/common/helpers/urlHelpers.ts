@@ -11,6 +11,9 @@ export function appendParamsToUrl(targetUrl: string): string {
 }
 
 export function removeQueryParams(url: string, paramToRemove: string): string {
+    if (!url) {
+        return url;
+    }
     const urlObject = new URL(url);
     urlObject.searchParams.delete(paramToRemove);
     return urlObject.toString();
