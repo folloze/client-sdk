@@ -179,6 +179,7 @@ export class Analytics {
         return this.fetchService.withDisableOnPreview(() => {
             try {
                 const url = `${this.fetchService.options.pingEndpoint}/pings`;
+                console.log('url beacon: ', url)
                 const pingPayload = JSON.stringify({
                     lead_id: payload.leadId,
                     board_id: payload.boardId,
