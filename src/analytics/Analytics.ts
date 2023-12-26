@@ -179,17 +179,10 @@ export class Analytics {
         return this.fetchService.withDisableOnPreview(() => {
             try {
                 const url = `${this.fetchService.options.pingEndpoint}/pings`;
-                const pingPayload = JSON.stringify({
-                    lead_id: payload.leadId,
-                    board_id: payload.boardId,
-                    item_id: payload.itemId,
-                    content_item_id: payload.contentItemId,
-                    client_guid: payload.guid,
-                    session_guid: this.fetchService.sessionGuid
-                });
-                return navigator.sendBeacon(url, pingPayload);
+                const body = Object.assign(payload, { session_guid: this.fetchService.sessionGuid })
+                return navigator.sendBeacon(url, JSON.stringify(body));
             } catch (e) {
-                console.error("could not send beacon", e);
+                console.error("could not send pings", e);
             }
         });
     }
