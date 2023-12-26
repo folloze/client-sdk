@@ -39,8 +39,7 @@ describe("testing analytics module", () => {
             guid: "",
             leadId: 0,
             itemId: 0,
-            contentItemId: 0,
-            session_guid: "",
+            contentItemId: 0
         };
 
         const mockNavigator: Partial<Navigator> = {
@@ -55,7 +54,13 @@ describe("testing analytics module", () => {
 
         expect(mockNavigator.sendBeacon).toHaveBeenCalledWith(
             expect.stringContaining("/pings"),
-            JSON.stringify(payload)
+            JSON.stringify({
+                lead_id: payload.leadId,
+                board_id: payload.boardId,
+                item_id: payload.itemId,
+                content_item_id: payload.contentItemId,
+                client_guid: payload.guid,
+            })
         );
 
         delete global.navigator;
