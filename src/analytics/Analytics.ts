@@ -179,13 +179,13 @@ export class Analytics {
         return this.fetchService.withDisableOnPreview(() => {
             try {
                 const url = `${this.fetchService.options.pingEndpoint}/pings`;
-                console.log('url beacon: ', url)
                 const pingPayload = JSON.stringify({
                     lead_id: payload.leadId,
                     board_id: payload.boardId,
                     item_id: payload.itemId,
                     content_item_id: payload.contentItemId,
                     client_guid: payload.guid,
+                    session_guid: this.fetchService.sessionGuid
                 });
                 return navigator.sendBeacon(url, pingPayload);
             } catch (e) {

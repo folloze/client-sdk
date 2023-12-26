@@ -14,9 +14,9 @@ export declare type FetcherOptions = {
 export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
+    sessionGuid: String;
     private mock;
     options: FetcherOptions;
-    private sessionGuid;
     private jwt;
     organizationId: number;
     urlToken: string;
