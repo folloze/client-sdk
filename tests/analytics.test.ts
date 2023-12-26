@@ -33,18 +33,32 @@ describe("testing analytics module", () => {
             .then(result => expect(result).toBeNull);
     });
 
-    it("checks that sendPing mock data works", async () => {
-        await sdk.analytics
-            .sendPing({
-                boardId: 0,
-                guid: "",
-                leadId: 0,
-                itemId: 0,
-                contentItemId: 0,
-            })
-            .then(result => {
-                expect(result.status).toEqual(200);
-            });
+    it("checks that sendPing mock data invokes sendBeacon", () => {
+        const payload = {
+            boardId: 0,
+            guid: "",
+            leadId: 0,
+            itemId: 0,
+            contentItemId: 0,
+            session_guid: "",
+        };
+
+        const mockNavigator: Partial<Navigator> = {
+            sendBeacon: jest.fn(),
+        };
+
+        global.navigator = mockNavigator as Navigator;
+
+        sdk.analytics.sendPing(payload);
+
+        expect(mockNavigator.sendBeacon).toHaveBeenCalled();
+
+        expect(mockNavigator.sendBeacon).toHaveBeenCalledWith(
+            expect.stringContaining("/pings"),
+            JSON.stringify(payload)
+        );
+
+        delete global.navigator;
     });
 
     it("checks that createSession mock works as expected", async () => {
