@@ -28,7 +28,7 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
         if (position === "fixed" && top.startsWith("0")) {
             calculatedStyles += `top: calc(${top} + var(--edit-fz-system-control-bar-height, 0px));`;
         } else {
-            calculatedStyles += `top: calc(${top} - var(--distanceForCloseButton, 0px));`;
+            calculatedStyles += `top: ${top};`;
         }
 
         if(top.endsWith("px")){
