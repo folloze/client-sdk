@@ -28,7 +28,11 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
         if (position === "fixed" && top.startsWith("0")) {
             calculatedStyles += `top: calc(${top} + var(--edit-fz-system-control-bar-height, 0px));`;
         } else {
-            calculatedStyles += `top: ${top};`;
+            calculatedStyles += `top: calc(${top} - var(--distanceForCloseButton, 0px));`;
+        }
+
+        if(top.endsWith("px")){
+            calculatedStyles += `--top-offset: ${top};`;
         }
     }
     if (fwc.floatPos.pos.right !== undefined) {
