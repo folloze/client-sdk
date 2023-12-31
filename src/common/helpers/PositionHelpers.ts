@@ -32,7 +32,7 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
         }
 
         if(top.endsWith("px")){
-            calculatedStyles += `--top-offset: ${top};`;
+            calculatedStyles += `--floating-widget-top-offset: ${top};`;
         }
     }
     if (fwc.floatPos.pos.right !== undefined) {
