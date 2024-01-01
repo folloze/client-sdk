@@ -30,6 +30,10 @@ export function getFloatingWidgetPosition(fwc: FloatingWidgetConfig): string {
         } else {
             calculatedStyles += `top: ${top};`;
         }
+
+        if(top.endsWith("px")){
+            calculatedStyles += `--floating-widget-top-offset: ${top};`;
+        }
     }
     if (fwc.floatPos.pos.right !== undefined) {
         // @ts-ignore
