@@ -316,10 +316,11 @@ export class CloudinaryHelper {
                     const chunkEnd = Math.min(bytesChunked + chunkSize, file.size);
                     const chunk = file.slice(bytesChunked, chunkEnd);
                     const formData = new FormData();
-                    formData.set("file", chunk);
+                    formData.set("file", chunk, file.name);
+                    
                     Object.entries(uploadData.params).forEach(([key, value]) => {
                         // @ts-ignore
-                        formData.append(key, value);
+                        formData.set(key, value);
                     });
                     
                     const contentRange = `bytes ${bytesChunked}-${chunkEnd-1}/${file.size}`;
