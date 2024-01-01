@@ -170,3 +170,61 @@ export function getBoardId(): number {
     }
     return id;
 }
+
+export type XhrRequestParams = {
+    url: string;
+    headers?: Record<string, string>;
+    method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+    data?: any;
+    retries?: number;
+    signal?: AbortSignal;
+    progressCallback?: (bytesLoaded: number) => void;
+};
+
+export async function sendXhrRequest(params: XhrRequestParams): Promise<any> {
+    return new Promise((resolve, reject) => {
+    const { url, method, data, headers, signal, progressCallback } = params;
+    const xhr = new XMLHttpRequest();
+    xhr.open(method, url);
+    if (headers) {
+        for (const key in headers) {
+            xhr.setRequestHeader(key, headers[key]);
+        }
+    }
+
+    xhr.upload.onprogress = function (evt) {
+        if (progressCallback && evt.lengthComputable) {
+            progressCallback(evt.loaded);
+        }
+    };
+
+    xhr.onloadstart = function (evt) {
+        console.log(evt);
+        if(progressCallback) {
+            progressCallback(0);
+        }
+    };
+
+    xhr.onload = function (evt) {
+        if (xhr.status == 200 || xhr.status == 201) {
+            const response = xhr.responseText && JSON.parse(xhr.responseText);
+            resolve(response);
+        } else {
+            reject("did not receive server conformation for upload i.e: status 200 or 201");
+        }
+    };
+
+    xhr.onerror = function (error) {
+        // TO DO: Implement a retry mechanism
+        reject(error);
+    };
+
+    signal?.addEventListener("abort", () => {
+        xhr.abort();
+    });
+
+    xhr.send(data);
+});
+}
+
+

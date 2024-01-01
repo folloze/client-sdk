@@ -18,3 +18,13 @@ export declare type DotNestedKeys<T> = (T extends Array<infer E> ? "" | `${numbe
 export declare function isInDesigner(): boolean;
 export declare function isInPreview(): boolean;
 export declare function getBoardId(): number;
+export declare type XhrRequestParams = {
+    url: string;
+    headers?: Record<string, string>;
+    method: "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+    data?: any;
+    retries?: number;
+    signal?: AbortSignal;
+    progressCallback?: (bytesLoaded: number) => void;
+};
+export declare function sendXhrRequest(params: XhrRequestParams): Promise<any>;

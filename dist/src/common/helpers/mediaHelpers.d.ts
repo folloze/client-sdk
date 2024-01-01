@@ -1,4 +1,4 @@
-import { BackgroundString, FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo } from "../../designer/IDesignerTypes";
+import { BackgroundString, FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo, UploadUrlResponseV1 } from "../../designer/IDesignerTypes";
 import { CloudinaryVideo } from "@cloudinary/url-gen";
 import { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
 import { BackgroundImage, BackgroundVideo } from "../interfaces/ISection";
@@ -46,6 +46,7 @@ export declare class CloudinaryHelper {
     getOptimizedVideoUrl(url: string, _position: string): string;
     getVideoThumbnail(url: string): string;
     static isCloudinaryImage(url: string): boolean;
+    uploadFileInChunks(file: File, uploadData: UploadUrlResponseV1, onSuccess: Function, onFail: Function, onProgress?: (file: File, percent: number) => void): Promise<void>;
 }
 export declare class MediaBackgroundHelper {
     static isBackgroundString(background: any): background is BackgroundString;

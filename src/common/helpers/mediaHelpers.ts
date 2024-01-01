@@ -5,6 +5,7 @@ import {
     GalleryImage,
     GalleryVideo,
     PercentPosition,
+    UploadUrlResponseV1
 } from "../../designer/IDesignerTypes";
 import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
 import {Cloudinary, CloudinaryVideo} from "@cloudinary/url-gen";
@@ -16,6 +17,7 @@ import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
 import {BackgroundImage, BackgroundVideo} from "../interfaces/ISection";
 import {ICompassGravity} from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
+import {sendXhrRequest} from './helpers';
 
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
@@ -291,6 +293,79 @@ export class CloudinaryHelper {
     public static isCloudinaryImage(url: string) {
         return CloudinaryHelper.cloudinaryUrlRegex.test(url);
     }
+
+    async uploadFileInChunks(
+        file: File,
+        uploadData: UploadUrlResponseV1,
+        onSuccess: Function,
+        onFail: Function,
+        onProgress?: (file: File, percent: number) => void
+        ){
+            const chunkSize = 10 * 1024 * 1024; // 10MB
+            const uniqueUploadId =
+                Math.random().toString(36).substring(2, 15) +
+                Math.random().toString(36).substring(2, 15);
+    
+                let bytesChunked = 0;
+                const uploadPromises = [];
+                const uploadBytesTrace: number[] = [];
+                const controller = new AbortController();
+                let iteration = 0;
+    
+                while (bytesChunked < file.size && !controller.signal.aborted) {
+                    const chunkIndex = iteration++;
+    
+                    const chunkEnd = Math.min(bytesChunked + chunkSize, file.size);
+                    const chunk = file.slice(bytesChunked, chunkEnd);
+                    const formData = new FormData();
+                    formData.set("file", chunk);
+                    Object.entries(uploadData.params).forEach(([key, value]) => {
+                        // @ts-ignore
+                        formData.append(key, value);
+                    });
+                    
+                    const contentRange = `bytes ${bytesChunked}-${chunkEnd-1}/${file.size}`;
+                    const result = sendXhrRequest({
+                        url: uploadData.put_url,
+                        method: "POST",
+                        headers: {
+                            "X-Unique-Upload-Id": uniqueUploadId,
+                            "Content-Range": contentRange,
+                        },
+                        data: formData,
+                        progressCallback: (bytesLoaded: number) => {
+                            if(!onProgress) return;
+                            
+                            uploadBytesTrace[chunkIndex] = bytesLoaded;
+                            const sentBytes = uploadBytesTrace.reduce((a, b) => a + b??0, 0);
+                            const percent = Math.min(100, Math.floor((sentBytes / file.size)*100));
+    
+                            onProgress(file, percent);
+                        },
+                        signal: controller.signal
+                    })
+                    .catch((error) => {
+                        console.error(error);
+                        if(!controller.signal.aborted){
+                            controller.abort();
+                        }
+                        onFail();
+                    });
+    
+                    uploadPromises.push(result);
+                    bytesChunked = chunkEnd;
+                }
+    
+                const allResponses = await Promise.all(uploadPromises);
+                const finalResponse = allResponses.length === 1 
+                    ? allResponses[0]
+                    : allResponses.find(res => res.done);
+                if(finalResponse){
+                    onSuccess(finalResponse);
+                } else {
+                    onFail("No upload data returned");
+                }
+        }
 }
 
 export class MediaBackgroundHelper {
