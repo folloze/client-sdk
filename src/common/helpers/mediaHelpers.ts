@@ -302,9 +302,7 @@ export class CloudinaryHelper {
         onProgress?: (file: File, percent: number) => void
         ){
             const chunkSize = 10 * 1024 * 1024; // 10MB
-            const uniqueUploadId =
-                Math.random().toString(36).substring(2, 15) +
-                Math.random().toString(36).substring(2, 15);
+            const uniqueUploadId = Math.random().toString(36).substring(2, 15);
     
                 let bytesChunked = 0;
                 const uploadPromises = [];

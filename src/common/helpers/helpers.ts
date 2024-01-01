@@ -199,7 +199,6 @@ export async function sendXhrRequest(params: XhrRequestParams): Promise<any> {
     };
 
     xhr.onloadstart = function (evt) {
-        console.log(evt);
         if(progressCallback) {
             progressCallback(0);
         }
