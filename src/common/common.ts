@@ -13,6 +13,8 @@ export * from "./helpers/helpers";
 export * from "./helpers/PositionHelpers";
 export * from "./helpers/eventHelpers";
 export * from "./helpers/mediaHelpers";
+export * from "./helpers/cloudinary/CloudinaryHelper";
+export * from "./helpers/cloudinary/CloudinaryUrlBuilder";
 export * from "./helpers/JsonConditions";
 export * from "./helpers/shadowDomHelpers";
 export * from "./helpers/userEventTracking";
