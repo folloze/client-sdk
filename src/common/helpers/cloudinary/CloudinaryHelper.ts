@@ -182,8 +182,8 @@ export class CloudinaryHelper {
     async uploadFileInChunks(
         file: File,
         uploadData: UploadUrlResponseV1,
-        onSuccess?: (result: UploadUrlResponseV1) => void,
-        onFail?: (reason: string) => void,
+        onSuccess?: CallableFunction,
+        onFail?: CallableFunction,
         onProgress?: (file: File, percent: number) => void
         ){
             const chunkSize = 10 * 1024 * 1024; // 10MB
