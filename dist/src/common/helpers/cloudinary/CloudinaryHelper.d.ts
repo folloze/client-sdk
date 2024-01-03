@@ -32,5 +32,5 @@ export declare class CloudinaryHelper {
     getOptimizedVideoUrl(url: string, _position: string): string;
     getVideoThumbnail(url: string): string;
     static isCloudinaryImage(url: string): boolean;
-    uploadFileInChunks(file: File, uploadData: UploadUrlResponseV1, onSuccess: Function, onFail: Function, onProgress?: (file: File, percent: number) => void): Promise<void>;
+    uploadFileInChunks(file: File, uploadData: UploadUrlResponseV1, onSuccess?: (result: UploadUrlResponseV1) => void, onFail?: (reason: string) => void, onProgress?: (file: File, percent: number) => void): Promise<void>;
 }

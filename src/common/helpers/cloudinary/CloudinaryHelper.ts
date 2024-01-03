@@ -182,8 +182,8 @@ export class CloudinaryHelper {
     async uploadFileInChunks(
         file: File,
         uploadData: UploadUrlResponseV1,
-        onSuccess: Function,
-        onFail: Function,
+        onSuccess?: (result: UploadUrlResponseV1) => void,
+        onFail?: (reason: string) => void,
         onProgress?: (file: File, percent: number) => void
         ){
             const chunkSize = 10 * 1024 * 1024; // 10MB
@@ -227,7 +227,7 @@ export class CloudinaryHelper {
                     if(!controller.signal.aborted){
                         controller.abort();
                     }
-                    onFail();
+                    onFail?.(error.message);
                 });
 
                 uploadPromises.push(result);
@@ -249,9 +249,9 @@ export class CloudinaryHelper {
                     ? allResponses[0]
                     : allResponses.find(res => res.done);
                 if(finalResponse){
-                    onSuccess(finalResponse);
+                    onSuccess?.(finalResponse);
                 } else {
-                    onFail("No upload data returned");
+                    onFail?.("No upload data returned");
                 }
         }
 }
