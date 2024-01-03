@@ -189,58 +189,62 @@ export class CloudinaryHelper {
             const chunkSize = 10 * 1024 * 1024; // 10MB
             const uniqueUploadId = Math.random().toString(36).substring(2, 15);
     
-                let bytesChunked = 0;
-                const uploadPromises = [];
-                const uploadBytesTrace: number[] = [];
-                const controller = new AbortController();
-                let iteration = 0;
-    
-                while (bytesChunked < file.size && !controller.signal.aborted) {
-                    const chunkIndex = iteration++;
-    
-                    const chunkEnd = Math.min(bytesChunked + chunkSize, file.size);
-                    const chunk = file.slice(bytesChunked, chunkEnd);
-                    const formData = new FormData();
-                    formData.set("file", chunk, file.name);
-                    
-                    Object.entries(uploadData.params).forEach(([key, value]) => {
-                        // @ts-ignore
-                        formData.set(key, value);
-                    });
-                    
-                    const contentRange = `bytes ${bytesChunked}-${chunkEnd-1}/${file.size}`;
-                    const result = sendXhrRequest({
-                        url: uploadData.put_url,
-                        method: "POST",
-                        headers: {
-                            "X-Unique-Upload-Id": uniqueUploadId,
-                            "Content-Range": contentRange,
-                        },
-                        data: formData,
-                        progressCallback: (bytesLoaded: number) => {
-                            if(!onProgress) return;
-                            
-                            uploadBytesTrace[chunkIndex] = bytesLoaded;
-                            const sentBytes = uploadBytesTrace.reduce((a, b) => a + b??0, 0);
-                            const percent = Math.min(100, Math.floor((sentBytes / file.size)*100));
-    
-                            onProgress(file, percent);
-                        },
-                        signal: controller.signal
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                        if(!controller.signal.aborted){
-                            controller.abort();
-                        }
-                        onFail();
-                    });
-    
-                    uploadPromises.push(result);
+            let bytesChunked = 0;
+            const uploadPromises = [];
+            const uploadBytesTrace: number[] = [];
+            const controller = new AbortController();
+            let iteration = 0;
+
+            while (bytesChunked < file.size && !controller.signal.aborted) {
+                const chunkIndex = iteration++;
+
+                const chunkEnd = Math.min(bytesChunked + chunkSize, file.size);
+                const chunk = file.slice(bytesChunked, chunkEnd);
+                const formData = new FormData();
+                formData.set("file", chunk, file.name);
+                
+                Object.entries(uploadData.params).forEach(([key, value]) => {
+                    // @ts-ignore
+                    formData.set(key, value);
+                });
+                
+                const contentRange = `bytes ${bytesChunked}-${chunkEnd-1}/${file.size}`;
+                const result = sendXhrRequest({
+                    url: uploadData.put_url,
+                    method: "POST",
+                    headers: {
+                        "X-Unique-Upload-Id": uniqueUploadId,
+                        "Content-Range": contentRange,
+                    },
+                    data: formData,
+                    progressCallback: (bytesLoaded: number) => {                            
+                        uploadBytesTrace[chunkIndex] = bytesLoaded;
+                    },
+                    signal: controller.signal
+                })
+                .catch((error) => {
+                    console.error(error);
+                    if(!controller.signal.aborted){
+                        controller.abort();
+                    }
+                    onFail();
+                });
+
+                uploadPromises.push(result);
                     bytesChunked = chunkEnd;
                 }
+
+                const updateProgress = setInterval(() => {
+                    if(!onProgress) return;
+
+                    const sentBytes = uploadBytesTrace.reduce((a, b) => a + b??0, 0);
+                        const percent = Math.min(100, Math.floor((sentBytes / file.size)*100));
+                        onProgress(file, percent);
+                }, 500);
     
                 const allResponses = await Promise.all(uploadPromises);
+                clearInterval(updateProgress);
+
                 const finalResponse = allResponses.length === 1 
                     ? allResponses[0]
                     : allResponses.find(res => res.done);
