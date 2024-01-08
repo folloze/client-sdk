@@ -346,9 +346,9 @@ export declare type MergeTagValue = {
     name: string;
 };
 export declare type MergeTagFilters = {
-    provider: string;
-    type: string;
-    tag_type: number;
+    provider?: string;
+    context_type?: string;
+    tag_type?: number;
 };
 export declare type Theme = {
     id: number;
