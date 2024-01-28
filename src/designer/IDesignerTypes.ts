@@ -167,6 +167,7 @@ export declare type CloudinaryUploadResult = {
     original_filename: string;
     original_extension: string;
     api_key: string;
+    duration?: number;
 };
 
 export type FormField = {
