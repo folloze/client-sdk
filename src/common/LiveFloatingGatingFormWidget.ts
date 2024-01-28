@@ -57,10 +57,12 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     }
 
     show() {
-        this.shouldBeShown = true;
-        if (this._data?.ctaFormConfig?.form_id !== 0 && this.classList.contains("hidden")) {
-            widgetEmit(this, "floating-widget-manager", {widget: this, command: "show"});
-        }
+        setTimeout(() => {
+            this.shouldBeShown = true;
+            if (this._data?.ctaFormConfig?.form_id !== 0 && this.classList.contains("hidden")) {
+                widgetEmit(this, "floating-widget-manager", {widget: this, command: "show"});
+            }
+        }, this._data.gatingFormDelay || 0);
     }
 
     close() {
