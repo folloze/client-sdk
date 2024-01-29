@@ -184,6 +184,7 @@ export declare type Board = {
         online: boolean;
     };
     is_v3_live: boolean;
+    public_link: string;
     review_status?: {
         approved: boolean;
     };
