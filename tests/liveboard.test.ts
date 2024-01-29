@@ -167,6 +167,10 @@ describe("test liveboard mocks module", () => {
             .getEnrichment(1)
             .then((result: EnrichmentBoardConfigV3) => expect(result.personalization_rules_results).toBeDefined());
     });
+
+    it("checks that getEnrichment mock works as expected", async () => {
+        await sdk.liveboard.getFormHTML(1).then(result => expect(result).toBeNull);
+    });
 });
 
 describe("testing liveboard module in preview", () => {

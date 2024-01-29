@@ -234,4 +234,11 @@ export declare class Liveboard {
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>;
     getEnrichment(boardId: number): Promise<EnrichmentBoardConfigV3>;
     notifyIdentity(boardId: number, values: CtaParams): Promise<any>;
+    /**
+     * gets a form html value
+     *
+     * @param {number} formId
+     * @returns {string} html string value
+     */
+    getFormHTML(formId: number): Promise<string>;
 }
