@@ -61,7 +61,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "analytic-event"
     | "link-click"
     | "get-is-regulated-country"
-    | "join-event";
+    | "join-event"
+    | "get-public-url";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
