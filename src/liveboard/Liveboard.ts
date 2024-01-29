@@ -840,4 +840,26 @@ export class Liveboard {
             return new Promise(resolve => resolve({status: 200}));
         }
     }
+
+    /**
+     * gets a form html value
+     *
+     * @param {number} formId
+     * @returns {string} html string value
+     */
+    getFormHTML(formId: number): Promise<string> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get<string>(`/live_board/v1/forms/${formId}`, {
+                    headers: {
+                        "Content-Type": "text/html"
+                    }
+                })
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get form html", e);
+                    reject(e);
+                });
+        });
+    }
 }
