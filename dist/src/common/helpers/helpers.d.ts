@@ -18,6 +18,7 @@ export declare type DotNestedKeys<T> = (T extends Array<infer E> ? "" | `${numbe
 export declare function isInDesigner(): boolean;
 export declare function isInPreview(): boolean;
 export declare function getBoardId(): number;
+export declare function getBoardPublicLink(): string;
 export declare type XhrRequestParams = {
     url: string;
     headers?: Record<string, string>;
