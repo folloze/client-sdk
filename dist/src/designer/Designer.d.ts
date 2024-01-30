@@ -1,6 +1,6 @@
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, type GenerateWidgetsTextsRequest, type GenerateWidgetsTextsResponse } from "./IDesignerTypes";
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, MergeTagFilters, type GenerateWidgetsTextsRequest, type GenerateWidgetsTextsResponse } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
@@ -140,10 +140,10 @@ export declare class Designer {
      * gets board merge tags
      *
      * @param {number} boardId
-     * @param {string} contextType
+     * @param {MergeTagFilters} filters
      * @returns {MergeTagAttribute[]} merge tags array
      */
-    getMergeTagsByBoard(boardId: number, contextType: string): Promise<MergeTagAttribute[]>;
+    getMergeTags(organizationId: number, boardId: number, filters: MergeTagFilters): Promise<MergeTagAttribute[]>;
     /**
      * gets merge tag lookup values
      *

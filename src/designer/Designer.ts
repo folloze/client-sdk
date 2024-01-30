@@ -23,6 +23,7 @@ import {
     VideoGalleryParams,
     GalleryVideo,
     Theme,
+    MergeTagFilters,
     type GenerateWidgetsTextsRequest,
     type GenerateWidgetsTextsResponse
 } from "./IDesignerTypes";
@@ -426,21 +427,25 @@ export class Designer {
      * gets board merge tags
      *
      * @param {number} boardId
-     * @param {string} contextType
+     * @param {MergeTagFilters} filters
      * @returns {MergeTagAttribute[]} merge tags array
      */
-    public getMergeTagsByBoard(
+    public getMergeTags(
+        organizationId: number,
         boardId: number,
-        contextType: string
+        filters: MergeTagFilters
     ): Promise<MergeTagAttribute[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<MergeTagAttribute[]>(`/api/v1/boards/${boardId}/merge_tags`, {
-                    params: {context_type: contextType},
+                .get<MergeTagAttribute[]>(`/api/v1/organizations/${organizationId}/merge_tags`, {
+                    params: {
+                        board_id: boardId,
+                        filters: filters
+                    }
                 })
                 .then(result => resolve(result.data))
                 .catch(e => {
-                    console.error("could not get board merge tags", e);
+                    console.error("could not get merge tags", e);
                     reject(e);
                 });
         });
