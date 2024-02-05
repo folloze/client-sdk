@@ -178,12 +178,15 @@ export function getBoardPublicLink(): string {
         return publicLink;
     }
 
-
     const url = new URL(document.URL);
-    url.hostname = `boards.${url.hostname}`;
-    url.pathname = window["FollozeState"].initialState.board.slug;
-    url.hash = "";
-    return url.href;
+    if(isInDesigner()){
+        url.hostname = `boards.${url.hostname}`;
+        url.pathname = window["FollozeState"].initialState.board.slug;
+        return url.href;
+    } else {
+        url.hash = "";
+        return url.href;
+    }
 }
 
 export type XhrRequestParams = {
