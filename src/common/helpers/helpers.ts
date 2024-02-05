@@ -173,13 +173,16 @@ export function getBoardId(): number {
 
 export function getBoardPublicLink(): string {
     const publicLink = window["FollozeState"]?.initialState?.board?.public_link;
+    // available only in designer
     if (publicLink) {
         return publicLink;
     }
 
+
     const url = new URL(document.URL);
     url.hostname = `boards.${url.hostname}`;
     url.pathname = window["FollozeState"].initialState.board.slug;
+    url.hash = "";
     return url.href;
 }
 
