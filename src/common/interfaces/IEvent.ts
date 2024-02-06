@@ -97,5 +97,4 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "open-generic-dialog"
     | "custom-sections-action"
     | "generate-ai-action"
-    | "upload-file"
-    | "get-board-name";
+    | "upload-file";
