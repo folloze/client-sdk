@@ -173,7 +173,6 @@ export function getBoardId(): number {
 
 export function getBoardPublicLink(): string {
     const publicLink = window["FollozeState"]?.initialState?.board?.public_link;
-    // available only in designer
     if (publicLink) {
         return publicLink;
     }
