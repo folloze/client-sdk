@@ -171,6 +171,23 @@ export function getBoardId(): number {
     return id;
 }
 
+export function getBoardPublicLink(): string {
+    const publicLink = window["FollozeState"]?.initialState?.board?.public_link;
+    if (publicLink) {
+        return publicLink;
+    }
+
+    const url = new URL(document.URL);
+    if(isInDesigner()){
+        url.hostname = `boards.${url.hostname}`;
+        url.pathname = window["FollozeState"].initialState.board.slug;
+        return url.href;
+    } else {
+        url.hash = "";
+        return url.href;
+    }
+}
+
 export type XhrRequestParams = {
     url: string;
     headers?: Record<string, string>;

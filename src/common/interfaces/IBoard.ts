@@ -221,6 +221,7 @@ export type Board = {
     };
     is_v3_live: boolean;
     // only in designer
+    public_link?: string;
     review_status?: {
         approved: boolean;
     };
