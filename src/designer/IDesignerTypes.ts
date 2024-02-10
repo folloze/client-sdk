@@ -91,6 +91,7 @@ export type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    fit?: "cover" | "contain";
 };
 
 export type ImageGalleryParams = {
