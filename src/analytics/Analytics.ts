@@ -177,13 +177,20 @@ export class Analytics {
 
     sendPing(payload: PingPayload) {
         return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher.post(`${this.fetchService.options.pingEndpoint}/pings`, {
-                lead_id: payload.leadId,
-                board_id: payload.boardId,
-                item_id: payload.itemId,
-                content_item_id: payload.contentItemId,
-                client_guid: payload.guid,
-            });
+            try {
+                const url = `${this.fetchService.options.pingEndpoint}/pings`;
+                const body = {
+                    lead_id: payload.leadId,
+                    board_id: payload.boardId,
+                    item_id: payload.itemId,
+                    content_item_id: payload.contentItemId,
+                    client_guid: payload.guid,
+                    session_guid: this.fetchService.sessionGuid
+                }
+                return navigator.sendBeacon(url, JSON.stringify(body));
+            } catch (e) {
+                console.error("could not send pings", e);
+            }
         });
     }
 
