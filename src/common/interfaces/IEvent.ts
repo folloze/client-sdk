@@ -60,7 +60,10 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "track-lead-event"
     | "analytic-event"
     | "link-click"
-    | "get-is-regulated-country";
+    | "get-is-regulated-country"
+    | "join-event"
+    | "get-public-url"
+    | "load-add-to-calendar";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
@@ -93,4 +96,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "navigate-to-documentation"
     | "open-generic-dialog"
     | "custom-sections-action"
-    | "generate-ai-action";
+    | "generate-ai-action"
+    | "upload-file";

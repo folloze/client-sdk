@@ -1,5 +1,6 @@
 import {describe, beforeAll, expect} from "@jest/globals";
-import {CloudinaryHelper, CloudinaryUrlBuilder} from "../../src/common/helpers/mediaHelpers";
+import {CloudinaryHelper} from "../../src/common/helpers/cloudinary/CloudinaryHelper";
+import {CloudinaryUrlBuilder} from "../../src/common/helpers/cloudinary/CloudinaryUrlBuilder";
 
 let cloudinaryHelper: CloudinaryHelper;
 

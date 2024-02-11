@@ -30,6 +30,5 @@ export * from "./controllers/CloseOnESCController";
 export * from "./controllers/FloatersChildrenContainer";
 export * from "./CookieConsentWidget";
 export * from "./LiveFloatingGatingFormWidget";
-
 export * from "./mixins/FloatableMixin";
 export * from "./mixins/PersonalaziableMixin";
