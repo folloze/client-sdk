@@ -12,6 +12,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     protected lead: LeadResponseV1;
     protected boardId: number;
     private shouldBeShown: boolean = false;
+    private gatingDelayTimer: ReturnType<typeof setTimeout>;
 
     connectedCallback() {
         super.connectedCallback();
@@ -57,15 +58,17 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     }
 
     show() {
-        setTimeout(() => {
+        const delay = this._data.gatingFormDelay || 0;
+        this.gatingDelayTimer = setTimeout(() => {
             this.shouldBeShown = true;
             if (this._data?.ctaFormConfig?.form_id !== 0 && this.classList.contains("hidden")) {
                 widgetEmit(this, "floating-widget-manager", {widget: this, command: "show"});
             }
-        }, this._data.gatingFormDelay || 0);
+        }, delay);
     }
 
     close() {
+        clearTimeout(this.gatingDelayTimer);
         this.shouldBeShown = false;
         if (!this.classList.contains("hidden")) {
             widgetEmit(this, "floating-widget-manager", {widget: this, command: "hide"});
