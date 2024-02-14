@@ -84,6 +84,7 @@ export const rules = (mock: MockAdapter) => {
                 regulated_countries_only: false,
             },
             slug: "",
+            public_link: "https://orgname.folloze.com/0",
         };
 
         // mock for saved without problem
