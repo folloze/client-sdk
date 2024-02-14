@@ -1,6 +1,7 @@
 export * from "./IDesignerTypes";
 import {AxiosInstance, AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
+import qs from "qs";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageGalleryParams,
@@ -440,7 +441,10 @@ export class Designer {
                 .get<MergeTagAttribute[]>(`/api/v1/organizations/${organizationId}/merge_tags`, {
                     params: {
                         board_id: boardId,
-                        filters: { ...filters }
+                        filters
+                    },
+                    paramsSerializer: params => {
+                        return qs.stringify(params);
                     }
                 })
                 .then(result => resolve(result.data))
