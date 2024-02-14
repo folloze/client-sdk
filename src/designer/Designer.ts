@@ -444,7 +444,7 @@ export class Designer {
                         filters
                     },
                     paramsSerializer: params => {
-                        return qs.stringify(params);
+                        return qs.stringify(params, { arrayFormat: 'brackets' });
                     }
                 })
                 .then(result => resolve(result.data))
