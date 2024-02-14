@@ -751,7 +751,7 @@ export const rules = (mock: MockAdapter) => {
         },
     ]);
 
-    mock.onGet(/api\/v1\/boards\/(\d+)\/merge_tags/).reply<MergeTagAttribute[]>(200, [
+    mock.onGet(/api\/v1\/organizations\/(\d+)\/merge_tags/).reply<MergeTagAttribute[]>(200, [
         {
             id: 1,
             is_enabled: true,
@@ -760,6 +760,8 @@ export const rules = (mock: MockAdapter) => {
             provider: "folloze",
             allow_text_replacement: true,
             allow_user_input: true,
+            type: "user_input",
+            predefined_list: []
         },
         {
             id: 2,
@@ -769,6 +771,8 @@ export const rules = (mock: MockAdapter) => {
             provider: "kickfire",
             allow_text_replacement: true,
             allow_user_input: false,
+            type: "predefined_list",
+            predefined_list: ["10M-50M", "1M-10M"]
         },
     ]);
 

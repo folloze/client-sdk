@@ -401,11 +401,19 @@ export type MergeTagAttribute = {
     provider: string;
     allow_text_replacement: boolean;
     allow_user_input: boolean;
+    type: string;
+    predefined_list: string[];
 }
 
 export type MergeTagValue = {
     id: string;
     name: string;
+}
+
+export type MergeTagFilters = {
+    provider?: string;
+    context_type?: string;
+    tag_type?: number;
 }
 
 export type Theme = {

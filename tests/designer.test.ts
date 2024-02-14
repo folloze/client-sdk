@@ -210,7 +210,7 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that board merge tags are fetched", async () => {
-        await sdk.designer.getMergeTagsByBoard(1, "context type").then(result => expect(result.length).toEqual(2));
+        await sdk.designer.getMergeTags(1, 1, { context_type: "live_board" }).then(result => expect(result.length).toEqual(2));
     });
 
     it("checks that merge tag values are fetched", async () => {

@@ -339,10 +339,17 @@ export declare type MergeTagAttribute = {
     provider: string;
     allow_text_replacement: boolean;
     allow_user_input: boolean;
+    type: string;
+    predefined_list: string[];
 };
 export declare type MergeTagValue = {
     id: string;
     name: string;
+};
+export declare type MergeTagFilters = {
+    provider?: string;
+    context_type?: string;
+    tag_type?: number;
 };
 export declare type Theme = {
     id: number;
