@@ -440,7 +440,7 @@ export class Designer {
                 .get<MergeTagAttribute[]>(`/api/v1/organizations/${organizationId}/merge_tags`, {
                     params: {
                         board_id: boardId,
-                        filters: filters
+                        filters: { toJSON: () => filters }
                     }
                 })
                 .then(result => resolve(result.data))
