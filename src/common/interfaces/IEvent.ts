@@ -64,6 +64,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "join-event"
     | "get-public-url"
     | "load-add-to-calendar"
+    | "load-chat"
     | "create-chat-user";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
