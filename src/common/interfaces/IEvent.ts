@@ -63,7 +63,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-is-regulated-country"
     | "join-event"
     | "get-public-url"
-    | "load-add-to-calendar";
+    | "load-add-to-calendar"
+    | "create-chat-user";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION

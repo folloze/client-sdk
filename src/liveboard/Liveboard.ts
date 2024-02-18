@@ -28,7 +28,9 @@ import {
     CtaParams,
     CtaResponseV1,
     EnrichmentBoardConfigV3,
-    LeadLinkClickResponseV1
+    LeadLinkClickResponseV1,
+    ChatUserDataV2,
+
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -166,6 +168,9 @@ export class Liveboard {
                     reject(e);
                 });
         });
+    }
+    async createChatUser(userData: ChatUserDataV2): Promise<void> {
+        return this.fetchService.fetcher.post("/live_board/v2/chat/user", userData);
     }
 
     // Items
