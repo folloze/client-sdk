@@ -45,6 +45,7 @@ export declare class Liveboard {
      */
     getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1>;
     createChatUser(userData: ChatUserDataV2): Promise<void>;
+    addUserToChatConversation(conversationId: number, userId: number): Promise<void>;
     createChatConversation(conversationData: ChatConversationDataV2): Promise<void>;
     /**
      * Fetches an item

@@ -174,6 +174,10 @@ export class Liveboard {
     async createChatUser(userData: ChatUserDataV2): Promise<void> {
         return this.fetchService.fetcher.post("/live_board/v2/chat/user", userData);
     }
+    
+    async addUserToChatConversation(conversationId: number, userId: number): Promise<void> {
+        return this.fetchService.fetcher.post(`/live_board/v2/chat/conversation/${conversationId}/participant/${userId}`, {});
+    }
 
     async createChatConversation(conversationData: ChatConversationDataV2): Promise<void> {
         return this.fetchService.fetcher.post("/live_board/v2/chat/conversation", conversationData);
