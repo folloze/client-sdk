@@ -22,6 +22,7 @@ export abstract class LiveWidgetElement extends LitElement {
     connectedCallback() {
         super.connectedCallback();
         this.addEventListener("get-widget", this.handleGetWidget);
+        this.addEventListener("widget-added", this.onWidgetAdded);
         widgetEmit(this, "widget-connected");
     }
 
@@ -111,6 +112,10 @@ export abstract class LiveWidgetElement extends LitElement {
     private handleGetWidget = (e: CustomEvent) => {
         e.stopPropagation();
         e.detail.result.widget = this;
+    };
+
+    public onWidgetAdded = (e: CustomEvent) => {
+        e.stopPropagation();
     };
 
     abstract render();
