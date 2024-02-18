@@ -311,4 +311,8 @@ export declare type ChatUserDataV2 = {
     id: number;
     name: string;
 };
+export declare type ChatConversationDataV2 = {
+    id: string;
+    name: string;
+};
 export {};

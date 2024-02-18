@@ -353,3 +353,8 @@ export type ChatUserDataV2 = {
     id: number;
     name: string;
 };
+
+export type ChatConversationDataV2 = {
+    id: string;
+    name: string,
+};
