@@ -457,3 +457,8 @@ export type GenerateWidgetsTextsResponse = {
 }
 
 export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
+
+export type ChatConversationDataV2 = {
+    id: string;
+    name: string,
+};

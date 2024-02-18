@@ -386,4 +386,8 @@ export declare type GenerateWidgetsTextsResponse = {
     widgets: GeneratedWidgetText[];
 };
 export declare type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
+export declare type ChatConversationDataV2 = {
+    id: string;
+    name: string;
+};
 export {};

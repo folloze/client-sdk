@@ -25,7 +25,8 @@ import {
     Theme,
     MergeTagFilters,
     type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse
+    type GenerateWidgetsTextsResponse,
+    type ChatConversationDataV2
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -552,5 +553,10 @@ export class Designer {
                 }
             );
         });
+    }
+
+
+    async createChatConversation(conversationData: ChatConversationDataV2): Promise<void> {
+        return this.fetchService.fetcher.post("/live_board/v2/chat/conversation", conversationData);
     }
 }

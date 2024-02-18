@@ -30,7 +30,6 @@ import {
     EnrichmentBoardConfigV3,
     LeadLinkClickResponseV1,
     ChatUserDataV2,
-    ChatConversationDataV2,
 
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
@@ -177,10 +176,6 @@ export class Liveboard {
     
     async addUserToChatConversation(conversationId: number, userId: number): Promise<void> {
         return this.fetchService.fetcher.post(`/live_board/v2/chat/conversation/${conversationId}/participant/${userId}`, {});
-    }
-
-    async createChatConversation(conversationData: ChatConversationDataV2): Promise<void> {
-        return this.fetchService.fetcher.post("/live_board/v2/chat/conversation", conversationData);
     }
 
     // Items
