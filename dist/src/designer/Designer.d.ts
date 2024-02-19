@@ -158,5 +158,5 @@ export declare class Designer {
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
-    createChatConversation(conversationData: ChatConversationDataV2): Promise<void>;
+    createChatConversation(boardId: any, widgetId: any, conversationData?: ChatConversationDataV2): Promise<void>;
 }

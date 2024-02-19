@@ -387,7 +387,10 @@ export declare type GenerateWidgetsTextsResponse = {
 };
 export declare type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
 export declare type ChatConversationDataV2 = {
-    id: string;
-    name: string;
+    participants?: Array<string>;
+    subject?: string | null;
+    welcomeMessages?: Array<string> | null;
+    custom?: Map<string, string> | null;
+    photoUrl?: string | null;
 };
 export {};

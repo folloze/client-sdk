@@ -556,7 +556,11 @@ export class Designer {
     }
 
 
-    async createChatConversation(conversationData: ChatConversationDataV2): Promise<void> {
-        return this.fetchService.fetcher.post("/live_board/v2/chat/conversation", conversationData);
+    async createChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
+        return this.fetchService.fetcher.post("/live_board/v2/chat/conversation", {
+            boardId,
+            widgetId,
+            ...conversationData
+        });
     }
 }
