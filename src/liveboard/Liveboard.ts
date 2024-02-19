@@ -174,8 +174,12 @@ export class Liveboard {
         return this.fetchService.fetcher.post("/live_board/v2/chat/user", userData);
     }
     
-    async addUserToChatConversation(conversationId: number, userId: number): Promise<void> {
+    async joinChatConversation(conversationId: number, userId: number): Promise<void> {
         return this.fetchService.fetcher.post(`/live_board/v2/chat/conversation/${conversationId}/participant/${userId}`, {});
+    }
+    
+    async leaveChatConversation(conversationId: number, userId: number): Promise<void> {
+        return this.fetchService.fetcher.delete(`/live_board/v2/chat/conversation/${conversationId}/participant/${userId}`);
     }
 
     // Items
