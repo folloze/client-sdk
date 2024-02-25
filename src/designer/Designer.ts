@@ -556,7 +556,7 @@ export class Designer {
     }
 
 
-    async createChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
+    async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
         return this.fetchService.fetcher.post("/live_board/v2/chat/conversation", {
             board_id: boardId,
             widget_id: widgetId,
