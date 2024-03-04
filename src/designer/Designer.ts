@@ -153,7 +153,7 @@ export class Designer {
     getForms(boardId: number, selectedFormId?: number): Promise<Record<string, FormV1>> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`, { params: { form_id: selectedFormId } })
+                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`, { params: { additional_form_id: selectedFormId } })
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get forms", e);
