@@ -35,7 +35,7 @@ export class CloudinaryHelper {
             analytics: false,
         },
     });
-    public static videoPlayerScriptUrl = "https://cdn.folloze.com/flz/vendors/cld-video-player.light.1.9.0.min.js";
+    public static videoPlayerScriptUrl = "https://cdn.folloze.com/flz/vendors/cld-video-player.light.1.10.6.min.js";
 
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage {
         const cldImageId = CloudinaryHelper.getPublicId(image.url);
