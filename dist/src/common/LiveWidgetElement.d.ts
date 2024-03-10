@@ -43,6 +43,5 @@ export declare abstract class LiveWidgetElement extends LitElement {
      */
     stateChanged(state: any): void;
     private handleGetWidget;
-    onWidgetAdded: (e: CustomEvent) => void;
     abstract render(): any;
 }
