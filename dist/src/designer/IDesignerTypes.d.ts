@@ -64,6 +64,7 @@ export declare type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    fit?: "cover" | "contain";
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
