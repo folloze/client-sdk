@@ -1,6 +1,7 @@
 import {describe, expect, beforeAll} from "@jest/globals";
-import {DesignerEventTypes, LiveBoardEventTypes} from "../src/analytics/Analytics";
-import {ClientSDK} from "../src/sdk";
+import {DesignerEventTypes, LiveBoardEventTypes} from "../../src/analytics/Analytics";
+import {ClientSDK} from "../../src/sdk";
+import LiveEventAnalytics from "../../src/analytics/LiveEventAnalytics";
 
 let sdk: ClientSDK;
 
@@ -60,6 +61,16 @@ describe("testing analytics module", () => {
 
     it("checks that updateInvitationUsed mock works as expected", async () => {
         await sdk.analytics.updateInvitationUsed("1").then(result => expect(result.status).toEqual(200));
+    });
+
+    describe('LiveEvent', () => {
+        it("checks that analytics.liveEvent exists", () => {
+            expect(sdk.analytics.liveEvent).toBeTruthy();
+        });
+        
+        it("checks that analytics.liveEvent is a LiveEventAnalytics instance", () => {
+            expect(sdk.analytics.liveEvent).toBeInstanceOf(LiveEventAnalytics);
+        });
     });
 });
 

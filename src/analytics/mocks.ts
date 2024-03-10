@@ -72,4 +72,7 @@ export const rules = (mock: MockAdapter) => {
         event_name: 'item_download'
     })
         .reply<void>(200);
+
+    mock.onPost(/live_board\/v1\/boards\/(\d+)\/attend_activities/).reply<void>(200);
+    mock.onPut(/live_board\/v1\/boards\/(\d+)\/attend_activities/).reply<void>(200);
 };
