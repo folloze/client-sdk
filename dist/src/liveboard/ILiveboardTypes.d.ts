@@ -307,4 +307,8 @@ export declare type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+export declare type ChatUserDataV2 = {
+    id: number;
+    name: string;
+};
 export {};
