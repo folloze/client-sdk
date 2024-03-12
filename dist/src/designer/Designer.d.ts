@@ -40,7 +40,7 @@ export declare class Designer {
      * @param {number} boardId
      * @returns {Record<string, FormV1>} an object of id and FormResponse
      */
-    getForms(boardId: number): Promise<Record<string, FormV1>>;
+    getForms(boardId: number, selectedFormId?: number): Promise<Record<string, FormV1>>;
     /**
      * Create a new form
      *
