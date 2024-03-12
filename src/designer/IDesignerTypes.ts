@@ -57,26 +57,26 @@ export type ImageTransformation = {
 };
 
 export type StringPosition =
-  | "top-left"
-  | "top-center"
-  | "top-right"
-  | "middle-left"
-  | "middle-center"
-  | "middle-right"
-  | "bottom-left"
-  | "bottom-center"
-  | "bottom-right";
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "middle-left"
+    | "middle-center"
+    | "middle-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
 
 export type PercentPosition =
-  | "0% 0%"
-  | "50% 0%"
-  | "100% 0%"
-  | "0% 50%"
-  | "50% 50%"
-  | "100% 50%"
-  | "0% 100%"
-  | "50% 100%"
-  | "100% 100%";
+    | "0% 0%"
+    | "50% 0%"
+    | "100% 0%"
+    | "0% 50%"
+    | "50% 50%"
+    | "100% 50%"
+    | "0% 100%"
+    | "50% 100%"
+    | "100% 100%";
 
 export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 
@@ -112,7 +112,7 @@ export type VideoGalleryParams = {
 
 export type VideoPlaybackOptions = {
     playOnce: boolean;
-}
+};
 
 export type FlzEditableVideoData = {
     url: string;
@@ -182,13 +182,13 @@ export type FormField = {
 };
 
 type DependentField = {
-    name: string,
-    values: string[]
+    name: string;
+    values: string[];
 };
 
 type SelectInputValue = {
-    id: string,
-    label: string
+    id: string;
+    label: string;
 };
 
 export type FormV1 = {
@@ -203,7 +203,7 @@ export type FormV1 = {
 
 export type FormDataV1 = {
     form_type?: number;
-    name?: string,
+    name?: string;
     // both classic and external
     form_title?: string;
     submit_label?: string;
@@ -404,35 +404,35 @@ export type MergeTagAttribute = {
     allow_user_input: boolean;
     type: string;
     predefined_list: string[];
-}
+};
 
 export type MergeTagValue = {
     id: string;
     name: string;
-}
+};
 
 export type MergeTagFilters = {
     provider?: string;
     context_type?: string;
     tag_type?: number;
-}
+};
 
 export type Theme = {
-  id: number;
-  name: string | "system theme";
-  status: "archived" | "published";
-  style: string;
-  type: "basic" | "migration" | "system";
-}
+    id: number;
+    name: string | "system theme";
+    status: "archived" | "published";
+    style: string;
+    type: "basic" | "migration" | "system";
+};
 
 export type GenerateWidgetsTextsRequest = {
     board: {
         goal: string;
         productName: string;
         details?: string;
-    },
+    };
     widgets: GenerateTextWidgetData[];
-}
+};
 
 export type GenerateTextWidgetData = {
     description: string;
@@ -440,21 +440,29 @@ export type GenerateTextWidgetData = {
     elaboratedPurpose?: string;
     injectables: any[];
     widgetId: string;
-}
+};
 
 export type GeneratedText = {
     text: string;
     path: string;
-}
+};
 
 export type GeneratedWidgetText = {
     text: GeneratedText[];
     prompt: string;
     widgetId: string;
-}
+};
 
 export type GenerateWidgetsTextsResponse = {
-    widgets: GeneratedWidgetText[]
-}
+    widgets: GeneratedWidgetText[];
+};
 
 export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
+
+export type ChatConversationDataV2 = {
+    participants?: Array<string>;
+    subject?: string | null;
+    welcomeMessages?: Array<string> | null;
+    custom?: Map<string, string> | null;
+    photoUrl?: string | null;
+};

@@ -348,3 +348,8 @@ export type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+
+export type ChatUserDataV2 = {
+    id: number;
+    name: string;
+};

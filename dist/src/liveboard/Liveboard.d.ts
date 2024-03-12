@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1, EnrichmentBoardConfigV3, LeadLinkClickResponseV1 } from "./ILiveboardTypes";
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1, EnrichmentBoardConfigV3, LeadLinkClickResponseV1, ChatUserDataV2 } from "./ILiveboardTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
 export declare class Liveboard {
     private fetchService;
@@ -44,6 +44,9 @@ export declare class Liveboard {
      * @returns {UserChatResponseV1} UserChatResponse
      */
     getUserChat(boardId: number, leadId: number): Promise<UserChatResponseV1>;
+    createChatUser(userData: ChatUserDataV2): Promise<void>;
+    joinChatConversation(conversationId: number, userId: number): Promise<void>;
+    leaveChatConversation(conversationId: number, userId: number): Promise<void>;
     /**
      * Fetches an item
      *
