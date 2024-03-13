@@ -1,4 +1,3 @@
-//import {describe, expect} from "@jest/globals";
 import {ClientSDK} from "../../src/sdk";
 import LiveEventAnalytics from "../../src/analytics/LiveEventAnalytics";
 
