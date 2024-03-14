@@ -4,6 +4,8 @@ import {type SessionResponseV1} from "../liveboard/ILiveboardTypes";
 import {type AnalyticEventPrepared} from "../common/helpers/analyticEventTracking";
 import LiveEventAnalytics from "./LiveEventAnalytics";
 
+export * from "./LiveEventAnalytics";
+
 export type PingPayload = {
     leadId: number;
     boardId: number;

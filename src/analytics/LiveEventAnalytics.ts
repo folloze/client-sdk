@@ -9,6 +9,14 @@ const ACTIVITY_CODES = {
     viewed_recording: 2,
 };
 
+export type TrackAttendanceData = {
+    boardId: number;
+    widgetId: string;
+    guid: string;
+    activityType: ActivityType;
+    eventName: string;
+};
+
 export default class LiveEventAnalytics {
     private fetchService: FetchService;
 
@@ -18,13 +26,7 @@ export default class LiveEventAnalytics {
 
     trackAttendance(
         trackType: TrackAttendanceType,
-        data: {
-            boardId: number;
-            widgetId: string;
-            guid: string;
-            activityType: ActivityType;
-            eventName: string;
-        },
+        data: TrackAttendanceData,
     ): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
             const method = trackType === "create" ? "post" : "put";

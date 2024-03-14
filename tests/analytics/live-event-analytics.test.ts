@@ -16,14 +16,14 @@ describe("LiveEventAnalytics", () => {
                 analyticsServiceEndpoint: "",
             });
             liveEventAnalytics = new LiveEventAnalytics(sdk.fetcher);
-            
+
             postSpy = jest.spyOn(sdk.fetcher.fetcher, "post");
             putSpy = jest.spyOn(sdk.fetcher.fetcher, "put");
         });
 
         describe("trackAttendance", () => {
             let params;
-            
+
             beforeEach(() => {
                 params = {
                     boardId: 1,
@@ -88,30 +88,29 @@ describe("LiveEventAnalytics", () => {
     });
 
     describe("In preview", () => {
-            beforeEach(async () => {
-                sdk = await ClientSDK.create({
-                    useMock: true,
-                    organizationId: 1,
-                    pingEndpoint: "url-for-ping",
-                    isPreview: true,
-                    analyticsServiceEndpoint: "",
-                });
-                liveEventAnalytics = new LiveEventAnalytics(sdk.fetcher);
-
-                postSpy = jest.spyOn(sdk.fetcher.fetcher, "post");
-                putSpy = jest.spyOn(sdk.fetcher.fetcher, "put");
+        beforeEach(async () => {
+            sdk = await ClientSDK.create({
+                useMock: true,
+                organizationId: 1,
+                pingEndpoint: "url-for-ping",
+                isPreview: true,
+                analyticsServiceEndpoint: "",
             });
+            liveEventAnalytics = new LiveEventAnalytics(sdk.fetcher);
 
-            it("checks that trackLeadBoardView isn't triggering an api call", async () => {
-                await liveEventAnalytics.trackAttendance("create", {
-                    boardId: 1,
-                    widgetId: "abc",
-                    guid: "123",
-                    activityType: "attended_event",
-                    eventName: "My event",
-                });
-                expect(postSpy).not.toHaveBeenCalled();
-            });
+            postSpy = jest.spyOn(sdk.fetcher.fetcher, "post");
+            putSpy = jest.spyOn(sdk.fetcher.fetcher, "put");
         });
-    
+
+        it("checks that trackLeadBoardView isn't triggering an api call", async () => {
+            await liveEventAnalytics.trackAttendance("create", {
+                boardId: 1,
+                widgetId: "abc",
+                guid: "123",
+                activityType: "attended_event",
+                eventName: "My event",
+            });
+            expect(postSpy).not.toHaveBeenCalled();
+        });
+    });
 });
