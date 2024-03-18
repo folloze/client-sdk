@@ -1,6 +1,8 @@
-import { AxiosResponse } from "axios";
-import { FetchService } from "../common/FetchService";
-import { AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
+import { type AxiosResponse } from "axios";
+import { type FetchService } from "../common/FetchService";
+import { type AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
+import LiveEventAnalytics from "./LiveEventAnalytics";
+export * from "./LiveEventAnalytics";
 export declare type PingPayload = {
     leadId: number;
     boardId: number;
@@ -57,6 +59,7 @@ export declare enum DesignerEventTypes {
 }
 export declare class Analytics {
     private fetchService;
+    liveEvent: LiveEventAnalytics;
     constructor(fetch: FetchService);
     /**
      * Lead viewed board
