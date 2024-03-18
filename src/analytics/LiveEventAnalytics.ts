@@ -2,7 +2,7 @@ import {type FetchService} from "../common/FetchService";
 import {type AxiosResponse} from "axios";
 
 export type TrackAttendanceType = "create" | "update";
-export type ActivityType = "attended_event" | "viewed_recording";
+export type LiveEventActivityType = "attended_event" | "viewed_recording";
 
 const ACTIVITY_CODES = {
     attended_event: 0,
@@ -13,7 +13,7 @@ export type TrackAttendanceData = {
     boardId: number;
     widgetId: string;
     guid: string;
-    activityType: ActivityType;
+    activityType: LiveEventActivityType;
     eventName: string;
 };
 
@@ -46,7 +46,7 @@ export default class LiveEventAnalytics {
         });
     }
 
-    private getActivityCode(activityType: ActivityType): number {
+    private getActivityCode(activityType: LiveEventActivityType): number {
         return ACTIVITY_CODES[activityType];
     }    
 }

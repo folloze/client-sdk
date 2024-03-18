@@ -2,6 +2,7 @@ import { type AxiosResponse } from "axios";
 import { type FetchService } from "../common/FetchService";
 import { type AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
 import LiveEventAnalytics from "./LiveEventAnalytics";
+export * from "./LiveEventAnalytics";
 export declare type PingPayload = {
     leadId: number;
     boardId: number;
