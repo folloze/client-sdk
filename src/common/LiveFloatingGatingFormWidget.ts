@@ -14,16 +14,6 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     private shouldBeShown: boolean = false;
     private gatingDelayTimer: ReturnType<typeof setTimeout>;
 
-    connectedCallback() {
-        super.connectedCallback();
-        widgetEmit(this, "get-state", undefined, state => {
-            this.boardId = state.board.id;
-            if (state.item_viewer?.current?.is_gated) {
-                this.toggleOnOrOff();
-            }
-        });
-    }
-
     incomingEvents(e: FlzEvent) {
         super.incomingEvents(e);
         const action: FLZ_EVENT_ACTION = e.action as FLZ_EVENT_ACTION;
@@ -49,7 +39,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
         const isSubmittedAlready = this.isPersistSubmitExists(this.boardId);
         const isKnownLeadGated = this._data.enableForKnownUsers && !isSubmittedAlready;
         const showGated = this.lead.anon_guest || isKnownLeadGated;
-        console.debug(`show gated form: ${showGated}`);
+        console.debug(`show gated form: ${showGated}, ${this._data.gatingFormDelay} ms`);
         if (showGated) {
             this.show();
             return;
