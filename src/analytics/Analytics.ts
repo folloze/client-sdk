@@ -1,7 +1,10 @@
-import {AxiosResponse} from "axios";
-import {FetchService} from "../common/FetchService";
-import {SessionResponseV1} from "../liveboard/ILiveboardTypes";
-import {AnalyticEventPrepared} from "../common/helpers/analyticEventTracking";
+import {type AxiosResponse} from "axios";
+import {type FetchService} from "../common/FetchService";
+import {type SessionResponseV1} from "../liveboard/ILiveboardTypes";
+import {type AnalyticEventPrepared} from "../common/helpers/analyticEventTracking";
+import LiveEventAnalytics from "./LiveEventAnalytics";
+
+export * from "./LiveEventAnalytics";
 
 export type PingPayload = {
     leadId: number;
@@ -63,9 +66,11 @@ export enum DesignerEventTypes {
 
 export class Analytics {
     private fetchService: FetchService;
+    liveEvent: LiveEventAnalytics;
 
     constructor(fetch: FetchService) {
         this.fetchService = fetch;
+        this.liveEvent = new LiveEventAnalytics(fetch);
     }
 
     /**
@@ -115,16 +120,21 @@ export class Analytics {
      * @param {SourceType} sourceType
      * @param {string} guid
      */
-    trackLeadContentView(contentItemId: number, sourceType: SourceType, guid: string, itemId?: number): Promise<AxiosResponse> {
+    trackLeadContentView(
+        contentItemId: number,
+        sourceType: SourceType,
+        guid: string,
+        itemId?: number,
+    ): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
             return this.fetchService.fetcher
                 .post(
                     `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/lead_views`,
                     {
-                            guid,
-                            item_id: itemId,
-                            source_type: sourceType
-                        },
+                        guid,
+                        item_id: itemId,
+                        source_type: sourceType,
+                    },
                 )
                 .catch(e => {
                     console.error("could not track lead item view", e);
@@ -237,17 +247,13 @@ export class Analytics {
      * @param {number} itemId
      * deprecated Use trackDownloadFileV2 instead
      */
-    trackDownloadFile(
-        sourceType: SourceType,
-        contentItemId: number,
-        itemId?: number
-    ): Promise<void> {
+    trackDownloadFile(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/downloads`, {
                     source_type: sourceType,
                     content_item_id: contentItemId,
-                    item_id: itemId
+                    item_id: itemId,
                 })
                 .then(() => {
                     resolve();
@@ -266,17 +272,16 @@ export class Analytics {
      * @param {number} contentItemId
      * @param {number} itemId
      */
-    trackDownloadFileV2(
-        sourceType: SourceType,
-        contentItemId: number,
-        itemId?: number
-    ): Promise<void> {
+    trackDownloadFileV2(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/downloads`, {
-                    source_type: sourceType,
-                    item_id: itemId
-                })
+                .post<void>(
+                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/downloads`,
+                    {
+                        source_type: sourceType,
+                        item_id: itemId,
+                    },
+                )
                 .then(() => {
                     resolve();
                 })
@@ -295,17 +300,13 @@ export class Analytics {
      * @param {SourceType} sourceType
      * deprecated Use trackLeadLikeContentV2 instead
      */
-    trackLeadLikeContent(
-        sourceType: SourceType,
-        contentItemId: number,
-        itemId?: number
-    ): Promise<void> {
+    trackLeadLikeContent(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/likes`, {
                     source_type: sourceType,
                     content_item_id: contentItemId,
-                    item_id: itemId
+                    item_id: itemId,
                 })
                 .then(() => {
                     resolve();
@@ -324,17 +325,16 @@ export class Analytics {
      * @param {number} itemId
      * @param {SourceType} sourceType
      */
-    trackLeadLikeContentV2(
-        sourceType: SourceType,
-        contentItemId: number,
-        itemId?: number
-    ): Promise<void> {
+    trackLeadLikeContentV2(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/likes`, {
-                    source_type: sourceType,
-                    item_id: itemId
-                })
+                .post<void>(
+                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/content_items/${contentItemId}/likes`,
+                    {
+                        source_type: sourceType,
+                        item_id: itemId,
+                    },
+                )
                 .then(() => {
                     resolve();
                 })
@@ -347,10 +347,10 @@ export class Analytics {
 
     /**
      * Publish lead event externally
-     * 
-     * @param {number} contentItemId 
-     * @param {Date} timestamp 
-     * @param {string} eventName 
+     *
+     * @param {number} contentItemId
+     * @param {Date} timestamp
+     * @param {string} eventName
      */
     publishLeadEvents(contentItemId: number, timestamp: number, eventName: string): Promise<void> {
         return this.fetchService.withDisableOnPreview(() => {
@@ -358,8 +358,9 @@ export class Analytics {
                 .post<void>("/live_board/v2/sphere/publish_lead_events", {
                     content_item_id: contentItemId,
                     timestamp,
-                    event_name: eventName
-                }).catch(e => {
+                    event_name: eventName,
+                })
+                .catch(e => {
                     console.error("could not update invitation wrapper", e);
                     throw e;
                 });
