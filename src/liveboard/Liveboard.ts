@@ -854,4 +854,46 @@ export class Liveboard {
             return new Promise(resolve => resolve({status: 200}));
         }
     }
+
+    joinLiveEvent(boardId: number, liveEventId: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/join`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not join live event", e);
+                    reject(e);
+                });
+        });
+    }
+
+    leaveLiveEvent(boardId: number, liveEventId: string): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .delete(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/leave`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not leave live event", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getLiveEventParticipants(boardId: number, liveEventId: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get live event participants", e);
+                    reject(e);
+                });
+        });
+    }
 }

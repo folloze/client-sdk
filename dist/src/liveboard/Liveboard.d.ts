@@ -237,4 +237,7 @@ export declare class Liveboard {
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>;
     getEnrichment(boardId: number): Promise<EnrichmentBoardConfigV3>;
     notifyIdentity(boardId: number, values: CtaParams): Promise<any>;
+    joinLiveEvent(boardId: number, liveEventId: string): Promise<void>;
+    leaveLiveEvent(boardId: number, liveEventId: string): Promise<void>;
+    getLiveEventParticipants(boardId: number, liveEventId: string): Promise<any>;
 }
