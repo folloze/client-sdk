@@ -14,6 +14,13 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     private shouldBeShown: boolean = false;
     private gatingDelayTimer: ReturnType<typeof setTimeout>;
 
+    connectedCallback() {
+        super.connectedCallback();
+        widgetEmit(this, "get-state", undefined, state => {
+            this.boardId = state.board.id;
+        });
+    }
+
     incomingEvents(e: FlzEvent) {
         super.incomingEvents(e);
         const action: FLZ_EVENT_ACTION = e.action as FLZ_EVENT_ACTION;
