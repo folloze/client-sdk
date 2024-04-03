@@ -7,6 +7,7 @@ export declare abstract class LiveFloatingGatingFormWidget extends LiveFloatingW
     protected boardId: number;
     private shouldBeShown;
     private gatingDelayTimer;
+    connectedCallback(): void;
     incomingEvents(e: FlzEvent): void;
     toggleOnOrOff(): void;
     show(): void;
