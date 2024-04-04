@@ -27,15 +27,19 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
         if (action === "widgets-scripts-loaded" && this.shouldBeShown) {
             // this is for solving a race condition when landing on gated item
             this.toggleOnOrOff();
-        } else if (action === "changeItem" || action === "openItemViewer") {
-            if (!e.payload?.is_gated) {
-                this.close();
-                return;
-            }
-            this.toggleOnOrOff();
+        } else if (action === "item-viewer-new-item") {
+            this.handleNewItem(e.payload);
         } else if (action === "itemViewerClosed") {
             this.close();
         }
+    }
+
+    handleNewItem(item: any) {
+        if (!item.is_gated) {
+            this.close();
+            return;
+        }
+        this.toggleOnOrOff();
     }
 
     toggleOnOrOff() {
