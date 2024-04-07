@@ -863,7 +863,7 @@ export class Liveboard {
     joinLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .post<LiveEventParticipant[]>(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/join`)
+                .post<LiveEventParticipant[]>(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants`)
                 .then((result) => {
                     resolve(result.data);
                 })
@@ -875,10 +875,10 @@ export class Liveboard {
     }
 
     
-    leaveLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]> {
+    leaveLiveEvent(boardId: number, liveEventId: string, leadId: number): Promise<LiveEventParticipant[]> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .delete(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/leave`)
+                .delete(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants/${leadId}`)
                 .then((result) => {
                     resolve(result.data);
                 })
