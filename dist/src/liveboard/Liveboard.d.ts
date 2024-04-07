@@ -243,7 +243,7 @@ export declare class Liveboard {
     getEnrichment(boardId: number): Promise<EnrichmentBoardConfigV3>;
     notifyIdentity(boardId: number, values: CtaParams): Promise<any>;
     joinLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
-    leaveLiveEvent(boardId: number, liveEventId: string, leadId: number): Promise<LiveEventParticipant[]>;
+    leaveLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
     getLiveEventParticipants(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
 }
 export {};

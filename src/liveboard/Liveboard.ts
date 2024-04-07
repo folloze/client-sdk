@@ -875,10 +875,10 @@ export class Liveboard {
     }
 
     
-    leaveLiveEvent(boardId: number, liveEventId: string, leadId: number): Promise<LiveEventParticipant[]> {
+    leaveLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
-                .delete(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants/${leadId}`)
+                .delete(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants/me`)
                 .then((result) => {
                     resolve(result.data);
                 })
