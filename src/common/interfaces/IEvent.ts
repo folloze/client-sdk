@@ -49,6 +49,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "open-link-by-target-type"
     | "openItemViewer"
     | "itemViewerClosed"
+    | "item-viewer-new-item"
     | "open-modal"
     | "register-floating-widgets-triggers"
     | "get-form-privacy-messages"
