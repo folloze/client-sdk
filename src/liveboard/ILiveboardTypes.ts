@@ -353,3 +353,9 @@ export type ChatUserDataV2 = {
     id: number;
     name: string;
 };
+
+export type LiveEventParticipant = {
+    id: number;
+    name: string;
+    last_name: string | null;       
+}

@@ -30,16 +30,11 @@ import {
     EnrichmentBoardConfigV3,
     LeadLinkClickResponseV1,
     ChatUserDataV2,
-
+    LiveEventParticipant,
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
 
-type LiveEventParticipant = {
-    id: number;
-    name: string;
-    last_name: string | null;       
-}
 export class Liveboard {
     private fetchService: FetchService;
 
