@@ -7,8 +7,7 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.stopTrackingForVisit"
-    | "Folloze.triggerCtaSubmit"
-    | "beforeunload";
+    | "Folloze.triggerCtaSubmit";
 
 export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
 
