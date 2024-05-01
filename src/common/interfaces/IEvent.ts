@@ -69,7 +69,10 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "create-chat-user"
     | "join-chat-conversation"
     | "leave-chat-conversation"
-    | "track-live-event-attendance";
+    | "track-live-event-attendance"
+    | "get-live-event-participants"
+    | "join-live-event"
+    | "leave-live-event";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
