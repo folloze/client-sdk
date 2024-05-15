@@ -24,6 +24,7 @@ export * from "./helpers/urlHelpers";
 export * from "./helpers/leadJourneyHelper";
 export * from "./helpers/analyticsHelper";
 export * from "./helpers/aiGenerationHelpers";
+export * from "./helpers/featuresHelper";
 export * from "./FlzEvent";
 export * from "./controllers/CloseOnOutSideClickController";
 export * from "./controllers/CloseOnESCController";

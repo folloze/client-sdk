@@ -13,6 +13,7 @@ export type AddListItem = {
 export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
+    requiresFeatures?: string[];
 }
 
 export interface CustomSectionListItem extends SectionListItem {
