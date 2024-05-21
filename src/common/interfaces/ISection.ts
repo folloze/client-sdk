@@ -1,3 +1,4 @@
+import {FeatureName} from "./IInitialState";
 import {FlzEditableImageData, FlzEditableVideoData} from "../../designer/IDesignerTypes";
 import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./IWidget";
 
@@ -13,6 +14,7 @@ export type AddListItem = {
 export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
+    requiresFeatures?: FeatureName[];
 }
 
 export interface CustomSectionListItem extends SectionListItem {
