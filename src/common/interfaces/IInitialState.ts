@@ -11,6 +11,7 @@ export type Features = {
     customTheme: boolean;
     genAi: boolean;
     liveEvent: boolean;
+    htmlSections: boolean;
 };
 
 export type FeatureName = keyof Features;
