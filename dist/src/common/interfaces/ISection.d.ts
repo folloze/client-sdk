@@ -9,15 +9,16 @@ export declare type AddListItem = {
     image: string;
     name: string;
 };
+export declare type RestrictedCapability = {
+    requiresFeatures: FeatureName[];
+    type: "useCase" | "premium";
+    valueStatement: string;
+    useCaseName?: string;
+};
 export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
-    restriction?: {
-        requiresFeatures: FeatureName[];
-        type: "useCase" | "premium";
-        valueStatement: string;
-        useCaseName?: string;
-    };
+    restriction?: RestrictedCapability;
 }
 export interface CustomSectionListItem extends SectionListItem {
     id: number;
