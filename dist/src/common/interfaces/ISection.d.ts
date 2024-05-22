@@ -12,7 +12,11 @@ export declare type AddListItem = {
 export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
-    requiresFeatures?: FeatureName[];
+    restriction?: {
+        requiresFeatures: FeatureName[];
+        type: "useCase" | "premium";
+        valueStatement: string;
+    };
 }
 export interface CustomSectionListItem extends SectionListItem {
     id: number;
