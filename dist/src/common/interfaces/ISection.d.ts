@@ -16,7 +16,7 @@ export interface SectionListItem extends AddListItem {
         requiresFeatures: FeatureName[];
         type: "useCase" | "premium";
         valueStatement: string;
-        useCaseName: string;
+        useCaseName?: string;
     };
 }
 export interface CustomSectionListItem extends SectionListItem {
