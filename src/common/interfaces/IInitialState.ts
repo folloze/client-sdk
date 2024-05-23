@@ -12,6 +12,7 @@ export type Features = {
     genAi: boolean;
     liveEvent: boolean;
     htmlSections: boolean;
+    registrationTracking: boolean;
 };
 
 export type FeatureName = keyof Features;

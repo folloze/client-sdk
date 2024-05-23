@@ -10,6 +10,7 @@ export declare type Features = {
     genAi: boolean;
     liveEvent: boolean;
     htmlSections: boolean;
+    registrationTracking: boolean;
 };
 export declare type FeatureName = keyof Features;
 export declare type InitialState = {
