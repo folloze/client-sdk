@@ -1,7 +1,7 @@
 import { ItemResponseV2, LeadResponseV1, OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
 import { Board, BoardConfig } from "./IBoard";
 import { PredefinedSection, WidgetListItem } from "./ISection";
-import { DefaultItemViewerSettings } from "./IItemViewer";
+import { FlzVItemViewerSettings } from "./IItemViewer";
 export declare type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
 export declare type Features = {
     personalization: boolean;
@@ -45,7 +45,7 @@ export declare type InitialState = {
     user?: User;
     privacy_messages: PrivacyMessage[];
     item_viewer: {
-        defult: DefaultItemViewerSettings;
+        defult: FlzVItemViewerSettings;
         current?: ItemResponseV2;
         history?: Record<string, OpenItemViewerPayload>;
         items?: Record<string, ItemResponseV2>;

@@ -3,11 +3,17 @@ import {OpenItemViewerPayload} from "../../liveboard/ILiveboardTypes";
 import {LiveWidget} from "../LiveWidget";
 import {FlzEvent} from "../FlzEvent";
 
-export type ItemViewerType = "lightbox" | "classic";
+export type ItemViewerDesign = "lightbox" | "classic";
 
-export type DefaultItemViewerSettings = {
+export interface FlzVItemViewerSettings {
+    design: ItemViewerDesign;
     allow_download: boolean;
-    item_viewer_type: ItemViewerType;
+    allow_likes?: boolean;
+    lead_journey?: {
+        type: "curated" | "recommendations",
+        layout: "arrow" | "bottom",
+        disableScrollingAnimation: boolean
+    }
 }
 export interface IItemViewer extends LitElement {
     open(item?: OpenItemViewerPayload): void;
