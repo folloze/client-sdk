@@ -45,7 +45,7 @@ export declare type InitialState = {
     user?: User;
     privacy_messages: PrivacyMessage[];
     item_viewer: {
-        defult: FlzVItemViewerSettings;
+        default: FlzVItemViewerSettings;
         current?: ItemResponseV2;
         history?: Record<string, OpenItemViewerPayload>;
         items?: Record<string, ItemResponseV2>;
