@@ -21,7 +21,8 @@ export type RestrictedCapability = {
 export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
-    restriction?: RestrictedCapability
+    restriction?: RestrictedCapability;
+    restricted?: boolean;
 }
 
 export interface CustomSectionListItem extends SectionListItem {

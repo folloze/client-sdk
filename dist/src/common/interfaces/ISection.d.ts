@@ -19,6 +19,7 @@ export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
     restriction?: RestrictedCapability;
+    restricted?: boolean;
 }
 export interface CustomSectionListItem extends SectionListItem {
     id: number;
