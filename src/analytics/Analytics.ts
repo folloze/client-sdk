@@ -212,6 +212,10 @@ export class Analytics {
                 console.error("could not create session", e);
                 throw e;
             });
+        }).then(response => {
+            const sessionGuid = response.headers?.[this.fetchService.headerSessionGuid] || response.data.guid;
+            this.fetchService.setSessionGuid(sessionGuid);
+            return response;
         });
     }
 

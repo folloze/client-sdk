@@ -50,6 +50,7 @@ export class FetchService {
     public organizationId: number;
     public urlToken: string;
     private isEmbeddedRequest: boolean;
+    public readonly headerSessionGuid = "folloze-session-guid";
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
@@ -137,12 +138,16 @@ export class FetchService {
         }
     }
 
+    public setSessionGuid(guid: string) {
+        this.sessionGuid = guid;
+    }
+
     private handleSuccess = (response): AxiosResponse => {
         if (response.headers?.["authorization"]) {
             this.jwt = response.headers["authorization"].replace("bearer ", "");
         }
-        if (response.headers?.["folloze-session-guid"]) {
-            this.sessionGuid = response.headers["folloze-session-guid"];
+        if (response.headers?.[this.headerSessionGuid]) {
+            this.sessionGuid = response.headers[this.headerSessionGuid];
         }
         return response;
     };
@@ -184,7 +189,7 @@ export class FetchService {
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
-                config.headers["folloze-session-guid"] = this.sessionGuid;
+                config.headers[this.headerSessionGuid] = this.sessionGuid;
             }
             if (this.jwt) {
                 config.headers["Authorization"] = `Bearer ${this.jwt}`;
