@@ -21,11 +21,13 @@ export declare class FetchService {
     organizationId: number;
     urlToken: string;
     private isEmbeddedRequest;
+    readonly headerSessionGuid = "folloze-session-guid";
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
     withPartialContent(promiseFunc: (resolve: any, reject: any, guid: any) => any, timeout?: number, retry?: number, guid?: string): Promise<any>;
     withDisableOnPreview(apiCall: Function): Promise<any>;
+    setSessionGuid(guid: string): void;
     private handleSuccess;
     private handleError;
     private MockHandleError;
