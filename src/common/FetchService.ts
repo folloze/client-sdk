@@ -29,6 +29,8 @@ const defaultFetcherOptions: FetcherOptions = {
     analyticsServiceEndpoint: "",
 };
 
+export const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
+
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
 // fetchItems: api.fetchItems,                // replace "live_board" with "api"
 // fetchHasItems: api.fetchHasItems,          // replace "live_board" with "api"
@@ -50,7 +52,6 @@ export class FetchService {
     public organizationId: number;
     public urlToken: string;
     private isEmbeddedRequest: boolean;
-    public readonly headerSessionGuid = "folloze-session-guid";
 
     private constructor(options: FetcherOptions) {
         this.useMock = options.useMock;
@@ -146,8 +147,8 @@ export class FetchService {
         if (response.headers?.["authorization"]) {
             this.jwt = response.headers["authorization"].replace("bearer ", "");
         }
-        if (response.headers?.[this.headerSessionGuid]) {
-            this.sessionGuid = response.headers[this.headerSessionGuid];
+        if (response.headers?.[FLZ_SESSION_GUID_HEADER]) {
+            this.sessionGuid = response.headers[FLZ_SESSION_GUID_HEADER];
         }
         return response;
     };
@@ -189,7 +190,7 @@ export class FetchService {
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
-                config.headers[this.headerSessionGuid] = this.sessionGuid;
+                config.headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid;
             }
             if (this.jwt) {
                 config.headers["Authorization"] = `Bearer ${this.jwt}`;

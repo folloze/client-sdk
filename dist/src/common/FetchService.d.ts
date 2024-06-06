@@ -11,6 +11,7 @@ export declare type FetcherOptions = {
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
 };
+export declare const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
 export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
@@ -21,7 +22,6 @@ export declare class FetchService {
     organizationId: number;
     urlToken: string;
     private isEmbeddedRequest;
-    readonly headerSessionGuid = "folloze-session-guid";
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
