@@ -72,7 +72,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "track-live-event-attendance"
     | "get-live-event-participants"
     | "join-live-event"
-    | "leave-live-event";
+    | "leave-live-event"
+    | "scroll";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
