@@ -11,10 +11,18 @@ export type AddListItem = {
     name: string;
 };
 
+export type RestrictedCapability = {
+    requiresFeatures: FeatureName[];
+    type: "useCase" | "premium";
+    valueStatement: string;
+    useCaseName?: string;
+}
+
 export interface SectionListItem extends AddListItem {
     type: SectionType;
     config: PredefinedSection;
-    requiresFeatures?: FeatureName[];
+    restriction?: RestrictedCapability;
+    restricted?: boolean;
 }
 
 export interface CustomSectionListItem extends SectionListItem {

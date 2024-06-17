@@ -9,6 +9,8 @@ export declare type Features = {
     customTheme: boolean;
     genAi: boolean;
     liveEvent: boolean;
+    htmlSections: boolean;
+    registrationTracking: boolean;
 };
 export declare type FeatureName = keyof Features;
 export declare type InitialState = {
