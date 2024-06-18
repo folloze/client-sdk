@@ -194,6 +194,7 @@ export class Analytics {
                 item_id: payload.itemId,
                 content_item_id: payload.contentItemId,
                 client_guid: payload.guid,
+                analyticsData: payload.analyticsData,
             });
         });
     }
