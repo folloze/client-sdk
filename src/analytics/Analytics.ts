@@ -92,27 +92,6 @@ export class Analytics {
     }
 
     /**
-     * Lead viewed item
-     *
-     * @param {number} itemId
-     * @param {string} guid
-     * @deprecated Use trackLeadContentView instead
-     */
-    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse> {
-        return this.fetchService.withDisableOnPreview(() => {
-            return this.fetchService.fetcher
-                .post(
-                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/items/${itemId}/lead_views`,
-                    {guid},
-                )
-                .catch(e => {
-                    console.error("could not track lead item view", e);
-                    throw e;
-                });
-        });
-    }
-
-    /**
      * Lead viewed content
      *
      * @param {number} itemId
