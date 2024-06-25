@@ -1,6 +1,6 @@
 import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
-import { FlzVItemViewerSettings } from "../common/interfaces/IContentWidget";
+import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
 export declare type BoardResponseV1 = {
     id: number;
     slug: string;
