@@ -9,6 +9,7 @@ export declare type PingPayload = {
     itemId?: number;
     contentItemId?: number;
     guid: string;
+    analyticsData: any;
 };
 export declare type SourceType = "item" | "ai" | "recommendations";
 export declare enum LiveBoardEventTypes {
