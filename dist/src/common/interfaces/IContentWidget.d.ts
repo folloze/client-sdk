@@ -1,3 +1,4 @@
+import { FlzVItemViewerSettings } from "./IItemViewer";
 export interface ContentWidgetConfig {
     sources: SourcesConfig;
     item_viewer: FlzVItemViewerSettings;
@@ -16,14 +17,4 @@ export interface SourcesConfig {
         flz_item_ids: number[];
     };
     type?: "curated" | "recommendations";
-}
-export interface FlzVItemViewerSettings {
-    design: "classic" | "lightbox";
-    allow_download: boolean;
-    allow_likes?: boolean;
-    lead_journey?: {
-        type: "curated" | "recommendations";
-        layout: "arrow" | "bottom";
-        disableScrollingAnimation: boolean;
-    };
 }

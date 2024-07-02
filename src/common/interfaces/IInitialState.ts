@@ -1,6 +1,7 @@
 import {ItemResponseV2, LeadResponseV1, OpenItemViewerPayload} from "../../liveboard/ILiveboardTypes";
 import {Board, BoardConfig} from "./IBoard";
 import {PredefinedSection, WidgetListItem} from "./ISection";
+import {FlzVItemViewerSettings} from "./IItemViewer";
 
 export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
 
@@ -11,6 +12,8 @@ export type Features = {
     customTheme: boolean;
     genAi: boolean;
     liveEvent: boolean;
+    htmlSections: boolean;
+    registrationTracking: boolean;
 };
 
 export type FeatureName = keyof Features;
@@ -51,6 +54,7 @@ export type InitialState = {
     user?: User;
     privacy_messages: PrivacyMessage[];
     item_viewer: {
+        default: FlzVItemViewerSettings;
         current?: ItemResponseV2;
         history?: Record<string, OpenItemViewerPayload>;
         items?: Record<string, ItemResponseV2>;
