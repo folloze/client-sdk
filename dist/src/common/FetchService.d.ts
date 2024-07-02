@@ -11,6 +11,7 @@ export declare type FetcherOptions = {
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
 };
+export declare const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
 export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
@@ -26,6 +27,7 @@ export declare class FetchService {
     private createMockFetcher;
     withPartialContent(promiseFunc: (resolve: any, reject: any, guid: any) => any, timeout?: number, retry?: number, guid?: string): Promise<any>;
     withDisableOnPreview(apiCall: Function): Promise<any>;
+    setSessionGuid(guid: string): void;
     private handleSuccess;
     private handleError;
     private MockHandleError;
