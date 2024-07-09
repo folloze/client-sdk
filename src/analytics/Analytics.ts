@@ -12,6 +12,7 @@ export type PingPayload = {
     itemId?: number;
     contentItemId?: number;
     guid: string;
+    analyticsData: any;
 };
 
 export type SourceType = "item" | "ai" | "recommendations"
@@ -193,6 +194,7 @@ export class Analytics {
                 item_id: payload.itemId,
                 content_item_id: payload.contentItemId,
                 client_guid: payload.guid,
+                analyticsData: payload.analyticsData,
             });
         });
     }
