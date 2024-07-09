@@ -69,14 +69,6 @@ export declare class Analytics {
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse>;
     /**
-     * Lead viewed item
-     *
-     * @param {number} itemId
-     * @param {string} guid
-     * @deprecated Use trackLeadContentView instead
-     */
-    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
-    /**
      * Lead viewed content
      *
      * @param {number} itemId
