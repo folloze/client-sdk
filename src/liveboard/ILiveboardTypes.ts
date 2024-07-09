@@ -6,7 +6,7 @@ import {
     FormPrivacyMessageResponseV1,
 } from "./../designer/IDesignerTypes";
 import {PrivacySettings} from "../common/ISharedTypes";
-import {FlzVItemViewerSettings} from "../common/interfaces/IContentWidget";
+import {FlzVItemViewerSettings} from "../common/interfaces/IItemViewer";
 
 export type BoardResponseV1 = {
     id: number;

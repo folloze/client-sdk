@@ -1,5 +1,5 @@
 import {type AxiosResponse} from "axios";
-import {type FetchService} from "../common/FetchService";
+import {FLZ_SESSION_GUID_HEADER, type FetchService} from "../common/FetchService";
 import {type SessionResponseV1} from "../liveboard/ILiveboardTypes";
 import {type AnalyticEventPrepared} from "../common/helpers/analyticEventTracking";
 import LiveEventAnalytics from "./LiveEventAnalytics";
@@ -12,6 +12,7 @@ export type PingPayload = {
     itemId?: number;
     contentItemId?: number;
     guid: string;
+    analyticsData: any;
 };
 
 export type SourceType = "item" | "ai" | "recommendations"
@@ -172,6 +173,7 @@ export class Analytics {
                 item_id: payload.itemId,
                 content_item_id: payload.contentItemId,
                 client_guid: payload.guid,
+                analyticsData: payload.analyticsData,
             });
         });
     }
@@ -191,6 +193,10 @@ export class Analytics {
                 console.error("could not create session", e);
                 throw e;
             });
+        }).then(response => {
+            const sessionGuid = response.headers?.[FLZ_SESSION_GUID_HEADER] || response.data.guid;
+            this.fetchService.setSessionGuid(sessionGuid);
+            return response;
         });
     }
 
