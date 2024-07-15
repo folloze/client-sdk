@@ -16,12 +16,6 @@ describe("testing analytics module", () => {
         expect(spy).toHaveBeenCalled();
     });
 
-    it("checks that trackLeadItemView mock works as expected", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.trackLeadItemView(1, "abc").then(result => expect(result).toBeNull);
-        expect(spy).toHaveBeenCalled();
-    });
-
     it("checks that trackLeadEvent mock works as expected for liveboard", async () => {
         await sdk.analytics
             .trackLeadEvent(LiveBoardEventTypes.changed_category, {})
@@ -82,12 +76,6 @@ describe("testing analytics module in preview", () => {
     it("checks that trackLeadBoardView isn't triggering an api call", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.analytics.trackLeadBoardView(1).then(result => expect(result.status).toEqual(200));
-        expect(spy).not.toHaveBeenCalled();
-    });
-
-    it("checks that trackLeadItemView isn't triggering an api call", async () => {
-        const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
-        await sdk.analytics.trackLeadItemView(1, "abc").then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();
     });
 

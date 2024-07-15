@@ -9,6 +9,7 @@ export declare type PingPayload = {
     itemId?: number;
     contentItemId?: number;
     guid: string;
+    analyticsData: any;
 };
 export declare type SourceType = "item" | "ai" | "recommendations";
 export declare enum LiveBoardEventTypes {
@@ -67,14 +68,6 @@ export declare class Analytics {
      * @param {number} boardId
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse>;
-    /**
-     * Lead viewed item
-     *
-     * @param {number} itemId
-     * @param {string} guid
-     * @deprecated Use trackLeadContentView instead
-     */
-    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
     /**
      * Lead viewed content
      *

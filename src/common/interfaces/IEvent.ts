@@ -7,7 +7,8 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.stopTrackingForVisit"
-    | "Folloze.triggerCtaSubmit";
+    | "Folloze.triggerCtaSubmit"
+    | "Folloze.closeFormRequest";
 
 export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
 
@@ -39,6 +40,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-journey"
     | "getFormData"
     | "get-form-privacy-message"
+    | "close-form-request"
     | "get-contact-card-info"
     | "get-file-metadata"
     | "get-file-download-url"
