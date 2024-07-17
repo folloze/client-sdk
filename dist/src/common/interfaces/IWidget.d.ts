@@ -30,6 +30,7 @@ export interface RibbonConfig extends LiveConfig, GridConfig, LoadableConfig {
 export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
     hasOverlay?: boolean;
+    singleInstance?: boolean;
     triggers: Array<{
         page: string;
         on: any;
