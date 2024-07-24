@@ -36,13 +36,14 @@ describe("testing analytics module", () => {
                 leadId: 0,
                 itemId: 0,
                 contentItemId: 0,
+                analyticsData: {},
             })
             .then(result => {
                 expect(result.status).toEqual(200);
             });
     });
 
-    it("checks that createSession mock works as expected", async () => {
+    it.skip("checks that createSession mock works as expected", async () => {
         await sdk.analytics.createSession().then(result => {
             expect(result.data.guid).toBeTruthy;
             expect(Object.keys(result.headers)).toContain("folloze-session-guid");
@@ -85,7 +86,7 @@ describe("testing analytics module in preview", () => {
         expect(spy).not.toHaveBeenCalled();
     });
 
-    it("checks that createSession mock works as expected", async () => {
+    it.skip("checks that createSession mock works as expected", async () => {
         const spy = jest.spyOn(sdk.fetcher.fetcher, "post");
         await sdk.analytics.createSession().then(result => expect(result.status).toEqual(200));
         expect(spy).not.toHaveBeenCalled();

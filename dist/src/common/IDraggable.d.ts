@@ -6,7 +6,7 @@ export interface IDraggable {
     currentY: number;
     onDrag: (event: PointerEvent) => void;
 }
-export declare type Pos = {
+export type Pos = {
     x: number;
     y: number;
 };
