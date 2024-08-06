@@ -35,5 +35,5 @@ export declare class TrackedUserPreviewBoard extends AbstractTracker {
 export declare class TrackedUserAddPersonalizationRule extends AbstractTracker {
     constructor(rule: IPersonalizationRule);
 }
-export type TrackedUserEvent = TrackedUserAddSection | TrackedUserEditSection | TrackedUserEditComponent | TrackedUserDeleteSection | TrackedUserPreviewBoard | TrackedUserPublishBoard | TrackedUserDeleteFloatingWidget | TrackedUserAddFloatingWidget | TrackedUserAddPersonalizationRule;
+export declare type TrackedUserEvent = TrackedUserAddSection | TrackedUserEditSection | TrackedUserEditComponent | TrackedUserDeleteSection | TrackedUserPreviewBoard | TrackedUserPublishBoard | TrackedUserDeleteFloatingWidget | TrackedUserAddFloatingWidget | TrackedUserAddPersonalizationRule;
 export declare function trackEvent(el: LitElement, trackedUserEvent: TrackedUserEvent): void;

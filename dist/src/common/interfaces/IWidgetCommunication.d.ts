@@ -1,5 +1,5 @@
 export declare const FLZ_WIDGET_EVENT_TYPE = "flz-widget-event-type";
-export type CtaClickData = {
+export declare type CtaClickData = {
     form: {
         "fields": {
             "name": {
@@ -38,7 +38,7 @@ export type CtaClickData = {
         url?: "https://example.com";
     };
 };
-export type CtaSubmitData = {
+export declare type CtaSubmitData = {
     cta: {
         area: string;
         label: string;

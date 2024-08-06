@@ -2,8 +2,8 @@ import { ItemResponseV2, LeadResponseV1, OpenItemViewerPayload } from "../../liv
 import { Board, BoardConfig } from "./IBoard";
 import { PredefinedSection, WidgetListItem } from "./ISection";
 import { FlzVItemViewerSettings } from "./IItemViewer";
-export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
-export type Features = {
+export declare type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+export declare type Features = {
     personalization: boolean;
     multiPages?: boolean;
     recommendationsAi: boolean;
@@ -13,8 +13,8 @@ export type Features = {
     htmlSections: boolean;
     registrationTracking: boolean;
 };
-export type FeatureName = keyof Features;
-export type InitialState = {
+export declare type FeatureName = keyof Features;
+export declare type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
     layout: BoardConfig;
@@ -58,11 +58,11 @@ export type InitialState = {
         preview_only: boolean;
     };
 };
-export type DataEnrichmentConfig = {
+export declare type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
     api_key: string;
 };
-export type CookieMatchingConfig = {
+export declare type CookieMatchingConfig = {
     type: "default" | "eloqua" | "marketo";
     api_key: string;
     run_cookie_matching: boolean;
