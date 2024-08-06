@@ -1,9 +1,9 @@
-export type Pos2d = {
+export declare type Pos2d = {
     x: number;
     y: number;
 };
-export type cssPos = [number, number, number, number];
-export type GridPos = {
+export declare type cssPos = [number, number, number, number];
+export declare type GridPos = {
     rowStart: number;
     colStart: number;
     rowEnd: number;
@@ -15,9 +15,9 @@ export type GridPos = {
     padding?: cssPos;
     minHeight?: string;
 };
-type Vertical = "top" | "middle" | "bottom";
-type Horizontal = "start" | "middle" | "end";
-export type FloatPos = {
+declare type Vertical = "top" | "middle" | "bottom";
+declare type Horizontal = "start" | "middle" | "end";
+export declare type FloatPos = {
     pos?: {
         top?: number | string;
         right?: number | string;

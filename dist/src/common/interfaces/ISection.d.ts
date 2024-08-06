@@ -1,7 +1,7 @@
 import { FeatureName } from "./IInitialState";
 import { FlzEditableImageData, FlzEditableVideoData } from "../../designer/IDesignerTypes";
 import { FloatingWidgetConfig, RibbonConfig, WidgetConfig } from "./IWidget";
-export type AddListItem = {
+export declare type AddListItem = {
     category: string;
     type: string;
     config: any;
@@ -9,7 +9,7 @@ export type AddListItem = {
     image: string;
     name: string;
 };
-export type RestrictedCapability = {
+export declare type RestrictedCapability = {
     requiresFeatures: FeatureName[];
     type: "useCase" | "premium";
     valueStatement: string;
@@ -28,47 +28,47 @@ export interface WidgetListItem extends AddListItem {
     type: WidgetType;
     config: WidgetConfig | FloatingWidgetConfig;
 }
-export type SectionType = "header" | "footer" | "body";
-export type WidgetType = "contact-card" | string;
-export type PredefinedSection = {
+export declare type SectionType = "header" | "footer" | "body";
+export declare type WidgetType = "contact-card" | string;
+export declare type PredefinedSection = {
     sections: Record<string, SectionConfig>;
     widgets?: Record<string, WidgetConfig>;
     ribbons?: Record<string, RibbonConfig>;
 };
-export type SectionConfig = {
+export declare type SectionConfig = {
     id: string;
     name?: string;
     type?: SectionType;
     anchor?: string;
 };
-export type BackgroundImage = {
+export declare type BackgroundImage = {
     image: FlzEditableImageData;
     position: string;
     size: "cover" | "contain" | string;
     repeat: string;
 };
-export type BackgroundVideo = {
+export declare type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
-export type WidgetDescription = {
+export declare type WidgetDescription = {
     description: string;
     purposes: string[];
     defaultPurpose: string;
     injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
 };
-export type SectionInjectable = {
+export declare type SectionInjectable = {
     name: string;
     path: string;
     visibilityPath?: string;
     description: string;
 };
-export type VisibilityConfig = {
+export declare type VisibilityConfig = {
     path: string;
     value: string;
 };
-export type DynamicArrayInjectable = {
+export declare type DynamicArrayInjectable = {
     arrayPath: string;
     injectables: SectionInjectable[];
 };
