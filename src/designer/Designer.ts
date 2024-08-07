@@ -74,19 +74,21 @@ export class Designer {
         });
     }
 
-    public getVideosGallery(): Promise<GalleryVideo[]> {
+    public getVideosGallery(isPersonal = false): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "videos",
             type: "video",
+            isPersonal
         });
     }
 
-    public getBannerImageGallery(): Promise<GalleryImage[]> {
+    public getBannerImageGallery(isPersonal = false): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
             type: "campaign",
+            isPersonal
         });
     }
 

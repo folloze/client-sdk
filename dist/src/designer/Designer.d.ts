@@ -15,8 +15,8 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     private getImageGallery;
-    getVideosGallery(): Promise<GalleryVideo[]>;
-    getBannerImageGallery(): Promise<GalleryImage[]>;
+    getVideosGallery(isPersonal?: boolean): Promise<GalleryVideo[]>;
+    getBannerImageGallery(isPersonal?: boolean): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
     getIconsImageGallery(): Promise<GalleryImage[]>;
     getLogosImageGallery(): Promise<GalleryImage[]>;
