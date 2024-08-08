@@ -27,7 +27,7 @@ import {
     type GenerateWidgetsTextsRequest,
     type GenerateWidgetsTextsResponse,
     type ChatConversationDataV2,
-    type uploadPersonalImageOrVideoParams
+    type personalGalleryContentParams
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -75,10 +75,16 @@ export class Designer {
         });
     }
 
-    public createPersonalOrganizationImage(payload: uploadPersonalImageOrVideoParams): Promise<GalleryImage[]> {
+    public createPersonalGalleryContent(payload: personalGalleryContentParams): Promise<GalleryImage[] | GalleryVideo[]> {
+        const params = {
+            ...payload,
+            isPersonal: true,
+            organizationId: this.fetchService.organizationId
+        };
+
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<GalleryImage[]>("/api/v1/organization_images", keysToSnakeCase(payload))
+                .post<GalleryImage[]>("/api/v1/organization_images", keysToSnakeCase(params))
                 .then(result => {
                     resolve(result.data);
                 })

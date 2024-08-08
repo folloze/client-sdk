@@ -82,12 +82,10 @@ export type VideoGalleryParams = {
     count?: number;
     isPersonal?: boolean;
 };
-export type uploadPersonalImageOrVideoParams = {
+export type personalGalleryContentParams = {
     category: "banners" | "videos";
     url: string;
     name: string;
-    organizationId: number;
-    isPersonal: boolean;
 };
 export type VideoPlaybackOptions = {
     playOnce: boolean;
