@@ -82,7 +82,7 @@ export type VideoGalleryParams = {
     count?: number;
     isPersonal?: boolean;
 };
-export type personalGalleryContentParams = {
+export type personalGalleryMediaParams = {
     category: "banners" | "videos";
     url: string;
     name: string;

@@ -27,7 +27,7 @@ import {
     type GenerateWidgetsTextsRequest,
     type GenerateWidgetsTextsResponse,
     type ChatConversationDataV2,
-    type personalGalleryContentParams
+    type personalGalleryMediaParams
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -75,7 +75,7 @@ export class Designer {
         });
     }
 
-    public createPersonalGalleryContent(payload: personalGalleryContentParams): Promise<GalleryImage[] | GalleryVideo[]> {
+    public createPersonalGalleryMedia(payload: personalGalleryMediaParams): Promise<GalleryImage[] | GalleryVideo[]> {
         const params = {
             ...payload,
             isPersonal: true,

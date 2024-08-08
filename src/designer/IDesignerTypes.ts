@@ -112,7 +112,7 @@ export type VideoGalleryParams = {
     isPersonal?: boolean; // for user uploaded videos from the designer.
 };
 
-export type personalGalleryContentParams = {
+export type personalGalleryMediaParams = {
     category: "banners" | "videos",
     url: string,
     name: string
