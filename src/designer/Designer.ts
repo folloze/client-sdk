@@ -26,7 +26,8 @@ import {
     MergeTagFilters,
     type GenerateWidgetsTextsRequest,
     type GenerateWidgetsTextsResponse,
-    type ChatConversationDataV2
+    type ChatConversationDataV2,
+    type uploadPersonalImageOrVideoParams
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -74,7 +75,7 @@ export class Designer {
         });
     }
 
-    public createPersonalOrganizationImage(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]> {
+    public createPersonalOrganizationImage(payload: uploadPersonalImageOrVideoParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .post<GalleryImage[]>("/api/v1/organization_images", keysToSnakeCase(payload))

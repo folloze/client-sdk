@@ -101,7 +101,6 @@ export type ImageGalleryParams = {
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;
     isPersonal?: boolean; // for user upload images from the designer.
-    url? : string; // for user upload images from the designer.
 };
 
 export type VideoGalleryParams = {
@@ -111,8 +110,14 @@ export type VideoGalleryParams = {
     bankCategory?: VideoBankCategoryType;
     count?: number;
     isPersonal?: boolean; // for user upload videos from the designer.
-    url? : string; // for user upload images from the designer.
 };
+
+export type uploadPersonalImageOrVideoParams = {
+    category: "banners" | "videos",
+    url: string,
+    name: string,
+    organizationId: number,
+}
 
 export type VideoPlaybackOptions = {
     playOnce: boolean;
