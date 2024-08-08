@@ -73,6 +73,7 @@ export type ImageGalleryParams = {
     bankCategory?: ImageBankCategoryType;
     count?: number;
     isPersonal?: boolean;
+    url?: string;
 };
 export type VideoGalleryParams = {
     type: VideoGalleryTypes;
@@ -81,6 +82,7 @@ export type VideoGalleryParams = {
     bankCategory?: VideoBankCategoryType;
     count?: number;
     isPersonal?: boolean;
+    url?: string;
 };
 export type VideoPlaybackOptions = {
     playOnce: boolean;
