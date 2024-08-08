@@ -117,6 +117,7 @@ export type uploadPersonalImageOrVideoParams = {
     url: string,
     name: string,
     organizationId: number,
+    isPersonal: boolean,
 }
 
 export type VideoPlaybackOptions = {
