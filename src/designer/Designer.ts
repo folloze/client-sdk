@@ -74,7 +74,7 @@ export class Designer {
         });
     }
 
-    private createPersonalOrganizationImage(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]> {
+    public createPersonalOrganizationImage(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .post<GalleryImage[]>("/api/v1/organization_images", keysToSnakeCase(payload))

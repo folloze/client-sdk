@@ -1,6 +1,6 @@
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, MergeTagFilters, type GenerateWidgetsTextsRequest, type GenerateWidgetsTextsResponse, type ChatConversationDataV2 } from "./IDesignerTypes";
+import { ImageGalleryParams, GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, VideoGalleryParams, GalleryVideo, Theme, MergeTagFilters, type GenerateWidgetsTextsRequest, type GenerateWidgetsTextsResponse, type ChatConversationDataV2 } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
@@ -15,7 +15,7 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     private getImageGallery;
-    private createPersonalOrganizationImage;
+    createPersonalOrganizationImage(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]>;
     getVideosGallery(): Promise<GalleryVideo[]>;
     getBannerImageGallery(): Promise<GalleryImage[]>;
     getPersonalVideosGallery(): Promise<GalleryVideo[]>;
