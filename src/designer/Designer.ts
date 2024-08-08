@@ -74,21 +74,51 @@ export class Designer {
         });
     }
 
-    public getVideosGallery(isPersonal = false): Promise<GalleryVideo[]> {
+    private createPersonalOrganizationImage(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post<GalleryImage[]>("/api/v1/organization_images", keysToSnakeCase(payload))
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not create organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public getVideosGallery(): Promise<GalleryVideo[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "videos",
+            type: "video"
+        });
+    }
+
+    public getBannerImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "banners",
+            type: "campaign"
+        });
+    }
+
+    public getPersonalVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "videos",
             type: "video",
-            isPersonal
+            isPersonal: true
         });
     }
 
-    public getBannerImageGallery(isPersonal = false): Promise<GalleryImage[]> {
+    public getPersonalImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
             type: "campaign",
-            isPersonal
+            isPersonal: true
         });
     }
 
