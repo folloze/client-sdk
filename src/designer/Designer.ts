@@ -95,6 +95,20 @@ export class Designer {
         });
     }
 
+    public deletePersonalGalleryMedia(id: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/organization_images/${id}`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not delete organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
     public getVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
