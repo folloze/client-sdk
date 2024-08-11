@@ -76,6 +76,8 @@ export class Designer {
     }
 
     public createPersonalGalleryMedia(payload: personalGalleryMediaParams): Promise<GalleryImage[] | GalleryVideo[]> {
+        console.log('test');
+
         const params = {
             ...payload,
             isPersonal: true,
