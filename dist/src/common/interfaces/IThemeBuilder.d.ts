@@ -1,16 +1,16 @@
-export type ThemeStruct = Map<string, ThemeCategory>;
-export type ThemeCategory = {
+export declare type ThemeStruct = Map<string, ThemeCategory>;
+export declare type ThemeCategory = {
     key: string;
     subCategories: Map<string, ThemeSubCategory>;
 };
-export type ThemeSubCategory = {
+export declare type ThemeSubCategory = {
     key: string;
     clearPart: string;
     order: number;
     text: string;
     rules: Map<string, ThemeRule>;
 };
-export type ThemeRule = {
+export declare type ThemeRule = {
     name: string;
     valueDefault: string;
     valueOrg: string;
@@ -20,12 +20,12 @@ export type ThemeRule = {
     comment?: string;
     _fullCategory?: string;
 };
-export type ThemeRuleUI = ThemeRule & {
+export declare type ThemeRuleUI = ThemeRule & {
     prettyName: string;
     section: string;
 };
-export type ThemeOverride = Record<string, string>;
-export type ThemeOverrideRules = {
+export declare type ThemeOverride = Record<string, string>;
+export declare type ThemeOverrideRules = {
     activated: boolean;
     activatedSubCategories: Record<string, boolean>;
     rules: Record<string, ThemeRule>;

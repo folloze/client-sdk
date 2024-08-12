@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosRequestConfig } from "axios";
-export type FetcherOptions = {
+export declare type FetcherOptions = {
     organizationId: number;
     useMock: boolean;
     isPreview?: boolean;

@@ -212,13 +212,15 @@ export type FormDataV1 = {
     // for type classic (1)
     fields?: Record<string, FormField>; // the field's name and properties. There will always be an 'email' field
     // for type external (2)
-    script?: string;
-    auto_fill?: boolean;
+    form_html?: string;
     // for type marketo (3)
     munchkin_id?: string;
-    form_id?: string;
+    form_id?: string; // also for type eloqua (4)
     base_url?: string;
     custom_script?: string;
+    // for type eloqua (4)
+    script?: string;
+    auto_fill?: boolean;
 };
 
 type Label = {
