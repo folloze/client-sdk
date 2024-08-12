@@ -142,11 +142,31 @@ describe("testing sdk designer module", () => {
         await sdk.designer.getIconsImageGallery().then(result => expect(result.length).toEqual(4));
         await sdk.designer.getMobileImageGallery().then(result => expect(result.length).toEqual(2));
         await sdk.designer.getLogosImageGallery().then(result => expect(result.length).toEqual(3));
+        await sdk.designer.getPersonalImageGallery().then(result => expect(result.length).toEqual(2));
+    });
+
+    it("checks that all video gallery requests work as expected", async () => {
+        await sdk.designer.getVideosGallery().then(result => expect(result.length).toEqual(3));
+        await sdk.designer.getPersonalVideosGallery().then(result => expect(result.length).toEqual(2));
     });
 
     it("checks that get image gallery by bing search is working as expected", async () => {
         await sdk.designer.searchImageGallery("bug").then(result => expect(result.length).toEqual(14));
         await sdk.designer.searchImageGallery("test").then(result => expect(result.length).toEqual(14));
+    });
+
+    it("checks that create personal gallery media works as expected", async () => {
+        const photoUrl = "https://images.folloze.com/image/upload/c_lfill,h_140/f_auto/q_auto/v1723457344/ooaw0nefau2avbe0x3fd.jpg";
+
+        await sdk.designer.createPersonalGalleryMedia({
+            url: photoUrl,
+            name: "image",
+            category: "banners"
+        }).then(result => expect(result.url).toEqual(photoUrl));
+    });
+
+    it("checks that delete personal gallery media works as expected", async () => {
+        await sdk.designer.deletePersonalGalleryMedia(1).then(result => expect(result).toEqual(undefined));
     });
 
     // todo(multi-pages): implement a new test for save liveboard

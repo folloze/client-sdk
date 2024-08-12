@@ -100,6 +100,7 @@ export type ImageGalleryParams = {
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;
+    isPersonal?: boolean; // for user uploaded images from the designer.
 };
 
 export type VideoGalleryParams = {
@@ -108,7 +109,14 @@ export type VideoGalleryParams = {
     organizationId?: number;
     bankCategory?: VideoBankCategoryType;
     count?: number;
+    isPersonal?: boolean; // for user uploaded videos from the designer.
 };
+
+export type personalGalleryMediaParams = {
+    category: "banners" | "videos",
+    url: string,
+    name: string
+}
 
 export type VideoPlaybackOptions = {
     playOnce: boolean;

@@ -3,7 +3,7 @@ import { type FetchService } from "../common/FetchService";
 import { type AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
 import LiveEventAnalytics from "./LiveEventAnalytics";
 export * from "./LiveEventAnalytics";
-export declare type PingPayload = {
+export type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
@@ -11,7 +11,7 @@ export declare type PingPayload = {
     guid: string;
     analyticsData: any;
 };
-export declare type SourceType = "item" | "ai" | "recommendations";
+export type SourceType = "item" | "ai" | "recommendations";
 export declare enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
@@ -31,7 +31,7 @@ export declare enum DesignerEventTypes {
     clicked_on_campaign_preview = 18,
     viewed_design_tab = 19,
     viewed_content_tab = 20,
-    changed_board_privacy_settings = 47,
+    changed_board_privacy_settings = 47,//might be unneccessary after general settings are out
     clicked_on_find_more_images = 51,
     clicked_on_search_image = 52,
     clicked_on_upload_an_image = 53,

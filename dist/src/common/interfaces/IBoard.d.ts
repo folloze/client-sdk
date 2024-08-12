@@ -26,7 +26,7 @@ export interface LoadableElement extends LitElement {
     config: LoadableConfig;
     data: LoadableConfig["data"];
 }
-export declare type BoardConfig = {
+export type BoardConfig = {
     id: number;
     meta: null | {
         savedTime?: Date;
@@ -46,7 +46,7 @@ export declare type BoardConfig = {
     personalization?: IPersonalizationConfig;
     generationConfig?: GenerationConfig;
 };
-export declare type PageConfig = {
+export type PageConfig = {
     name: "default" | string;
     displayName?: string;
     grid: {
@@ -128,7 +128,7 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
-export declare type PageGenerationConfig = {
+export type PageGenerationConfig = {
     board?: {
         goal?: string;
         productName?: string;
@@ -138,19 +138,19 @@ export declare type PageGenerationConfig = {
         [key: string]: WidgetGenerationConfig;
     };
 };
-export declare type GenerationConfig = {
+export type GenerationConfig = {
     pages: {
         [key: string]: PageGenerationConfig;
     };
 };
 export declare const BOARD_GOALS: string[];
 export declare const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig;
-export declare type WidgetGenerationConfig = {
+export type WidgetGenerationConfig = {
     purpose?: string;
     elaboratedPurpose?: string;
 };
-export declare type PageName = "default" | "registration" | string;
-export declare type Board = {
+export type PageName = "default" | "registration" | string;
+export type Board = {
     allow_embedding?: boolean;
     id: number;
     auto_upgrade_widgets?: boolean;
