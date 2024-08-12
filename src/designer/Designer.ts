@@ -1,5 +1,5 @@
 export * from "./IDesignerTypes";
-import {AxiosInstance, AxiosResponse} from "axios";
+import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
@@ -26,7 +26,8 @@ import {
     MergeTagFilters,
     type GenerateWidgetsTextsRequest,
     type GenerateWidgetsTextsResponse,
-    type ChatConversationDataV2
+    type ChatConversationDataV2,
+    type personalGalleryMediaParams
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -74,11 +75,45 @@ export class Designer {
         });
     }
 
+    public createPersonalGalleryMedia(payload: personalGalleryMediaParams): Promise<GalleryImage | GalleryVideo> {
+        const params = {
+            ...payload,
+            isPersonal: true,
+            organizationId: this.fetchService.organizationId
+        };
+
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post<GalleryImage | GalleryVideo>("/api/v1/organization_images", keysToSnakeCase(params))
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not create organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public deletePersonalGalleryMedia(id: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/organization_images/${id}`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not delete organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
     public getVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "videos",
-            type: "video",
+            type: "video"
         });
     }
 
@@ -86,7 +121,25 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
+            type: "campaign"
+        });
+    }
+
+    public getPersonalVideosGallery(): Promise<GalleryVideo[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "videos",
+            type: "video",
+            isPersonal: true
+        });
+    }
+
+    public getPersonalImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "banners",
             type: "campaign",
+            isPersonal: true
         });
     }
 

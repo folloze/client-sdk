@@ -1,4 +1,4 @@
-declare type AnalyticTypeToPayload = {
+type AnalyticTypeToPayload = {
     video_started: {
         content_id: number;
         content_item_id: number;
@@ -33,10 +33,10 @@ declare type AnalyticTypeToPayload = {
         content_id: number;
     };
 };
-declare type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
+type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
 }[K];
-export declare type AnalyticEventPrepared = {
+export type AnalyticEventPrepared = {
     type: string;
     timezone_offset: number;
     timezone: string;

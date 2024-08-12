@@ -2,7 +2,7 @@ import { LitElement } from "lit";
 import { OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
 import { LiveWidget } from "../LiveWidget";
 import { FlzEvent } from "../FlzEvent";
-export declare type ItemViewerDesign = "lightbox" | "classic";
+export type ItemViewerDesign = "lightbox" | "classic";
 export interface FlzVItemViewerSettings {
     design: ItemViewerDesign;
     allow_download: boolean;

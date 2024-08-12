@@ -1,4 +1,4 @@
-export declare type PrivacySettings = {
+export type PrivacySettings = {
     restrict_export_data: boolean;
     privacy_warning_provider: string;
     emails_privacy_disclaimer: {
