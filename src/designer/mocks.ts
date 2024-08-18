@@ -1,6 +1,6 @@
 import MockAdapter from "axios-mock-adapter";
 import {
-    GalleryImage,
+    type GalleryImage,
     UploadUrlResponseV1,
     FormV1,
     CampaignElementResponseV1,
@@ -17,7 +17,8 @@ import {
     ConfigSavedSuccess,
     MergeTagAttribute,
     MergeTagValue,
-    Theme
+    Theme,
+    type GalleryVideo
 } from "./IDesignerTypes";
 import {Board} from "../common/interfaces/IBoard";
 
@@ -251,76 +252,138 @@ export const rules = (mock: MockAdapter) => {
         },
     ]);
 
-    // search
-    mock.onGet("/api/v1/image_gallery").reply<GalleryImage[]>((config): [number, Object] => {
-        if (config.params.type !== "search") {
-            throw new Error("this mock is only for search type query");
+    //videos
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "videos", type: "video"},
+    }).reply<GalleryVideo[]>(200, [
+        {
+            url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.mp4",
+            fit: "cover",
+            id: 1
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.mp4",
+            fit: "cover",
+            id: 2
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.mp4",
+            fit: "cover",
+            id: 3
+        },
+    ]);
+
+    //uploaded personal images
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "banners", type: "campaign", is_personal: true},
+    }).reply<GalleryImage[]>(200, [
+        {
+            url: "https://images.folloze.com/image/upload/v1723448083/pdztu2nhl7szhmxoviha.webp",
+            fit: "cover",
+            id: 42
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686314/ilmmffwrlm2rv8quriml.png",
+            fit: "cover",
+            id: 76
         }
-        if (!config.params.query) {
-            throw new Error("there is no query attached to this request");
+    ]);
+
+    //uploaded personal videos
+    mock.onGet("/api/v1/image_gallery", {
+        params: {organization_id: 1, bank_category: "videos", type: "video", is_personal: true},
+    }).reply<GalleryImage[]>(200, [
+        {
+            url: "https://images.folloze.com/image/upload/v1640686386/svzkkcxgxvekrdexyisz.mp4",
+            fit: "cover",
+            id: 78
+        },
+        {
+            url: "https://images.folloze.com/image/upload/v1640686372/o9tfjjaynitx01czqpmy.mp4",
+            fit: "cover",
+            id: 76
         }
-        return [
-            200,
-            [
-                {
-                    url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
-                    fit: "contained",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
-                    fit: "contained",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
-                    fit: "contained",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
-                    fit: "contained",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
-                    fit: "contained",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
-                    fit: "contained",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
-                    fit: "cover",
-                },
-                {
-                    url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
-                    fit: "contained",
-                },
-            ],
-        ];
+    ]);
+
+    mock.onPost("/api/v1/organization_images").reply(200, {
+        id: 30,
+        is_personal: true,
+        url: "https://images.folloze.com/image/upload/c_lfill,h_140/f_auto/q_auto/v1723457344/ooaw0nefau2avbe0x3fd.jpg"
     });
+
+    // delete personal gallery media
+    mock.onDelete(/api\/v1\/organization_images\/(\d+)/).reply(200);
+
+        // search
+        mock.onGet("/api/v1/image_gallery").reply<GalleryImage[]>((config): [number, Object] => {
+            if (config.params.type !== "search") {
+                throw new Error("this mock is only for search type query");
+            }
+            if (!config.params.query) {
+                throw new Error("there is no query attached to this request");
+            }
+            return [
+                200,
+                [
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://images2.minutemediacdn.com/image/upload/c_fill,g_auto,h_1248,w_2220/v1555446925/shape/mentalfloss/800px-cotton_harlequin_bugs.jpg?itok=GHLRk9OC",
+                        fit: "contained",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://blog.growingwithscience.com/wp-content/uploads/2012/01/2011-mesquite-bug.jpg",
+                        fit: "contained",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://i2.wp.com/www.gardeningknowhow.com/wp-content/uploads/2014/07/milkweed-bug.jpg?fit=1722,1115\u0026ssl=1",
+                        fit: "contained",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://cdn.britannica.com/44/125544-050-9ADBFAB9/Red-bug.jpg",
+                        fit: "contained",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/https://pnwhandbooks.org/sites/pnwhandbooks/files/insect/images/landscape-stink-bug/wredshoulderedsbadult0165.jpg",
+                        fit: "contained",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/http://www.brisbaneinsects.com/brisbane_lygaeoidbugs/images/DSC_6659.jpg",
+                        fit: "contained",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+                        fit: "cover",
+                    },
+                    {
+                        url: "https://images.folloze.com/image/fetch/http://ucanr.edu/blogs/slomggarden/blogfiles/40859_original.jpg",
+                        fit: "contained",
+                    },
+                ],
+            ];
+        });
 
     mock.onPost("/api/v1/upload_urls").reply<UploadUrlResponseV1>(200, {
         file_name: "file_name",
@@ -751,7 +814,7 @@ export const rules = (mock: MockAdapter) => {
         },
     ]);
 
-    mock.onGet(/api\/v1\/boards\/(\d+)\/merge_tags/).reply<MergeTagAttribute[]>(200, [
+    mock.onGet(/api\/v1\/organizations\/(\d+)\/merge_tags/).reply<MergeTagAttribute[]>(200, [
         {
             id: 1,
             is_enabled: true,
@@ -760,6 +823,8 @@ export const rules = (mock: MockAdapter) => {
             provider: "folloze",
             allow_text_replacement: true,
             allow_user_input: true,
+            type: "user_input",
+            predefined_list: []
         },
         {
             id: 2,
@@ -769,6 +834,8 @@ export const rules = (mock: MockAdapter) => {
             provider: "kickfire",
             allow_text_replacement: true,
             allow_user_input: false,
+            type: "predefined_list",
+            predefined_list: ["10M-50M", "1M-10M"]
         },
     ]);
 

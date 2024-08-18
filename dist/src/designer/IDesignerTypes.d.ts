@@ -64,6 +64,7 @@ export declare type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    fit?: "cover" | "contain";
 };
 export declare type ImageGalleryParams = {
     type: ImageGalleryTypes;
@@ -71,6 +72,7 @@ export declare type ImageGalleryParams = {
     organizationId?: number;
     bankCategory?: ImageBankCategoryType;
     count?: number;
+    isPersonal?: boolean;
 };
 export declare type VideoGalleryParams = {
     type: VideoGalleryTypes;
@@ -78,6 +80,12 @@ export declare type VideoGalleryParams = {
     organizationId?: number;
     bankCategory?: VideoBankCategoryType;
     count?: number;
+    isPersonal?: boolean;
+};
+export declare type personalGalleryMediaParams = {
+    category: "banners" | "videos";
+    url: string;
+    name: string;
 };
 export declare type VideoPlaybackOptions = {
     playOnce: boolean;
@@ -168,12 +176,13 @@ export declare type FormDataV1 = {
     success_message?: string;
     submit_redirect_url?: string;
     fields?: Record<string, FormField>;
-    script?: string;
-    auto_fill?: boolean;
+    form_html?: string;
     munchkin_id?: string;
     form_id?: string;
     base_url?: string;
     custom_script?: string;
+    script?: string;
+    auto_fill?: boolean;
 };
 declare type Label = {
     text: string;
@@ -339,10 +348,17 @@ export declare type MergeTagAttribute = {
     provider: string;
     allow_text_replacement: boolean;
     allow_user_input: boolean;
+    type: string;
+    predefined_list: string[];
 };
 export declare type MergeTagValue = {
     id: string;
     name: string;
+};
+export declare type MergeTagFilters = {
+    provider?: string;
+    context_type?: string;
+    tag_type?: number;
 };
 export declare type Theme = {
     id: number;
@@ -379,4 +395,11 @@ export declare type GenerateWidgetsTextsResponse = {
     widgets: GeneratedWidgetText[];
 };
 export declare type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
+export declare type ChatConversationDataV2 = {
+    participants?: Array<string>;
+    subject?: string | null;
+    welcomeMessages?: Array<string> | null;
+    custom?: Map<string, string> | null;
+    photoUrl?: string | null;
+};
 export {};

@@ -6,7 +6,7 @@ import {
     FormPrivacyMessageResponseV1,
 } from "./../designer/IDesignerTypes";
 import {PrivacySettings} from "../common/ISharedTypes";
-import {FlzVItemViewerSettings} from "../common/interfaces/IContentWidget";
+import {FlzVItemViewerSettings} from "../common/interfaces/IItemViewer";
 
 export type BoardResponseV1 = {
     id: number;
@@ -348,3 +348,14 @@ export type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+
+export type ChatUserDataV2 = {
+    id: number;
+    name: string;
+};
+
+export type LiveEventParticipant = {
+    id: number;
+    name: string;
+    last_name: string | null;       
+}

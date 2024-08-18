@@ -1,5 +1,5 @@
 export * from "./IDesignerTypes";
-import {AxiosInstance, AxiosResponse} from "axios";
+import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
@@ -23,8 +23,11 @@ import {
     VideoGalleryParams,
     GalleryVideo,
     Theme,
+    MergeTagFilters,
     type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse
+    type GenerateWidgetsTextsResponse,
+    type ChatConversationDataV2,
+    type personalGalleryMediaParams
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -72,11 +75,45 @@ export class Designer {
         });
     }
 
+    public createPersonalGalleryMedia(payload: personalGalleryMediaParams): Promise<GalleryImage | GalleryVideo> {
+        const params = {
+            ...payload,
+            isPersonal: true,
+            organizationId: this.fetchService.organizationId
+        };
+
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post<GalleryImage | GalleryVideo>("/api/v1/organization_images", keysToSnakeCase(params))
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not create organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public deletePersonalGalleryMedia(id: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/organization_images/${id}`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not delete organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
     public getVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "videos",
-            type: "video",
+            type: "video"
         });
     }
 
@@ -84,7 +121,25 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
+            type: "campaign"
+        });
+    }
+
+    public getPersonalVideosGallery(): Promise<GalleryVideo[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "videos",
+            type: "video",
+            isPersonal: true
+        });
+    }
+
+    public getPersonalImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "banners",
             type: "campaign",
+            isPersonal: true
         });
     }
 
@@ -149,10 +204,10 @@ export class Designer {
      * @param {number} boardId
      * @returns {Record<string, FormV1>} an object of id and FormResponse
      */
-    getForms(boardId: number): Promise<Record<string, FormV1>> {
+    getForms(boardId: number, selectedFormId?: number): Promise<Record<string, FormV1>> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`)
+                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`, { params: { additional_form_id: selectedFormId } })
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get forms", e);
@@ -426,21 +481,25 @@ export class Designer {
      * gets board merge tags
      *
      * @param {number} boardId
-     * @param {string} contextType
+     * @param {MergeTagFilters} filters
      * @returns {MergeTagAttribute[]} merge tags array
      */
-    public getMergeTagsByBoard(
+    public getMergeTags(
+        organizationId: number,
         boardId: number,
-        contextType: string
+        filters: MergeTagFilters
     ): Promise<MergeTagAttribute[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<MergeTagAttribute[]>(`/api/v1/boards/${boardId}/merge_tags`, {
-                    params: {context_type: contextType},
+                .get<MergeTagAttribute[]>(`/api/v1/organizations/${organizationId}/merge_tags`, {
+                    params: {
+                        board_id: boardId,
+                        filters: filters
+                    }
                 })
                 .then(result => resolve(result.data))
                 .catch(e => {
-                    console.error("could not get board merge tags", e);
+                    console.error("could not get merge tags", e);
                     reject(e);
                 });
         });
@@ -546,6 +605,15 @@ export class Designer {
                     reject(e);
                 }
             );
+        });
+    }
+
+
+    async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
+        return this.fetchService.fetcher.post("/api/v2/boards/chat/conversations", {
+            board_id: boardId,
+            widget_id: widgetId,
+            ...conversationData
         });
     }
 }

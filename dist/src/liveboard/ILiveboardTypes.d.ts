@@ -1,6 +1,6 @@
 import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
-import { FlzVItemViewerSettings } from "../common/interfaces/IContentWidget";
+import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
 export declare type BoardResponseV1 = {
     id: number;
     slug: string;
@@ -306,5 +306,14 @@ export declare type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageRe
 export declare type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
+};
+export declare type ChatUserDataV2 = {
+    id: number;
+    name: string;
+};
+export declare type LiveEventParticipant = {
+    id: number;
+    name: string;
+    last_name: string | null;
 };
 export {};

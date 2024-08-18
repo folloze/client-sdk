@@ -1,7 +1,19 @@
 import { ItemResponseV2, LeadResponseV1, OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
 import { Board, BoardConfig } from "./IBoard";
 import { PredefinedSection, WidgetListItem } from "./ISection";
+import { FlzVItemViewerSettings } from "./IItemViewer";
 export declare type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+export declare type Features = {
+    personalization: boolean;
+    multiPages?: boolean;
+    recommendationsAi: boolean;
+    customTheme: boolean;
+    genAi: boolean;
+    liveEvent: boolean;
+    htmlSections: boolean;
+    registrationTracking: boolean;
+};
+export declare type FeatureName = keyof Features;
 export declare type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
@@ -31,16 +43,11 @@ export declare type InitialState = {
         tagline: string;
     };
     footers: Record<string, Footer>;
-    features: {
-        personalization: boolean;
-        multiPages?: boolean;
-        recommendationsAi: boolean;
-        customTheme: boolean;
-        genAi: boolean;
-    };
+    features: Features;
     user?: User;
     privacy_messages: PrivacyMessage[];
     item_viewer: {
+        default: FlzVItemViewerSettings;
         current?: ItemResponseV2;
         history?: Record<string, OpenItemViewerPayload>;
         items?: Record<string, ItemResponseV2>;

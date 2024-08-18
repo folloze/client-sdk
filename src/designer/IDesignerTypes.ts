@@ -57,26 +57,26 @@ export type ImageTransformation = {
 };
 
 export type StringPosition =
-  | "top-left"
-  | "top-center"
-  | "top-right"
-  | "middle-left"
-  | "middle-center"
-  | "middle-right"
-  | "bottom-left"
-  | "bottom-center"
-  | "bottom-right";
+    | "top-left"
+    | "top-center"
+    | "top-right"
+    | "middle-left"
+    | "middle-center"
+    | "middle-right"
+    | "bottom-left"
+    | "bottom-center"
+    | "bottom-right";
 
 export type PercentPosition =
-  | "0% 0%"
-  | "50% 0%"
-  | "100% 0%"
-  | "0% 50%"
-  | "50% 50%"
-  | "100% 50%"
-  | "0% 100%"
-  | "50% 100%"
-  | "100% 100%";
+    | "0% 0%"
+    | "50% 0%"
+    | "100% 0%"
+    | "0% 50%"
+    | "50% 50%"
+    | "100% 50%"
+    | "0% 100%"
+    | "50% 100%"
+    | "100% 100%";
 
 export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
 
@@ -91,6 +91,7 @@ export type FlzEditableImageData = {
     alt?: string;
     maxWidth?: number;
     maxHeight?: number;
+    fit?: "cover" | "contain";
 };
 
 export type ImageGalleryParams = {
@@ -99,6 +100,7 @@ export type ImageGalleryParams = {
     organizationId?: number; // imageBank This is for cross org users in image bank (agencies, super admins, etc)
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;
+    isPersonal?: boolean; // for user uploaded images from the designer.
 };
 
 export type VideoGalleryParams = {
@@ -107,11 +109,18 @@ export type VideoGalleryParams = {
     organizationId?: number;
     bankCategory?: VideoBankCategoryType;
     count?: number;
+    isPersonal?: boolean; // for user uploaded videos from the designer.
 };
+
+export type personalGalleryMediaParams = {
+    category: "banners" | "videos",
+    url: string,
+    name: string
+}
 
 export type VideoPlaybackOptions = {
     playOnce: boolean;
-}
+};
 
 export type FlzEditableVideoData = {
     url: string;
@@ -181,13 +190,13 @@ export type FormField = {
 };
 
 type DependentField = {
-    name: string,
-    values: string[]
+    name: string;
+    values: string[];
 };
 
 type SelectInputValue = {
-    id: string,
-    label: string
+    id: string;
+    label: string;
 };
 
 export type FormV1 = {
@@ -202,7 +211,7 @@ export type FormV1 = {
 
 export type FormDataV1 = {
     form_type?: number;
-    name?: string,
+    name?: string;
     // both classic and external
     form_title?: string;
     submit_label?: string;
@@ -211,13 +220,15 @@ export type FormDataV1 = {
     // for type classic (1)
     fields?: Record<string, FormField>; // the field's name and properties. There will always be an 'email' field
     // for type external (2)
-    script?: string;
-    auto_fill?: boolean;
+    form_html?: string;
     // for type marketo (3)
     munchkin_id?: string;
-    form_id?: string;
+    form_id?: string; // also for type eloqua (4)
     base_url?: string;
     custom_script?: string;
+    // for type eloqua (4)
+    script?: string;
+    auto_fill?: boolean;
 };
 
 type Label = {
@@ -401,29 +412,37 @@ export type MergeTagAttribute = {
     provider: string;
     allow_text_replacement: boolean;
     allow_user_input: boolean;
-}
+    type: string;
+    predefined_list: string[];
+};
 
 export type MergeTagValue = {
     id: string;
     name: string;
-}
+};
+
+export type MergeTagFilters = {
+    provider?: string;
+    context_type?: string;
+    tag_type?: number;
+};
 
 export type Theme = {
-  id: number;
-  name: string | "system theme";
-  status: "archived" | "published";
-  style: string;
-  type: "basic" | "migration" | "system";
-}
+    id: number;
+    name: string | "system theme";
+    status: "archived" | "published";
+    style: string;
+    type: "basic" | "migration" | "system";
+};
 
 export type GenerateWidgetsTextsRequest = {
     board: {
         goal: string;
         productName: string;
         details?: string;
-    },
+    };
     widgets: GenerateTextWidgetData[];
-}
+};
 
 export type GenerateTextWidgetData = {
     description: string;
@@ -431,21 +450,29 @@ export type GenerateTextWidgetData = {
     elaboratedPurpose?: string;
     injectables: any[];
     widgetId: string;
-}
+};
 
 export type GeneratedText = {
     text: string;
     path: string;
-}
+};
 
 export type GeneratedWidgetText = {
     text: GeneratedText[];
     prompt: string;
     widgetId: string;
-}
+};
 
 export type GenerateWidgetsTextsResponse = {
-    widgets: GeneratedWidgetText[]
-}
+    widgets: GeneratedWidgetText[];
+};
 
 export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
+
+export type ChatConversationDataV2 = {
+    participants?: Array<string>;
+    subject?: string | null;
+    welcomeMessages?: Array<string> | null;
+    custom?: Map<string, string> | null;
+    photoUrl?: string | null;
+};

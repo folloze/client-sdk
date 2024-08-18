@@ -29,6 +29,8 @@ const defaultFetcherOptions: FetcherOptions = {
     analyticsServiceEndpoint: "",
 };
 
+export const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
+
 // fetchCategories: api.fetchCategories,      // replace "live_board" with "api"
 // fetchItems: api.fetchItems,                // replace "live_board" with "api"
 // fetchHasItems: api.fetchHasItems,          // replace "live_board" with "api"
@@ -137,12 +139,16 @@ export class FetchService {
         }
     }
 
+    public setSessionGuid(guid: string) {
+        this.sessionGuid = guid;
+    }
+
     private handleSuccess = (response): AxiosResponse => {
         if (response.headers?.["authorization"]) {
             this.jwt = response.headers["authorization"].replace("bearer ", "");
         }
-        if (response.headers?.["folloze-session-guid"]) {
-            this.sessionGuid = response.headers["folloze-session-guid"];
+        if (response.headers?.[FLZ_SESSION_GUID_HEADER]) {
+            this.sessionGuid = response.headers[FLZ_SESSION_GUID_HEADER];
         }
         return response;
     };
@@ -184,7 +190,7 @@ export class FetchService {
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
-                config.headers["folloze-session-guid"] = this.sessionGuid;
+                config.headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid;
             }
             if (this.jwt) {
                 config.headers["Authorization"] = `Bearer ${this.jwt}`;

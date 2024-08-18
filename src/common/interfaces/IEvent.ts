@@ -7,7 +7,8 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.stopTrackingForVisit"
-    | "Folloze.triggerCtaSubmit";
+    | "Folloze.triggerCtaSubmit"
+    | "Folloze.closeFormRequest";
 
 export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_ACTION;
 
@@ -39,6 +40,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-journey"
     | "getFormData"
     | "get-form-privacy-message"
+    | "close-form-request"
     | "get-contact-card-info"
     | "get-file-metadata"
     | "get-file-download-url"
@@ -49,6 +51,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "open-link-by-target-type"
     | "openItemViewer"
     | "itemViewerClosed"
+    | "item-viewer-new-item"
     | "open-modal"
     | "register-floating-widgets-triggers"
     | "get-form-privacy-messages"
@@ -63,7 +66,16 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "get-is-regulated-country"
     | "join-event"
     | "get-public-url"
-    | "load-add-to-calendar";
+    | "load-add-to-calendar"
+    | "load-chat-script"
+    | "create-chat-user"
+    | "join-chat-conversation"
+    | "leave-chat-conversation"
+    | "track-live-event-attendance"
+    | "get-live-event-participants"
+    | "join-live-event"
+    | "leave-live-event"
+    | "scroll";
 
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
@@ -97,4 +109,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "open-generic-dialog"
     | "custom-sections-action"
     | "generate-ai-action"
-    | "upload-file";
+    | "upload-file"
+    | "create-or-update-chat-conversation";

@@ -1,12 +1,15 @@
-import { AxiosResponse } from "axios";
-import { FetchService } from "../common/FetchService";
-import { AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
+import { type AxiosResponse } from "axios";
+import { type FetchService } from "../common/FetchService";
+import { type AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
+import LiveEventAnalytics from "./LiveEventAnalytics";
+export * from "./LiveEventAnalytics";
 export declare type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
     contentItemId?: number;
     guid: string;
+    analyticsData: any;
 };
 export declare type SourceType = "item" | "ai" | "recommendations";
 export declare enum LiveBoardEventTypes {
@@ -57,6 +60,7 @@ export declare enum DesignerEventTypes {
 }
 export declare class Analytics {
     private fetchService;
+    liveEvent: LiveEventAnalytics;
     constructor(fetch: FetchService);
     /**
      * Lead viewed board
@@ -64,14 +68,6 @@ export declare class Analytics {
      * @param {number} boardId
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse>;
-    /**
-     * Lead viewed item
-     *
-     * @param {number} itemId
-     * @param {string} guid
-     * @deprecated Use trackLeadContentView instead
-     */
-    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
     /**
      * Lead viewed content
      *

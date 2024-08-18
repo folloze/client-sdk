@@ -12,14 +12,12 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     protected lead: LeadResponseV1;
     protected boardId: number;
     private shouldBeShown: boolean = false;
+    private gatingDelayTimer: ReturnType<typeof setTimeout>;
 
     connectedCallback() {
         super.connectedCallback();
         widgetEmit(this, "get-state", undefined, state => {
             this.boardId = state.board.id;
-            if (state.item_viewer?.current?.is_gated) {
-                this.toggleOnOrOff();
-            }
         });
     }
 
@@ -29,15 +27,19 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
         if (action === "widgets-scripts-loaded" && this.shouldBeShown) {
             // this is for solving a race condition when landing on gated item
             this.toggleOnOrOff();
-        } else if (action === "changeItem" || action === "openItemViewer") {
-            if (!e.payload?.is_gated) {
-                this.close();
-                return;
-            }
-            this.toggleOnOrOff();
+        } else if (action === "item-viewer-new-item") {
+            this.handleNewItem(e.payload);
         } else if (action === "itemViewerClosed") {
             this.close();
         }
+    }
+
+    handleNewItem(item: any) {
+        if (!item.is_gated) {
+            this.close();
+            return;
+        }
+        this.toggleOnOrOff();
     }
 
     toggleOnOrOff() {
@@ -48,7 +50,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
         const isSubmittedAlready = this.isPersistSubmitExists(this.boardId);
         const isKnownLeadGated = this._data.enableForKnownUsers && !isSubmittedAlready;
         const showGated = this.lead.anon_guest || isKnownLeadGated;
-        console.debug(`show gated form: ${showGated}`);
+        console.debug(`show gated form: ${showGated}, ${this._data.gatingFormDelay} ms`);
         if (showGated) {
             this.show();
             return;
@@ -57,15 +59,17 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     }
 
     show() {
-        setTimeout(() => {
+        const delay = this._data.gatingFormDelay || 0;
+        this.gatingDelayTimer = setTimeout(() => {
             this.shouldBeShown = true;
             if (this._data?.ctaFormConfig?.form_id !== 0 && this.classList.contains("hidden")) {
                 widgetEmit(this, "floating-widget-manager", {widget: this, command: "show"});
             }
-        }, this._data.gatingFormDelay || 0);
+        }, delay);
     }
 
     close() {
+        clearTimeout(this.gatingDelayTimer);
         this.shouldBeShown = false;
         if (!this.classList.contains("hidden")) {
             widgetEmit(this, "floating-widget-manager", {widget: this, command: "hide"});
