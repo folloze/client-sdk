@@ -95,6 +95,7 @@ export type OpenItemViewerPayload = ItemNavigationParams & {
     content_item_id: number;
     slug: string;
     name: string;
+    seo_title: string;
     description: string;
     item_source: number;
     item_type: string;
