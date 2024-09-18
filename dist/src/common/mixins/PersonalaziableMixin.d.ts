@@ -1,5 +1,5 @@
 import { LiveElement } from "../interfaces/IBoard";
-type Constructor<T> = abstract new (...args: any[]) => T;
+declare type Constructor<T> = abstract new (...args: any[]) => T;
 export declare class IPersonalizable {
     isConfigSet(): boolean;
 }

@@ -1,6 +1,6 @@
 import { InitialState } from "./IInitialState";
 import { FetcherOptions } from "../FetchService";
-export type IFollozeState = {
+export declare type IFollozeState = {
     initialState: InitialState;
     baseRoute: string;
     envConfig: {

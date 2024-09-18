@@ -1,15 +1,16 @@
 import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
 import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
-export type BoardResponseV1 = {
+export declare type BoardResponseV1 = {
     id: number;
     slug: string;
     online_items_count: number;
     organization_id: number;
     name: string;
+    seo_title: string;
     is_ssl: boolean;
 };
-export type BoardSellerResponseV1 = {
+export declare type BoardSellerResponseV1 = {
     name: string;
     last_name: string;
     email: string;
@@ -20,10 +21,11 @@ export type BoardSellerResponseV1 = {
     twitter: string;
     linkedin: string;
 };
-export type CategoryResponseV2 = {
+export declare type CategoryResponseV2 = {
     id: number;
     slug: string;
     name: string;
+    seo_title: string;
     category_type: number;
     parent_category_id: number;
     board_id: number;
@@ -34,22 +36,22 @@ export type CategoryResponseV2 = {
     images: object[];
     route: string;
 };
-export type CategoriesResponseV2 = {
+export declare type CategoriesResponseV2 = {
     categories_ids: number[];
     data: Record<string, CategoryResponseV2>;
 };
-export type UserChatResponseV1 = {
+export declare type UserChatResponseV1 = {
     token: string;
     chat_id: number;
 };
-export type Image = {
+export declare type Image = {
     id: number;
     url: string;
     fit: string;
     transformation: object;
     displayable_section?: string;
 };
-type ItemNavigationParams = {
+declare type ItemNavigationParams = {
     multiCategories?: number[][];
     categoriesScope?: number[];
     search?: string;
@@ -64,7 +66,7 @@ type ItemNavigationParams = {
     journey_type?: "nextPrev" | "list";
     amount?: number;
 };
-export type ItemsParams = ItemNavigationParams & {
+export declare type ItemsParams = ItemNavigationParams & {
     boardId: number;
     category?: number;
     page?: number;
@@ -72,7 +74,7 @@ export type ItemsParams = ItemNavigationParams & {
     source: "curated" | "recommendations";
     amount?: number;
 };
-export type OpenItemViewerPayload = ItemNavigationParams & {
+export declare type OpenItemViewerPayload = ItemNavigationParams & {
     id: number;
     content_item_id: number;
     slug: string;
@@ -92,11 +94,11 @@ export type OpenItemViewerPayload = ItemNavigationParams & {
     is_landing?: boolean;
     is_content_item: boolean;
 };
-export type JourneyItemParams = ItemNavigationParams & {
+export declare type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
     boardId?: number;
 };
-export type ItemResponseV2 = {
+export declare type ItemResponseV2 = {
     id: number;
     content_item_id: number;
     category_ids: number[];
@@ -114,6 +116,7 @@ export type ItemResponseV2 = {
     likes_count: number;
     link_url?: string;
     name: string;
+    seo_title: string;
     slug: string;
     status: number;
     views_count: number;
@@ -121,7 +124,7 @@ export type ItemResponseV2 = {
     route: string;
     is_content_item: boolean;
 };
-export type ItemsResponseV2 = {
+export declare type ItemsResponseV2 = {
     item_ids: number[];
     data: Record<string, ItemResponseV2>;
     most_viewed_item_id: number;
@@ -130,10 +133,10 @@ export type ItemsResponseV2 = {
     current_page?: number;
     per_page?: number;
 };
-export type HasItemResponseV2 = {
+export declare type HasItemResponseV2 = {
     has_items: boolean;
 };
-type User = {
+declare type User = {
     user_id: number;
     name: string;
     email: string;
@@ -147,7 +150,7 @@ type User = {
     twitter: string;
     image: string;
 };
-type ArticleItem = {
+declare type ArticleItem = {
     article_id: number;
     status: number;
     has_unpublished_changes: boolean;
@@ -176,7 +179,7 @@ type ArticleItem = {
     body: string;
     published_data?: object;
 };
-export type JourneyItem = {
+export declare type JourneyItem = {
     journey_index: number;
     category_id: number;
     category_slug: string;
@@ -201,7 +204,7 @@ export type JourneyItem = {
     open_in_new_tab?: boolean;
     article?: ArticleItem;
 };
-export type JourneyItemsResponseV2 = {
+export declare type JourneyItemsResponseV2 = {
     items: Record<string, JourneyItem>;
     items_count: number;
     current_item: JourneyItem;
@@ -209,32 +212,32 @@ export type JourneyItemsResponseV2 = {
     next_item_index: number;
     prev_item_index: number;
 };
-export type SnapshotUrlResponseV1 = {
+export declare type SnapshotUrlResponseV1 = {
     link_url: string;
     snapshot_url: string;
 };
-export type ItemAnalysisResponseV1 = {
+export declare type ItemAnalysisResponseV1 = {
     secured: boolean;
 };
-export type ItemFileMetadataResponseV1 = {
+export declare type ItemFileMetadataResponseV1 = {
     preview_metadata: {
         url?: string;
         file_id?: number;
         access_token?: string;
     };
 };
-export type ItemDownloadUrlSuccessResponseV2 = {
+export declare type ItemDownloadUrlSuccessResponseV2 = {
     download_url: string;
 };
-export type ItemDownloadUrlFailedResponseV2 = {
+export declare type ItemDownloadUrlFailedResponseV2 = {
     text: string;
 };
-export type CookieConsentParams = {
+export declare type CookieConsentParams = {
     leadId: number;
     constentOrigin: string;
     isoCode: string;
 };
-export type CtaParams = {
+export declare type CtaParams = {
     cta: {
         area: string;
         label?: string;
@@ -249,7 +252,7 @@ export type CtaParams = {
     link?: string;
     invitee?: string;
 };
-export type CtaResponseV1 = {
+export declare type CtaResponseV1 = {
     id: number;
     email: string;
     name: string;
@@ -258,15 +261,15 @@ export type CtaResponseV1 = {
     company?: string;
     group_user: boolean;
 };
-export type TargetType = "inline" | "new_tab";
-export type GeoLocationResponseV1 = {
+export declare type TargetType = "inline" | "new_tab";
+export declare type GeoLocationResponseV1 = {
     city: string;
     continent: string;
     country: string;
     country_code: string;
     state: string;
 };
-export type LeadResponseV1 = {
+export declare type LeadResponseV1 = {
     id: number;
     name: string;
     email: string;
@@ -275,8 +278,8 @@ export type LeadResponseV1 = {
     anon_guest: boolean;
     account_domain?: string;
 };
-export type LeadLinkClickResponseV1 = {};
-export type LiveEventUrlsResponseV2 = {
+export declare type LeadLinkClickResponseV1 = {};
+export declare type LiveEventUrlsResponseV2 = {
     meeting_url?: string;
     api_params?: {
         name: string;
@@ -292,26 +295,26 @@ export type LiveEventUrlsResponseV2 = {
     rich_client_desktop_url?: string;
     rich_client_mobile_url?: string;
 };
-export type OrganizationSettingsResponseV1 = {
+export declare type OrganizationSettingsResponseV1 = {
     privacy: PrivacySettings;
 };
-export type SessionResponseV1 = {
+export declare type SessionResponseV1 = {
     guid: string;
 };
-export type FormMetadataDataV1 = {
+export declare type FormMetadataDataV1 = {
     form: FormDataV1;
     privacy_message: FormPrivacyMessageDataV1;
 };
-export type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
-export type EnrichmentBoardConfigV3 = {
+export declare type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
+export declare type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
-export type ChatUserDataV2 = {
+export declare type ChatUserDataV2 = {
     id: number;
     name: string;
 };
-export type LiveEventParticipant = {
+export declare type LiveEventParticipant = {
     id: number;
     name: string;
     last_name: string | null;
