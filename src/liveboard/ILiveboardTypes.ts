@@ -34,6 +34,7 @@ export type CategoryResponseV2 = {
     id: number;
     slug: string;
     name: string;
+    seo_title: string;
     category_type: number;
     parent_category_id: number;
     board_id: number;
