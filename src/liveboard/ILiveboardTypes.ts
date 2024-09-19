@@ -14,6 +14,7 @@ export type BoardResponseV1 = {
     online_items_count: number;
     organization_id: number;
     name: string;
+    seo_title: string;
     is_ssl: boolean;
 };
 
@@ -33,6 +34,7 @@ export type CategoryResponseV2 = {
     id: number;
     slug: string;
     name: string;
+    seo_title: string;
     category_type: number;
     parent_category_id: number;
     board_id: number;
@@ -93,6 +95,7 @@ export type OpenItemViewerPayload = ItemNavigationParams & {
     content_item_id: number;
     slug: string;
     name: string;
+    seo_title: string;
     description: string;
     item_source: number;
     item_type: string;
@@ -128,6 +131,7 @@ export type ItemResponseV2 = {
     likes_count: number;
     link_url?: string;
     name: string;
+    seo_title: string;
     slug: string;
     status: number;
     views_count: number;
