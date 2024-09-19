@@ -164,6 +164,7 @@ export declare type Board = {
     };
     is_ssl: boolean;
     name: string;
+    seo_title: string;
     online_items_count: number;
     organization_id: number;
     privacy?: {
