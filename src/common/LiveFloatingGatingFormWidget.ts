@@ -11,6 +11,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
 
     protected lead: LeadResponseV1;
     protected boardId: number;
+    protected itemId?: number;
     private shouldBeShown: boolean = false;
     private gatingDelayTimer: ReturnType<typeof setTimeout>;
 
@@ -24,11 +25,14 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     incomingEvents(e: FlzEvent) {
         super.incomingEvents(e);
         const action: FLZ_EVENT_ACTION = e.action as FLZ_EVENT_ACTION;
+        this.itemId = null;
         if (action === "widgets-scripts-loaded" && this.shouldBeShown) {
             // this is for solving a race condition when landing on gated item
             this.toggleOnOrOff();
         } else if (action === "item-viewer-new-item") {
-            this.handleNewItem(e.payload);
+            const item = e.payload;
+            this.itemId = item.id;
+            this.handleNewItem(item);
         } else if (action === "itemViewerClosed") {
             this.close();
         }

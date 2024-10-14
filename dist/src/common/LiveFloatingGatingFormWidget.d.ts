@@ -5,6 +5,7 @@ export declare abstract class LiveFloatingGatingFormWidget extends LiveFloatingW
     readonly isGatingForm = true;
     protected lead: LeadResponseV1;
     protected boardId: number;
+    protected itemId?: number;
     private shouldBeShown;
     private gatingDelayTimer;
     connectedCallback(): void;
