@@ -15,9 +15,9 @@ export declare const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
 export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
+    sessionGuid: String;
     private mock;
     options: FetcherOptions;
-    private sessionGuid;
     private jwt;
     organizationId: number;
     urlToken: string;

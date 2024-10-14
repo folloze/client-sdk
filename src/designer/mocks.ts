@@ -75,6 +75,7 @@ export const rules = (mock: MockAdapter) => {
             is_v3_live: true,
             landing_page: "registration",
             name: "",
+            seo_title: "",
             online_items_count: 0,
             organization_id: 0,
             privacy: {
