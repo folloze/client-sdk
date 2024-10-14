@@ -25,14 +25,11 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
     incomingEvents(e: FlzEvent) {
         super.incomingEvents(e);
         const action: FLZ_EVENT_ACTION = e.action as FLZ_EVENT_ACTION;
-        this.itemId = null;
         if (action === "widgets-scripts-loaded" && this.shouldBeShown) {
             // this is for solving a race condition when landing on gated item
             this.toggleOnOrOff();
         } else if (action === "item-viewer-new-item") {
-            const item = e.payload;
-            this.itemId = item.id;
-            this.handleNewItem(item);
+            this.handleNewItem(e.payload);
         } else if (action === "itemViewerClosed") {
             this.close();
         }
@@ -43,6 +40,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
             this.close();
             return;
         }
+        this.itemId = item.id;
         this.toggleOnOrOff();
     }
 
@@ -78,6 +76,7 @@ export abstract class LiveFloatingGatingFormWidget extends LiveFloatingWidget {
         if (!this.classList.contains("hidden")) {
             widgetEmit(this, "floating-widget-manager", {widget: this, command: "hide"});
         }
+        this.itemId = null;
     }
 
     protected persistSubmitToLocalStorage(boardId: number) {
