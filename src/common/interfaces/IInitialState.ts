@@ -65,7 +65,7 @@ export type InitialState = {
     designer?: {
         preview_only: boolean;
     };
-    organization_name: string;
+    company_name: string;
 };
 
 export type DataEnrichmentConfig = {

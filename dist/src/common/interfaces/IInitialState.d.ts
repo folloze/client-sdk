@@ -57,7 +57,7 @@ export declare type InitialState = {
     designer?: {
         preview_only: boolean;
     };
-    organization_name: string;
+    company_name: string;
 };
 export declare type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
