@@ -121,7 +121,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
-            type: "campaign"
+            type: "designer",
+            category: 'images'
         });
     }
 
@@ -147,7 +148,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "mobile_banners",
-            type: "campaign",
+            type: "designer",
+            category: "mobile"
         });
     }
 
@@ -155,7 +157,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "icons",
-            type: "icon",
+            type: "designer",
+            category: 'icons'
         });
     }
 
@@ -163,7 +166,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "logos",
-            type: "campaign",
+            type: "designer",
+            category: 'logos'
         });
     }
 

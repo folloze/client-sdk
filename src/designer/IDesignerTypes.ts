@@ -2,7 +2,7 @@ import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
 import {BackgroundImage, BackgroundVideo} from "../common/interfaces/ISection";
 
-export type ImageGalleryTypes = "campaign" | "search" | "icon";
+export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer";
 export type VideoGalleryTypes = "video";
 
 export enum CampaignElementsTypes {
@@ -23,6 +23,7 @@ export type GalleryImage = {
     galleryType?: ImageGalleryTypes; // todo: not implemented in serverside
     maxWidth?: number;
     maxHeight?: number;
+    name?: string;
 };
 
 export type GalleryVideo = {
@@ -33,6 +34,7 @@ export type GalleryVideo = {
     displayable_section?: string;
     transformation?: VideoTransformation;
     viewed?: boolean;
+    name?: string;
 };
 
 export type ImageTransformation = {
@@ -101,6 +103,7 @@ export type ImageGalleryParams = {
     bankCategory?: ImageBankCategoryType; // imageBank
     count?: number;
     isPersonal?: boolean; // for user uploaded images from the designer.
+    category?: string; // for folloze images
 };
 
 export type VideoGalleryParams = {
