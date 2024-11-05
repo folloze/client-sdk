@@ -138,7 +138,7 @@ describe("testing sdk designer module", () => {
     });
 
     it("checks that all image gallery requests work as expected", async () => {
-        await sdk.designer.getBannerImageGallery().then(result => expect(result.length).toEqual(19));
+        await sdk.designer.getImagesImageGallery().then(result => expect(result.length).toEqual(19));
         await sdk.designer.getIconsImageGallery().then(result => expect(result.length).toEqual(4));
         await sdk.designer.getMobileImageGallery().then(result => expect(result.length).toEqual(2));
         await sdk.designer.getLogosImageGallery().then(result => expect(result.length).toEqual(3));
@@ -161,7 +161,7 @@ describe("testing sdk designer module", () => {
         await sdk.designer.createPersonalGalleryMedia({
             url: photoUrl,
             name: "image",
-            category: "banners"
+            category: "images"
         }).then(result => expect(result.url).toEqual(photoUrl));
     });
 

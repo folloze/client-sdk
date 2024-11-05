@@ -117,7 +117,7 @@ export class Designer {
         });
     }
 
-    public getBannerImageGallery(): Promise<GalleryImage[]> {
+    public getImagesImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "images",

@@ -116,7 +116,7 @@ export type VideoGalleryParams = {
 };
 
 export type personalGalleryMediaParams = {
-    category: "banners" | "videos",
+    category: "images" | "videos",
     url: string,
     name: string
 }
