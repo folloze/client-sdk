@@ -89,6 +89,7 @@ export interface ImageBankConfig {
     banners: string;
     thumbnails: string;
     mobile_banners: string;
+    images: string;
 }
 
 export interface MsCrmIntegration {

@@ -117,7 +117,7 @@ export const rules = (mock: MockAdapter) => {
         ];
     });
 
-    // banners
+    // images
     mock.onGet("/api/v1/image_gallery", {
         params: {organization_id: 1, bank_category: "images", type: "campaign"},
     }).reply<GalleryImage[]>(200, [
