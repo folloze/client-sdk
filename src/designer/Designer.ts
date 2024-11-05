@@ -123,7 +123,6 @@ export class Designer {
             bankCategory: "images",
             type: "designer",
             category: 'images'
-            
         });
     }
 
