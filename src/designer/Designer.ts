@@ -126,6 +126,15 @@ export class Designer {
         });
     }
 
+    public getBannersImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "banners",
+            type: "designer",
+            category: 'banners'
+        });
+    }
+
     public getPersonalVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,

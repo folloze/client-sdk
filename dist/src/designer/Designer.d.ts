@@ -19,6 +19,7 @@ export declare class Designer {
     deletePersonalGalleryMedia(id: number): Promise<void>;
     getVideosGallery(): Promise<GalleryVideo[]>;
     getImagesImageGallery(): Promise<GalleryImage[]>;
+    getBannersImageGallery(): Promise<GalleryImage[]>;
     getPersonalVideosGallery(): Promise<GalleryVideo[]>;
     getPersonalImageGallery(): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
