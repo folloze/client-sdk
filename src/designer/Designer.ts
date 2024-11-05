@@ -120,7 +120,7 @@ export class Designer {
     public getBannerImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
-            bankCategory: "banners",
+            bankCategory: "images",
             type: "designer",
             category: 'images'
         });
@@ -138,7 +138,7 @@ export class Designer {
     public getPersonalImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
-            bankCategory: "banners",
+            bankCategory: "images",
             type: "campaign",
             isPersonal: true
         });

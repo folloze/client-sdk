@@ -80,7 +80,7 @@ export type PercentPosition =
     | "50% 100%"
     | "100% 100%";
 
-export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads";
+export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads" | "images";
 
 export type FlzEditableImageData = {
     url: string;
