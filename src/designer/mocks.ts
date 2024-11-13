@@ -117,9 +117,9 @@ export const rules = (mock: MockAdapter) => {
         ];
     });
 
-    // banners
+    // images
     mock.onGet("/api/v1/image_gallery", {
-        params: {organization_id: 1, bank_category: "banners", type: "campaign"},
+        params: {organization_id: 1, bank_category: "images", type: "campaign"},
     }).reply<GalleryImage[]>(200, [
         {
             fit: "cover",
@@ -276,7 +276,7 @@ export const rules = (mock: MockAdapter) => {
 
     //uploaded personal images
     mock.onGet("/api/v1/image_gallery", {
-        params: {organization_id: 1, bank_category: "banners", type: "campaign", is_personal: true},
+        params: {organization_id: 1, bank_category: "images", type: "campaign", is_personal: true},
     }).reply<GalleryImage[]>(200, [
         {
             url: "https://images.folloze.com/image/upload/v1723448083/pdztu2nhl7szhmxoviha.webp",

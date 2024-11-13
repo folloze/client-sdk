@@ -43,7 +43,7 @@ export class CloudinaryUrlBuilder {
         // todo: this should be removed? why string ?
         if (typeof this.image === "string") {
             this.image = {
-                bankCategory: "banners",
+                bankCategory: "images",
                 url: this.image,
             };
         }

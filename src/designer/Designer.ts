@@ -117,11 +117,21 @@ export class Designer {
         });
     }
 
-    public getBannerImageGallery(): Promise<GalleryImage[]> {
+    public getImagesImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "images",
+            type: "designer",
+            category: 'images'
+        });
+    }
+
+    public getBannersImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
-            type: "campaign"
+            type: "designer",
+            category: 'banners'
         });
     }
 
@@ -137,7 +147,7 @@ export class Designer {
     public getPersonalImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
-            bankCategory: "banners",
+            bankCategory: "images",
             type: "campaign",
             isPersonal: true
         });
@@ -147,7 +157,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "mobile_banners",
-            type: "campaign",
+            type: "designer",
+            category: "mobile"
         });
     }
 
@@ -155,7 +166,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "icons",
-            type: "icon",
+            type: "designer",
+            category: 'icons'
         });
     }
 
@@ -163,7 +175,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "logos",
-            type: "campaign",
+            type: "designer",
+            category: 'logos'
         });
     }
 
