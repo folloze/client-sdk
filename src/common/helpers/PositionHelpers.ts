@@ -81,7 +81,7 @@ export function positionToGridArea(p: GridPos): string {
     return `${p.rowStart} / ${p.colStart} / ${p.rowEnd} / ${p.colEnd}`;
 }
 
-export function getWidgetStyleByPosition(p: GridPos, isEmbedded: boolean) {
+export function getWidgetStyleByPosition(p: GridPos, isEmbedded: boolean = false) {
     let result = "";
     if (p?.hasOwnProperty("rowStart")) {
         if ((p as GridPos).hasOwnProperty("layer")) {
