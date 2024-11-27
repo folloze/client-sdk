@@ -81,7 +81,7 @@ export function positionToGridArea(p: GridPos): string {
     return `${p.rowStart} / ${p.colStart} / ${p.rowEnd} / ${p.colEnd}`;
 }
 
-export function getWidgetStyleByPosition(p: GridPos) {
+export function getWidgetStyleByPosition(p: GridPos, isEmbedded: boolean) {
     let result = "";
     if (p?.hasOwnProperty("rowStart")) {
         if ((p as GridPos).hasOwnProperty("layer")) {
@@ -100,7 +100,20 @@ export function getWidgetStyleByPosition(p: GridPos) {
             //     calc(${p.padding[2]} * var(--fz-section-padding-step))
             //     calc(${p.padding[3]} * var(--fz-section-padding-step));`;
         }
-        result += "grid-area: " + positionToGridArea(p as GridPos);
+
+        const pPos = Object.assign({}, p);
+        if (isEmbedded) {
+            const diff = 1 - pPos.rowStart;
+            if (diff > 0) {
+                pPos.rowStart += diff;
+                pPos.rowEnd += diff;
+            } else {
+                pPos.rowStart = 1;
+                pPos.rowEnd += diff;
+            }
+        }
+
+        result += "grid-area: " + positionToGridArea(pPos as GridPos);
         return result;
     }
 }
