@@ -177,7 +177,7 @@ export class Analytics {
                     client_guid: payload.guid,
                     session_guid: this.fetchService.sessionGuid,
                     analyticsData: payload.analyticsData
-                }
+                };
                 return navigator.sendBeacon(url, JSON.stringify(body));
             } catch (e) {
                 console.error("could not send pings", e);

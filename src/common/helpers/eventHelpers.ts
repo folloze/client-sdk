@@ -44,7 +44,8 @@ export function widgetEmit(
     onSuccess?: Function,
     onError?: Function,
 ): void {
-    el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
+    // el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
+    window["board"]!.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
 
 export function editorEmit(
@@ -54,7 +55,8 @@ export function editorEmit(
     onSuccess?: Function,
     onError?: Function,
 ): void {
-    el.dispatchEvent(new FlzDesignerEvent(el, action, payload, onSuccess, onError));
+    // el.dispatchEvent(new FlzDesignerEvent(el, action, payload, onSuccess, onError));
+    window["board"]!.dispatchEvent(new FlzDesignerEvent(el, action, payload, onSuccess, onError));
 }
 
 export function componentEmit(
