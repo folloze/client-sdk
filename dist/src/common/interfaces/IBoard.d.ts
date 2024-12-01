@@ -112,8 +112,8 @@ export interface ILiveBoard extends LitElement {
     getGridConfigById(id: string): GridConfig;
     getWidgetEl(id: string): LiveWidget;
     getRibbonEl(id: string): RibbonElement;
-    getFloatEl(id: string): FloatWidgetElement;
     getLiveEl(id: string): LiveElement;
+    getFloatEl(id: string): FloatWidgetElement | undefined;
     getWidgetConfig(id: string): WidgetConfig;
     getRibbonConfig(id: string): RibbonConfig;
     getFloatingWidgetConfig(id: string): FloatingWidgetConfig;
