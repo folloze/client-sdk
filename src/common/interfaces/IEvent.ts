@@ -110,4 +110,5 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "custom-sections-action"
     | "generate-ai-action"
     | "upload-file"
-    | "create-or-update-chat-conversation";
+    | "create-or-update-chat-conversation"
+    | "open-editor";
