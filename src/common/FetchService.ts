@@ -206,5 +206,12 @@ export class FetchService {
             }
             return config;
         });
+
+        if (options.config?.baseURL != "/" && options.config?.baseURL != window.location.origin) {
+            this.fetcher.interceptors.request.use(config => {
+                config.headers["flz-referrer"] = window.location.href;
+                return config;
+            });
+        }
     }
 }
