@@ -397,7 +397,7 @@ export type GeneratedWidgetText = {
 export type GenerateWidgetsTextsResponse = {
     widgets: GeneratedWidgetText[];
 };
-export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config";
+export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config" | "set-variant";
 export type ChatConversationDataV2 = {
     participants?: Array<string>;
     subject?: string | null;
