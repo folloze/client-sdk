@@ -573,6 +573,7 @@ export class Designer {
 
     getCustomSections(type: 'sections' | 'floating_widgets'): Promise<CustomSectionListItem[]> {
         return new Promise((resolve, reject) => {
+            
             this.fetcher
                 .get(`/api/v1/custom_sections/${type}`)
                 .then(result => resolve(result.data))
