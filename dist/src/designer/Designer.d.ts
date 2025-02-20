@@ -159,7 +159,8 @@ export declare class Designer {
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
     generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse>;
-    getCustomSections(type: 'sections' | 'floating_widgets'): Promise<CustomSectionListItem[]>;
+    getCustomSections(): Promise<CustomSectionListItem[]>;
+    getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;

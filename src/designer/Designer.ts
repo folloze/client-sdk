@@ -571,10 +571,22 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 
-    getCustomSections(type: 'sections' | 'floating_widgets'): Promise<CustomSectionListItem[]> {
+    getCustomSections(): Promise<CustomSectionListItem[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get(`/api/v1/custom_sections/${type}`)
+                .get(`/api/v1/custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get saved sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getCustomFloatingWidgets(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/custom_sections/floating_widgets`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get saved sections", e);
