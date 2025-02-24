@@ -560,7 +560,7 @@ export class Designer {
     public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/widgets_texts`, { ...generateParams, numberOfVariants: 2, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
