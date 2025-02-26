@@ -560,7 +560,26 @@ export class Designer {
     public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { strategy: "personalize", widgets: generateParams.widgets, additionalInfo: { targetAudience: { type: "account", name: "tata", overview: "ovov" } }, numberOfVariants: 2, guid })
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, {
+                    strategy: "personalize",
+                    widgets: [{
+                        widget_id: "blabla1",
+                        injectables: [{
+                            name: "title",
+                            path: "title",
+                            description: "Title of 5 to 8 words",
+                            value: "Frozen Pizza"
+                        }, {
+                            name: "subtitle",
+                            path: "subtitle",
+                            description: "Sub-Title of 15 to 20 words",
+                            value: "Save time in cooking a pizza from scratch, our pizza is delicious and easy to make"
+                        }]
+                    }],
+                    additionalInfo: { targetAudience: { type: "account", name: "rich's" } },
+                    numberOfVariants: 2,
+                    guid
+                })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
