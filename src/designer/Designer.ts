@@ -563,7 +563,7 @@ export class Designer {
                 .post<any>(`/api/v1/boards/rephrase/widgets_texts`, {
                     strategy: "personalize",
                     widgets: [{
-                        widget_id: "blabla1",
+                        widgetId: "blabla1",
                         injectables: [{
                             name: "title",
                             path: "title",
