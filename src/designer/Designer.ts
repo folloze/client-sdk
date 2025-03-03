@@ -560,7 +560,29 @@ export class Designer {
     public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, numberOfVariants: 2, guid })
+                // .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, numberOfVariants: 2, guid })
+
+
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, {
+                    strategy: "personalize",
+                    widgets: [{
+                        widgetId: "blabla1",
+                        injectables: [{
+                            name: "title",
+                            path: "title",
+                            description: "Title of 5 to 8 words",
+                            value: "Frozen Pizza"
+                        }, {
+                            name: "subtitle",
+                            path: "subtitle",
+                            description: "Sub-Title of 15 to 20 words",
+                            value: "Save time in cooking a pizza from scratch, our pizza is delicious and easy to make"
+                        }]
+                    }],
+                    additionalInfo: { targetAudience: { type: "account", name: "Barilla", overview: "Barilla is a well-known Italian food company that specializes in producing pasta, sauces, and other related products. The company was founded in 1877 and has since become one of the leading producers of pasta in the world. The company's account may include information about its history, products, promotions, recipes, and other related content aimed at engaging with its consumers and promoting its brand. It is likely to highlight the company's commitment to quality, tradition, and innovation in the food industry. Additionally, the account may feature partnerships with chefs, influencers, and other collaborations to showcase the versatility and popularity of its products." } },
+                    numberOfVariants: 2,
+                    guid
+                })
 
                 .then(result => resolve(result))
                 .catch(e => {
