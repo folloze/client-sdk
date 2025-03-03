@@ -583,6 +583,18 @@ export class Designer {
         });
     }
 
+    getCustomFloatingWidgets(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/custom_sections/floating_widgets`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get saved sections", e);
+                    reject(e);
+                });
+        });
+    }
+
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem> {
         return new Promise((resolve, reject) => {
             this.fetcher

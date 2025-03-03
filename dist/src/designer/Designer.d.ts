@@ -160,6 +160,7 @@ export declare class Designer {
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
     generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
+    getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
