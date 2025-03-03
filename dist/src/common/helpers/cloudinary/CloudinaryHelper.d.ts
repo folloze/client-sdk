@@ -29,7 +29,7 @@ export declare class CloudinaryHelper {
     private loadVideoPlayerScript;
     private createVideoPlayer;
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
-    getOptimizedVideoUrl(url: string, _position: string): string;
+    getOptimizedVideoUrl(url: string, _position: string, optimizeFormat?: boolean): string;
     getVideoThumbnail(url: string): string;
     static isCloudinaryImage(url: string): boolean;
     uploadFileInChunks(file: File, uploadData: UploadUrlResponseV1, onSuccess?: CallableFunction, onFail?: CallableFunction, onProgress?: (file: File, percent: number) => void): Promise<void>;
