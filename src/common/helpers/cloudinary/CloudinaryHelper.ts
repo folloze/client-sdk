@@ -168,8 +168,9 @@ export class CloudinaryHelper {
 
         const parts = url.split("/upload/");
         const deviceOptimization = `${optimizeFormat ? "f_auto," : ""}` + "q_auto";
-        const position = _position ? `c_fill,g_${positionAsDirection},h_688,w_1432` : '';
-        const optimizedUrl = parts[0] + `/upload/${deviceOptimization}/${position}/` + parts[1];
+        const position = `c_fill,g_${positionAsDirection},h_688,w_1432`;
+        const optimization = `/upload/${deviceOptimization}/` + _position ? `${position}/` : '';
+        const optimizedUrl = parts[0] + optimization + parts[1];
 
         return optimizedUrl;
     }

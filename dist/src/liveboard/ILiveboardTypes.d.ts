@@ -225,6 +225,7 @@ export type ItemFileMetadataResponseV1 = {
         url?: string;
         file_id?: number;
         access_token?: string;
+        should_optimize?: boolean;
     };
 };
 export type ItemDownloadUrlSuccessResponseV2 = {
