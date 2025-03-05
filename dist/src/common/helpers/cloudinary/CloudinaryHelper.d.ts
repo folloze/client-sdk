@@ -23,6 +23,7 @@ export declare class CloudinaryHelper {
     static videoPlayerScriptUrl: string;
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage;
     static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo;
+    static getVideoUrlByTransformation(url: string, transformations: CloudinaryVideoTransformations): string;
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
      * @param image
@@ -43,7 +44,6 @@ export declare class CloudinaryHelper {
     private createVideoPlayer;
     getVideoPlayer(url: string, playerElement: HTMLVideoElement, options?: object, transformation?: object): Promise<any>;
     getOptimizedVideoUrl(url: string, _position: string): string;
-    static getVideoUrlByTransformation(url: string, transformations: CloudinaryVideoTransformations): string;
     getVideoThumbnail(url: string): string;
     static isCloudinaryImage(url: string): boolean;
     uploadFileInChunks(file: File, uploadData: UploadUrlResponseV1, onSuccess?: CallableFunction, onFail?: CallableFunction, onProgress?: (file: File, percent: number) => void): Promise<void>;

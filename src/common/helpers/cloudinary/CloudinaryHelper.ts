@@ -63,6 +63,16 @@ export class CloudinaryHelper {
         return this.cloudinary.video(cldVideoId);
     }
 
+    static getVideoUrlByTransformation(url:string, transformations: CloudinaryVideoTransformations): string {
+        const cldVideoId = CloudinaryHelper.getPublicId(url);
+        return buildVideoUrl(cldVideoId, {
+            cloud: {
+            cloudName: CLOUD_NAME,
+            },
+            transformations
+        });
+    }
+
     // PLEASE NOTE - from now on use the
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
@@ -188,17 +198,6 @@ export class CloudinaryHelper {
         const optimizedUrl = parts[0] + `/upload/${DEVICE_OPTIMIZATION}/${position}/` + parts[1];
 
         return optimizedUrl;
-    }
-
-    static getVideoUrlByTransformation(url:string, transformations: CloudinaryVideoTransformations): string {
-        const publicId = CloudinaryHelper.getPublicId(url);
-
-        return buildVideoUrl(publicId, {
-            cloud: {
-            cloudName: CLOUD_NAME,
-            },
-            transformations
-        });
     }
 
     getVideoThumbnail(url: string): string {
