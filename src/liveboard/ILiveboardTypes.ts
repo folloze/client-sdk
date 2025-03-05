@@ -250,6 +250,7 @@ export type ItemFileMetadataResponseV1 = {
         url?: string; //every provider but box
         file_id?: number; //box
         access_token?: string; //box
+        should_optimize?: boolean; //for optimizing cloudinary videos quality
     };
 };
 
