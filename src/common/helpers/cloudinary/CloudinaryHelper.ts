@@ -1,4 +1,5 @@
-import {Cloudinary, CloudinaryVideo} from "@cloudinary/url-gen";
+import {Cloudinary, CloudinaryVideo, } from "@cloudinary/url-gen";
+import { buildVideoUrl } from 'cloudinary-build-url';
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
 import {ICompassGravity} from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
 import {
@@ -12,7 +13,21 @@ import {
 import {sendXhrRequest} from '../helpers';
 import {CloudinaryUrlBuilder} from "./CloudinaryUrlBuilder";
 
+const CLOUD_NAME = 'folloze';
 const supportedVideoFormats = ["mov", "mp4", "webm"];
+type CloudinaryVideoTransformations = {
+    resize?: {
+        width?: number | string,
+        height?: number | string,
+        type?: 'imaggaScale' | 'imaggaCrop' | 'crop' | 'fill' | 'scale' | 'minimumPad' | 'fit' | 'pad' | 'limitFit' | 'thumbnail' | 'limitFill' | 'minimumFit' | 'limitPad' | 'fillPad'
+    },
+    background?: string,
+    quality?: string | number
+    format?: string,
+    radius?: string | number,
+    overlay?: string,
+    rotate? : number | 'auto_right' | 'auto_left' | 'ignore' | 'vflip' | 'hflip'
+}
 
 export class CloudinaryHelper {
     private static flzImagesDomain: string = "images.folloze.com";
@@ -25,7 +40,7 @@ export class CloudinaryHelper {
     );
     private static cloudinary: Cloudinary = new Cloudinary({
         cloud: {
-            cloudName: "folloze",
+            cloudName: CLOUD_NAME
         },
         url: {
             secureDistribution: CloudinaryHelper.flzImagesDomain,
@@ -173,6 +188,15 @@ export class CloudinaryHelper {
         const optimizedUrl = parts[0] + optimizations + parts[1];
 
         return optimizedUrl;
+    }
+
+    static getVideoUrlByTransformation(url:string, transformations: CloudinaryVideoTransformations): string {
+      return buildVideoUrl(url, {
+        cloud: {
+          cloudName: CLOUD_NAME,
+        },
+        transformations
+      });
     }
 
     getVideoThumbnail(url: string): string {
