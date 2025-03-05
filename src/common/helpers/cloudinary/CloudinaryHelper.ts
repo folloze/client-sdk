@@ -13,8 +13,6 @@ import {
 import {sendXhrRequest} from '../helpers';
 import {CloudinaryUrlBuilder} from "./CloudinaryUrlBuilder";
 
-const CLOUD_NAME = 'folloze';
-const supportedVideoFormats = ["mov", "mp4", "webm"];
 type CloudinaryVideoTransformations = {
     resize?: {
         width?: number | string,
@@ -28,6 +26,9 @@ type CloudinaryVideoTransformations = {
     overlay?: string,
     rotate? : number | 'auto_right' | 'auto_left' | 'ignore' | 'vflip' | 'hflip'
 }
+
+const CLOUD_NAME = 'folloze';
+const supportedVideoFormats = ["mov", "mp4", "webm"];
 
 export class CloudinaryHelper {
     private static flzImagesDomain: string = "images.folloze.com";
