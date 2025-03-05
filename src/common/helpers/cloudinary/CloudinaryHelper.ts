@@ -1,4 +1,4 @@
-import {Cloudinary, CloudinaryVideo, } from "@cloudinary/url-gen";
+import {Cloudinary, CloudinaryVideo} from "@cloudinary/url-gen";
 import { buildVideoUrl } from 'cloudinary-build-url';
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
 import {ICompassGravity} from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
