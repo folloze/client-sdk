@@ -191,12 +191,13 @@ export class CloudinaryHelper {
     }
 
     static getVideoUrlByTransformation(url:string, transformations: CloudinaryVideoTransformations): string {
-      return buildVideoUrl(url, {
-        cloud: {
-          cloudName: CLOUD_NAME,
-        },
-        transformations
-      });
+        const publicId = CloudinaryHelper.getPublicId(url);
+        return buildVideoUrl(publicId, {
+            cloud: {
+            cloudName: CLOUD_NAME,
+            },
+            transformations
+        });
     }
 
     getVideoThumbnail(url: string): string {
