@@ -565,6 +565,7 @@ export class Designer {
 
                 // .post<any>(`/api/v1/boards/rephrase/widgets_texts`, {
                 .post<any>(`/api/v1/boards/generation/widgets_texts`, {
+                    ...generateParams,
                     strategy: "personalize",
                     widgets: [{
                         widgetId: "blabla1",
