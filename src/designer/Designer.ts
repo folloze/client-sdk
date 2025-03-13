@@ -1,3 +1,9 @@
+import {
+    GenerateWidgetsTextsRequest,
+    GenerateWidgetsTextsResponse,
+    GenRephraseWidgetsTextsRequest
+} from "../common/interfaces/IGenerationTypes";
+
 export * from "./IDesignerTypes";
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
@@ -24,8 +30,6 @@ import {
     GalleryVideo,
     Theme,
     MergeTagFilters,
-    type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse,
     type ChatConversationDataV2,
     type personalGalleryMediaParams
 } from "./IDesignerTypes";
@@ -560,10 +564,24 @@ export class Designer {
     public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
+                    reject(e);
+                });
+        };
+
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
+
+    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
                     reject(e);
                 });
         };

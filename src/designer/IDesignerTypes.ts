@@ -438,38 +438,6 @@ export type Theme = {
     type: "basic" | "migration" | "system";
 };
 
-export type GenerateWidgetsTextsRequest = {
-    board: {
-        goal: string;
-        productName: string;
-        details?: string;
-    };
-    widgets: GenerateTextWidgetData[];
-};
-
-export type GenerateTextWidgetData = {
-    description: string;
-    purpose: string;
-    elaboratedPurpose?: string;
-    injectables: any[];
-    widgetId: string;
-};
-
-export type GeneratedText = {
-    text: string;
-    path: string;
-};
-
-export type GeneratedWidgetText = {
-    text: GeneratedText[];
-    prompt: string;
-    widgetId: string;
-};
-
-export type GenerateWidgetsTextsResponse = {
-    widgets: GeneratedWidgetText[];
-};
-
 export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config" | "set-variant";
 
 export type ChatConversationDataV2 = {

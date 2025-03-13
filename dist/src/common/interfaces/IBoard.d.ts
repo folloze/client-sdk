@@ -5,6 +5,7 @@ import { LiveWidget } from "../LiveWidget";
 import { IPersonalizationConfig } from "./IPersonalization";
 import { FlzEvent } from "../FlzEvent";
 import { ThemeOverride, ThemeOverrideRules } from "./IThemeBuilder";
+import { GenerationConfig, PageGenerationConfig } from "./IGenerationTypes";
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
     data: RibbonConfig["data"];
@@ -128,27 +129,8 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
-export type PageGenerationConfig = {
-    board?: {
-        goal?: string;
-        productName?: string;
-        details?: string;
-    };
-    widgets?: {
-        [key: string]: WidgetGenerationConfig;
-    };
-};
-export type GenerationConfig = {
-    pages: {
-        [key: string]: PageGenerationConfig;
-    };
-};
 export declare const BOARD_GOALS: string[];
 export declare const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig;
-export type WidgetGenerationConfig = {
-    purpose?: string;
-    elaboratedPurpose?: string;
-};
 export type PageName = "default" | "registration" | string;
 export type Board = {
     allow_embedding?: boolean;
