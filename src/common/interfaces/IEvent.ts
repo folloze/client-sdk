@@ -1,5 +1,6 @@
 import {type LiveWidget} from "../LiveWidget";
 import {type FloatEditor} from "../FloatEditor";
+import {hasFloatingChildren} from "../controllers/FloatersChildrenContainer";
 
 export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaClick"
@@ -127,7 +128,7 @@ export type OpenEditorPayload = {
     editTag: string,
     title?: string,
     pos?: MouseEvent | {x: number, y: number},
-    parentEl?: HTMLElement,
+    parentEl?: HTMLElement & hasFloatingChildren,
     propertyPath?: string,
     isFloatingWidget?: boolean,
     layer?: number,
