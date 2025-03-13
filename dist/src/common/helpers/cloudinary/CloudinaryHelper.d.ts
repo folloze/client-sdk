@@ -1,6 +1,19 @@
 import { CloudinaryVideo } from "@cloudinary/url-gen";
 import { CloudinaryImage } from "@cloudinary/url-gen/assets/CloudinaryImage";
 import { FlzEditableImageData, FlzEditableVideoData, GalleryImage, GalleryVideo, UploadUrlResponseV1 } from "../../../designer/IDesignerTypes";
+type CloudinaryVideoTransformations = {
+    resize?: {
+        width?: number | string;
+        height?: number | string;
+        type?: 'imaggaScale' | 'imaggaCrop' | 'crop' | 'fill' | 'scale' | 'minimumPad' | 'fit' | 'pad' | 'limitFit' | 'thumbnail' | 'limitFill' | 'minimumFit' | 'limitPad' | 'fillPad';
+    };
+    background?: string;
+    quality?: string | number;
+    format?: string;
+    radius?: string | number;
+    overlay?: string;
+    rotate?: number | 'auto_right' | 'auto_left' | 'ignore' | 'vflip' | 'hflip';
+};
 export declare class CloudinaryHelper {
     private static flzImagesDomain;
     private static cloudinaryImagesDomain;
@@ -10,6 +23,7 @@ export declare class CloudinaryHelper {
     static videoPlayerScriptUrl: string;
     static getImage(image: FlzEditableImageData | GalleryImage): CloudinaryImage;
     static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo;
+    static getVideoUrlByTransformation(url: string, transformations: CloudinaryVideoTransformations): string;
     /**
      * @deprecated - please use CloudinaryUrlBuilder class instead
      * @param image
@@ -34,3 +48,4 @@ export declare class CloudinaryHelper {
     static isCloudinaryImage(url: string): boolean;
     uploadFileInChunks(file: File, uploadData: UploadUrlResponseV1, onSuccess?: CallableFunction, onFail?: CallableFunction, onProgress?: (file: File, percent: number) => void): Promise<void>;
 }
+export {};
