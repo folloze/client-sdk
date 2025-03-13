@@ -1,6 +1,5 @@
 import {
-    GenerateWidgetsTextsRequest,
-    GenerateWidgetsTextsResponse,
+    GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1,
     GenRephraseWidgetsTextsRequest
 } from "../common/interfaces/IGenerationTypes";
 
@@ -561,7 +560,7 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
@@ -575,7 +574,7 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 
-    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })

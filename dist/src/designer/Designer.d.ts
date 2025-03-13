@@ -1,4 +1,4 @@
-import { GenerateWidgetsTextsRequest, GenerateWidgetsTextsResponse, GenRephraseWidgetsTextsRequest } from "../common/interfaces/IGenerationTypes";
+import { GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest } from "../common/interfaces/IGenerationTypes";
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
 import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams } from "./IDesignerTypes";
@@ -159,8 +159,8 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
-    generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse>;
-    rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse>;
+    generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
+    rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
