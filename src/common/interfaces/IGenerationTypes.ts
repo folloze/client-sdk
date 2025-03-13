@@ -108,6 +108,7 @@ export type WidgetGenerationConfig = {
     purpose?: string;
     product?: string;
     targetAudienceId?: number;
+    genByTarget?: GenAudienceTarget[];
 };
 
 export type PageGenerationConfig = {
