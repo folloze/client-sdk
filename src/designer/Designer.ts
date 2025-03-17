@@ -1,6 +1,6 @@
 import {
     GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1,
-    GenRephraseWidgetsTextsRequest
+    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
@@ -570,7 +570,6 @@ export class Designer {
                     reject(e);
                 });
         };
-
         return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 
@@ -584,7 +583,19 @@ export class Designer {
                     reject(e);
                 });
         };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
 
+    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
         return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 

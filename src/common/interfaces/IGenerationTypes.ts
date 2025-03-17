@@ -86,6 +86,15 @@ export type GenRephraseWidgetsTextsRequest = {
     numberOfVariants: number;
 }
 
+export type GenTranslateWidgetsTextsRequest = {
+    language: "Spanish" | "German" | "French" | "Portuguese" | "Japanese",
+    widgets: GenerateTextWidgetData[],
+}
+
+export type GenTranslateResponseV1 = {
+    widgets: GenWidgetVariance[]
+}
+
 export type GenRephraseResponseV1 = {
     variants: Array<{widgets: GenWidgetVariance[]}>
 }
