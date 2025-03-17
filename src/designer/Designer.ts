@@ -563,7 +563,7 @@ export class Designer {
                 // .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, numberOfVariants: 2, guid })
 
 
-                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, {
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, {
                 // .post<any>(`/api/v1/boards/generation/widgets_texts`, {
                     ...generateParams,
                     // strategy: "personalize",
