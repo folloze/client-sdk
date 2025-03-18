@@ -25,6 +25,7 @@ export declare class Designer {
     getMobileImageGallery(): Promise<GalleryImage[]>;
     getIconsImageGallery(): Promise<GalleryImage[]>;
     getLogosImageGallery(): Promise<GalleryImage[]>;
+    getThumbnailsImageGallery(): Promise<GalleryImage[]>;
     /**
      * When searching the web for an image
      *

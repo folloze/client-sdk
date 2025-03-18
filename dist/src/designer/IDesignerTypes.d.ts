@@ -33,7 +33,7 @@ export type GalleryVideo = {
     name?: string;
 };
 export type ImageTransformation = {
-    crop: {
+    crop?: {
         x: number;
         y: number;
         crop?: string;
@@ -51,6 +51,7 @@ export type ImageTransformation = {
         color: string;
         alpha: number;
     };
+    sharpness?: boolean;
 };
 export type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";

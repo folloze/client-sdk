@@ -180,6 +180,15 @@ export class Designer {
         });
     }
 
+    public getThumbnailsImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "thumbnails",
+            type: "campaign",
+            category: 'thumbnails'
+        });
+    }
+
     /**
      * When searching the web for an image
      *
