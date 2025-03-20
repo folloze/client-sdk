@@ -1,6 +1,7 @@
 import {FeatureName} from "./IInitialState";
 import {FlzEditableImageData, FlzEditableVideoData} from "../../designer/IDesignerTypes";
 import {FloatingWidgetConfig, RibbonConfig, WidgetConfig} from "./IWidget";
+import {SectionInjectable} from "./IGenerationTypes";
 
 export type AddListItem = {
     category: string;
@@ -61,28 +62,3 @@ export type BackgroundVideo = {
     video: FlzEditableVideoData;
     position: string;
 };
-
-export type WidgetDescription = {
-    description: string;
-    purposes: string[];
-    defaultPurpose: string;
-    injectables: SectionInjectable[];
-    dynamicArrayInjectables?: DynamicArrayInjectable[];
-}
-
-export type SectionInjectable = {
-    name: string;
-    path: string;
-    visibilityPath?: string;
-    description: string;
-}
-
-export type VisibilityConfig = {
-    path: string;
-    value: string;
-}
-
-export type DynamicArrayInjectable = {
-    arrayPath: string;
-    injectables: SectionInjectable[];
-}

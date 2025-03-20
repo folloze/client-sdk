@@ -1,4 +1,4 @@
-import {type PageGenerationConfig} from "../interfaces/IBoard";
+import {PageGenerationConfig} from "../interfaces/IGenerationTypes";
 
 export function canWidgetGenerateText(widgetId: string, widgetTagName: string, generateConfig: PageGenerationConfig | undefined): boolean {
   if (!window["follozeWidgetDescriptions"][widgetTagName.toLowerCase()]) {

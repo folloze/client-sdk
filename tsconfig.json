@@ -24,7 +24,9 @@
         "strict": true,
         "rules": {
           "no-unknown-tag-name": "off",
-          "no-unknown-event": "warn"
+          "no-unknown-event": "warn",
+          "no-unused-imports": "off",
+          "no-unused-vars": "off",
         }
       }
     ]

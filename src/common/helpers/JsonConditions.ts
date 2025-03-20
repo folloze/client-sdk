@@ -21,7 +21,9 @@ export function checkJsonConditions(settings: TriggerPersistence["showConditions
         }
         let value = get(reference, rule.property);
         if (rule.property.includes("[]")) {
-            let [topPath, nestedPath] = rule.property.split("[]");
+            const tmp = rule.property.split("[]");
+            const topPath = tmp[0];
+            let nestedPath = tmp[1];
             nestedPath = nestedPath.substring(1);
             value = get(reference, topPath).map(item => (nestedPath ? get(item, nestedPath) : item));
         }

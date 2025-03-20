@@ -1,4 +1,5 @@
 import {Cloudinary, CloudinaryVideo} from "@cloudinary/url-gen";
+import { buildVideoUrl } from 'cloudinary-build-url';
 import {CloudinaryImage} from "@cloudinary/url-gen/assets/CloudinaryImage";
 import {ICompassGravity} from "@cloudinary/url-gen/qualifiers/gravity/compassGravity/CompassGravity";
 import {
@@ -12,6 +13,21 @@ import {
 import {sendXhrRequest} from '../helpers';
 import {CloudinaryUrlBuilder} from "./CloudinaryUrlBuilder";
 
+type CloudinaryVideoTransformations = {
+    resize?: {
+        width?: number | string,
+        height?: number | string,
+        type?: 'imaggaScale' | 'imaggaCrop' | 'crop' | 'fill' | 'scale' | 'minimumPad' | 'fit' | 'pad' | 'limitFit' | 'thumbnail' | 'limitFill' | 'minimumFit' | 'limitPad' | 'fillPad'
+    },
+    background?: string,
+    quality?: string | number
+    format?: string,
+    radius?: string | number,
+    overlay?: string,
+    rotate? : number | 'auto_right' | 'auto_left' | 'ignore' | 'vflip' | 'hflip'
+}
+
+const CLOUD_NAME = 'folloze';
 const supportedVideoFormats = ["mov", "mp4", "webm"];
 
 export class CloudinaryHelper {
@@ -25,7 +41,7 @@ export class CloudinaryHelper {
     );
     private static cloudinary: Cloudinary = new Cloudinary({
         cloud: {
-            cloudName: "folloze",
+            cloudName: CLOUD_NAME
         },
         url: {
             secureDistribution: CloudinaryHelper.flzImagesDomain,
@@ -45,6 +61,16 @@ export class CloudinaryHelper {
     static getVideo(video: FlzEditableVideoData | GalleryVideo): CloudinaryVideo {
         const cldVideoId = CloudinaryHelper.getPublicId(video.url);
         return this.cloudinary.video(cldVideoId);
+    }
+
+    static getVideoUrlByTransformation(url:string, transformations: CloudinaryVideoTransformations): string {
+        const cldVideoId = CloudinaryHelper.getPublicId(url);
+        return buildVideoUrl(cldVideoId, {
+            cloud: {
+            cloudName: CLOUD_NAME,
+            },
+            transformations
+        });
     }
 
     // PLEASE NOTE - from now on use the

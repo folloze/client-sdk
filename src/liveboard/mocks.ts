@@ -1,4 +1,3 @@
-import {PrivacyMessageResponseV1} from "./../designer/IDesignerTypes";
 import MockAdapter from "axios-mock-adapter";
 import {
     BoardResponseV1,

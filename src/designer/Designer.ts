@@ -1,3 +1,8 @@
+import {
+    GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1,
+    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest
+} from "../common/interfaces/IGenerationTypes";
+
 export * from "./IDesignerTypes";
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
@@ -24,8 +29,6 @@ import {
     GalleryVideo,
     Theme,
     MergeTagFilters,
-    type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse,
     type ChatConversationDataV2,
     type personalGalleryMediaParams
 } from "./IDesignerTypes";
@@ -557,89 +560,42 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                // .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, numberOfVariants: 2, guid })
-
-
-                // .post<any>(`/api/v1/boards/rephrase/widgets_texts`, {
-                // // .post<any>(`/api/v1/boards/generation/widgets_texts`, {
-                //     ...generateParams,
-                //     strategy: "personalize",
-                //     // language: "Spanish",
-                //     // widgets: [
-                //     //     {
-                //     //         ...generateParams.widgets[0],
-                //     //         additionalInfo: { targetAudience: { type: "account", name: "Barilla", overview: "Barilla is a well-known Italian food company that specializes in producing pasta, sauces, and other related products. The company was founded in 1877 and has since become one of the leading producers of pasta in the world. The company's account may include information about its history, products, promotions, recipes, and other related content aimed at engaging with its consumers and promoting its brand. It is likely to highlight the company's commitment to quality, tradition, and innovation in the food industry. Additionally, the account may feature partnerships with chefs, influencers, and other collaborations to showcase the versatility and popularity of its products." } }
-                //     //     }
-                //     // ],
-                //     widgets: [{
-                //         widgetId: "blabla1",
-                //         additionalInfo: { targetAudience: { type: "account", name: "Barilla", overview: "Barilla is a well-known Italian food company that specializes in producing pasta, sauces, and other related products. The company was founded in 1877 and has since become one of the leading producers of pasta in the world. The company's account may include information about its history, products, promotions, recipes, and other related content aimed at engaging with its consumers and promoting its brand. It is likely to highlight the company's commitment to quality, tradition, and innovation in the food industry. Additionally, the account may feature partnerships with chefs, influencers, and other collaborations to showcase the versatility and popularity of its products." } },
-                //         injectables: [{
-                //             name: "title",
-                //             path: "title",
-                //             description: "Title of 5 to 8 words",
-                //             value: "Frozen Pizza",
-                //         }, {
-                //             name: "subtitle",
-                //             path: "subtitle",
-                //             description: "Sub-Title of 15 to 20 words",
-                //             value: "Save time in cooking a pizza from scratch, our pizza is delicious and easy to make"
-                //         }]
-                //     }],
-                //     numberOfVariants: 2,
-                //     guid
-                // })
-
-                .post<any>(`/api/v1/boards/translate/widgets_texts`, {
-                    "language": "Japanese",
-                    "widgets": [
-                        {
-                            "widgetId": "w_70c2d24c",
-                            "injectables": [
-                                {
-                                    "name": "title",
-                                    "path": "title",
-                                    "description": "Title of 5 to 8 words",
-                                    "value": "<div>A better way to <span style=\"color: var(--fz-color-primary-3);\">engage</span> your customers</div>"
-                                },
-                                {
-                                    "name": "subtitle",
-                                    "path": "subtitle",
-                                    "description": "Sub-Title of 15 to 20 words",
-                                    "value": "<div>Tell customers more about you. Add a few words and stunning pic to grab their attention and get them to click.</div>"
-                                },
-                                {
-                                    "name": "cta",
-                                    "path": "cta.text",
-                                    "visibilityPath": "cta",
-                                    "description": "Main CTA button with 2 to 3 words of text",
-                                    "value": "Explore Solutions"
-                                },
-                                {
-                                    "name": "secondary_cta",
-                                    "path": "secondary_cta.text",
-                                    "visibilityPath": "secondary_cta",
-                                    "description": "Secondary CTA button with 2 to 3 words of text",
-                                    "value": "Schedule a Demo"
-                                }
-                            ],
-                            "description": "Banner with title and subtitle and maybe a call to action",
-                            "purpose": "Marketing Message"
-                        }
-                    ],
-                    guid
-                })
-
+                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
                     reject(e);
                 });
         };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
 
+    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
+
+    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
         return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 
