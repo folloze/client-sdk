@@ -563,7 +563,48 @@ export class Designer {
     public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, //{ ...generateParams, guid })
+
+                    {
+                        "language": "Japanese",
+                        "widgets": [
+                            {
+                                "widgetId": "w_70c2d24c",
+                                "injectables": [
+                                    {
+                                        "name": "title",
+                                        "path": "title",
+                                        "description": "Title of 5 to 8 words",
+                                        "value": "<div>A better way to <span style=\"color: var(--fz-color-primary-3);\">engage</span> your customers</div>"
+                                    },
+                                    {
+                                        "name": "subtitle",
+                                        "path": "subtitle",
+                                        "description": "Sub-Title of 15 to 20 words",
+                                        "value": "<div>Tell customers more about you. Add a few words and stunning pic to grab their attention and get them to click.</div>"
+                                    },
+                                    {
+                                        "name": "cta",
+                                        "path": "cta.text",
+                                        "visibilityPath": "cta",
+                                        "description": "Main CTA button with 2 to 3 words of text",
+                                        "value": "Explore Solutions"
+                                    },
+                                    {
+                                        "name": "secondary_cta",
+                                        "path": "secondary_cta.text",
+                                        "visibilityPath": "secondary_cta",
+                                        "description": "Secondary CTA button with 2 to 3 words of text",
+                                        "value": "Schedule a Demo"
+                                    }
+                                ],
+                                "description": "Banner with title and subtitle and maybe a call to action",
+                                "purpose": "Marketing Message"
+                            }
+                        ],
+                        guid
+                    }
+                )
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
