@@ -2,7 +2,7 @@ import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
 import {BackgroundImage, BackgroundVideo} from "../common/interfaces/ISection";
 
-export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer" | "thumbnail";
+export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer"
 export type VideoGalleryTypes = "video";
 
 export enum CampaignElementsTypes {
