@@ -184,7 +184,7 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "thumbnails",
-            type: "campaign",
+            type: "designer",
             category: 'thumbnails'
         });
     }
