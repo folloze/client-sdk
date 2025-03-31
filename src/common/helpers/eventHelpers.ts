@@ -1,6 +1,6 @@
 import {LitElement} from "lit";
 import {FlzBoardEvent, FlzDesignerEvent, type FlzEvent} from "../FlzEvent";
-import {FLZ_DESIGNER_EVENT_ACTION, FLZ_EVENT_TYPE_PAYLOAD_MAP, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
+import {FLZ_DESIGNER_EVENT_ACTION, FLZ_DESIGNER_EVENT_REQUEST_ACTION, FLZ_EVENT_TYPE_PAYLOAD_MAP, FLZ_EVENT_TYPE_RESPONSE_MAP, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
 import {CategoriesResponseV2, LeadResponseV1} from "../../liveboard/ILiveboardTypes";
 import {LiveFloatingWidget} from "../LiveFloatingWidget";
 
@@ -91,7 +91,20 @@ export function widgetEmitPromise(el: LitElement, action: FLZ_LIVEBOARD_EVENT_AC
     });
 }
 
-export function editorEmitPromise(el: LitElement, action: FLZ_DESIGNER_EVENT_ACTION, payload?: any): Promise<any> {
+export function editorEmitPromise<
+    T extends FLZ_DESIGNER_EVENT_REQUEST_ACTION,
+    P extends FLZ_EVENT_TYPE_PAYLOAD_MAP[T],
+    A extends P['action']
+>(
+    el: LitElement, 
+    action: T,
+    payload: P
+): Promise<FLZ_EVENT_TYPE_RESPONSE_MAP[T][A]>;
+export function editorEmitPromise<T extends FLZ_DESIGNER_EVENT_ACTION>(
+    el: LitElement, 
+    action: T, 
+    payload?: any
+): Promise<any> {
     return new Promise((resolve, reject) => {
         editorEmit(el, action, payload, resolve, reject);
     });
