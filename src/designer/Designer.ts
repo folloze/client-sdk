@@ -24,7 +24,11 @@ import {
     GalleryVideo,
     Theme,
     type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse
+    type GenerateWidgetsTextsResponse,
+    VideoAIVoice,
+    VideoAIAvatar,
+    VideoAIGenerateRequest,
+    VideoAIGenerateResponse
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -547,5 +551,17 @@ export class Designer {
                 }
             );
         });
+    }
+
+    public getVideoAIVoices(): Promise<VideoAIVoice[]> {
+        return this.fetcher.get<VideoAIVoice[]>('/api/v1/video-ai/voices').then(result => result.data);
+    }
+
+    public getVideoAIAvatars(): Promise<VideoAIAvatar[]> {
+        return this.fetcher.get<VideoAIAvatar[]>('/api/v1/video-ai/avatars').then(result => result.data);
+    }
+
+    public generateVideoAI(request: VideoAIGenerateRequest): Promise<VideoAIGenerateResponse> {
+        return this.fetcher.post<VideoAIGenerateResponse>('/api/v1/video-ai/generate', request).then(result => result.data);
     }
 }
