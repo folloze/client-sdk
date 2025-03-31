@@ -36,6 +36,9 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     // whether or not to show an opacity overlay behind the widget
     hasOverlay?: boolean;
 
+    // whether or not to allow multiple instances of the widget
+    singleInstance?: boolean;
+
     // todo: we dont necessarily need both options for temporary use
     // option 1
     triggers: Array<{page: string; on: any}>;

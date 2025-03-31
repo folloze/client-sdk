@@ -1,5 +1,10 @@
+import {
+    GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1,
+    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest
+} from "../common/interfaces/IGenerationTypes";
+
 export * from "./IDesignerTypes";
-import {AxiosInstance, AxiosResponse} from "axios";
+import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
 import {
@@ -23,12 +28,13 @@ import {
     VideoGalleryParams,
     GalleryVideo,
     Theme,
-    type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse,
     VideoAIVoice,
     VideoAIAvatar,
     VideoAIGenerateRequest,
-    VideoAIGenerateResponse
+    VideoAIGenerateResponse,
+    MergeTagFilters,
+    type ChatConversationDataV2,
+    type personalGalleryMediaParams
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -76,19 +82,81 @@ export class Designer {
         });
     }
 
+    public createPersonalGalleryMedia(payload: personalGalleryMediaParams): Promise<GalleryImage | GalleryVideo> {
+        const params = {
+            ...payload,
+            isPersonal: true,
+            organizationId: this.fetchService.organizationId
+        };
+
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post<GalleryImage | GalleryVideo>("/api/v1/organization_images", keysToSnakeCase(params))
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not create organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public deletePersonalGalleryMedia(id: number): Promise<void> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/organization_images/${id}`)
+                .then(() => {
+                    resolve();
+                })
+                .catch(e => {
+                    console.error("could not delete organization image", e);
+                    reject(e);
+                });
+        });
+    }
+
     public getVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "videos",
-            type: "video",
+            type: "video"
         });
     }
 
-    public getBannerImageGallery(): Promise<GalleryImage[]> {
+    public getImagesImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "images",
+            type: "designer",
+            category: 'images'
+        });
+    }
+
+    public getBannersImageGallery(): Promise<GalleryImage[]> {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "banners",
+            type: "designer",
+            category: 'banners'
+        });
+    }
+
+    public getPersonalVideosGallery(): Promise<GalleryVideo[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "videos",
+            type: "video",
+            isPersonal: true
+        });
+    }
+
+    public getPersonalImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "images",
             type: "campaign",
+            isPersonal: true
         });
     }
 
@@ -96,7 +164,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "mobile_banners",
-            type: "campaign",
+            type: "designer",
+            category: "mobile"
         });
     }
 
@@ -104,7 +173,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "icons",
-            type: "icon",
+            type: "designer",
+            category: 'icons'
         });
     }
 
@@ -112,7 +182,8 @@ export class Designer {
         return this.getImageGallery({
             organizationId: this.fetchService.organizationId,
             bankCategory: "logos",
-            type: "campaign",
+            type: "designer",
+            category: 'logos'
         });
     }
 
@@ -153,10 +224,10 @@ export class Designer {
      * @param {number} boardId
      * @returns {Record<string, FormV1>} an object of id and FormResponse
      */
-    getForms(boardId: number): Promise<Record<string, FormV1>> {
+    getForms(boardId: number, selectedFormId?: number): Promise<Record<string, FormV1>> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`)
+                .get<Record<string, FormV1>>(`api/v1/boards/${boardId}/forms`, { params: { additional_form_id: selectedFormId } })
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get forms", e);
@@ -430,21 +501,25 @@ export class Designer {
      * gets board merge tags
      *
      * @param {number} boardId
-     * @param {string} contextType
+     * @param {MergeTagFilters} filters
      * @returns {MergeTagAttribute[]} merge tags array
      */
-    public getMergeTagsByBoard(
+    public getMergeTags(
+        organizationId: number,
         boardId: number,
-        contextType: string
+        filters: MergeTagFilters
     ): Promise<MergeTagAttribute[]> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .get<MergeTagAttribute[]>(`/api/v1/boards/${boardId}/merge_tags`, {
-                    params: {context_type: contextType},
+                .get<MergeTagAttribute[]>(`/api/v1/organizations/${organizationId}/merge_tags`, {
+                    params: {
+                        board_id: boardId,
+                        filters: filters
+                    }
                 })
                 .then(result => resolve(result.data))
                 .catch(e => {
-                    console.error("could not get board merge tags", e);
+                    console.error("could not get merge tags", e);
                     reject(e);
                 });
         });
@@ -489,17 +564,42 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
                     reject(e);
                 });
         };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
 
+    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    }
+
+    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
         return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
     }
 
@@ -507,6 +607,18 @@ export class Designer {
         return new Promise((resolve, reject) => {
             this.fetcher
                 .get(`/api/v1/custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get saved sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getCustomFloatingWidgets(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/custom_sections/floating_widgets`)
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get saved sections", e);
@@ -550,6 +662,14 @@ export class Designer {
                     reject(e);
                 }
             );
+        });
+    }
+
+    async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
+        return this.fetchService.fetcher.post("/api/v2/boards/chat/conversations", {
+            board_id: boardId,
+            widget_id: widgetId,
+            ...conversationData
         });
     }
 

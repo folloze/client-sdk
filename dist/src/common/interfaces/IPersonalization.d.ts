@@ -1,13 +1,13 @@
 import { LiveConfig } from "./IWidget";
 import { LiveElement } from "./IBoard";
-export declare type PersonalizationElement = {
+export type PersonalizationElement = {
     id: string;
     type: "widget" | "ribbon" | "floating";
     config: LiveConfig;
     element: LiveElement;
     _display?: string;
 };
-export declare type ruleId = string;
+export type ruleId = string;
 export interface IPersonalizationConfig {
     rules: Record<ruleId, IPersonalizationRule>;
     rulesBatches: Record<string, ruleId[]>;

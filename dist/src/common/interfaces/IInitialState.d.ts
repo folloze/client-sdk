@@ -1,8 +1,20 @@
 import { ItemResponseV2, LeadResponseV1, OpenItemViewerPayload } from "../../liveboard/ILiveboardTypes";
 import { Board, BoardConfig } from "./IBoard";
 import { PredefinedSection, WidgetListItem } from "./ISection";
-export declare type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
-export declare type InitialState = {
+import { FlzVItemViewerSettings } from "./IItemViewer";
+export type DataProviders = "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
+export type Features = {
+    personalization: boolean;
+    multiPages?: boolean;
+    recommendationsAi: boolean;
+    customTheme: boolean;
+    genAi: boolean;
+    liveEvent: boolean;
+    htmlSections: boolean;
+    registrationTracking: boolean;
+};
+export type FeatureName = keyof Features;
+export type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
     layout: BoardConfig;
@@ -31,16 +43,11 @@ export declare type InitialState = {
         tagline: string;
     };
     footers: Record<string, Footer>;
-    features: {
-        personalization: boolean;
-        multiPages?: boolean;
-        recommendationsAi: boolean;
-        customTheme: boolean;
-        genAi: boolean;
-    };
+    features: Features;
     user?: User;
     privacy_messages: PrivacyMessage[];
     item_viewer: {
+        default: FlzVItemViewerSettings;
         current?: ItemResponseV2;
         history?: Record<string, OpenItemViewerPayload>;
         items?: Record<string, ItemResponseV2>;
@@ -50,12 +57,13 @@ export declare type InitialState = {
     designer?: {
         preview_only: boolean;
     };
+    company_name: string;
 };
-export declare type DataEnrichmentConfig = {
+export type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
     api_key: string;
 };
-export declare type CookieMatchingConfig = {
+export type CookieMatchingConfig = {
     type: "default" | "eloqua" | "marketo";
     api_key: string;
     run_cookie_matching: boolean;

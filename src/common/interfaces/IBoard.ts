@@ -5,6 +5,7 @@ import {LiveWidget} from "../LiveWidget";
 import {IPersonalizationConfig} from "./IPersonalization";
 import {FlzEvent} from "../FlzEvent";
 import {ThemeOverride, ThemeOverrideRules} from "./IThemeBuilder";
+import {GenerationConfig, PageGenerationConfig} from "./IGenerationTypes";
 
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
@@ -124,8 +125,8 @@ export interface ILiveBoard extends LitElement {
 
     getWidgetEl(id: string): LiveWidget;
     getRibbonEl(id: string): RibbonElement;
-    getFloatEl(id: string): FloatWidgetElement;
     getLiveEl(id: string): LiveElement;
+    getFloatEl(id: string): FloatWidgetElement | undefined;
 
     getWidgetConfig(id: string): WidgetConfig;
     getRibbonConfig(id: string): RibbonConfig;
@@ -147,23 +148,6 @@ export interface ILiveBoard extends LitElement {
     isBoardReady(): boolean;
 }
 
-export type PageGenerationConfig = {
-    board?: {
-        goal?: string;
-        productName?: string;
-        details?: string;
-    };
-    widgets?: {
-        [key:string]: WidgetGenerationConfig
-    }
-}
-
-export type GenerationConfig = {
-    pages: {
-        [key:string]: PageGenerationConfig
-    }
-};
-
 export const BOARD_GOALS = [
     "Product/Solution Overview",
     "Content Nurturing",
@@ -177,11 +161,6 @@ export const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig = {
         goal: BOARD_GOALS[0]
     },
     widgets: {}
-};
-
-export type WidgetGenerationConfig = {
-    purpose?: string;
-    elaboratedPurpose?: string;
 };
 
 export type PageName = "default" | "registration" | string;
@@ -200,6 +179,7 @@ export type Board = {
     };
     is_ssl: boolean;
     name: string;
+    seo_title: string;
     online_items_count: number;
     organization_id: number;
     privacy?: {
@@ -221,6 +201,7 @@ export type Board = {
     };
     is_v3_live: boolean;
     // only in designer
+    public_link?: string;
     review_status?: {
         approved: boolean;
     };

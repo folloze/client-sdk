@@ -5,6 +5,7 @@ import { LiveWidget } from "../LiveWidget";
 import { IPersonalizationConfig } from "./IPersonalization";
 import { FlzEvent } from "../FlzEvent";
 import { ThemeOverride, ThemeOverrideRules } from "./IThemeBuilder";
+import { GenerationConfig, PageGenerationConfig } from "./IGenerationTypes";
 export interface RibbonElement extends LitElement {
     config: RibbonConfig;
     data: RibbonConfig["data"];
@@ -26,7 +27,7 @@ export interface LoadableElement extends LitElement {
     config: LoadableConfig;
     data: LoadableConfig["data"];
 }
-export declare type BoardConfig = {
+export type BoardConfig = {
     id: number;
     meta: null | {
         savedTime?: Date;
@@ -46,7 +47,7 @@ export declare type BoardConfig = {
     personalization?: IPersonalizationConfig;
     generationConfig?: GenerationConfig;
 };
-export declare type PageConfig = {
+export type PageConfig = {
     name: "default" | string;
     displayName?: string;
     grid: {
@@ -112,8 +113,8 @@ export interface ILiveBoard extends LitElement {
     getGridConfigById(id: string): GridConfig;
     getWidgetEl(id: string): LiveWidget;
     getRibbonEl(id: string): RibbonElement;
-    getFloatEl(id: string): FloatWidgetElement;
     getLiveEl(id: string): LiveElement;
+    getFloatEl(id: string): FloatWidgetElement | undefined;
     getWidgetConfig(id: string): WidgetConfig;
     getRibbonConfig(id: string): RibbonConfig;
     getFloatingWidgetConfig(id: string): FloatingWidgetConfig;
@@ -128,29 +129,10 @@ export interface ILiveBoard extends LitElement {
     themeOverrideReload(): void;
     isBoardReady(): boolean;
 }
-export declare type PageGenerationConfig = {
-    board?: {
-        goal?: string;
-        productName?: string;
-        details?: string;
-    };
-    widgets?: {
-        [key: string]: WidgetGenerationConfig;
-    };
-};
-export declare type GenerationConfig = {
-    pages: {
-        [key: string]: PageGenerationConfig;
-    };
-};
 export declare const BOARD_GOALS: string[];
 export declare const DEFAULT_PAGE_GENERATION_CONFIG: PageGenerationConfig;
-export declare type WidgetGenerationConfig = {
-    purpose?: string;
-    elaboratedPurpose?: string;
-};
-export declare type PageName = "default" | "registration" | string;
-export declare type Board = {
+export type PageName = "default" | "registration" | string;
+export type Board = {
     allow_embedding?: boolean;
     id: number;
     auto_upgrade_widgets?: boolean;
@@ -164,6 +146,7 @@ export declare type Board = {
     };
     is_ssl: boolean;
     name: string;
+    seo_title: string;
     online_items_count: number;
     organization_id: number;
     privacy?: {
@@ -184,6 +167,7 @@ export declare type Board = {
         online: boolean;
     };
     is_v3_live: boolean;
+    public_link?: string;
     review_status?: {
         approved: boolean;
     };

@@ -1,4 +1,3 @@
-import {PrivacyMessageResponseV1} from "./../designer/IDesignerTypes";
 import MockAdapter from "axios-mock-adapter";
 import {
     BoardResponseV1,
@@ -46,6 +45,7 @@ export const rules = (mock: MockAdapter) => {
         likes_count: 0,
         link_url: "https://www.amazon.com/",
         name: "Amazon.com. Spend less. Smile more.",
+        seo_title: "Amazon.com. Spend less. Smile more.",
         open_in_new_tab: null,
         slug: "amazoncom-spend-less-smile-more",
         status: 1,
@@ -60,6 +60,7 @@ export const rules = (mock: MockAdapter) => {
         online_items_count: 0,
         organization_id: 1,
         name: "board",
+        seo_title: "board",
         is_ssl: true,
     });
 
@@ -79,6 +80,7 @@ export const rules = (mock: MockAdapter) => {
         id: 1,
         slug: "home",
         name: "home",
+        seo_title: "home",
         category_type: 1,
         parent_category_id: 1,
         board_id: 1,

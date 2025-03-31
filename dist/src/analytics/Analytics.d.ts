@@ -1,14 +1,17 @@
-import { AxiosResponse } from "axios";
-import { FetchService } from "../common/FetchService";
-import { AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
-export declare type PingPayload = {
+import { type AxiosResponse } from "axios";
+import { type FetchService } from "../common/FetchService";
+import { type AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
+import LiveEventAnalytics from "./LiveEventAnalytics";
+export * from "./LiveEventAnalytics";
+export type PingPayload = {
     leadId: number;
     boardId: number;
     itemId?: number;
     contentItemId?: number;
     guid: string;
+    analyticsData: any;
 };
-export declare type SourceType = "item" | "ai" | "recommendations";
+export type SourceType = "item" | "ai" | "recommendations";
 export declare enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
@@ -28,7 +31,7 @@ export declare enum DesignerEventTypes {
     clicked_on_campaign_preview = 18,
     viewed_design_tab = 19,
     viewed_content_tab = 20,
-    changed_board_privacy_settings = 47,
+    changed_board_privacy_settings = 47,//might be unneccessary after general settings are out
     clicked_on_find_more_images = 51,
     clicked_on_search_image = 52,
     clicked_on_upload_an_image = 53,
@@ -57,6 +60,7 @@ export declare enum DesignerEventTypes {
 }
 export declare class Analytics {
     private fetchService;
+    liveEvent: LiveEventAnalytics;
     constructor(fetch: FetchService);
     /**
      * Lead viewed board
@@ -64,14 +68,6 @@ export declare class Analytics {
      * @param {number} boardId
      */
     trackLeadBoardView(boardId: number): Promise<AxiosResponse>;
-    /**
-     * Lead viewed item
-     *
-     * @param {number} itemId
-     * @param {string} guid
-     * @deprecated Use trackLeadContentView instead
-     */
-    trackLeadItemView(itemId: number, guid: string): Promise<AxiosResponse>;
     /**
      * Lead viewed content
      *

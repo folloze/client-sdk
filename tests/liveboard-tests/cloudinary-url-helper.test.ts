@@ -1,5 +1,6 @@
 import {describe, beforeAll, expect} from "@jest/globals";
-import {CloudinaryHelper, CloudinaryUrlBuilder} from "../../src/common/helpers/mediaHelpers";
+import {CloudinaryHelper} from "../../src/common/helpers/cloudinary/CloudinaryHelper";
+import {CloudinaryUrlBuilder} from "../../src/common/helpers/cloudinary/CloudinaryUrlBuilder";
 
 let cloudinaryHelper: CloudinaryHelper;
 
@@ -105,7 +106,7 @@ const testData1: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url: null,
     },
 };
@@ -118,7 +119,7 @@ const testData2: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url: null,
     },
 };
@@ -132,7 +133,7 @@ const testData3: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url: null,
     },
 };
@@ -145,7 +146,7 @@ const testData4: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url:
             "https://images.folloze.com/image/upload/a_vflip/a_hflip/c_crop,h_220,w_322,x_64/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         transformation: {
@@ -170,7 +171,7 @@ const testData5: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url: null,
         transformation: {
             artisticFilter: "peacock",
@@ -197,7 +198,7 @@ const testData6: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url: null,
         transformation: {},
     },
@@ -213,7 +214,7 @@ const testData7: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url: null,
         transformation: {},
     },
@@ -227,7 +228,7 @@ const testData8: TestData = {
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         fit: "cover",
-        bankCategory: "banners",
+        bankCategory: "images",
         optimized_url:
             "https://images.folloze.com/image/upload/a_hflip/c_crop,h_258,w_387/c_lfill,w_1920/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
         transformation: {

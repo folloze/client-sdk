@@ -28,7 +28,9 @@ import {
     CtaParams,
     CtaResponseV1,
     EnrichmentBoardConfigV3,
-    LeadLinkClickResponseV1
+    LeadLinkClickResponseV1,
+    ChatUserDataV2,
+    LiveEventParticipant,
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -166,6 +168,18 @@ export class Liveboard {
                     reject(e);
                 });
         });
+    }
+
+    async createChatUser(userData: ChatUserDataV2): Promise<void> {
+        return this.fetchService.fetcher.post("/live_board/v2/chat/user", userData);
+    }
+    
+    async joinChatConversation(conversationId: number, userId: number): Promise<void> {
+        return this.fetchService.fetcher.post(`/live_board/v2/chat/conversation/${conversationId}/participant/${userId}`, {});
+    }
+    
+    async leaveChatConversation(conversationId: number, userId: number): Promise<void> {
+        return this.fetchService.fetcher.delete(`/live_board/v2/chat/conversation/${conversationId}/participant/${userId}`);
     }
 
     // Items
@@ -839,5 +853,48 @@ export class Liveboard {
         } else {
             return new Promise(resolve => resolve({status: 200}));
         }
+    }
+
+    joinLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .post<LiveEventParticipant[]>(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants`)
+                .then((result) => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not join live event", e);
+                    reject(e);
+                });
+        });
+    }
+
+    
+    leaveLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .delete(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants/me`)
+                .then((result) => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not leave live event", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getLiveEventParticipants(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get(`/live_board/v3/boards/${boardId}/live_event/${liveEventId}/participants`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get live event participants", e);
+                    reject(e);
+                });
+        });
     }
 }

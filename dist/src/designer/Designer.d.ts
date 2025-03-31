@@ -1,6 +1,7 @@
+import { GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest } from "../common/interfaces/IGenerationTypes";
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, type GenerateWidgetsTextsRequest, type GenerateWidgetsTextsResponse, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse } from "./IDesignerTypes";
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
@@ -15,8 +16,13 @@ export declare class Designer {
      * @returns {GalleryImage[]} an array of GalleryImage
      */
     private getImageGallery;
+    createPersonalGalleryMedia(payload: personalGalleryMediaParams): Promise<GalleryImage | GalleryVideo>;
+    deletePersonalGalleryMedia(id: number): Promise<void>;
     getVideosGallery(): Promise<GalleryVideo[]>;
-    getBannerImageGallery(): Promise<GalleryImage[]>;
+    getImagesImageGallery(): Promise<GalleryImage[]>;
+    getBannersImageGallery(): Promise<GalleryImage[]>;
+    getPersonalVideosGallery(): Promise<GalleryVideo[]>;
+    getPersonalImageGallery(): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
     getIconsImageGallery(): Promise<GalleryImage[]>;
     getLogosImageGallery(): Promise<GalleryImage[]>;
@@ -40,7 +46,7 @@ export declare class Designer {
      * @param {number} boardId
      * @returns {Record<string, FormV1>} an object of id and FormResponse
      */
-    getForms(boardId: number): Promise<Record<string, FormV1>>;
+    getForms(boardId: number, selectedFormId?: number): Promise<Record<string, FormV1>>;
     /**
      * Create a new form
      *
@@ -140,10 +146,10 @@ export declare class Designer {
      * gets board merge tags
      *
      * @param {number} boardId
-     * @param {string} contextType
+     * @param {MergeTagFilters} filters
      * @returns {MergeTagAttribute[]} merge tags array
      */
-    getMergeTagsByBoard(boardId: number, contextType: string): Promise<MergeTagAttribute[]>;
+    getMergeTags(organizationId: number, boardId: number, filters: MergeTagFilters): Promise<MergeTagAttribute[]>;
     /**
      * gets merge tag lookup values
      *
@@ -153,11 +159,15 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
-    generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse>;
+    generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
+    rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
+    translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
+    getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
+    createOrUpdateChatConversation(boardId: any, widgetId: any, conversationData?: ChatConversationDataV2): Promise<void>;
     getVideoAIVoices(): Promise<VideoAIVoice[]>;
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;
     generateVideoAI(request: VideoAIGenerateRequest): Promise<VideoAIGenerateResponse>;

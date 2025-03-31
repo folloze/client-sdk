@@ -6,7 +6,7 @@ import {
     FormPrivacyMessageResponseV1,
 } from "./../designer/IDesignerTypes";
 import {PrivacySettings} from "../common/ISharedTypes";
-import {FlzVItemViewerSettings} from "../common/interfaces/IContentWidget";
+import {FlzVItemViewerSettings} from "../common/interfaces/IItemViewer";
 
 export type BoardResponseV1 = {
     id: number;
@@ -14,6 +14,7 @@ export type BoardResponseV1 = {
     online_items_count: number;
     organization_id: number;
     name: string;
+    seo_title: string;
     is_ssl: boolean;
 };
 
@@ -33,6 +34,7 @@ export type CategoryResponseV2 = {
     id: number;
     slug: string;
     name: string;
+    seo_title: string;
     category_type: number;
     parent_category_id: number;
     board_id: number;
@@ -93,6 +95,7 @@ export type OpenItemViewerPayload = ItemNavigationParams & {
     content_item_id: number;
     slug: string;
     name: string;
+    seo_title: string;
     description: string;
     item_source: number;
     item_type: string;
@@ -128,6 +131,7 @@ export type ItemResponseV2 = {
     likes_count: number;
     link_url?: string;
     name: string;
+    seo_title: string;
     slug: string;
     status: number;
     views_count: number;
@@ -246,6 +250,7 @@ export type ItemFileMetadataResponseV1 = {
         url?: string; //every provider but box
         file_id?: number; //box
         access_token?: string; //box
+        should_optimize?: boolean; //for optimizing cloudinary videos quality
     };
 };
 
@@ -348,3 +353,14 @@ export type EnrichmentBoardConfigV3 = {
     board_configuration: any;
     personalization_rules_results: any;
 };
+
+export type ChatUserDataV2 = {
+    id: number;
+    name: string;
+};
+
+export type LiveEventParticipant = {
+    id: number;
+    name: string;
+    last_name: string | null;       
+}
