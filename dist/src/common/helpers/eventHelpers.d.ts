@@ -21,6 +21,7 @@ export declare function widgetEmitPromise(el: LitElement, action: "floating-widg
     command: "hide" | "show" | "remove";
 }, onSuccess?: Function, onError?: Function): void;
 export declare function editorEmitPromise<T extends FLZ_DESIGNER_EVENT_REQUEST_ACTION, P extends FLZ_EVENT_TYPE_PAYLOAD_MAP[T], A extends P['action']>(el: LitElement, action: T, payload: P): Promise<FLZ_EVENT_TYPE_RESPONSE_MAP[T][A]>;
+export declare function editorEmitPromise<T extends Exclude<FLZ_DESIGNER_EVENT_ACTION, FLZ_DESIGNER_EVENT_REQUEST_ACTION>>(el: LitElement, action: T, payload?: any): Promise<any>;
 export declare function emit(el: HTMLElement, name: string, options?: CustomEventInit): CustomEvent<any>;
 export declare function waitForEvent(el: HTMLElement, eventName: string): Promise<void>;
 export declare function onSuccessIfExists<T>(e: FlzEvent, result?: T): void;
