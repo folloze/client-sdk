@@ -100,9 +100,14 @@ export function editorEmitPromise<
     action: T,
     payload: P
 ): Promise<FLZ_EVENT_TYPE_RESPONSE_MAP[T][A]>;
-export function editorEmitPromise<T extends FLZ_DESIGNER_EVENT_ACTION>(
+export function editorEmitPromise<T extends Exclude<FLZ_DESIGNER_EVENT_ACTION, FLZ_DESIGNER_EVENT_REQUEST_ACTION>>(
     el: LitElement, 
     action: T, 
+    payload?: any
+): Promise<any>;
+export function editorEmitPromise(
+    el: LitElement, 
+    action: FLZ_DESIGNER_EVENT_ACTION, 
     payload?: any
 ): Promise<any> {
     return new Promise((resolve, reject) => {
