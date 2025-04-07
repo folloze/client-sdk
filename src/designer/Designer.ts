@@ -566,7 +566,7 @@ export class Designer {
                 .post<any>(`/api/v1/boards/translate/widgets_texts`, //{ ...generateParams, guid })
 
                     {
-                        "language": "Japanese",
+                        "language": "French (Canada)",
                         "widgets": [
                             {
                                 "widgetId": "w_70c2d24c",
