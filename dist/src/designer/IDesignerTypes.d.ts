@@ -427,7 +427,10 @@ export type VideoAIGenerateRequest = {
 };
 export type VideoAIGenerateResponse = {
     id: string;
+    status: 'starting';
+} | {
+    id: string;
     url: string;
-    status: 'starting' | 'processing' | 'completed' | 'failed';
+    status: 'processing' | 'completed' | 'failed';
 };
 export {};
