@@ -415,7 +415,7 @@ export type VideoAIGenerateRequest = {
         ssml: boolean;
     };
     presenter_config: {
-        crop: {
+        crop?: {
             type: "wide";
         };
     };
@@ -426,8 +426,8 @@ export type VideoAIGenerateRequest = {
     };
 };
 export type VideoAIGenerateResponse = {
-    id: number;
+    id: string;
     url: string;
-    status: 'processing' | 'completed' | 'failed';
+    status: 'starting' | 'processing' | 'completed' | 'failed';
 };
 export {};

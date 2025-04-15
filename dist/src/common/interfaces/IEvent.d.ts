@@ -18,6 +18,7 @@ export interface FLZ_EVENT_TYPE_RESPONSE_MAP {
         "avatars": VideoAIAvatar[];
         "generate": VideoAIGenerateResponse;
         "voices": VideoAIVoice[];
+        "status": VideoAIGenerateResponse;
     };
 }
 export type OpenEditorPayload = {
@@ -41,5 +42,5 @@ export type GenerateAiVideoPayload = {
     action: "generate";
     request: VideoAIGenerateRequest;
 } | {
-    action: "voices" | "avatars";
+    action: "voices" | "avatars" | "status";
 };

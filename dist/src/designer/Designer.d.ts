@@ -171,4 +171,5 @@ export declare class Designer {
     getVideoAIVoices(): Promise<VideoAIVoice[]>;
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;
     generateVideoAI(request: VideoAIGenerateRequest): Promise<VideoAIGenerateResponse>;
+    getVideoAIStatus(id: string): Promise<VideoAIGenerateResponse>;
 }
