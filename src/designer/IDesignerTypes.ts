@@ -483,7 +483,7 @@ export type VideoAIGenerateRequest = {
         input: string;
         ssml: boolean
     };
-    presenter_config: {crop: {type: "wide"}};
+    presenter_config: {crop?: {type: "wide"}};
     config: {
         logo?: {
             position: [number, number]
@@ -492,7 +492,7 @@ export type VideoAIGenerateRequest = {
 }
 
 export type VideoAIGenerateResponse = {
-    id: number;
+    id: string;
     url: string;
-    status: 'processing' | 'completed' | 'failed';
+    status: 'starting' | 'processing' | 'completed' | 'failed';
 }
