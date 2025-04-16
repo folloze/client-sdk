@@ -570,7 +570,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
@@ -583,7 +583,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
@@ -596,7 +596,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     getCustomSections(): Promise<CustomSectionListItem[]> {
