@@ -215,7 +215,7 @@ export type JourneyItem = {
     image: {
         url: string;
         fit: string;
-        transformation?:  | object;
+        transformation?:  ImageTransformation | object;
         alt_text: string;
     };
     item_type: string;
