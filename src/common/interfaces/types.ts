@@ -13,3 +13,4 @@ export * from "./IPersonalization";
 export * from "./IFollozeState";
 export * from "./IInitialState";
 export * from "./IThemeBuilder";
+export * from "./IGenerationTypes";

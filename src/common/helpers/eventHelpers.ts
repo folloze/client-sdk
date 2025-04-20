@@ -1,6 +1,6 @@
 import {LitElement} from "lit";
 import {FlzBoardEvent, FlzDesignerEvent, type FlzEvent} from "../FlzEvent";
-import {FLZ_DESIGNER_EVENT_ACTION, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
+import {FLZ_DESIGNER_EVENT_ACTION, FLZ_EVENT_TYPE_PAYLOAD_MAP, FLZ_LIVEBOARD_EVENT_ACTION} from "../interfaces/IEvent";
 import {CategoriesResponseV2, LeadResponseV1} from "../../liveboard/ILiveboardTypes";
 import {LiveFloatingWidget} from "../LiveFloatingWidget";
 
@@ -49,10 +49,10 @@ export function widgetEmit(
         : el.dispatchEvent(new FlzBoardEvent(el, action, payload, onSuccess, onError));
 }
 
-export function editorEmit(
+export function editorEmit<T extends FLZ_DESIGNER_EVENT_ACTION>(
     el: LitElement,
-    action: FLZ_DESIGNER_EVENT_ACTION,
-    payload?: any,
+    action: T,
+    payload?: FLZ_EVENT_TYPE_PAYLOAD_MAP[T],
     onSuccess?: Function,
     onError?: Function,
 ): void {
@@ -115,6 +115,16 @@ export function emit(el: HTMLElement, name: string, options?: CustomEventInit) {
     );
     el.dispatchEvent(event);
     return event;
+}
+
+//
+// Emits a custom event with a promise.
+//
+export async function emitPromise(el: HTMLElement, eventName: string, detail: any): Promise<any> {
+    const result = {promise: undefined};
+    emit(el, eventName, {detail: {...detail, result}});
+
+    return result.promise;
 }
 
 //

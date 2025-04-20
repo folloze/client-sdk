@@ -1,3 +1,8 @@
+import {
+    GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1,
+    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest
+} from "../common/interfaces/IGenerationTypes";
+
 export * from "./IDesignerTypes";
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
@@ -24,8 +29,6 @@ import {
     GalleryVideo,
     Theme,
     MergeTagFilters,
-    type GenerateWidgetsTextsRequest,
-    type GenerateWidgetsTextsResponse,
     type ChatConversationDataV2,
     type personalGalleryMediaParams
 } from "./IDesignerTypes";
@@ -566,18 +569,43 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenerateWidgetsTextsResponse> {
+    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
                     reject(e);
                 });
         };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+    }
 
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+    }
+
+    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     getCustomSections(): Promise<CustomSectionListItem[]> {

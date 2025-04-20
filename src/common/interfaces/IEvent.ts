@@ -1,3 +1,7 @@
+import {type LiveWidget} from "../LiveWidget";
+import {type FloatEditor} from "../FloatEditor";
+import {hasFloatingChildren} from "../controllers/FloatersChildrenContainer";
+
 export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaClick"
     | "Folloze.ctaSubmit"
@@ -112,3 +116,22 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "upload-file"
     | "create-or-update-chat-conversation"
     | "open-editor";
+
+
+export interface FLZ_EVENT_TYPE_PAYLOAD_MAP {
+    "open-editor": OpenEditorPayload;
+    [eventName: string]: any; // Index signature for any other event name
+}
+
+export type OpenEditorPayload = {
+    widget: LiveWidget,
+    editTag: string,
+    title?: string,
+    pos?: MouseEvent | {x: number, y: number},
+    parentEl?: HTMLElement & hasFloatingChildren,
+    propertyPath?: string,
+    isFloatingWidget?: boolean,
+    layer?: number,
+    width?: string | "610px",
+    response?: {editorContainer?: FloatEditor},
+}

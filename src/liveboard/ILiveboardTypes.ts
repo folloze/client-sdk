@@ -61,7 +61,7 @@ export type Image = {
     id: number;
     url: string;
     fit: string;
-    transformation: ImageTransformation; // TODO
+    transformation: ImageTransformation;
     displayable_section?: string;
 };
 
@@ -215,7 +215,7 @@ export type JourneyItem = {
     image: {
         url: string;
         fit: string;
-        transformation: ImageTransformation;
+        transformation?:  ImageTransformation;
         alt_text: string;
     };
     item_type: string;

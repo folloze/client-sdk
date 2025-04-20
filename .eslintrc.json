@@ -35,7 +35,7 @@
     "no-async-promise-executor": "off",
     "no-prototype-builtins": "off",
     "@typescript-eslint/no-unused-vars": [
-      "warn",
+      "off",
       {
         "argsIgnorePattern": "^_"
       }
