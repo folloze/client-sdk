@@ -167,6 +167,7 @@ export const rules = (mock: MockAdapter) => {
                 image: {
                     fit: "cover",
                     url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png",
+                    alt_text: "alt text"
                 },
                 is_gated: null,
                 item_source: 1,
@@ -190,6 +191,7 @@ export const rules = (mock: MockAdapter) => {
                 image: {
                     fit: "cover",
                     url: "https://images.folloze.com/image/fetch/https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png",
+                    alt_text: "alt text"
                 },
                 is_gated: null,
                 item_source: 1,
@@ -213,6 +215,7 @@ export const rules = (mock: MockAdapter) => {
                 image: {
                     fit: "cover",
                     url: "https://images.folloze.com/image/fetch/http://g-ec2.images-amazon.com/images/G/01/social/api-share/amazon_logo_500500._V323939215_.png",
+                    alt_text: "alt text"
                 },
                 is_gated: null,
                 item_source: 1,
@@ -241,6 +244,7 @@ export const rules = (mock: MockAdapter) => {
             image: {
                 fit: "cover",
                 url: "https://images.folloze.com/image/fetch/https://www.wikipedia.org/portal/wikipedia.org/assets/img/Wikipedia-logo-v2.png",
+                alt_text: "alt text"
             },
             is_gated: null,
             item_source: 1,

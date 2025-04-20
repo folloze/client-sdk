@@ -183,6 +183,15 @@ export class Designer {
         });
     }
 
+    public getThumbnailsImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "thumbnails",
+            type: "designer",
+            category: 'thumbnails'
+        });
+    }
+
     /**
      * When searching the web for an image
      *

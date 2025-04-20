@@ -1,4 +1,4 @@
-import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1 } from "./../designer/IDesignerTypes";
+import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, ImageTransformation } from "./../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
 import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
 export type BoardResponseV1 = {
@@ -48,7 +48,7 @@ export type Image = {
     id: number;
     url: string;
     fit: string;
-    transformation: object;
+    transformation: ImageTransformation;
     displayable_section?: string;
 };
 type ItemNavigationParams = {
@@ -195,6 +195,8 @@ export type JourneyItem = {
     image: {
         url: string;
         fit: string;
+        transformation?: object;
+        alt_text: string;
     };
     item_type: string;
     item_source: number;
