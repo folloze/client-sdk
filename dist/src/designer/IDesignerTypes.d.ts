@@ -51,10 +51,11 @@ export type ImageTransformation = {
         color: string;
         alpha: number;
     };
+    sharpness?: boolean;
 };
 export type StringPosition = "top-left" | "top-center" | "top-right" | "middle-left" | "middle-center" | "middle-right" | "bottom-left" | "bottom-center" | "bottom-right";
 export type PercentPosition = "0% 0%" | "50% 0%" | "100% 0%" | "0% 50%" | "50% 50%" | "100% 50%" | "0% 100%" | "50% 100%" | "100% 100%";
-export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads" | "images";
+export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads" | "images" | "thumbnails";
 export type FlzEditableImageData = {
     url: string;
     bankCategory: ImageBankCategoryType;
