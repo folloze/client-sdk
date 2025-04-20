@@ -33,7 +33,7 @@ export type GalleryVideo = {
     name?: string;
 };
 export type ImageTransformation = {
-    crop?: {
+    crop: {
         x: number;
         y: number;
         crop?: string;
