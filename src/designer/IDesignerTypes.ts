@@ -38,7 +38,7 @@ export type GalleryVideo = {
 };
 
 export type ImageTransformation = {
-    crop?: {
+    crop: {
         x: number;
         y: number;
         crop?: string; // "crop"
