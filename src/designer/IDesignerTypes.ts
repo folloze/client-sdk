@@ -491,8 +491,9 @@ export type VideoAIGenerateRequest = {
     };
 }
 
+export type VideoAIGenerateStatus = 'starting' | 'processing' | 'completed' | 'failed';
 export type VideoAIGenerateResponse = {
     id: string;
     url: string;
-    status: 'starting' | 'processing' | 'completed' | 'failed';
+    status: VideoAIGenerateStatus;
 }
