@@ -152,7 +152,7 @@ export type GenerateAiVideoPayload = {
     action: "generate";
     request: VideoAIGenerateRequest;
 } | {
-    action: "voices" | "avatars" | "status";
+    action: "voices" | "avatars";
 } | {
     action: "status";
     id: string;
