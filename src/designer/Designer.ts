@@ -569,10 +569,10 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsText(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
@@ -582,10 +582,10 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
-    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+    public rephraseWidgetText(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/rephrase/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not rephrase widgets texts", e);
