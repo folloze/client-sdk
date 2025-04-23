@@ -4,6 +4,7 @@ import {
     FootersResponseV1,
     PrivacyMessageResponseV1,
     FormPrivacyMessageResponseV1,
+    ImageTransformation
 } from "./../designer/IDesignerTypes";
 import {PrivacySettings} from "../common/ISharedTypes";
 import {FlzVItemViewerSettings} from "../common/interfaces/IItemViewer";
@@ -60,7 +61,7 @@ export type Image = {
     id: number;
     url: string;
     fit: string;
-    transformation: object; // TODO
+    transformation: ImageTransformation;
     displayable_section?: string;
 };
 
@@ -214,6 +215,8 @@ export type JourneyItem = {
     image: {
         url: string;
         fit: string;
+        transformation?:  ImageTransformation;
+        alt_text: string;
     };
     item_type: string;
     item_source: number;

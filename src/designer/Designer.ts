@@ -187,6 +187,15 @@ export class Designer {
         });
     }
 
+    public getThumbnailsImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "thumbnails",
+            type: "designer",
+            category: 'thumbnails'
+        });
+    }
+
     /**
      * When searching the web for an image
      *
@@ -574,7 +583,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
@@ -587,7 +596,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
@@ -600,7 +609,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 30) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
     getCustomSections(): Promise<CustomSectionListItem[]> {

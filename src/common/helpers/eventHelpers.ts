@@ -136,6 +136,16 @@ export function emit(el: HTMLElement, name: string, options?: CustomEventInit) {
 }
 
 //
+// Emits a custom event with a promise.
+//
+export async function emitPromise(el: HTMLElement, eventName: string, detail: any): Promise<any> {
+    const result = {promise: undefined};
+    emit(el, eventName, {detail: {...detail, result}});
+
+    return result.promise;
+}
+
+//
 // Waits for a specific event to be emitted from an element. Ignores events that bubble up from child elements.
 //
 export function waitForEvent(el: HTMLElement, eventName: string) {

@@ -2,7 +2,7 @@ import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
 import {BackgroundImage, BackgroundVideo} from "../common/interfaces/ISection";
 
-export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer";
+export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer"
 export type VideoGalleryTypes = "video";
 
 export enum CampaignElementsTypes {
@@ -56,6 +56,7 @@ export type ImageTransformation = {
         color: string;
         alpha: number;
     };
+    sharpness?: boolean;
 };
 
 export type StringPosition =
@@ -80,7 +81,7 @@ export type PercentPosition =
     | "50% 100%"
     | "100% 100%";
 
-export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads" | "images";
+export type ImageBankCategoryType = "banners" | "mobile_banners" | "thumbnails" | "icons" | "logos" | "uploads" | "images" | "thumbnails";
 
 export type FlzEditableImageData = {
     url: string;
