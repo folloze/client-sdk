@@ -424,6 +424,14 @@ export type VideoAIGenerateRequest = {
             position: [number, number];
         };
     };
+    background?: {
+        color: string | boolean;
+    } | {
+        source_url: string;
+    } | {
+        color: string | boolean;
+        source_url: string;
+    };
 };
 export type VideoAIGenerateStatus = 'starting' | 'processing' | 'completed' | 'failed';
 export type VideoAIGenerateResponse = {
