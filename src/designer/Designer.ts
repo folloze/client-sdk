@@ -569,7 +569,7 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsText(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> { 
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/${boardId}/generation/widgets_texts`, { ...generateParams, guid })
