@@ -14,6 +14,7 @@ export type Features = {
     liveEvent: boolean;
     htmlSections: boolean;
     registrationTracking: boolean;
+    videoAi: boolean;
 };
 
 export type FeatureName = keyof Features;

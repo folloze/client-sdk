@@ -379,4 +379,65 @@ export type ChatConversationDataV2 = {
     custom?: Map<string, string> | null;
     photoUrl?: string | null;
 };
+export type VideoAIVoice = {
+    id: string;
+    name: string;
+    gender: 'male' | 'female';
+    provider: string;
+    description: string;
+    age: string;
+    use_case: string;
+    languages: {
+        locale: string;
+        language: string;
+        accent?: string;
+        previewUrl?: string;
+    }[];
+};
+export type VideoAIAvatar = {
+    presenter_id: string;
+    gender: 'male' | 'female';
+    name: string;
+    preview_url: string;
+    thumbnail_url: string;
+    image_url: string;
+    talking_preview_url: string;
+};
+export type VideoAIGenerateRequest = {
+    presenter_id: string;
+    script: {
+        type: "text";
+        subtitles: boolean;
+        provider: {
+            type: string;
+            voice_id: string;
+        };
+        input: string;
+        ssml: boolean;
+    };
+    presenter_config: {
+        crop?: {
+            type: "wide";
+        };
+    };
+    config: {
+        logo?: {
+            position: [number, number];
+        };
+    };
+    background?: {
+        color: string | boolean;
+    } | {
+        source_url: string;
+    } | {
+        color: string | boolean;
+        source_url: string;
+    };
+};
+export type VideoAIGenerateStatus = 'starting' | 'processing' | 'completed' | 'failed';
+export type VideoAIGenerateResponse = {
+    id: string;
+    url: string;
+    status: VideoAIGenerateStatus;
+};
 export {};

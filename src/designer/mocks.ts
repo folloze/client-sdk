@@ -869,4 +869,73 @@ export const rules = (mock: MockAdapter) => {
             type: "basic"
         }
     });
+
+    // Video AI Voices
+    mock.onGet("/api/v1/video_ai/voices").reply(200, [
+        {
+            id: "voice1",
+            name: "Sarah",
+            language: "en-US",
+            gender: "female",
+            previewUrl: "https://example.com/voice-samples/sarah.mp3"
+        },
+        {
+            id: "voice2", 
+            name: "Michael",
+            language: "en-US",
+            gender: "male",
+            previewUrl: "https://example.com/voice-samples/michael.mp3"
+        }
+    ]);
+
+    // Video AI Avatars
+    mock.onGet("/api/v1/video_ai/avatars").reply(200, [
+        {
+            id: "avatar1",
+            name: "Anna",
+            previewUrl: "https://example.com/avatars/anna.jpg",
+            previewVideoUrl: "https://example.com/avatars/anna-preview.mp4"
+        },
+        {
+            id: "avatar2",
+            name: "John",
+            previewUrl: "https://example.com/avatars/john.jpg",
+            previewVideoUrl: "https://example.com/avatars/john-preview.mp4"
+        }
+    ]);
+
+    // Generate Video AI
+    mock.onPost("/api/v1/video_ai/generate").reply(() => {
+        return [200, {
+            id: "job123",
+            status: "processing",
+            url: "https://example.com/generated-videos/final.mp4",
+        }];
+    });
+
+    // Video AI Status
+    mock.onGet(/api\/v1\/video_ai\/status\/(.+)/).reply((config) => {
+        const id = config.url.split('/').pop();
+        const url = "https://example.com/generated-videos/final.mp4"
+
+        if (id.indexOf("completed") !== -1) {
+            return [200, {
+                status: "completed",
+                id,
+                url
+            }];
+        } else if (id.indexOf("failed") !== -1) {
+            return [200, {
+                id,
+                status: "failed",
+                url
+            }];
+        } else {
+            return [200, {
+                status: "processing",
+                id,
+                url
+            }];
+        }
+    });
 };
