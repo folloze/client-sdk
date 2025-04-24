@@ -242,4 +242,62 @@ describe("testing sdk designer module", () => {
       await sdk.designer.getDesignerThemes(1).then(result => expect(result[1].id).toEqual(1));
       await sdk.designer.getDesignerThemes(1).then(result => expect(result[2].id).toEqual(2));
   });
+
+    it("checks that video AI voices can be fetched", async () => {
+        await sdk.designer.getVideoAIVoices().then(result => {
+            expect(Array.isArray(result)).toBeTruthy();
+            expect(result.length).toBeGreaterThan(0);
+        });
+    });
+
+    it("checks that video AI avatars can be fetched", async () => {
+        await sdk.designer.getVideoAIAvatars().then(result => {
+            expect(Array.isArray(result)).toBeTruthy();
+            expect(result.length).toBeGreaterThan(0);
+        });
+    });
+
+    it("checks that video AI generation works", async () => {
+        const request = {
+            presenter_id: "avatar1",
+            script: {
+                type: "text" as const,
+                subtitles: true,
+                provider: {
+                    type: "elevenlabs" as const,
+                    voice_id: "voice1"
+                },
+                input: "Hello world",
+                ssml: false
+            },
+            presenter_config: {
+                crop: {
+                    type: "wide" as const
+                }
+            },
+            config: {}
+        };
+        await sdk.designer.generateVideoAI(request).then(result => {
+            expect(result.id).toBeDefined();
+            expect(result.status).toBeDefined();
+            expect(result.url).toBeDefined();
+        });
+    });
+
+    it("checks that video AI status can be retrieved", async () => {
+        await sdk.designer.getVideoAIStatus("completed-id").then(result => {
+            expect(result.id).toBeDefined();
+            expect(result.status).toEqual("completed");
+        });
+
+        await sdk.designer.getVideoAIStatus("failed-id").then(result => {
+            expect(result.id).toBeDefined();
+            expect(result.status).toEqual("failed");
+        });
+
+        await sdk.designer.getVideoAIStatus("random-id").then(result => {
+            expect(result.id).toBeDefined();
+            expect(result.status).toEqual("processing");
+        });
+    });
 });
