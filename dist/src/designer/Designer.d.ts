@@ -160,8 +160,10 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
-    generateWidgetsText(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
-    rephraseWidgetText(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
+    generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
+    generateWidgetsTextWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
+    rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
+    rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
     translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
