@@ -1,6 +1,6 @@
 import { LitElement } from "lit";
 import { type FlzEvent } from "../FlzEvent";
-import { FLZ_DESIGNER_EVENT_ACTION, FLZ_EVENT_TYPE_PAYLOAD_MAP, FLZ_LIVEBOARD_EVENT_ACTION } from "../interfaces/IEvent";
+import { FLZ_DESIGNER_EVENT_ACTION, FLZ_DESIGNER_EVENT_REQUEST_ACTION, FLZ_EVENT_TYPE_PAYLOAD_MAP, FLZ_EVENT_TYPE_RESPONSE_MAP, FLZ_LIVEBOARD_EVENT_ACTION } from "../interfaces/IEvent";
 import { CategoriesResponseV2, LeadResponseV1 } from "../../liveboard/ILiveboardTypes";
 import { LiveFloatingWidget } from "../LiveFloatingWidget";
 type ExcludedAction = Exclude<FLZ_LIVEBOARD_EVENT_ACTION, "get-lead" & "get-all-categories" & "floating-widget-manager">;
@@ -20,7 +20,8 @@ export declare function widgetEmitPromise(el: LitElement, action: "floating-widg
     widget: LiveFloatingWidget;
     command: "hide" | "show" | "remove";
 }, onSuccess?: Function, onError?: Function): void;
-export declare function editorEmitPromise(el: LitElement, action: FLZ_DESIGNER_EVENT_ACTION, payload?: any): Promise<any>;
+export declare function editorEmitPromise<T extends FLZ_DESIGNER_EVENT_REQUEST_ACTION, P extends FLZ_EVENT_TYPE_PAYLOAD_MAP[T], A extends P['action']>(el: LitElement, action: T, payload: P): Promise<FLZ_EVENT_TYPE_RESPONSE_MAP[T][A]>;
+export declare function editorEmitPromise<T extends Exclude<FLZ_DESIGNER_EVENT_ACTION, FLZ_DESIGNER_EVENT_REQUEST_ACTION>>(el: LitElement, action: T, payload?: any): Promise<any>;
 export declare function emit(el: HTMLElement, name: string, options?: CustomEventInit): CustomEvent<any>;
 export declare function emitPromise(el: HTMLElement, eventName: string, detail: any): Promise<any>;
 export declare function waitForEvent(el: HTMLElement, eventName: string): Promise<void>;

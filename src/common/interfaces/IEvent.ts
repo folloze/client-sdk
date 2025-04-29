@@ -1,6 +1,7 @@
 import {type LiveWidget} from "../LiveWidget";
 import {type FloatEditor} from "../FloatEditor";
 import {hasFloatingChildren} from "../controllers/FloatersChildrenContainer";
+import { VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, VideoAIVoice } from "../../designer/IDesignerTypes";
 
 export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaClick"
@@ -81,8 +82,10 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "leave-live-event"
     | "scroll";
 
+export type FLZ_DESIGNER_EVENT_REQUEST_ACTION = "generate-ai-video";
 export type FLZ_DESIGNER_EVENT_ACTION =
     | FLZ_LIVEBOARD_EVENT_ACTION
+    | FLZ_DESIGNER_EVENT_REQUEST_ACTION
     | "searchBoardContacts"
     | "update-form"
     | "create-form"
@@ -117,10 +120,19 @@ export type FLZ_DESIGNER_EVENT_ACTION =
     | "create-or-update-chat-conversation"
     | "open-editor";
 
-
-export interface FLZ_EVENT_TYPE_PAYLOAD_MAP {
+export interface FLZ_EVENT_TYPE_PAYLOAD_MAP{
     "open-editor": OpenEditorPayload;
+    "generate-ai-video": GenerateAiVideoPayload;
     [eventName: string]: any; // Index signature for any other event name
+}
+
+export interface FLZ_EVENT_TYPE_RESPONSE_MAP {
+    "generate-ai-video": {
+        "avatars": VideoAIAvatar[];
+        "generate": VideoAIGenerateResponse;
+        "voices": VideoAIVoice[];
+        "status": VideoAIGenerateResponse;
+    };
 }
 
 export type OpenEditorPayload = {
@@ -134,4 +146,14 @@ export type OpenEditorPayload = {
     layer?: number,
     width?: string | "610px",
     response?: {editorContainer?: FloatEditor},
+}
+
+export type GenerateAiVideoPayload = {
+    action: "generate";
+    request: VideoAIGenerateRequest;
+} | {
+    action: "voices" | "avatars";
+} | {
+    action: "status";
+    id: string;
 }

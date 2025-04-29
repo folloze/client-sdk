@@ -33,6 +33,8 @@ export interface CustomSectionListItem extends SectionListItem {
 export interface WidgetListItem extends AddListItem {
     type: WidgetType;
     config: WidgetConfig | FloatingWidgetConfig;
+    restriction?: RestrictedCapability;
+    restricted?: boolean;
 }
 
 export type SectionType = "header" | "footer" | "body";
