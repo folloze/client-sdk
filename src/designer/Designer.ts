@@ -593,8 +593,8 @@ export class Designer {
             this.fetcher
                 .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => {
-                  console.log("1", result.data.variants)
-                  result.data.variants.forEach(variant => {
+                  console.log("1", result.data?.variants)
+                  result.data?.variants?.forEach(variant => {
                     console.log("2", variant.widgets)
                     variant.widgets = this.encodeWidgetsText(variant.widgets);
                   });
@@ -614,7 +614,9 @@ export class Designer {
             this.fetcher
                 .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
                 .then(result => {
-                  result.data.variants.forEach(variant => {
+                  console.log("1", result.data?.variants)
+                  result.data?.variants?.forEach(variant => {
+                    console.log("2", variant.widgets)
                     variant.widgets = this.encodeWidgetsText(variant.widgets);
                   });
                   resolve(result)
