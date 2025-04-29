@@ -586,10 +586,38 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
+    // This method is for testing with brand voice, it should replace the current generateWidgetsText
+    public generateWidgetsTextWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/generation/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+    }
+
     public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not rephrase widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+    }
+
+    // This method is for testing with brand voice, it should replace the current rephraseWidgetText
+    public rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/rephrase/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not rephrase widgets texts", e);
