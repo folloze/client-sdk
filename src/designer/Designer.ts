@@ -575,9 +575,7 @@ export class Designer {
     }
     
     private encodeWidgetsText(widgets: any[]): any[] {
-      console.log("3", widgets)
       widgets.forEach(widget => {
-        console.log("4", widget.text)
         widget.text = widget.text.map(d => {
             return {
                 ...d,
@@ -593,9 +591,7 @@ export class Designer {
             this.fetcher
                 .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
                 .then(result => {
-                  console.log("1", result.data?.variants)
                   result.data?.variants?.forEach(variant => {
-                    console.log("2", variant.widgets)
                     variant.widgets = this.encodeWidgetsText(variant.widgets);
                   });
                   resolve(result)
@@ -628,9 +624,7 @@ export class Designer {
             this.fetcher
                 .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
                 .then(result => {
-                  console.log("1", result.data?.variants)
                   result.data?.variants?.forEach(variant => {
-                    console.log("2", variant.widgets)
                     variant.widgets = this.encodeWidgetsText(variant.widgets);
                   });
                   resolve(result)
@@ -662,7 +656,10 @@ export class Designer {
             this.fetcher
                 .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
                 .then(result => {
-                  result.data.widgets = this.encodeWidgetsText(result.data.widgets);
+                  if(result.data) {
+                    result.data.widgets = this.encodeWidgetsText(result.data?.widgets);
+                  }
+
                   resolve(result)
                 })
                 .catch(e => {
