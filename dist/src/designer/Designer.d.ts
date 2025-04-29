@@ -160,6 +160,7 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
+    private encodeWidgetsText;
     generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
     generateWidgetsTextWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1>;
     rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
