@@ -4,6 +4,7 @@ import {
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
+import { encode } from 'entities';
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
 import {keysToSnakeCase} from "../common/helpers/helpers";
@@ -572,17 +573,35 @@ export class Designer {
                 });
         });
     }
+    
+    private encodeWidgetsText(widgets: any[]): any[] {
+      widgets.forEach(widget => {
+        widget.text = widget.text.map(generated_text => {
+            return {
+                ...generated_text,
+                text: encode(generated_text.text),
+            };
+        });
+      })
+      return widgets;
+    }
 
     public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
-                .then(result => resolve(result))
+                .then(result => {
+                  result.data?.variants?.forEach(variant => {
+                    variant.widgets = this.encodeWidgetsText(variant.widgets);
+                  });
+                  resolve(result)
+                })
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
                     reject(e);
                 });
         };
+
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
@@ -590,7 +609,12 @@ export class Designer {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
-                .then(result => resolve(result))
+                .then(result => {
+                  result.data?.variants?.forEach(variant => {
+                    variant.widgets = this.encodeWidgetsText(variant.widgets);
+                  });
+                  resolve(result)
+                })
                 .catch(e => {
                     console.error("could not rephrase widgets texts", e);
                     reject(e);
@@ -603,7 +627,13 @@ export class Designer {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
-                .then(result => resolve(result))
+                .then(result => {
+                  if(result.data) {
+                    result.data.widgets = this.encodeWidgetsText(result.data?.widgets);
+                  }
+
+                  resolve(result)
+                })
                 .catch(e => {
                     console.error("could not rephrase widgets texts", e);
                     reject(e);
