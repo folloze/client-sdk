@@ -576,10 +576,10 @@ export class Designer {
     
     private encodeWidgetsText(widgets: any[]): any[] {
       widgets.forEach(widget => {
-        widget.text = widget.text.map(d => {
+        widget.text = widget.text.map(generated_text => {
             return {
-                ...d,
-                text: encode(d.text),
+                ...generated_text,
+                text: encode(generated_text.text),
             };
         });
       })
