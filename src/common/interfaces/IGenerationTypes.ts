@@ -126,6 +126,7 @@ export type PageGenerationConfig = {
         productName?: string;
         details?: string;
         genByTarget?: GenAudienceTarget[];
+        language?: string;
     };
     widgets?: {
         [key:string]: WidgetGenerationConfig

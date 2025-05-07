@@ -916,7 +916,7 @@ export const rules = (mock: MockAdapter) => {
     // Video AI Status
     mock.onGet(/api\/v1\/video_ai\/status\/(.+)/).reply((config) => {
         const id = config.url.split('/').pop();
-        const url = "https://example.com/generated-videos/final.mp4"
+        const url = "https://example.com/generated-videos/final.mp4";
 
         if (id.indexOf("completed") !== -1) {
             return [200, {
