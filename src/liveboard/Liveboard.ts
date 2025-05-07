@@ -31,6 +31,7 @@ import {
     LeadLinkClickResponseV1,
     ChatUserDataV2,
     LiveEventParticipant,
+    ZoomMeetingResponse,
 } from "./ILiveboardTypes";
 import {CampaignElementsTypes} from "../designer/IDesignerTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
@@ -641,6 +642,21 @@ export class Liveboard {
                     reject(e);
                 });
         });
+    }
+
+    // Zoom
+    getZoomMeetingDataFromUrl(boardId: number, meeting_url: string): Promise<ZoomMeetingResponse> {
+      return new Promise((resolve, reject) => {
+        this.fetchService.fetcher
+        .get<ZoomMeetingResponse>(`/live_board/v2/boards/${boardId}/live_event/zoom`, {
+          params: {meeting_url}
+        })
+        .then(result => resolve(result.data))
+        .catch(e => {
+          console.error("could not get zoom meeting data", e);
+          reject(e);
+        })
+      });
     }
 
     //TODO: pings
