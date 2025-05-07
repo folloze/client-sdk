@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1, EnrichmentBoardConfigV3, LeadLinkClickResponseV1, ChatUserDataV2, LiveEventParticipant } from "./ILiveboardTypes";
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1, EnrichmentBoardConfigV3, LeadLinkClickResponseV1, ChatUserDataV2, LiveEventParticipant, ZoomMeetingResponse } from "./ILiveboardTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
 export declare class Liveboard {
     private fetchService;
@@ -179,6 +179,7 @@ export declare class Liveboard {
     getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
     getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
     getFormPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
+    getZoomMeetingDataFromUrl(boardId: number, meeting_url: string): Promise<ZoomMeetingResponse>;
     /**
      * submit a message CTA
      *

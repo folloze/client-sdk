@@ -323,4 +323,12 @@ export type LiveEventParticipant = {
     name: string;
     last_name: string | null;
 };
+export type ZoomMeetingResponse = {
+    mn: number;
+    sdkKey: string;
+    signature: string;
+    pwd: string;
+    name: string;
+    email: string;
+};
 export {};
