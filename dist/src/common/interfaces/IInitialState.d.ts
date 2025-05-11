@@ -13,6 +13,7 @@ export type Features = {
     htmlSections: boolean;
     registrationTracking: boolean;
     videoAi: boolean;
+    localization?: boolean;
 };
 export type FeatureName = keyof Features;
 export type InitialState = {
