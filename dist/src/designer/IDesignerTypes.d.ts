@@ -439,5 +439,6 @@ export type VideoAIGenerateResponse = {
     id: string;
     url: string;
     status: VideoAIGenerateStatus;
+    message?: string;
 };
 export {};
