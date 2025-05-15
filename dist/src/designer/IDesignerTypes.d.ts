@@ -422,6 +422,7 @@ export type VideoAIGenerateRequest = {
     };
     config: {
         logo?: {
+            url: string;
             position: [number, number];
         };
     };
