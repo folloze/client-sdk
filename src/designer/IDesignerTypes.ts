@@ -487,6 +487,7 @@ export type VideoAIGenerateRequest = {
     presenter_config: {crop?: {type: "wide"}};
     config: {
         logo?: {
+            url: string;
             position: [number, number]
         }
     };
