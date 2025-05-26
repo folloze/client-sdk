@@ -133,6 +133,7 @@ export type PageGenerationConfig = {
         details?: string;
         genByTarget?: GenAudienceTarget[];
         language?: string;
+        prompt?: string;
     };
     widgets?: {
         [key:string]: WidgetGenerationConfig
