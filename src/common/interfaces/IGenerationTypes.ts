@@ -70,7 +70,7 @@ export type GenerateTextWidgetExtendedData = GenerateTextWidgetData & {
     product?: string;
 }
 
-export type GenerateWidgetsTextsRequest = {
+export type GenerateWidgetsTextsFromScratchRequest = {
     board: {
         goal: string,
         productName: string,
