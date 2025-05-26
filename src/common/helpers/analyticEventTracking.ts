@@ -37,6 +37,9 @@ type AnalyticTypeToPayload = {
         button_text: string;
         content_id: number;
     };
+    video_ai: {
+        unique_id: string;
+    };
 };
 
 type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
