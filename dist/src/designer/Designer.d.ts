@@ -1,4 +1,4 @@
-import { GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest } from "../common/interfaces/IGenerationTypes";
+import { GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest, GenerateWidgetsTextsFromPromptRequest } from "../common/interfaces/IGenerationTypes";
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
 import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams } from "./IDesignerTypes";
@@ -162,6 +162,7 @@ export declare class Designer {
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
     generateWidgetsTextFromScratch(generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1>;
     generateWidgetsTextFromScratchWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1>;
+    generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1>;
     rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
     rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
     translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;

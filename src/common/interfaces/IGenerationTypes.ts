@@ -80,6 +80,12 @@ export type GenerateWidgetsTextsFromScratchRequest = {
     numberOfVariants: number;
 }
 
+export type GenerateWidgetsTextsFromPromptRequest = {
+    prompt: string,
+    widgets: GenerateTextWidgetExtendedData[],
+    numberOfVariants: number;
+}
+
 export type GenRephraseWidgetsTextsRequest = {
     strategy: "personalize" | "shorten",
     widgets: GenerateTextWidgetData[],

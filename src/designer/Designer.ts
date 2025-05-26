@@ -1,6 +1,7 @@
 import {
     GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1,
-    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest
+    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest,
+    GenerateWidgetsTextsFromPromptRequest
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
@@ -591,6 +592,19 @@ export class Designer {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/${boardId}/generation/from_scratch/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+    }
+
+    public generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_prompt/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
