@@ -68,6 +68,7 @@ export type GenerateTextWidgetExtendedData = GenerateTextWidgetData & {
     description: string;
     purpose: string;
     product?: string;
+    prompt?: string;
 }
 
 export type GenerateWidgetsTextsFromScratchRequest = {
@@ -122,6 +123,7 @@ export type SectionInjectable = {
 export type WidgetGenerationConfig = {
     purpose?: string;
     product?: string;
+    prompt?: string;
     targetAudienceId?: number;
     genByTarget?: GenAudienceTarget[];
 };
