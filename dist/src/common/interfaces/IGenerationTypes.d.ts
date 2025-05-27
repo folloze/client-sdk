@@ -56,13 +56,19 @@ export type GenerateTextWidgetExtendedData = GenerateTextWidgetData & {
     description: string;
     purpose: string;
     product?: string;
+    prompt?: string;
 };
-export type GenerateWidgetsTextsRequest = {
+export type GenerateWidgetsTextsFromScratchRequest = {
     board: {
         goal: string;
         productName: string;
         details?: string;
     };
+    widgets: GenerateTextWidgetExtendedData[];
+    numberOfVariants: number;
+};
+export type GenerateWidgetsTextsFromPromptRequest = {
+    prompt: string;
     widgets: GenerateTextWidgetExtendedData[];
     numberOfVariants: number;
 };
@@ -98,6 +104,7 @@ export type SectionInjectable = {
 export type WidgetGenerationConfig = {
     purpose?: string;
     product?: string;
+    prompt?: string;
     targetAudienceId?: number;
     genByTarget?: GenAudienceTarget[];
 };
@@ -108,6 +115,7 @@ export type PageGenerationConfig = {
         details?: string;
         genByTarget?: GenAudienceTarget[];
         language?: string;
+        prompt?: string;
     };
     widgets?: {
         [key: string]: WidgetGenerationConfig;

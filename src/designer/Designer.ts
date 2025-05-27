@@ -1,6 +1,7 @@
 import {
-    GenerateWidgetsTextsRequest, GenGenerateResponseV1, GenRephraseResponseV1,
-    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest
+    GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1,
+    GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest,
+    GenerateWidgetsTextsFromPromptRequest
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
@@ -573,7 +574,7 @@ export class Designer {
         });
     }
 
-    public generateWidgetsText(generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsTextFromScratch(generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
                 .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
@@ -587,10 +588,23 @@ export class Designer {
     }
 
     // This method is for testing with brand voice, it should replace the current generateWidgetsText
-    public generateWidgetsTextWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsTextFromScratchWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/generation/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_scratch/widgets_texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate widgets texts", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+    }
+
+    public generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_prompt/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);

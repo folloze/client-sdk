@@ -439,7 +439,7 @@ export type Theme = {
     type: "basic" | "migration" | "system";
 };
 
-export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config" | "set-variant";
+export type GenAIAction = "generate-widget" | "generate-board" | "init-generation-config" | "set-variant" | "generate-widget-from-prompt" | "generate-board-by-prompt";
 
 export type ChatConversationDataV2 = {
     participants?: Array<string>;
