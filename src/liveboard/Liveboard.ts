@@ -543,6 +543,30 @@ export class Liveboard {
     }
 
     /**
+     * Gets the urls to use for 'Open In Zoom'
+     *
+     * @param {number} boardId
+     * @param {string} meetingUrl
+     * @returns {LiveEventUrlsResponseV2} LiveEventUrlsResponse
+     */
+    getOpenInZoomUrls(boardId: number, meetingUrl: string): Promise<LiveEventUrlsResponseV2> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get<LiveEventUrlsResponseV2>(`/live_board/v2/boards/${boardId}/live_event/open_in_zoom_urls`, {
+                    params: {meeting_url: meetingUrl},
+                  }
+                )
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not get zoom urls", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
      * Gets the organization's settings
      *
      * @param {number} boardId
