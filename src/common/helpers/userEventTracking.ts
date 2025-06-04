@@ -113,6 +113,23 @@ export class TrackedUserAddPersonalizationRule extends AbstractTracker {
     }
 }
 
+
+type GenAITargetAudiencePayload = {
+    
+}
+
+type EventPayloadMap = {
+    [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
+};
+
+type UserTrackedEventsV2 = {
+    [K in DesignerEventTypes]: {
+        action: K;
+        payload: K extends keyof EventPayloadMap ? EventPayloadMap[K] : {};
+    };
+};
+  
+
 export type TrackedUserEvent =
     TrackedUserAddSection
     | TrackedUserEditSection
@@ -124,6 +141,6 @@ export type TrackedUserEvent =
     | TrackedUserAddFloatingWidget
     | TrackedUserAddPersonalizationRule;
 
-export function trackEvent(el: LitElement, trackedUserEvent: TrackedUserEvent) {
+export function trackEvent(el: LitElement, trackedUserEvent: TrackedUserEvent | UserTrackedEventsV2[keyof UserTrackedEventsV2]) {
     editorEmit(el, "track-user-event", { trackedUserEvent });
 }
