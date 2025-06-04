@@ -6,12 +6,12 @@ import { FloatEditor } from "../FloatEditor";
 import { editorEmit } from "./eventHelpers";
 import { IPersonalizationRule } from "../interfaces/IPersonalization";
 
-export class AbstractTracker {
+export class AbstractTracker<K extends DesignerEventTypes> {
     public payload: unknown;
-    public action: DesignerEventTypes;
+    public action: K;
 }
 
-export class TrackedUserAddSection extends AbstractTracker {
+export class TrackedUserAddSection extends AbstractTracker<DesignerEventTypes.add_new_section> {
     constructor(section: SectionListItem) {
         super();
 
@@ -23,7 +23,7 @@ export class TrackedUserAddSection extends AbstractTracker {
     }
 }
 
-export class TrackedUserDeleteSection extends AbstractTracker {
+export class TrackedUserDeleteSection extends AbstractTracker<DesignerEventTypes.delete_section> {
     constructor(section: SectionConfig) {
         super();
 
@@ -35,7 +35,7 @@ export class TrackedUserDeleteSection extends AbstractTracker {
     }
 }
 
-export class TrackedUserAddFloatingWidget extends AbstractTracker {
+export class TrackedUserAddFloatingWidget extends AbstractTracker<DesignerEventTypes.add_floating_section> {
     constructor(widget: LiveWidget) {
         super();
 
@@ -47,7 +47,7 @@ export class TrackedUserAddFloatingWidget extends AbstractTracker {
     }
 }
 
-export class TrackedUserDeleteFloatingWidget extends AbstractTracker {
+export class TrackedUserDeleteFloatingWidget extends AbstractTracker<DesignerEventTypes.delete_floating_section> {
     constructor(widget: LiveWidget) {
         super();
 
@@ -59,7 +59,7 @@ export class TrackedUserDeleteFloatingWidget extends AbstractTracker {
     }
 }
 
-export class TrackedUserEditSection extends AbstractTracker {
+export class TrackedUserEditSection extends AbstractTracker<DesignerEventTypes.edit_section> {
     constructor(section: SectionConfig) {
         super();
 
@@ -71,7 +71,7 @@ export class TrackedUserEditSection extends AbstractTracker {
     }
 }
 
-export class TrackedUserEditComponent extends AbstractTracker {
+export class TrackedUserEditComponent extends AbstractTracker<DesignerEventTypes.edit_editable_component> {
     constructor(editorContainer: FloatEditor) {
         super();
 
@@ -83,7 +83,7 @@ export class TrackedUserEditComponent extends AbstractTracker {
     }
 }
 
-export class TrackedUserPublishBoard extends AbstractTracker {
+export class TrackedUserPublishBoard extends AbstractTracker<DesignerEventTypes.publish_board> {
     constructor() {
         super();
 
@@ -91,7 +91,7 @@ export class TrackedUserPublishBoard extends AbstractTracker {
     }
 }
 
-export class TrackedUserPreviewBoard extends AbstractTracker {
+export class TrackedUserPreviewBoard extends AbstractTracker<DesignerEventTypes.preview_board> {
     constructor() {
         super();
 
@@ -99,7 +99,7 @@ export class TrackedUserPreviewBoard extends AbstractTracker {
     }
 }
 
-export class TrackedUserAddPersonalizationRule extends AbstractTracker {
+export class TrackedUserAddPersonalizationRule extends AbstractTracker<DesignerEventTypes.add_personalization_rule_from_designer> {
     constructor(rule: IPersonalizationRule) {
         super();
 
@@ -112,7 +112,6 @@ export class TrackedUserAddPersonalizationRule extends AbstractTracker {
         };
     }
 }
-
 
 type GenAIPayload = {
     level: 'board';
