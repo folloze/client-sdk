@@ -4,35 +4,35 @@ import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
 import { IPersonalizationRule } from "../interfaces/IPersonalization";
-export declare class AbstractTracker {
+export declare class AbstractTracker<K extends DesignerEventTypes> {
     payload: unknown;
-    action: DesignerEventTypes;
+    action: K;
 }
-export declare class TrackedUserAddSection extends AbstractTracker {
+export declare class TrackedUserAddSection extends AbstractTracker<DesignerEventTypes.add_new_section> {
     constructor(section: SectionListItem);
 }
-export declare class TrackedUserDeleteSection extends AbstractTracker {
+export declare class TrackedUserDeleteSection extends AbstractTracker<DesignerEventTypes.delete_section> {
     constructor(section: SectionConfig);
 }
-export declare class TrackedUserAddFloatingWidget extends AbstractTracker {
+export declare class TrackedUserAddFloatingWidget extends AbstractTracker<DesignerEventTypes.add_floating_section> {
     constructor(widget: LiveWidget);
 }
-export declare class TrackedUserDeleteFloatingWidget extends AbstractTracker {
+export declare class TrackedUserDeleteFloatingWidget extends AbstractTracker<DesignerEventTypes.delete_floating_section> {
     constructor(widget: LiveWidget);
 }
-export declare class TrackedUserEditSection extends AbstractTracker {
+export declare class TrackedUserEditSection extends AbstractTracker<DesignerEventTypes.edit_section> {
     constructor(section: SectionConfig);
 }
-export declare class TrackedUserEditComponent extends AbstractTracker {
+export declare class TrackedUserEditComponent extends AbstractTracker<DesignerEventTypes.edit_editable_component> {
     constructor(editorContainer: FloatEditor);
 }
-export declare class TrackedUserPublishBoard extends AbstractTracker {
+export declare class TrackedUserPublishBoard extends AbstractTracker<DesignerEventTypes.publish_board> {
     constructor();
 }
-export declare class TrackedUserPreviewBoard extends AbstractTracker {
+export declare class TrackedUserPreviewBoard extends AbstractTracker<DesignerEventTypes.preview_board> {
     constructor();
 }
-export declare class TrackedUserAddPersonalizationRule extends AbstractTracker {
+export declare class TrackedUserAddPersonalizationRule extends AbstractTracker<DesignerEventTypes.add_personalization_rule_from_designer> {
     constructor(rule: IPersonalizationRule);
 }
 type GenAIPayload = {
