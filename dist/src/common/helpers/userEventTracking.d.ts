@@ -4,6 +4,7 @@ import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
 import { IPersonalizationRule } from "../interfaces/IPersonalization";
+import { GenAudienceTarget } from "../interfaces/IGenerationTypes";
 export declare class AbstractTracker<K extends DesignerEventTypes> {
     payload: unknown;
     action: K;
@@ -47,7 +48,7 @@ type GenAITargetAudiencePayload = GenAIPayload & {
 };
 type GenAIGenerateByGoalPayload = GenAIPayload & {
     goal: string;
-    target_audience: any[];
+    target_audience: GenAudienceTarget | null;
     target_audience_text: string;
 };
 type GenAIGenerateByFreePromptPayload = GenAIPayload & {
