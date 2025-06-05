@@ -5,6 +5,7 @@ import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
 import { editorEmit } from "./eventHelpers";
 import { IPersonalizationRule } from "../interfaces/IPersonalization";
+import { GenAudienceTarget } from "../interfaces/IGenerationTypes";
 
 export class AbstractTracker<K extends DesignerEventTypes> {
     public payload: unknown;
@@ -127,7 +128,7 @@ type GenAITargetAudiencePayload = GenAIPayload & {
 
 type GenAIGenerateByGoalPayload = GenAIPayload & {
     goal: string;
-    target_audience: any[];
+    target_audience: GenAudienceTarget | null;
     target_audience_text: string;
 }
 
