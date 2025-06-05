@@ -56,7 +56,13 @@ export declare enum DesignerEventTypes {
     publish_board = 330,
     preview_board = 331,
     edit_editable_component = 332,
-    add_personalization_rule_from_designer = 333
+    add_personalization_rule_from_designer = 333,
+    gen_ai_brand_voice = 350,
+    gen_ai_personalize_existing_target_audience = 351,
+    gen_ai_personalize_new_target_audience = 352,
+    gen_ai_generate_by_goal = 353,
+    gen_ai_generate_by_free_prompt = 354,
+    gen_ai_translate = 355
 }
 export declare class Analytics {
     private fetchService;

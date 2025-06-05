@@ -1,0 +1,1 @@
+import{b as t,e as c}from"./chunk.5RCW6JLF.js";import{a as n}from"./chunk.GYIGA73E.js";import{a as o}from"./chunk.TLCQRZFM.js";var i=class{constructor(){}static async create(a){let e=new i,r=await t.create(a);return e.fetcher=r,e.analytics=new c(r),e.designer=new n(r),e.liveboard=new o(r),e}};export{i as a};
