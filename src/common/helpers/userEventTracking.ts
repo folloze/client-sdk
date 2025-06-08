@@ -7,12 +7,13 @@ import { editorEmit } from "./eventHelpers";
 import { IPersonalizationRule } from "../interfaces/IPersonalization";
 import { GenAudienceTarget } from "../interfaces/IGenerationTypes";
 
-export class AbstractTracker<K extends DesignerEventTypes> {
+export class AbstractTracker {
     public payload: unknown;
-    public action: K;
+    public action: DesignerEventTypes;
 }
 
-export class TrackedUserAddSection extends AbstractTracker<DesignerEventTypes.add_new_section> {
+export class TrackedUserAddSection extends AbstractTracker {
+    override payload: {section_name: string; section_type: string};
     constructor(section: SectionListItem) {
         super();
 
@@ -24,7 +25,8 @@ export class TrackedUserAddSection extends AbstractTracker<DesignerEventTypes.ad
     }
 }
 
-export class TrackedUserDeleteSection extends AbstractTracker<DesignerEventTypes.delete_section> {
+export class TrackedUserDeleteSection extends AbstractTracker {
+    override payload: {section_name: string; section_type: string};
     constructor(section: SectionConfig) {
         super();
 
@@ -36,7 +38,8 @@ export class TrackedUserDeleteSection extends AbstractTracker<DesignerEventTypes
     }
 }
 
-export class TrackedUserAddFloatingWidget extends AbstractTracker<DesignerEventTypes.add_floating_section> {
+export class TrackedUserAddFloatingWidget extends AbstractTracker{
+    override payload: {widget_tag: string; widget_title: string};
     constructor(widget: LiveWidget) {
         super();
 
@@ -48,7 +51,8 @@ export class TrackedUserAddFloatingWidget extends AbstractTracker<DesignerEventT
     }
 }
 
-export class TrackedUserDeleteFloatingWidget extends AbstractTracker<DesignerEventTypes.delete_floating_section> {
+export class TrackedUserDeleteFloatingWidget extends AbstractTracker {
+    override payload: {widget_tag: string; widget_title: string};
     constructor(widget: LiveWidget) {
         super();
 
@@ -60,7 +64,8 @@ export class TrackedUserDeleteFloatingWidget extends AbstractTracker<DesignerEve
     }
 }
 
-export class TrackedUserEditSection extends AbstractTracker<DesignerEventTypes.edit_section> {
+export class TrackedUserEditSection extends AbstractTracker {
+    override payload: {section_name: string; section_type: string};
     constructor(section: SectionConfig) {
         super();
 
@@ -72,7 +77,8 @@ export class TrackedUserEditSection extends AbstractTracker<DesignerEventTypes.e
     }
 }
 
-export class TrackedUserEditComponent extends AbstractTracker<DesignerEventTypes.edit_editable_component> {
+export class TrackedUserEditComponent extends AbstractTracker {
+    override payload: {component_tag: string; widget_tag: string};
     constructor(editorContainer: FloatEditor) {
         super();
 
@@ -84,7 +90,8 @@ export class TrackedUserEditComponent extends AbstractTracker<DesignerEventTypes
     }
 }
 
-export class TrackedUserPublishBoard extends AbstractTracker<DesignerEventTypes.publish_board> {
+export class TrackedUserPublishBoard extends AbstractTracker {
+    override payload: undefined;
     constructor() {
         super();
 
@@ -92,7 +99,8 @@ export class TrackedUserPublishBoard extends AbstractTracker<DesignerEventTypes.
     }
 }
 
-export class TrackedUserPreviewBoard extends AbstractTracker<DesignerEventTypes.preview_board> {
+export class TrackedUserPreviewBoard extends AbstractTracker {
+    override payload: undefined;
     constructor() {
         super();
 
@@ -100,7 +108,13 @@ export class TrackedUserPreviewBoard extends AbstractTracker<DesignerEventTypes.
     }
 }
 
-export class TrackedUserAddPersonalizationRule extends AbstractTracker<DesignerEventTypes.add_personalization_rule_from_designer> {
+export class TrackedUserAddPersonalizationRule extends AbstractTracker {
+    override payload: {
+        rule: {
+            attribute_id: string;
+            attribute_values: string[];
+        };
+    };
     constructor(rule: IPersonalizationRule) {
         super();
 
