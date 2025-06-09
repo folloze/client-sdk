@@ -162,6 +162,14 @@ export declare class Liveboard {
      */
     getLiveEventUrls(boardId: number): Promise<LiveEventUrlsResponseV2>;
     /**
+     * Gets the urls to use for 'Open In Zoom'
+     *
+     * @param {number} boardId
+     * @param {string} meetingUrl
+     * @returns {LiveEventUrlsResponseV2} LiveEventUrlsResponse
+     */
+    getOpenInZoomUrls(boardId: number, meetingUrl: string): Promise<LiveEventUrlsResponseV2>;
+    /**
      * Gets the organization's settings
      *
      * @param {number} boardId
