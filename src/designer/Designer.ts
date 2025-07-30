@@ -9,7 +9,7 @@ import {
 export * from "./IDesignerTypes";
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import {fileUpload, FileUploadParams, keysToSnakeCase} from "../common/helpers/helpers";
+import {FileUploadParams, keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageGalleryParams,
     GalleryImage,
@@ -748,7 +748,15 @@ export class Designer {
             filename: generateParams.file.name,
             operation: generateParams.operation
         });
-        await fileUpload(generateParams.file, fileuploadDetails.data.file_upload_details, ()=>{});
+        const file_upload_details = fileuploadDetails.data.file_upload_details; 
+        const formData = new FormData();
+        formData.append('attributes', JSON.stringify(file_upload_details.data));
+        formData.append('file', generateParams.file);
+        await fetch(file_upload_details.url, {
+            method: file_upload_details.method,
+            headers: file_upload_details.headers,
+            body: formData
+        });
 
         const apiCallFunc =  (resolve, reject, guid = fileuploadDetails.data.guid) => {
             this.fetcher
