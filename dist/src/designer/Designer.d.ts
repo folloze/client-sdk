@@ -176,5 +176,5 @@ export declare class Designer {
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;
     generateVideoAI(request: VideoAIGenerateRequest): Promise<VideoAIGenerateResponse>;
     getVideoAIStatus(id: string): Promise<VideoAIGenerateResponse>;
-    getGenerateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1>;
+    generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1>;
 }
