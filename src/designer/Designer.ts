@@ -1,13 +1,14 @@
 import {
     GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1,
     GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest,
-    GenerateWidgetsTextsFromPromptRequest
+    GenerateWidgetsTextsFromPromptRequest,
+    GenTextFromFile
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import {keysToSnakeCase} from "../common/helpers/helpers";
+import {fileUpload, FileUploadParams, keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageGalleryParams,
     GalleryImage,
@@ -738,5 +739,22 @@ export class Designer {
 
     public getVideoAIStatus(id: string): Promise<VideoAIGenerateResponse> {
         return this.fetcher.get<VideoAIGenerateResponse>(`/api/v1/video_ai/status/${id}`).then(result => result.data);
+    }
+
+    public async getGenerateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1> {
+        const path = `/api/v1/boards/${boardId}/generation/from_file/texts`;
+        const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
+            filename: generateParams.file.name,
+            operation: generateParams.operation
+        });
+        await fileUpload(generateParams.file, fileuploadDetails.data.file_upload_details, ()=>{});
+
+        const apiCallFunc =  (resolve, reject, guid = fileuploadDetails.data.guid) => {
+            this.fetcher
+                .post<any>(path, { guid })
+                .then(result => resolve(result))
+                .catch(e => reject(e));
+        };
+        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 }
