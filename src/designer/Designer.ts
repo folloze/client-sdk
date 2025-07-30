@@ -2,7 +2,8 @@ import {
     GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1,
     GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest,
     GenerateWidgetsTextsFromPromptRequest,
-    GenTextFromFile
+    GenTextFromFile,
+    GenTextResponse
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
@@ -741,7 +742,7 @@ export class Designer {
         return this.fetcher.get<VideoAIGenerateResponse>(`/api/v1/video_ai/status/${id}`).then(result => result.data);
     }
 
-    public async generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1> {
+    public async generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTextResponse> {
         const path = `/api/v1/boards/${boardId}/generation/from_file/texts`;
         const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
             filename: generateParams.file.name,
@@ -755,6 +756,6 @@ export class Designer {
                 .then(result => resolve(result))
                 .catch(e => reject(e));
         };
-        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
     }
 }
