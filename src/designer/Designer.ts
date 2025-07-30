@@ -741,7 +741,7 @@ export class Designer {
         return this.fetcher.get<VideoAIGenerateResponse>(`/api/v1/video_ai/status/${id}`).then(result => result.data);
     }
 
-    public async getGenerateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1> {
+    public async generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1> {
         const path = `/api/v1/boards/${boardId}/generation/from_file/texts`;
         const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
             filename: generateParams.file.name,
