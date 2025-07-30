@@ -1,4 +1,4 @@
-import { GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest, GenerateWidgetsTextsFromPromptRequest, GenTextFromFile } from "../common/interfaces/IGenerationTypes";
+import { GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest, GenerateWidgetsTextsFromPromptRequest, GenTextFromFile, GenTextResponse } from "../common/interfaces/IGenerationTypes";
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
 import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams } from "./IDesignerTypes";
@@ -176,5 +176,5 @@ export declare class Designer {
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;
     generateVideoAI(request: VideoAIGenerateRequest): Promise<VideoAIGenerateResponse>;
     getVideoAIStatus(id: string): Promise<VideoAIGenerateResponse>;
-    generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTranslateResponseV1>;
+    generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTextResponse>;
 }
