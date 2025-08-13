@@ -1,13 +1,15 @@
 import {
     GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1,
     GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest,
-    GenerateWidgetsTextsFromPromptRequest
+    GenerateWidgetsTextsFromPromptRequest,
+    GenTextFromFile,
+    GenTextResponse
 } from "../common/interfaces/IGenerationTypes";
 
 export * from "./IDesignerTypes";
 import {type AxiosInstance, type AxiosResponse} from "axios";
 import {FetchService} from "../common/FetchService";
-import {keysToSnakeCase} from "../common/helpers/helpers";
+import {FileUploadParams, keysToSnakeCase} from "../common/helpers/helpers";
 import {
     ImageGalleryParams,
     GalleryImage,
@@ -738,5 +740,30 @@ export class Designer {
 
     public getVideoAIStatus(id: string): Promise<VideoAIGenerateResponse> {
         return this.fetcher.get<VideoAIGenerateResponse>(`/api/v1/video_ai/status/${id}`).then(result => result.data);
+    }
+
+    public async generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTextResponse> {
+        const path = `/api/v1/boards/${boardId}/generation/from_file/texts`;
+        const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
+            filename: generateParams.file.name,
+            operation: generateParams.operation
+        });
+        const file_upload_details = fileuploadDetails.data.file_upload_details; 
+        const formData = new FormData();
+        formData.append('attributes', JSON.stringify(file_upload_details.data));
+        formData.append('file', generateParams.file);
+        await fetch(file_upload_details.url, {
+            method: file_upload_details.method,
+            headers: file_upload_details.headers,
+            body: formData
+        });
+
+        const apiCallFunc =  (resolve, reject, guid = fileuploadDetails.data.guid) => {
+            this.fetcher
+                .post<any>(path, { guid })
+                .then(result => resolve(result))
+                .catch(e => reject(e));
+        };
+        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
     }
 }

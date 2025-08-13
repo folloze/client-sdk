@@ -138,3 +138,10 @@ export type GeneratedWidgetText = {
 export type GenerateWidgetsTextsResponse = {
     widgets: GeneratedWidgetText[];
 };
+export type GenTextFromFile = {
+    file: File;
+    operation: 'extract_product';
+};
+export type GenTextResponse = {
+    text: string;
+};
