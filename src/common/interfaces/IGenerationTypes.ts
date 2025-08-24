@@ -168,6 +168,11 @@ export type GenTextFromFile = {
     operation: 'extract_product';
 }
 
+export type GenTextFromLink = {
+    link: string;
+    operation: 'extract_product';
+}
+
 export type GenTextResponse = {
     text: string;
 }
