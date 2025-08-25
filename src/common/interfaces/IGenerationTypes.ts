@@ -168,8 +168,8 @@ export type GenTextFromFile = {
     operation: 'extract_product';
 }
 
-export type GenTextFromLink = {
-    link: string;
+export type GenTextFromUrl = {
+    url: string;
     operation: 'extract_product';
 }
 
