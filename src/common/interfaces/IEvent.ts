@@ -11,6 +11,7 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.linkClick";
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
+    | "Folloze.showCookieConsent"
     | "Folloze.stopTrackingForVisit"
     | "Folloze.triggerCtaSubmit"
     | "Folloze.closeFormRequest";
@@ -34,6 +35,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "ctaClick"
     | "ctaSubmit"
     | "consent-given"
+    | "show-cookie-consent"
+    | "reject-cookies"
     | "get-current-item"
     | "get-initial-journey-item"
     | "get-category-slug"
