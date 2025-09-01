@@ -12,6 +12,7 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.showCookieConsent"
+    | "Folloze.rejectCookies"
     | "Folloze.stopTrackingForVisit"
     | "Folloze.triggerCtaSubmit"
     | "Folloze.closeFormRequest";
