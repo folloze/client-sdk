@@ -183,6 +183,7 @@ export declare class Liveboard {
      * @returns {number} the lead's id
      */
     setSessionCookie(boardId: number): Promise<number>;
+    deleteSessionCookie(boardId: number): Promise<unknown>;
     getFormData(boardId: number, formId: number, privacyMessageId?: number): Promise<FormMetadataDataV1>;
     getPrivacyMessage(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
     getFooter(boardId: number, elementId: number): Promise<CampaignElementDataV2>;
