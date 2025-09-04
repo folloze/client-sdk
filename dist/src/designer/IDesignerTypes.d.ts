@@ -187,6 +187,8 @@ export type FormDataV1 = {
     custom_script?: string;
     script?: string;
     auto_fill?: boolean;
+    portal_id?: string;
+    region?: string;
 };
 type Label = {
     text: string;
