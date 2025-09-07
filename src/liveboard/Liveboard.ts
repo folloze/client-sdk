@@ -606,6 +606,17 @@ export class Liveboard {
         });
     }
 
+    deleteSessionCookie(boardId: number) {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .delete(`/live_board/v1/boards/${boardId}/session_cookies`)
+                .catch(e => {
+                    console.error("could not create session cookie", e);
+                    reject(e);
+                });
+        });
+    }
+
     getFormData(boardId: number, formId: number, privacyMessageId: number = null): Promise<FormMetadataDataV1> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
