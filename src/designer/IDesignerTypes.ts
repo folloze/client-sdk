@@ -233,6 +233,9 @@ export type FormDataV1 = {
     // for type eloqua (4)
     script?: string;
     auto_fill?: boolean;
+    //for type hubspot (5)
+    portal_id?: string;
+    region?: string;
 };
 
 type Label = {
