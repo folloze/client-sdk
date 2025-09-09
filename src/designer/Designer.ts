@@ -3,6 +3,7 @@ import {
     GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest,
     GenerateWidgetsTextsFromPromptRequest,
     GenTextFromFile,
+    GenTextFromUrl,
     GenTextResponse
 } from "../common/interfaces/IGenerationTypes";
 
@@ -765,5 +766,18 @@ export class Designer {
                 .catch(e => reject(e));
         };
         return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
+    }
+
+    public generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl): Promise<GenTextResponse> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_url/texts`, { ...generateParams, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate text from url", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
     }
 }

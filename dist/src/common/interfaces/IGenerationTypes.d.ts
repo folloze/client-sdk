@@ -142,6 +142,10 @@ export type GenTextFromFile = {
     file: File;
     operation: 'extract_product';
 };
+export type GenTextFromUrl = {
+    url: string;
+    operation: 'extract_product';
+};
 export type GenTextResponse = {
     text: string;
 };
