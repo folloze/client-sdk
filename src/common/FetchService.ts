@@ -204,6 +204,8 @@ export class FetchService {
                     config.withCredentials = true;
                 }
             }
+
+            config.withCredentials = true;
             return config;
         });
 
