@@ -85,14 +85,11 @@ export class Analytics {
      *
      * @param {number} boardId
      */
-    trackLeadBoardView(boardId: number, hubspotutk?: string): Promise<AxiosResponse> {
+    trackLeadBoardView(boardId: number): Promise<AxiosResponse> {
         return this.fetchService.withDisableOnPreview(() => {
             return this.fetchService.fetcher
                 .post(
-                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_views`,
-                    {
-                        hubspotutk
-                    }
+                    `${this.fetchService.options.analyticsServiceEndpoint}/live_board/v2/boards/${boardId}/lead_views`
                 )
                 .catch(e => {
                     console.error("could not track lead board view", e);

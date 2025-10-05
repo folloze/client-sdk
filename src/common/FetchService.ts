@@ -4,6 +4,7 @@ import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
 import mergeWith from "lodash/mergeWith";
 import get from "lodash/get";
+import { getHubspotUtkCookie } from "./helpers/hubspot";
 
 export type FetcherOptions = {
     organizationId: number;
@@ -198,12 +199,17 @@ export class FetchService {
             }
             if (this.isEmbeddedRequest) {
                 config.headers["flz-client-feature"] = `embedded`;
+
+                // When the credentials flag is set to true on the client-side,
+                // browsers do not allow the use of wildcards ( * ) for Access-Control-Allow-Origin.
+                if (!(config.url?.includes(this.options.analyticsServiceEndpoint) || config.url?.includes(this.options.pingEndpoint))) {
+                    config.withCredentials = true;
+                }
             }
 
             if (this.options.sendHubspotCookie) {
-                config.headers['HUBSPOT_UTK'] = this.getHubSpotUtkCookie();
+                config.headers['HUBSPOT_UTK'] = getHubspotUtkCookie();
             }
-
             return config;
         });
 
@@ -213,19 +219,5 @@ export class FetchService {
                 return config;
             });
         }
-    }
-
-    private getHubSpotUtkCookie(): string | null {
-        const cookieName = 'hubspotutk';
-        const cookieValues = document.cookie.split(';');
-        for (let cookieValue of cookieValues) {
-            while (cookieValue.charAt(0) === ' ') {
-            cookieValue = cookieValue.substring(1, cookieValue.length);
-            }
-            if (cookieValue.indexOf(`${cookieName}=`) === 0) {
-            return cookieValue.substring(cookieName.length + 1, cookieValue.length);
-            }
-        }
-        return null;
     }
 }

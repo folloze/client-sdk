@@ -33,5 +33,4 @@ export declare class FetchService {
     private handleError;
     private MockHandleError;
     private createAxiosFetcher;
-    private getHubSpotUtkCookie;
 }

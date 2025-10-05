@@ -73,7 +73,7 @@ export declare class Analytics {
      *
      * @param {number} boardId
      */
-    trackLeadBoardView(boardId: number, hubspotutk?: string): Promise<AxiosResponse>;
+    trackLeadBoardView(boardId: number): Promise<AxiosResponse>;
     /**
      * Lead viewed content
      *
