@@ -30,3 +30,4 @@ export type XhrRequestParams = {
 };
 export declare function sendXhrRequest(params: XhrRequestParams): Promise<any>;
 export declare function getCookie(cname: string): any;
+export declare function waitForHubspotCookie(maxWaitTime?: number, checkInterval?: number): Promise<string | null>;

@@ -243,4 +243,52 @@ export async function sendXhrRequest(params: XhrRequestParams): Promise<any> {
 });
 }
 
+function getCookieWithPostfix(cname: string): string {
+    // use the cookie post fix if available (eu differentiator)
+    const postFix = window["FollozeState"]?.envConfig?.cookiePostfix || "";
+    cname = `${cname}${postFix}`;
+    return cname;
+}
+
+export function getCookie(cname: string) {
+    cname = getCookieWithPostfix(cname);
+    const reg = new RegExp(`(?:(?:^|.*;\\s*)${cname}\\s*\\=\\s*([^;]*).*$)|^.*$`);
+    const cvalue = decodeURIComponent(document.cookie.replace(reg, "$1"));
+    try {
+        return JSON.parse(cvalue);
+    }
+    catch(e) {
+        return cvalue;
+    }
+}
+
+export async function waitForHubspotCookie(maxWaitTime: number = 5000, checkInterval: number = 100): Promise<string | null> {
+    return new Promise((resolve) => {
+        const startTime = Date.now();
+
+        const checkCookie = () => {
+            const hubspotCookie = getCookie('hubspotutk');
+
+            // If cookie exists and is not empty
+            if (hubspotCookie && hubspotCookie !== '') {
+                resolve(hubspotCookie);
+                return;
+            }
+
+            // If we've exceeded max wait time, resolve with null
+            if (Date.now() - startTime >= maxWaitTime) {
+                console.warn('HubSpot UTK cookie not available after waiting', maxWaitTime, 'ms');
+                resolve(null);
+                return;
+            }
+
+            // Check again after interval
+            setTimeout(checkCookie, checkInterval);
+        };
+
+        checkCookie();
+    });
+}
+
+
 
