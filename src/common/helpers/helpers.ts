@@ -262,7 +262,7 @@ export function getCookie(cname: string) {
     }
 }
 
-export async function waitForHubspotCookie(maxWaitTime: number = 5000, checkInterval: number = 100): Promise<string | null> {
+export async function waitForHubspotCookie(maxWaitTime: number = 5000, checkInterval: number = 100): Promise<string | null> { 
     return new Promise((resolve) => {
         const startTime = Date.now();
 
