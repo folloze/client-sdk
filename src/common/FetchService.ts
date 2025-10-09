@@ -4,7 +4,7 @@ import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
 import mergeWith from "lodash/mergeWith";
 import get from "lodash/get";
-import { getCookie, waitForHubspotCookie } from "../common/helpers/helpers";
+import { getCookie } from "../common/helpers/helpers";
 
 export type FetcherOptions = {
     organizationId: number;
@@ -190,7 +190,7 @@ export class FetchService {
 
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
-        this.fetcher.interceptors.request.use(async config => {
+        this.fetcher.interceptors.request.use(config => {
             if (this.sessionGuid) {
                 config.headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid;
             }
@@ -208,11 +208,8 @@ export class FetchService {
             }
 
             if (this.options.sendHubspotCookie) {
-                let hubspotCookie = getCookie('hubspotutk');
-                // If cookie is not available, wait for it (with a short timeout to avoid blocking requests)
-                if (!hubspotCookie) {
-                    hubspotCookie = await waitForHubspotCookie(2000); // Wait max 2 seconds
-                }
+                const hubspotCookie = getCookie('hubspotutk');
+
                 if (hubspotCookie) {
                     config.headers['HUBSPOT_UTK'] = hubspotCookie;
                 }
