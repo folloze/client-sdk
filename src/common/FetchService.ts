@@ -4,6 +4,7 @@ import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
 import mergeWith from "lodash/mergeWith";
 import get from "lodash/get";
+import { getCookie } from "../common/helpers/helpers";
 
 export type FetcherOptions = {
     organizationId: number;
@@ -16,6 +17,7 @@ export type FetcherOptions = {
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
+    sendHubspotCookie?: boolean;
 };
 
 const defaultFetcherOptions: FetcherOptions = {
@@ -204,6 +206,15 @@ export class FetchService {
                     config.withCredentials = true;
                 }
             }
+
+            if (this.options.sendHubspotCookie) {
+                const hubspotCookie = getCookie('hubspotutk');
+
+                if (hubspotCookie) {
+                    config.headers['HUBSPOT_UTK'] = hubspotCookie;
+                }
+            }
+
             return config;
         });
 
