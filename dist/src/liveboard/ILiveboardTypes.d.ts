@@ -99,6 +99,20 @@ export type JourneyItemParams = ItemNavigationParams & {
     categoryId?: number;
     boardId?: number;
 };
+export type TileLabel = {
+    id: number;
+    text: string;
+    is_protected: boolean;
+    created_at: Date;
+    updated_at: Date;
+};
+export type TileAction = {
+    id: number;
+    text: string;
+    is_protected: boolean;
+    created_at: Date;
+    updated_at: Date;
+};
 export type ItemResponseV2 = {
     id: number;
     content_item_id: number;
@@ -124,6 +138,8 @@ export type ItemResponseV2 = {
     open_in_new_tab?: boolean;
     route: string;
     is_content_item: boolean;
+    tile_label?: TileLabel;
+    tile_action?: TileAction;
 };
 export type ItemsResponseV2 = {
     item_ids: number[];
