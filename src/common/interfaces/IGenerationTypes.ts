@@ -112,12 +112,15 @@ export type GenWidgetVariance = {
     text: GeneratedText[]
 }
 
+type ExcludeEngines = "gen2" | "helix";
+
 export type SectionInjectable = {
     name: string;
     path: string;
     value?: string;
     visibilityPath?: string;
     description: string;
+    excludeEngine?: ExcludeEngines[];
 }
 
 export type WidgetGenerationConfig = {
