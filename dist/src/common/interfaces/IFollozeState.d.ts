@@ -7,6 +7,7 @@ export type IFollozeState = {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
         cookiePostfix?: string;
+        sendHubspotCookie?: boolean;
     };
     platform: "desktop" | "mobile";
 };
