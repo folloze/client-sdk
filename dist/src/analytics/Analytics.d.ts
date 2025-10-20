@@ -144,4 +144,13 @@ export declare class Analytics {
      * @param {string} eventName
      */
     publishLeadEvents(contentItemId: number, timestamp: number, eventName: string): Promise<void>;
+    /**
+     * Caching the HubSpot user token (HUTK) for the current lead
+     *
+     * @param {string} hutk - The HubSpot user token
+    */
+    cacheLeadHubSpotHutk(hutk: string): Promise<{
+        success: boolean;
+        error?: string;
+    }>;
 }

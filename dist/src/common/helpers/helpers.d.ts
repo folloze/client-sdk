@@ -29,4 +29,3 @@ export type XhrRequestParams = {
     progressCallback?: (bytesLoaded: number) => void;
 };
 export declare function sendXhrRequest(params: XhrRequestParams): Promise<any>;
-export declare function getCookie(cname: string): any;

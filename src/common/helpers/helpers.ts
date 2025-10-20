@@ -242,24 +242,3 @@ export async function sendXhrRequest(params: XhrRequestParams): Promise<any> {
     xhr.send(data);
 });
 }
-
-function getCookieWithPostfix(cname: string): string {
-    // use the cookie post fix if available (eu differentiator)
-    const postFix = window["FollozeState"]?.envConfig?.cookiePostfix || "";
-    cname = `${cname}${postFix}`;
-    return cname;
-}
-
-export function getCookie(cname: string) {
-    cname = getCookieWithPostfix(cname);
-    const reg = new RegExp(`(?:(?:^|.*;\\s*)${cname}\\s*\\=\\s*([^;]*).*$)|^.*$`);
-    const cvalue = decodeURIComponent(document.cookie.replace(reg, "$1"));
-    try {
-        return JSON.parse(cvalue);
-    }
-    catch(e) {
-        return cvalue;
-    }
-}
-
-

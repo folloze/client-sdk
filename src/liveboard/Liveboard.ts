@@ -932,25 +932,4 @@ export class Liveboard {
                 });
         });
     }
-
-    /**
-     * Caching the HubSpot user token (HUTK) for the current lead
-     *
-     * @param {string} hutk - The HubSpot user token
-    */
-    cacheLeadHubSpotHutk(hutk: string): Promise<{success: boolean, error?: string}> {
-        return new Promise((resolve, reject) => {
-            this.fetchService.fetcher
-                .post<{success: boolean, error?: string}>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/hubspot/set_hutk`, {
-                    hutk: hutk
-                })
-                .then(result => {
-                    resolve(result.data);
-                })
-                .catch(e => {
-                    console.error(e);
-                    reject(e);
-                });
-        });
-    }
 }
