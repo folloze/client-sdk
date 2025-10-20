@@ -249,4 +249,13 @@ export declare class Liveboard {
     joinLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
     leaveLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
     getLiveEventParticipants(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
+    /**
+     * Caching the HubSpot user token (HUTK) for the current lead
+     *
+     * @param {string} hutk - The HubSpot user token
+    */
+    cacheLeadHubSpotHutk(hutk: string): Promise<{
+        success: boolean;
+        error?: string;
+    }>;
 }
