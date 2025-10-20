@@ -16,7 +16,6 @@ export type FetcherOptions = {
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
-    sendHubspotCookie?: boolean;
 };
 
 const defaultFetcherOptions: FetcherOptions = {

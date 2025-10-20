@@ -10,7 +10,6 @@ export type FetcherOptions = {
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
-    sendHubspotCookie?: boolean;
 };
 export declare const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
 export declare class FetchService {
