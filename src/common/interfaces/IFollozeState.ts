@@ -9,7 +9,6 @@ export type IFollozeState = {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
         cookiePostfix?: string;
-        sendHubspotCookie? : boolean;
     };
 
     // not really using this but nice to keep
