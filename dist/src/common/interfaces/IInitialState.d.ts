@@ -30,6 +30,7 @@ export type InitialState = {
     session_guid: string;
     data_service_configuration?: DataEnrichmentConfig;
     cookie_matching?: CookieMatchingConfig;
+    send_hubspot_cookie?: boolean;
     itemViewerData?: OpenItemViewerPayload;
     token?: string;
     sections?: Section[];

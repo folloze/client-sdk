@@ -242,5 +242,3 @@ export async function sendXhrRequest(params: XhrRequestParams): Promise<any> {
     xhr.send(data);
 });
 }
-
-
