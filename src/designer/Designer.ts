@@ -145,6 +145,14 @@ export class Designer {
             category: 'banners'
         });
     }
+    public getAvatarsImageGallery(): Promise<GalleryImage[]> {
+        return this.getImageGallery({
+            organizationId: this.fetchService.organizationId,
+            bankCategory: "avatars",
+            type: "designer",
+            category: 'avatars'
+        });
+    }
 
     public getPersonalVideosGallery(): Promise<GalleryVideo[]> {
         return this.getImageGallery({
