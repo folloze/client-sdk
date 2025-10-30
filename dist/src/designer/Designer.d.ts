@@ -21,6 +21,7 @@ export declare class Designer {
     getVideosGallery(): Promise<GalleryVideo[]>;
     getImagesImageGallery(): Promise<GalleryImage[]>;
     getBannersImageGallery(): Promise<GalleryImage[]>;
+    getAvatarsImageGallery(): Promise<GalleryImage[]>;
     getPersonalVideosGallery(): Promise<GalleryVideo[]>;
     getPersonalImageGallery(): Promise<GalleryImage[]>;
     getMobileImageGallery(): Promise<GalleryImage[]>;
