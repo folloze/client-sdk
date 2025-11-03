@@ -62,7 +62,8 @@ export declare enum DesignerEventTypes {
     gen_ai_personalize_new_target_audience = 352,
     gen_ai_generate_by_goal = 353,
     gen_ai_generate_by_free_prompt = 354,
-    gen_ai_translate = 355
+    gen_ai_translate = 355,
+    gen_ai_generate_text_from_input = 356
 }
 export declare class Analytics {
     private fetchService;
