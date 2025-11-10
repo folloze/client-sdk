@@ -49,6 +49,7 @@ export type GenAdditionalInfo = {
 };
 export type GenerateTextWidgetData = {
     widgetId: string;
+    widgetTag: string;
     injectables: SectionInjectable[];
     additionalInfo?: GenAdditionalInfo;
 };
