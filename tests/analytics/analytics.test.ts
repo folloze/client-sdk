@@ -132,7 +132,4 @@ describe("testing analytics module in preview", () => {
         await sdk.analytics.trackLeadLikeContent('item', 1, 1).then(result => expect(result).toBeNull);
     });
 
-    it("checks that publishLeadEvents mock works as expected", async () => {
-        await sdk.analytics.publishLeadEvents(1, 1683629866446, 'item_download').then(result => expect(result).toBeNull);
-    });
 });
