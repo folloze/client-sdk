@@ -66,13 +66,6 @@ export const rules = (mock: MockAdapter) => {
     })
         .reply<void>(200);
 
-    mock.onPost("/live_board/v2/sphere/publish_lead_events", {
-        content_item_id: 1,
-        timestamp: 1683629866446,
-        event_name: 'item_download'
-    })
-        .reply<void>(200);
-
     mock.onPost(/live_board\/v1\/boards\/(\d+)\/attend_activities/).reply<void>(200);
     mock.onPut(/live_board\/v1\/boards\/(\d+)\/attend_activities/).reply<void>(200);
 };

@@ -138,14 +138,6 @@ export declare class Analytics {
      */
     trackLeadLikeContentV2(sourceType: SourceType, contentItemId: number, itemId?: number): Promise<void>;
     /**
-     * Publish lead event externally
-     *
-     * @param {number} contentItemId
-     * @param {Date} timestamp
-     * @param {string} eventName
-     */
-    publishLeadEvents(contentItemId: number, timestamp: number, eventName: string): Promise<void>;
-    /**
      * Caching the HubSpot user token (HUTK) for the current lead
      *
      * @param {string} hutk - The HubSpot user token
