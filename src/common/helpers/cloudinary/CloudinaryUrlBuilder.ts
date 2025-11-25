@@ -1,4 +1,4 @@
-import {crop, limitFill, fit} from "@cloudinary/url-gen/actions/resize";
+import {crop, limitFill, fit, limitFit} from "@cloudinary/url-gen/actions/resize";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
 import {sharpen} from "@cloudinary/url-gen/actions/adjust";
@@ -100,8 +100,12 @@ export class CloudinaryUrlBuilder {
             cldImage.effect(colorize(this.image.transformation.tint.alpha).color(colorHex));
         }
 
+        // Add limit transformation to scale down large images (larger than 1800px)
         // do not add f_auto & q_auto on SVG images unless needed (when cropped - handled above)
         if (!isSvg) {
+            const limitTransformation = limitFit();
+            limitTransformation.width(1800).height(1800);
+            cldImage.resize(limitTransformation);
             cldImage.format("auto").quality("auto");
         }
 
