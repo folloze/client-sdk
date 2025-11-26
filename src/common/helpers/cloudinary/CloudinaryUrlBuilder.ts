@@ -103,8 +103,7 @@ export class CloudinaryUrlBuilder {
         // Add limit transformation to scale down large images (larger than 1800px)
         // do not add f_auto & q_auto on SVG images unless needed (when cropped - handled above)
         if (!isSvg) {
-            const limitTransformation = limitFit();
-            limitTransformation.width(1800).height(1800);
+            const limitTransformation = limitFit(1800, 1800);
             cldImage.resize(limitTransformation);
             cldImage.format("auto").quality("auto");
         }
