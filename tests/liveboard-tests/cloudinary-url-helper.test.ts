@@ -99,7 +99,7 @@ type TestData = {
 };
 
 const testData1: TestData = {
-    result: "https://images.folloze.com/image/upload/c_lfill,w_210/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/c_lfill,w_210/c_limit,h_1800,w_1800/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         maxWidth: 210,
     },
@@ -112,7 +112,7 @@ const testData1: TestData = {
 };
 
 const testData2: TestData = {
-    result: "https://images.folloze.com/image/upload/c_lfill,h_500/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/c_lfill,h_500/c_limit,h_1800,w_1800/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         maxHeight: 500,
     },
@@ -125,7 +125,7 @@ const testData2: TestData = {
 };
 
 const testData3: TestData = {
-    result: "https://images.folloze.com/image/upload/c_lfill,h_500,w_210/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/c_lfill,h_500,w_210/c_limit,h_1800,w_1800/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         maxHeight: 500,
         maxWidth: 210,
@@ -166,7 +166,7 @@ const testData4: TestData = {
 };
 
 const testData5: TestData = {
-    result: "https://images.folloze.com/image/upload/a_vflip/c_crop,h_258,w_387,x_0,y_0/e_art:peacock/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/a_vflip/c_crop,h_258,w_387,x_0,y_0/e_art:peacock/c_limit,h_1800,w_1800/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {},
     img: {
         url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
@@ -191,7 +191,7 @@ const testData5: TestData = {
 };
 
 const testData6: TestData = {
-    result: "https://images.folloze.com/image/upload/f_auto/q_auto/e_sharpen/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/c_limit,h_1800,w_1800/f_auto/q_auto/e_sharpen/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         sharpen: true,
     },
@@ -205,7 +205,7 @@ const testData6: TestData = {
 };
 
 const testData7: TestData = {
-    result: "https://images.folloze.com/image/upload/c_lfill,h_500,w_210/f_auto/q_auto/e_sharpen/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/c_lfill,h_500,w_210/c_limit,h_1800,w_1800/f_auto/q_auto/e_sharpen/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         maxHeight: 500,
         maxWidth: 210,
@@ -221,7 +221,7 @@ const testData7: TestData = {
 };
 
 const testData8: TestData = {
-    result: "https://images.folloze.com/image/upload/a_hflip/c_crop,h_258,w_387,x_0,y_0/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+    result: "https://images.folloze.com/image/upload/a_hflip/c_crop,h_258,w_387,x_0,y_0/c_limit,h_1800,w_1800/f_auto/q_auto/v1609744958/rcrlvper6pdobqvuggjx.jpg",
     params: {
         optimize: true,
     },
