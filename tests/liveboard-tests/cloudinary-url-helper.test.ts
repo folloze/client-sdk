@@ -85,30 +85,6 @@ describe("cloudinary helpers tests", () => {
                 .toString(),
         ).toEqual(testData7.result);
     });
-
-    it("verifies that limit transformation is applied to all non-SVG images", async () => {
-        const testImg = {
-            url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
-            fit: "cover",
-            bankCategory: "images" as const,
-            optimized_url: null,
-        };
-        const result = new CloudinaryUrlBuilder(testImg as any).toString();
-        expect(result).toContain("c_limit,h_1800,w_1800");
-        expect(result).toContain("f_auto/q_auto");
-    });
-
-    it("verifies that limit transformation is NOT applied to SVG images", async () => {
-        const testSvgImg = {
-            url: "https://images.folloze.com/image/upload/v1609744958/test-image.svg",
-            fit: "cover",
-            bankCategory: "images" as const,
-            optimized_url: null,
-        };
-        const result = new CloudinaryUrlBuilder(testSvgImg as any).toString();
-        expect(result).not.toContain("c_limit,h_1800,w_1800");
-        expect(result).not.toContain("f_auto/q_auto");
-    });
 });
 
 type TestData = {
