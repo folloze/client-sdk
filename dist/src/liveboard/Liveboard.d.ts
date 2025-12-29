@@ -81,10 +81,10 @@ export declare class Liveboard {
     /**
      * Gets the url to download the content
      *
-     * @param {string} downloadUid - The unique download identifier for the content item
+     * @param {string | number} downloadUidOrContentItemId - The unique download identifier (string) or content item id (number, deprecated)
      * @returns {ItemDownloadUrlSuccessResponseV2|ItemDownloadUrlFailedResponseV2} the url or failure message
      */
-    getContentDownloadUrl(downloadUid: string): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
+    getContentDownloadUrl(downloadUidOrContentItemId: string | number): Promise<ItemDownloadUrlSuccessResponseV2 | ItemDownloadUrlFailedResponseV2>;
     /**
      *
      * For url items that cannot be rendered inside an iframe, this creates a snapshot and returns the original url and the new image
