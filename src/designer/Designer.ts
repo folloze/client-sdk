@@ -585,10 +585,10 @@ export class Designer {
         });
     }
 
-    public generateWidgetsTextFromScratch(generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsTextFromScratch(generateParams: GenerateWidgetsTextsFromScratchRequest, captcha?: string | null): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/generation/widgets_texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
@@ -599,10 +599,10 @@ export class Designer {
     }
 
     // This method is for testing with brand voice, it should replace the current generateWidgetsText
-    public generateWidgetsTextFromScratchWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsTextFromScratchWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsFromScratchRequest, captcha?: string | null): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/generation/from_scratch/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_scratch/widgets_texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
@@ -612,10 +612,10 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
-    public generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1> {
+    public generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest, captcha?: string | null): Promise<GenGenerateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/generation/from_prompt/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_prompt/widgets_texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate widgets texts", e);
@@ -625,10 +625,10 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
-    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+    public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest, captcha?: string | null): Promise<GenRephraseResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/rephrase/widgets_texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not rephrase widgets texts", e);
@@ -639,10 +639,10 @@ export class Designer {
     }
 
     // This method is for testing with brand voice, it should replace the current rephraseWidgetText
-    public rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
+    public rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest, captcha?: string | null): Promise<GenRephraseResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/rephrase/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/rephrase/widgets_texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not rephrase widgets texts", e);
@@ -652,13 +652,13 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
     }
 
-    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
+    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest, captcha?: string | null): Promise<GenTranslateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
-                    console.error("could not rephrase widgets texts", e);
+                    console.error("could not translate widgets texts", e);
                     reject(e);
                 });
         };
@@ -751,11 +751,12 @@ export class Designer {
         return this.fetcher.get<VideoAIGenerateResponse>(`/api/v1/video_ai/status/${id}`).then(result => result.data);
     }
 
-    public async generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTextResponse> {
+    public async generateTextFromFile(boardId: number, generateParams: GenTextFromFile, captcha?: string | null): Promise<GenTextResponse> {
         const path = `/api/v1/boards/${boardId}/generation/from_file/texts`;
         const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
             filename: generateParams.file.name,
-            operation: generateParams.operation
+            operation: generateParams.operation,
+            captcha
         });
         const file_upload_details = fileuploadDetails.data.file_upload_details; 
         const formData = new FormData();
@@ -769,17 +770,17 @@ export class Designer {
 
         const apiCallFunc =  (resolve, reject, guid = fileuploadDetails.data.guid) => {
             this.fetcher
-                .post<any>(path, { guid })
+                .post<any>(path, { guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => reject(e));
         };
         return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
     }
 
-    public generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl): Promise<GenTextResponse> {
+    public generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl, captcha?: string | null): Promise<GenTextResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/generation/from_url/texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/generation/from_url/texts`, { ...generateParams, guid, captcha })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate text from url", e);

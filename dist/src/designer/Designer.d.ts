@@ -161,12 +161,12 @@ export declare class Designer {
      */
     getMergeTagValues(organizationId: number, mergeTagId: number): Promise<Record<number, MergeTagValue[]>>;
     getDesignerThemes(boardId: number): Promise<Record<number, Theme>>;
-    generateWidgetsTextFromScratch(generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1>;
-    generateWidgetsTextFromScratchWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsFromScratchRequest): Promise<GenGenerateResponseV1>;
-    generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1>;
-    rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
-    rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
-    translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
+    generateWidgetsTextFromScratch(generateParams: GenerateWidgetsTextsFromScratchRequest, captcha?: string | null): Promise<GenGenerateResponseV1>;
+    generateWidgetsTextFromScratchWithBoardId(boardId: number, generateParams: GenerateWidgetsTextsFromScratchRequest, captcha?: string | null): Promise<GenGenerateResponseV1>;
+    generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest, captcha?: string | null): Promise<GenGenerateResponseV1>;
+    rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest, captcha?: string | null): Promise<GenRephraseResponseV1>;
+    rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest, captcha?: string | null): Promise<GenRephraseResponseV1>;
+    translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest, captcha?: string | null): Promise<GenTranslateResponseV1>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
@@ -177,6 +177,6 @@ export declare class Designer {
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;
     generateVideoAI(request: VideoAIGenerateRequest): Promise<VideoAIGenerateResponse>;
     getVideoAIStatus(id: string): Promise<VideoAIGenerateResponse>;
-    generateTextFromFile(boardId: number, generateParams: GenTextFromFile): Promise<GenTextResponse>;
-    generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl): Promise<GenTextResponse>;
+    generateTextFromFile(boardId: number, generateParams: GenTextFromFile, captcha?: string | null): Promise<GenTextResponse>;
+    generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl, captcha?: string | null): Promise<GenTextResponse>;
 }
