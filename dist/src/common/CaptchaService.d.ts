@@ -1,3 +1,8 @@
+export declare class CaptchaService {
+    private static getSiteKey;
+    private static isRecaptchaAvailable;
+    static getCaptchaToken(action: string): Promise<string | null>;
+}
 declare global {
     interface Window {
         grecaptcha?: {
@@ -7,9 +12,4 @@ declare global {
             }) => Promise<string>;
         };
     }
-}
-export declare class CaptchaService {
-    private static getSiteKey;
-    private static isRecaptchaAvailable;
-    static getCaptchaToken(action: string): Promise<string | null>;
 }
