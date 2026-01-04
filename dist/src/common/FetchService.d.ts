@@ -11,6 +11,13 @@ export type FetcherOptions = {
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
 };
+declare module 'axios' {
+    interface AxiosRequestConfig {
+        captcha?: {
+            action: string;
+        };
+    }
+}
 export declare const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
 export declare class FetchService {
     private readonly useMock;
@@ -25,7 +32,7 @@ export declare class FetchService {
     private constructor();
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
-    withPartialContent(promiseFunc: (resolve: any, reject: any, guid: any) => any, timeout?: number, retry?: number, guid?: string): Promise<any>;
+    withPartialContent(promiseFunc: (resolve: any, reject: any, guid: any) => any, timeout?: number, retry?: number, guid?: string, captchaAction?: string): Promise<any>;
     withDisableOnPreview(apiCall: Function): Promise<any>;
     setSessionGuid(guid: string): void;
     private handleSuccess;
