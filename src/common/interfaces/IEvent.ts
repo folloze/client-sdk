@@ -21,6 +21,7 @@ export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_A
 
 export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "board-ready"
+    | "board-idle"
     | "append-to-liveboard"
     | "append-to-liveboard-light-dom"
     | "widget-connected"
