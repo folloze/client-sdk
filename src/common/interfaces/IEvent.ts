@@ -8,7 +8,9 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaSubmit"
     | "Folloze.pageview"
     | "Folloze.onConsent"
-    | "Folloze.linkClick";
+    | "Folloze.linkClick"
+    | "Folloze.boardReady"
+    | "Folloze.boardIdle";
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.showCookieConsent"
