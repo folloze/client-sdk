@@ -7,6 +7,7 @@ export type IFollozeState = {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
         cookiePostfix?: string;
+        talkJsAppId?: string;
     };
     platform: "desktop" | "mobile";
 };

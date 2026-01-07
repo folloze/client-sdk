@@ -69,6 +69,9 @@ export type InitialState = {
         preview_only: boolean;
     };
     company_name: string;
+
+    allow_form_creation?: boolean;
+    is_bot?: boolean;
 };
 
 export type DataEnrichmentConfig = {
@@ -203,6 +206,7 @@ export interface Lead {
     anon_guest: boolean;
     group_user: boolean;
     account_domain?: string;
+    account_logo?: string;
 }
 
 export interface Integrations {

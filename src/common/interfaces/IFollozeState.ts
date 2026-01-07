@@ -9,6 +9,7 @@ export type IFollozeState = {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
         cookiePostfix?: string;
+        talkJsAppId?: string;
     };
 
     // not really using this but nice to keep
