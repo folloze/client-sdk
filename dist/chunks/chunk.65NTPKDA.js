@@ -1,1 +1,0 @@
-var e=["Product/Solution Overview","Content Nurturing","Account Based Page","Landing Page","Event Registration"],i={board:{goal:e[0]},widgets:{}};var o="flz-widget-event-type";export{o as a,e as b,i as c};

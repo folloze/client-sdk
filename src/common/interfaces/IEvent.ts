@@ -8,7 +8,9 @@ export type PUBLIC_OUTGOING_EVENT_ACTION =
     | "Folloze.ctaSubmit"
     | "Folloze.pageview"
     | "Folloze.onConsent"
-    | "Folloze.linkClick";
+    | "Folloze.linkClick"
+    | "Folloze.boardReady"
+    | "Folloze.boardIdle";
 export type PUBLIC_INCOMING_EVENT_ACTION =
     | "Folloze.consentGiven"
     | "Folloze.showCookieConsent"
@@ -21,6 +23,7 @@ export type FLZ_EVENT_ACTION = FLZ_LIVEBOARD_EVENT_ACTION | FLZ_DESIGNER_EVENT_A
 
 export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "board-ready"
+    | "board-idle"
     | "append-to-liveboard"
     | "append-to-liveboard-light-dom"
     | "widget-connected"
