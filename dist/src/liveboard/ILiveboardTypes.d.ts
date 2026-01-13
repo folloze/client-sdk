@@ -1,6 +1,7 @@
-import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, ImageTransformation } from "./../designer/IDesignerTypes";
+import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, ImageTransformation } from "../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
 import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
+import { Lead } from "../common/interfaces/IInitialState";
 export type BoardResponseV1 = {
     id: number;
     slug: string;
@@ -289,15 +290,7 @@ export type GeoLocationResponseV1 = {
     country_code: string;
     state: string;
 };
-export type LeadResponseV1 = {
-    id: number;
-    name: string;
-    email: string;
-    last_name: string;
-    company: string;
-    anon_guest: boolean;
-    account_domain?: string;
-};
+export type LeadResponseV1 = Partial<Lead>;
 export type LeadLinkClickResponseV1 = {};
 export type LiveEventUrlsResponseV2 = {
     meeting_url?: string;

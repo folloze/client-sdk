@@ -10,6 +10,7 @@ export type IFollozeState = {
         pingInterval?: number | null;
         cookiePostfix?: string;
         INVISIBLE_RECAPTCHA_SITE_KEY?: string;
+        talkJsAppId?: string;
     };
 
     // not really using this but nice to keep

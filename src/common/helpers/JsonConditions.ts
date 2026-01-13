@@ -61,13 +61,13 @@ export function checkJsonConditions(settings: TriggerPersistence["showConditions
                 result = value <= targetValue;
                 break;
             case "startsWith":
-                result = toString(value).startsWith(targetValue);
+                result = toString(value).startsWith(String(targetValue));
                 break;
             case "endsWith":
-                result = toString(value).endsWith(targetValue);
+                result = toString(value).endsWith(String(targetValue));
                 break;
             case "contains":
-                result = toString(value).includes(targetValue);
+                result = toString(value).includes(String(targetValue));
                 break;
             case "present":
                 result = !!value;
