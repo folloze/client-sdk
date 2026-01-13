@@ -265,7 +265,7 @@ export const rules = (mock: MockAdapter) => {
         download_url: "https://url-for-download.com",
     });
 
-    mock.onGet("/live_board/v2/downloads",{content_item_id: 1}).reply<ItemDownloadUrlSuccessResponseV2>(200, {
+    mock.onGet("/live_board/v2/downloads").reply<ItemDownloadUrlSuccessResponseV2>(200, {
         download_url: "https://url-for-download.com",
     });
 
