@@ -30,37 +30,6 @@ export interface WidgetConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
 export interface RibbonConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
-export type TriggerDefinition =
-    | {name: "ByWidgetTrigger"; persist?: TriggerPersistence}
-    | {name: "TimerTrigger"; options: {repeat: number; time: number; timeUnit?: "seconds" | "minutes"}; persist?: TriggerPersistence}
-    | {name: "OnEventTrigger"; options: {repeat: number; eventName: string}; persist?: TriggerPersistence}
-    | {name: "LeaveTrigger"; persist?: TriggerPersistence}
-    | {name: "AtExactlyTrigger"; options: {time: string}; persist?: TriggerPersistence}
-    | {name: "ScrollTrigger"; options: {percentage: number}; persist?: TriggerPersistence}
-    | {name: "UserClicksTrigger"; options: {target: "item" | "cta_button" | "submit_form"}; persist?: TriggerPersistence}
-    | {name: "PageLoadTrigger"; persist?: TriggerPersistence}
-    | {name: "FormSubmittedTrigger"; persist?: TriggerPersistence}
-    | {name: "AfterItemsTrigger"; options: {itemCount: number}; persist?: TriggerPersistence}
-    | {name: "TabSwitchedTrigger"; persist?: TriggerPersistence};
-
-export type TriggerLogic = "OR" | "AND";
-
-export type FrequencyCapping =
-    | "always"
-    | "daily"
-    | "first_visit"
-    | "once_per_session"
-    | "until_form_submitted";
-
-export interface MultiTriggerConfig {
-    logic: TriggerLogic;
-    conditions: TriggerDefinition[];
-    persist?: TriggerPersistence;
-    frequencyCapping?: FrequencyCapping;
-}
-
-export type TriggerConfig = TriggerDefinition | MultiTriggerConfig;
-
 export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
 
@@ -76,7 +45,12 @@ export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
 
     // option 2
     pages: string[];
-    trigger?: TriggerConfig;
+    trigger:
+        | undefined
+        | {name: "ByWidgetTrigger"; persist?: TriggerPersistence}
+        | {name: "TimerTrigger"; options: {repeat: number; time: number}; persist?: TriggerPersistence}
+        | {name: "OnEventTrigger"; options: {repeat: number; eventName: string}; persist?: TriggerPersistence}
+        | {name: "LeaveTrigger"; persist?: TriggerPersistence};
 }
 
 type TriggerPersistenceFields = {
@@ -126,29 +100,3 @@ export type TriggerPersistenceRule = {
     value: number | boolean | string;
     required?: boolean;
 };
-
-export function isMultiTriggerConfig(trigger: TriggerConfig | undefined): trigger is MultiTriggerConfig {
-    return trigger !== undefined && "logic" in trigger && "conditions" in trigger && Array.isArray(trigger.conditions);
-}
-
-export function isSingleTriggerDefinition(trigger: TriggerConfig | undefined): trigger is TriggerDefinition {
-    return trigger !== undefined && "name" in trigger && !("logic" in trigger);
-}
-
-export function normalizeTriggerConfig(trigger: TriggerConfig | undefined): MultiTriggerConfig | undefined {
-    if (!trigger) return undefined;
-
-    if (isMultiTriggerConfig(trigger)) {
-        return trigger;
-    }
-
-    if (isSingleTriggerDefinition(trigger)) {
-        return {
-            logic: "OR",
-            conditions: [trigger],
-            persist: trigger.persist,
-        };
-    }
-
-    return undefined;
-}
