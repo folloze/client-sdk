@@ -15,7 +15,6 @@ export type FetcherOptions = {
     csrfToken?: string;
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
-    identityServiceEndpoint: string;
     flzClientFeature?: "embedded";
 };
 
@@ -28,7 +27,6 @@ const defaultFetcherOptions: FetcherOptions = {
         headers: {},
     },
     analyticsServiceEndpoint: "",
-    identityServiceEndpoint: "",
 };
 
 export const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
