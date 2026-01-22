@@ -10,6 +10,7 @@ export type IFollozeState = {
         pingInterval?: number | null;
         cookiePostfix?: string;
         talkJsAppId?: string;
+        tryMe?: boolean;
     };
 
     // not really using this but nice to keep
