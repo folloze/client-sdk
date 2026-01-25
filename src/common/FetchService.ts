@@ -191,8 +191,6 @@ export class FetchService {
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(config => {
-            console.log("yay in the fetcher, setting credentials");
-            config.withCredentials = true;
             if (this.sessionGuid) {
                 config.headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid;
             }
