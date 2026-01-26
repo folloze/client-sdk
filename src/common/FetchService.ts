@@ -103,8 +103,13 @@ export class FetchService {
     }
 
     // todo: this method will need backoff implementation
-    withPartialContent(promiseFunc: (resolve, reject, guid) => any, timeout: number = 2000, retry: number = 1, guid?: string): Promise<any> {
+    withPartialContent(promiseFunc: (resolve, reject, guid) => any, timeout: number = 2000, retry: number = 1, guid?: string, signal?: AbortSignal): Promise<any> {
         return new Promise((resolve, reject) => {
+            if (signal?.aborted) {
+                console.debug("withPartialContent aborted before starting");
+                reject(new Error("Operation cancelled"));
+                return;
+            }
             if (retry <= 0) {
                 console.warn("stop retrying partial content");
                 reject("stop retrying");
@@ -113,11 +118,21 @@ export class FetchService {
             const innerPromise = new Promise((resolve, reject) => promiseFunc(resolve, reject, guid));
             innerPromise
                 .then((result: any) => {
+                    if (signal?.aborted) {
+                        console.debug("withPartialContent aborted after request");
+                        reject(new Error("Operation cancelled"));
+                        return;
+                    }
                     if (result.status == 206) {
                         console.debug(`retry partial content ${retry}`);
                         retry = retry - 1;
                         setTimeout(() => {
-                            resolve(this.withPartialContent(promiseFunc, timeout, retry, result.data.guid));
+                            if (signal?.aborted) {
+                                console.debug("withPartialContent aborted during retry timeout");
+                                reject(new Error("Operation cancelled"));
+                                return;
+                            }
+                            resolve(this.withPartialContent(promiseFunc, timeout, retry, result.data.guid, signal));
                         }, timeout);
                     } else {
                         console.debug(`partial content resolved`, result.data);
