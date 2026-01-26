@@ -273,6 +273,7 @@ export type FootersResponseV1 = {
         button_label?: string;
         dialog_button_label?: string;
         dialog_text?: string;
+        button_style?: string;
     };
 };
 

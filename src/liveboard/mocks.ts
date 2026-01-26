@@ -436,6 +436,7 @@ export const rules = (mock: MockAdapter) => {
                     button_label: "Do not track me",
                     dialog_button_label: "my help text",
                     dialog_text: "my dialog text",
+                    button_style: "curved"
                 },
             };
         } else if (config.params.element_type == "2") {
