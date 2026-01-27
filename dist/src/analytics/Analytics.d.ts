@@ -63,7 +63,13 @@ export declare enum DesignerEventTypes {
     gen_ai_generate_by_goal = 353,
     gen_ai_generate_by_free_prompt = 354,
     gen_ai_translate = 355,
-    gen_ai_generate_text_from_input = 356
+    gen_ai_generate_text_from_input = 356,
+    ai_board_creation_chat_opened = 357,
+    ai_board_creation_chat_attachment_added = 358,
+    ai_board_creation_chat_suggestion_clicked = 359,
+    ai_board_creation_chat_edit_clicked = 360,
+    ai_board_creation_chat_create_board_clicked = 361,
+    ai_board_creation_chat_board_created = 362
 }
 export declare class Analytics {
     private fetchService;

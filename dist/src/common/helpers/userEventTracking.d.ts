@@ -89,12 +89,37 @@ type GenAIGenerateByFreePromptPayload = GenAIPayload & {
 type GenAITranslatePayload = GenAIPayload & {
     language: string;
 };
+type AIBoardCreationChatOpenedPayload = {};
+type AIBoardCreationChatAttachmentAddedPayload = {
+    attachment_type: 'url' | 'file';
+    file_name?: string;
+    file_type?: string;
+    url?: string;
+};
+type AIBoardCreationChatSuggestionClickedPayload = {
+    text: string;
+};
+type AIBoardCreationChatEditClickedPayload = {
+    component_key: string;
+};
+type AIBoardCreationChatCreateBoardClickedPayload = {
+    gathered_info_keys: string[];
+};
+type AIBoardCreationChatBoardCreatedPayload = {
+    board_id: number;
+};
 type EventPayloadMap = {
     [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
     [DesignerEventTypes.gen_ai_personalize_new_target_audience]: GenAITargetAudiencePayload;
     [DesignerEventTypes.gen_ai_generate_by_goal]: GenAIGenerateByGoalPayload;
     [DesignerEventTypes.gen_ai_generate_by_free_prompt]: GenAIGenerateByFreePromptPayload;
     [DesignerEventTypes.gen_ai_translate]: GenAITranslatePayload;
+    [DesignerEventTypes.ai_board_creation_chat_opened]: AIBoardCreationChatOpenedPayload;
+    [DesignerEventTypes.ai_board_creation_chat_attachment_added]: AIBoardCreationChatAttachmentAddedPayload;
+    [DesignerEventTypes.ai_board_creation_chat_suggestion_clicked]: AIBoardCreationChatSuggestionClickedPayload;
+    [DesignerEventTypes.ai_board_creation_chat_edit_clicked]: AIBoardCreationChatEditClickedPayload;
+    [DesignerEventTypes.ai_board_creation_chat_create_board_clicked]: AIBoardCreationChatCreateBoardClickedPayload;
+    [DesignerEventTypes.ai_board_creation_chat_board_created]: AIBoardCreationChatBoardCreatedPayload;
 };
 type UserTrackedEventsV2 = {
     [K in DesignerEventTypes]: {
