@@ -101,12 +101,6 @@ type AIBoardCreationChatSuggestionClickedPayload = {
 };
 type AIBoardCreationChatEditClickedPayload = {
     component_key: string;
-    before_edit: {
-        [key: string]: string;
-    };
-    after_edit: {
-        [key: string]: string;
-    };
 };
 type AIBoardCreationChatCreateBoardClickedPayload = {
     gathered_info: string[];
