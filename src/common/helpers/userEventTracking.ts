@@ -1,5 +1,5 @@
 import {LitElement} from "lit";
-import { DesignerEventTypes } from "../../analytics/Analytics";
+import { DesignerEventTypes, WidgetEventTypes } from "../../analytics/Analytics";
 import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
@@ -154,8 +154,6 @@ type GenAITranslatePayload = GenAIPayload & {
     language: string;
 };
 
-type AIBoardCreationChatOpenedPayload = {};
-
 type AIBoardCreationChatAttachmentAddedPayload = {
     attachment_type: 'url' | 'file';
     file_name?: string;
@@ -185,16 +183,15 @@ type EventPayloadMap = {
     [DesignerEventTypes.gen_ai_generate_by_goal]: GenAIGenerateByGoalPayload;
     [DesignerEventTypes.gen_ai_generate_by_free_prompt]: GenAIGenerateByFreePromptPayload;
     [DesignerEventTypes.gen_ai_translate]: GenAITranslatePayload;
-    [DesignerEventTypes.ai_board_creation_chat_opened]: AIBoardCreationChatOpenedPayload;
-    [DesignerEventTypes.ai_board_creation_chat_attachment_added]: AIBoardCreationChatAttachmentAddedPayload;
-    [DesignerEventTypes.ai_board_creation_chat_suggestion_clicked]: AIBoardCreationChatSuggestionClickedPayload;
-    [DesignerEventTypes.ai_board_creation_chat_edit_clicked]: AIBoardCreationChatEditClickedPayload;
-    [DesignerEventTypes.ai_board_creation_chat_create_board_clicked]: AIBoardCreationChatCreateBoardClickedPayload;
-    [DesignerEventTypes.ai_board_creation_chat_board_created]: AIBoardCreationChatBoardCreatedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_attachment_added]: AIBoardCreationChatAttachmentAddedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_suggestion_clicked]: AIBoardCreationChatSuggestionClickedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_edit_clicked]: AIBoardCreationChatEditClickedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_create_board_clicked]: AIBoardCreationChatCreateBoardClickedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_board_created]: AIBoardCreationChatBoardCreatedPayload;
 };
 
 type UserTrackedEventsV2 = {
-    [K in DesignerEventTypes]: {
+    [K in DesignerEventTypes | WidgetEventTypes]: {
         action: K;
         payload: K extends keyof EventPayloadMap ? EventPayloadMap[K] : {};
     };

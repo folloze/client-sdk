@@ -63,8 +63,9 @@ export declare enum DesignerEventTypes {
     gen_ai_generate_by_goal = 353,
     gen_ai_generate_by_free_prompt = 354,
     gen_ai_translate = 355,
-    gen_ai_generate_text_from_input = 356,
-    ai_board_creation_chat_opened = 357,
+    gen_ai_generate_text_from_input = 356
+}
+export declare enum WidgetEventTypes {
     ai_board_creation_chat_attachment_added = 358,
     ai_board_creation_chat_suggestion_clicked = 359,
     ai_board_creation_chat_edit_clicked = 360,
@@ -91,12 +92,12 @@ export declare class Analytics {
      */
     trackLeadContentView(contentItemId: number, sourceType: SourceType, guid: string, itemId?: number): Promise<AxiosResponse>;
     /**
-     * Tracks an event - only in designer
+     * Tracks a user event
      *
-     * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
+     * @param {LiveBoardEventTypes|DesignerEventTypes|WidgetEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
-    trackUserEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
+    trackUserEvent(eventId: LiveBoardEventTypes | DesignerEventTypes | WidgetEventTypes, data: any): Promise<AxiosResponse>;
     /**
      * Tracks an event - only in liveboard
      *
