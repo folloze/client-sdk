@@ -23,13 +23,12 @@ export class ClientSDK {
         instance.liveboard = new Liveboard(fetcher);
 
         ClientSDK.instance = instance;
-        global["flzTrack"] = ClientSDK.flzTrack;
+        globalThis["flzTrack"] = ClientSDK.flzTrack;
 
         return instance;
     }
 
     public static async flzTrack<K extends AllEventTypes>(type: "user" | "lead", eventId: K, data: UserTrackedEventsV2[K]["payload"]): Promise<void> {
-        console.log(eventId, data);
         if (type === "user") {
             await ClientSDK.instance.analytics.trackUserEvent(eventId, data);
         }
