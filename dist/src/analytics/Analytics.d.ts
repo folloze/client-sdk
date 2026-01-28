@@ -108,8 +108,19 @@ type AIBoardCreationChatSuggestionClickedPayload = {
 type AIBoardCreationChatEditClickedPayload = {
     component_key: string;
 };
+type AIBoardCreationChatGatheredInfoItem = {
+    title: string;
+    content: string;
+};
 type AIBoardCreationChatCreateBoardClickedPayload = {
-    gathered_info: string[];
+    gathered_info: {
+        product: AIBoardCreationChatGatheredInfoItem;
+        targetAudience: AIBoardCreationChatGatheredInfoItem;
+        campaignMessage: AIBoardCreationChatGatheredInfoItem;
+        goal: AIBoardCreationChatGatheredInfoItem;
+        additionalInformation: AIBoardCreationChatGatheredInfoItem;
+        generationInstructions: AIBoardCreationChatGatheredInfoItem;
+    };
 };
 type AIBoardCreationChatBoardCreatedPayload = {
     board_id: number;
