@@ -23,7 +23,7 @@ export class ClientSDK {
         instance.liveboard = new Liveboard(fetcher);
 
         ClientSDK.instance = instance;
-        globalThis["flzTrack"] = ClientSDK.flzTrack;
+        global["flzTrack"] = ClientSDK.flzTrack;
 
         return instance;
     }
