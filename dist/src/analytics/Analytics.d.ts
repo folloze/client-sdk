@@ -2,6 +2,8 @@ import { type AxiosResponse } from "axios";
 import { type FetchService } from "../common/FetchService";
 import { type AnalyticEventPrepared } from "../common/helpers/analyticEventTracking";
 import LiveEventAnalytics from "./LiveEventAnalytics";
+import { GenAudienceTarget } from "../common/interfaces/IGenerationTypes";
+import type { TrackedUserAddFloatingWidget, TrackedUserAddPersonalizationRule, TrackedUserAddSection, TrackedUserDeleteFloatingWidget, TrackedUserDeleteSection, TrackedUserEditComponent, TrackedUserEditSection, TrackedUserPreviewBoard, TrackedUserPublishBoard } from "../common/common";
 export * from "./LiveEventAnalytics";
 export type PingPayload = {
     leadId: number;
@@ -12,6 +14,7 @@ export type PingPayload = {
     analyticsData: any;
 };
 export type SourceType = "item" | "ai" | "recommendations";
+export type AllEventTypes = LiveBoardEventTypes | DesignerEventTypes | WidgetEventTypes;
 export declare enum LiveBoardEventTypes {
     viewed_board = 1,
     viewed_item = 2,
@@ -72,6 +75,64 @@ export declare enum WidgetEventTypes {
     ai_board_creation_chat_create_board_clicked = 361,
     ai_board_creation_chat_board_created = 362
 }
+type GenAIPayload = {
+    level: 'board';
+} | {
+    level: 'section';
+    section_name: string;
+};
+type GenAITargetAudiencePayload = GenAIPayload & {
+    text: string;
+    target_type: string;
+};
+type GenAIGenerateByGoalPayload = GenAIPayload & {
+    goal: string;
+    target_audience: GenAudienceTarget | null;
+    target_audience_text: string;
+};
+type GenAIGenerateByFreePromptPayload = GenAIPayload & {
+    prompt: string;
+};
+type GenAITranslatePayload = GenAIPayload & {
+    language: string;
+};
+type AIBoardCreationChatAttachmentAddedPayload = {
+    attachment_type: 'url' | 'file';
+    file_name?: string;
+    file_type?: string;
+    url?: string;
+};
+type AIBoardCreationChatSuggestionClickedPayload = {
+    text: string;
+};
+type AIBoardCreationChatEditClickedPayload = {
+    component_key: string;
+};
+type AIBoardCreationChatCreateBoardClickedPayload = {
+    gathered_info: string[];
+};
+type AIBoardCreationChatBoardCreatedPayload = {
+    board_id: number;
+};
+type EventPayloadMap = {
+    [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
+    [DesignerEventTypes.gen_ai_personalize_new_target_audience]: GenAITargetAudiencePayload;
+    [DesignerEventTypes.gen_ai_generate_by_goal]: GenAIGenerateByGoalPayload;
+    [DesignerEventTypes.gen_ai_generate_by_free_prompt]: GenAIGenerateByFreePromptPayload;
+    [DesignerEventTypes.gen_ai_translate]: GenAITranslatePayload;
+    [WidgetEventTypes.ai_board_creation_chat_attachment_added]: AIBoardCreationChatAttachmentAddedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_suggestion_clicked]: AIBoardCreationChatSuggestionClickedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_edit_clicked]: AIBoardCreationChatEditClickedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_create_board_clicked]: AIBoardCreationChatCreateBoardClickedPayload;
+    [WidgetEventTypes.ai_board_creation_chat_board_created]: AIBoardCreationChatBoardCreatedPayload;
+};
+export type UserTrackedEventsV2 = {
+    [K in AllEventTypes]: {
+        action: K;
+        payload: K extends keyof EventPayloadMap ? EventPayloadMap[K] : {};
+    };
+};
+export type TrackedUserEvent = TrackedUserAddSection | TrackedUserEditSection | TrackedUserEditComponent | TrackedUserDeleteSection | TrackedUserPreviewBoard | TrackedUserPublishBoard | TrackedUserDeleteFloatingWidget | TrackedUserAddFloatingWidget | TrackedUserAddPersonalizationRule;
 export declare class Analytics {
     private fetchService;
     liveEvent: LiveEventAnalytics;
@@ -104,7 +165,7 @@ export declare class Analytics {
      * @param {LiveBoardEventTypes|DesignerEventTypes} eventId the event that occurred
      * @param {any} data the data to report
      */
-    trackLeadEvent(eventId: LiveBoardEventTypes | DesignerEventTypes, data: any): Promise<AxiosResponse>;
+    trackLeadEvent(eventId: AllEventTypes, data: any): Promise<AxiosResponse>;
     sendPing(payload: PingPayload): Promise<any>;
     validateSession(): Promise<AxiosResponse>;
     createSession(): Promise<AxiosResponse>;
