@@ -76,6 +76,17 @@ export enum DesignerEventTypes {
     gen_ai_generate_by_free_prompt = 354,
     gen_ai_translate = 355,
     gen_ai_generate_text_from_input = 356,
+    clicked_on_create_ad = 357,
+    created_an_ad = 358,
+    clicked_create_ad_chat_attach = 359,
+    clicked_ad_download = 360,
+    duplicated_an_ad = 361,
+    clicked_on_edit_ad = 362,
+    clicked_ad_text_assist_button = 363,
+    copied_ad_text = 364,
+    clicked_edit_ad_chat_attach = 365,
+    saved_ad_changes = 366,
+    clicked_ad_retry = 367
 }
 
 export enum WidgetEventTypes {
