@@ -86,7 +86,8 @@ export enum DesignerEventTypes {
     copied_ad_text = 364,
     clicked_edit_ad_chat_attach = 365,
     saved_ad_changes = 366,
-    clicked_ad_retry = 367
+    clicked_ad_retry = 367,
+    edit_ad_image_actions = 368
 }
 
 export enum WidgetEventTypes {
