@@ -73,7 +73,13 @@ export declare enum WidgetEventTypes {
     ai_board_creation_chat_suggestion_clicked = 359,
     ai_board_creation_chat_edit_clicked = 360,
     ai_board_creation_chat_create_board_clicked = 361,
-    ai_board_creation_chat_board_created = 362
+    ai_board_creation_chat_board_created = 362,
+    clicked_ad_download = 365,
+    clicked_ad_text_assist_button = 368,
+    copied_ad_text = 369,
+    saved_ad_changes = 370,
+    edit_ad_image_actions = 372,
+    edit_ad_image_chat_message_sent = 373
 }
 type GenAIPayload = {
     level: 'board';
@@ -125,6 +131,23 @@ type AIBoardCreationChatCreateBoardClickedPayload = {
 type AIBoardCreationChatBoardCreatedPayload = {
     board_id: number;
 };
+type AdsPayload = {
+    board_id: number;
+    ad_id: string;
+};
+type AdsImageActionPayload = AdsPayload & {
+    action: 'add to chat' | 'set as ad';
+};
+type AdsTextActionPayload = AdsPayload & {
+    action: string;
+    prompt?: string;
+};
+type AdsDownloadPayload = AdsPayload & {
+    type: 'image' | 'ad' | 'all';
+};
+type AdsEditImageMessagePayload = AdsPayload & {
+    message: string;
+};
 type EventPayloadMap = {
     [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
     [DesignerEventTypes.gen_ai_personalize_new_target_audience]: GenAITargetAudiencePayload;
@@ -136,6 +159,12 @@ type EventPayloadMap = {
     [WidgetEventTypes.ai_board_creation_chat_edit_clicked]: AIBoardCreationChatEditClickedPayload;
     [WidgetEventTypes.ai_board_creation_chat_create_board_clicked]: AIBoardCreationChatCreateBoardClickedPayload;
     [WidgetEventTypes.ai_board_creation_chat_board_created]: AIBoardCreationChatBoardCreatedPayload;
+    [WidgetEventTypes.copied_ad_text]: AdsPayload;
+    [WidgetEventTypes.clicked_ad_download]: AdsDownloadPayload;
+    [WidgetEventTypes.clicked_ad_text_assist_button]: AdsTextActionPayload;
+    [WidgetEventTypes.saved_ad_changes]: AdsPayload;
+    [WidgetEventTypes.edit_ad_image_actions]: AdsImageActionPayload;
+    [WidgetEventTypes.edit_ad_image_chat_message_sent]: AdsEditImageMessagePayload;
 };
 export type UserTrackedEventsV2 = {
     [K in AllEventTypes]: {
