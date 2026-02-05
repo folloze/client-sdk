@@ -78,7 +78,8 @@ export declare enum WidgetEventTypes {
     clicked_ad_text_assist_button = 368,
     copied_ad_text = 369,
     saved_ad_changes = 370,
-    edit_ad_image_actions = 372
+    edit_ad_image_actions = 372,
+    edit_ad_image_chat_message_sent = 373
 }
 type GenAIPayload = {
     level: 'board';
@@ -144,6 +145,9 @@ type AdsTextActionPayload = AdsPayload & {
 type AdsDownloadPayload = AdsPayload & {
     type: 'image' | 'ad' | 'all';
 };
+type AdsEditImageMessagePayload = AdsPayload & {
+    message: string;
+};
 type EventPayloadMap = {
     [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
     [DesignerEventTypes.gen_ai_personalize_new_target_audience]: GenAITargetAudiencePayload;
@@ -160,6 +164,7 @@ type EventPayloadMap = {
     [WidgetEventTypes.clicked_ad_text_assist_button]: AdsTextActionPayload;
     [WidgetEventTypes.saved_ad_changes]: AdsPayload;
     [WidgetEventTypes.edit_ad_image_actions]: AdsImageActionPayload;
+    [WidgetEventTypes.edit_ad_image_chat_message_sent]: AdsEditImageMessagePayload;
 };
 export type UserTrackedEventsV2 = {
     [K in AllEventTypes]: {
