@@ -30,18 +30,25 @@ export interface WidgetConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
 export interface RibbonConfig extends LiveConfig, GridConfig, LoadableConfig {}
 
+// Base trigger types - live-board compatible
 export type TriggerDefinition =
     | {name: "ByWidgetTrigger"; persist?: TriggerPersistence}
     | {name: "TimerTrigger"; options: {repeat: number; time: number; timeUnit?: "seconds" | "minutes"}; persist?: TriggerPersistence}
     | {name: "OnEventTrigger"; options: {repeat: number; eventName: string}; persist?: TriggerPersistence}
-    | {name: "LeaveTrigger"; persist?: TriggerPersistence}
+    | {name: "LeaveTrigger"; persist?: TriggerPersistence};
+
+// Extended trigger types - includes all triggers for MultiTrigger conditions
+export type ExtendedTriggerDefinition =
+    | TriggerDefinition
     | {name: "AtExactlyTrigger"; options: {time: string}; persist?: TriggerPersistence}
     | {name: "ScrollTrigger"; options: {percentage: number}; persist?: TriggerPersistence}
     | {name: "UserClicksTrigger"; options: {target: "item" | "cta_button" | "submit_form"}; persist?: TriggerPersistence}
     | {name: "PageLoadTrigger"; persist?: TriggerPersistence}
     | {name: "FormSubmittedTrigger"; persist?: TriggerPersistence}
     | {name: "AfterItemsTrigger"; options: {itemCount: number}; persist?: TriggerPersistence}
-    | {name: "TabSwitchedTrigger"; persist?: TriggerPersistence};
+    | {name: "TabSwitchedTrigger"; persist?: TriggerPersistence}
+    | {name: "EventAttendedTrigger"; persist?: TriggerPersistence}
+    | {name: "ViewedRecordingTrigger"; persist?: TriggerPersistence};
 
 export type TriggerLogic = "OR" | "AND";
 
@@ -53,13 +60,18 @@ export type FrequencyCapping =
     | "until_form_submitted";
 
 export interface MultiTriggerConfig {
+    name: "MultiTrigger";
     logic: TriggerLogic;
-    conditions: TriggerDefinition[];
+    conditions: ExtendedTriggerDefinition[];
     persist?: TriggerPersistence;
     frequencyCapping?: FrequencyCapping;
 }
 
-export type TriggerConfig = TriggerDefinition | MultiTriggerConfig;
+// TriggerConfig for FloatingWidgetConfig - live-board compatible (no MultiTrigger)
+export type TriggerConfig = TriggerDefinition;
+
+// FullTriggerConfig for widgets package - includes MultiTrigger support
+export type FullTriggerConfig = ExtendedTriggerDefinition | MultiTriggerConfig;
 
 export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
@@ -127,15 +139,15 @@ export type TriggerPersistenceRule = {
     required?: boolean;
 };
 
-export function isMultiTriggerConfig(trigger: TriggerConfig | undefined): trigger is MultiTriggerConfig {
-    return trigger !== undefined && "logic" in trigger && "conditions" in trigger && Array.isArray(trigger.conditions);
+export function isMultiTriggerConfig(trigger: FullTriggerConfig | undefined): trigger is MultiTriggerConfig {
+    return trigger !== undefined && trigger.name === "MultiTrigger" && "logic" in trigger && "conditions" in trigger && Array.isArray(trigger.conditions);
 }
 
-export function isSingleTriggerDefinition(trigger: TriggerConfig | undefined): trigger is TriggerDefinition {
-    return trigger !== undefined && "name" in trigger && !("logic" in trigger);
+export function isSingleTriggerDefinition(trigger: FullTriggerConfig | undefined): trigger is ExtendedTriggerDefinition {
+    return trigger !== undefined && "name" in trigger && trigger.name !== "MultiTrigger";
 }
 
-export function normalizeTriggerConfig(trigger: TriggerConfig | undefined): MultiTriggerConfig | undefined {
+export function normalizeTriggerConfig(trigger: FullTriggerConfig | undefined): MultiTriggerConfig | undefined {
     if (!trigger) return undefined;
 
     if (isMultiTriggerConfig(trigger)) {
@@ -144,6 +156,7 @@ export function normalizeTriggerConfig(trigger: TriggerConfig | undefined): Mult
 
     if (isSingleTriggerDefinition(trigger)) {
         return {
+            name: "MultiTrigger",
             logic: "OR",
             conditions: [trigger],
             persist: trigger.persist,

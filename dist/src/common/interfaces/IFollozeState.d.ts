@@ -9,6 +9,7 @@ export type IFollozeState = {
         cookiePostfix?: string;
         INVISIBLE_RECAPTCHA_SITE_KEY?: string;
         talkJsAppId?: string;
+        tryMe?: boolean;
     };
     platform: "desktop" | "mobile";
 };

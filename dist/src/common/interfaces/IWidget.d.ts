@@ -48,7 +48,8 @@ export type TriggerDefinition = {
 } | {
     name: "LeaveTrigger";
     persist?: TriggerPersistence;
-} | {
+};
+export type ExtendedTriggerDefinition = TriggerDefinition | {
     name: "AtExactlyTrigger";
     options: {
         time: string;
@@ -81,16 +82,24 @@ export type TriggerDefinition = {
 } | {
     name: "TabSwitchedTrigger";
     persist?: TriggerPersistence;
+} | {
+    name: "EventAttendedTrigger";
+    persist?: TriggerPersistence;
+} | {
+    name: "ViewedRecordingTrigger";
+    persist?: TriggerPersistence;
 };
 export type TriggerLogic = "OR" | "AND";
 export type FrequencyCapping = "always" | "daily" | "first_visit" | "once_per_session" | "until_form_submitted";
 export interface MultiTriggerConfig {
+    name: "MultiTrigger";
     logic: TriggerLogic;
-    conditions: TriggerDefinition[];
+    conditions: ExtendedTriggerDefinition[];
     persist?: TriggerPersistence;
     frequencyCapping?: FrequencyCapping;
 }
-export type TriggerConfig = TriggerDefinition | MultiTriggerConfig;
+export type TriggerConfig = TriggerDefinition;
+export type FullTriggerConfig = ExtendedTriggerDefinition | MultiTriggerConfig;
 export interface FloatingWidgetConfig extends LiveConfig, LoadableConfig {
     floatPos?: FloatPos;
     hasOverlay?: boolean;
@@ -130,7 +139,7 @@ export type TriggerPersistenceRule = {
     value: number | boolean | string;
     required?: boolean;
 };
-export declare function isMultiTriggerConfig(trigger: TriggerConfig | undefined): trigger is MultiTriggerConfig;
-export declare function isSingleTriggerDefinition(trigger: TriggerConfig | undefined): trigger is TriggerDefinition;
-export declare function normalizeTriggerConfig(trigger: TriggerConfig | undefined): MultiTriggerConfig | undefined;
+export declare function isMultiTriggerConfig(trigger: FullTriggerConfig | undefined): trigger is MultiTriggerConfig;
+export declare function isSingleTriggerDefinition(trigger: FullTriggerConfig | undefined): trigger is ExtendedTriggerDefinition;
+export declare function normalizeTriggerConfig(trigger: FullTriggerConfig | undefined): MultiTriggerConfig | undefined;
 export {};
