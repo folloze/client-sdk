@@ -1,4 +1,5 @@
 export * from "./FetchService";
+export * from "./CaptchaService";
 export * from "./LiveWidgetElement";
 export * from "./LiveWidget";
 export * from "./LiveFloatingWidget";

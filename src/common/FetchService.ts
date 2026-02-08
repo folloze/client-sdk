@@ -4,6 +4,7 @@ import MockAdapter from "axios-mock-adapter";
 import MockConnector from "./MockConnector";
 import mergeWith from "lodash/mergeWith";
 import get from "lodash/get";
+import { CaptchaInterceptor } from "./CaptchaInterceptor";
 
 export type FetcherOptions = {
     organizationId: number;
@@ -17,6 +18,13 @@ export type FetcherOptions = {
     analyticsServiceEndpoint: string;
     flzClientFeature?: "embedded";
 };
+
+// Extend AxiosRequestConfig to include CAPTCHA metadata
+declare module 'axios' {
+    export interface AxiosRequestConfig {
+        captcha?: boolean;
+    }
+}
 
 const defaultFetcherOptions: FetcherOptions = {
     organizationId: -1,
@@ -102,17 +110,37 @@ export class FetchService {
             .catch(e => console.error("could not create mock fetcher", e));
     }
 
-    // todo: this method will need backoff implementation
-    withPartialContent(promiseFunc: (resolve, reject, guid) => any, timeout: number = 2000, retry: number = 1, guid?: string): Promise<any> {
+    withPartialContent(promiseFunc: (resolve, reject, guid) => any, timeout: number = 2000, retry: number = 1, guid?: string, captcha?: boolean): Promise<any> {
         return new Promise((resolve, reject) => {
             if (retry <= 0) {
                 console.warn("stop retrying partial content");
                 reject("stop retrying");
                 return;
             }
-            const innerPromise = new Promise((resolve, reject) => promiseFunc(resolve, reject, guid));
+            
+            let captchaInterceptorId: number | null = null;
+            if (captcha && !guid) {
+                captchaInterceptorId = this.fetcher.interceptors.request.use(async (config) => {
+                    if (config.method?.toLowerCase() === 'post' && config.data) {
+                        const data = config.data;
+                        if (!data.guid && config.captcha === undefined) {
+                            config.captcha = true;
+                        }
+                    }
+                    return config;
+                });
+            }
+            
+            const innerPromise = new Promise((resolve, reject) => {
+                promiseFunc(resolve, reject, guid);
+            });
+            
             innerPromise
                 .then((result: any) => {
+                    if (captchaInterceptorId !== null) {
+                        this.fetcher.interceptors.request.eject(captchaInterceptorId);
+                    }
+                    
                     if (result.status == 206) {
                         console.debug(`retry partial content ${retry}`);
                         retry = retry - 1;
@@ -125,6 +153,9 @@ export class FetchService {
                     }
                 })
                 .catch(e => {
+                    if (captchaInterceptorId !== null) {
+                        this.fetcher.interceptors.request.eject(captchaInterceptorId);
+                    }
                     console.error("could not finish partial content request", e);
                     reject(e);
                 });
@@ -188,7 +219,7 @@ export class FetchService {
 
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
-        this.fetcher.interceptors.request.use(config => {
+        this.fetcher.interceptors.request.use(async config => {
             if (this.sessionGuid) {
                 config.headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid;
             }
@@ -204,8 +235,11 @@ export class FetchService {
                     config.withCredentials = true;
                 }
             }
+            
             return config;
         });
+        
+        CaptchaInterceptor.setupCaptchaInterceptor(this.fetcher);
 
         if (options.config?.baseURL != "/" && options.config?.baseURL != window.location.origin) {
             this.fetcher.interceptors.request.use(config => {

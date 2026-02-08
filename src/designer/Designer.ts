@@ -595,7 +595,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     // This method is for testing with brand voice, it should replace the current generateWidgetsText
@@ -609,7 +609,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     public generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1> {
@@ -622,7 +622,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
@@ -635,7 +635,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     // This method is for testing with brand voice, it should replace the current rephraseWidgetText
@@ -649,7 +649,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
@@ -658,11 +658,11 @@ export class Designer {
                 .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
-                    console.error("could not rephrase widgets texts", e);
+                    console.error("could not translate widgets texts", e);
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     getCustomSections(): Promise<CustomSectionListItem[]> {
@@ -767,13 +767,14 @@ export class Designer {
             body: formData
         });
 
-        const apiCallFunc =  (resolve, reject, guid = fileuploadDetails.data.guid) => {
+        const initialGuid = fileuploadDetails.data.guid;
+        const apiCallFunc =  (resolve, reject, guid?: string) => {
             this.fetcher
-                .post<any>(path, { guid })
+                .post<any>(path, { guid: guid || initialGuid })
                 .then(result => resolve(result))
                 .catch(e => reject(e));
         };
-        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
+        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90, initialGuid, true) as Promise<GenTextResponse>;
     }
 
     public generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl): Promise<GenTextResponse> {
@@ -786,6 +787,6 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<GenTextResponse>;
     }
 }
