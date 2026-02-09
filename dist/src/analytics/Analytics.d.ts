@@ -79,7 +79,9 @@ export declare enum WidgetEventTypes {
     copied_ad_text = 369,
     saved_ad_changes = 370,
     edit_ad_image_actions = 372,
-    edit_ad_image_chat_message_sent = 373
+    edit_ad_image_chat_message_sent = 373,
+    audience_research_chat_opened = 374,
+    audience_research_save_to_campaign_clicked = 375
 }
 type GenAIPayload = {
     level: 'board';
