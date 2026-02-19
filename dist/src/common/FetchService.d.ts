@@ -17,6 +17,10 @@ declare module 'axios' {
     }
 }
 export declare const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
+export type SSEEvent = {
+    event: string;
+    data: any;
+};
 export declare class FetchService {
     private readonly useMock;
     fetcher: AxiosInstance;
@@ -31,6 +35,7 @@ export declare class FetchService {
     static create(options: FetcherOptions): Promise<FetchService>;
     private createMockFetcher;
     withPartialContent(promiseFunc: (resolve: any, reject: any, guid: any) => any, timeout?: number, retry?: number, guid?: string, captcha?: boolean): Promise<any>;
+    streamSSE(url: string, payload: any, onEvent: (event: SSEEvent) => void, extraHeaders?: Record<string, string>): Promise<void>;
     withDisableOnPreview(apiCall: Function): Promise<any>;
     setSessionGuid(guid: string): void;
     private handleSuccess;
