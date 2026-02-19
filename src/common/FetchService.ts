@@ -50,6 +50,11 @@ export const FLZ_SESSION_GUID_HEADER = "folloze-session-guid";
 // getIsoCode: () => Promise.resolve(),
 // fetchEventUrls: () => Promise.resolve("")
 
+export type SSEEvent = {
+    event: string;
+    data: any;
+};
+
 export class FetchService {
     private readonly useMock: boolean;
     public fetcher: AxiosInstance;
@@ -159,6 +164,88 @@ export class FetchService {
                     console.error("could not finish partial content request", e);
                     reject(e);
                 });
+        });
+    }
+
+    streamSSE(url: string, payload: any, onEvent: (event: SSEEvent) => void, extraHeaders?: Record<string, string>): Promise<void> {
+        const headers: Record<string, string> = {
+            "Content-Type": "application/json",
+            "X-Requested-With": "XMLHttpRequest",
+        };
+        if (this.options.csrfToken) {
+            headers["X-CSRF-Token"] = this.options.csrfToken;
+        }
+        if (this.sessionGuid) {
+            headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid as string;
+        }
+        if (this.jwt) {
+            headers["Authorization"] = `Bearer ${this.jwt}`;
+        }
+        if (this.isEmbeddedRequest) {
+            headers["flz-client-feature"] = "embedded";
+        }
+        if (extraHeaders) {
+            Object.assign(headers, extraHeaders);
+        }
+
+        const baseURL = this.options.config?.baseURL || "";
+        const fullUrl = url.startsWith("http") ? url : `${baseURL.replace(/\/$/, "")}${url}`;
+
+        return new Promise(async (resolve, reject) => {
+            try {
+                const response = await fetch(fullUrl, {
+                    method: "POST",
+                    headers,
+                    body: JSON.stringify(payload),
+                    credentials: this.isEmbeddedRequest ? "include" : "same-origin",
+                });
+
+                if (!response.ok) {
+                    reject(new Error(`SSE request failed: ${response.status} ${response.statusText}`));
+                    return;
+                }
+
+                const reader = response.body!.getReader();
+                const decoder = new TextDecoder();
+                let buffer = "";
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    buffer += decoder.decode(value, { stream: true });
+
+                    const parts = buffer.split("\n\n");
+                    buffer = parts.pop() || "";
+
+                    for (const part of parts) {
+                        if (!part.trim()) continue;
+
+                        let eventType = "";
+                        let eventData = "";
+
+                        for (const line of part.split("\n")) {
+                            if (line.startsWith("event: ")) {
+                                eventType = line.slice(7);
+                            } else if (line.startsWith("data: ")) {
+                                eventData = line.slice(6);
+                            }
+                        }
+
+                        if (eventType && eventData) {
+                            try {
+                                onEvent({ event: eventType, data: JSON.parse(eventData) });
+                            } catch (e) {
+                                console.warn("Failed to parse SSE event data", eventData, e);
+                            }
+                        }
+                    }
+                }
+                resolve();
+            } catch (e) {
+                console.error("SSE stream error", e);
+                reject(e);
+            }
         });
     }
 
