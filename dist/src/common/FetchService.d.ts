@@ -9,6 +9,7 @@ export type FetcherOptions = {
     csrfToken?: string;
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
+    identityServiceEndpoint: string;
     flzClientFeature?: "embedded";
 };
 declare module 'axios' {
