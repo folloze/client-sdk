@@ -864,6 +864,32 @@ export class Liveboard {
             });
         });
     }
+
+    /**
+     * Track a share board action (from header share button)
+     *
+     * @param {number} boardId
+     * @param {string} platform - linkedin, facebook, twitter, or email
+     * @param {string} recipientEmail - only for email shares
+     */
+    saveShareBoard(boardId: number, platform: string, invitee?: string): Promise<AxiosResponse> | Promise<void> {
+        return this.fetchService.withDisableOnPreview((): Promise<void> => {
+            return new Promise((resolve, reject) => {
+                this.fetchService.fetcher
+                    .post<void>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/shares/social`, {
+                        platform,
+                        invitee,
+                    })
+                    .then(() => {
+                        resolve();
+                    })
+                    .catch(e => {
+                        console.error("could not save share board", e);
+                        reject(e);
+                    });
+            });
+        });
+    }
     // end CTA
 
     getEnrichment(boardId: number): Promise<EnrichmentBoardConfigV3> {

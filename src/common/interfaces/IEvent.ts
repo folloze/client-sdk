@@ -66,6 +66,7 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "register-floating-widgets-triggers"
     | "get-form-privacy-messages"
     | "share-by-email"
+    | "share-board"
     | "get-privacy-messages"
     | "get-state"
     | "is-personalization-mod"

@@ -244,6 +244,14 @@ export declare class Liveboard {
      * @param {number} invitationId
      */
     saveShareByEmailCta(boardId: number, email: string, invitationId: number): Promise<AxiosResponse> | Promise<void>;
+    /**
+     * Track a share board action (from header share button)
+     *
+     * @param {number} boardId
+     * @param {string} platform - linkedin, facebook, twitter, or email
+     * @param {string} recipientEmail - only for email shares
+     */
+    saveShareBoard(boardId: number, platform: string, invitee?: string): Promise<AxiosResponse> | Promise<void>;
     getEnrichment(boardId: number): Promise<EnrichmentBoardConfigV3>;
     notifyIdentity(boardId: number, values: CtaParams): Promise<any>;
     joinLiveEvent(boardId: number, liveEventId: string): Promise<LiveEventParticipant[]>;
