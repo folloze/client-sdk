@@ -756,7 +756,7 @@ export class Designer {
         const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
             filename: generateParams.file.name,
             operation: generateParams.operation
-        });
+        }, { captcha: true });
         const file_upload_details = fileuploadDetails.data.file_upload_details; 
         const formData = new FormData();
         formData.append('attributes', JSON.stringify(file_upload_details.data));
