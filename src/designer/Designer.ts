@@ -221,13 +221,14 @@ export class Designer {
     /**
      * Fetches all the parameters required to upload a file
      *
-     * @param {string} uploadType the type of file to be uploaded
+     * @param {string} fileType MIME type of the file (e.g. "video/mp4", "image/jpeg")
+     * @param {string} fileName original file name
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
-    public getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
+    public getUploadUrl(fileType: string, fileName: string): Promise<UploadUrlResponseV1> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post("/api/v1/upload_urls", {type: uploadType})
+                .post("/api/v1/upload_urls", {file_type: fileType, file_name: fileName})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -236,6 +237,11 @@ export class Designer {
                     reject(e);
                 });
         });
+    }
+
+    /** @deprecated Use getUploadUrl instead */
+    public getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1> {
+        return this.getUploadUrl(uploadType === "video" ? "video/mp4" : "image/jpeg", `upload_${Date.now()}.${uploadType === "video" ? "mp4" : "jpg"}`);
     }
 
     // Forms
