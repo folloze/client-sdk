@@ -41,6 +41,8 @@ export declare class Designer {
      * @param {string} uploadType the type of file to be uploaded
      * @returns {UploadUrlResponseV1} UploadUrlResponse
      */
+    getUploadUrl(fileType: string, fileName: string): Promise<UploadUrlResponseV1>;
+    /** @deprecated Use getUploadUrl instead */
     getImageUploadUrl(uploadType: string): Promise<UploadUrlResponseV1>;
     /**
      * Gets all forms of a board
