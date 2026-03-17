@@ -36,7 +36,7 @@ export class Identity {
         });
     }
 
-    public verifyEmail(email: string, code: number, session: string): Promise<VerifyEmailResponse> {
+    public verifyEmail(email: string, code: string, session: string): Promise<VerifyEmailResponse> {
         return new Promise((resolve, reject) => {
             this.fetchService.fetcher
                 .post<VerifyEmailResponse>(`${this.fetchService.options.identityServiceEndpoint}/tryme/verify_email`, {email, code, session})

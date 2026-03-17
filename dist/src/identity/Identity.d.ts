@@ -11,5 +11,5 @@ export declare class Identity {
     private fetchService;
     constructor(fetch: FetchService);
     signIn(email: string): Promise<SignInResponse>;
-    verifyEmail(email: string, code: number, session: string): Promise<VerifyEmailResponse>;
+    verifyEmail(email: string, code: string, session: string): Promise<VerifyEmailResponse>;
 }
