@@ -63,6 +63,9 @@ export type InitialState = {
     company_name: string;
     allow_form_creation?: boolean;
     is_bot?: boolean;
+    try_me?: {
+        can_edit: boolean;
+    };
 };
 export type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
