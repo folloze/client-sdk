@@ -38,7 +38,8 @@ import {
     VideoAIGenerateResponse,
     MergeTagFilters,
     type ChatConversationDataV2,
-    type personalGalleryMediaParams
+    type personalGalleryMediaParams,
+    type BoardExpirationSettingsV1
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -414,6 +415,18 @@ export class Designer {
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get feature settings", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getBoardExpirationSettings(organizationId: number): Promise<BoardExpirationSettingsV1> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get<BoardExpirationSettingsV1>(`/api/v1/organizations/${organizationId}/settings/board_expiration`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get board expiration settings", e);
                     reject(e);
                 });
         });
