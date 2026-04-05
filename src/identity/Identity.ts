@@ -17,7 +17,9 @@ export class Identity {
         this.fetchService = fetch;
 
         this.fetchService.fetcher.interceptors.request.use(config => {
-            config.withCredentials = true;
+            if (config.url?.includes(this.fetchService.options.identityServiceEndpoint)) {
+                config.withCredentials = true;
+            }
             return config;
         });
     }
