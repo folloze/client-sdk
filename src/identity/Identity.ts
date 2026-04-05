@@ -17,7 +17,11 @@ export class Identity {
         this.fetchService = fetch;
 
         this.fetchService.fetcher.interceptors.request.use(config => {
-            config.withCredentials = true;
+            // When the credentials flag is set to true on the client-side,
+            // browsers do not allow the use of wildcards ( * ) for Access-Control-Allow-Origin.
+            if (!(config.url?.includes(this.fetchService.options.analyticsServiceEndpoint) || config.url?.includes(this.fetchService.options.pingEndpoint))) {
+                config.withCredentials = true;
+            }
             return config;
         });
     }
