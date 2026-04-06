@@ -53,10 +53,10 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
-    public publishLiveBoard(boardId: number, withGoOnline: boolean = true, expirationAt?: string): Promise<Board> {
+    public publishLiveBoard(boardId: number, withGoOnline: boolean = true, expirationAt?: string, expirationPolicy?: string): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline, expiration_at: expirationAt})
+                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline, expiration_at: expirationAt, expiration_policy: expirationPolicy})
                 .then(result => {
                     resolve(result.data);
                 })
