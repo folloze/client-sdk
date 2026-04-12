@@ -72,6 +72,9 @@ export type InitialState = {
 
     allow_form_creation?: boolean;
     is_bot?: boolean;
+    try_me?: {
+        can_edit: boolean;
+    };
 };
 
 export type DataEnrichmentConfig = {

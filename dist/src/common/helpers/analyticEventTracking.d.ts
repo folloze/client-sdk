@@ -32,6 +32,10 @@ type AnalyticTypeToPayload = {
         button_text: string;
         content_id: number;
     };
+    social_share: {
+        platform: "linkedin" | "x" | "facebook" | "email";
+        recipient_email?: string;
+    };
 };
 type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
     [P in K]: AnalyticTypeToPayload[P];
