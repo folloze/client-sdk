@@ -39,7 +39,8 @@ import {
     MergeTagFilters,
     type ChatConversationDataV2,
     type personalGalleryMediaParams,
-    type BoardExpirationSettingsV1
+    type BoardExpirationSettingsV1,
+    type BoardExpirationDataV1
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -53,10 +54,10 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
-    public publishLiveBoard(boardId: number, withGoOnline: boolean = true, expirationAt?: string, expirationPolicy?: string): Promise<Board> {
+    public publishLiveBoard(boardId: number, withGoOnline: boolean = true, boardExpirationSettings?: BoardExpirationDataV1): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline, expiration_at: expirationAt, expiration_policy: expirationPolicy})
+                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline, board_expiration_settings: boardExpirationSettings})
                 .then(result => {
                     resolve(result.data);
                 })
