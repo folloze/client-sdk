@@ -40,7 +40,8 @@ import {
     type ChatConversationDataV2,
     type personalGalleryMediaParams,
     type BoardExpirationSettingsV1,
-    type BoardExpirationDataV1
+    type BoardExpirationDataV1,
+    type BoardExpirationResponse
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -52,6 +53,12 @@ export class Designer {
     constructor(fetch: FetchService) {
         this.fetchService = fetch;
         this.fetcher = fetch.fetcher;
+    }
+
+    public fetchBoardExpiration(boardId: number): Promise<BoardExpirationResponse> {
+        return this.fetcher
+            .get<BoardExpirationResponse>(`/api/v1/boards/${boardId}/expiration`)
+            .then(result => result.data);
     }
 
     public publishLiveBoard(boardId: number, withGoOnline: boolean = true, boardExpirationSettings?: BoardExpirationDataV1): Promise<Board> {

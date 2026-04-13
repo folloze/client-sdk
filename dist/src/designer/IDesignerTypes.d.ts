@@ -299,6 +299,12 @@ export type BoardExpirationDataV1 = {
     policy: string;
     timezone: string;
 };
+export type BoardExpirationResponse = {
+    policy: string | null;
+    timezone: string | null;
+    expiration_at: string | null;
+    org_default_policy: string;
+};
 export type PersonalizationV1 = {
     auto_assign_inviter: object;
     campaign: {
