@@ -67,8 +67,8 @@ export type InitialState = {
         can_edit: boolean;
     };
     board_expiration_settings?: {
-        policy?: string;
-        custom_days?: number;
+        policy: string;
+        custom_days: number;
     };
 };
 export type DataEnrichmentConfig = {
