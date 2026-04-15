@@ -179,6 +179,7 @@ export declare class Analytics {
     private fetchService;
     liveEvent: LiveEventAnalytics;
     constructor(fetch: FetchService);
+    trackGainsight(eventName: string, eventProperties?: Record<string, unknown>): void;
     /**
      * Lead viewed board
      *
