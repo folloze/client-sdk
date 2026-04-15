@@ -7,6 +7,7 @@ import { GenAudienceTarget } from "../common/interfaces/IGenerationTypes";
 import type { 
     TrackedUserAddFloatingWidget,
     TrackedUserAddPersonalizationRule, TrackedUserAddSection, TrackedUserDeleteFloatingWidget, TrackedUserDeleteSection, TrackedUserEditComponent, TrackedUserEditSection, TrackedUserPreviewBoard, TrackedUserPublishBoard } from "../common/common";
+import { trackAptrinsicEvent } from "../common/helpers/gainsightHelper";
 
 export * from "./LiveEventAnalytics";
 
@@ -221,6 +222,10 @@ export class Analytics {
     constructor(fetch: FetchService) {
         this.fetchService = fetch;
         this.liveEvent = new LiveEventAnalytics(fetch);
+    }
+
+    trackGainsight(eventName: string, eventProperties?: Record<string, unknown>) {
+        trackAptrinsicEvent(eventName, eventProperties);
     }
 
     /**
