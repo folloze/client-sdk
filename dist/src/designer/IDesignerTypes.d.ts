@@ -303,6 +303,7 @@ export type BoardExpirationResponse = {
     policy: string | null;
     timezone: string | null;
     expiration_at: string | null;
+    custom_days: number | null;
 };
 export type PersonalizationV1 = {
     auto_assign_inviter: object;
