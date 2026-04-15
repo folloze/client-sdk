@@ -39,7 +39,6 @@ import {
     MergeTagFilters,
     type ChatConversationDataV2,
     type personalGalleryMediaParams,
-    type BoardExpirationSettingsV1,
     type BoardExpirationDataV1,
     type BoardExpirationResponse
 } from "./IDesignerTypes";
@@ -423,18 +422,6 @@ export class Designer {
                 .then(result => resolve(result.data))
                 .catch(e => {
                     console.error("could not get feature settings", e);
-                    reject(e);
-                });
-        });
-    }
-
-    getBoardExpirationSettings(organizationId: number): Promise<BoardExpirationSettingsV1> {
-        return new Promise((resolve, reject) => {
-            this.fetcher
-                .get<BoardExpirationSettingsV1>(`/api/v1/organizations/${organizationId}/settings/board_expiration`)
-                .then(result => resolve(result.data))
-                .catch(e => {
-                    console.error("could not get board expiration settings", e);
                     reject(e);
                 });
         });

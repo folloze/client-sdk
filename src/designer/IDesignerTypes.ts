@@ -349,11 +349,6 @@ export type BoardHasItemsResponseV1 = {
     has_items: boolean;
 };
 
-export type BoardExpirationSettingsV1 = {
-    policy: string;
-    custom_days?: number;
-};
-
 export type BoardExpirationDataV1 = {
     expiration_at: string | undefined;
     policy: string;
