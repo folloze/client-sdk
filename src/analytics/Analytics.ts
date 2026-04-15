@@ -76,7 +76,10 @@ export enum DesignerEventTypes {
     gen_ai_generate_by_goal = 353,
     gen_ai_generate_by_free_prompt = 354,
     gen_ai_translate = 355,
-    gen_ai_generate_text_from_input = 356
+    gen_ai_generate_text_from_input = 356,
+    designer_opened = 385,
+    designer_edit_mode = 386,
+    designer_preview_mode = 387
 }
 
 export enum WidgetEventTypes {
@@ -92,7 +95,12 @@ export enum WidgetEventTypes {
     edit_ad_image_actions = 372,
     edit_ad_image_chat_message_sent = 373,
     audience_research_chat_opened = 374,
-    audience_research_save_to_campaign_clicked = 375
+    audience_research_save_to_campaign_clicked = 375,
+    board_creator_chat_opened = 376,
+    try_me_user_register = 377,
+    try_me_user_login = 378,
+    try_me_share_clicked = 379,
+    try_me_edit_background = 380
 }
 
 type GenAIPayload = {
@@ -178,6 +186,28 @@ type AdsEditImageMessagePayload = AdsPayload & {
     message: string;
 }
 
+type DesignerOpenedPayload = {
+    board_id: number;
+};
+
+type DesignerModePayload = {
+    board_id: number;
+};
+
+type UserAuthPayload = {
+    email: string;
+};
+
+type ShareClickedPayload = {
+    board_id: number;
+    shared_with_email?: string;
+};
+
+type EditBackgroundPayload = {
+    board_id: number;
+    section_id?: string;
+};
+
 type EventPayloadMap = {
     [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
     [DesignerEventTypes.gen_ai_personalize_new_target_audience]: GenAITargetAudiencePayload;
@@ -195,6 +225,13 @@ type EventPayloadMap = {
     [WidgetEventTypes.saved_ad_changes]: AdsPayload;
     [WidgetEventTypes.edit_ad_image_actions]: AdsImageActionPayload;
     [WidgetEventTypes.edit_ad_image_chat_message_sent]: AdsEditImageMessagePayload;
+    [WidgetEventTypes.try_me_user_register]: UserAuthPayload;
+    [WidgetEventTypes.try_me_user_login]: UserAuthPayload;
+    [WidgetEventTypes.try_me_share_clicked]: ShareClickedPayload;
+    [WidgetEventTypes.try_me_edit_background]: EditBackgroundPayload;
+    [DesignerEventTypes.designer_opened]: DesignerOpenedPayload;
+    [DesignerEventTypes.designer_edit_mode]: DesignerModePayload;
+    [DesignerEventTypes.designer_preview_mode]: DesignerModePayload;
 };
 
 export type UserTrackedEventsV2 = {
