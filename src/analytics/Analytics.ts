@@ -232,10 +232,14 @@ type EventPayloadMap = {
     [WidgetEventTypes.try_me_user_register]: UserAuthPayload;
     [WidgetEventTypes.try_me_user_login]: UserAuthPayload;
     [WidgetEventTypes.try_me_share_clicked]: ShareClickedPayload;
-    [WidgetEventTypes.try_me_edit_background]: EditBackgroundPayload;
     [DesignerEventTypes.designer_opened]: DesignerOpenedPayload;
     [DesignerEventTypes.designer_edit_mode]: DesignerModePayload;
     [DesignerEventTypes.designer_preview_mode]: DesignerModePayload;
+    [DesignerEventTypes.designer_add_section_from_gallery]: DesignerModePayload;
+    [DesignerEventTypes.designer_remove_section_from_gallery]: DesignerModePayload;
+    [DesignerEventTypes.designer_edit_element]: DesignerModePayload;
+    [DesignerEventTypes.designer_edit_background]: EditBackgroundPayload;
+    [DesignerEventTypes.designer_edit_section]: DesignerModePayload;
 };
 
 export type UserTrackedEventsV2 = {
