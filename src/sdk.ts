@@ -3,6 +3,7 @@ import {FetcherOptions, FetchService} from "./common/FetchService";
 import {Designer} from "./designer/Designer";
 import {Identity} from "./identity/Identity";
 import {Liveboard} from "./liveboard/Liveboard";
+import {identifyAptrinsicUser} from "./common/helpers/gainsightHelper";
 
 export class ClientSDK {
     public static instance: ClientSDK;
@@ -40,6 +41,9 @@ export class ClientSDK {
             if (ClientSDK.isTryMe) {
                 const eventName = LiveBoardEventTypes[eventId] || DesignerEventTypes[eventId] || WidgetEventTypes[eventId] || String(eventId);
                 ClientSDK.instance.analytics.trackGainsight(eventName, { event_id: eventId, ...data });
+                if (eventId === WidgetEventTypes.try_me_user_login) {
+                    identifyAptrinsicUser(data as UserTrackedEventsV2[WidgetEventTypes.try_me_user_login]["payload"]);
+                }
             } else {
                 await ClientSDK.instance.analytics.trackUserEvent(eventId, data);
             }
