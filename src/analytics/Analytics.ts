@@ -80,11 +80,11 @@ export enum DesignerEventTypes {
     designer_opened = 409,
     designer_edit_mode = 410,
     designer_preview_mode = 411,
-    designer_add_section_from_gallery = 412,
-    designer_remove_section_from_gallery = 413,
+    designer_add_section_to_board = 412,
+    designer_remove_section_from_board = 413,
     designer_edit_element = 414,
     designer_edit_background = 415,
-    designer_edit_section = 416
+    designer_manage_section = 416
 }
 
 export enum WidgetEventTypes {
@@ -207,9 +207,19 @@ type ShareClickedPayload = {
     shared_with_email?: string;
 };
 
-type EditBackgroundPayload = {
+type DesignerSectionPayload = {
     board_id: number;
     section_id?: string;
+    section_name?: string;
+};
+
+type DesignerEditElementPayload = {
+    board_id: number;
+    section_id?: string;
+    section_name?: string;
+    widget_tag?: string;
+    element_type?: 'text' | 'image' | 'button';
+    property_path?: string;
 };
 
 type EventPayloadMap = {
@@ -235,11 +245,11 @@ type EventPayloadMap = {
     [DesignerEventTypes.designer_opened]: DesignerOpenedPayload;
     [DesignerEventTypes.designer_edit_mode]: DesignerModePayload;
     [DesignerEventTypes.designer_preview_mode]: DesignerModePayload;
-    [DesignerEventTypes.designer_add_section_from_gallery]: DesignerModePayload;
-    [DesignerEventTypes.designer_remove_section_from_gallery]: DesignerModePayload;
-    [DesignerEventTypes.designer_edit_element]: DesignerModePayload;
-    [DesignerEventTypes.designer_edit_background]: EditBackgroundPayload;
-    [DesignerEventTypes.designer_edit_section]: DesignerModePayload;
+    [DesignerEventTypes.designer_add_section_to_board]: DesignerSectionPayload;
+    [DesignerEventTypes.designer_remove_section_from_board]: DesignerSectionPayload;
+    [DesignerEventTypes.designer_edit_element]: DesignerEditElementPayload;
+    [DesignerEventTypes.designer_edit_background]: DesignerSectionPayload;
+    [DesignerEventTypes.designer_manage_section]: DesignerSectionPayload;
 };
 
 export type UserTrackedEventsV2 = {
