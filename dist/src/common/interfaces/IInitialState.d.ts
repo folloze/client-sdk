@@ -66,6 +66,10 @@ export type InitialState = {
     try_me?: {
         can_edit: boolean;
     };
+    try_me_identity?: {
+        id: string;
+        email: string;
+    };
 };
 export type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
