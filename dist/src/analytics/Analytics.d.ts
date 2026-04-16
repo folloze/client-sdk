@@ -67,9 +67,14 @@ export declare enum DesignerEventTypes {
     gen_ai_generate_by_free_prompt = 354,
     gen_ai_translate = 355,
     gen_ai_generate_text_from_input = 356,
-    designer_opened = 385,
-    designer_edit_mode = 386,
-    designer_preview_mode = 387
+    designer_opened = 409,
+    designer_edit_mode = 410,
+    designer_preview_mode = 411,
+    designer_add_section_from_gallery = 412,
+    designer_remove_section_from_gallery = 413,
+    designer_edit_element = 414,
+    designer_edit_background = 415,
+    designer_edit_section = 416
 }
 export declare enum WidgetEventTypes {
     ai_board_creation_chat_attachment_added = 358,
@@ -85,11 +90,10 @@ export declare enum WidgetEventTypes {
     edit_ad_image_chat_message_sent = 373,
     audience_research_chat_opened = 374,
     audience_research_save_to_campaign_clicked = 375,
-    board_creator_chat_opened = 376,
-    try_me_user_register = 377,
-    try_me_user_login = 378,
-    try_me_share_clicked = 379,
-    try_me_edit_background = 380
+    board_creator_chat_opened = 417,
+    try_me_user_register = 418,
+    try_me_user_login = 419,
+    try_me_share_clicked = 420
 }
 type GenAIPayload = {
     level: 'board';
@@ -195,10 +199,14 @@ type EventPayloadMap = {
     [WidgetEventTypes.try_me_user_register]: UserAuthPayload;
     [WidgetEventTypes.try_me_user_login]: UserAuthPayload;
     [WidgetEventTypes.try_me_share_clicked]: ShareClickedPayload;
-    [WidgetEventTypes.try_me_edit_background]: EditBackgroundPayload;
     [DesignerEventTypes.designer_opened]: DesignerOpenedPayload;
     [DesignerEventTypes.designer_edit_mode]: DesignerModePayload;
     [DesignerEventTypes.designer_preview_mode]: DesignerModePayload;
+    [DesignerEventTypes.designer_add_section_from_gallery]: DesignerModePayload;
+    [DesignerEventTypes.designer_remove_section_from_gallery]: DesignerModePayload;
+    [DesignerEventTypes.designer_edit_element]: DesignerModePayload;
+    [DesignerEventTypes.designer_edit_background]: EditBackgroundPayload;
+    [DesignerEventTypes.designer_edit_section]: DesignerModePayload;
 };
 export type UserTrackedEventsV2 = {
     [K in AllEventTypes]: {
