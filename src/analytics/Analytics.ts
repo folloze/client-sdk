@@ -61,14 +61,14 @@ export enum DesignerEventTypes {
     saved_personalization_changes = 290,
     discarded_personalization_changes = 291,
     change_rule_set_priority = 292,
-    add_new_section = 325,
-    add_floating_section = 326,
-    delete_section = 327,
-    delete_floating_section = 328,
-    edit_section = 329,
+    designer_add_section_to_board = 325,
+    designer_add_floating_section = 326,
+    designer_remove_section_from_board = 327,
+    designer_delete_floating_section = 328,
+    designer_manage_section = 329,
     publish_board = 330,
-    preview_board = 331,
-    edit_editable_component = 332,
+    designer_preview_mode = 331,
+    designer_edit_element = 332,
     add_personalization_rule_from_designer = 333,
     gen_ai_brand_voice = 350,
     gen_ai_personalize_existing_target_audience = 351,
@@ -79,12 +79,7 @@ export enum DesignerEventTypes {
     gen_ai_generate_text_from_input = 356,
     designer_opened = 409,
     designer_edit_mode = 410,
-    designer_preview_mode = 411,
-    designer_add_section_to_board = 412,
-    designer_remove_section_from_board = 413,
-    designer_edit_element = 414,
-    designer_edit_background = 415,
-    designer_manage_section = 416
+    designer_edit_background = 411
 }
 
 export enum WidgetEventTypes {
@@ -101,10 +96,10 @@ export enum WidgetEventTypes {
     edit_ad_image_chat_message_sent = 373,
     audience_research_chat_opened = 374,
     audience_research_save_to_campaign_clicked = 375,
-    board_creator_chat_opened = 417,
-    try_me_user_register = 418,
-    try_me_user_login = 419,
-    try_me_share_clicked = 420
+    board_creator_chat_opened = 412,
+    try_me_user_register = 413,
+    try_me_user_login = 414,
+    try_me_share_clicked = 415
 }
 
 type GenAIPayload = {
@@ -211,6 +206,7 @@ type DesignerSectionPayload = {
     board_id: number;
     section_id?: string;
     section_name?: string;
+    section_type?: string;
 };
 
 type DesignerEditElementPayload = {
@@ -218,8 +214,15 @@ type DesignerEditElementPayload = {
     section_id?: string;
     section_name?: string;
     widget_tag?: string;
+    component_tag?: string;
     element_type?: 'text' | 'image' | 'button';
     property_path?: string;
+};
+
+type DesignerFloatingWidgetPayload = {
+    board_id: number;
+    widget_tag?: string;
+    widget_title?: string;
 };
 
 type EventPayloadMap = {
@@ -250,6 +253,8 @@ type EventPayloadMap = {
     [DesignerEventTypes.designer_edit_element]: DesignerEditElementPayload;
     [DesignerEventTypes.designer_edit_background]: DesignerSectionPayload;
     [DesignerEventTypes.designer_manage_section]: DesignerSectionPayload;
+    [DesignerEventTypes.designer_add_floating_section]: DesignerFloatingWidgetPayload;
+    [DesignerEventTypes.designer_delete_floating_section]: DesignerFloatingWidgetPayload;
 };
 
 export type UserTrackedEventsV2 = {
