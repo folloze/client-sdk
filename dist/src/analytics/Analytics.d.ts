@@ -166,6 +166,9 @@ type DesignerModePayload = {
 type UserAuthPayload = {
     email: string;
 };
+type UserLoginPayload = UserAuthPayload & {
+    id: string;
+};
 type ShareClickedPayload = {
     board_id: number;
     shared_with_email?: string;
@@ -208,7 +211,7 @@ type EventPayloadMap = {
     [WidgetEventTypes.edit_ad_image_actions]: AdsImageActionPayload;
     [WidgetEventTypes.edit_ad_image_chat_message_sent]: AdsEditImageMessagePayload;
     [WidgetEventTypes.try_me_user_register]: UserAuthPayload;
-    [WidgetEventTypes.try_me_user_login]: UserAuthPayload;
+    [WidgetEventTypes.try_me_user_login]: UserLoginPayload;
     [WidgetEventTypes.try_me_share_clicked]: ShareClickedPayload;
     [DesignerEventTypes.designer_opened]: DesignerOpenedPayload;
     [DesignerEventTypes.designer_edit_mode]: DesignerModePayload;
