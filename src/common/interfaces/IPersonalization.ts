@@ -21,7 +21,7 @@ export type PersonalizationCompareOperator =
 
 export interface IPersonalizationConfig {
     rules: Record<ruleId, IPersonalizationRule>;
-    rulesBatches: Record<string, ruleId[]>;
+    rulesBatchedddds: Record<string, ruleId[]>;
 }
 
 export interface IPersonalizationRule {
@@ -32,7 +32,7 @@ export interface IPersonalizationRule {
      * Per-rule comparison operator. Defaults to "is" (legacy behavior driven by the
      * merge tag's own compare_operator) when omitted.
      */
-    compareOperator?: PersonalizationCompareOperator;
+    compareOperator?: PersonalizationCompareOperator;  
     _appliedOn?: string[]; // widget / ribbon / floating ids
     // index?: number;
 }
