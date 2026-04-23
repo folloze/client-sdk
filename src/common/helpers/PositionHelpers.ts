@@ -113,6 +113,11 @@ export function getWidgetStyleByPosition(p: GridPos, isEmbedded: boolean = false
             }
         }
 
+        if (pPos.fullBleed) {
+            pPos.colStart += 1;
+            pPos.colEnd -= 1;
+        }
+
         result += "grid-area: " + positionToGridArea(pPos as GridPos);
         return result;
     }
