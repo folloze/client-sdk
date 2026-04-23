@@ -15,7 +15,7 @@ export declare const PERSONALIZATION_COMPARE_OPERATORS: {
 export type PersonalizationCompareOperator = (typeof PERSONALIZATION_COMPARE_OPERATORS)[keyof typeof PERSONALIZATION_COMPARE_OPERATORS];
 export interface IPersonalizationConfig {
     rules: Record<ruleId, IPersonalizationRule>;
-    rulesBatchedddds: Record<string, ruleId[]>;
+    rulesBatches: Record<string, ruleId[]>;
 }
 export interface IPersonalizationRule {
     key: ruleId;
