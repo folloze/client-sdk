@@ -15,6 +15,6 @@ export declare class FloatEditor extends FloatingElement {
     removeHighlight(): void;
     goToDocumentation(): void;
     getDocumentationUrl(): string | undefined;
-    render(): import("lit-html").TemplateResult<1>;
+    render(): import("lit").TemplateResult<1>;
 }
 export {};
