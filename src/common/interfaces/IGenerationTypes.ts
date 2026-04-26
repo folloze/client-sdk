@@ -1,12 +1,42 @@
 import {type LiveWidgetEdit} from "../LiveWidgetEdit";
 import {type LiveWidget} from "../LiveWidget";
 
-export type WidgetDescription = {
+/**
+ * Primitive field types the server understands.
+ * Mirrors JSON primitives so the server can decide how to validate / manipulate
+ * the value. Semantic types (e.g. "categoryId") may be added later as the server
+ * gains the ability to resolve them.
+ */
+export type SchemaFieldType = "string" | "number";
+
+/**
+ * Describes a single leaf field in the schema:
+ * - A {@link SchemaFieldType} for a primitive value, or
+ * - A `string[]` of allowed values to express an ad-hoc enum (e.g. `["draft", "published"]`).
+ */
+export type SchemaFieldDescriptor = SchemaFieldType | string[];
+
+/**
+ * Recursive description of a widget data shape sent to the server alongside the
+ * generation request. Every key is optional so partial schemas are valid.
+ * Object branches recurse, arrays and primitives terminate at a {@link SchemaFieldDescriptor}.
+ */
+export type SchemaDescriptor<T> = {
+    [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<unknown>
+        ? SchemaFieldDescriptor
+        : NonNullable<T[K]> extends object
+        ? SchemaDescriptor<NonNullable<T[K]>>
+        : SchemaFieldDescriptor;
+};
+
+export type WidgetDescription<T = unknown> = {
     description: string;
     purposes: string[];
     defaultPurpose: string;
     injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
+    /** Optional shape hint for the server. Omit when no schema validation is needed. */
+    schema?: SchemaDescriptor<T>;
 }
 
 export type VisibilityConfig = {
