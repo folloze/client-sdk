@@ -15,9 +15,6 @@ export abstract class LiveWidgetElement extends LitElement {
     protected _widgetId: string;
     protected _config: WidgetConfig;
 
-    @property({type: Boolean, reflect: true})
-    protected _isFullBleed: boolean = this.isFullBleed;
-
     constructor() {
         super();
         this._widgetId = uuid_v4();
@@ -53,7 +50,8 @@ export abstract class LiveWidgetElement extends LitElement {
         this._widgetId = data.id;
         this._config = data;
         this._data = data?.data;
-        this.requestUpdate();
+        const oldFullBleed = this.isFullBleed;
+        this.requestUpdate("isFullBleed", oldFullBleed);
     }
 
     public get config(): WidgetConfig {
@@ -73,15 +71,17 @@ export abstract class LiveWidgetElement extends LitElement {
         return this._widgetId;
     }
 
-    public get isFullBleed() {
+    @property({type: Boolean, reflect: true, attribute: "full-bleed"})
+    public get isFullBleed(): boolean {
         return this._config?.position?.fullBleed === true;
     }
 
     public set isFullBleed(value: boolean) {
+        const old = this.isFullBleed;
         if (this._config?.position) {
             this._config.position.fullBleed = value;
-            this._isFullBleed = value;
         }
+        this.requestUpdate("isFullBleed", old);
     }
 
     /**

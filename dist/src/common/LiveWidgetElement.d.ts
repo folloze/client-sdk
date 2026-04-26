@@ -9,7 +9,6 @@ export declare abstract class LiveWidgetElement extends LitElement {
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;
-    protected _isFullBleed: boolean;
     constructor();
     connectedCallback(): void;
     willUpdate(_changedProperties: PropertyValues): void;
