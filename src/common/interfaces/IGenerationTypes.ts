@@ -3,11 +3,16 @@ import {type LiveWidget} from "../LiveWidget";
 
 export type SchemaFieldType = "string" | "number";
 
-export type SchemaFieldDescriptor = SchemaFieldType | string[];
+export type SchemaFieldDescriptor =
+    | SchemaFieldType
+    | SchemaFieldType[]
+    | ["enum", string[]];
 
 export type SchemaDescriptor<T> = {
-    [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<unknown>
-        ? SchemaFieldDescriptor
+    [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<infer E>
+        ? NonNullable<E> extends object
+            ? ["items", SchemaDescriptor<NonNullable<E>>]
+            : SchemaFieldDescriptor
         : NonNullable<T[K]> extends object
         ? SchemaDescriptor<NonNullable<T[K]>>
         : SchemaFieldDescriptor;
