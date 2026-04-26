@@ -9,6 +9,7 @@ export declare abstract class LiveWidgetElement extends LitElement {
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;
+    isFullBleed: boolean;
     constructor();
     connectedCallback(): void;
     willUpdate(_changedProperties: PropertyValues): void;
@@ -20,8 +21,6 @@ export declare abstract class LiveWidgetElement extends LitElement {
     set data(x: any);
     get data(): any;
     get widgetId(): string;
-    get isFullBleed(): boolean;
-    set isFullBleed(value: boolean);
     /**
      * called when the widget enters the viewport 50%
      * the percentage can be changed in the future
