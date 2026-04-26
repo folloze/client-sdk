@@ -7,8 +7,6 @@ export type Pos2d = {
 export type cssPos = [number, number, number, number];
 
 export type GridPos = {
-    fullBleed?: boolean;
-
     rowStart: number;
     colStart: number;
     rowEnd: number;
