@@ -54,6 +54,7 @@ export abstract class LiveWidgetElement extends LitElement {
         this._config = data;
         this._data = data?.data;
         this.isFullBleed = data?.position?.fullBleed === true;
+        this.requestUpdate();
     }
 
     public get config(): WidgetConfig {
