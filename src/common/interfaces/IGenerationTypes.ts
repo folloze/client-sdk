@@ -1,7 +1,7 @@
 import {type LiveWidgetEdit} from "../LiveWidgetEdit";
 import {type LiveWidget} from "../LiveWidget";
 
-export type SchemaFieldType = "string" | "number";
+export type SchemaFieldType = "string" | "number" | "boolean";
 
 export type SchemaFieldDescriptor =
     | SchemaFieldType
