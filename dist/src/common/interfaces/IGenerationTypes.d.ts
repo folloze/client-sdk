@@ -2,8 +2,8 @@ import { type LiveWidgetEdit } from "../LiveWidgetEdit";
 import { type LiveWidget } from "../LiveWidget";
 export type SchemaFieldType = "string" | "number" | "boolean";
 export type SchemaFieldDescriptor = SchemaFieldType | SchemaFieldType[] | ["enum", string[]];
-export type APISchemaDescriptor<T> = {
-    [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<infer E> ? NonNullable<E> extends object ? ["items", APISchemaDescriptor<NonNullable<E>>] : SchemaFieldDescriptor : NonNullable<T[K]> extends object ? APISchemaDescriptor<NonNullable<T[K]>> : SchemaFieldDescriptor;
+export type ApiSchemaDescriptor<T> = {
+    [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<infer E> ? NonNullable<E> extends object ? ["items", ApiSchemaDescriptor<NonNullable<E>>] : SchemaFieldDescriptor : NonNullable<T[K]> extends object ? ApiSchemaDescriptor<NonNullable<T[K]>> : SchemaFieldDescriptor;
 };
 export type WidgetDescription = {
     description: string;
