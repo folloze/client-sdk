@@ -8,13 +8,13 @@ export type SchemaFieldDescriptor =
     | SchemaFieldType[]
     | ["enum", string[]];
 
-export type APISchemaDescriptor<T> = {
+export type ApiSchemaDescriptor<T> = {
     [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<infer E>
         ? NonNullable<E> extends object
-            ? ["items", APISchemaDescriptor<NonNullable<E>>]
+            ? ["items", ApiSchemaDescriptor<NonNullable<E>>]
             : SchemaFieldDescriptor
         : NonNullable<T[K]> extends object
-        ? APISchemaDescriptor<NonNullable<T[K]>>
+        ? ApiSchemaDescriptor<NonNullable<T[K]>>
         : SchemaFieldDescriptor;
 };
 
