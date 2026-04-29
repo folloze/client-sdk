@@ -18,13 +18,12 @@ export type SchemaDescriptor<T> = {
         : SchemaFieldDescriptor;
 };
 
-export type WidgetDescription<T = unknown> = {
+export type WidgetDescription = {
     description: string;
     purposes: string[];
     defaultPurpose: string;
     injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
-    schema?: SchemaDescriptor<T>;
 }
 
 export type VisibilityConfig = {
