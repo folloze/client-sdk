@@ -5,13 +5,12 @@ export type SchemaFieldDescriptor = SchemaFieldType | SchemaFieldType[] | ["enum
 export type SchemaDescriptor<T> = {
     [K in keyof T]?: NonNullable<T[K]> extends ReadonlyArray<infer E> ? NonNullable<E> extends object ? ["items", SchemaDescriptor<NonNullable<E>>] : SchemaFieldDescriptor : NonNullable<T[K]> extends object ? SchemaDescriptor<NonNullable<T[K]>> : SchemaFieldDescriptor;
 };
-export type WidgetDescription<T = unknown> = {
+export type WidgetDescription = {
     description: string;
     purposes: string[];
     defaultPurpose: string;
     injectables: SectionInjectable[];
     dynamicArrayInjectables?: DynamicArrayInjectable[];
-    schema?: SchemaDescriptor<T>;
 };
 export type VisibilityConfig = {
     path: string;
