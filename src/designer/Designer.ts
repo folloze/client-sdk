@@ -727,6 +727,66 @@ export class Designer {
         });
     }
 
+    getCompanyCustomSections(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/company_custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get company gallery sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getCompanyCustomFloatingWidgets(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/company_custom_sections/floating_widgets`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get company gallery floating widgets", e);
+                    reject(e);
+                });
+        });
+    }
+
+    createCompanyCustomSection(section: SectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post(`/api/v1/company_custom_sections`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    updateCompanyCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .put(`/api/v1/company_custom_sections/${customSectionId}`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not update company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    deleteCompanyCustomSection(customSectionId: number): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/company_custom_sections/${customSectionId}`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not delete company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
     async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
         return this.fetchService.fetcher.post("/api/v2/boards/chat/conversations", {
             board_id: boardId,

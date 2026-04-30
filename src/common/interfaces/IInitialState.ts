@@ -16,6 +16,7 @@ export type Features = {
     registrationTracking: boolean;
     videoAi: boolean;
     localization?: boolean;
+    companySectionGallery?: boolean;
 };
 
 export type FeatureName = keyof Features;
