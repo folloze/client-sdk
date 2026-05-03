@@ -22,11 +22,11 @@ import{e as $}from"./chunk.KSCIUEMP.js";import{l as Xe}from"./chunk.HBA5WTQJ.js"
                     box-shadow: var(--floatBoxShadow);
 
                     //overflow: hidden;
-                    min-width: 300px;
+                    min-width: 320px;
                     min-height: 40px;
 
                     overflow: visible;
-                    max-width: 300px;
+                    max-width: 320px;
 
                     border-radius: var(--edit-fz-border-radius-small);
                     font-family: Open Sans, serif;

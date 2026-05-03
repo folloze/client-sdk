@@ -34,11 +34,11 @@ export const Floatable = <T extends Constructor<LitElement>>(superClass: T) => {
                     box-shadow: var(--floatBoxShadow);
 
                     //overflow: hidden;
-                    min-width: 300px;
+                    min-width: 320px;
                     min-height: 40px;
 
                     overflow: visible;
-                    max-width: 300px;
+                    max-width: 320px;
 
                     border-radius: var(--edit-fz-border-radius-small);
                     font-family: Open Sans, serif;
