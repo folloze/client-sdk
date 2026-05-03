@@ -172,6 +172,11 @@ export declare class Designer {
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     deleteCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     updateCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
+    getCompanyCustomSections(): Promise<CustomSectionListItem[]>;
+    getCompanyCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
+    createCompanyCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
+    updateCompanyCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
+    deleteCompanyCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     createOrUpdateChatConversation(boardId: any, widgetId: any, conversationData?: ChatConversationDataV2): Promise<void>;
     getVideoAIVoices(): Promise<VideoAIVoice[]>;
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;
