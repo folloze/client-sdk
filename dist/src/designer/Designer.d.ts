@@ -177,6 +177,12 @@ export declare class Designer {
     createCompanyCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;
     updateCompanyCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem>;
     deleteCompanyCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
+    generateCompanyCustomSectionDescription(params: {
+        name: string;
+        config: unknown;
+    }): Promise<{
+        description: string;
+    }>;
     createOrUpdateChatConversation(boardId: any, widgetId: any, conversationData?: ChatConversationDataV2): Promise<void>;
     getVideoAIVoices(): Promise<VideoAIVoice[]>;
     getVideoAIAvatars(): Promise<VideoAIAvatar[]>;

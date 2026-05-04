@@ -787,6 +787,21 @@ export class Designer {
         });
     }
 
+    public generateCompanyCustomSectionDescription(
+        params: { name: string; config: unknown }
+    ): Promise<{ description: string }> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<any>(`/api/v1/company_custom_sections/generate_description`, { ...params, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate company section description", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
+    }
+
     async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
         return this.fetchService.fetcher.post("/api/v2/boards/chat/conversations", {
             board_id: boardId,
