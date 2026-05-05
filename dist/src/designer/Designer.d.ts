@@ -179,8 +179,8 @@ export declare class Designer {
     deleteCompanyCustomSection(customSectionId: number): Promise<CustomSectionListItem>;
     generateCompanyCustomSectionDescription(params: {
         name: string;
-        config?: unknown;
-        image?: string;
+        config: any;
+        image: string;
     }): Promise<{
         description: string;
     }>;
