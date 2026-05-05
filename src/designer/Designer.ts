@@ -788,7 +788,7 @@ export class Designer {
     }
 
     public generateCompanyCustomSectionDescription(
-        params: { name: string; config: unknown }
+        params: { name: string; config?: unknown; image?: string }
     ): Promise<{ description: string }> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
