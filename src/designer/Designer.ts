@@ -36,6 +36,8 @@ import {
     VideoAIAvatar,
     VideoAIGenerateRequest,
     VideoAIGenerateResponse,
+    GenerateCompanyCustomSectionDescriptionRequest,
+    GenerateCompanyCustomSectionDescriptionResponse,
     MergeTagFilters,
     type ChatConversationDataV2,
     type personalGalleryMediaParams
@@ -788,18 +790,18 @@ export class Designer {
     }
 
     public generateCompanyCustomSectionDescription(
-        params: { name: string; config: any; image: string }
-    ): Promise<{ description: string }> {
+        params: GenerateCompanyCustomSectionDescriptionRequest
+    ): Promise<GenerateCompanyCustomSectionDescriptionResponse> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/company_custom_sections/generate_description`, { ...params, guid })
+                .post<GenerateCompanyCustomSectionDescriptionResponse>(`/api/v1/company_custom_sections/generate_description`, { ...params, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not generate company section description", e);
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<GenerateCompanyCustomSectionDescriptionResponse>;
     }
 
     async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
