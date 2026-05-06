@@ -1,6 +1,6 @@
 import {PrivacySettings} from "../common/ISharedTypes";
 import {BoardConfig} from "../common/interfaces/IBoard";
-import {BackgroundImage, BackgroundVideo} from "../common/interfaces/ISection";
+import {BackgroundImage, BackgroundVideo, PredefinedSection} from "../common/interfaces/ISection";
 
 export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer"
 export type VideoGalleryTypes = "video";
@@ -505,3 +505,14 @@ export type VideoAIGenerateResponse = {
     status: VideoAIGenerateStatus;
     message?: string;
 }
+
+export type GenerateCompanyCustomSectionDescriptionRequest = {
+    name: string;
+    config: PredefinedSection;
+    image: string;
+};
+
+export type GenerateCompanyCustomSectionDescriptionResponse = {
+    description: string;
+};
+

@@ -36,6 +36,8 @@ import {
     VideoAIAvatar,
     VideoAIGenerateRequest,
     VideoAIGenerateResponse,
+    GenerateCompanyCustomSectionDescriptionRequest,
+    GenerateCompanyCustomSectionDescriptionResponse,
     MergeTagFilters,
     type ChatConversationDataV2,
     type personalGalleryMediaParams
@@ -785,6 +787,21 @@ export class Designer {
                     reject(e);
                 });
         });
+    }
+
+    public generateCompanyCustomSectionDescription(
+        params: GenerateCompanyCustomSectionDescriptionRequest
+    ): Promise<GenerateCompanyCustomSectionDescriptionResponse> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<GenerateCompanyCustomSectionDescriptionResponse>(`/api/v1/company_custom_sections/generate_description`, { ...params, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate company section description", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<GenerateCompanyCustomSectionDescriptionResponse>;
     }
 
     async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
