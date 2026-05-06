@@ -16,6 +16,7 @@ export type PersonalizationCompareOperator = (typeof PERSONALIZATION_COMPARE_OPE
 export interface IPersonalizationConfig {
     rules: Record<ruleId, IPersonalizationRule>;
     rulesBatches: Record<string, ruleId[]>;
+    boardRules?: ruleId[];
 }
 export interface IPersonalizationRule {
     key: ruleId;

@@ -22,6 +22,7 @@ export type PersonalizationCompareOperator =
 export interface IPersonalizationConfig {
     rules: Record<ruleId, IPersonalizationRule>;
     rulesBatches: Record<string, ruleId[]>;
+    boardRules?: ruleId[];
 }
 
 export interface IPersonalizationRule {
