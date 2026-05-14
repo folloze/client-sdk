@@ -51,6 +51,7 @@ export type PageConfig = {
     name: "default" | string;
     displayName?: string;
     grid: {
+        fullBleed?: boolean;
         maxWidth: string;
         gap: {
             x: string;

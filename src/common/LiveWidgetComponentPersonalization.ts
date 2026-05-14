@@ -5,6 +5,7 @@ import {PersonalizationElement} from "./interfaces/IPersonalization";
 
 export abstract class LiveWidgetComponentPersonalization extends LitElement {
     public liveElementsMap: Map<string, PersonalizationElement>;
+    public mode: "section" | "board";
     protected _propPath: string;
     protected _editTag: string;
     protected _viewTag: string;

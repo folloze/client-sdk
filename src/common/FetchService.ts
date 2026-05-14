@@ -16,7 +16,7 @@ export type FetcherOptions = {
     csrfToken?: string;
     pingEndpoint?: string;
     analyticsServiceEndpoint: string;
-    identityServiceEndpoint: string;
+    identityServiceEndpoint?: string;
     flzClientFeature?: "embedded";
 };
 

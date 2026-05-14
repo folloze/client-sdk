@@ -3,6 +3,7 @@ import {v4 as uuid_v4} from "uuid";
 import {LitElement, PropertyValues} from "lit";
 import {FlzEvent} from "./FlzEvent";
 import {widgetEmit} from "./helpers/eventHelpers";
+import {property} from "lit/decorators.js";
 
 export abstract class LiveWidgetElement extends LitElement {
     public abstract readonly customEditWidgets: string[];
@@ -13,6 +14,9 @@ export abstract class LiveWidgetElement extends LitElement {
     protected _data: any;
     protected _widgetId: string;
     protected _config: WidgetConfig;
+
+    @property({type: Boolean, reflect: true, attribute: "full-bleed"})
+    public isFullBleed: boolean = false;
 
     constructor() {
         super();
@@ -49,6 +53,7 @@ export abstract class LiveWidgetElement extends LitElement {
         this._widgetId = data.id;
         this._config = data;
         this._data = data?.data;
+        this.isFullBleed = data?.position?.fullBleed === true;
         this.requestUpdate();
     }
 
