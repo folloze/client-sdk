@@ -5,6 +5,7 @@ on: push
 jobs:
   test:
     runs-on: [aio-small-org-runner-folloze]
+    
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
