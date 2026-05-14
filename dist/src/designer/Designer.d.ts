@@ -1,11 +1,7 @@
 import { GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest, GenerateWidgetsTextsFromPromptRequest, GenTextFromFile, GenTextFromUrl, GenTextResponse } from "../common/interfaces/IGenerationTypes";
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-<<<<<<< HEAD
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams, type BoardExpirationDataV1, type BoardExpirationResponse } from "./IDesignerTypes";
-=======
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, GenerateCompanyCustomSectionDescriptionRequest, GenerateCompanyCustomSectionDescriptionResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams } from "./IDesignerTypes";
->>>>>>> origin
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, GenerateCompanyCustomSectionDescriptionRequest, GenerateCompanyCustomSectionDescriptionResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams, type BoardExpirationDataV1, type BoardExpirationResponse } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
