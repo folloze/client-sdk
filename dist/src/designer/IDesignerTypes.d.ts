@@ -290,6 +290,17 @@ export type FeatureSettingsResponseV1 = {
 export type BoardHasItemsResponseV1 = {
     has_items: boolean;
 };
+export type BoardExpirationDataV1 = {
+    expiration_at: string | undefined;
+    policy: string;
+    timezone: string;
+};
+export type BoardExpirationResponse = {
+    policy: string | null;
+    timezone: string | null;
+    expiration_at: string | null;
+    custom_days: number | null;
+};
 export type PersonalizationV1 = {
     auto_assign_inviter: object;
     campaign: {
