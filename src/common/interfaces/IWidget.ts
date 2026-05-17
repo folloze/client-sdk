@@ -52,19 +52,11 @@ export type ExtendedTriggerDefinition =
 
 export type TriggerLogic = "OR" | "AND";
 
-export type FrequencyCapping =
-    | "always"
-    | "daily"
-    | "first_visit"
-    | "once_per_session"
-    | "until_form_submitted";
-
 export interface MultiTriggerConfig {
     name: "MultiTrigger";
     logic: TriggerLogic;
     conditions: ExtendedTriggerDefinition[];
     persist?: TriggerPersistence;
-    frequencyCapping?: FrequencyCapping;
 }
 
 // TriggerConfig for FloatingWidgetConfig - live-board compatible (no MultiTrigger)
