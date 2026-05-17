@@ -95,10 +95,11 @@ export function getWidgetStyleByPosition(p: GridPos, isEmbedded: boolean = false
                 --fz-tmp-padd-right: ${p.padding[1]};
                 --fz-tmp-padd-bottom: ${p.padding[2]};
                 --fz-tmp-padd-left: ${p.padding[3]};`;
-            // result += `padding: calc(${p.padding[0]} * var(--fz-section-padding-step))
-            //     calc(${p.padding[1]} * var(--fz-section-padding-step))
-            //     calc(${p.padding[2]} * var(--fz-section-padding-step))
-            //     calc(${p.padding[3]} * var(--fz-section-padding-step));`;
+        }
+
+        if (p.colStart && p.colEnd) {
+            result += `--fz-tmp-col-start: ${p.colStart};
+                --fz-tmp-col-end: ${p.colEnd};`;
         }
 
         const pPos = Object.assign({}, p);

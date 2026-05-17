@@ -3,6 +3,7 @@ import { LitElement } from "lit";
 import { PersonalizationElement } from "./interfaces/IPersonalization";
 export declare abstract class LiveWidgetComponentPersonalization extends LitElement {
     liveElementsMap: Map<string, PersonalizationElement>;
+    mode: "section" | "board";
     protected _propPath: string;
     protected _editTag: string;
     protected _viewTag: string;

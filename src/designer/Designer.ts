@@ -36,9 +36,13 @@ import {
     VideoAIAvatar,
     VideoAIGenerateRequest,
     VideoAIGenerateResponse,
+    GenerateCompanyCustomSectionDescriptionRequest,
+    GenerateCompanyCustomSectionDescriptionResponse,
     MergeTagFilters,
     type ChatConversationDataV2,
-    type personalGalleryMediaParams
+    type personalGalleryMediaParams,
+    type BoardExpirationDataV1,
+    type BoardExpirationResponse
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -52,10 +56,16 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
-    public publishLiveBoard(boardId: number, withGoOnline: boolean = true): Promise<Board> {
+    public fetchBoardExpiration(boardId: number): Promise<BoardExpirationResponse> {
+        return this.fetcher
+            .get<BoardExpirationResponse>(`/api/v1/boards/${boardId}/expiration`)
+            .then(result => result.data);
+    }
+
+    public publishLiveBoard(boardId: number, withGoOnline: boolean = true, boardExpirationSettings?: BoardExpirationDataV1): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline})
+                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline, board_expiration_settings: boardExpirationSettings})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -725,6 +735,81 @@ export class Designer {
                 }
             );
         });
+    }
+
+    getCompanyCustomSections(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/company_custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get company gallery sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getCompanyCustomFloatingWidgets(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/company_custom_sections/floating_widgets`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get company gallery floating widgets", e);
+                    reject(e);
+                });
+        });
+    }
+
+    createCompanyCustomSection(section: SectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post(`/api/v1/company_custom_sections`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    updateCompanyCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .put(`/api/v1/company_custom_sections/${customSectionId}`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not update company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    deleteCompanyCustomSection(customSectionId: number): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/company_custom_sections/${customSectionId}`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not delete company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public generateCompanyCustomSectionDescription(
+        params: GenerateCompanyCustomSectionDescriptionRequest
+    ): Promise<GenerateCompanyCustomSectionDescriptionResponse> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<GenerateCompanyCustomSectionDescriptionResponse>(`/api/v1/company_custom_sections/generate_description`, { ...params, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate company section description", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<GenerateCompanyCustomSectionDescriptionResponse>;
     }
 
     async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
