@@ -11,6 +11,7 @@ export declare class ClientSDK {
     identity: Identity;
     liveboard: Liveboard;
     private constructor();
+    private static get isTryMe();
     static create(options: FetcherOptions): Promise<ClientSDK>;
     static flzTrack<K extends AllEventTypes>(type: "user" | "lead", eventId: K, data: UserTrackedEventsV2[K]["payload"]): Promise<void>;
 }
