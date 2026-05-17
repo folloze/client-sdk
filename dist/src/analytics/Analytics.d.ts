@@ -67,9 +67,9 @@ export declare enum DesignerEventTypes {
     gen_ai_generate_by_free_prompt = 354,
     gen_ai_translate = 355,
     gen_ai_generate_text_from_input = 356,
-    designer_opened = 409,
-    designer_edit_mode = 410,
-    designer_edit_background = 411
+    designer_opened = 420,
+    designer_edit_mode = 421,
+    designer_edit_background = 422
 }
 export declare enum WidgetEventTypes {
     ai_board_creation_chat_attachment_added = 358,
@@ -85,7 +85,7 @@ export declare enum WidgetEventTypes {
     edit_ad_image_chat_message_sent = 373,
     audience_research_chat_opened = 374,
     audience_research_save_to_campaign_clicked = 375,
-    board_creator_chat_opened = 412,
+    board_creator_chat_opened = 423,
     try_me_user_register = 413,
     try_me_user_login = 414,
     try_me_share_clicked = 415
