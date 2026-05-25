@@ -1,12 +1,14 @@
 type AnalyticTypeToPayload = {
     video_started: {
-        content_id: number;
-        content_item_id: number;
+        content_id?: number;
+        content_item_id?: number;
+        external_id?: string;
         guid: string;
     };
     video_ended: {
-        content_id: number;
-        content_item_id: number;
+        content_id?: number;
+        content_item_id?: number;
+        external_id?: string;
         guid: string;
         duration: number;
     };
