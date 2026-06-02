@@ -88,7 +88,7 @@ export type DataEnrichmentConfig = {
 };
 
 export type CookieMatchingConfig = {
-    type: "default" | "eloqua" | "marketo";
+    type: "default" | "eloqua" | "marketo" | "hubspot";
     api_key: string;
     run_cookie_matching: boolean;
     load_local_script: boolean;
