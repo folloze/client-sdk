@@ -84,8 +84,10 @@ export class Designer {
      */
     private getImageGallery(payload: ImageGalleryParams | VideoGalleryParams): Promise<GalleryImage[]> {
         return new Promise((resolve, reject) => {
+            const try_me = window["FollozeState"]?.envConfig?.tryMe ?? false;
+            const headers = try_me ? {"folloze-try-me": "true"} : {};
             this.fetcher
-                .get<GalleryImage[]>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}})
+                .get<GalleryImage[]>("/api/v1/image_gallery", {params: {...keysToSnakeCase(payload)}, headers})
                 .then(result => {
                     resolve(result.data);
                 })
