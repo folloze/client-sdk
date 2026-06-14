@@ -238,8 +238,7 @@ export class FetchService {
                 }
             }
             
-            const try_me = window["FollozeState"]?.envConfig?.tryMe ?? false;
-            if (try_me) {
+            if (window["FollozeState"]?.envConfig?.tryMe) {
                 config.headers["folloze-try-me"] = "true";
             }
 
