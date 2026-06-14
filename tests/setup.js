@@ -7,6 +7,13 @@ global.console = {
     debug: jest.fn(), // console.debug are ignored in tests
 };
 
+global.window = {
+    FollozeState: {
+        envConfig: {},
+        initialState: {},
+    },
+};
+
 global.File = class MockFile {
     fileName;
     constructor(fileBits, fileName, properties) {
