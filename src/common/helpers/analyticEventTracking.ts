@@ -3,14 +3,16 @@ import {componentEmit} from "./eventHelpers";
 
 type AnalyticTypeToPayload = {
     video_started: {
-        content_id: number;
-        content_item_id: number;
+        content_id?: number;
+        content_item_id?: number;
+        external_id?: string; // identifier for videos that are not backed by a content item (e.g. Video Agent)
         guid: string;
     };
 
     video_ended: {
-        content_id: number;
-        content_item_id: number;
+        content_id?: number;
+        content_item_id?: number;
+        external_id?: string;
         guid: string;
         duration: number; // the time in seconds
     };
@@ -36,6 +38,10 @@ type AnalyticTypeToPayload = {
     open_content_item_clicked: {
         button_text: string;
         content_id: number;
+    };
+    social_share: {
+        platform: "linkedin" | "x" | "facebook" | "email";
+        recipient_email?: string;
     };
 };
 

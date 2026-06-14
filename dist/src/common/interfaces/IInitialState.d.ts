@@ -14,6 +14,7 @@ export type Features = {
     registrationTracking: boolean;
     videoAi: boolean;
     localization?: boolean;
+    companySectionGallery?: boolean;
 };
 export type FeatureName = keyof Features;
 export type InitialState = {
@@ -63,13 +64,20 @@ export type InitialState = {
     company_name: string;
     allow_form_creation?: boolean;
     is_bot?: boolean;
+    try_me?: {
+        can_edit: boolean;
+    };
+    try_me_identity?: {
+        id: string;
+        email: string;
+    };
 };
 export type DataEnrichmentConfig = {
     type: "six_sense" | "dnb" | "demandbase_legacy" | "demandbase_one";
     api_key: string;
 };
 export type CookieMatchingConfig = {
-    type: "default" | "eloqua" | "marketo";
+    type: "default" | "eloqua" | "marketo" | "hubspot";
     api_key: string;
     run_cookie_matching: boolean;
     load_local_script: boolean;

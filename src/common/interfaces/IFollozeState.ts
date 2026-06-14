@@ -9,6 +9,7 @@ export type IFollozeState = {
         fetcherOptions: FetcherOptions;
         pingInterval?: number | null;
         cookiePostfix?: string;
+        INVISIBLE_RECAPTCHA_SITE_KEY?: string;
         talkJsAppId?: string;
         tryMe?: boolean;
     };

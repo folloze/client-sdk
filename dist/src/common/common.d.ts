@@ -1,4 +1,5 @@
 export * from "./FetchService";
+export * from "./CaptchaService";
 export * from "./LiveWidgetElement";
 export * from "./LiveWidget";
 export * from "./LiveFloatingWidget";
@@ -23,6 +24,7 @@ export * from "./helpers/analyticEventTracking";
 export * from "./helpers/urlHelpers";
 export * from "./helpers/leadJourneyHelper";
 export * from "./helpers/analyticsHelper";
+export * from "./helpers/gainsightHelper";
 export * from "./helpers/aiGenerationHelpers";
 export * from "./helpers/featuresHelper";
 export * from "./FlzEvent";

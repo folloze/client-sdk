@@ -36,9 +36,13 @@ import {
     VideoAIAvatar,
     VideoAIGenerateRequest,
     VideoAIGenerateResponse,
+    GenerateCompanyCustomSectionDescriptionRequest,
+    GenerateCompanyCustomSectionDescriptionResponse,
     MergeTagFilters,
     type ChatConversationDataV2,
-    type personalGalleryMediaParams
+    type personalGalleryMediaParams,
+    type BoardExpirationDataV1,
+    type BoardExpirationResponse
 } from "./IDesignerTypes";
 import {BoardConfig, Board} from "../common/interfaces/IBoard";
 import {SectionListItem, CustomSectionListItem} from "../common/interfaces/ISection";
@@ -52,10 +56,16 @@ export class Designer {
         this.fetcher = fetch.fetcher;
     }
 
-    public publishLiveBoard(boardId: number, withGoOnline: boolean = true): Promise<Board> {
+    public fetchBoardExpiration(boardId: number): Promise<BoardExpirationResponse> {
+        return this.fetcher
+            .get<BoardExpirationResponse>(`/api/v1/boards/${boardId}/expiration`)
+            .then(result => result.data);
+    }
+
+    public publishLiveBoard(boardId: number, withGoOnline: boolean = true, boardExpirationSettings?: BoardExpirationDataV1): Promise<Board> {
         return new Promise((resolve, reject) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline})
+                .post<any>(`/api/v1/boards/${boardId}/publish`, {with_go_online: withGoOnline, board_expiration_settings: boardExpirationSettings})
                 .then(result => {
                     resolve(result.data);
                 })
@@ -597,7 +607,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     // This method is for testing with brand voice, it should replace the current generateWidgetsText
@@ -611,7 +621,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     public generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1> {
@@ -624,7 +634,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     public rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1> {
@@ -637,7 +647,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     // This method is for testing with brand voice, it should replace the current rephraseWidgetText
@@ -651,7 +661,7 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
@@ -660,11 +670,11 @@ export class Designer {
                 .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
-                    console.error("could not rephrase widgets texts", e);
+                    console.error("could not translate widgets texts", e);
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<any>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
     getCustomSections(): Promise<CustomSectionListItem[]> {
@@ -729,6 +739,81 @@ export class Designer {
         });
     }
 
+    getCompanyCustomSections(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/company_custom_sections`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get company gallery sections", e);
+                    reject(e);
+                });
+        });
+    }
+
+    getCompanyCustomFloatingWidgets(): Promise<CustomSectionListItem[]> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .get(`/api/v1/company_custom_sections/floating_widgets`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not get company gallery floating widgets", e);
+                    reject(e);
+                });
+        });
+    }
+
+    createCompanyCustomSection(section: SectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .post(`/api/v1/company_custom_sections`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not save company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    updateCompanyCustomSection(customSectionId: number, section: CustomSectionListItem): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .put(`/api/v1/company_custom_sections/${customSectionId}`, section)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not update company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    deleteCompanyCustomSection(customSectionId: number): Promise<CustomSectionListItem> {
+        return new Promise((resolve, reject) => {
+            this.fetcher
+                .delete(`/api/v1/company_custom_sections/${customSectionId}`)
+                .then(result => resolve(result.data))
+                .catch(e => {
+                    console.error("could not delete company gallery section", e);
+                    reject(e);
+                });
+        });
+    }
+
+    public generateCompanyCustomSectionDescription(
+        params: GenerateCompanyCustomSectionDescriptionRequest
+    ): Promise<GenerateCompanyCustomSectionDescriptionResponse> {
+        const apiCallFunc = (resolve, reject, guid) => {
+            this.fetcher
+                .post<GenerateCompanyCustomSectionDescriptionResponse>(`/api/v1/company_custom_sections/generate_description`, { ...params, guid })
+                .then(result => resolve(result))
+                .catch(e => {
+                    console.error("could not generate company section description", e);
+                    reject(e);
+                });
+        };
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<GenerateCompanyCustomSectionDescriptionResponse>;
+    }
+
     async createOrUpdateChatConversation(boardId, widgetId, conversationData: ChatConversationDataV2 = {}): Promise<void> {
         return this.fetchService.fetcher.post("/api/v2/boards/chat/conversations", {
             board_id: boardId,
@@ -758,7 +843,7 @@ export class Designer {
         const fileuploadDetails = await this.fetcher.post<{ file_upload_details: FileUploadParams, guid: string }>(path, {
             filename: generateParams.file.name,
             operation: generateParams.operation
-        });
+        }, { captcha: true });
         const file_upload_details = fileuploadDetails.data.file_upload_details; 
         const formData = new FormData();
         formData.append('attributes', JSON.stringify(file_upload_details.data));
@@ -769,13 +854,14 @@ export class Designer {
             body: formData
         });
 
-        const apiCallFunc =  (resolve, reject, guid = fileuploadDetails.data.guid) => {
+        const initialGuid = fileuploadDetails.data.guid;
+        const apiCallFunc =  (resolve, reject, guid?: string) => {
             this.fetcher
-                .post<any>(path, { guid })
+                .post<any>(path, { guid: guid || initialGuid })
                 .then(result => resolve(result))
                 .catch(e => reject(e));
         };
-        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
+        return await this.fetchService.withPartialContent(apiCallFunc, 500, 90, initialGuid, true) as Promise<GenTextResponse>;
     }
 
     public generateTextFromUrl(boardId: number, generateParams: GenTextFromUrl): Promise<GenTextResponse> {
@@ -788,6 +874,6 @@ export class Designer {
                     reject(e);
                 });
         };
-        return this.fetchService.withPartialContent(apiCallFunc, 500, 90) as Promise<GenTextResponse>;
+        return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<GenTextResponse>;
     }
 }

@@ -1,6 +1,8 @@
 import mapKeys from "lodash/mapKeys";
 import snakeCase from "lodash/snakeCase";
 import {sha1} from "object-hash";
+import stringify from "fast-json-stable-stringify";
+import type {BoardConfig} from "../interfaces/IBoard";
 
 export async function waitForFollozeScriptsToLoad(): Promise<boolean> {
     return new Promise(resolve => {
@@ -105,6 +107,12 @@ export function isObjsEqual(obj1: any, obj2: any) {
 
 export function hashObj(obj: any) {
     return sha1(obj);
+}
+
+// Canonical board-config fingerprint. Single source of truth for
+// `ILiveBoard.generateConfigHash` and any server-side meta stamping
+export function generateConfigHash(config: BoardConfig): string {
+    return hashObj(stringify(Object.assign({}, config, {meta: null})));
 }
 
 export function simpleDebounce(callback: CallableFunction, delay: number = 500) {

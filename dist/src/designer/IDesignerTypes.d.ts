@@ -1,6 +1,6 @@
 import { PrivacySettings } from "../common/ISharedTypes";
 import { BoardConfig } from "../common/interfaces/IBoard";
-import { BackgroundImage, BackgroundVideo } from "../common/interfaces/ISection";
+import { BackgroundImage, BackgroundVideo, PredefinedSection } from "../common/interfaces/ISection";
 export type ImageGalleryTypes = "campaign" | "search" | "icon" | "designer";
 export type VideoGalleryTypes = "video";
 export declare enum CampaignElementsTypes {
@@ -290,6 +290,17 @@ export type FeatureSettingsResponseV1 = {
 export type BoardHasItemsResponseV1 = {
     has_items: boolean;
 };
+export type BoardExpirationDataV1 = {
+    expiration_at: string | undefined;
+    policy: string;
+    timezone: string;
+};
+export type BoardExpirationResponse = {
+    policy: string | null;
+    timezone: string | null;
+    expiration_at: string | null;
+    custom_days: number | null;
+};
 export type PersonalizationV1 = {
     auto_assign_inviter: object;
     campaign: {
@@ -444,5 +455,13 @@ export type VideoAIGenerateResponse = {
     url: string;
     status: VideoAIGenerateStatus;
     message?: string;
+};
+export type GenerateCompanyCustomSectionDescriptionRequest = {
+    name: string;
+    config: PredefinedSection;
+    image: string;
+};
+export type GenerateCompanyCustomSectionDescriptionResponse = {
+    description: string;
 };
 export {};

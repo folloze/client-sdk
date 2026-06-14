@@ -16,6 +16,7 @@ export type Features = {
     registrationTracking: boolean;
     videoAi: boolean;
     localization?: boolean;
+    companySectionGallery?: boolean;
 };
 
 export type FeatureName = keyof Features;
@@ -72,6 +73,13 @@ export type InitialState = {
 
     allow_form_creation?: boolean;
     is_bot?: boolean;
+    try_me?: {
+        can_edit: boolean;
+    };
+    try_me_identity?: {
+        id: string;
+        email: string;
+    };
 };
 
 export type DataEnrichmentConfig = {
@@ -80,7 +88,7 @@ export type DataEnrichmentConfig = {
 };
 
 export type CookieMatchingConfig = {
-    type: "default" | "eloqua" | "marketo";
+    type: "default" | "eloqua" | "marketo" | "hubspot";
     api_key: string;
     run_cookie_matching: boolean;
     load_local_script: boolean;
