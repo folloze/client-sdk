@@ -238,6 +238,10 @@ export class FetchService {
                 }
             }
             
+            if (window["FollozeState"]?.envConfig?.tryMe) {
+                config.headers["folloze-try-me"] = "true";
+            }
+
             return config;
         });
         
