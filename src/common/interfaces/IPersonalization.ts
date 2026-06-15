@@ -25,15 +25,27 @@ export interface IPersonalizationConfig {
     boardRules?: ruleId[];
 }
 
-export interface IPersonalizationRule {
-    key: ruleId;
+export interface IPersonalizationRuleCondition {
     mergeTagId: string;
     mergeTagValues: string[];
     /**
-     * Per-rule comparison operator. Defaults to "is" (legacy behavior driven by the
+     * Per-condition comparison operator. Defaults to "is" (legacy behavior driven by the
      * merge tag's own compare_operator) when omitted.
      */
-    compareOperator?: PersonalizationCompareOperator;  
+    compareOperator?: PersonalizationCompareOperator;
+}
+
+export interface IPersonalizationRule extends IPersonalizationRuleCondition {
+    key: ruleId;
+    /**
+     * Extra conditions ANDed with the primary condition (the inherited
+     * mergeTagId/mergeTagValues/compareOperator fields). Absent or empty for
+     * legacy single-condition rules. Each mergeTagId appears at most once per
+     * rule, including the primary condition.
+     */
+    andConditions?: IPersonalizationRuleCondition[];
+    /** Optional display name (matrix editor group rows). */
+    name?: string;
     _appliedOn?: string[]; // widget / ribbon / floating ids
     // index?: number;
 }
