@@ -4,7 +4,8 @@ import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
 import { editorEmit } from "./eventHelpers";
-import { IPersonalizationRule } from "../interfaces/IPersonalization";
+import { IPersonalizationRule, PersonalizationCompareOperator } from "../interfaces/IPersonalization";
+import { getRuleConditions } from "./personalizationRules";
 
 export class AbstractTracker {
     public payload: unknown;
@@ -112,16 +113,30 @@ export class TrackedUserAddPersonalizationRule extends AbstractTracker {
         rule: {
             attribute_id: string;
             attribute_values: string[];
+            conditions: {
+                attribute_id: string;
+                attribute_values: string[];
+                operator: PersonalizationCompareOperator;
+            }[];
+            conditions_count: number;
         };
     };
     constructor(rule: IPersonalizationRule) {
         super();
 
         this.action = DesignerEventTypes.add_personalization_rule_from_designer;
+        const conditions = getRuleConditions(rule);
+        const [primaryCondition] = conditions;
         this.payload = {
             rule: {
-                attribute_id: rule.mergeTagId,
-                attribute_values: rule.mergeTagValues,
+                attribute_id: primaryCondition.mergeTagId,
+                attribute_values: primaryCondition.mergeTagValues,
+                conditions: conditions.map(condition => ({
+                    attribute_id: condition.mergeTagId,
+                    attribute_values: condition.mergeTagValues,
+                    operator: condition.compareOperator,
+                })),
+                conditions_count: conditions.length,
             }
         };
     }

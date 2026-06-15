@@ -3,7 +3,7 @@ import { DesignerEventTypes, TrackedUserEvent, UserTrackedEventsV2 } from "../..
 import { SectionConfig, SectionListItem } from "../interfaces/ISection";
 import { LiveWidget } from "../LiveWidget";
 import { FloatEditor } from "../FloatEditor";
-import { IPersonalizationRule } from "../interfaces/IPersonalization";
+import { IPersonalizationRule, PersonalizationCompareOperator } from "../interfaces/IPersonalization";
 export declare class AbstractTracker {
     payload: unknown;
     action: DesignerEventTypes;
@@ -63,6 +63,12 @@ export declare class TrackedUserAddPersonalizationRule extends AbstractTracker {
         rule: {
             attribute_id: string;
             attribute_values: string[];
+            conditions: {
+                attribute_id: string;
+                attribute_values: string[];
+                operator: PersonalizationCompareOperator;
+            }[];
+            conditions_count: number;
         };
     };
     constructor(rule: IPersonalizationRule);

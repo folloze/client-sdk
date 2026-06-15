@@ -19,6 +19,7 @@ export * from "./helpers/cloudinary/CloudinaryUrlBuilder";
 export * from "./helpers/JsonConditions";
 export * from "./helpers/shadowDomHelpers";
 export * from "./helpers/userEventTracking";
+export * from "./helpers/personalizationRules";
 export * from "./helpers/leadEventTracking";
 export * from "./helpers/analyticEventTracking";
 export * from "./helpers/urlHelpers";
