@@ -662,10 +662,10 @@ export class Designer {
         return this.fetchService.withPartialContent(apiCallFunc, 500, 90, undefined, true) as Promise<any>;
     }
 
-    public translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
+    public translateWidgetText(boardId: number, generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1> {
         const apiCallFunc = (resolve, reject, guid) => {
             this.fetcher
-                .post<any>(`/api/v1/boards/translate/widgets_texts`, { ...generateParams, guid })
+                .post<any>(`/api/v1/boards/${boardId}/translate/widgets_texts`, { ...generateParams, guid })
                 .then(result => resolve(result))
                 .catch(e => {
                     console.error("could not translate widgets texts", e);
