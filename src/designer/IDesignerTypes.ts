@@ -191,6 +191,15 @@ export type FormField = {
     type: string;
     dependent_field?: DependentField;
     selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
+    // References a reusable, organization-scoped option list (MergeTag, data.operation:
+    // option_list) instead of a fixed selection_values array. Resolved into selection_values
+    // server-side at request time so the list stays centrally managed. select fields only.
+    optionsSource?: OptionsSource;
+};
+
+export type OptionsSource = {
+    type: "merge_tag";
+    merge_tag_id: number;
 };
 
 type DependentField = {

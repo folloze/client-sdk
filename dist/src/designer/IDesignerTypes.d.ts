@@ -154,6 +154,11 @@ export type FormField = {
     type: string;
     dependent_field?: DependentField;
     selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
+    optionsSource?: OptionsSource;
+};
+export type OptionsSource = {
+    type: "merge_tag";
+    merge_tag_id: number;
 };
 type DependentField = {
     name: string;
