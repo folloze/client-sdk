@@ -157,8 +157,8 @@ export type FormField = {
     optionsSource?: OptionsSource;
 };
 export type OptionsSource = {
-    type: "merge_tag";
-    merge_tag_id: number;
+    type: "option_list";
+    form_resource_id: number;
 };
 type DependentField = {
     name: string;
