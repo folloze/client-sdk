@@ -154,7 +154,7 @@ export type FormField = {
     type: string;
     dependent_field?: DependentField;
     selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
-    optionsSource?: OptionsSource;
+    options_source?: OptionsSource;
 };
 export type OptionsSource = {
     type: "option_list";

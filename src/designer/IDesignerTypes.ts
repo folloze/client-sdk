@@ -194,7 +194,9 @@ export type FormField = {
     // References a reusable, organization-scoped option list (FormResource, kind: option_list)
     // instead of a fixed selection_values array. Resolved into selection_values server-side at
     // request time so the list stays centrally managed. select fields only.
-    optionsSource?: OptionsSource;
+    // snake_case (not optionsSource): the Form model's jsonb `data` column round-trips through
+    // Hashie::Mash under Rails, which silently mangles camelCase keys — snake_case is stable.
+    options_source?: OptionsSource;
 };
 
 export type OptionsSource = {
