@@ -67,24 +67,24 @@ export type GenerateWidgetsTextsFromScratchRequest = {
     };
     widgets: GenerateTextWidgetExtendedData[];
     numberOfVariants: number;
-    scope?: "board" | "section";
+    generation_scope?: "board" | "section";
 };
 export type GenerateWidgetsTextsFromPromptRequest = {
     prompt: string;
     widgets: GenerateTextWidgetExtendedData[];
     numberOfVariants: number;
-    scope?: "board" | "section";
+    generation_scope?: "board" | "section";
 };
 export type GenRephraseWidgetsTextsRequest = {
     strategy: "personalize" | "shorten";
     widgets: GenerateTextWidgetData[];
     numberOfVariants: number;
-    scope?: "board" | "section";
+    generation_scope?: "board" | "section";
 };
 export type GenTranslateWidgetsTextsRequest = {
     language: "Spanish" | "German" | "French" | "Portuguese" | "Japanese";
     widgets: GenerateTextWidgetData[];
-    scope?: "board" | "section";
+    generation_scope?: "board" | "section";
 };
 export type GenTranslateResponseV1 = {
     widgets: GenWidgetVariance[];
