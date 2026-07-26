@@ -160,6 +160,13 @@ export type OptionsSource = {
     type: "option_list";
     form_resource_id: number;
 };
+export type FormOptionListDataV1 = {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
+};
 type DependentField = {
     name: string;
     values: string[];

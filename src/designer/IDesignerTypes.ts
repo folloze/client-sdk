@@ -192,8 +192,9 @@ export type FormField = {
     dependent_field?: DependentField;
     selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
     // References a reusable, organization-scoped option list (FormResource, kind: option_list)
-    // instead of a fixed selection_values array. Resolved into selection_values server-side at
-    // request time so the list stays centrally managed. select fields only.
+    // instead of a fixed selection_values array. The response resolves this separately (see
+    // FormOptionListDataV1, returned alongside `fields`, keyed by form_resource_id) rather than
+    // rewriting selection_values, so the field's own JSON is never touched. select fields only.
     // snake_case (not optionsSource): the Form model's jsonb `data` column round-trips through
     // Hashie::Mash under Rails, which silently mangles camelCase keys — snake_case is stable.
     options_source?: OptionsSource;
@@ -202,6 +203,12 @@ export type FormField = {
 export type OptionsSource = {
     type: "option_list";
     form_resource_id: number;
+};
+
+// A resolved options_source target — see FormField.options_source.
+export type FormOptionListDataV1 = {
+    name: string;
+    options: {label: string; value: string}[];
 };
 
 type DependentField = {
