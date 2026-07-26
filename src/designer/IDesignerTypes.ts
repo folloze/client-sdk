@@ -200,7 +200,7 @@ export type OptionsSource = {
 };
 
 // A resolved options_source target — see FormField.options_source.
-export type FormOptionListDataV1 = {
+export type SavedListDataV1 = {
     name: string;
     options: {label: string; value: string}[];
 };
