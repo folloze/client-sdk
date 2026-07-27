@@ -160,7 +160,7 @@ export type OptionsSource = {
     type: "option_list";
     form_resource_id: number;
 };
-export type SavedListDataV1 = {
+export type FormOptionListDataV1 = {
     name: string;
     options: {
         label: string;

@@ -1,4 +1,4 @@
-import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, SavedListDataV1, ImageTransformation } from "../designer/IDesignerTypes";
+import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, FormOptionListDataV1, ImageTransformation } from "../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
 import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
 import { Lead } from "../common/interfaces/IInitialState";
@@ -317,7 +317,7 @@ export type SessionResponseV1 = {
 export type FormMetadataDataV1 = {
     form: FormDataV1;
     privacy_message: FormPrivacyMessageDataV1;
-    saved_lists?: Record<string, SavedListDataV1>;
+    option_lists?: Record<string, FormOptionListDataV1>;
 };
 export type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
 export type EnrichmentBoardConfigV3 = {
