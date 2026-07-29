@@ -167,7 +167,7 @@ export declare class Designer {
     generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1>;
     rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
     rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
-    translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
+    translateWidgetText(boardId: number, generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;

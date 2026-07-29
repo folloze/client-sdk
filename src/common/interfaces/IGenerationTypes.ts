@@ -80,23 +80,27 @@ export type GenerateWidgetsTextsFromScratchRequest = {
     },
     widgets: GenerateTextWidgetExtendedData[],
     numberOfVariants: number;
+    generation_scope?: "board" | "section";
 }
 
 export type GenerateWidgetsTextsFromPromptRequest = {
     prompt: string,
     widgets: GenerateTextWidgetExtendedData[],
     numberOfVariants: number;
+    generation_scope?: "board" | "section";
 }
 
 export type GenRephraseWidgetsTextsRequest = {
     strategy: "personalize" | "shorten",
     widgets: GenerateTextWidgetData[],
     numberOfVariants: number;
+    generation_scope?: "board" | "section";
 }
 
 export type GenTranslateWidgetsTextsRequest = {
     language: "Spanish" | "German" | "French" | "Portuguese" | "Japanese",
     widgets: GenerateTextWidgetData[],
+    generation_scope?: "board" | "section";
 }
 
 export type GenTranslateResponseV1 = {
