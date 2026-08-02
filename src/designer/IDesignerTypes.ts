@@ -248,6 +248,7 @@ export type FormDataV1 = {
     //for type hubspot (5)
     portal_id?: string;
     region?: string;
+    show_success_message?: boolean;
 };
 
 type Label = {

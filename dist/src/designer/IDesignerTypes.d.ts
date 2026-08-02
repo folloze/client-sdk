@@ -201,6 +201,7 @@ export type FormDataV1 = {
     auto_fill?: boolean;
     portal_id?: string;
     region?: string;
+    show_success_message?: boolean;
 };
 type Label = {
     text: string;
