@@ -31,6 +31,7 @@ export type InitialState = {
     session_guid: string;
     data_service_configuration?: DataEnrichmentConfig;
     cookie_matching?: CookieMatchingConfig;
+    warmly?: WarmlyConfig;
     send_hubspot_cookie?: boolean;
     itemViewerData?: OpenItemViewerPayload;
     token?: string;
@@ -81,6 +82,10 @@ export type CookieMatchingConfig = {
     api_key: string;
     run_cookie_matching: boolean;
     load_local_script: boolean;
+};
+export type WarmlyConfig = {
+    is_enabled: boolean;
+    client_id: string | null;
 };
 export interface Organization {
     id: number;
