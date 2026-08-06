@@ -20,6 +20,7 @@ type AnalyticTypeToPayload = {
     anchor_clicked: {
         hash: string;
         button_text: string;
+        area: string;
         origin_section: {
             name: string | null;
             id: string | null;
