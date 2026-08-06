@@ -15,6 +15,7 @@ type AnalyticTypeToPayload = {
     send_email_clicked: {
         email: string;
         subject: string;
+        area: string;
     };
     anchor_clicked: {
         hash: string;
@@ -33,6 +34,7 @@ type AnalyticTypeToPayload = {
     open_content_item_clicked: {
         button_text: string;
         content_id: number;
+        area: string;
     };
     social_share: {
         platform: "linkedin" | "x" | "facebook" | "email";
