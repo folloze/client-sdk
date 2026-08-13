@@ -1,11 +1,36 @@
-import {crop, limitFill, fit, limitFit} from "@cloudinary/url-gen/actions/resize";
+import {crop, fill, limitFill, fit, limitFit} from "@cloudinary/url-gen/actions/resize";
 import {max} from "@cloudinary/url-gen/actions/roundCorners";
 import {mode} from "@cloudinary/url-gen/actions/rotate";
 import {sharpen} from "@cloudinary/url-gen/actions/adjust";
 import {horizontalFlip, verticalFlip} from "@cloudinary/url-gen/qualifiers/rotationMode";
 import {artisticFilter, colorize} from "@cloudinary/url-gen/actions/effect";
-import {FlzEditableImageData, GalleryImage} from "../../../designer/IDesignerTypes";
+import {autoGravity, compass, focusOn} from "@cloudinary/url-gen/qualifiers/gravity";
+import {center} from "@cloudinary/url-gen/qualifiers/compass";
+import {face} from "@cloudinary/url-gen/qualifiers/focusOn";
+import {FlzEditableImageData, GalleryImage, ImageTransformation} from "../../../designer/IDesignerTypes";
 import {CloudinaryHelper} from "./CloudinaryHelper";
+
+function gravityForFocus(focus?: ImageTransformation["focus"]) {
+    switch (focus) {
+        case "face":
+            return focusOn(face());
+        case "center":
+            return compass(center());
+        default:
+            return autoGravity();
+    }
+}
+
+function applyShapeFill(cldImage: ReturnType<typeof CloudinaryHelper.getImage>, transformation: ImageTransformation): void {
+    const shape = transformation.shape;
+    if (!shape || shape === "none") return;
+
+    const aspect = shape === "rectangle" ? "16:9" : 1;
+    cldImage.resize(fill().aspectRatio(aspect).gravity(gravityForFocus(transformation.focus)));
+    if (shape === "circle") {
+        cldImage.roundCorners(max());
+    }
+}
 
 
 export class CloudinaryUrlBuilder {
@@ -85,6 +110,8 @@ export class CloudinaryUrlBuilder {
                 cldImage.resize(fitTransformation);
                 cldImage.format("auto").quality("auto");
             }
+        } else if (this.image.transformation?.shape && this.image.transformation.shape !== "none") {
+            applyShapeFill(cldImage, this.image.transformation);
         }
         if (this._maxWidth || this._maxHeight) {
             const sizeTransformation = limitFill();

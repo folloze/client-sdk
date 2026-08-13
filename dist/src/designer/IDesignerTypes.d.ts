@@ -33,7 +33,7 @@ export type GalleryVideo = {
     name?: string;
 };
 export type ImageTransformation = {
-    crop: {
+    crop?: {
         x: number;
         y: number;
         crop?: string;
@@ -44,6 +44,7 @@ export type ImageTransformation = {
         radius: string | number;
     };
     shape?: "square" | "rectangle" | "circle" | "none";
+    focus?: "auto" | "face" | "center";
     artisticFilter?: string;
     flipY?: boolean;
     flipX?: boolean;

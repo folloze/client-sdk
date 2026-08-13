@@ -85,6 +85,54 @@ describe("cloudinary helpers tests", () => {
                 .toString(),
         ).toEqual(testData7.result);
     });
+
+    it("applies a circular shape fill with face gravity when there is no pixel crop", () => {
+        const url = new CloudinaryUrlBuilder({
+            url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+            bankCategory: "images",
+            optimized_url: null,
+            transformation: {shape: "circle", focus: "face"},
+        } as any)
+            .optimize()
+            .toString();
+
+        expect(url).toContain("g_face");
+        expect(url).toContain("ar_1");
+        expect(url).toContain("c_fill");
+        expect(url).toContain("r_max");
+    });
+
+    it("applies a square fill without rounding when there is no pixel crop", () => {
+        const url = new CloudinaryUrlBuilder({
+            url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+            bankCategory: "images",
+            optimized_url: null,
+            transformation: {shape: "square", focus: "center"},
+        } as any)
+            .optimize()
+            .toString();
+
+        expect(url).toContain("g_center");
+        expect(url).toContain("ar_1");
+        expect(url).toContain("c_fill");
+        expect(url).not.toContain("r_max");
+    });
+
+    it("applies a 16:9 rectangle fill with auto gravity when there is no pixel crop", () => {
+        const url = new CloudinaryUrlBuilder({
+            url: "https://images.folloze.com/image/upload/v1609744958/rcrlvper6pdobqvuggjx.jpg",
+            bankCategory: "images",
+            optimized_url: null,
+            transformation: {shape: "rectangle", focus: "auto"},
+        } as any)
+            .optimize()
+            .toString();
+
+        expect(url).toContain("g_auto");
+        expect(url).toContain("ar_16:9");
+        expect(url).toContain("c_fill");
+        expect(url).not.toContain("r_max");
+    });
 });
 
 type TestData = {
