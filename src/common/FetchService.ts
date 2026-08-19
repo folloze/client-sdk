@@ -5,6 +5,7 @@ import MockConnector from "./MockConnector";
 import mergeWith from "lodash/mergeWith";
 import get from "lodash/get";
 import { CaptchaInterceptor } from "./CaptchaInterceptor";
+import { REQUEST_ID_HEADER, nextRequestId } from "./RequestId";
 
 export type FetcherOptions = {
     organizationId: number;
@@ -222,6 +223,8 @@ export class FetchService {
         this.fetcher = axios.create(options.config);
         this.fetcher.interceptors.response.use(this.handleSuccess, this.handleError);
         this.fetcher.interceptors.request.use(async config => {
+            config.headers[REQUEST_ID_HEADER] = nextRequestId();
+
             if (this.sessionGuid) {
                 config.headers[FLZ_SESSION_GUID_HEADER] = this.sessionGuid;
             }
