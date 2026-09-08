@@ -15,6 +15,7 @@ export type Features = {
     videoAi: boolean;
     localization?: boolean;
     companySectionGallery?: boolean;
+    formAutofill?: boolean;
 };
 export type FeatureName = keyof Features;
 export type InitialState = {
