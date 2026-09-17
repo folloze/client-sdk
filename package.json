@@ -1,5 +1,5 @@
 {
-  "name": "client-sdk",
+  "name": "@folloze/client-sdk",
   "version": "1.0.0",
   "main": "dist/index.js",
   "types": "dist/src/index.d.js",
@@ -21,6 +21,10 @@
   },
   "author": "Rotem Grimberg <rotem@folloze.com>",
   "license": "",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "public"
+  },
   "dependencies": {
     "@cloudinary/url-gen": "^1.8.0",
     "axios": "1.6.5",
@@ -57,18 +61,7 @@
   "homepage": "https://github.com/folloze/client-sdk",
   "repository": "https://github.com/folloze/client-sdk",
   "files": [
-    "/analytics.{d.ts.map,d.ts,js.map,js}",
-    "/analytics/",
-    "/liveboard.{d.ts.map,d.ts,js.map,js}",
-    "/liveboard/",
-    "/common.{d.ts.map,d.ts,js.map,js}",
-    "/common/",
-    "/types.{d.ts.map,d.ts,js.map,js}",
-    "/common/interfaces/",
-    "/designer.{d.ts.map,d.ts,js.map,js}",
-    "/designer/",
-    "sdk.{d.ts.map,d.ts,js.map,js}",
-    "index.{d.ts.map,d.ts,js.map,js}"
+    "dist"
   ],
   "exports": {
     ".": "./dist/index.js",
