@@ -6,10 +6,7 @@
     "removeComments": false,
     "sourceMap": true,
     "outDir": "dist",
-    "rootDirs": [
-        "./src",
-        "./node_modules/axios-mock-adapter/dist/axios-mock-adapter.js"
-    ],
+    "rootDir": ".",
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
@@ -33,7 +30,6 @@
   },
   "exclude": [],
   "include": [
-    "./src",
-    "./node_modules/axios-mock-adapter/dist/axios-mock-adapter.js",
+    "./src"
   ]
 }

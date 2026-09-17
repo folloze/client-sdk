@@ -1,0 +1,64 @@
+name: Release client-sdk
+
+on:
+  push:
+    branches:
+      - FLZ-13052_make-clientsdk-npm-package
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client-sdk/package-lock.json
+          registry-url: https://npm.pkg.github.com
+          scope: "@folloze"
+
+      - name: Install dependencies
+        working-directory: client-sdk
+        run: npm ci
+
+      - name: Bump minor version
+        working-directory: client-sdk
+        run: |
+          npm version minor --no-git-tag-version
+          echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> "$GITHUB_ENV"
+
+      - name: Build package
+        working-directory: client-sdk
+        run: npm run build
+
+      - name: Publish package
+        working-directory: client-sdk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish
+
+      - name: Commit and push version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add client-sdk/package.json
+          if [ -f client-sdk/package-lock.json ]; then
+            git add client-sdk/package-lock.json
+          fi
+          git commit -m "chore(client-sdk): bump minor version [skip ci]" || exit 0
+          git push
+          git tag -a "client-sdk-v${PACKAGE_VERSION}" -m "client-sdk v${PACKAGE_VERSION}"
+          git push origin "client-sdk-v${PACKAGE_VERSION}"
