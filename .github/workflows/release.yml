@@ -32,9 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Bump minor version
+      - name: Bump patch version
         run: |
-          npm version minor --no-git-tag-version
+          npm version patch --no-git-tag-version
           echo "PACKAGE_VERSION=$(node -p "require('./package.json').version")" >> "$GITHUB_ENV"
 
       - name: Build package
@@ -54,7 +54,7 @@ jobs:
           if [ -f package-lock.json ]; then
             git add package-lock.json
           fi
-          git commit -m "chore(client-sdk): bump minor version [skip ci]" || exit 0
+          git commit -m "chore(client-sdk): bump patch version [skip ci]" || exit 0
           git push
           git tag -a "client-sdk-v${PACKAGE_VERSION}" -m "client-sdk v${PACKAGE_VERSION}"
           git push origin "client-sdk-v${PACKAGE_VERSION}"
