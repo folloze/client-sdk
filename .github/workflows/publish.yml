@@ -32,6 +32,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Run tests
+        run: npx jest --verbose
+
       - name: Bump patch version
         run: |
           npm version patch --no-git-tag-version
