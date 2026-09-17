@@ -3,7 +3,7 @@ name: Release client-sdk
 on:
   push:
     branches:
-      - FLZ-13052_make-clientsdk-npm-package
+      - master
 
 permissions:
   contents: write
