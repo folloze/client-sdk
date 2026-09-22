@@ -1,6 +1,12 @@
 import type { BoardConfig } from "../interfaces/IBoard";
 export declare function waitForFollozeScriptsToLoad(): Promise<boolean>;
 export declare const keysToSnakeCase: (params: any) => any;
+/**
+ * form_fields holds the payload's own key names, so it has to go through the same transform as the
+ * keys themselves — otherwise the server slices the snake_cased params by names that no longer exist
+ * and silently drops every field the sender wrote in camelCase.
+ */
+export declare const formCtaKeysToSnakeCase: (params: any) => any;
 export type FileUploadParams = {
     url: string;
     headers?: Record<string, string>;
