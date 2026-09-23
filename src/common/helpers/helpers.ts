@@ -25,6 +25,21 @@ export const keysToSnakeCase = params => {
     });
 };
 
+/**
+ * form_fields holds the payload's own key names, so it has to go through the same transform as the
+ * keys themselves — otherwise the server slices the snake_cased params by names that no longer exist
+ * and silently drops every field the sender wrote in camelCase.
+ */
+export const formCtaKeysToSnakeCase = params => {
+    const snakeCased = keysToSnakeCase(params);
+
+    if (Array.isArray(params?.form_fields)) {
+        snakeCased.form_fields = params.form_fields.map(field => snakeCase(field));
+    }
+
+    return snakeCased;
+};
+
 export type FileUploadParams = {
     url: string;
     headers?: Record<string, string>;
