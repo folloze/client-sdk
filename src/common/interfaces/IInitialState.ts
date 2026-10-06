@@ -18,6 +18,7 @@ export type Features = {
     localization?: boolean;
     companySectionGallery?: boolean;
     formAutofill?: boolean;
+    vibeSections?: boolean;
 };
 
 export type FeatureName = keyof Features;
