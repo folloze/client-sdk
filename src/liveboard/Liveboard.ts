@@ -1,5 +1,5 @@
 import {AxiosResponse} from "axios";
-import {keysToSnakeCase} from "../common/helpers/helpers";
+import {formCtaKeysToSnakeCase, keysToSnakeCase} from "../common/helpers/helpers";
 import {FetchService} from "../common/FetchService";
 import {
     BoardResponseV1,
@@ -750,7 +750,7 @@ export class Liveboard {
             return new Promise((resolve, reject) => {
                 return this.notifyIdentity(boardId, options).then(_ => {
                     this.fetchService.fetcher
-                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/form`, keysToSnakeCase(options))
+                        .post<CtaResponseV1>(`${this.fetchService.options.analyticsServiceEndpoint}/live_board/v1/boards/${boardId}/campaign/form`, formCtaKeysToSnakeCase(options))
                         .then(result => resolve(result.data))
                         .catch(e => {
                             console.error("could not submit cta", e);
