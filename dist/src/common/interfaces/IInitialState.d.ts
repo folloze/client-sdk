@@ -19,9 +19,24 @@ export type Features = {
     vibeSections?: boolean;
 };
 export type FeatureName = keyof Features;
+export type BoardEventType = "zoom" | "simulive" | "in_person";
+export type BoardEvent = {
+    id: number;
+    board_id: number;
+    event_name: string;
+    event_type: BoardEventType | null;
+    start_at: string | null;
+    end_at: string | null;
+    time_zone: string | null;
+    description: string | null;
+    data: Record<string, any>;
+    created_at: string;
+    updated_at: string;
+};
 export type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
+    board_event?: BoardEvent | null;
     layout: BoardConfig;
     privacy_settings: {
         cookie_management?: string;
