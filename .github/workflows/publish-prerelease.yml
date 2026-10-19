@@ -1,0 +1,93 @@
+name: Publish client-sdk prerelease
+# Jenkins resolves this run by its exact title — keep in sync with buildClientsWithSdk() in helm-staging Jenkinsfile.
+run-name: prerelease ${{ inputs.version }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_ref:
+        description: "client-sdk branch to publish from"
+        required: true
+        type: string
+      version:
+        description: "Prerelease version to publish, e.g. 1.0.4-jenkins.1234"
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: prerelease-${{ inputs.version }}
+  cancel-in-progress: false
+
+jobs:
+  prerelease:
+    runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ inputs.version }}
+
+    steps:
+      - name: Validate version
+        run: |
+          if ! [[ "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+-[0-9A-Za-z.-]+$ ]]; then
+            echo "❌ '$VERSION' is not a semver prerelease (x.y.z-tag)"
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.source_ref }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: package-lock.json
+          registry-url: https://npm.pkg.github.com
+          scope: "@folloze"
+
+      - name: Check if version is already published
+        id: published
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if npm view "@folloze/client-sdk@$VERSION" version > /dev/null 2>&1; then
+            echo "ℹ️ @folloze/client-sdk@$VERSION already published — skipping"
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Install dependencies
+        if: steps.published.outputs.exists == 'false'
+        run: npm ci
+
+      - name: Run tests
+        if: steps.published.outputs.exists == 'false'
+        run: npx jest --verbose
+
+      - name: Set prerelease version
+        if: steps.published.outputs.exists == 'false'
+        run: npm version "$VERSION" --no-git-tag-version
+
+      - name: Build package
+        if: steps.published.outputs.exists == 'false'
+        run: npm run build
+
+      # Never touch `latest`: consumers pin exact versions, prereleases live under the `ci` dist-tag.
+      - name: Publish prerelease
+        if: steps.published.outputs.exists == 'false'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npm publish --tag ci
+
+      - name: Summary
+        env:
+          SOURCE_REF: ${{ inputs.source_ref }}
+        run: echo "Published \`@folloze/client-sdk@$VERSION\` (dist-tag \`ci\`) from \`$SOURCE_REF\`" >> "$GITHUB_STEP_SUMMARY"
