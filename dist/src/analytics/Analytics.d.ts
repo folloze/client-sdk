@@ -86,6 +86,8 @@ export declare enum WidgetEventTypes {
     audience_research_chat_opened = 374,
     audience_research_save_to_campaign_clicked = 375,
     board_creator_chat_opened = 423,
+    vibe_section_generation = 425,
+    vibe_section_edit = 426,
     try_me_user_register = 413,
     try_me_user_login = 414,
     try_me_share_clicked = 415
@@ -193,6 +195,9 @@ type DesignerFloatingWidgetPayload = {
     widget_tag?: string;
     widget_title?: string;
 };
+type VibeSectionPayload = {
+    board_id: number;
+};
 type EventPayloadMap = {
     [DesignerEventTypes.gen_ai_personalize_existing_target_audience]: GenAITargetAudiencePayload;
     [DesignerEventTypes.gen_ai_personalize_new_target_audience]: GenAITargetAudiencePayload;
@@ -210,6 +215,8 @@ type EventPayloadMap = {
     [WidgetEventTypes.saved_ad_changes]: AdsPayload;
     [WidgetEventTypes.edit_ad_image_actions]: AdsImageActionPayload;
     [WidgetEventTypes.edit_ad_image_chat_message_sent]: AdsEditImageMessagePayload;
+    [WidgetEventTypes.vibe_section_generation]: VibeSectionPayload;
+    [WidgetEventTypes.vibe_section_edit]: VibeSectionPayload;
     [WidgetEventTypes.try_me_user_register]: UserAuthPayload;
     [WidgetEventTypes.try_me_user_login]: UserLoginPayload;
     [WidgetEventTypes.try_me_share_clicked]: ShareClickedPayload;
