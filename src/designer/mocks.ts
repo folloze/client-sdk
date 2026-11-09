@@ -825,7 +825,8 @@ export const rules = (mock: MockAdapter) => {
             allow_text_replacement: true,
             allow_user_input: true,
             type: "user_input",
-            predefined_list: []
+            predefined_list: [],
+            category: "lead"
         },
         {
             id: 2,
@@ -836,7 +837,8 @@ export const rules = (mock: MockAdapter) => {
             allow_text_replacement: true,
             allow_user_input: false,
             type: "predefined_list",
-            predefined_list: ["10M-50M", "1M-10M"]
+            predefined_list: ["10M-50M", "1M-10M"],
+            category: "account"
         },
     ]);
 
