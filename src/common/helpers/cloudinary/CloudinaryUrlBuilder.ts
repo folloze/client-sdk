@@ -58,6 +58,7 @@ export class CloudinaryUrlBuilder {
 
         const cldImage = CloudinaryHelper.getImage(this.image);
         const isSvg = cldImage.toURL().endsWith(".svg");
+        const isGif = cldImage.toURL().endsWith(".gif");
 
         if (this.image.transformation?.flipY) {
             cldImage.rotate(mode(verticalFlip()));
@@ -87,7 +88,8 @@ export class CloudinaryUrlBuilder {
             }
         }
         if (this._maxWidth || this._maxHeight) {
-            const sizeTransformation = limitFill();
+            // c_lfill keeps only the first 100 frames of an animated GIF; c_limit keeps them all
+            const sizeTransformation = isGif ? limitFit() : limitFill();
             this._maxWidth && sizeTransformation.width(this._maxWidth);
             this._maxHeight && sizeTransformation.height(this._maxHeight);
             cldImage.resize(sizeTransformation);
