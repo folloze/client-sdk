@@ -46,6 +46,9 @@ type AnalyticTypeToPayload = {
         platform: "linkedin" | "x" | "facebook" | "email";
         recipient_email?: string;
     };
+    video_ai: {
+        unique_id: string;
+    };
 };
 
 type TypeMapAsGeneric<K extends keyof AnalyticTypeToPayload = keyof AnalyticTypeToPayload> = {
