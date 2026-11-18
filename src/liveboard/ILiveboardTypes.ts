@@ -331,6 +331,10 @@ export type LeadResponseV1 = Partial<Lead>;
 
 export type LeadLinkClickResponseV1 = {}
 
+export type ZoomEndedResponse = {
+    ended: boolean;
+};
+
 export type LiveEventUrlsResponseV2 = {
     meeting_url?: string; //stream
     //zoom

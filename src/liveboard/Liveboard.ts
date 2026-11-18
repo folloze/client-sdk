@@ -19,6 +19,7 @@ import {
     ItemDownloadUrlSuccessResponseV2,
     ItemDownloadUrlFailedResponseV2,
     LiveEventUrlsResponseV2,
+    ZoomEndedResponse,
     OrganizationSettingsResponseV1,
     ItemsParams,
     JourneyItemParams,
@@ -563,6 +564,26 @@ export class Liveboard {
                 })
                 .catch(e => {
                     console.error("could not get zoom urls", e);
+                    reject(e);
+                });
+        });
+    }
+
+    /**
+     * Checks whether the board's Zoom meeting/webinar has ended (by Zoom's ended webhook)
+     *
+     * @param {number} boardId
+     * @returns {ZoomEndedResponse} ZoomEndedResponse
+     */
+    getZoomEnded(boardId: number): Promise<ZoomEndedResponse> {
+        return new Promise((resolve, reject) => {
+            this.fetchService.fetcher
+                .get<ZoomEndedResponse>(`/live_board/v2/boards/${boardId}/live_event/zoom_ended`)
+                .then(result => {
+                    resolve(result.data);
+                })
+                .catch(e => {
+                    console.error("could not check if the zoom event ended", e);
                     reject(e);
                 });
         });

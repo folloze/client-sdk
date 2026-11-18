@@ -86,7 +86,8 @@ export type FLZ_LIVEBOARD_EVENT_ACTION =
     | "join-live-event"
     | "leave-live-event"
     | "scroll"
-    | "get-open-zoom-urls";
+    | "get-open-zoom-urls"
+    | "get-zoom-ended";
 
 export type FLZ_DESIGNER_EVENT_REQUEST_ACTION = "generate-ai-video";
 export type FLZ_DESIGNER_EVENT_ACTION =
