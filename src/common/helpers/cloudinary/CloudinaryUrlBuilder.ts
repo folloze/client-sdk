@@ -58,6 +58,7 @@ export class CloudinaryUrlBuilder {
 
         const cldImage = CloudinaryHelper.getImage(this.image);
         const isSvg = cldImage.toURL().endsWith(".svg");
+        const isGif = cldImage.toURL().endsWith(".gif");
 
         if (this.image.transformation?.flipY) {
             cldImage.rotate(mode(verticalFlip()));
@@ -87,7 +88,8 @@ export class CloudinaryUrlBuilder {
             }
         }
         if (this._maxWidth || this._maxHeight) {
-            const sizeTransformation = limitFill();
+            // c_lfill keeps only the first 100 frames of an animated GIF; c_limit keeps them all
+            const sizeTransformation = isGif ? limitFit() : limitFill();
             this._maxWidth && sizeTransformation.width(this._maxWidth);
             this._maxHeight && sizeTransformation.height(this._maxHeight);
             cldImage.resize(sizeTransformation);
@@ -104,10 +106,13 @@ export class CloudinaryUrlBuilder {
         // do not add f_auto & q_auto on SVG images unless needed (when cropped - handled above)
         if (!isSvg) {
             cldImage.resize(limitFit(1800, 1800));
-            cldImage.format("auto").quality("auto");
+            // animated GIF: f_auto gives animated WebP that ignores q_auto (~13x the size of animated AVIF),
+            // and AVIF rejects e_sharpens
+            const format = isGif ? "avif" : "auto";
+            cldImage.format(format).quality("auto");
         }
 
-        if (this.sharp) {
+        if (this.sharp && !isGif) {
             cldImage.adjust(sharpen());
         }
 

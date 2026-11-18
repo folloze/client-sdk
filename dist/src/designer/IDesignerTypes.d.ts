@@ -381,6 +381,7 @@ export type MergeTagAttribute = {
     allow_user_input: boolean;
     type: string;
     predefined_list: string[];
+    category: "event" | "lead" | "account";
 };
 export type MergeTagValue = {
     id: string;

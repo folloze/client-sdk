@@ -72,6 +72,13 @@ describe("cloudinary helpers tests", () => {
         expect(new CloudinaryUrlBuilder(testData5.img).toString()).toEqual(testData5.result);
     });
 
+    it("animated GIF: caps with c_limit (c_lfill keeps 100 frames), delivers f_avif, drops e_sharpen", async () => {
+        const gif: any = {url: "https://images.folloze.com/image/upload/v1793649349/g6iazvtnh2bszkqe5tql.gif"};
+        expect(new CloudinaryUrlBuilder(gif).maxWidth(900).sharpen().toString()).toEqual(
+            "https://images.folloze.com/image/upload/c_limit,w_900/c_limit,h_1800,w_1800/f_avif/q_auto/v1793649349/g6iazvtnh2bszkqe5tql.gif",
+        );
+    });
+
     it("checks buildTransform for image with sharpen", async () => {
         expect(new CloudinaryUrlBuilder(testData6.img).sharpen().toString()).toEqual(testData6.result);
     });

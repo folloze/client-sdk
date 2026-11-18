@@ -37,6 +37,7 @@ export type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
     board_event?: BoardEvent | null;
+    event_merge_tag_values?: Record<string, string>;
     layout: BoardConfig;
     privacy_settings: {
         cookie_management?: string;

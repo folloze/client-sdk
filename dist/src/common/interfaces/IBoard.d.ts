@@ -46,6 +46,7 @@ export type BoardConfig = {
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
     generationConfig?: GenerationConfig;
+    hasEventMergeTags?: boolean;
 };
 export type PageConfig = {
     name: "default" | string;
