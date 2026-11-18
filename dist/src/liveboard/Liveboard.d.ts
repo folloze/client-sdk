@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { FetchService } from "../common/FetchService";
-import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1, EnrichmentBoardConfigV3, LeadLinkClickResponseV1, ChatUserDataV2, LiveEventParticipant } from "./ILiveboardTypes";
+import { BoardResponseV1, BoardSellerResponseV1, CategoryResponseV2, CategoriesResponseV2, UserChatResponseV1, ItemResponseV2, ItemsResponseV2, HasItemResponseV2, SnapshotUrlResponseV1, ItemAnalysisResponseV1, ItemFileMetadataResponseV1, GeoLocationResponseV1, LeadResponseV1, JourneyItemsResponseV2, ItemDownloadUrlSuccessResponseV2, ItemDownloadUrlFailedResponseV2, LiveEventUrlsResponseV2, ZoomEndedResponse, OrganizationSettingsResponseV1, ItemsParams, JourneyItemParams, CookieConsentParams, FormMetadataDataV1, CampaignElementDataV2, CtaParams, CtaResponseV1, EnrichmentBoardConfigV3, LeadLinkClickResponseV1, ChatUserDataV2, LiveEventParticipant } from "./ILiveboardTypes";
 import { TrackedLeadLinkClickPayload } from "../common/helpers/leadEventTracking";
 export declare class Liveboard {
     private fetchService;
@@ -169,6 +169,13 @@ export declare class Liveboard {
      * @returns {LiveEventUrlsResponseV2} LiveEventUrlsResponse
      */
     getOpenInZoomUrls(boardId: number, meetingUrl: string): Promise<LiveEventUrlsResponseV2>;
+    /**
+     * Checks whether the board's Zoom meeting/webinar has ended (by Zoom's ended webhook)
+     *
+     * @param {number} boardId
+     * @returns {ZoomEndedResponse} ZoomEndedResponse
+     */
+    getZoomEnded(boardId: number): Promise<ZoomEndedResponse>;
     /**
      * Gets the organization's settings
      *
