@@ -108,13 +108,15 @@ export type VideoBankCategoryType = "videos";
 export type UploadUrlResponseV1 = {
     file_name: string;
     method: string;
-    params: {
+    params?: {
         api_key: string;
         signature: string;
         timestamp: number;
-    };
+    } | null;
     get_url: string;
     put_url: string;
+    file_provider_type?: number;
+    is_public?: boolean;
 };
 export type VideoTransformation = {
     tint?: {
@@ -145,6 +147,10 @@ export declare type CloudinaryUploadResult = {
     original_extension: string;
     api_key: string;
     duration?: number;
+};
+export type FileUploadResult = {
+    secure_url: string;
+    original_filename: string;
 };
 export type FormField = {
     label: string;
