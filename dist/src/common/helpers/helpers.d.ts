@@ -1,3 +1,4 @@
+import type { BoardConfig } from "../interfaces/IBoard";
 export declare function waitForFollozeScriptsToLoad(): Promise<boolean>;
 export declare const keysToSnakeCase: (params: any) => any;
 export type FileUploadParams = {
@@ -9,6 +10,7 @@ export type FileUploadParams = {
 export declare function fileUpload(file: File, params: FileUploadParams, progressCallback: (file: File, n: number) => any): Promise<any>;
 export declare function isObjsEqual(obj1: any, obj2: any): boolean;
 export declare function hashObj(obj: any): string;
+export declare function generateConfigHash(config: BoardConfig): string;
 export declare function simpleDebounce(callback: CallableFunction, delay?: number): (...args: any[]) => void;
 export declare function simpleThrottle(callback: CallableFunction, delay?: number): (...args: any[]) => void;
 export type DotPrefix<T extends string> = T extends "" ? "" : `.${T}`;

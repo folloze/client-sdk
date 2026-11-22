@@ -3,14 +3,16 @@ import {componentEmit} from "./eventHelpers";
 
 type AnalyticTypeToPayload = {
     video_started: {
-        content_id: number;
-        content_item_id: number;
+        content_id?: number;
+        content_item_id?: number;
+        external_id?: string; // identifier for videos that are not backed by a content item (e.g. Video Agent)
         guid: string;
     };
 
     video_ended: {
-        content_id: number;
-        content_item_id: number;
+        content_id?: number;
+        content_item_id?: number;
+        external_id?: string;
         guid: string;
         duration: number; // the time in seconds
     };
@@ -18,10 +20,12 @@ type AnalyticTypeToPayload = {
     send_email_clicked: {
         email: string;
         subject: string;
+        area: string;
     };
     anchor_clicked: {
         hash: string;
         button_text: string;
+        area: string;
         origin_section: {
             name: string | null;
             id: string | null;
@@ -36,6 +40,7 @@ type AnalyticTypeToPayload = {
     open_content_item_clicked: {
         button_text: string;
         content_id: number;
+        area: string; // the board section the CTA was clicked in
     };
     social_share: {
         platform: "linkedin" | "x" | "facebook" | "email";

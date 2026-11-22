@@ -17,13 +17,33 @@ export type Features = {
     videoAi: boolean;
     localization?: boolean;
     companySectionGallery?: boolean;
+    formAutofill?: boolean;
+    vibeSections?: boolean;
 };
 
 export type FeatureName = keyof Features;
 
+export type BoardEventType = "zoom" | "simulive" | "in_person"
+
+export type BoardEvent = {
+    id: number;
+    board_id: number;
+    event_name: string;
+    event_type: BoardEventType | null;
+    start_at: string | null;
+    end_at: string | null;
+    time_zone: string | null;
+    description: string | null;
+    data: Record<string, any>;
+    created_at: string;
+    updated_at: string;
+};
+
 export type InitialState = {
     lead: Lead | LeadResponseV1;
     board: Board;
+    board_event?: BoardEvent | null;
+    event_merge_tag_values?: Record<string, string>;
     layout: BoardConfig;
     privacy_settings: {
         cookie_management?: string;
@@ -35,6 +55,7 @@ export type InitialState = {
     session_guid: string; // needs to be in all requests to the server in header: "folloze-session-guid"
     data_service_configuration?: DataEnrichmentConfig;
     cookie_matching?: CookieMatchingConfig;
+    warmly?: WarmlyConfig;
     send_hubspot_cookie? : boolean;
     itemViewerData?: OpenItemViewerPayload; // in case we land on item viewer
 
@@ -76,6 +97,10 @@ export type InitialState = {
     try_me?: {
         can_edit: boolean;
     };
+    try_me_identity?: {
+        id: string;
+        email: string;
+    };
 };
 
 export type DataEnrichmentConfig = {
@@ -84,10 +109,15 @@ export type DataEnrichmentConfig = {
 };
 
 export type CookieMatchingConfig = {
-    type: "default" | "eloqua" | "marketo";
+    type: "default" | "eloqua" | "marketo" | "hubspot";
     api_key: string;
     run_cookie_matching: boolean;
     load_local_script: boolean;
+};
+
+export type WarmlyConfig = {
+    is_enabled: boolean;
+    client_id: string | null;
 };
 
 export interface Organization {

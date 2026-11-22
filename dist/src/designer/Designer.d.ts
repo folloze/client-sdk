@@ -1,14 +1,15 @@
 import { GenerateWidgetsTextsFromScratchRequest, GenGenerateResponseV1, GenRephraseResponseV1, GenRephraseWidgetsTextsRequest, GenTranslateResponseV1, GenTranslateWidgetsTextsRequest, GenerateWidgetsTextsFromPromptRequest, GenTextFromFile, GenTextFromUrl, GenTextResponse } from "../common/interfaces/IGenerationTypes";
 export * from "./IDesignerTypes";
 import { FetchService } from "../common/FetchService";
-import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, GenerateCompanyCustomSectionDescriptionRequest, GenerateCompanyCustomSectionDescriptionResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams } from "./IDesignerTypes";
+import { GalleryImage, UploadUrlResponseV1, FormV1, CampaignElementResponseV1, PrivacySettingsResponseV1, BoardHasPersonalizationResponseV1, FeatureSettingsResponseV1, PersonalizationV1, EmailTemplateV1, UserV1, PublishedUnpublishedConfig, ConfigSavedConflict, ConfigSavedSuccess, MergeTagAttribute, MergeTagValue, GalleryVideo, Theme, VideoAIVoice, VideoAIAvatar, VideoAIGenerateRequest, VideoAIGenerateResponse, GenerateCompanyCustomSectionDescriptionRequest, GenerateCompanyCustomSectionDescriptionResponse, MergeTagFilters, type ChatConversationDataV2, type personalGalleryMediaParams, type BoardExpirationDataV1, type BoardExpirationResponse } from "./IDesignerTypes";
 import { BoardConfig, Board } from "../common/interfaces/IBoard";
 import { SectionListItem, CustomSectionListItem } from "../common/interfaces/ISection";
 export declare class Designer {
     private fetcher;
     private fetchService;
     constructor(fetch: FetchService);
-    publishLiveBoard(boardId: number, withGoOnline?: boolean): Promise<Board>;
+    fetchBoardExpiration(boardId: number): Promise<BoardExpirationResponse>;
+    publishLiveBoard(boardId: number, withGoOnline?: boolean, boardExpirationSettings?: BoardExpirationDataV1): Promise<Board>;
     /**
      * Gets the image gallery for given types
      *
@@ -166,7 +167,7 @@ export declare class Designer {
     generateWidgetsTextFromPrompt(boardId: number, generateParams: GenerateWidgetsTextsFromPromptRequest): Promise<GenGenerateResponseV1>;
     rephraseWidgetText(generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
     rephraseWidgetTextWithBoardId(boardId: number, generateParams: GenRephraseWidgetsTextsRequest): Promise<GenRephraseResponseV1>;
-    translateWidgetText(generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
+    translateWidgetText(boardId: number, generateParams: GenTranslateWidgetsTextsRequest): Promise<GenTranslateResponseV1>;
     getCustomSections(): Promise<CustomSectionListItem[]>;
     getCustomFloatingWidgets(): Promise<CustomSectionListItem[]>;
     createCustomSection(section: SectionListItem): Promise<CustomSectionListItem>;

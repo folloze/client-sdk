@@ -1,4 +1,4 @@
-import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, ImageTransformation } from "../designer/IDesignerTypes";
+import { FormDataV1, FormPrivacyMessageDataV1, FootersResponseV1, PrivacyMessageResponseV1, FormPrivacyMessageResponseV1, FormOptionListDataV1, ImageTransformation } from "../designer/IDesignerTypes";
 import { PrivacySettings } from "../common/ISharedTypes";
 import { FlzVItemViewerSettings } from "../common/interfaces/IItemViewer";
 import { Lead } from "../common/interfaces/IInitialState";
@@ -292,6 +292,9 @@ export type GeoLocationResponseV1 = {
 };
 export type LeadResponseV1 = Partial<Lead>;
 export type LeadLinkClickResponseV1 = {};
+export type ZoomEndedResponse = {
+    ended: boolean;
+};
 export type LiveEventUrlsResponseV2 = {
     meeting_url?: string;
     api_params?: {
@@ -317,6 +320,7 @@ export type SessionResponseV1 = {
 export type FormMetadataDataV1 = {
     form: FormDataV1;
     privacy_message: FormPrivacyMessageDataV1;
+    option_lists?: Record<string, FormOptionListDataV1>;
 };
 export type CampaignElementDataV2 = FootersResponseV1 | PrivacyMessageResponseV1 | FormPrivacyMessageResponseV1;
 export type EnrichmentBoardConfigV3 = {

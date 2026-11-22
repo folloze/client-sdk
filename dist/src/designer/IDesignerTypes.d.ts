@@ -154,6 +154,18 @@ export type FormField = {
     type: string;
     dependent_field?: DependentField;
     selection_values?: SelectInputValue[] | Record<string, SelectInputValue[]>;
+    options_source?: OptionsSource;
+};
+export type OptionsSource = {
+    type: "option_list";
+    form_resource_id: number;
+};
+export type FormOptionListDataV1 = {
+    name: string;
+    options: {
+        label: string;
+        value: string;
+    }[];
 };
 type DependentField = {
     name: string;
@@ -189,6 +201,7 @@ export type FormDataV1 = {
     auto_fill?: boolean;
     portal_id?: string;
     region?: string;
+    show_success_message?: boolean;
 };
 type Label = {
     text: string;
@@ -290,6 +303,17 @@ export type FeatureSettingsResponseV1 = {
 export type BoardHasItemsResponseV1 = {
     has_items: boolean;
 };
+export type BoardExpirationDataV1 = {
+    expiration_at: string | undefined;
+    policy: string;
+    timezone: string;
+};
+export type BoardExpirationResponse = {
+    policy: string | null;
+    timezone: string | null;
+    expiration_at: string | null;
+    custom_days: number | null;
+};
 export type PersonalizationV1 = {
     auto_assign_inviter: object;
     campaign: {
@@ -357,6 +381,7 @@ export type MergeTagAttribute = {
     allow_user_input: boolean;
     type: string;
     predefined_list: string[];
+    category: "event" | "lead" | "account";
 };
 export type MergeTagValue = {
     id: string;

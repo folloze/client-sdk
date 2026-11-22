@@ -51,6 +51,7 @@ export type BoardConfig = {
     floatingWidgets?: Record<string, FloatingWidgetConfig>;
     personalization?: IPersonalizationConfig;
     generationConfig?: GenerationConfig;
+    hasEventMergeTags?: boolean;
 };
 
 export type PageConfig = {
@@ -203,6 +204,7 @@ export type Board = {
     is_v3_live: boolean;
     // only in designer
     public_link?: string;
+    custom_fonts?: string[];
     review_status?: {
         approved: boolean;
     };

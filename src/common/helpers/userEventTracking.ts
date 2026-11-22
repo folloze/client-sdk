@@ -16,7 +16,7 @@ export class TrackedUserAddSection extends AbstractTracker {
     constructor(section: SectionListItem) {
         super();
 
-        this.action = DesignerEventTypes.add_new_section;
+        this.action = DesignerEventTypes.designer_add_section_to_board;
         this.payload = {
             section_name: section.name,
             section_type: section.type,
@@ -29,7 +29,7 @@ export class TrackedUserDeleteSection extends AbstractTracker {
     constructor(section: SectionConfig) {
         super();
 
-        this.action = DesignerEventTypes.delete_section;
+        this.action = DesignerEventTypes.designer_remove_section_from_board;
         this.payload = {
             section_name: section.name,
             section_type: section.type,
@@ -42,7 +42,7 @@ export class TrackedUserAddFloatingWidget extends AbstractTracker{
     constructor(widget: LiveWidget) {
         super();
 
-        this.action = DesignerEventTypes.add_floating_section;
+        this.action = DesignerEventTypes.designer_add_floating_section;
         this.payload = {
             widget_tag: widget.config.widgetTag.toLowerCase(),
             widget_title: widget.widgetTitle,
@@ -55,7 +55,7 @@ export class TrackedUserDeleteFloatingWidget extends AbstractTracker {
     constructor(widget: LiveWidget) {
         super();
 
-        this.action = DesignerEventTypes.delete_floating_section;
+        this.action = DesignerEventTypes.designer_delete_floating_section;
         this.payload = {
             widget_tag: widget.config.widgetTag.toLowerCase(),
             widget_title: widget.widgetTitle,
@@ -68,7 +68,7 @@ export class TrackedUserEditSection extends AbstractTracker {
     constructor(section: SectionConfig) {
         super();
 
-        this.action = DesignerEventTypes.edit_section;
+        this.action = DesignerEventTypes.designer_manage_section;
         this.payload = {
             section_name: section.name,
             section_type: section.type,
@@ -81,7 +81,7 @@ export class TrackedUserEditComponent extends AbstractTracker {
     constructor(editorContainer: FloatEditor) {
         super();
 
-        this.action = DesignerEventTypes.edit_editable_component;
+        this.action = DesignerEventTypes.designer_edit_element;
         this.payload = {
             component_tag: editorContainer.getChildEl().tagName.toLowerCase(),
             widget_tag: editorContainer.getChildEl().widget.tagName.toLowerCase()
@@ -103,7 +103,7 @@ export class TrackedUserPreviewBoard extends AbstractTracker {
     constructor() {
         super();
 
-        this.action = DesignerEventTypes.preview_board;
+        this.action = DesignerEventTypes.designer_preview_mode;
     }
 }
 
