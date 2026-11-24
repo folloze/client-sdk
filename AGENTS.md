@@ -1,9 +1,5 @@
-> **Workspace context:** if this repo is checked out inside the Folloze
-> `workspace` repo, also read `../AGENTS.md` (team-wide conventions: commit
-> format, running services via flz-dev, secrets). This pointer exists because
-> some agents (e.g. Cursor opened on this subdirectory only) do not discover
-> parent-directory rules automatically; ignore if the file doesn't exist
-> (standalone checkout).
+> Inside the Folloze `workspace` repo, also read `../AGENTS.md` (team-wide conventions); ignore this if
+> the file doesn't exist.
 
 # Client SDK
 
